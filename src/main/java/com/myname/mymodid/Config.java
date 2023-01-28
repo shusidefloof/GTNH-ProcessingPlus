@@ -1,6 +1,7 @@
 package com.myname.mymodid;
 
 import java.io.File;
+
 import net.minecraftforge.common.config.Configuration;
 
 public class Config {

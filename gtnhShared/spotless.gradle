@@ -1,4 +1,5 @@
-printf("Configuring spotless\n")
+
+apply plugin: 'com.diffplug.spotless'
 
 // Spotless autoformatter
 // See https://github.com/diffplug/spotless/tree/main/plugin-gradle
@@ -14,17 +15,26 @@ spotless {
         endWithNewline()
     }
     java {
+        target 'src/*/java/**/*.java', 'src/*/scala/**/*.java'
+
         toggleOffOn()
-        importOrder()
+        importOrderFile(Blowdryer.file('spotless.importorder'))
         removeUnusedImports()
-        palantirJavaFormat('1.1.0') // last version supporting jvm 8
+        eclipse('4.19.0').configFile(Blowdryer.file('spotless.eclipseformat.xml'))
     }
     kotlin {
+        target 'src/*/kotlin/**/*.kt'
+
         toggleOffOn()
         ktfmt('0.39')
 
         trimTrailingWhitespace()
         indentWithSpaces(4)
         endWithNewline()
+    }
+    scala {
+        target 'src/*/scala/**/*.scala'
+
+        scalafmt('3.7.1')
     }
 }

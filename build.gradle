@@ -1,4 +1,4 @@
-//version: 1674985020
+//version: 1674986648
 /*
  DO NOT CHANGE THIS FILE!
  Also, you may replace this file at any time if there is an update available.
@@ -212,6 +212,25 @@ if (accessTransformersFile) {
     }
     tasks.deobfuscateMergedJarToSrg.accessTransformerFiles.from(targetFile)
     tasks.srgifyBinpatchedJar.accessTransformerFiles.from(targetFile)
+} else {
+    boolean atsFound = false
+    for (File at : sourceSets.getByName("main").resources.files) {
+        if (at.name.toLowerCase().endsWith("_at.cfg")) {
+            atsFound = true
+            tasks.deobfuscateMergedJarToSrg.accessTransformerFiles.from(at)
+            tasks.srgifyBinpatchedJar.accessTransformerFiles.from(at)
+        }
+    }
+    for (File at : sourceSets.getByName("api").resources.files) {
+        if (at.name.toLowerCase().endsWith("_at.cfg")) {
+            atsFound = true
+            tasks.deobfuscateMergedJarToSrg.accessTransformerFiles.from(at)
+            tasks.srgifyBinpatchedJar.accessTransformerFiles.from(at)
+        }
+    }
+    if (atsFound) {
+        logger.warn("Found and added access transformers in the resources folder, please configure gradle.properties to explicitly mention them by name")
+    }
 }
 
 if (usesMixins.toBoolean()) {

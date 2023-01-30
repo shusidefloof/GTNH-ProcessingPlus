@@ -1,4 +1,4 @@
-//version: 1675074449
+//version: 1675084541
 /*
  DO NOT CHANGE THIS FILE!
  Also, you may replace this file at any time if there is an update available.
@@ -166,6 +166,9 @@ pluginManager.withPlugin('org.jetbrains.kotlin.jvm') {
         "kaptMcLauncherKotlin",
         "kaptPatchedMcKotlin",
         "kaptInjectedTagsKotlin",
+        "kspMcLauncherKotlin",
+        "kspPatchedMcKotlin",
+        "kspInjectedTagsKotlin",
     ]
     tasks.configureEach { task ->
         if (task.name in disabledKotlinTaskList) {

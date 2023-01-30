@@ -1,4 +1,4 @@
-//version: 1675030924
+//version: 1675074449
 /*
  DO NOT CHANGE THIS FILE!
  Also, you may replace this file at any time if there is an update available.
@@ -575,9 +575,11 @@ if (usesMixins.toBoolean()) {
     tasks.named("reobfJar", ReobfuscatedJar).configure {
         extraSrgFiles.from(mixinSrg)
     }
-}
 
-if (usesMixins.toBoolean()) {
+    tasks.named("processResources").configure {
+        dependsOn("generateAssets")
+    }
+
     tasks.named("compileJava", JavaCompile).configure {
         doFirst {
             new File(mixinTmpDir).mkdirs()

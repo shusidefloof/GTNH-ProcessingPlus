@@ -1,0 +1,20 @@
+# GT:NH Processing+ block names
+tile.gtnhpp.casings.0.name=Silicon Carbide Ceramic Casing
+tile.gtnhpp.casings.1.name=Hardened Pressure Vessel Casing
+tile.gtnhpp.casings.2.name=Dual-Sealed Atmosphere Casing
+tile.gtnhpp.casings.3.name=Chemically Inert Reaction Vessel
+tile.gtnhpp.casings.4.name=Precision Cleanroom Casing
+tile.gtnhpp.casings.5.name=Corrosion-Resistant Reactor Casing
+tile.gtnhpp.casings.6.name=High-Pressure Containment Casing
+tile.gtnhpp.casings.7.name=Iridium-Reinforced Reactor Casing
+tile.gtnhpp.casings.8.name=Hexagonal Boron Nitride Ceramic Block
+
+# Machine names
+gt.blockmachines.gtnhpp.htrf.name=High Temperature Reaction Furnace
+gt.blockmachines.gtnhpp.hpsf.name=High Pressure Sintering Furnace
+gt.blockmachines.gtnhpp.daf.name=Dual Atmosphere Furnace
+gt.blockmachines.gtnhpp.pcv.name=Polycondensation Vessel
+gt.blockmachines.gtnhpp.pfc.name=Precision Film Caster
+gt.blockmachines.gtnhpp.aar.name=Ammonia Atmosphere Reactor
+gt.blockmachines.gtnhpp.scd.name=Supercritical Dryer
+gt.blockmachines.gtnhpp.crv.name=Ceramic Reaction Vessel

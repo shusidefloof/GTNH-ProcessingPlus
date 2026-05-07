@@ -18,7 +18,6 @@ import com.gtnh.processingplus.materials.GTNHPPMaterials;
 public class GTNHPPRecipes {
 
     public static void init() {
-        addFormConversions();
         addNylon66Chain();
         addPLAChain();
         addKaptonChain();

@@ -23,6 +23,8 @@ public class CommonProxy {
         Config.synchronizeConfiguration(event.getSuggestedConfigurationFile());
         MATERIAL_ITEM = new GTNHPPMetaItem();
         GameRegistry.registerItem(MATERIAL_ITEM, "gtnhpp_material");
+
+        // This line registers the actual liquids AND makes them compatible with the cells
         GTNHPPBlocks.registerBlocks();
         GTNHProcessingPlus.LOG.info("GT:NH Processing+ v{} loading", Tags.VERSION);
     }

@@ -1,7 +1,11 @@
 package com.gtnh.processingplus.recipes;
 
 import static com.gtnh.processingplus.items.GTNHPPItemList.*;
+import static gregtech.api.util.GTRecipeConstants.CHEMPLANT_CASING_TIER;
 
+import gregtech.api.util.GTRecipeConstants;
+import gtPlusPlus.api.recipe.GTPPRecipeMaps;
+import gtPlusPlus.core.item.chemistry.GenericChem;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
@@ -44,25 +48,142 @@ public class GTNHPPRecipes {
     // =========================================================================
 
     private static void addNylon66Chain() {
-        // Step 1: Cyclohexane + HNO3 → Adipic Acid + water  (LCR ZPM)
+
+        /*
+         * ==============================
+         * 1. PHENOL → CYCLOHEXANOL
+         * Hydrogenation (Catalytic)
+         * ==============================
+         */
+
         GTValues.RA.stdBuilder()
-            .itemInputs(GTUtility.getIntegratedCircuit(1))
+            .itemInputs(
+                GTUtility.getIntegratedCircuit(1),
+                GTOreDictUnificator.get(OrePrefixes.dustSmall, "catalystCobaltTitanium", 0)
+            )
             .fluidInputs(
-                gtppFluid("cyclohexane", 1000),
-                Materials.NitricAcid.getFluid(2000))
-            .fluidOutputs(Materials.Water.getFluid(1000))
-            .itemOutputs(AdipicAcid.get(4))
-            .duration(400).eut(TierEU.RECIPE_ZPM)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+                Materials.Phenol.getFluid(1000),
+                Materials.Hydrogen.getGas(3000)
+            )
+            .fluidOutputs(
+                GTNHPPMaterials.Cyclohexanol.getFluid(1000)
+            )
+            .duration(200)
+            .eut(TierEU.RECIPE_HV)
+            .metadata(CHEMPLANT_CASING_TIER, 3)
+            .addTo(GTPPRecipeMaps.chemicalPlantRecipes);
+
+        /*
+         * ==============================
+         * 2. KA OIL FORMATION
+         * Cyclohexanol ⇌ Cyclohexanone mix
+         * (partial oxidation equilibrium)
+         * ==============================
+         */
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                GTUtility.getIntegratedCircuit(2)
+            )
+            .fluidInputs(
+                GTNHPPMaterials.Cyclohexanol.getFluid(1000),
+                Materials.Oxygen.getGas(1000)
+            )
+            .fluidOutputs(
+                gtppFluid("cyclohexanone", 5000),
+                GTNHPPMaterials.Cyclohexanol.getFluid(500)
+            )
+            .duration(120)
+            .eut(TierEU.RECIPE_MV)
+            .addTo(GTRecipeConstants.UniversalChemical);
+
+        /*
+         * ==============================
+         * 3. KA OIL → ADIPIC ACID
+         * Nitric acid oxidation (CORE PROCESS)
+         * ==============================
+         */
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                GTUtility.getIntegratedCircuit(24),
+                GTOreDictUnificator.get(OrePrefixes.dustSmall, "catalystCobaltTitanium", 0)
+            )
+            .fluidInputs(
+                GTNHPPMaterials.Cyclohexanol.getFluid(1000),
+                gtppFluid("cyclohexanone", 1000),
+                Materials.NitricAcid.getFluid(4000)
+            )
+            .fluidOutputs(
+                GTNHPPMaterials.AdipicAcid.getFluid(2000),
+                Materials.NitrousOxide.getGas(2000),
+                Materials.Water.getFluid(2000)
+            )
+            .duration(350)
+            .eut(TierEU.RECIPE_UV)
+            .metadata(CHEMPLANT_CASING_TIER, 6)
+            .addTo(GTPPRecipeMaps.chemicalPlantRecipes);
+
+        /*
+         * ==============================
+         * 4. GREEN ROUTE (optional)
+         * Cyclohexene oxidation
+         * ==============================
+         */
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                GTUtility.getIntegratedCircuit(4)
+            )
+            .fluidInputs(new FluidStack[]{
+                gtppFluid("cyclohexene", 1000),
+                gtppFluid("fluid.hydrogenperoxide", 3000)}
+            )
+            .fluidOutputs(
+                GTNHPPMaterials.AdipicAcid.getFluid(1000),
+                Materials.Water.getFluid(3000)
+            )
+            .duration(300)
+            .eut(TierEU.RECIPE_LuV)
+            .metadata(CHEMPLANT_CASING_TIER, 6)
+            .addTo(GTRecipeConstants.UniversalChemical);
+
+        /*
+         * ==============================
+         * 5. ADVANCED ROUTE (butadiene)
+         * Petrochemical synthesis
+         * ==============================
+         */
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                GTUtility.getIntegratedCircuit(5),
+                GTOreDictUnificator.get(OrePrefixes.dustSmall, "catalystCobaltTitanium", 0)
+            )
+            .fluidInputs(
+                Materials.Butene.getGas(2000),
+                Materials.CarbonMonoxide.getGas(2000),
+                Materials.Water.getFluid(2000)
+            )
+            .fluidOutputs(
+                GTNHPPMaterials.AdipicAcid.getFluid(1000)
+            )
+            .duration(500)
+            .eut(TierEU.RECIPE_UV)
+            .metadata(CHEMPLANT_CASING_TIER, 7)
+            .addTo(GTPPRecipeMaps.chemicalPlantRecipes);
 
         // Step 2: Adipic Acid + NH3 → Adiponitrile + water  (LCR ZPM)
         GTValues.RA.stdBuilder()
-            .itemInputs(AdipicAcid.get(2))
-            .fluidInputs(Materials.Ammonia.getFluid(2000))
+            .fluidInputs(new FluidStack[]{
+                Materials.Ammonia.getFluid(2000),
+                gtppFluid("adipicacid", 4000)}
+
+            )
             .fluidOutputs(Materials.Water.getFluid(2000))
             .itemOutputs(Adiponitrile.get(2))
             .duration(400).eut(TierEU.RECIPE_ZPM)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTNHPPRecipeMaps.sAARRecipes);
 
         // Step 3: Adiponitrile + H2 → HMD  (LCR ZPM, hydrogenation)
         GTValues.RA.stdBuilder()
@@ -70,11 +191,15 @@ public class GTNHPPRecipes {
             .fluidInputs(Materials.Hydrogen.getGas(4000))
             .itemOutputs(HMD.get(1))
             .duration(300).eut(TierEU.RECIPE_ZPM)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTRecipeConstants.UniversalChemical);
 
         // Step 4 (PCV): Adipic Acid + HMD → Nylon-6,6 + water  (polycondensation)
         GTValues.RA.stdBuilder()
-            .itemInputs(AdipicAcid.get(4), HMD.get(4))
+            .itemInputs(
+                HMD.get(4))
+            .fluidInputs(
+                gtppFluid("adipicacid", 4000)
+            )
             .fluidOutputs(Materials.Water.getFluid(4000))
             .itemOutputs(mat(OrePrefixes.ingot, GTNHPPMaterials.Nylon66, 8))
             .duration(1600).eut(TierEU.RECIPE_ZPM)
@@ -89,13 +214,13 @@ public class GTNHPPRecipes {
         // Step 1: Ethanol + H2SO4 → Lactic Acid  (LCR LuV, fermentation shortcut)
         GTValues.RA.stdBuilder()
             .itemInputs(GTUtility.getIntegratedCircuit(2))
-            .fluidInputs(
+            .fluidInputs(new FluidStack[]{
                 Materials.Ethanol.getFluid(1000),
-                Materials.SulfuricAcid.getFluid(100))
+                Materials.SulfuricAcid.getFluid(100)})
             .itemOutputs(LacticAcid.get(2))
             .fluidOutputs(Materials.Water.getFluid(500))
             .duration(400).eut(TierEU.RECIPE_LuV)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTRecipeConstants.UniversalChemical);
 
         // Step 2 (PCV): Lactic Acid → Lactide + water  (vacuum dehydration, ZPM)
         GTValues.RA.stdBuilder()
@@ -129,18 +254,18 @@ public class GTNHPPRecipes {
                 Materials.Water.getFluid(1000))
             .itemOutputs(PMDA.get(2))
             .duration(600).eut(TierEU.RECIPE_LuV)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTRecipeConstants.UniversalChemical);
 
         // Step 2: Benzene + HNO3 → ODA  (LCR UV, nitration + reduction)
         GTValues.RA.stdBuilder()
             .itemInputs(GTUtility.getIntegratedCircuit(4))
-            .fluidInputs(
+            .fluidInputs(new FluidStack[]{
                 Materials.Benzene.getFluid(2000),
-                Materials.NitricAcid.getFluid(1000))
+                Materials.NitricAcid.getFluid(1000)})
             .itemOutputs(ODA.get(1))
             .fluidOutputs(Materials.Water.getFluid(1000))
             .duration(600).eut(TierEU.RECIPE_UV)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTRecipeConstants.UniversalChemical);
 
         // Step 3: PMDA + ODA + NMP → PAA Solution  (LCR UV, polycondensation in solvent)
         GTValues.RA.stdBuilder()
@@ -148,7 +273,7 @@ public class GTNHPPRecipes {
             .fluidInputs(Materials.NMethylIIPyrrolidone.getFluid(1000))
             .fluidOutputs(GTNHPPMaterials.PAASolution.getFluid(2000))
             .duration(800).eut(TierEU.RECIPE_UV)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTRecipeConstants.UniversalChemical);
 
         // Step 4: PAA Solution → Concentrated PAA + recovered NMP  (distillation, UV)
         GTValues.RA.stdBuilder()
@@ -195,13 +320,13 @@ public class GTNHPPRecipes {
         // Step 2 (LCR): Crude SiC + HF + H2SO4 → Purified SiC + water  (acid wash, ZPM)
         GTValues.RA.stdBuilder()
             .itemInputs(CrudeSiCPowder.get(4))
-            .fluidInputs(
+            .fluidInputs(new FluidStack[]{
                 Materials.HydrofluoricAcid.getFluid(500),
-                Materials.SulfuricAcid.getFluid(500))
+                Materials.SulfuricAcid.getFluid(500)})
             .fluidOutputs(Materials.Water.getFluid(800))
             .itemOutputs(PurifiedSiCPowder.get(4))
             .duration(600).eut(TierEU.RECIPE_ZPM)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTRecipeConstants.UniversalChemical);
 
         // Step 3 (HPSF): Purified SiC + sintering aid → Dense SiC Compact  (hot-press, UV)
         GTValues.RA.stdBuilder()
@@ -246,7 +371,7 @@ public class GTNHPPRecipes {
             .fluidOutputs(Materials.Water.getFluid(2000))
             .itemOutputs(BoronTrioxide.get(1))
             .duration(600).eut(TierEU.RECIPE_ZPM)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTRecipeConstants.UniversalChemical);
 
         // Step 2 (HTRF): B2O3 + C → B4C + CO  (carbothermal reduction, UV)
         GTValues.RA.stdBuilder()
@@ -275,7 +400,7 @@ public class GTNHPPRecipes {
             .fluidInputs(Materials.Nitrogen.getGas(500))
             .itemOutputs(HBNPowderBlend.get(4))
             .duration(800).eut(TierEU.RECIPE_UHV)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTRecipeConstants.UniversalChemical);
 
         // Step 5 (HPSF): hBN Powder Blend → Dense hBN Ceramic  (hot-press sintering, UHV)
         GTValues.RA.stdBuilder()
@@ -310,20 +435,19 @@ public class GTNHPPRecipes {
 
     // =========================================================================
     // CARBON FIBER COMPOSITE CHAIN — LuV→UV tiers
-    // =========================================================================
+    // =========================================================================gt
 
     private static void addCFCChain() {
         // Step 1: Propylene + NH3 + O2 → Acrylonitrile + water  (LCR LuV, ammoxidation)
         GTValues.RA.stdBuilder()
             .itemInputs(GTUtility.getIntegratedCircuit(5))
-            .fluidInputs(
-                Materials.Propene.getFluid(1000),
-                Materials.Ammonia.getFluid(1000),
-                Materials.Oxygen.getGas(3000))
+            .fluidInputs(gtppFluid("propene", 3000))
+            .fluidInputs(gtppFluid("ammonia", 1000))
+            .fluidInputs(gtppFluid("oxygen", 3000))
             .fluidOutputs(Materials.Water.getFluid(3000))
             .itemOutputs(Acrylonitrile.get(2))
             .duration(400).eut(TierEU.RECIPE_LuV)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTRecipeConstants.UniversalChemical);
 
         // Step 2: Acrylonitrile + NMP → PAN Fiber  (LCR UV, solution polymerization)
         GTValues.RA.stdBuilder()
@@ -331,7 +455,7 @@ public class GTNHPPRecipes {
             .fluidInputs(Materials.NMethylIIPyrrolidone.getFluid(500))
             .itemOutputs(PANFiber.get(4))
             .duration(800).eut(TierEU.RECIPE_UV)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTRecipeConstants.UniversalChemical);
 
         // Step 3 (DAF Oxidizing, 250°C): PAN Fiber + O2 → Stabilized PAN  (UV)
         GTValues.RA.stdBuilder()
@@ -374,18 +498,17 @@ public class GTNHPPRecipes {
                 GTNHPPMaterials.TEOS.getFluid(1000),
                 Materials.HydrochloricAcid.getFluid(4000))
             .duration(400).eut(TierEU.RECIPE_UV)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTRecipeConstants.UniversalChemical);
 
         // Step 2 (LCR UHV): TEOS + water + HF → Wet Silica Gel  (sol-gel hydrolysis)
         GTValues.RA.stdBuilder()
             .itemInputs(GTUtility.getIntegratedCircuit(7))
-            .fluidInputs(
-                GTNHPPMaterials.TEOS.getFluid(1000),
-                Materials.Water.getFluid(2000),
-                Materials.HydrofluoricAcid.getFluid(100))
+            .fluidInputs(GTNHPPMaterials.TEOS.getFluid(1000))
+            .fluidInputs(Materials.Water.getFluid(2000))
+            .fluidInputs(Materials.HydrofluoricAcid.getFluid(1000))
             .itemOutputs(WetSilicaGel.get(2))
             .duration(800).eut(TierEU.RECIPE_UHV)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTRecipeConstants.UniversalChemical);
 
         // Step 3: Wet Silica Gel → Aged Silica Gel  (aging in sealed vessel, SCD UHV)
         GTValues.RA.stdBuilder()

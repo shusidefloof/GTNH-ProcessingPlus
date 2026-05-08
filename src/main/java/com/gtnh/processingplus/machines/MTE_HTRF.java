@@ -209,19 +209,21 @@ public class MTE_HTRF extends MTEExtendedPowerMultiBlockBase<MTE_HTRF> implement
     @Override
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType("High Temperature Reaction Furnace, HTRF")
-            .addInfo("Operates above 2000 K — tier above the EBF family.")
-            .addInfo(
-                "Also accepts " + EnumChatFormatting.YELLOW
-                    + "all EBF and ABS recipes"
-                    + EnumChatFormatting.GRAY
-                    + " at "
-                    + EnumChatFormatting.GREEN
-                    + "80% EU cost"
-                    + EnumChatFormatting.GRAY
-                    + ".")
-            .addInfo("Heat capacity: Coil tier + 100 K per voltage tier above LV (same formula as EBF).")
-            .addInfo("Required for the Acheson process (SiC synthesis at 2000°C+).")
+        tt.addMachineType("High Temperature Reaction Furnace (HTRF)")
+            .addInfo(EnumChatFormatting.GRAY + "A thermochemical instability reactor operating above 2000K.")
+            .addInfo("Designed for ceramic synthesis, polymer cyclization, and carbide/nitride formation.")
+            .addInfo("")
+            .addInfo(EnumChatFormatting.YELLOW + "System Mechanics:")
+            .addInfo(EnumChatFormatting.RED + "- Reaction Heat" + EnumChatFormatting.GRAY + " determines valid recipes and overclocking ceiling")
+            .addInfo(EnumChatFormatting.RED + "- Thermal Overdrive" + EnumChatFormatting.GRAY + " increases speed but raises instability")
+            .addInfo(EnumChatFormatting.RED + "- Residue Accumulation" + EnumChatFormatting.GRAY + " acts as long-term system degradation")
+            .addInfo("")
+            .addInfo(EnumChatFormatting.YELLOW + "Core Functions:")
+            .addInfo("- SiC / hBN ceramic synthesis")
+            .addInfo("- Kapton & polyimide processing")
+            .addInfo("- High-temperature alloy precursor reactions")
+            .addInfo("")
+            .addInfo(EnumChatFormatting.RED + "WARNING: Excess thermal load may destabilize reaction chamber.")
             .beginStructureBlock(3, 5, 3, true)
             .addController("Front face, center column, middle height")
             .addCasingInfoMin("Silicon Carbide Ceramic Casing", 10, false)

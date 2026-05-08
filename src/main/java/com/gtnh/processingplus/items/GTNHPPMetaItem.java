@@ -31,7 +31,15 @@ public class GTNHPPMetaItem extends Item {
     public static final int INTER_BORON_CARBIDE = 13;
     public static final int INTER_CRUDE_HBN = 14;
     public static final int INTER_WET_SILICA_GEL = 15;
-    public static final int INTER_COUNT = 16;
+    public static final int INTER_CRUDE_SIC_POWDER = 16;
+    public static final int INTER_PURIFIED_SIC_POWDER = 17;
+    public static final int INTER_DENSE_SIC_COMPACT = 18;
+    public static final int INTER_CONCENTRATED_PAA = 19;
+    public static final int INTER_HBN_POWDER_BLEND = 20;
+    public static final int INTER_DENSE_HBN_CERAMIC = 21;
+    public static final int INTER_AGED_SILICA_GEL = 22;
+    public static final int INTER_ETHANOL_SAT_GEL = 23;
+    public static final int INTER_COUNT = 24;
 
     // @formatter:off
     private static final String[] INTER_DISPLAY_NAMES = {
@@ -51,6 +59,41 @@ public class GTNHPPMetaItem extends Item {
         "Boron Carbide",
         "Crude Hexagonal Boron Nitride",
         "Wet Silica Gel",
+        "Crude SiC Powder",
+        "Purified SiC Powder",
+        "Dense SiC Compact",
+        "Concentrated Polyamic Acid",
+        "hBN Powder Blend",
+        "Dense hBN Ceramic",
+        "Aged Silica Gel",
+        "Ethanol-Saturated Silica Gel",
+    };
+
+    private static final String[] INTER_FORMULAS = {
+        "C₆H₁₀O₄",          // Adipic Acid
+        "C₆H₁₆N₂",          // HMD
+        "C₆H₈N₂",           // Adiponitrile
+        "C₃H₆O₃",           // Lactic Acid
+        "C₆H₈O₄",           // Lactide
+        "C₃H₃N",            // Acrylonitrile
+        "(C₃H₃N)ₙ",         // PAN Fiber
+        "(C₃H₃N)ₙ",         // Stabilized PAN
+        "C",                // Carbon Fiber Tow
+        "C₁₀H₂O₆",          // PMDA
+        "C₁₂H₁₂N₂O",        // ODA
+        "(C₂₂H₁₄N₂O₇)ₙ",   // Polyamic Acid Film
+        "B₂O₃",             // Boron Trioxide
+        "B₄C",              // Boron Carbide
+        "BN",               // Crude hBN
+        "SiO₂·xH₂O",        // Wet Silica Gel
+        "SiC",              // Crude SiC Powder
+        "SiC",              // Purified SiC Powder
+        "SiC",              // Dense SiC Compact
+        "(C₂₂H₁₄N₂O₇)ₙ",   // Concentrated PAA
+        "BN",               // hBN Powder Blend
+        "BN",               // Dense hBN Ceramic
+        "SiO₂·xH₂O",        // Aged Silica Gel
+        "SiO₂·C₂H₅OH",      // Ethanol Saturated Gel
     };
 
     private static final int[] INTER_COLORS = {
@@ -58,6 +101,8 @@ public class GTNHPPMetaItem extends Item {
         0xF0ECD4, 0xB8A882, 0x111111,
         0xFFFBE6, 0xFFE4C4, 0xFFD700,
         0xF8F8F2, 0x2A2A2A, 0xEEECE8, 0xBBDDFF,
+        0x606060, 0x888888, 0x3D3D40, 0xFFE082,
+        0xEEECE8, 0xE8E6E2, 0xD0E0FF, 0xC0D8FF,
     };
     // @formatter:on
 
@@ -98,7 +143,7 @@ public class GTNHPPMetaItem extends Item {
     public IIcon getIconFromDamage(int meta) {
         if (meta == INTER_PAN_FIBER || meta == INTER_STABILIZED_PAN || meta == INTER_CF_TOW)
             return icons[ICON_STICK];
-        if (meta == INTER_PAA_FILM)
+        if (meta == INTER_PAA_FILM || meta == INTER_DENSE_SIC_COMPACT || meta == INTER_DENSE_HBN_CERAMIC)
             return icons[ICON_PLATE];
         return icons[ICON_DUST];
     }
@@ -120,7 +165,13 @@ public class GTNHPPMetaItem extends Item {
 
     @Override
     @SuppressWarnings("unchecked")
-    public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean advanced) {}
+    public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean advanced) {
+        int meta = stack.getItemDamage();
+
+        if (meta >= 0 && meta < INTER_FORMULAS.length) {
+            list.add(INTER_FORMULAS[meta]);
+        }
+    }
 
     @Override
     @SuppressWarnings("unchecked")

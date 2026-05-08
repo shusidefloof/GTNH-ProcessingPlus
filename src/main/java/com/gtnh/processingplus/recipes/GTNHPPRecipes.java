@@ -3,6 +3,8 @@ package com.gtnh.processingplus.recipes;
 import static com.gtnh.processingplus.items.GTNHPPItemList.*;
 
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
 
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.ItemList;
@@ -31,61 +33,71 @@ public class GTNHPPRecipes {
         return GTOreDictUnificator.get(prefix, material, amount);
     }
 
+    private static FluidStack gtppFluid(String name, int amount) {
+        FluidStack fs = FluidRegistry.getFluidStack(name, amount);
+        if (fs == null) throw new IllegalStateException("GT++ fluid not found: " + name);
+        return fs;
+    }
+
     // =========================================================================
     // NYLON-6,6 CHAIN — ZPM tier
     // =========================================================================
 
     private static void addNylon66Chain() {
-        // Step 1: Benzene + HNO3 → Adipic Acid + water
+        // Step 1: Cyclohexane + HNO3 → Adipic Acid + water  (LCR ZPM)
         GTValues.RA.stdBuilder()
             .itemInputs(GTUtility.getIntegratedCircuit(1))
-            .fluidInputs(Materials.Benzene.getFluid(1000), Materials.NitricAcid.getFluid(3000))
+            .fluidInputs(
+                gtppFluid("cyclohexane", 1000),
+                Materials.NitricAcid.getFluid(2000))
             .fluidOutputs(Materials.Water.getFluid(1000))
             .itemOutputs(AdipicAcid.get(4))
             .duration(400).eut(TierEU.RECIPE_ZPM)
-            .addTo(RecipeMaps.chemicalReactorRecipes);
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
 
-        // Step 2: Adipic Acid + NH3 → Adiponitrile + water
+        // Step 2: Adipic Acid + NH3 → Adiponitrile + water  (LCR ZPM)
         GTValues.RA.stdBuilder()
             .itemInputs(AdipicAcid.get(2))
             .fluidInputs(Materials.Ammonia.getFluid(2000))
             .fluidOutputs(Materials.Water.getFluid(2000))
             .itemOutputs(Adiponitrile.get(2))
             .duration(400).eut(TierEU.RECIPE_ZPM)
-            .addTo(RecipeMaps.chemicalReactorRecipes);
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
 
-        // Step 3: Adiponitrile + H2 → HMD (hydrogenation)
+        // Step 3: Adiponitrile + H2 → HMD  (LCR ZPM, hydrogenation)
         GTValues.RA.stdBuilder()
             .itemInputs(Adiponitrile.get(1))
             .fluidInputs(Materials.Hydrogen.getGas(4000))
             .itemOutputs(HMD.get(1))
             .duration(300).eut(TierEU.RECIPE_ZPM)
-            .addTo(RecipeMaps.chemicalReactorRecipes);
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
 
-        // Step 4 (PCV): Adipic Acid + HMD → Nylon-6,6 ingot (polycondensation)
+        // Step 4 (PCV): Adipic Acid + HMD → Nylon-6,6 + water  (polycondensation)
         GTValues.RA.stdBuilder()
             .itemInputs(AdipicAcid.get(4), HMD.get(4))
             .fluidOutputs(Materials.Water.getFluid(4000))
-            .itemOutputs(GTNHPPMaterials.Nylon66.getIngots(8))
+            .itemOutputs(mat(OrePrefixes.ingot, GTNHPPMaterials.Nylon66, 8))
             .duration(1600).eut(TierEU.RECIPE_ZPM)
             .addTo(GTNHPPRecipeMaps.sPCVRecipes);
     }
 
     // =========================================================================
-    // PLA CHAIN — ZPM tier
+    // PLA CHAIN — LuV→ZPM tiers
     // =========================================================================
 
     private static void addPLAChain() {
-        // Step 1: Ethanol + H2SO4 → Lactic Acid
+        // Step 1: Ethanol + H2SO4 → Lactic Acid  (LCR LuV, fermentation shortcut)
         GTValues.RA.stdBuilder()
             .itemInputs(GTUtility.getIntegratedCircuit(2))
-            .fluidInputs(Materials.Ethanol.getFluid(1000), Materials.SulfuricAcid.getFluid(100))
+            .fluidInputs(
+                Materials.Ethanol.getFluid(1000),
+                Materials.SulfuricAcid.getFluid(100))
             .itemOutputs(LacticAcid.get(2))
             .fluidOutputs(Materials.Water.getFluid(500))
-            .duration(400).eut(TierEU.RECIPE_ZPM)
-            .addTo(RecipeMaps.chemicalReactorRecipes);
+            .duration(400).eut(TierEU.RECIPE_LuV)
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
 
-        // Step 2 (PCV): Lactic Acid → Lactide + water (vacuum dehydration)
+        // Step 2 (PCV): Lactic Acid → Lactide + water  (vacuum dehydration, ZPM)
         GTValues.RA.stdBuilder()
             .itemInputs(LacticAcid.get(4))
             .fluidOutputs(Materials.Water.getFluid(2000))
@@ -93,118 +105,160 @@ public class GTNHPPRecipes {
             .duration(800).eut(TierEU.RECIPE_ZPM)
             .addTo(GTNHPPRecipeMaps.sPCVRecipes);
 
-        // Step 3 (PCV): Lactide + Sn catalyst → PLA ingot (ring-opening polymerization)
+        // Step 3 (PCV): Lactide + Sn catalyst → PLA ingot  (ring-opening polymerization, ZPM)
         GTValues.RA.stdBuilder()
             .itemInputs(Lactide.get(4), Materials.Tin.getDust(1))
-            .itemOutputs(GTNHPPMaterials.PolylacticAcid.getIngots(4))
+            .itemOutputs(mat(OrePrefixes.ingot, GTNHPPMaterials.PolylacticAcid, 4))
             .duration(1600).eut(TierEU.RECIPE_ZPM)
             .addTo(GTNHPPRecipeMaps.sPCVRecipes);
     }
 
     // =========================================================================
-    // KAPTON CHAIN — UV tier
+    // KAPTON CHAIN — LuV→UV tiers
     // =========================================================================
 
     private static void addKaptonChain() {
-        // Step 1: Carbon + O2 + HNO3 → PMDA
+        // Step 1: PhthalicAcid + O2 → PMDA + CO2 + water  (LCR LuV, oxidative dehydration)
         GTValues.RA.stdBuilder()
-            .itemInputs(Materials.Carbon.getDust(3))
-            .fluidInputs(Materials.Oxygen.getGas(6000), Materials.NitricAcid.getFluid(500))
-            .fluidOutputs(Materials.Water.getFluid(2000))
+            .itemInputs(
+                mat(OrePrefixes.dust, Materials.PhthalicAcid, 2),
+                GTUtility.getIntegratedCircuit(3))
+            .fluidInputs(Materials.Oxygen.getGas(6000))
+            .fluidOutputs(
+                Materials.CarbonDioxide.getGas(2000),
+                Materials.Water.getFluid(1000))
             .itemOutputs(PMDA.get(2))
-            .duration(600).eut(TierEU.RECIPE_UV)
-            .addTo(RecipeMaps.chemicalReactorRecipes);
+            .duration(600).eut(TierEU.RECIPE_LuV)
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
 
-        // Step 2: Benzene + HNO3 → ODA (nitration then reduction)
+        // Step 2: Benzene + HNO3 → ODA  (LCR UV, nitration + reduction)
         GTValues.RA.stdBuilder()
-            .itemInputs(GTUtility.getIntegratedCircuit(3))
-            .fluidInputs(Materials.Benzene.getFluid(2000), Materials.NitricAcid.getFluid(1000))
+            .itemInputs(GTUtility.getIntegratedCircuit(4))
+            .fluidInputs(
+                Materials.Benzene.getFluid(2000),
+                Materials.NitricAcid.getFluid(1000))
             .itemOutputs(ODA.get(1))
             .fluidOutputs(Materials.Water.getFluid(1000))
             .duration(600).eut(TierEU.RECIPE_UV)
-            .addTo(RecipeMaps.chemicalReactorRecipes);
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
 
-        // Step 3 (PFC Casting): PMDA + ODA + ethanol → PAA green film
+        // Step 3: PMDA + ODA + NMP → PAA Solution  (LCR UV, polycondensation in solvent)
         GTValues.RA.stdBuilder()
             .itemInputs(PMDA.get(2), ODA.get(2))
-            .fluidInputs(Materials.Ethanol.getFluid(500))
+            .fluidInputs(Materials.NMethylIIPyrrolidone.getFluid(1000))
+            .fluidOutputs(GTNHPPMaterials.PAASolution.getFluid(2000))
+            .duration(800).eut(TierEU.RECIPE_UV)
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+
+        // Step 4: PAA Solution → Concentrated PAA + recovered NMP  (distillation, UV)
+        GTValues.RA.stdBuilder()
+            .fluidInputs(GTNHPPMaterials.PAASolution.getFluid(2000))
+            .itemOutputs(ConcentratedPAA.get(2))
+            .fluidOutputs(Materials.NMethylIIPyrrolidone.getFluid(800))
+            .duration(600).eut(TierEU.RECIPE_UV)
+            .addTo(RecipeMaps.distillationTowerRecipes);
+
+        // Step 5 (PFC Casting): Concentrated PAA + ethanol → PAA Film  (UV)
+        GTValues.RA.stdBuilder()
+            .itemInputs(ConcentratedPAA.get(2))
+            .fluidInputs(Materials.Ethanol.getFluid(200))
             .itemOutputs(PolyamicAcidFilm.get(4))
             .duration(800).eut(TierEU.RECIPE_UV)
             .addTo(GTNHPPRecipeMaps.sPFCCastingRecipes);
 
-        // Step 4 (PFC Imidization): PAA film → Kapton plate + water (thermal cure 350°C)
+        // Step 6 (PFC Imidization): PAA Film → Kapton plate + water  (thermal cure 350°C, UV)
         GTValues.RA.stdBuilder()
             .itemInputs(PolyamicAcidFilm.get(2))
             .fluidOutputs(Materials.Water.getFluid(1000))
-            .itemOutputs(GTNHPPMaterials.Kapton.getPlates(2))
+            .itemOutputs(mat(OrePrefixes.plate, GTNHPPMaterials.Kapton, 2))
             .duration(1200).eut(TierEU.RECIPE_UV)
             .addTo(GTNHPPRecipeMaps.sPFCImidizationRecipes);
     }
 
     // =========================================================================
-    // SILICON CARBIDE CHAIN — UV tier
+    // SILICON CARBIDE CHAIN — ZPM→UV tiers
     // =========================================================================
 
     private static void addSiCChain() {
-        // Acheson process (HTRF only — requires 2200°C+)
+        // Step 1 (HTRF): SiO2 + C → Crude SiC Powder + CO  (Acheson process, UV 2200°C+)
         GTValues.RA.stdBuilder()
             .itemInputs(
-                Materials.SiliconDioxide.getDust(3),
-                Materials.Carbon.getDust(3),
+                mat(OrePrefixes.dust, Materials.SiliconDioxide, 3),
+                mat(OrePrefixes.dust, Materials.Carbon, 3),
                 GTUtility.getIntegratedCircuit(1))
             .fluidInputs(Materials.Argon.getGas(1000))
             .fluidOutputs(Materials.CarbonMonoxide.getGas(2000))
-            .itemOutputs(GTNHPPMaterials.SiliconCarbide.getDust(2))
+            .itemOutputs(CrudeSiCPowder.get(2))
             .duration(1200).eut(TierEU.RECIPE_UV)
             .addTo(GTNHPPRecipeMaps.sHTRFRecipes);
 
-        // Acid wash: SiC + HF + H2SO4 → purified SiC
+        // Step 2 (LCR): Crude SiC + HF + H2SO4 → Purified SiC + water  (acid wash, ZPM)
         GTValues.RA.stdBuilder()
-            .itemInputs(GTNHPPMaterials.SiliconCarbide.getDust(4))
+            .itemInputs(CrudeSiCPowder.get(4))
             .fluidInputs(
                 Materials.HydrofluoricAcid.getFluid(500),
                 Materials.SulfuricAcid.getFluid(500))
             .fluidOutputs(Materials.Water.getFluid(800))
-            .itemOutputs(GTNHPPMaterials.SiliconCarbide.getDust(4))
-            .duration(600).eut(TierEU.RECIPE_UV)
-            .addTo(RecipeMaps.chemicalReactorRecipes);
+            .itemOutputs(PurifiedSiCPowder.get(4))
+            .duration(600).eut(TierEU.RECIPE_ZPM)
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
 
-        // SiC ceramic casing (for HTRF construction)
+        // Step 3 (HPSF): Purified SiC + sintering aid → Dense SiC Compact  (hot-press, UV)
         GTValues.RA.stdBuilder()
-            .itemInputs(GTNHPPMaterials.SiliconCarbide.getDust(9), GTUtility.getIntegratedCircuit(9))
-            .fluidInputs(Materials.Argon.getGas(1000))
+            .itemInputs(PurifiedSiCPowder.get(4), mat(OrePrefixes.dust, Materials.Boron, 1))
+            .fluidInputs(Materials.Argon.getGas(500))
+            .itemOutputs(DenseSiCCompact.get(2))
+            .duration(1600).eut(TierEU.RECIPE_UV)
+            .addTo(GTNHPPRecipeMaps.sHPSFRecipes);
+
+        // Step 4 (Lathe): Dense SiC Compact → SiC plates  (machining)
+        GTValues.RA.stdBuilder()
+            .itemInputs(DenseSiCCompact.get(1))
             .itemOutputs(
-                new ItemStack(
-                    com.gtnh.processingplus.blocks.GTNHPPBlocks.CASINGS,
-                    1,
-                    com.gtnh.processingplus.blocks.BlockGTNHPPCasings.HTRF_CASING))
+                mat(OrePrefixes.plate, GTNHPPMaterials.SinteredSiliconCarbide, 2),
+                mat(OrePrefixes.dustSmall, GTNHPPMaterials.SinteredSiliconCarbide, 2))
+            .duration(800).eut(TierEU.RECIPE_UV)
+            .addTo(RecipeMaps.latheRecipes);
+
+        // SiC ceramic casing (for HTRF construction) — HPSF
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                mat(OrePrefixes.dust, GTNHPPMaterials.SinteredSiliconCarbide, 9),
+                GTUtility.getIntegratedCircuit(9))
+            .fluidInputs(Materials.Argon.getGas(1000))
+            .itemOutputs(new ItemStack(
+                com.gtnh.processingplus.blocks.GTNHPPBlocks.CASINGS,
+                1,
+                com.gtnh.processingplus.blocks.BlockGTNHPPCasings.HTRF_CASING))
             .duration(1600).eut(TierEU.RECIPE_UV)
             .addTo(GTNHPPRecipeMaps.sHPSFRecipes);
     }
 
     // =========================================================================
-    // HEXAGONAL BORON NITRIDE CHAIN — UHV tier
+    // HEXAGONAL BORON NITRIDE CHAIN — ZPM→UHV tiers
     // =========================================================================
 
     private static void addHBNChain() {
-        // Step 1: Borax + H2SO4 → B2O3 + water
+        // Step 1: Borax + H2SO4 → B2O3 + water  (LCR ZPM)
         GTValues.RA.stdBuilder()
-            .itemInputs(Materials.Borax.getDust(2))
+            .itemInputs(mat(OrePrefixes.dust, Materials.Borax, 2))
             .fluidInputs(Materials.SulfuricAcid.getFluid(1000))
             .fluidOutputs(Materials.Water.getFluid(2000))
             .itemOutputs(BoronTrioxide.get(1))
-            .duration(600).eut(TierEU.RECIPE_UHV)
-            .addTo(RecipeMaps.chemicalReactorRecipes);
+            .duration(600).eut(TierEU.RECIPE_ZPM)
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
 
-        // Step 2: B2O3 + Carbon → B4C + CO (HTRF)
+        // Step 2 (HTRF): B2O3 + C → B4C + CO  (carbothermal reduction, UV)
         GTValues.RA.stdBuilder()
-            .itemInputs(BoronTrioxide.get(2), Materials.Carbon.getDust(5))
+            .itemInputs(
+                BoronTrioxide.get(2),
+                mat(OrePrefixes.dust, Materials.Carbon, 5))
             .fluidOutputs(Materials.CarbonMonoxide.getGas(4000))
             .itemOutputs(BoronCarbide.get(1))
-            .duration(1600).eut(TierEU.RECIPE_UHV)
+            .duration(1600).eut(TierEU.RECIPE_UV)
             .addTo(GTNHPPRecipeMaps.sHTRFRecipes);
 
-        // Step 3 (AAR): B4C + NH3 → crude hBN + CO (nitriding)
+        // Step 3 (AAR): B4C + NH3 → Crude hBN + CO  (nitriding, UHV)
         GTValues.RA.stdBuilder()
             .itemInputs(BoronCarbide.get(1))
             .fluidInputs(Materials.Ammonia.getFluid(3000))
@@ -213,53 +267,73 @@ public class GTNHPPRecipes {
             .duration(2400).eut(TierEU.RECIPE_UHV)
             .addTo(GTNHPPRecipeMaps.sAARRecipes);
 
-        // Step 4 (HPSF): crude hBN + sintering aid → hBN plate
+        // Step 4: Crude hBN + Yttrium → hBN Powder Blend  (blending for sinter aid, UHV LCR)
         GTValues.RA.stdBuilder()
-            .itemInputs(CrudeHBN.get(4), Materials.Yttrium.getDust(1))
+            .itemInputs(
+                CrudeHBN.get(4),
+                mat(OrePrefixes.dust, Materials.Yttrium, 1))
+            .fluidInputs(Materials.Nitrogen.getGas(500))
+            .itemOutputs(HBNPowderBlend.get(4))
+            .duration(800).eut(TierEU.RECIPE_UHV)
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+
+        // Step 5 (HPSF): hBN Powder Blend → Dense hBN Ceramic  (hot-press sintering, UHV)
+        GTValues.RA.stdBuilder()
+            .itemInputs(HBNPowderBlend.get(4))
             .fluidInputs(Materials.Nitrogen.getGas(1000))
-            .itemOutputs(GTNHPPMaterials.HexagonalBoronNitride.getPlates(2))
+            .itemOutputs(DenseHBNCeramic.get(2))
             .duration(2400).eut(TierEU.RECIPE_UHV)
             .addTo(GTNHPPRecipeMaps.sHPSFRecipes);
 
-        // hBN Ceramic Block (for CRV inner lining)
+        // Step 6 (Lathe): Dense hBN Ceramic → hBN plates
         GTValues.RA.stdBuilder()
-            .itemInputs(GTNHPPMaterials.HexagonalBoronNitride.getDust(9), GTUtility.getIntegratedCircuit(8))
-            .fluidInputs(Materials.Nitrogen.getGas(2000))
+            .itemInputs(DenseHBNCeramic.get(1))
             .itemOutputs(
-                new ItemStack(
-                    com.gtnh.processingplus.blocks.GTNHPPBlocks.CASINGS,
-                    1,
-                    com.gtnh.processingplus.blocks.BlockGTNHPPCasings.HBN_CERAMIC_BLOCK))
+                mat(OrePrefixes.plate, GTNHPPMaterials.HexagonalBoronNitride, 2),
+                mat(OrePrefixes.dustSmall, GTNHPPMaterials.HexagonalBoronNitride, 2))
+            .duration(1000).eut(TierEU.RECIPE_UHV)
+            .addTo(RecipeMaps.latheRecipes);
+
+        // hBN Ceramic Block (for CRV inner lining) — HPSF
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                mat(OrePrefixes.dust, GTNHPPMaterials.HexagonalBoronNitride, 9),
+                GTUtility.getIntegratedCircuit(8))
+            .fluidInputs(Materials.Nitrogen.getGas(2000))
+            .itemOutputs(new ItemStack(
+                com.gtnh.processingplus.blocks.GTNHPPBlocks.CASINGS,
+                1,
+                com.gtnh.processingplus.blocks.BlockGTNHPPCasings.HBN_CERAMIC_BLOCK))
             .duration(3200).eut(TierEU.RECIPE_UHV)
             .addTo(GTNHPPRecipeMaps.sHPSFRecipes);
     }
 
     // =========================================================================
-    // CARBON FIBER COMPOSITE CHAIN — UV tier
+    // CARBON FIBER COMPOSITE CHAIN — LuV→UV tiers
     // =========================================================================
 
     private static void addCFCChain() {
-        // Step 1: Propene + NH3 + O2 → Acrylonitrile + water (ammoxidation)
+        // Step 1: Propylene + NH3 + O2 → Acrylonitrile + water  (LCR LuV, ammoxidation)
         GTValues.RA.stdBuilder()
-            .itemInputs(GTUtility.getIntegratedCircuit(4))
+            .itemInputs(GTUtility.getIntegratedCircuit(5))
             .fluidInputs(
                 Materials.Propene.getFluid(1000),
                 Materials.Ammonia.getFluid(1000),
                 Materials.Oxygen.getGas(3000))
             .fluidOutputs(Materials.Water.getFluid(3000))
             .itemOutputs(Acrylonitrile.get(2))
-            .duration(400).eut(TierEU.RECIPE_UV)
-            .addTo(RecipeMaps.chemicalReactorRecipes);
+            .duration(400).eut(TierEU.RECIPE_LuV)
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
 
-        // Step 2: Acrylonitrile polymerization → PAN fiber
+        // Step 2: Acrylonitrile + NMP → PAN Fiber  (LCR UV, solution polymerization)
         GTValues.RA.stdBuilder()
             .itemInputs(Acrylonitrile.get(4))
-            .fluidInputs(Materials.Ethanol.getFluid(500))
+            .fluidInputs(Materials.NMethylIIPyrrolidone.getFluid(500))
             .itemOutputs(PANFiber.get(4))
             .duration(800).eut(TierEU.RECIPE_UV)
-            .addTo(RecipeMaps.chemicalReactorRecipes);
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
 
-        // Step 3 (DAF Oxidizing, 250°C): PAN fiber → stabilized PAN
+        // Step 3 (DAF Oxidizing, 250°C): PAN Fiber + O2 → Stabilized PAN  (UV)
         GTValues.RA.stdBuilder()
             .itemInputs(PANFiber.get(4))
             .fluidInputs(Materials.Oxygen.getGas(2000))
@@ -267,7 +341,7 @@ public class GTNHPPRecipes {
             .duration(1600).eut(TierEU.RECIPE_UV)
             .addTo(GTNHPPRecipeMaps.sDAFOxidizingRecipes);
 
-        // Step 4 (DAF Inert, 1200°C): stabilized PAN → carbon fiber tow
+        // Step 4 (DAF Inert, 1200°C): Stabilized PAN + N2 → Carbon Fiber Tow + CO  (UV)
         GTValues.RA.stdBuilder()
             .itemInputs(StabilizedPANFiber.get(4))
             .fluidInputs(Materials.Nitrogen.getGas(2000))
@@ -276,36 +350,66 @@ public class GTNHPPRecipes {
             .duration(2000).eut(TierEU.RECIPE_UV)
             .addTo(GTNHPPRecipeMaps.sDAFInertRecipes);
 
-        // Step 5 (Assembler): CF tow + epoxy under pressure → CF composite plate
+        // Step 5 (Assembler): CF Tow + epoxy → CFC plate  (UV)
         GTValues.RA.stdBuilder()
             .itemInputs(CarbonFiberTow.get(4))
             .fluidInputs(Materials.Epoxid.getFluid(576))
-            .itemOutputs(GTNHPPMaterials.CarbonFiberComposite.getPlates(4))
+            .itemOutputs(mat(OrePrefixes.plate, GTNHPPMaterials.CarbonFiberComposite, 4))
             .duration(1200).eut(TierEU.RECIPE_UV)
             .addTo(RecipeMaps.assemblerRecipes);
     }
 
     // =========================================================================
-    // SILICA AEROGEL CHAIN — UHV tier
+    // SILICA AEROGEL CHAIN — UV→UHV tiers
     // =========================================================================
 
     private static void addAerogelChain() {
-        // Step 1: SiO2 + HF + ethanol → wet silica gel (sol-gel)
+        // Step 1: SiCl4 + ethanol → TEOS + HCl  (LCR UV, alkoxide synthesis)
         GTValues.RA.stdBuilder()
-            .itemInputs(Materials.SiliconDioxide.getDust(3))
+            .itemInputs(GTUtility.getIntegratedCircuit(6))
             .fluidInputs(
-                Materials.HydrofluoricAcid.getFluid(250),
-                Materials.Ethanol.getFluid(1000))
+                Materials.SiliconTetrachloride.getFluid(1000),
+                Materials.Ethanol.getFluid(4000))
+            .fluidOutputs(
+                GTNHPPMaterials.TEOS.getFluid(1000),
+                Materials.HydrochloricAcid.getFluid(4000))
+            .duration(400).eut(TierEU.RECIPE_UV)
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+
+        // Step 2 (LCR UHV): TEOS + water + HF → Wet Silica Gel  (sol-gel hydrolysis)
+        GTValues.RA.stdBuilder()
+            .itemInputs(GTUtility.getIntegratedCircuit(7))
+            .fluidInputs(
+                GTNHPPMaterials.TEOS.getFluid(1000),
+                Materials.Water.getFluid(2000),
+                Materials.HydrofluoricAcid.getFluid(100))
             .itemOutputs(WetSilicaGel.get(2))
             .duration(800).eut(TierEU.RECIPE_UHV)
-            .addTo(RecipeMaps.chemicalReactorRecipes);
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
 
-        // Step 2 (SCD): wet silica gel → aerogel plate (supercritical drying)
+        // Step 3: Wet Silica Gel → Aged Silica Gel  (aging in sealed vessel, SCD UHV)
         GTValues.RA.stdBuilder()
             .itemInputs(WetSilicaGel.get(4))
+            .fluidInputs(Materials.Water.getFluid(1000))
+            .itemOutputs(AgedSilicaGel.get(4))
+            .duration(1600).eut(TierEU.RECIPE_UHV)
+            .addTo(GTNHPPRecipeMaps.sSCDRecipes);
+
+        // Step 4: Aged Silica Gel + ethanol → Ethanol-Saturated Gel  (solvent exchange, SCD UHV)
+        GTValues.RA.stdBuilder()
+            .itemInputs(AgedSilicaGel.get(4))
             .fluidInputs(Materials.Ethanol.getFluid(4000))
-            .fluidOutputs(Materials.Ethanol.getFluid(3800))
-            .itemOutputs(GTNHPPMaterials.SilicaAerogel.getPlates(2))
+            .fluidOutputs(Materials.Water.getFluid(3000))
+            .itemOutputs(EthanolSaturatedGel.get(4))
+            .duration(2400).eut(TierEU.RECIPE_UHV)
+            .addTo(GTNHPPRecipeMaps.sSCDRecipes);
+
+        // Step 5 (SCD): Ethanol-Saturated Gel → Aerogel plate + ethanol  (supercritical drying, UHV)
+        GTValues.RA.stdBuilder()
+            .itemInputs(EthanolSaturatedGel.get(4))
+            .fluidInputs(Materials.Ethanol.getFluid(2000))
+            .fluidOutputs(Materials.Ethanol.getFluid(1800))
+            .itemOutputs(mat(OrePrefixes.plate, GTNHPPMaterials.SilicaAerogel, 2))
             .duration(3200).eut(TierEU.RECIPE_UHV)
             .addTo(GTNHPPRecipeMaps.sSCDRecipes);
     }

@@ -31,17 +31,30 @@ public enum GTNHPPItemList implements IItemContainer {
     // --- hBN synthesis intermediates ---
     BoronTrioxide, BoronCarbide, CrudeHBN,
 
-    // --- Aerogel synthesis intermediate ---
-    WetSilicaGel;
+    // --- Aerogel synthesis intermediates ---
+    WetSilicaGel, AgedSilicaGel, EthanolSaturatedGel,
+
+    // --- SiC synthesis intermediates ---
+    CrudeSiCPowder, PurifiedSiCPowder, DenseSiCCompact,
+
+    // --- Kapton concentrated sol intermediate ---
+    ConcentratedPAA,
+
+    // --- hBN sintering intermediates ---
+    HBNPowderBlend, DenseHBNCeramic;
 
     // @formatter:off
     public static final GTNHPPItemList[] INTER_MAP = {
-        AdipicAcid, HMD, Adiponitrile,
-        LacticAcid, Lactide,
-        Acrylonitrile, PANFiber, StabilizedPANFiber, CarbonFiberTow,
-        PMDA, ODA, PolyamicAcidFilm,
-        BoronTrioxide, BoronCarbide, CrudeHBN,
-        WetSilicaGel,
+        AdipicAcid, HMD, Adiponitrile,           //  0–2
+        LacticAcid, Lactide,                       //  3–4
+        Acrylonitrile, PANFiber, StabilizedPANFiber, CarbonFiberTow, //  5–8
+        PMDA, ODA, PolyamicAcidFilm,              //  9–11
+        BoronTrioxide, BoronCarbide, CrudeHBN,    // 12–14
+        WetSilicaGel,                              // 15
+        CrudeSiCPowder, PurifiedSiCPowder, DenseSiCCompact, // 16–18
+        ConcentratedPAA,                           // 19
+        HBNPowderBlend, DenseHBNCeramic,           // 20–21
+        AgedSilicaGel, EthanolSaturatedGel         // 22–23
     };
     // @formatter:on
 

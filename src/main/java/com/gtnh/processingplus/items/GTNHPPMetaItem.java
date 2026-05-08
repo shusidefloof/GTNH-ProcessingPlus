@@ -67,6 +67,7 @@ public class GTNHPPMetaItem extends Item {
         "Dense hBN Ceramic",
         "Aged Silica Gel",
         "Ethanol-Saturated Silica Gel",
+        "Molten NMP-Saturated Polyacrylonitrile"
     };
 
     private static final String[] INTER_FORMULAS = {

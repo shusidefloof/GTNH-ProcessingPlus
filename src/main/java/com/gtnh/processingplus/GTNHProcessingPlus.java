@@ -27,7 +27,7 @@ public class GTNHProcessingPlus {
 
     // Registers our IMaterialHandler before GT's preInit calls Materials.init()
     static {
-        Materials.add(new GTNHPPMaterials());
+        GTNHPPMaterials.init();
     }
 
     @SidedProxy(clientSide = "com.gtnh.processingplus.ClientProxy", serverSide = "com.gtnh.processingplus.CommonProxy")

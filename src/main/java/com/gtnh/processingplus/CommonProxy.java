@@ -1,36 +1,30 @@
 package com.gtnh.processingplus;
 
 import com.gtnh.processingplus.blocks.GTNHPPBlocks;
-import com.gtnh.processingplus.items.GTNHPPMetaItem;
+import com.gtnh.processingplus.loader.MaterialLoader;
 import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
-import com.gtnh.processingplus.recipes.GTNHPPRecipes;
 
+import com.gtnh.processingplus.recipes.PrPlusRecipes;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLLoadCompleteEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
-import cpw.mods.fml.common.registry.GameRegistry;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.util.GTRecipe;
 import gtPlusPlus.api.recipe.GTPPRecipeMaps;
 
 public class CommonProxy {
 
-    public static GTNHPPMetaItem MATERIAL_ITEM;
-
     public void preInit(FMLPreInitializationEvent event) {
-        Config.synchronizeConfiguration(event.getSuggestedConfigurationFile());
-        MATERIAL_ITEM = new GTNHPPMetaItem();
-        GameRegistry.registerItem(MATERIAL_ITEM, "gtnhpp_material");
-
-        // This line registers the actual liquids AND makes them compatible with the cells
-        GTNHPPBlocks.registerBlocks();
+       // Config.synchronizeConfiguration(event.getSuggestedConfigurationFile());
+        //GTNHPPBlocks.registerBlocks();
         GTNHProcessingPlus.LOG.info("GT:NH Processing+ v{} loading", Tags.VERSION);
+
+        MaterialLoader.load();
     }
 
     public void init(FMLInitializationEvent event) {
-        GTNHPPMetaItem.registerItems(MATERIAL_ITEM);
         GTNHPPBlocks.registerMachines();
     }
 
@@ -39,7 +33,7 @@ public class CommonProxy {
     public void loadComplete(FMLLoadCompleteEvent event) {
         copyRecipesToHTRF();
         copyRecipesToCRV();
-        GTNHPPRecipes.init();
+        PrPlusRecipes.init();
     }
 
     public void serverStarting(FMLServerStartingEvent event) {}

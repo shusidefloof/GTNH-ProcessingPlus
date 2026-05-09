@@ -1,5 +1,7 @@
 package com.gtnh.processingplus;
 
+import gregtech.api.GregTechAPI;
+import gregtech.loaders.materials.MaterialsInit;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -18,29 +20,33 @@ import gregtech.api.enums.Materials;
     modid = GTNHProcessingPlus.MODID,
     version = Tags.VERSION,
     name = "GT:NH Processing+",
-    acceptedMinecraftVersions = "[1.7.10]",
-    dependencies = "required-after:gregtech;after:gtplusplus")
+    acceptedMinecraftVersions = "",
+    // Force this mod to load AFTER GregTech's and Bartwork's internal material init
+    dependencies = "required-after:gregtech;" + "required-after:bartworks;"
+)
 public class GTNHProcessingPlus {
 
-    public static final String MODID = "gtnhpp";
+    public static final String MODID = "gtnhprp";
     public static final Logger LOG = LogManager.getLogger(MODID);
 
-    // Registers our IMaterialHandler before GT's preInit calls Materials.init()
-    static {
-        GTNHPPMaterials.init();
-    }
-
-    @SidedProxy(clientSide = "com.gtnh.processingplus.ClientProxy", serverSide = "com.gtnh.processingplus.CommonProxy")
+    @SidedProxy(
+        clientSide = "com.gtnh.processingplus.ClientProxy",
+        serverSide = "com.gtnh.processingplus.CommonProxy"
+    )
     public static CommonProxy proxy;
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
+        System.out.println(">>> MAIN MOD PREINIT FIRED");
+        System.out.println("PROXY IS: " + proxy);
+        Materials.mMaterialHandlers.add(new GTNHPPMaterials());
         proxy.preInit(event);
     }
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
         proxy.init(event);
+        System.out.println("GT MATERIAL COUNT: " + gregtech.api.GregTechAPI.sGeneratedMaterials.length);
     }
 
     @Mod.EventHandler
@@ -49,12 +55,5 @@ public class GTNHProcessingPlus {
     }
 
     @Mod.EventHandler
-    public void loadComplete(FMLLoadCompleteEvent event) {
-        proxy.loadComplete(event);
-    }
-
-    @Mod.EventHandler
-    public void serverStarting(FMLServerStartingEvent event) {
-        proxy.serverStarting(event);
-    }
+    public void loadComplete(FMLLoadCompleteEvent event) { proxy.loadComplete(event); }
 }

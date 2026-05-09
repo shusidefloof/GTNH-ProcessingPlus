@@ -214,9 +214,18 @@ public class MTE_HTRF extends MTEExtendedPowerMultiBlockBase<MTE_HTRF> implement
             .addInfo("Designed for ceramic synthesis, polymer cyclization, and carbide/nitride formation.")
             .addInfo("")
             .addInfo(EnumChatFormatting.YELLOW + "System Mechanics:")
-            .addInfo(EnumChatFormatting.RED + "- Reaction Heat" + EnumChatFormatting.GRAY + " determines valid recipes and overclocking ceiling")
-            .addInfo(EnumChatFormatting.RED + "- Thermal Overdrive" + EnumChatFormatting.GRAY + " increases speed but raises instability")
-            .addInfo(EnumChatFormatting.RED + "- Residue Accumulation" + EnumChatFormatting.GRAY + " acts as long-term system degradation")
+            .addInfo(
+                EnumChatFormatting.RED + "- Reaction Heat"
+                    + EnumChatFormatting.GRAY
+                    + " determines valid recipes and overclocking ceiling")
+            .addInfo(
+                EnumChatFormatting.RED + "- Thermal Overdrive"
+                    + EnumChatFormatting.GRAY
+                    + " increases speed but raises instability")
+            .addInfo(
+                EnumChatFormatting.RED + "- Residue Accumulation"
+                    + EnumChatFormatting.GRAY
+                    + " acts as long-term system degradation")
             .addInfo("")
             .addInfo(EnumChatFormatting.YELLOW + "Core Functions:")
             .addInfo("- SiC / hBN ceramic synthesis")

@@ -15,6 +15,7 @@ public class SiCRecipes {
 
     public static void init() {
         step1_CarbothermalReduction();
+        stepAlt_CVDRoute();
         step2_AcidPurification();
         step3_Sintering();
         step4_Machining();
@@ -37,6 +38,22 @@ public class SiCRecipes {
     }
 
     // =========================================================
+    // ALT: CVD route — SiCl4 + CH4 → PurifiedSiC + HCl (HTRF, UV)
+    // Higher purity than Acheson; skips crushing and acid wash
+    // =========================================================
+    private static void stepAlt_CVDRoute() {
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(circuit(2))
+            .fluidInputs(fluid(Materials.SiliconTetrachloride, 1000), fluid(Materials.Methane, 1000))
+            .fluidOutputs(fluid(Materials.HydrochloricAcid, 4000))
+            .itemOutputs(dust(PrPMaterials.PurifiedSiCPowder, 2))
+            .duration(800)
+            .eut(TierEU.RECIPE_UV)
+            .addTo(GTNHPPRecipeMaps.sHTRFRecipes);
+    }
+
+    // =========================================================
     // 2. HF purification → Purified SiC
     // =========================================================
     private static void step2_AcidPurification() {
@@ -47,7 +64,7 @@ public class SiCRecipes {
             .fluidOutputs(fluid(Materials.Water, 800))
             .itemOutputs(dust(PrPMaterials.PurifiedSiCPowder, 4))
             .duration(600)
-            .eut(TierEU.RECIPE_ZPM)
+            .eut(TierEU.RECIPE_UV)
             .addTo(GTRecipeConstants.UniversalChemical);
     }
 

@@ -19,6 +19,8 @@ public class CarbonFiberRecipes {
         step3_Spinning();
         step4_SolventRecovery();
         step5_Stabilization();
+        stepAlt_CoalTarToMesophasePitch();
+        stepAlt_PitchStabilization();
         step6_Carbonization();
         step7_CompositeFinal();
     }
@@ -75,7 +77,7 @@ public class CarbonFiberRecipes {
             .fluidInputs(fluid(PrPMaterials.DilutedNMP, 1500))
             .fluidOutputs(fluid(Materials.NMethylIIPyrrolidone, 950), fluid(Materials.Water, 550))
             .duration(400)
-            .eut(TierEU.RECIPE_EV)
+            .eut(TierEU.RECIPE_UV)
             .addTo(RecipeMaps.distillationTowerRecipes);
     }
 
@@ -120,5 +122,34 @@ public class CarbonFiberRecipes {
             .duration(1200)
             .eut(TierEU.RECIPE_UV)
             .addTo(RecipeMaps.assemblerRecipes);
+    }
+
+    // =========================================================
+    // ALT: Coal Tar → Mesophase Pitch (UV LCR)
+    // Pyrolyse Oven coal tar heat-treated to mesophase
+    // =========================================================
+    private static void stepAlt_CoalTarToMesophasePitch() {
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(circuit(1))
+            .fluidInputs(fluid("fluid.coaltar", 2000))
+            .fluidOutputs(fluid(PrPMaterials.MesophasePitch, 1000))
+            .duration(800)
+            .eut(TierEU.RECIPE_UV)
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+    }
+
+    // =========================================================
+    // ALT: Mesophase Pitch oxidative stabilization (DAF, UV)
+    // Skips PAN synthesis; lower yield — 3 tows vs 3 tows from 4 PAN
+    // =========================================================
+    private static void stepAlt_PitchStabilization() {
+
+        GTValues.RA.stdBuilder()
+            .fluidInputs(fluid(PrPMaterials.MesophasePitch, 1000), fluid(Materials.Oxygen, 2000))
+            .itemOutputs(dust(PrPMaterials.StabilizedPolyacrylonitrile, 3))
+            .duration(1200)
+            .eut(TierEU.RECIPE_UV)
+            .addTo(GTNHPPRecipeMaps.sDAFOxidizingRecipes);
     }
 }

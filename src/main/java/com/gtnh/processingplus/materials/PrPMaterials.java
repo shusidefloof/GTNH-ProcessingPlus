@@ -110,6 +110,36 @@ public class PrPMaterials implements Runnable {
     public static Werkstoff ConcentratedPAA;
     public static Werkstoff PolyamicAcidFilm;
 
+    // =========================
+    // NYLON CAPROLACTAM ROUTE
+    // =========================
+    public static Werkstoff CyclohexanoneOxime;
+    public static Werkstoff HydroxylammoniumSulfate;
+    public static Werkstoff Caprolactam;
+
+    // =========================
+    // KAPTON CHEMICAL IMIDIZATION
+    // =========================
+    public static Werkstoff Triethylamine;
+    public static Werkstoff AceticAnhydride;
+    public static Werkstoff Ketene;
+
+    // =========================
+    // CARBON FIBER PITCH ROUTE
+    // =========================
+    public static Werkstoff MesophasePitch;
+
+    // =========================
+    // AEROGEL AMBIENT DRYING
+    // =========================
+    public static Werkstoff Trimethylsilane;
+    public static Werkstoff Trimethylchlorosilane;
+
+    // =========================
+    // PLA ALTERNATE ROUTES
+    // =========================
+    public static Werkstoff PropyleneGlycol;
+
     public static List<Werkstoff> ALL = new ArrayList<>();
 
     // =========================
@@ -334,6 +364,71 @@ public class PrPMaterials implements Runnable {
         PolyamicAcidFilm = register(new Werkstoff(
             rgb(255, 215, 0), "Polyamic Acid Film", subscriptNumbers("C22H14N2O7"),
             new Werkstoff.Stats(), Werkstoff.Types.COMPOUND, polymerFeatures(), id(), TextureSet.SET_DULL
+        ));
+
+        // -------------------------
+        // NYLON CAPROLACTAM ROUTE
+        // -------------------------
+        CyclohexanoneOxime = register(new Werkstoff(
+            rgb(240, 245, 230), "Cyclohexanone Oxime", subscriptNumbers("C6H11NO"),
+            new Werkstoff.Stats(), Werkstoff.Types.COMPOUND, polymerFeatures(), id(), TextureSet.SET_DULL
+        ));
+
+        HydroxylammoniumSulfate = register(new Werkstoff(
+            rgb(245, 245, 245), "Hydroxylammonium Sulfate", subscriptNumbers("(NH3OH)2SO4"),
+            new Werkstoff.Stats(), Werkstoff.Types.COMPOUND, polymerFeatures(), id(), TextureSet.SET_DULL
+        ));
+
+        Caprolactam = register(new Werkstoff(
+            rgb(240, 240, 250), "Caprolactam", subscriptNumbers("C6H11NO"),
+            new Werkstoff.Stats(), Werkstoff.Types.COMPOUND, fluidFeatures(), id(), TextureSet.SET_FLUID
+        ));
+
+        // -------------------------
+        // KAPTON CHEMICAL IMIDIZATION
+        // -------------------------
+        Triethylamine = register(new Werkstoff(
+            rgb(200, 215, 240), "Triethylamine", subscriptNumbers("N(C2H5)3"),
+            new Werkstoff.Stats(), Werkstoff.Types.COMPOUND, fluidFeatures(), id(), TextureSet.SET_FLUID
+        ));
+
+        AceticAnhydride = register(new Werkstoff(
+            rgb(245, 245, 240), "Acetic Anhydride", subscriptNumbers("C4H6O3"),
+            new Werkstoff.Stats(), Werkstoff.Types.COMPOUND, fluidFeatures(), id(), TextureSet.SET_FLUID
+        ));
+
+        Ketene = register(new Werkstoff(
+            rgb(250, 255, 245), "Ketene", subscriptNumbers("C2H2O"),
+            new Werkstoff.Stats(), Werkstoff.Types.COMPOUND, fluidFeatures(), id(), TextureSet.SET_FLUID
+        ));
+
+        // -------------------------
+        // CARBON FIBER PITCH ROUTE
+        // -------------------------
+        MesophasePitch = register(new Werkstoff(
+            rgb(20, 15, 10), "Mesophase Pitch", subscriptNumbers("(C)n"),
+            new Werkstoff.Stats(), Werkstoff.Types.COMPOUND, fluidFeatures(), id(), TextureSet.SET_FLUID
+        ));
+
+        // -------------------------
+        // AEROGEL AMBIENT DRYING
+        // -------------------------
+        Trimethylsilane = register(new Werkstoff(
+            rgb(210, 230, 210), "Trimethylsilane", subscriptNumbers("(CH3)3SiH"),
+            new Werkstoff.Stats(), Werkstoff.Types.COMPOUND, fluidFeatures(), id(), TextureSet.SET_FLUID
+        ));
+
+        Trimethylchlorosilane = register(new Werkstoff(
+            rgb(205, 225, 205), "Trimethylchlorosilane", subscriptNumbers("(CH3)3SiCl"),
+            new Werkstoff.Stats(), Werkstoff.Types.COMPOUND, fluidFeatures(), id(), TextureSet.SET_FLUID
+        ));
+
+        // -------------------------
+        // PLA ALTERNATE ROUTES
+        // -------------------------
+        PropyleneGlycol = register(new Werkstoff(
+            rgb(220, 245, 220), "Propylene Glycol", subscriptNumbers("C3H8O2"),
+            new Werkstoff.Stats(), Werkstoff.Types.COMPOUND, fluidFeatures(), id(), TextureSet.SET_FLUID
         ));
     }
 

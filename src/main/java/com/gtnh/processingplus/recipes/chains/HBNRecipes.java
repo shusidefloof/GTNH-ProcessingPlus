@@ -23,6 +23,7 @@ public class HBNRecipes {
         step1_BoraxToB2O3();
         step2_CarbothermalReduction();
         step3_Nitriding();
+        stepAlt_BCl3Shortcut();
         step4_PowderBlending();
         step5_Sintering();
         step6_MachiningAndCasing();
@@ -64,13 +65,28 @@ public class HBNRecipes {
 
         GTValues.RA.stdBuilder()
             .itemInputs(dust(PrPMaterials.BoronCarbide, 4))
-            .fluidInputs(fluid(Materials.Oxygen, 5000)
-                )
-            .fluidOutputs(fluid(Materials.Hydrogen, 24000), fluid(Materials.CarbonDioxide, 1000), fluid(Materials.CarbonMonoxide, 3000))
+            .fluidInputs(fluid(Materials.Ammonia, 3000))
+            .fluidOutputs(fluid(Materials.Methane, 1000), fluid(Materials.CarbonMonoxide, 500))
             .itemOutputs(dust(PrPMaterials.CrudeHBN, 12))
             .duration(2400)
             .eut(TierEU.RECIPE_UV)
             .addTo(GTNHPPRecipeMaps.sAARRecipes);
+    }
+
+    // =========================================================
+    // ALT: BCl3 shortcut — B2O3 + Cl2 + NH3 → CrudeHBN + HCl (UV LCR)
+    // Skips BoronCarbide intermediate; requires chlorine infrastructure
+    // =========================================================
+    private static void stepAlt_BCl3Shortcut() {
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(GTOreDictUnificator.get("dustBoronTrioxide", 1))
+            .fluidInputs(fluid(Materials.Chlorine, 3000), fluid(Materials.Ammonia, 2000))
+            .fluidOutputs(fluid(Materials.HydrochloricAcid, 3000))
+            .itemOutputs(dust(PrPMaterials.CrudeHBN, 1))
+            .duration(800)
+            .eut(TierEU.RECIPE_UV)
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 
     // =========================================================

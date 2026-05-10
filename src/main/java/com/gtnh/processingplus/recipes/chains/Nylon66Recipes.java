@@ -23,6 +23,8 @@ public class Nylon66Recipes {
         step4_GreenRoute();
         step5_ButadieneRoute();
         step6_PolymerChain();
+        step0_HydroxylammoniumSulfateSynthesis();
+        step7_CaprolactamRoute();
     }
 
     // =========================================================
@@ -66,7 +68,7 @@ public class Nylon66Recipes {
                 fluid(PrPMaterials.AdipicAcid, 2000),
                 fluid(Materials.NitrousOxide, 2000),
                 fluid(Materials.Water, 2000))
-            .duration(350)
+            .duration(150)
             .eut(TierEU.RECIPE_UV)
             .metadata(GTRecipeConstants.CHEMPLANT_CASING_TIER, 6)
             .addTo(GTPPRecipeMaps.chemicalPlantRecipes);
@@ -94,7 +96,7 @@ public class Nylon66Recipes {
         GTValues.RA.stdBuilder()
             .itemInputs(circuit(5), GTOreDictUnificator.get(OrePrefixes.dustSmall, "catalystCobaltTitanium", 0))
             .fluidInputs(
-                fluid(Materials.Butene, 2000),
+                fluid(Materials.Butadiene, 2000),
                 fluid(Materials.CarbonMonoxide, 2000),
                 fluid(Materials.Water, 2000))
             .fluidOutputs(fluid(PrPMaterials.AdipicAcid, 1000))
@@ -137,5 +139,61 @@ public class Nylon66Recipes {
             .duration(1600)
             .eut(TierEU.RECIPE_ZPM)
             .addTo(GTNHPPRecipeMaps.sPCVRecipes);
+    }
+
+    // =========================================================
+    // 0. Hydroxylammonium Sulfate synthesis (UV LCR)
+    // 2 NH3 + H2O2 + H2SO4 → (NH3OH)2SO4 + H2O
+    // =========================================================
+    private static void step0_HydroxylammoniumSulfateSynthesis() {
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(circuit(10))
+            .fluidInputs(
+                fluid(Materials.Ammonia, 2000),
+                fluid("fluid.hydrogenperoxide", 1000),
+                fluid(Materials.SulfuricAcid, 1000))
+            .itemOutputs(dust(PrPMaterials.HydroxylammoniumSulfate, 1))
+            .fluidOutputs(fluid(Materials.Water, 2000))
+            .duration(400)
+            .eut(TierEU.RECIPE_UV)
+            .addTo(GTRecipeConstants.UniversalChemical);
+    }
+
+    // =========================================================
+    // 7. Caprolactam route — third path branching from cyclohexanone
+    // =========================================================
+    private static void step7_CaprolactamRoute() {
+
+        // A: Cyclohexanone + Hydroxylammonium Sulfate → Cyclohexanone Oxime + H2SO4
+        GTValues.RA.stdBuilder()
+            .itemInputs(circuit(7), dust(PrPMaterials.HydroxylammoniumSulfate, 2))
+            .fluidInputs(fluid("cyclohexanone", 2000))
+            .fluidOutputs(fluid(Materials.SulfuricAcid, 1000))
+            .itemOutputs(dust(PrPMaterials.CyclohexanoneOxime, 2))
+            .duration(300)
+            .eut(TierEU.RECIPE_UV)
+            .metadata(GTRecipeConstants.CHEMPLANT_CASING_TIER, 5)
+            .addTo(GTPPRecipeMaps.chemicalPlantRecipes);
+
+        // B: Cyclohexanone Oxime + H2SO4 → Caprolactam (Beckmann rearrangement)
+        GTValues.RA.stdBuilder()
+            .itemInputs(circuit(8), dust(PrPMaterials.CyclohexanoneOxime, 1))
+            .fluidInputs(fluid(Materials.SulfuricAcid, 500))
+            .fluidOutputs(fluid(PrPMaterials.Caprolactam, 1000))
+            .duration(400)
+            .eut(TierEU.RECIPE_UV)
+            .metadata(GTRecipeConstants.CHEMPLANT_CASING_TIER, 5)
+            .addTo(GTPPRecipeMaps.chemicalPlantRecipes);
+
+        // C: Caprolactam + H2O → Nylon-6,6 (ring-opening polymerization, Chemical Plant)
+        GTValues.RA.stdBuilder()
+            .itemInputs(circuit(9))
+            .fluidInputs(fluid(PrPMaterials.Caprolactam, 4000), fluid(Materials.Water, 500))
+            .itemOutputs(dust(PrPMaterials.Nylon66, 4))
+            .duration(2000)
+            .eut(TierEU.RECIPE_UV)
+            .metadata(GTRecipeConstants.CHEMPLANT_CASING_TIER, 5)
+            .addTo(GTPPRecipeMaps.chemicalPlantRecipes);
     }
 }

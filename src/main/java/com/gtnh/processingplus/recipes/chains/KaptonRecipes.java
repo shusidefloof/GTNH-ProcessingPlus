@@ -7,9 +7,12 @@ import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
 
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.Materials;
+import gregtech.api.enums.OrePrefixes;
 import gregtech.api.enums.TierEU;
 import gregtech.api.recipe.RecipeMaps;
+import gregtech.api.util.GTOreDictUnificator;
 import gregtech.api.util.GTRecipeConstants;
+import gtPlusPlus.api.recipe.GTPPRecipeMaps;
 
 public class KaptonRecipes {
 
@@ -21,22 +24,27 @@ public class KaptonRecipes {
         step5_PAAConcentration();
         step6_FilmCasting();
         step7_ImidizationToKapton();
+        stepPrereq_TriethylamineSynthesis();
+        stepPrereq_KeteneSynthesis();
+        stepAlt_AceticAnhydrideSynthesis();
+        stepAlt_ChemicalImidization();
     }
 
     // =========================================================
-    // 1. PMDA synthesis — phthalic acid oxidative dehydration (LuV hook)
-    // PhthalicAcid + O2 → PMDA + CO2 + H2O
+    // 1. PMDA synthesis — naphthalene catalytic oxidation (LuV Chemical Plant)
+    // 2 C10H8 + 9 O2 → C10H2O6 + 4 CO2 + 2 H2O
     // =========================================================
     private static void step1_PMDASynthesis() {
 
         GTValues.RA.stdBuilder()
-            .itemInputs(dust(Materials.PhthalicAcid, 2), circuit(3))
-            .fluidInputs(fluid(Materials.Oxygen, 6000))
-            .fluidOutputs(fluid(Materials.CarbonDioxide, 2000), fluid(Materials.Water, 1000))
+            .itemInputs(circuit(3), GTOreDictUnificator.get(OrePrefixes.dustSmall, "catalystVanadiumPalladium", 0))
+            .fluidInputs(fluid("fluid.naphthalene", 2000), fluid(Materials.Oxygen, 9000))
+            .fluidOutputs(fluid(Materials.CarbonDioxide, 4000), fluid(Materials.Water, 2000))
             .itemOutputs(dust(PrPMaterials.PMDA, 2))
             .duration(600)
             .eut(TierEU.RECIPE_LuV)
-            .addTo(GTRecipeConstants.UniversalChemical);
+            .metadata(GTRecipeConstants.CHEMPLANT_CASING_TIER, 5)
+            .addTo(GTPPRecipeMaps.chemicalPlantRecipes);
     }
 
     // =========================================================
@@ -133,5 +141,66 @@ public class KaptonRecipes {
             .duration(1200)
             .eut(TierEU.RECIPE_UV)
             .addTo(GTNHPPRecipeMaps.sPFCImidizationRecipes);
+    }
+
+    // =========================================================
+    // PREREQ: Triethylamine synthesis — Leuckart ethylation (UV LCR)
+    // 3 Ethanol + NH3 → N(C2H5)3 + 3 H2O
+    // =========================================================
+    private static void stepPrereq_TriethylamineSynthesis() {
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(circuit(1))
+            .fluidInputs(fluid(Materials.Ethanol, 3000), fluid(Materials.Ammonia, 1000))
+            .fluidOutputs(fluid(PrPMaterials.Triethylamine, 1000), fluid(Materials.Water, 3000))
+            .duration(600)
+            .eut(TierEU.RECIPE_UV)
+            .addTo(GTRecipeConstants.UniversalChemical);
+    }
+
+    // =========================================================
+    // PREREQ: Ketene synthesis — acetic acid pyrolysis (UV HTRF)
+    // CH3COOH → CH2=C=O + H2O
+    // =========================================================
+    private static void stepPrereq_KeteneSynthesis() {
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(circuit(2))
+            .fluidInputs(fluid(Materials.AceticAcid, 1000))
+            .fluidOutputs(fluid(PrPMaterials.Ketene, 1000), fluid(Materials.Water, 1000))
+            .duration(400)
+            .eut(TierEU.RECIPE_UV)
+            .addTo(GTNHPPRecipeMaps.sHTRFRecipes);
+    }
+
+    // =========================================================
+    // ALT: Acetic Anhydride synthesis (LuV LCR prerequisite)
+    // AceticAcid + Ketene → AceticAnhydride + Water
+    // =========================================================
+    private static void stepAlt_AceticAnhydrideSynthesis() {
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(circuit(5))
+            .fluidInputs(fluid(Materials.AceticAcid, 2000), fluid(PrPMaterials.Ketene, 1000))
+            .fluidOutputs(fluid(PrPMaterials.AceticAnhydride, 1000), fluid(Materials.Water, 500))
+            .duration(400)
+            .eut(TierEU.RECIPE_LuV)
+            .addTo(GTRecipeConstants.UniversalChemical);
+    }
+
+    // =========================================================
+    // ALT: Chemical imidization → Kapton plate (UV LCR)
+    // Faster than thermal; consumes AceticAnhydride + Triethylamine
+    // =========================================================
+    private static void stepAlt_ChemicalImidization() {
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(dust(PrPMaterials.PolyamicAcidFilm, 2))
+            .fluidInputs(fluid(PrPMaterials.AceticAnhydride, 500), fluid(PrPMaterials.Triethylamine, 200))
+            .fluidOutputs(fluid(Materials.AceticAcid, 500))
+            .itemOutputs(plate(PrPMaterials.Kapton, 2))
+            .duration(800)
+            .eut(TierEU.RECIPE_UV)
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 }

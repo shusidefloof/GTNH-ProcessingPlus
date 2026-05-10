@@ -8,28 +8,82 @@ import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.TierEU;
+import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.util.GTRecipeConstants;
 
 public class PLARecipes {
 
     public static void init() {
-        step1_LacticAcidSynthesis();
+        step0_PropyleneGlycolSynthesis();
+        step1_FermentationRoute();
+        step1b_PropyleneGlycolRoute();
+        step1c_AcetaldehydeStreckerRoute();
         step2_LactideFormation();
         step3_Polymerization();
     }
 
     // =========================================================
-    // 1. Ethanol + H2SO4 → Lactic Acid (LuV hook)
+    // 0. Propylene Glycol synthesis — HPPO process (LuV LCR)
+    // Propene + H2O2 → PropyleneGlycol + Water
     // =========================================================
-    private static void step1_LacticAcidSynthesis() {
+    private static void step0_PropyleneGlycolSynthesis() {
 
         GTValues.RA.stdBuilder()
             .itemInputs(circuit(2))
-            .fluidInputs(fluid(Materials.Ethanol, 1000), fluid(Materials.SulfuricAcid, 200))
-            .fluidOutputs(fluid(PrPMaterials.LacticAcid, 1000), fluid(Materials.Water, 500))
-            .duration(400)
+            .fluidInputs(fluid(Materials.Propene, 1000), fluid("fluid.hydrogenperoxide", 1000), fluid(Materials.Water, 500))
+            .fluidOutputs(fluid(PrPMaterials.PropyleneGlycol, 1000), fluid(Materials.Water, 1500))
+            .duration(300)
             .eut(TierEU.RECIPE_LuV)
-            .addTo(GTRecipeConstants.UniversalChemical);
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+    }
+
+    // =========================================================
+    // 1. Fermentation route — sugarcane + water → Lactic Acid (LuV Fermenter)
+    // =========================================================
+    private static void step1_FermentationRoute() {
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(new net.minecraft.item.ItemStack(net.minecraft.init.Items.reeds, 8))
+            .fluidInputs(fluid(Materials.Water, 1000))
+            .fluidOutputs(fluid(PrPMaterials.LacticAcid, 1000), fluid(Materials.Ethanol, 250))
+            .duration(1200)
+            .eut(TierEU.RECIPE_LuV)
+            .addTo(RecipeMaps.fermentingRecipes);
+    }
+
+    // =========================================================
+    // 1b. Propylene Glycol oxidation → Lactic Acid (ZPM LCR)
+    // =========================================================
+    private static void step1b_PropyleneGlycolRoute() {
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(circuit(3))
+            .fluidInputs(fluid(PrPMaterials.PropyleneGlycol, 1000), fluid(Materials.Oxygen, 500))
+            .fluidOutputs(fluid(PrPMaterials.LacticAcid, 1000))
+            .duration(400)
+            .eut(TierEU.RECIPE_ZPM)
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+    }
+
+    // =========================================================
+    // 1c. Acetaldehyde Strecker route → Lactic Acid (ZPM LCR)
+    // Uses HCN from carbon fiber carbonization byproduct
+    // =========================================================
+    private static void step1c_AcetaldehydeStreckerRoute() {
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(circuit(4))
+            .fluidInputs(
+                fluid(Materials.Acetaldehyde, 1000),
+                fluid(PrPMaterials.HydrogenCyanide, 1000),
+                fluid(Materials.Ammonia, 1000),
+                fluid(Materials.Water, 2000))
+            .fluidOutputs(
+                fluid(PrPMaterials.LacticAcid, 1000),
+                fluid("ammonium chloride", 500))
+            .duration(600)
+            .eut(TierEU.RECIPE_ZPM)
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 
     // =========================================================

@@ -2,8 +2,7 @@ package com.gtnh.processingplus.recipes.chains;
 
 import static com.gtnh.processingplus.recipes.PPRecipeHelper.*;
 
-import bartworks.system.material.Werkstoff;
-import com.gtnh.processingplus.materials.PPMaterials;
+import com.gtnh.processingplus.materials.PrPMaterials;
 import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
 
 import gregtech.api.enums.GTValues;
@@ -31,9 +30,9 @@ public class CarbonFiberRecipes {
 
         GTValues.RA.stdBuilder()
             .itemInputs(circuit(5))
-            .fluidInputs(fluid(Materials.Propene, 3000), fluid(Materials.Ammonia, 3000), fluid(Materials.Oxygen, 1000))
-            .fluidOutputs(fluid(Materials.Water, 3000))
-            .itemOutputs(dust(PPMaterials.Acrylonitrile, 2))
+            .fluidInputs(fluid(Materials.Propene, 2000), fluid(Materials.Ammonia, 2000), fluid(Materials.Oxygen, 3000))
+            .fluidOutputs(fluid(Materials.Water, 6000))
+            .itemOutputs(dust(PrPMaterials.Acrylonitrile, 2))
             .duration(400)
             .eut(TierEU.RECIPE_LuV)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
@@ -45,9 +44,9 @@ public class CarbonFiberRecipes {
     private static void step2_Polymerization() {
 
         GTValues.RA.stdBuilder()
-            .itemInputs(dust(PPMaterials.Acrylonitrile, 4))
+            .itemInputs(dust(PrPMaterials.Acrylonitrile, 4))
             .fluidInputs(fluid(Materials.NMethylIIPyrrolidone, 1000))
-            .fluidOutputs(fluid(PPMaterials.PolyacrylonitrileSolution, 1000))
+            .fluidOutputs(fluid(PrPMaterials.PolyacrylonitrileSolution, 1000))
             .duration(800)
             .eut(TierEU.RECIPE_UV)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
@@ -59,9 +58,9 @@ public class CarbonFiberRecipes {
     private static void step3_Spinning() {
 
         GTValues.RA.stdBuilder()
-            .fluidInputs(fluid(PPMaterials.PolyacrylonitrileSolution, 1000), fluid(Materials.Water, 3000))
-            .itemOutputs(dust(PPMaterials.Polyacrylonitrile, 4))
-            .fluidOutputs(fluid(PPMaterials.DilutedNMP, 1500))
+            .fluidInputs(fluid(PrPMaterials.PolyacrylonitrileSolution, 1000), fluid(Materials.Water, 3000))
+            .itemOutputs(dust(PrPMaterials.Polyacrylonitrile, 4))
+            .fluidOutputs(fluid(PrPMaterials.DilutedNMP, 1500))
             .duration(600)
             .eut(TierEU.RECIPE_UV)
             .addTo(GTPPRecipeMaps.chemicalPlantRecipes);
@@ -73,7 +72,7 @@ public class CarbonFiberRecipes {
     private static void step4_SolventRecovery() {
 
         GTValues.RA.stdBuilder()
-            .fluidInputs(fluid(PPMaterials.DilutedNMP, 1500))
+            .fluidInputs(fluid(PrPMaterials.DilutedNMP, 1500))
             .fluidOutputs(fluid(Materials.NMethylIIPyrrolidone, 950), fluid(Materials.Water, 550))
             .duration(400)
             .eut(TierEU.RECIPE_EV)
@@ -86,9 +85,9 @@ public class CarbonFiberRecipes {
     private static void step5_Stabilization() {
 
         GTValues.RA.stdBuilder()
-            .itemInputs(dust(PPMaterials.Polyacrylonitrile, 4))
+            .itemInputs(dust(PrPMaterials.Polyacrylonitrile, 4))
             .fluidInputs(fluid(Materials.Oxygen, 2000))
-            .itemOutputs(dust(PPMaterials.StabilizedPolyacrylonitrile, 4))
+            .itemOutputs(dust(PrPMaterials.StabilizedPolyacrylonitrile, 4))
             .duration(1600)
             .eut(TierEU.RECIPE_UV)
             .addTo(GTNHPPRecipeMaps.sDAFOxidizingRecipes);
@@ -100,10 +99,10 @@ public class CarbonFiberRecipes {
     private static void step6_Carbonization() {
 
         GTValues.RA.stdBuilder()
-            .itemInputs(dust(PPMaterials.StabilizedPolyacrylonitrile, 4))
+            .itemInputs(dust(PrPMaterials.StabilizedPolyacrylonitrile, 4))
             .fluidInputs(fluid(Materials.Nitrogen, 2000))
-            .itemOutputs(dust(PPMaterials.CarbonFiberTow, 3))
-            .fluidOutputs(fluid(Materials.CarbonMonoxide, 500), fluid(PPMaterials.HydrogenCyanide, 250))
+            .itemOutputs(dust(PrPMaterials.CarbonFiberTow, 3))
+            .fluidOutputs(fluid(Materials.CarbonMonoxide, 500), fluid(PrPMaterials.HydrogenCyanide, 250))
             .duration(2000)
             .eut(TierEU.RECIPE_UV)
             .addTo(GTNHPPRecipeMaps.sDAFInertRecipes);
@@ -115,9 +114,9 @@ public class CarbonFiberRecipes {
     private static void step7_CompositeFinal() {
 
         GTValues.RA.stdBuilder()
-            .itemInputs(dust(PPMaterials.CarbonFiberTow, 4))
+            .itemInputs(dust(PrPMaterials.CarbonFiberTow, 4))
             .fluidInputs(fluid("molten.epoxid", 576))
-            .itemOutputs(plate(PPMaterials.CarbonFiberComposite, 4))
+            .itemOutputs(plate(PrPMaterials.CarbonFiberComposite, 4))
             .duration(1200)
             .eut(TierEU.RECIPE_UV)
             .addTo(RecipeMaps.assemblerRecipes);

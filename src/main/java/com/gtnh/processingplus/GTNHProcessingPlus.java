@@ -1,11 +1,7 @@
 package com.gtnh.processingplus;
 
-import gregtech.api.GregTechAPI;
-import gregtech.loaders.materials.MaterialsInit;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import com.gtnh.processingplus.materials.GTNHPPMaterials;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
@@ -13,7 +9,6 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLLoadCompleteEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import gregtech.api.enums.Materials;
 
 @Mod(
@@ -39,7 +34,6 @@ public class GTNHProcessingPlus {
     public void preInit(FMLPreInitializationEvent event) {
         System.out.println(">>> MAIN MOD PREINIT FIRED");
         System.out.println("PROXY IS: " + proxy);
-        Materials.mMaterialHandlers.add(new GTNHPPMaterials());
         proxy.preInit(event);
     }
 

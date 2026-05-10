@@ -2,7 +2,7 @@ package com.gtnh.processingplus.recipes.chains;
 
 import static com.gtnh.processingplus.recipes.PPRecipeHelper.*;
 
-import com.gtnh.processingplus.materials.PPMaterials;
+import com.gtnh.processingplus.materials.PrPMaterials;
 import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
 
 import gregtech.api.enums.GTValues;
@@ -28,7 +28,7 @@ public class AerogelRecipes {
         GTValues.RA.stdBuilder()
             .itemInputs(circuit(6))
             .fluidInputs(fluid(Materials.SiliconTetrachloride, 1000), fluid(Materials.Ethanol, 4000))
-            .fluidOutputs(fluid(PPMaterials.TEOS, 1000), fluid(Materials.HydrochloricAcid, 4000))
+            .fluidOutputs(fluid(PrPMaterials.TEOS, 1000), fluid(Materials.HydrochloricAcid, 4000))
             .duration(400)
             .eut(TierEU.RECIPE_UV)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
@@ -42,10 +42,11 @@ public class AerogelRecipes {
         GTValues.RA.stdBuilder()
             .itemInputs(circuit(7))
             .fluidInputs(
-                fluid(PPMaterials.TEOS, 1000),
-                fluid(Materials.Water, 2000),
-                fluid(Materials.HydrofluoricAcid, 1000))
-            .itemOutputs(dust(PPMaterials.WetSilicaGel, 2))
+                fluid(PrPMaterials.TEOS, 1000),
+                fluid(Materials.Water, 5000),
+                fluid(Materials.HydrofluoricAcid, 100))
+            .itemOutputs(dust(PrPMaterials.WetSilicaGel, 2))
+            .fluidOutputs(fluid(Materials.Ethanol, 4000))
             .duration(800)
             .eut(TierEU.RECIPE_UHV)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
@@ -57,9 +58,9 @@ public class AerogelRecipes {
     private static void step3_Aging() {
 
         GTValues.RA.stdBuilder()
-            .itemInputs(dust(PPMaterials.WetSilicaGel, 4))
+            .itemInputs(dust(PrPMaterials.WetSilicaGel, 4))
             .fluidInputs(fluid(Materials.Water, 1000))
-            .itemOutputs(dust(PPMaterials.AgedSilicaGel, 4))
+            .itemOutputs(dust(PrPMaterials.AgedSilicaGel, 4))
             .duration(1600)
             .eut(TierEU.RECIPE_UHV)
             .addTo(GTNHPPRecipeMaps.sSCDRecipes);
@@ -71,10 +72,10 @@ public class AerogelRecipes {
     private static void step4_SolventExchange() {
 
         GTValues.RA.stdBuilder()
-            .itemInputs(dust(PPMaterials.AgedSilicaGel, 4))
+            .itemInputs(dust(PrPMaterials.AgedSilicaGel, 4))
             .fluidInputs(fluid(Materials.Ethanol, 4000))
             .fluidOutputs(fluid(Materials.Water, 3000))
-            .itemOutputs(dust(PPMaterials.EthanolSaturatedGel, 4))
+            .itemOutputs(dust(PrPMaterials.EthanolSaturatedGel, 4))
             .duration(2400)
             .eut(TierEU.RECIPE_UHV)
             .addTo(GTNHPPRecipeMaps.sSCDRecipes);
@@ -86,10 +87,10 @@ public class AerogelRecipes {
     private static void step5_SupercriticalDrying() {
 
         GTValues.RA.stdBuilder()
-            .itemInputs(dust(PPMaterials.EthanolSaturatedGel, 4))
+            .itemInputs(dust(PrPMaterials.EthanolSaturatedGel, 4))
             .fluidInputs(fluid(Materials.Ethanol, 2000))
             .fluidOutputs(fluid(Materials.Ethanol, 1800))
-            .itemOutputs(plate(PPMaterials.SilicaAerogel, 2))
+            .itemOutputs(plate(PrPMaterials.SilicaAerogel, 2))
             .duration(3200)
             .eut(TierEU.RECIPE_UHV)
             .addTo(GTNHPPRecipeMaps.sSCDRecipes);

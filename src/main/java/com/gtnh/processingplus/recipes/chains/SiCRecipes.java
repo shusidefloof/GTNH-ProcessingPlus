@@ -2,14 +2,13 @@ package com.gtnh.processingplus.recipes.chains;
 
 import static com.gtnh.processingplus.recipes.PPRecipeHelper.*;
 
-import com.gtnh.processingplus.materials.PPMaterials;
+import com.gtnh.processingplus.materials.PrPMaterials;
 import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
 
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.TierEU;
 import gregtech.api.recipe.RecipeMaps;
-import gregtech.api.util.GTOreDictUnificator;
 import gregtech.api.util.GTRecipeConstants;
 
 public class SiCRecipes {
@@ -31,7 +30,7 @@ public class SiCRecipes {
             .itemInputs(dust(Materials.SiliconDioxide, 3), dust(Materials.Carbon, 3), circuit(1))
             .fluidInputs(fluid(Materials.Argon, 1000))
             .fluidOutputs(fluid(Materials.CarbonMonoxide, 2000))
-            .itemOutputs(dust(PPMaterials.CrudeSiCPowder, 2))
+            .itemOutputs(dust(PrPMaterials.CrudeSiCPowder, 2))
             .duration(1200)
             .eut(TierEU.RECIPE_UV)
             .addTo(GTNHPPRecipeMaps.sHTRFRecipes);
@@ -43,10 +42,10 @@ public class SiCRecipes {
     private static void step2_AcidPurification() {
 
         GTValues.RA.stdBuilder()
-            .itemInputs(dust(PPMaterials.CrudeSiCPowder, 4))
+            .itemInputs(dust(PrPMaterials.CrudeSiCPowder, 4))
             .fluidInputs(fluid(Materials.HydrofluoricAcid, 500), fluid(Materials.SulfuricAcid, 500))
             .fluidOutputs(fluid(Materials.Water, 800))
-            .itemOutputs(dust(PPMaterials.PurifiedSiCPowder, 4))
+            .itemOutputs(dust(PrPMaterials.PurifiedSiCPowder, 4))
             .duration(600)
             .eut(TierEU.RECIPE_ZPM)
             .addTo(GTRecipeConstants.UniversalChemical);
@@ -58,9 +57,9 @@ public class SiCRecipes {
     private static void step3_Sintering() {
 
         GTValues.RA.stdBuilder()
-            .itemInputs(dust(PPMaterials.PurifiedSiCPowder, 4), dust(Materials.Boron, 1))
+            .itemInputs(dust(PrPMaterials.PurifiedSiCPowder, 4), dust(Materials.Boron, 1))
             .fluidInputs(fluid(Materials.Argon, 500))
-            .itemOutputs(dust(PPMaterials.DenseSiCCompact, 2))
+            .itemOutputs(dust(PrPMaterials.DenseSiCCompact, 2))
             .duration(1600)
             .eut(TierEU.RECIPE_UV)
             .addTo(GTNHPPRecipeMaps.sHPSFRecipes);
@@ -72,10 +71,10 @@ public class SiCRecipes {
     private static void step4_Machining() {
 
         GTValues.RA.stdBuilder()
-            .itemInputs(dust(PPMaterials.DenseSiCCompact, 1))
+            .itemInputs(dust(PrPMaterials.DenseSiCCompact, 1))
             .itemOutputs(
-                plate(PPMaterials.SinteredSiliconCarbide, 2),
-                dust(PPMaterials.SinteredSiliconCarbide, 2))
+                plate(PrPMaterials.SinteredSiliconCarbide, 2),
+                dust(PrPMaterials.SinteredSiliconCarbide, 2))
             .duration(800)
             .eut(TierEU.RECIPE_UV)
             .addTo(RecipeMaps.latheRecipes);
@@ -87,7 +86,7 @@ public class SiCRecipes {
     private static void step5_Casing() {
 
         GTValues.RA.stdBuilder()
-            .itemInputs(dust(PPMaterials.SinteredSiliconCarbide, 9), circuit(9))
+            .itemInputs(dust(PrPMaterials.SinteredSiliconCarbide, 9), circuit(9))
             .fluidInputs(fluid(Materials.Argon, 1000))
             .itemOutputs(
                 new net.minecraft.item.ItemStack(

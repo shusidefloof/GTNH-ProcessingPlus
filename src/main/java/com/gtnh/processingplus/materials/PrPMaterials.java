@@ -1,7 +1,6 @@
 package com.gtnh.processingplus.materials;
 
 import bartworks.system.material.Werkstoff;
-import gregtech.api.enums.OrePrefixes;
 import gregtech.api.enums.TextureSet;
 
 import java.util.ArrayList;
@@ -9,7 +8,7 @@ import java.util.List;
 
 import static bartworks.util.BWUtil.subscriptNumbers;
 
-public class PPMaterials implements Runnable {
+public class PrPMaterials implements Runnable {
 
     // =========================
     // ID SPACE (keep stable!)
@@ -69,6 +68,7 @@ public class PPMaterials implements Runnable {
     public static Werkstoff CarbonFiberTow;
     public static Werkstoff Cyclohexanol;
     public static Werkstoff Cyclohexene;
+    public static Werkstoff DiphenylEther;
     public static Werkstoff AdipicAcid;
 
     // =========================
@@ -88,6 +88,27 @@ public class PPMaterials implements Runnable {
     public static Werkstoff EthanolSaturatedGel;
     public static Werkstoff TEOS;
     public static Werkstoff PAASolution;
+    public static Werkstoff BoricAcid;
+
+    // =========================
+    // NYLON CHAIN — INTERMEDIATES
+    // =========================
+    public static Werkstoff Adiponitrile;
+    public static Werkstoff HMD;
+
+    // =========================
+    // PLA CHAIN — INTERMEDIATES
+    // =========================
+    public static Werkstoff LacticAcid;
+    public static Werkstoff Lactide;
+
+    // =========================
+    // KAPTON CHAIN — INTERMEDIATES
+    // =========================
+    public static Werkstoff PMDA;
+    public static Werkstoff ODA;
+    public static Werkstoff ConcentratedPAA;
+    public static Werkstoff PolyamicAcidFilm;
 
     public static List<Werkstoff> ALL = new ArrayList<>();
 
@@ -112,7 +133,7 @@ public class PPMaterials implements Runnable {
 
         Kapton = register(new Werkstoff(
             rgb(204, 136, 0), "Kapton", subscriptNumbers("C22H10N2O5"),
-            new Werkstoff.Stats(), Werkstoff.Types.COMPOUND, polymerFeatures(), id(), TextureSet.SET_DULL
+            new Werkstoff.Stats(), Werkstoff.Types.COMPOUND, ceramicFeatures(), id(), TextureSet.SET_DULL
         ));
 
         CarbonFiberComposite = register(new Werkstoff(
@@ -155,7 +176,7 @@ public class PPMaterials implements Runnable {
 
         Acrylonitrile = register(new Werkstoff(
             rgb(176, 176, 176), "Acrylonitrile", subscriptNumbers("C3H3N"),
-            new Werkstoff.Stats(), Werkstoff.Types.COMPOUND, fluidFeatures(), id(), TextureSet.SET_FLUID
+            new Werkstoff.Stats(), Werkstoff.Types.COMPOUND, polymerFeatures(), id(), TextureSet.SET_DULL
         ));
 
         Cyclohexanol = register(new Werkstoff(
@@ -165,6 +186,11 @@ public class PPMaterials implements Runnable {
 
         Cyclohexene = register(new Werkstoff(
             rgb(239, 239, 239), "Cyclohexene", subscriptNumbers("C6H10"),
+            new Werkstoff.Stats(), Werkstoff.Types.COMPOUND, fluidFeatures(), id(), TextureSet.SET_FLUID
+        ));
+
+        DiphenylEther = register(new Werkstoff(
+            rgb(230, 230, 215), "Diphenyl Ether", subscriptNumbers("C12H10O"),
             new Werkstoff.Stats(), Werkstoff.Types.COMPOUND, fluidFeatures(), id(), TextureSet.SET_FLUID
         ));
 
@@ -190,6 +216,7 @@ public class PPMaterials implements Runnable {
             rgb(255, 224, 130), "Polyamic Acid Solution", subscriptNumbers("C22H14N2O7"),
             new Werkstoff.Stats(), Werkstoff.Types.COMPOUND, fluidFeatures(), id(), TextureSet.SET_FLUID
         ));
+
 
         // -------------------------
         // SiC CHAIN — CERAMICS
@@ -258,6 +285,55 @@ public class PPMaterials implements Runnable {
         EthanolSaturatedGel = register(new Werkstoff(
             rgb(255, 224, 178), "Ethanol Saturated Gel", subscriptNumbers("SiO2/C2H5OH"),
             new Werkstoff.Stats(), Werkstoff.Types.MIXTURE, ceramicFeatures(), id(), TextureSet.SET_DULL
+        ));
+
+        // -------------------------
+        // NYLON CHAIN INTERMEDIATES
+        // -------------------------
+        Adiponitrile = register(new Werkstoff(
+            rgb(208, 255, 208), "Adiponitrile", subscriptNumbers("C6H8N2"),
+            new Werkstoff.Stats(), Werkstoff.Types.COMPOUND, polymerFeatures(), id(), TextureSet.SET_DULL
+        ));
+
+        HMD = register(new Werkstoff(
+            rgb(240, 240, 255), "Hexamethylenediamine", subscriptNumbers("C6H16N2"),
+            new Werkstoff.Stats(), Werkstoff.Types.COMPOUND, polymerFeatures(), id(), TextureSet.SET_DULL
+        ));
+
+        // -------------------------
+        // PLA CHAIN INTERMEDIATES
+        // -------------------------
+        LacticAcid = register(new Werkstoff(
+            rgb(255, 224, 224), "Lactic Acid", subscriptNumbers("C3H6O3"),
+            new Werkstoff.Stats(), Werkstoff.Types.COMPOUND, fluidFeatures(), id(), TextureSet.SET_FLUID
+        ));
+
+        Lactide = register(new Werkstoff(
+            rgb(255, 255, 255), "Lactide", subscriptNumbers("C6H8O4"),
+            new Werkstoff.Stats(), Werkstoff.Types.COMPOUND, polymerFeatures(), id(), TextureSet.SET_DULL
+        ));
+
+        // -------------------------
+        // KAPTON CHAIN INTERMEDIATES
+        // -------------------------
+        PMDA = register(new Werkstoff(
+            rgb(255, 251, 230), "PMDA", subscriptNumbers("C10H2O6"),
+            new Werkstoff.Stats(), Werkstoff.Types.COMPOUND, polymerFeatures(), id(), TextureSet.SET_DULL
+        ));
+
+        ODA = register(new Werkstoff(
+            rgb(255, 228, 196), "ODA", subscriptNumbers("C12H12N2O"),
+            new Werkstoff.Stats(), Werkstoff.Types.COMPOUND, polymerFeatures(), id(), TextureSet.SET_DULL
+        ));
+
+        ConcentratedPAA = register(new Werkstoff(
+            rgb(255, 224, 130), "Concentrated Polyamic Acid", subscriptNumbers("C22H14N2O7"),
+            new Werkstoff.Stats(), Werkstoff.Types.COMPOUND, polymerFeatures(), id(), TextureSet.SET_DULL
+        ));
+
+        PolyamicAcidFilm = register(new Werkstoff(
+            rgb(255, 215, 0), "Polyamic Acid Film", subscriptNumbers("C22H14N2O7"),
+            new Werkstoff.Stats(), Werkstoff.Types.COMPOUND, polymerFeatures(), id(), TextureSet.SET_DULL
         ));
     }
 

@@ -46,7 +46,7 @@ public class PLARecipes {
             .itemInputs(new net.minecraft.item.ItemStack(net.minecraft.init.Items.reeds, 8))
             .fluidInputs(fluid(Materials.Water, 1000))
             .fluidOutputs(fluid(PrPMaterials.LacticAcid, 1000), fluid(Materials.Ethanol, 250))
-            .duration(1200)
+            .duration(600)
             .eut(TierEU.RECIPE_LuV)
             .addTo(RecipeMaps.fermentingRecipes);
     }
@@ -95,7 +95,7 @@ public class PLARecipes {
             .fluidInputs(fluid(PrPMaterials.LacticAcid, 2000))
             .itemOutputs(dust(PrPMaterials.Lactide, 2))
             .fluidOutputs(fluid(Materials.Water, 500))
-            .duration(800)
+            .duration(400)
             .eut(TierEU.RECIPE_ZPM)
             .addTo(GTNHPPRecipeMaps.sPCVRecipes);
     }
@@ -108,7 +108,7 @@ public class PLARecipes {
         GTValues.RA.stdBuilder()
             .itemInputs(dust(PrPMaterials.Lactide, 4), dust(Materials.Tin, 1))
             .itemOutputs(dust(PrPMaterials.PolylacticAcid, 4))
-            .duration(1600)
+            .duration(600)
             .eut(TierEU.RECIPE_ZPM)
             .addTo(GTNHPPRecipeMaps.sPCVRecipes);
     }

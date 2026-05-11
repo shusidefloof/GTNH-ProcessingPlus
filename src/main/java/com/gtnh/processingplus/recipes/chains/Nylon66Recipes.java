@@ -136,7 +136,7 @@ public class Nylon66Recipes {
             .fluidInputs(fluid(PrPMaterials.AdipicAcid, 4000))
             .fluidOutputs(fluid(Materials.Water, 4000))
             .itemOutputs(dust(PrPMaterials.Nylon66, 8))
-            .duration(1600)
+            .duration(600)
             .eut(TierEU.RECIPE_ZPM)
             .addTo(GTNHPPRecipeMaps.sPCVRecipes);
     }
@@ -191,7 +191,7 @@ public class Nylon66Recipes {
             .itemInputs(circuit(9))
             .fluidInputs(fluid(PrPMaterials.Caprolactam, 4000), fluid(Materials.Water, 500))
             .itemOutputs(dust(PrPMaterials.Nylon66, 4))
-            .duration(2000)
+            .duration(600)
             .eut(TierEU.RECIPE_UV)
             .metadata(GTRecipeConstants.CHEMPLANT_CASING_TIER, 5)
             .addTo(GTPPRecipeMaps.chemicalPlantRecipes);

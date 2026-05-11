@@ -13,5 +13,6 @@ public class PrPlusRecipes {
         HBNRecipes.init();
         CarbonFiberRecipes.init();
         AerogelRecipes.init();
+        MaterialUsesRecipes.init();
     }
 }

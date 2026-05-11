@@ -32,7 +32,7 @@ public class SiCRecipes {
             .fluidInputs(fluid(Materials.Argon, 1000))
             .fluidOutputs(fluid(Materials.CarbonMonoxide, 2000))
             .itemOutputs(dust(PrPMaterials.CrudeSiCPowder, 2))
-            .duration(1200)
+            .duration(400)
             .eut(TierEU.RECIPE_UV)
             .addTo(GTNHPPRecipeMaps.sHTRFRecipes);
     }
@@ -77,7 +77,7 @@ public class SiCRecipes {
             .itemInputs(dust(PrPMaterials.PurifiedSiCPowder, 4), dust(Materials.Boron, 1))
             .fluidInputs(fluid(Materials.Argon, 500))
             .itemOutputs(dust(PrPMaterials.DenseSiCCompact, 2))
-            .duration(1600)
+            .duration(600)
             .eut(TierEU.RECIPE_UV)
             .addTo(GTNHPPRecipeMaps.sHPSFRecipes);
     }
@@ -92,7 +92,7 @@ public class SiCRecipes {
             .itemOutputs(
                 plate(PrPMaterials.SinteredSiliconCarbide, 2),
                 dust(PrPMaterials.SinteredSiliconCarbide, 2))
-            .duration(800)
+            .duration(200)
             .eut(TierEU.RECIPE_UV)
             .addTo(RecipeMaps.latheRecipes);
     }
@@ -110,7 +110,7 @@ public class SiCRecipes {
                     com.gtnh.processingplus.blocks.GTNHPPBlocks.CASINGS,
                     1,
                     com.gtnh.processingplus.blocks.BlockGTNHPPCasings.HTRF_CASING))
-            .duration(1600)
+            .duration(600)
             .eut(TierEU.RECIPE_UV)
             .addTo(GTNHPPRecipeMaps.sHPSFRecipes);
     }

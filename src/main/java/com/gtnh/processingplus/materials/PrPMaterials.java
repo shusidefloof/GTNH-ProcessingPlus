@@ -25,6 +25,11 @@ public class PrPMaterials implements Runnable {
         return new Werkstoff.GenerationFeatures().onlyDust().addCells();
     }
 
+    // Structural polymers — dust + cells + simple metalworking items (plates, rods, etc.)
+    private static Werkstoff.GenerationFeatures plasticFeatures() {
+        return new Werkstoff.GenerationFeatures().onlyDust().addCells().addSimpleMetalWorkingItems();
+    }
+
     private static Werkstoff.GenerationFeatures ceramicFeatures() {
         return new Werkstoff.GenerationFeatures().onlyDust().addMolten().addCasings().addSimpleMetalWorkingItems();
     }
@@ -89,6 +94,7 @@ public class PrPMaterials implements Runnable {
     public static Werkstoff TEOS;
     public static Werkstoff PAASolution;
     public static Werkstoff BoricAcid;
+    public static Werkstoff BNitrideWaste;
 
     // =========================
     // NYLON CHAIN — INTERMEDIATES
@@ -140,6 +146,14 @@ public class PrPMaterials implements Runnable {
     // =========================
     public static Werkstoff PropyleneGlycol;
 
+    // =========================
+    // USES — DERIVED MATERIALS
+    // =========================
+    public static Werkstoff HBNLubricant;        // hBN-suspended lubricant fluid (UHV machine fluid)
+    public static Werkstoff PAAAdhesive;          // polyamic acid adhesive fluid (precision bonding)
+    public static Werkstoff LoadedAerogelCatalystSupport; // PGM-impregnated aerogel catalyst (CRC consumable)
+    public static Werkstoff AerogelInsulationPanel;       // aerogel + CF composite thermal panel
+
     public static List<Werkstoff> ALL = new ArrayList<>();
 
     // =========================
@@ -153,12 +167,12 @@ public class PrPMaterials implements Runnable {
         // -------------------------
         Nylon66 = register(new Werkstoff(
             rgb(245, 234, 208), "Nylon-6,6", subscriptNumbers("C12H22N2O2"),
-            new Werkstoff.Stats(), Werkstoff.Types.COMPOUND, polymerFeatures(), id(), TextureSet.SET_DULL
+            new Werkstoff.Stats(), Werkstoff.Types.COMPOUND, plasticFeatures(), id(), TextureSet.SET_DULL
         ));
 
         PolylacticAcid = register(new Werkstoff(
             rgb(245, 245, 240), "Polylactic Acid", subscriptNumbers("C3H4O2"),
-            new Werkstoff.Stats(), Werkstoff.Types.COMPOUND, polymerFeatures(), id(), TextureSet.SET_DULL
+            new Werkstoff.Stats(), Werkstoff.Types.COMPOUND, plasticFeatures(), id(), TextureSet.SET_DULL
         ));
 
         Kapton = register(new Werkstoff(
@@ -284,14 +298,19 @@ public class PrPMaterials implements Runnable {
             new Werkstoff.Stats(), Werkstoff.Types.MIXTURE, ceramicFeatures(), id(), TextureSet.SET_DULL
         ));
 
+        BNitrideWaste = register(new Werkstoff(
+            rgb(239, 239, 239), "Boron Nitride Waste", "??BN??",
+            new Werkstoff.Stats(), Werkstoff.Types.MIXTURE, ceramicFeatures(), id(), TextureSet.SET_DULL
+        ));
+
         HBNPowderBlend = register(new Werkstoff(
-            rgb(218, 218, 218), "hBN Powder Blend", subscriptNumbers("BN+Y"),
+            rgb(218, 218, 218), "hBN Powder Blend", subscriptNumbers("BN+Y2"),
             new Werkstoff.Stats(), Werkstoff.Types.MIXTURE, ceramicFeatures(), id(), TextureSet.SET_DULL
         ));
 
         DenseHBNCeramic = register(new Werkstoff(
             rgb(245, 245, 245), "Dense hBN Ceramic", subscriptNumbers("BN"),
-            new Werkstoff.Stats(), Werkstoff.Types.COMPOUND, metalCeramicFeatures(), id(), TextureSet.SET_METALLIC
+            new Werkstoff.Stats(), Werkstoff.Types.COMPOUND, metalCeramicFeatures(), id(), TextureSet.SET_DULL
         ));
 
         HexagonalBoronNitride = register(new Werkstoff(
@@ -429,6 +448,29 @@ public class PrPMaterials implements Runnable {
         PropyleneGlycol = register(new Werkstoff(
             rgb(220, 245, 220), "Propylene Glycol", subscriptNumbers("C3H8O2"),
             new Werkstoff.Stats(), Werkstoff.Types.COMPOUND, fluidFeatures(), id(), TextureSet.SET_FLUID
+        ));
+
+        // -------------------------
+        // USES — DERIVED MATERIALS
+        // -------------------------
+        HBNLubricant = register(new Werkstoff(
+            rgb(230, 240, 255), "hBN Lubricant", subscriptNumbers("BN/oil"),
+            new Werkstoff.Stats(), Werkstoff.Types.MIXTURE, fluidFeatures(), id(), TextureSet.SET_FLUID
+        ));
+
+        PAAAdhesive = register(new Werkstoff(
+            rgb(255, 210, 80), "PAA Adhesive", subscriptNumbers("C22H14N2O7/NMP"),
+            new Werkstoff.Stats(), Werkstoff.Types.MIXTURE, fluidFeatures(), id(), TextureSet.SET_FLUID
+        ));
+
+        LoadedAerogelCatalystSupport = register(new Werkstoff(
+            rgb(180, 210, 240), "Loaded Aerogel Catalyst Support", subscriptNumbers("SiO2/PGM"),
+            new Werkstoff.Stats(), Werkstoff.Types.MIXTURE, polymerFeatures(), id(), TextureSet.SET_DULL
+        ));
+
+        AerogelInsulationPanel = register(new Werkstoff(
+            rgb(195, 225, 248), "Aerogel Insulation Panel", subscriptNumbers("SiO2/(C)n"),
+            new Werkstoff.Stats(), Werkstoff.Types.MIXTURE, ceramicFeatures(), id(), TextureSet.SET_DULL
         ));
     }
 

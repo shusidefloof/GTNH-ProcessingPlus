@@ -78,7 +78,7 @@ public class KaptonRecipes {
                 fluid(Materials.Hydrogen, 4000))
             .fluidOutputs(fluid(Materials.Water, 4000))
             .itemOutputs(dust(PrPMaterials.ODA, 1))
-            .duration(800)
+            .duration(400)
             .eut(TierEU.RECIPE_UV)
             .addTo(GTRecipeConstants.UniversalChemical);
     }
@@ -93,7 +93,7 @@ public class KaptonRecipes {
             .itemInputs(dust(PrPMaterials.PMDA, 2), dust(PrPMaterials.ODA, 2))
             .fluidInputs(fluid(Materials.NMethylIIPyrrolidone, 1000), fluid(Materials.Nitrogen, 1000))
             .fluidOutputs(fluid(PrPMaterials.PAASolution, 2000))
-            .duration(800)
+            .duration(400)
             .eut(TierEU.RECIPE_UV)
             .addTo(GTRecipeConstants.UniversalChemical);
     }
@@ -138,7 +138,7 @@ public class KaptonRecipes {
             .itemInputs(dust(PrPMaterials.PolyamicAcidFilm, 2))
             .fluidOutputs(fluid(Materials.Water, 1000))
             .itemOutputs(plate(PrPMaterials.Kapton, 2))
-            .duration(1200)
+            .duration(600)
             .eut(TierEU.RECIPE_UV)
             .addTo(GTNHPPRecipeMaps.sPFCImidizationRecipes);
     }

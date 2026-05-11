@@ -90,7 +90,7 @@ public class CarbonFiberRecipes {
             .itemInputs(dust(PrPMaterials.Polyacrylonitrile, 4))
             .fluidInputs(fluid(Materials.Oxygen, 2000))
             .itemOutputs(dust(PrPMaterials.StabilizedPolyacrylonitrile, 4))
-            .duration(1600)
+            .duration(600)
             .eut(TierEU.RECIPE_UV)
             .addTo(GTNHPPRecipeMaps.sDAFOxidizingRecipes);
     }
@@ -105,7 +105,7 @@ public class CarbonFiberRecipes {
             .fluidInputs(fluid(Materials.Nitrogen, 2000))
             .itemOutputs(dust(PrPMaterials.CarbonFiberTow, 3))
             .fluidOutputs(fluid(Materials.CarbonMonoxide, 500), fluid(PrPMaterials.HydrogenCyanide, 250))
-            .duration(2000)
+            .duration(800)
             .eut(TierEU.RECIPE_UV)
             .addTo(GTNHPPRecipeMaps.sDAFInertRecipes);
     }
@@ -119,7 +119,7 @@ public class CarbonFiberRecipes {
             .itemInputs(dust(PrPMaterials.CarbonFiberTow, 4))
             .fluidInputs(fluid("molten.epoxid", 576))
             .itemOutputs(plate(PrPMaterials.CarbonFiberComposite, 4))
-            .duration(1200)
+            .duration(400)
             .eut(TierEU.RECIPE_UV)
             .addTo(RecipeMaps.assemblerRecipes);
     }

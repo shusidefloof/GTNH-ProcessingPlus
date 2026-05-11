@@ -97,6 +97,13 @@ public class PPRecipeHelper {
         throw new IllegalArgumentException("Invalid GT material fluid/gas: " + m.name());
     }
 
+    /** For molten metals — calls getMolten() rather than getFluid(). */
+    public static FluidStack molten(Materials m, int amount) {
+        FluidStack fs = m.getMolten(amount);
+        if (fs == null) throw new IllegalArgumentException("No molten form for material: " + m.name());
+        return fs;
+    }
+
     // =========================
     // FLUIDS — Werkstoff
     // =========================

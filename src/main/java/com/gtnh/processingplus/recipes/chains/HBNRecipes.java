@@ -20,27 +20,12 @@ import net.minecraftforge.fluids.FluidStack;
 public class HBNRecipes {
 
     public static void init() {
-        step1_BoraxToB2O3();
         step2_CarbothermalReduction();
         step3_Nitriding();
         stepAlt_BCl3Shortcut();
         step4_PowderBlending();
         step5_Sintering();
         step6_MachiningAndCasing();
-    }
-
-    // =========================================================
-    // 1. Borax → Boron Trioxide
-    // =========================================================
-    private static void step1_BoraxToB2O3() {
-
-        GTValues.RA.stdBuilder()
-            .fluidInputs(new FluidStack(GTPPFluids.BoricAcid, 2000))
-            .fluidOutputs(fluid(Materials.Steam, 6000))
-            .itemOutputs(GTOreDictUnificator.get("dustBoronTrioxide", 1))
-            .duration(600)
-            .eut(TierEU.RECIPE_IV)
-            .addTo(GTPPRecipeMaps.chemicalDehydratorRecipes);
     }
 
     // =========================================================
@@ -53,7 +38,7 @@ public class HBNRecipes {
             .fluidOutputs(fluid(Materials.CarbonMonoxide, 2000),
                 fluid(Materials.CarbonDioxide, 5000))
             .itemOutputs(dust(PrPMaterials.BoronCarbide, 2))
-            .duration(1600)
+            .duration(600)
             .eut((int) (TierEU.RECIPE_LuV * 0.75))
             .addTo(GTNHPPRecipeMaps.sHTRFRecipes);
     }
@@ -67,8 +52,8 @@ public class HBNRecipes {
             .itemInputs(dust(PrPMaterials.BoronCarbide, 4))
             .fluidInputs(fluid(Materials.Ammonia, 3000))
             .fluidOutputs(fluid(Materials.Methane, 1000), fluid(Materials.CarbonMonoxide, 500))
-            .itemOutputs(dust(PrPMaterials.CrudeHBN, 12))
-            .duration(2400)
+            .itemOutputs(dust(PrPMaterials.CrudeHBN, 2), dust(PrPMaterials.BNitrideWaste, 10))
+            .duration(240)
             .eut(TierEU.RECIPE_UV)
             .addTo(GTNHPPRecipeMaps.sAARRecipes);
     }
@@ -95,10 +80,11 @@ public class HBNRecipes {
     private static void step4_PowderBlending() {
 
         GTValues.RA.stdBuilder()
-            .itemInputs(dust(PrPMaterials.CrudeHBN, 4), dust(Materials.Yttrium, 4))
-            .fluidInputs(fluid(Materials.Nitrogen, 16000))
-            .itemOutputs(dust(PrPMaterials.HBNPowderBlend, 12))
-            .duration(800)
+            .itemInputs(dust(PrPMaterials.CrudeHBN, 4), dust(Materials.Yttrium, 16))
+            .fluidInputs(fluid(Materials.Nitrogen, 64000))
+            .itemOutputs(dust(PrPMaterials.HBNPowderBlend, 8))
+            .fluidOutputs(fluid(Materials.NitricOxide, 12000), fluid(Materials.Oxygen, 6000))
+            .duration(45)
             .eut(TierEU.RECIPE_UHV)
             .addTo(GTRecipeConstants.UniversalChemical);
     }
@@ -109,10 +95,10 @@ public class HBNRecipes {
     private static void step5_Sintering() {
 
         GTValues.RA.stdBuilder()
-            .itemInputs(dust(PrPMaterials.HBNPowderBlend, 4))
-            .fluidInputs(fluid(Materials.Nitrogen, 16000), fluid(Materials.Argon, 4000))
-            .itemOutputs(dust(PrPMaterials.DenseHBNCeramic, 2))
-            .duration(2400)
+            .itemInputs(dust(PrPMaterials.HBNPowderBlend, 4*8))
+            .fluidInputs(fluid(Materials.Nitrogen, 16000*8), fluid(Materials.Argon, 4000*8))
+            .itemOutputs(dust(PrPMaterials.DenseHBNCeramic, 2*8))
+            .duration(600)
             .eut(TierEU.RECIPE_UHV)
             .addTo(GTNHPPRecipeMaps.sHPSFRecipes);
     }
@@ -141,7 +127,7 @@ public class HBNRecipes {
                     com.gtnh.processingplus.blocks.GTNHPPBlocks.CASINGS,
                     1,
                     com.gtnh.processingplus.blocks.BlockGTNHPPCasings.HBN_CERAMIC_BLOCK))
-            .duration(3200)
+            .duration(600)
             .eut(TierEU.RECIPE_UHV)
             .addTo(GTNHPPRecipeMaps.sHPSFRecipes);
     }

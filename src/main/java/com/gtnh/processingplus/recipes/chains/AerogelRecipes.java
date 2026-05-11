@@ -96,7 +96,7 @@ public class AerogelRecipes {
             .itemInputs(dust(PrPMaterials.WetSilicaGel, 4))
             .fluidInputs(fluid(Materials.Water, 1000))
             .itemOutputs(dust(PrPMaterials.AgedSilicaGel, 4))
-            .duration(1600)
+            .duration(3200)
             .eut(TierEU.RECIPE_UHV)
             .addTo(GTNHPPRecipeMaps.sSCDRecipes);
     }
@@ -111,7 +111,7 @@ public class AerogelRecipes {
             .fluidInputs(fluid(Materials.Ethanol, 4000))
             .fluidOutputs(fluid(Materials.Water, 3000))
             .itemOutputs(dust(PrPMaterials.EthanolSaturatedGel, 4))
-            .duration(2400)
+            .duration(800)
             .eut(TierEU.RECIPE_UHV)
             .addTo(GTNHPPRecipeMaps.sSCDRecipes);
     }
@@ -126,7 +126,7 @@ public class AerogelRecipes {
             .fluidInputs(fluid(Materials.Ethanol, 2000))
             .fluidOutputs(fluid(Materials.Ethanol, 1800))
             .itemOutputs(plate(PrPMaterials.SilicaAerogel, 2))
-            .duration(3200)
+            .duration(1000)
             .eut(TierEU.RECIPE_UHV)
             .addTo(GTNHPPRecipeMaps.sSCDRecipes);
     }
@@ -142,7 +142,7 @@ public class AerogelRecipes {
             .fluidInputs(fluid(PrPMaterials.Trimethylchlorosilane, 500), fluid(Materials.Nitrogen, 1000))
             .fluidOutputs(fluid(Materials.HydrochloricAcid, 500))
             .itemOutputs(plate(PrPMaterials.SilicaAerogel, 1))
-            .duration(2000)
+            .duration(600)
             .eut(TierEU.RECIPE_UHV)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }

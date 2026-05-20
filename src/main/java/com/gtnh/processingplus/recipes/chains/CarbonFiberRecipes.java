@@ -22,7 +22,8 @@ public class CarbonFiberRecipes {
         stepAlt_CoalTarToMesophasePitch();
         stepAlt_PitchStabilization();
         step6_Carbonization();
-        step7_CompositeFinal();
+        step7_Graphitization();
+        step8_CompositeFinal();
     }
 
     // =========================================================
@@ -33,8 +34,7 @@ public class CarbonFiberRecipes {
         GTValues.RA.stdBuilder()
             .itemInputs(circuit(5))
             .fluidInputs(fluid(Materials.Propene, 2000), fluid(Materials.Ammonia, 2000), fluid(Materials.Oxygen, 3000))
-            .fluidOutputs(fluid(Materials.Water, 6000))
-            .itemOutputs(dust(PrPMaterials.Acrylonitrile, 2))
+            .fluidOutputs(fluid(PrPMaterials.Acrylonitrile, 2000), fluid(Materials.Water, 6000))
             .duration(400)
             .eut(TierEU.RECIPE_LuV)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
@@ -46,11 +46,10 @@ public class CarbonFiberRecipes {
     private static void step2_Polymerization() {
 
         GTValues.RA.stdBuilder()
-            .itemInputs(dust(PrPMaterials.Acrylonitrile, 4))
-            .fluidInputs(fluid(Materials.NMethylIIPyrrolidone, 1000))
+            .fluidInputs(fluid(PrPMaterials.Acrylonitrile, 4000), fluid(Materials.NMethylIIPyrrolidone, 1000))
             .fluidOutputs(fluid(PrPMaterials.PolyacrylonitrileSolution, 1000))
             .duration(800)
-            .eut(TierEU.RECIPE_UV)
+            .eut(TierEU.RECIPE_LuV)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 
@@ -64,7 +63,7 @@ public class CarbonFiberRecipes {
             .itemOutputs(dust(PrPMaterials.Polyacrylonitrile, 4))
             .fluidOutputs(fluid(PrPMaterials.DilutedNMP, 1500))
             .duration(600)
-            .eut(TierEU.RECIPE_UV)
+            .eut(TierEU.RECIPE_LuV)
             .addTo(GTPPRecipeMaps.chemicalPlantRecipes);
     }
 
@@ -77,7 +76,7 @@ public class CarbonFiberRecipes {
             .fluidInputs(fluid(PrPMaterials.DilutedNMP, 1500))
             .fluidOutputs(fluid(Materials.NMethylIIPyrrolidone, 950), fluid(Materials.Water, 550))
             .duration(400)
-            .eut(TierEU.RECIPE_UV)
+            .eut(TierEU.RECIPE_LuV)
             .addTo(RecipeMaps.distillationTowerRecipes);
     }
 
@@ -111,21 +110,37 @@ public class CarbonFiberRecipes {
     }
 
     // =========================================================
-    // 7. Final Composite
+    // 7. Graphitization — 2500°C+ in Argon (HTRF, ZPM)
+    // Aligns graphite crystal planes; produces aerospace-grade fiber.
+    // Continuous Argon supply required — if it drops, process fails.
     // =========================================================
-    private static void step7_CompositeFinal() {
+    private static void step7_Graphitization() {
 
         GTValues.RA.stdBuilder()
             .itemInputs(dust(PrPMaterials.CarbonFiberTow, 4))
+            .fluidInputs(fluid(Materials.Argon, 16000))
+            .itemOutputs(dust(PrPMaterials.GraphitizedCarbonFiber, 4))
+            .duration(1200)
+            .eut(TierEU.RECIPE_ZPM)
+            .addTo(GTNHPPRecipeMaps.sHTRFRecipes);
+    }
+
+    // =========================================================
+    // 8. Final Composite
+    // =========================================================
+    private static void step8_CompositeFinal() {
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(dust(PrPMaterials.GraphitizedCarbonFiber, 4))
             .fluidInputs(fluid("molten.epoxid", 576))
             .itemOutputs(plate(PrPMaterials.CarbonFiberComposite, 4))
             .duration(400)
-            .eut(TierEU.RECIPE_UV)
+            .eut(TierEU.RECIPE_ZPM)
             .addTo(RecipeMaps.assemblerRecipes);
     }
 
     // =========================================================
-    // ALT: Coal Tar → Mesophase Pitch (UV LCR)
+    // ALT: Coal Tar → Mesophase Pitch (LuV LCR)
     // Pyrolyse Oven coal tar heat-treated to mesophase
     // =========================================================
     private static void stepAlt_CoalTarToMesophasePitch() {
@@ -135,7 +150,7 @@ public class CarbonFiberRecipes {
             .fluidInputs(fluid("fluid.coaltar", 2000))
             .fluidOutputs(fluid(PrPMaterials.MesophasePitch, 1000))
             .duration(800)
-            .eut(TierEU.RECIPE_UV)
+            .eut(TierEU.RECIPE_LuV)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 

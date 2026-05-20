@@ -1,7 +1,8 @@
 package com.gtnh.processingplus.loader;
 
-import bartworks.API.WerkstoffAdderRegistry;
 import com.gtnh.processingplus.materials.PrPMaterials;
+
+import bartworks.API.WerkstoffAdderRegistry;
 
 public class MaterialLoader {
 

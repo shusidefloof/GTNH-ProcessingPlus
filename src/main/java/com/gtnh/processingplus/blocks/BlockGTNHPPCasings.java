@@ -24,7 +24,10 @@ public class BlockGTNHPPCasings extends Block {
     public static final int SCD_CASING = 6;
     public static final int CRV_CASING = 7;
     public static final int HBN_CERAMIC_BLOCK = 8;
-    public static final int NUM_CASINGS = 9;
+    public static final int SPC_CASING = 9;
+    public static final int CSC_CASING = 10;
+    public static final int BOF_CASING = 11;
+    public static final int NUM_CASINGS = 12;
 
     // @formatter:off
     private static final String[] DISPLAY_NAMES = {
@@ -37,6 +40,9 @@ public class BlockGTNHPPCasings extends Block {
         "High-Pressure Containment Casing",      // SCD
         "Iridium-Reinforced Reactor Casing",     // CRV outer shell
         "Hexagonal Boron Nitride Ceramic Block", // CRV inner lining
+        "Spectral Isolation Casing",             // SPC
+        "Cryogenic Column Casing",               // CSC
+        "Basic Oxygen Furnace Casing",           // BOF
     };
 
     // Borrow GT5U's existing block textures as placeholders until custom art is made.
@@ -51,6 +57,9 @@ public class BlockGTNHPPCasings extends Block {
         "gregtech:iconsets/MACHINE_CASING_STABLE_TITANIUM",     // SCD: high-pressure titanium
         "gregtech:iconsets/MACHINE_CASING_ROBUST_TUNGSTENSTEEL",// CRV outer: LuV-tier reactor shell
         "gregtech:iconsets/MACHINE_CASING_CLEAN_STAINLESSSTEEL",// hBN ceramic: white/inert lining
+        "gregtech:iconsets/MACHINE_CASING_STABLE_TITANIUM",     // SPC: clean precision chamber
+        "gregtech:iconsets/MACHINE_CASING_CLEAN_STAINLESSSTEEL", // CSC: cryogenic stainless column
+        "gregtech:iconsets/MACHINE_CASING_SOLID_STEEL",          // BOF: industrial steel converter
     };
     // @formatter:on
 

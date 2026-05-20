@@ -1,7 +1,6 @@
 package com.gtnh.processingplus.recipes.chains;
 
 import static com.gtnh.processingplus.recipes.PPRecipeHelper.*;
-import static gregtech.api.enums.Materials.getGtMaterialFromFluid;
 
 import com.gtnh.processingplus.materials.PrPMaterials;
 import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
@@ -11,11 +10,6 @@ import gregtech.api.enums.Materials;
 import gregtech.api.enums.TierEU;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.util.GTOreDictUnificator;
-import gregtech.api.util.GTRecipeConstants;
-import gtPlusPlus.api.recipe.GTPPRecipeMaps;
-import gtPlusPlus.core.fluids.GTPPFluids;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidStack;
 
 public class HBNRecipes {
 
@@ -25,7 +19,6 @@ public class HBNRecipes {
         stepAlt_BCl3Shortcut();
         step4_PowderBlending();
         step5_Sintering();
-        step6_MachiningAndCasing();
     }
 
     // =========================================================
@@ -35,8 +28,7 @@ public class HBNRecipes {
 
         GTValues.RA.stdBuilder()
             .itemInputs(GTOreDictUnificator.get("dustBoronTrioxide", 4), dust(Materials.Carbon, 9))
-            .fluidOutputs(fluid(Materials.CarbonMonoxide, 2000),
-                fluid(Materials.CarbonDioxide, 5000))
+            .fluidOutputs(fluid(Materials.CarbonMonoxide, 2000), fluid(Materials.CarbonDioxide, 5000))
             .itemOutputs(dust(PrPMaterials.BoronCarbide, 2))
             .duration(600)
             .eut((int) (TierEU.RECIPE_LuV * 0.75))
@@ -52,24 +44,28 @@ public class HBNRecipes {
             .itemInputs(dust(PrPMaterials.BoronCarbide, 4))
             .fluidInputs(fluid(Materials.Ammonia, 3000))
             .fluidOutputs(fluid(Materials.Methane, 1000), fluid(Materials.CarbonMonoxide, 500))
-            .itemOutputs(dust(PrPMaterials.CrudeHBN, 2), dust(PrPMaterials.BNitrideWaste, 10))
+            .itemOutputs(dust(PrPMaterials.CrudeHBN, 2), dust(PrPMaterials.BNitrideWaste, 4))
             .duration(240)
             .eut(TierEU.RECIPE_UV)
             .addTo(GTNHPPRecipeMaps.sAARRecipes);
     }
 
     // =========================================================
-    // ALT: BCl3 shortcut — B2O3 + Cl2 + NH3 → CrudeHBN + HCl (UV LCR)
-    // Skips BoronCarbide intermediate; requires chlorine infrastructure
+    // ALT: BCl3 shortcut — B2O3 + Cl2 + HF + NH3 → CrudeHBN + HCl (UV LCR)
+    // Skips BoronCarbide intermediate; HF flux gates behind fluorine infrastructure.
+    // Lower B2O3 efficiency than main route (1:1 vs 2:4) — sidepath, not shortcut.
     // =========================================================
     private static void stepAlt_BCl3Shortcut() {
 
         GTValues.RA.stdBuilder()
-            .itemInputs(GTOreDictUnificator.get("dustBoronTrioxide", 1))
-            .fluidInputs(fluid(Materials.Chlorine, 3000), fluid(Materials.Ammonia, 2000))
-            .fluidOutputs(fluid(Materials.HydrochloricAcid, 3000))
+            .itemInputs(GTOreDictUnificator.get("dustBoronTrioxide", 2))
+            .fluidInputs(
+                fluid(Materials.Chlorine, 3000),
+                fluid(Materials.HydrofluoricAcid, 2000),
+                fluid(Materials.Ammonia, 2000))
+            .fluidOutputs(fluid(Materials.HydrochloricAcid, 3000), fluid(Materials.Water, 1000))
             .itemOutputs(dust(PrPMaterials.CrudeHBN, 1))
-            .duration(800)
+            .duration(1200)
             .eut(TierEU.RECIPE_UV)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
@@ -81,12 +77,12 @@ public class HBNRecipes {
 
         GTValues.RA.stdBuilder()
             .itemInputs(dust(PrPMaterials.CrudeHBN, 4), dust(Materials.Yttrium, 16))
-            .fluidInputs(fluid(Materials.Nitrogen, 64000))
+            .fluidInputs(fluid(Materials.Nitrogen, 16000), fluid(Materials.Argon, 8000))
             .itemOutputs(dust(PrPMaterials.HBNPowderBlend, 8))
-            .fluidOutputs(fluid(Materials.NitricOxide, 12000), fluid(Materials.Oxygen, 6000))
-            .duration(45)
+            .fluidOutputs(fluid(Materials.NitricOxide, 3000), fluid(Materials.Oxygen, 1500))
+            .duration(480)
             .eut(TierEU.RECIPE_UHV)
-            .addTo(GTRecipeConstants.UniversalChemical);
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 
     // =========================================================
@@ -95,38 +91,12 @@ public class HBNRecipes {
     private static void step5_Sintering() {
 
         GTValues.RA.stdBuilder()
-            .itemInputs(dust(PrPMaterials.HBNPowderBlend, 4*8))
-            .fluidInputs(fluid(Materials.Nitrogen, 16000*8), fluid(Materials.Argon, 4000*8))
-            .itemOutputs(dust(PrPMaterials.DenseHBNCeramic, 2*8))
-            .duration(600)
-            .eut(TierEU.RECIPE_UHV)
-            .addTo(GTNHPPRecipeMaps.sHPSFRecipes);
-    }
-
-    // =========================================================
-    // 6. Machining + casing block
-    // =========================================================
-    private static void step6_MachiningAndCasing() {
-
-        // Plates
-        GTValues.RA.stdBuilder()
-            .itemInputs(ingot(PrPMaterials.DenseHBNCeramic, 1))
-            .itemOutputs(
-                plate(PrPMaterials.HexagonalBoronNitride, 2),
-                dustSmall(PrPMaterials.HexagonalBoronNitride, 2))
-            .duration(1000)
-            .eut(TierEU.RECIPE_UHV)
-            .addTo(RecipeMaps.latheRecipes);
-
-        // Casing block
-        GTValues.RA.stdBuilder()
-            .itemInputs(dust(PrPMaterials.HexagonalBoronNitride, 9), circuit(8))
-            .fluidInputs(fluid(Materials.Nitrogen, 2000))
-            .itemOutputs(
-                new net.minecraft.item.ItemStack(
-                    com.gtnh.processingplus.blocks.GTNHPPBlocks.CASINGS,
-                    1,
-                    com.gtnh.processingplus.blocks.BlockGTNHPPCasings.HBN_CERAMIC_BLOCK))
+            .itemInputs(dust(PrPMaterials.HBNPowderBlend, 4 * 8))
+            .fluidInputs(
+                fluid(Materials.Nitrogen, 16000 * 8),
+                fluid(Materials.Argon, 4000 * 8),
+                fluid("oganesson", 288))
+            .itemOutputs(dust(PrPMaterials.HexagonalBoronNitride, 2 * 8))
             .duration(600)
             .eut(TierEU.RECIPE_UHV)
             .addTo(GTNHPPRecipeMaps.sHPSFRecipes);

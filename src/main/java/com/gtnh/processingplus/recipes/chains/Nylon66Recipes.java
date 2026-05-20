@@ -111,31 +111,29 @@ public class Nylon66Recipes {
     // =========================================================
     private static void step6_PolymerChain() {
 
-        // Adipic Acid + NH3 → Adiponitrile + Water  (ZPM LCR)
+        // Adipic Acid + NH3 → Adiponitrile (liquid) + Water (ZPM LCR)
         GTValues.RA.stdBuilder()
             .itemInputs(circuit(6))
             .fluidInputs(fluid(PrPMaterials.AdipicAcid, 2000), fluid(Materials.Ammonia, 2000))
-            .fluidOutputs(fluid(Materials.Water, 2000))
-            .itemOutputs(dust(PrPMaterials.Adiponitrile, 1))
+            .fluidOutputs(fluid(PrPMaterials.Adiponitrile, 1000), fluid(Materials.Water, 2000))
             .duration(350)
             .eut(TierEU.RECIPE_ZPM)
-            .addTo(GTRecipeConstants.UniversalChemical);
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
 
-        // Adiponitrile + 4 H2 → HMD  (ZPM LCR)
+        // Adiponitrile + 4 H2 → HMD (liquid) (ZPM LCR)
         GTValues.RA.stdBuilder()
-            .itemInputs(dust(PrPMaterials.Adiponitrile, 1))
-            .fluidInputs(fluid(Materials.Hydrogen, 4000))
-            .itemOutputs(dust(PrPMaterials.HMD, 1))
+            .itemInputs(circuit(7))
+            .fluidInputs(fluid(PrPMaterials.Adiponitrile, 1000), fluid(Materials.Hydrogen, 4000))
+            .fluidOutputs(fluid(PrPMaterials.HMD, 1000))
             .duration(300)
             .eut(TierEU.RECIPE_ZPM)
-            .addTo(GTRecipeConstants.UniversalChemical);
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
 
-        // Adipic Acid + HMD → Nylon-6,6 + Water  (ZPM PCV, 1:1 molar)
+        // HMD + Adipic Acid → molten Nylon-6,6 + Water (ZPM PCV, 1:1 molar)
         GTValues.RA.stdBuilder()
-            .itemInputs(dust(PrPMaterials.HMD, 4))
-            .fluidInputs(fluid(PrPMaterials.AdipicAcid, 4000))
-            .fluidOutputs(fluid(Materials.Water, 4000))
-            .itemOutputs(dust(PrPMaterials.Nylon66, 8))
+            .itemInputs(circuit(8))
+            .fluidInputs(fluid(PrPMaterials.HMD, 4000), fluid(PrPMaterials.AdipicAcid, 4000))
+            .fluidOutputs(molten(PrPMaterials.Nylon66, 1152), fluid(Materials.Water, 4000))
             .duration(600)
             .eut(TierEU.RECIPE_ZPM)
             .addTo(GTNHPPRecipeMaps.sPCVRecipes);
@@ -157,7 +155,7 @@ public class Nylon66Recipes {
             .fluidOutputs(fluid(Materials.Water, 2000))
             .duration(400)
             .eut(TierEU.RECIPE_UV)
-            .addTo(GTRecipeConstants.UniversalChemical);
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 
     // =========================================================
@@ -186,11 +184,12 @@ public class Nylon66Recipes {
             .metadata(GTRecipeConstants.CHEMPLANT_CASING_TIER, 5)
             .addTo(GTPPRecipeMaps.chemicalPlantRecipes);
 
-        // C: Caprolactam + H2O → Nylon-6,6 (ring-opening polymerization, Chemical Plant)
+        // C: Caprolactam + H2O → molten Nylon-6 (ring-opening polymerization, Chemical Plant)
+        // Note: ROP of caprolactam produces Nylon-6, not Nylon-6,6. Distinct polymer.
         GTValues.RA.stdBuilder()
             .itemInputs(circuit(9))
             .fluidInputs(fluid(PrPMaterials.Caprolactam, 4000), fluid(Materials.Water, 500))
-            .itemOutputs(dust(PrPMaterials.Nylon66, 4))
+            .fluidOutputs(molten(PrPMaterials.Nylon6, 576))
             .duration(600)
             .eut(TierEU.RECIPE_UV)
             .metadata(GTRecipeConstants.CHEMPLANT_CASING_TIER, 5)

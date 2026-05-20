@@ -1,11 +1,11 @@
 package com.gtnh.processingplus.recipes;
 
-import bartworks.system.material.Werkstoff;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
+import bartworks.system.material.Werkstoff;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
 import gregtech.api.util.GTOreDictUnificator;
@@ -101,6 +101,13 @@ public class PPRecipeHelper {
     public static FluidStack molten(Materials m, int amount) {
         FluidStack fs = m.getMolten(amount);
         if (fs == null) throw new IllegalArgumentException("No molten form for material: " + m.name());
+        return fs;
+    }
+
+    /** For fusion-produced plasmas — calls getPlasma(). */
+    public static FluidStack plasma(Materials m, int amount) {
+        FluidStack fs = m.getPlasma(amount);
+        if (fs == null) throw new IllegalArgumentException("No plasma form for material: " + m.name());
         return fs;
     }
 

@@ -9,7 +9,6 @@ import gregtech.api.enums.GTValues;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.TierEU;
 import gregtech.api.recipe.RecipeMaps;
-import gregtech.api.util.GTRecipeConstants;
 
 public class PLARecipes {
 
@@ -30,7 +29,10 @@ public class PLARecipes {
 
         GTValues.RA.stdBuilder()
             .itemInputs(circuit(2))
-            .fluidInputs(fluid(Materials.Propene, 1000), fluid("fluid.hydrogenperoxide", 1000), fluid(Materials.Water, 500))
+            .fluidInputs(
+                fluid(Materials.Propene, 1000),
+                fluid("fluid.hydrogenperoxide", 1000),
+                fluid(Materials.Water, 500))
             .fluidOutputs(fluid(PrPMaterials.PropyleneGlycol, 1000), fluid(Materials.Water, 1500))
             .duration(300)
             .eut(TierEU.RECIPE_LuV)
@@ -78,9 +80,7 @@ public class PLARecipes {
                 fluid(PrPMaterials.HydrogenCyanide, 1000),
                 fluid(Materials.Ammonia, 1000),
                 fluid(Materials.Water, 2000))
-            .fluidOutputs(
-                fluid(PrPMaterials.LacticAcid, 1000),
-                fluid("ammonium chloride", 500))
+            .fluidOutputs(fluid(PrPMaterials.LacticAcid, 1000), fluid("ammonium chloride", 500))
             .duration(600)
             .eut(TierEU.RECIPE_ZPM)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
@@ -101,13 +101,13 @@ public class PLARecipes {
     }
 
     // =========================================================
-    // 3. Lactide + Sn catalyst → PLA pellets (ZPM PCV)
+    // 3. Lactide + Sn catalyst → molten PLA (ZPM PCV)
     // =========================================================
     private static void step3_Polymerization() {
 
         GTValues.RA.stdBuilder()
             .itemInputs(dust(PrPMaterials.Lactide, 4), dust(Materials.Tin, 1))
-            .itemOutputs(dust(PrPMaterials.PolylacticAcid, 4))
+            .fluidOutputs(molten(PrPMaterials.PolylacticAcid, 576))
             .duration(600)
             .eut(TierEU.RECIPE_ZPM)
             .addTo(GTNHPPRecipeMaps.sPCVRecipes);

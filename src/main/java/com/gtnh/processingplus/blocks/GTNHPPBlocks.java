@@ -1,13 +1,16 @@
 package com.gtnh.processingplus.blocks;
 
 import com.gtnh.processingplus.machines.MTE_AAR;
+import com.gtnh.processingplus.machines.MTE_BOF;
 import com.gtnh.processingplus.machines.MTE_CRV;
+import com.gtnh.processingplus.machines.MTE_CSC;
 import com.gtnh.processingplus.machines.MTE_DAF;
 import com.gtnh.processingplus.machines.MTE_HPSF;
 import com.gtnh.processingplus.machines.MTE_HTRF;
 import com.gtnh.processingplus.machines.MTE_PCV;
 import com.gtnh.processingplus.machines.MTE_PFC;
 import com.gtnh.processingplus.machines.MTE_SCD;
+import com.gtnh.processingplus.machines.MTE_SPC;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -34,5 +37,8 @@ public class GTNHPPBlocks {
         new MTE_AAR(31505, "gtnhpp.aar", "Ammonia Atmosphere Reactor").getStackForm(1);
         new MTE_SCD(31506, "gtnhpp.scd", "Supercritical Dryer").getStackForm(1);
         new MTE_CRV(31507, "gtnhpp.crv", "Ceramic Reaction Vessel").getStackForm(1);
+        new MTE_SPC(31508, "gtnhpp.spc", "Spectral Photolithography Chamber").getStackForm(1);
+        new MTE_CSC(31509, "gtnhpp.csc", "Cryogenic Separation Column").getStackForm(1);
+        new MTE_BOF(31510, "gtnhpp.bof", "Basic Oxygen Furnace").getStackForm(1);
     }
 }

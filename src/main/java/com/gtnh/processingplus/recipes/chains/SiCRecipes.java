@@ -9,7 +9,6 @@ import gregtech.api.enums.GTValues;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.TierEU;
 import gregtech.api.recipe.RecipeMaps;
-import gregtech.api.util.GTRecipeConstants;
 
 public class SiCRecipes {
 
@@ -65,7 +64,7 @@ public class SiCRecipes {
             .itemOutputs(dust(PrPMaterials.PurifiedSiCPowder, 4))
             .duration(600)
             .eut(TierEU.RECIPE_UV)
-            .addTo(GTRecipeConstants.UniversalChemical);
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 
     // =========================================================
@@ -89,9 +88,7 @@ public class SiCRecipes {
 
         GTValues.RA.stdBuilder()
             .itemInputs(dust(PrPMaterials.DenseSiCCompact, 1))
-            .itemOutputs(
-                plate(PrPMaterials.SinteredSiliconCarbide, 2),
-                dust(PrPMaterials.SinteredSiliconCarbide, 2))
+            .itemOutputs(plate(PrPMaterials.SinteredSiliconCarbide, 2), dust(PrPMaterials.SinteredSiliconCarbide, 2))
             .duration(200)
             .eut(TierEU.RECIPE_UV)
             .addTo(RecipeMaps.latheRecipes);

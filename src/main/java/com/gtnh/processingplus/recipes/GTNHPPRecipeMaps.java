@@ -66,5 +66,23 @@ public class GTNHPPRecipeMaps {
         .of("gtnhpp.recipe.crv")
         .maxIO(9, 4, 6, 3)
         .build();
+
+    /** Spectral Photolithography Chamber — light-isolated synthesis of photoresist chemistry, EV+. */
+    public static final RecipeMap<RecipeMapBackend> sSPCRecipes = RecipeMapBuilder
+        .of("gtnhpp.recipe.spc")
+        .maxIO(4, 2, 2, 2)
+        .build();
+
+    /** Cryogenic Separation Column — circuit(1) = ASU, circuit(2) = CO₂ liquefaction. */
+    public static final RecipeMap<RecipeMapBackend> sCSCRecipes = RecipeMapBuilder
+        .of("gtnhpp.recipe.csc")
+        .maxIO(2, 1, 2, 4)
+        .build();
+
+    /** Basic Oxygen Furnace — LOX-driven iron→steel converter, three circuit modes. */
+    public static final RecipeMap<RecipeMapBackend> sBOFRecipes = RecipeMapBuilder
+        .of("gtnhpp.recipe.bof")
+        .maxIO(3, 2, 2, 2)
+        .build();
     // @formatter:on
 }

@@ -9,7 +9,6 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLLoadCompleteEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import gregtech.api.enums.Materials;
 
 @Mod(
     modid = GTNHProcessingPlus.MODID,
@@ -17,17 +16,13 @@ import gregtech.api.enums.Materials;
     name = "GT:NH Processing+",
     acceptedMinecraftVersions = "",
     // Force this mod to load AFTER GregTech's and Bartwork's internal material init
-    dependencies = "required-after:gregtech;" + "required-after:bartworks;"
-)
+    dependencies = "required-after:gregtech;" + "required-after:bartworks;")
 public class GTNHProcessingPlus {
 
     public static final String MODID = "gtnhprp";
     public static final Logger LOG = LogManager.getLogger(MODID);
 
-    @SidedProxy(
-        clientSide = "com.gtnh.processingplus.ClientProxy",
-        serverSide = "com.gtnh.processingplus.CommonProxy"
-    )
+    @SidedProxy(clientSide = "com.gtnh.processingplus.ClientProxy", serverSide = "com.gtnh.processingplus.CommonProxy")
     public static CommonProxy proxy;
 
     @Mod.EventHandler
@@ -49,5 +44,7 @@ public class GTNHProcessingPlus {
     }
 
     @Mod.EventHandler
-    public void loadComplete(FMLLoadCompleteEvent event) { proxy.loadComplete(event); }
+    public void loadComplete(FMLLoadCompleteEvent event) {
+        proxy.loadComplete(event);
+    }
 }

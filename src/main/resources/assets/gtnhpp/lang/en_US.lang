@@ -8,6 +8,9 @@ tile.gtnhpp.casings.5.name=Corrosion-Resistant Reactor Casing
 tile.gtnhpp.casings.6.name=High-Pressure Containment Casing
 tile.gtnhpp.casings.7.name=Iridium-Reinforced Reactor Casing
 tile.gtnhpp.casings.8.name=Hexagonal Boron Nitride Ceramic Block
+tile.gtnhpp.casings.9.name=Spectral Isolation Casing
+tile.gtnhpp.casings.10.name=Cryogenic Column Casing
+tile.gtnhpp.casings.11.name=Basic Oxygen Furnace Casing
 
 # Machine names
 gt.blockmachines.gtnhpp.htrf.name=High Temperature Reaction Furnace
@@ -18,3 +21,6 @@ gt.blockmachines.gtnhpp.pfc.name=Precision Film Caster
 gt.blockmachines.gtnhpp.aar.name=Ammonia Atmosphere Reactor
 gt.blockmachines.gtnhpp.scd.name=Supercritical Dryer
 gt.blockmachines.gtnhpp.crv.name=Ceramic Reaction Vessel
+gt.blockmachines.gtnhpp.spc.name=Spectral Photolithography Chamber
+gt.blockmachines.gtnhpp.csc.name=Cryogenic Separation Column
+gt.blockmachines.gtnhpp.bof.name=Basic Oxygen Furnace

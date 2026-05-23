@@ -65,7 +65,7 @@ public class UEVPhotoresistRecipes {
     private static void uevHypogenQuantumMatrix() {
         GTValues.RA.stdBuilder()
             .itemInputs(circuit(3))
-            .fluidInputs(fluid("hypogen", 1000), fluid(PrPMaterials.ActivatedNaquadriaFluid, 1000))
+            .fluidInputs(fluid("molten.hypogen", 1000), fluid(PrPMaterials.ActivatedNaquadriaFluid, 1000))
             .fluidOutputs(fluid(PrPMaterials.HypogenQuantumMatrix, 1000))
             .duration(200)
             .eut(TierEU.RECIPE_UEV)

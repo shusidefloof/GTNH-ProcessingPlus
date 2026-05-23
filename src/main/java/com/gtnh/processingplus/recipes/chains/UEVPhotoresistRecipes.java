@@ -9,9 +9,8 @@ import gregtech.api.enums.GTValues;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.TierEU;
 import gregtech.api.recipe.RecipeMaps;
+import gregtech.api.util.GTRecipeConstants;
 import gtPlusPlus.api.recipe.GTPPRecipeMaps;
-import gtPlusPlus.core.material.ELEMENT;
-import gtPlusPlus.core.material.MaterialsElements;
 
 public class UEVPhotoresistRecipes {
 
@@ -66,9 +65,7 @@ public class UEVPhotoresistRecipes {
     private static void uevHypogenQuantumMatrix() {
         GTValues.RA.stdBuilder()
             .itemInputs(circuit(3))
-            .fluidInputs(
-                fluid(MaterialsElements.STANDALONE.HYPOGEN, 1000),
-                fluid(PrPMaterials.ActivatedNaquadriaFluid, 1000))
+            .fluidInputs(fluid("hypogen", 1000), fluid(PrPMaterials.ActivatedNaquadriaFluid, 1000))
             .fluidOutputs(fluid(PrPMaterials.HypogenQuantumMatrix, 1000))
             .duration(200)
             .eut(TierEU.RECIPE_UEV)
@@ -82,7 +79,7 @@ public class UEVPhotoresistRecipes {
     // =========================================================
     private static void uevFermiumTriflate() {
         GTValues.RA.stdBuilder()
-            .itemInputs(dust(ELEMENT.getInstance().FERMIUM, 1), circuit(4))
+            .itemInputs(item("dustFermium", 1), circuit(4))
             .fluidInputs(fluid(PrPMaterials.TriflicAcid, 2000))
             .fluidOutputs(fluid(PrPMaterials.FermiumTriflate, 1000))
             .duration(80)
@@ -91,7 +88,7 @@ public class UEVPhotoresistRecipes {
     }
 
     // =========================================================
-    // UEV — Quantum-Primed Intermediate (QFT Tier 1)
+    // UEV — Quantum-Primed Intermediate (QFT Tier 3)
     // HypogenQuantumMatrix + FermiumTriflate + TengamTriflate → QuantumPrimedIntermediate
     // =========================================================
     private static void uevQuantumPrimedIntermediate() {
@@ -104,6 +101,8 @@ public class UEVPhotoresistRecipes {
             .fluidOutputs(fluid(PrPMaterials.QuantumPrimedIntermediate, 1000))
             .duration(200)
             .eut(TierEU.RECIPE_UEV)
+            .metadata(GTRecipeConstants.QFT_CATALYST, item("catalystRawIntelligence", 0))
+            .metadata(GTRecipeConstants.QFT_FOCUS_TIER, 3)
             .addTo(GTPPRecipeMaps.quantumForceTransformerRecipes);
     }
 
@@ -123,7 +122,7 @@ public class UEVPhotoresistRecipes {
     }
 
     // =========================================================
-    // UEV — Naquadria-Loaded Intermediate (QFT Tier 1)
+    // UEV — Naquadria-Loaded Intermediate (QFT Tier 3)
     // BeamActivatedIntermediate + ActivatedNaquadriaFluid → NaquadriaLoadedIntermediate
     // =========================================================
     private static void uevNaquadriaLoaded() {
@@ -135,11 +134,13 @@ public class UEVPhotoresistRecipes {
             .fluidOutputs(fluid(PrPMaterials.NaquadriaLoadedIntermediate, 1000))
             .duration(200)
             .eut(TierEU.RECIPE_UEV)
+            .metadata(GTRecipeConstants.QFT_CATALYST, item("catalystRawIntelligence", 0))
+            .metadata(GTRecipeConstants.QFT_FOCUS_TIER, 3)
             .addTo(GTPPRecipeMaps.quantumForceTransformerRecipes);
     }
 
     // =========================================================
-    // UEV — Quantum Cascade Matrix (QFT Tier 1)
+    // UEV — Quantum Cascade Matrix (QFT Tier 3)
     // NaquadriaLoadedIntermediate + TengamTriflate → QuantumCascadeMatrix
     // =========================================================
     private static void uevQuantumCascadeMatrix() {
@@ -149,6 +150,8 @@ public class UEVPhotoresistRecipes {
             .fluidOutputs(fluid(PrPMaterials.QuantumCascadeMatrix, 1000))
             .duration(200)
             .eut(TierEU.RECIPE_UEV)
+            .metadata(GTRecipeConstants.QFT_CATALYST, item("catalystRawIntelligence", 0))
+            .metadata(GTRecipeConstants.QFT_FOCUS_TIER, 3)
             .addTo(GTPPRecipeMaps.quantumForceTransformerRecipes);
     }
 

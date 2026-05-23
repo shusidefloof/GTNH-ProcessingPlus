@@ -9,6 +9,7 @@ import gregtech.api.enums.GTValues;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.TierEU;
 import gregtech.api.recipe.RecipeMaps;
+import gregtech.api.util.GTRecipeConstants;
 import gtPlusPlus.api.recipe.GTPPRecipeMaps;
 
 public class UMVPhotoresistRecipes {
@@ -91,6 +92,8 @@ public class UMVPhotoresistRecipes {
             .itemOutputs(dust(PrPMaterials.SpaceTimePolymerLattice, 2))
             .duration(200)
             .eut(TierEU.RECIPE_UMV)
+            .metadata(GTRecipeConstants.QFT_CATALYST, item("catalystTemporalHarmony", 0))
+            .metadata(GTRecipeConstants.QFT_FOCUS_TIER, 4)
             .addTo(GTPPRecipeMaps.quantumForceTransformerRecipes);
     }
 
@@ -119,6 +122,8 @@ public class UMVPhotoresistRecipes {
             .itemOutputs(dust(PrPMaterials.NeutroniumCrystalMatrix, 2))
             .duration(200)
             .eut(TierEU.RECIPE_UMV)
+            .metadata(GTRecipeConstants.QFT_CATALYST, item("catalystTemporalHarmony", 0))
+            .metadata(GTRecipeConstants.QFT_FOCUS_TIER, 4)
             .addTo(GTPPRecipeMaps.quantumForceTransformerRecipes);
     }
 
@@ -181,6 +186,8 @@ public class UMVPhotoresistRecipes {
             .fluidOutputs(fluid(PrPMaterials.RareEarthPlasmaBlend, 1000))
             .duration(120)
             .eut(TierEU.RECIPE_UMV)
+            .metadata(GTRecipeConstants.QFT_CATALYST, item("catalystTemporalHarmony", 0))
+            .metadata(GTRecipeConstants.QFT_FOCUS_TIER, 4)
             .addTo(GTPPRecipeMaps.quantumForceTransformerRecipes);
     }
 
@@ -197,6 +204,8 @@ public class UMVPhotoresistRecipes {
             .itemOutputs(dust(PrPMaterials.StellarFieldMatrix, 2))
             .duration(300)
             .eut(TierEU.RECIPE_UMV)
+            .metadata(GTRecipeConstants.QFT_CATALYST, item("catalystTemporalHarmony", 0))
+            .metadata(GTRecipeConstants.QFT_FOCUS_TIER, 4)
             .addTo(GTPPRecipeMaps.quantumForceTransformerRecipes);
     }
 
@@ -228,6 +237,8 @@ public class UMVPhotoresistRecipes {
             .itemOutputs(dust(PrPMaterials.DimensionallyBoundMatrix, 2))
             .duration(400)
             .eut(TierEU.RECIPE_UMV)
+            .metadata(GTRecipeConstants.QFT_CATALYST, item("catalystTemporalHarmony", 0))
+            .metadata(GTRecipeConstants.QFT_FOCUS_TIER, 4)
             .addTo(GTPPRecipeMaps.quantumForceTransformerRecipes);
     }
 

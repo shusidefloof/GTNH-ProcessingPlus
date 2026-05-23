@@ -96,7 +96,8 @@ public class PPRecipeHelper {
     public static ItemStack item(String oreDictEntry, int amount) {
         List<ItemStack> ores = OreDictionary.getOres(oreDictEntry);
         if (ores.isEmpty()) throw new IllegalStateException("No OreDict entry: '" + oreDictEntry + "'");
-        ItemStack copy = ores.get(0).copy();
+        ItemStack copy = ores.get(0)
+            .copy();
         copy.stackSize = amount;
         return copy;
     }

@@ -78,9 +78,7 @@ public class CoalFlyashRecipes {
         GTValues.RA.stdBuilder()
             .itemInputs(dust(PrPMaterials.GalliumHydroxide, 2), circuit(4))
             .fluidInputs(fluid(Materials.HydrochloricAcid, 3000))
-            .fluidOutputs(
-                fluid(PrPMaterials.GalliumTrichlorideSolution, 2000),
-                fluid(Materials.Water, 1000))
+            .fluidOutputs(fluid(PrPMaterials.GalliumTrichlorideSolution, 2000), fluid(Materials.Water, 1000))
             .duration(160)
             .eut(TierEU.RECIPE_HV)
             .addTo(GTRecipeConstants.UniversalChemical);
@@ -93,9 +91,7 @@ public class CoalFlyashRecipes {
         GTValues.RA.stdBuilder()
             .itemInputs(dust(PrPMaterials.GermaniumHydroxide, 2), circuit(5))
             .fluidInputs(fluid(Materials.HydrochloricAcid, 4000))
-            .fluidOutputs(
-                fluid(PrPMaterials.GermaniumTetrachlorideSolution, 2000),
-                fluid(Materials.Water, 2000))
+            .fluidOutputs(fluid(PrPMaterials.GermaniumTetrachlorideSolution, 2000), fluid(Materials.Water, 2000))
             .duration(160)
             .eut(TierEU.RECIPE_HV)
             .addTo(GTRecipeConstants.UniversalChemical);
@@ -122,9 +118,7 @@ public class CoalFlyashRecipes {
     private static void step5b_GermaniumReduction() {
         GTValues.RA.stdBuilder()
             .itemInputs(circuit(6))
-            .fluidInputs(
-                fluid(PrPMaterials.GermaniumTetrachlorideSolution, 2000),
-                fluid(Materials.Hydrogen, 4000))
+            .fluidInputs(fluid(PrPMaterials.GermaniumTetrachlorideSolution, 2000), fluid(Materials.Hydrogen, 4000))
             .itemOutputs(GTOreDictUnificator.get(OrePrefixes.dust, "Germanium", 3))
             .fluidOutputs(fluid(Materials.HydrochloricAcid, 4000))
             .duration(280)

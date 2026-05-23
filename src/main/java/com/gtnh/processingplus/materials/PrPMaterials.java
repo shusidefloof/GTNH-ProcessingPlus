@@ -28,6 +28,13 @@ public class PrPMaterials implements Runnable {
             .addCells();
     }
 
+    // Thermoplastic polymers used in molten-form blending — dust + cells + molten, no metalworking
+    private static Werkstoff.GenerationFeatures moltenPolymerFeatures() {
+        return new Werkstoff.GenerationFeatures().onlyDust()
+            .addCells()
+            .addMolten();
+    }
+
     // Structural polymers — molten + cells + simple metalworking items (plates, rods, etc.)
     private static Werkstoff.GenerationFeatures plasticFeatures() {
         return new Werkstoff.GenerationFeatures().onlyDust()
@@ -50,7 +57,8 @@ public class PrPMaterials implements Runnable {
     }
 
     private static Werkstoff.GenerationFeatures fluidFeatures() {
-        return new Werkstoff.GenerationFeatures().addCells();
+        return new Werkstoff.GenerationFeatures().onlyDust()
+            .addCells();
     }
 
     // Dense sintered ceramics — dust + metal items + simple metalworking (plates, rods, etc.)
@@ -195,6 +203,7 @@ public class PrPMaterials implements Runnable {
     public static Werkstoff TriflicAcid;
     public static Werkstoff MethacrylicAcid;
     public static Werkstoff AmmoniumBisulfate;
+    public static Werkstoff Adamantol;
     public static Werkstoff AdamantylMethacrylate;
     public static Werkstoff AcetoneAzine;
     public static Werkstoff AIBN;
@@ -204,6 +213,81 @@ public class PrPMaterials implements Runnable {
     public static Werkstoff PGME;
     public static Werkstoff PGMEA;
     public static Werkstoff LuVPhotoresist;
+
+    // =========================
+    // PHOTORESIST CHAIN — ZPM
+    // =========================
+    public static Werkstoff Hexafluoroacetone;
+    public static Werkstoff HFIMAMonomer;
+    public static Werkstoff GBLMAMonomer;
+    public static Werkstoff HAdMAMonomer;
+    public static Werkstoff ArFCopolymerResin;
+    public static Werkstoff ZPMPhotoresist;
+
+    // =========================
+    // PHOTORESIST CHAIN — UV
+    // =========================
+    public static Werkstoff TinOxoAcetateCluster;
+    public static Werkstoff ErbiumTriflate;
+    public static Werkstoff YtterbiumAcetate;
+    public static Werkstoff TerbiumChloride;
+    public static Werkstoff TerbiumAcetylacetonate;
+    public static Werkstoff DysprosiumDopedCalciumFluoride;
+    public static Werkstoff REDopedPhotoresistMatrix;
+    public static Werkstoff UVPhotoresist;
+
+    // =========================
+    // PHOTORESIST CHAIN — UHV
+    // =========================
+    public static Werkstoff BioRefinedIntermediate;
+    public static Werkstoff RadoxXenoxeneMatrix;
+    public static Werkstoff LivingSolderAcetate;
+    public static Werkstoff UHVPhotoresistMatrix;
+    public static Werkstoff UHVPhotoresist;
+
+    // =========================
+    // PHOTORESIST CHAIN — UEV
+    // =========================
+    public static Werkstoff TengamTriflate;
+    public static Werkstoff ActivatedNaquadriaFluid;
+    public static Werkstoff HypogenQuantumMatrix;
+    public static Werkstoff FermiumTriflate;
+    public static Werkstoff QuantumPrimedIntermediate;
+    public static Werkstoff BeamActivatedIntermediate;
+    public static Werkstoff NaquadriaLoadedIntermediate;
+    public static Werkstoff QuantumCascadeMatrix;
+    public static Werkstoff PurifiedQuantumCascadeMatrix;
+    public static Werkstoff UEVPhotoresist;
+
+    // =========================
+    // PHOTORESIST CHAIN — UIV
+    // =========================
+    public static Werkstoff StabilizedQGPMatrix;
+    public static Werkstoff TranscendentQGPLattice;
+    public static Werkstoff CreonTriflate;
+    public static Werkstoff QuantumFieldImprintedIntermediate;
+    public static Werkstoff UIVPhotoresistMatrix;
+    public static Werkstoff UIVPhotoresist;
+
+    // =========================
+    // PHOTORESIST CHAIN — UMV
+    // =========================
+    public static Werkstoff ShirabonTriflate;
+    public static Werkstoff OsmiumPlasmaPrecursor;
+    public static Werkstoff TachyonicPolymerBase;
+    public static Werkstoff SpaceTimePolymerLattice;
+    public static Werkstoff MagmatterStabilizer;
+    public static Werkstoff NeutroniumCrystalMatrix;
+    public static Werkstoff MoltenTungstenStellarAlloy;
+    public static Werkstoff GravitonImprintedLattice;
+    public static Werkstoff CosmicNeutroniumTriflate;
+    public static Werkstoff RareEarthPlasmaBlend;
+    public static Werkstoff StellarFieldMatrix;
+    public static Werkstoff PhotonicStellarLayer;
+    public static Werkstoff DimensionallyBoundMatrix;
+    public static Werkstoff StellarPhotoresistPrecursor;
+    public static Werkstoff UMVPhotoresistMatrix;
+    public static Werkstoff UMVPhotoresist;
 
     // =========================
     // AMORPHOUS METALS (CRV)
@@ -428,9 +512,9 @@ public class PrPMaterials implements Runnable {
                 subscriptNumbers("C6H10O4"),
                 new Werkstoff.Stats(),
                 Werkstoff.Types.COMPOUND,
-                polymerFeatures(),
+                fluidFeatures(),
                 id(),
-                TextureSet.SET_DULL));
+                TextureSet.SET_FLUID));
 
         CarbonFiberTow = register(
             new Werkstoff(
@@ -863,7 +947,7 @@ public class PrPMaterials implements Runnable {
                 subscriptNumbers("(C7H6O)n"),
                 new Werkstoff.Stats(),
                 Werkstoff.Types.COMPOUND,
-                polymerFeatures(),
+                moltenPolymerFeatures(),
                 id(),
                 TextureSet.SET_DULL));
 
@@ -946,7 +1030,7 @@ public class PrPMaterials implements Runnable {
                 "poly(p-hydroxystyrene)",
                 new Werkstoff.Stats(),
                 Werkstoff.Types.COMPOUND,
-                polymerFeatures(),
+                moltenPolymerFeatures(),
                 id(),
                 TextureSet.SET_DULL));
 
@@ -1077,6 +1161,17 @@ public class PrPMaterials implements Runnable {
                 id(),
                 TextureSet.SET_DULL));
 
+        Adamantol = register(
+            new Werkstoff(
+                rgb(250, 250, 248),
+                "Adamantol",
+                subscriptNumbers("C10H16O"),
+                new Werkstoff.Stats(),
+                Werkstoff.Types.COMPOUND,
+                polymerFeatures(),
+                id(),
+                TextureSet.SET_DULL));
+
         AdamantylMethacrylate = register(
             new Werkstoff(
                 rgb(240, 240, 245),
@@ -1084,9 +1179,9 @@ public class PrPMaterials implements Runnable {
                 subscriptNumbers("Ad·C4H5O2"),
                 new Werkstoff.Stats(),
                 Werkstoff.Types.COMPOUND,
-                polymerFeatures(),
+                fluidFeatures(),
                 id(),
-                TextureSet.SET_DULL));
+                TextureSet.SET_FLUID));
 
         AcetoneAzine = register(
             new Werkstoff(
@@ -1117,7 +1212,7 @@ public class PrPMaterials implements Runnable {
                 "poly(AdMA·MAA)",
                 new Werkstoff.Stats(),
                 Werkstoff.Types.COMPOUND,
-                polymerFeatures(),
+                moltenPolymerFeatures(),
                 id(),
                 TextureSet.SET_DULL));
 
@@ -1170,6 +1265,585 @@ public class PrPMaterials implements Runnable {
                 rgb(120, 20, 80),
                 "LuV Photoresist",
                 "alicyclic/PAG/PGMEA",
+                new Werkstoff.Stats(),
+                Werkstoff.Types.MIXTURE,
+                fluidFeatures(),
+                id(),
+                TextureSet.SET_FLUID));
+
+        // -------------------------
+        // PHOTORESIST CHAIN — ZPM
+        // -------------------------
+        Hexafluoroacetone = register(
+            new Werkstoff(
+                rgb(200, 230, 220),
+                "Hexafluoroacetone",
+                subscriptNumbers("(CF3)2CO"),
+                new Werkstoff.Stats(),
+                Werkstoff.Types.COMPOUND,
+                fluidFeatures(),
+                id(),
+                TextureSet.SET_FLUID));
+
+        HFIMAMonomer = register(
+            new Werkstoff(
+                rgb(215, 240, 235),
+                "HFIMA Monomer",
+                subscriptNumbers("C7H7F6O2"),
+                new Werkstoff.Stats(),
+                Werkstoff.Types.COMPOUND,
+                fluidFeatures(),
+                id(),
+                TextureSet.SET_FLUID));
+
+        GBLMAMonomer = register(
+            new Werkstoff(
+                rgb(220, 245, 220),
+                "GBLMA Monomer",
+                subscriptNumbers("C9H14O4"),
+                new Werkstoff.Stats(),
+                Werkstoff.Types.COMPOUND,
+                fluidFeatures(),
+                id(),
+                TextureSet.SET_FLUID));
+
+        HAdMAMonomer = register(
+            new Werkstoff(
+                rgb(240, 240, 245),
+                "HAdMA Monomer",
+                subscriptNumbers("C14H22O3"),
+                new Werkstoff.Stats(),
+                Werkstoff.Types.COMPOUND,
+                fluidFeatures(),
+                id(),
+                TextureSet.SET_FLUID));
+
+        ArFCopolymerResin = register(
+            new Werkstoff(
+                rgb(235, 225, 200),
+                "ArF Copolymer Resin",
+                "poly(GBLMA·HAdMA·HFIMA)",
+                new Werkstoff.Stats(),
+                Werkstoff.Types.COMPOUND,
+                moltenPolymerFeatures(),
+                id(),
+                TextureSet.SET_DULL));
+
+        ZPMPhotoresist = register(
+            new Werkstoff(
+                rgb(80, 0, 140),
+                "ZPM Photoresist",
+                "ArF/PAG/PGMEA",
+                new Werkstoff.Stats(),
+                Werkstoff.Types.MIXTURE,
+                fluidFeatures(),
+                id(),
+                TextureSet.SET_FLUID));
+
+        // -------------------------
+        // PHOTORESIST CHAIN — UV
+        // -------------------------
+        TinOxoAcetateCluster = register(
+            new Werkstoff(
+                rgb(240, 230, 180),
+                "Tin Oxo-Acetate Cluster",
+                subscriptNumbers("SnO·(OAc)2"),
+                new Werkstoff.Stats(),
+                Werkstoff.Types.MIXTURE,
+                fluidFeatures(),
+                id(),
+                TextureSet.SET_FLUID));
+
+        ErbiumTriflate = register(
+            new Werkstoff(
+                rgb(230, 180, 195),
+                "Erbium Triflate",
+                subscriptNumbers("Er(OTf)3"),
+                new Werkstoff.Stats(),
+                Werkstoff.Types.COMPOUND,
+                polymerFeatures(),
+                id(),
+                TextureSet.SET_DULL));
+
+        YtterbiumAcetate = register(
+            new Werkstoff(
+                rgb(240, 240, 238),
+                "Ytterbium Acetate",
+                subscriptNumbers("Yb(OAc)3"),
+                new Werkstoff.Stats(),
+                Werkstoff.Types.COMPOUND,
+                polymerFeatures(),
+                id(),
+                TextureSet.SET_DULL));
+
+        TerbiumChloride = register(
+            new Werkstoff(
+                rgb(235, 245, 235),
+                "Terbium Chloride",
+                subscriptNumbers("TbCl3"),
+                new Werkstoff.Stats(),
+                Werkstoff.Types.COMPOUND,
+                polymerFeatures(),
+                id(),
+                TextureSet.SET_DULL));
+
+        TerbiumAcetylacetonate = register(
+            new Werkstoff(
+                rgb(245, 240, 200),
+                "Terbium Acetylacetonate",
+                subscriptNumbers("Tb(acac)3"),
+                new Werkstoff.Stats(),
+                Werkstoff.Types.COMPOUND,
+                polymerFeatures(),
+                id(),
+                TextureSet.SET_DULL));
+
+        DysprosiumDopedCalciumFluoride = register(
+            new Werkstoff(
+                rgb(210, 200, 230),
+                "Dysprosium-Doped Calcium Fluoride",
+                subscriptNumbers("CaF2:Dy"),
+                new Werkstoff.Stats(),
+                Werkstoff.Types.MIXTURE,
+                polymerFeatures(),
+                id(),
+                TextureSet.SET_DULL));
+
+        REDopedPhotoresistMatrix = register(
+            new Werkstoff(
+                rgb(220, 230, 245),
+                "RE-Doped Photoresist Matrix",
+                "Sn-RE composite",
+                new Werkstoff.Stats(),
+                Werkstoff.Types.MIXTURE,
+                polymerFeatures(),
+                id(),
+                TextureSet.SET_DULL));
+
+        UVPhotoresist = register(
+            new Werkstoff(
+                rgb(0, 80, 180),
+                "UV Photoresist",
+                "Sn-MOR/RE-PAG/PGMEA",
+                new Werkstoff.Stats(),
+                Werkstoff.Types.MIXTURE,
+                fluidFeatures(),
+                id(),
+                TextureSet.SET_FLUID));
+
+        // -------------------------
+        // PHOTORESIST CHAIN — UHV
+        // -------------------------
+        BioRefinedIntermediate = register(
+            new Werkstoff(
+                rgb(60, 90, 50),
+                "Bio-Refined Intermediate",
+                "UV/mutagen/barnarda",
+                new Werkstoff.Stats(),
+                Werkstoff.Types.MIXTURE,
+                fluidFeatures(),
+                id(),
+                TextureSet.SET_FLUID));
+
+        RadoxXenoxeneMatrix = register(
+            new Werkstoff(
+                rgb(160, 80, 200),
+                "Radox-Xenoxene Matrix",
+                "radox/xenoxene",
+                new Werkstoff.Stats(),
+                Werkstoff.Types.MIXTURE,
+                fluidFeatures(),
+                id(),
+                TextureSet.SET_FLUID));
+
+        LivingSolderAcetate = register(
+            new Werkstoff(
+                rgb(100, 130, 90),
+                "Living Solder Acetate",
+                "solder/OAc",
+                new Werkstoff.Stats(),
+                Werkstoff.Types.MIXTURE,
+                fluidFeatures(),
+                id(),
+                TextureSet.SET_FLUID));
+
+        UHVPhotoresistMatrix = register(
+            new Werkstoff(
+                rgb(80, 20, 40),
+                "UHV Photoresist Matrix",
+                "bio/radox/solder",
+                new Werkstoff.Stats(),
+                Werkstoff.Types.MIXTURE,
+                fluidFeatures(),
+                id(),
+                TextureSet.SET_FLUID));
+
+        UHVPhotoresist = register(
+            new Werkstoff(
+                rgb(60, 0, 20),
+                "UHV Photoresist",
+                "UHV-matrix/PGMEA",
+                new Werkstoff.Stats(),
+                Werkstoff.Types.MIXTURE,
+                fluidFeatures(),
+                id(),
+                TextureSet.SET_FLUID));
+
+        // -------------------------
+        // PHOTORESIST CHAIN — UEV
+        // -------------------------
+        TengamTriflate = register(
+            new Werkstoff(
+                rgb(180, 160, 255),
+                "Tengam Triflate",
+                "Tg·OTf",
+                new Werkstoff.Stats(),
+                Werkstoff.Types.COMPOUND,
+                fluidFeatures(),
+                id(),
+                TextureSet.SET_FLUID));
+
+        ActivatedNaquadriaFluid = register(
+            new Werkstoff(
+                rgb(50, 220, 80),
+                "Activated Naquadria Solution",
+                subscriptNumbers("Nq**(aq)"),
+                new Werkstoff.Stats(),
+                Werkstoff.Types.MIXTURE,
+                fluidFeatures(),
+                id(),
+                TextureSet.SET_FLUID));
+
+        HypogenQuantumMatrix = register(
+            new Werkstoff(
+                rgb(150, 200, 255),
+                "Hypogen Quantum Matrix",
+                "Hyp/H2O",
+                new Werkstoff.Stats(),
+                Werkstoff.Types.MIXTURE,
+                fluidFeatures(),
+                id(),
+                TextureSet.SET_FLUID));
+
+        FermiumTriflate = register(
+            new Werkstoff(
+                rgb(255, 160, 100),
+                "Fermium Triflate",
+                "Fm·OTf",
+                new Werkstoff.Stats(),
+                Werkstoff.Types.COMPOUND,
+                fluidFeatures(),
+                id(),
+                TextureSet.SET_FLUID));
+
+        QuantumPrimedIntermediate = register(
+            new Werkstoff(
+                rgb(180, 240, 255),
+                "Quantum Primed Intermediate",
+                "QFT-primed",
+                new Werkstoff.Stats(),
+                Werkstoff.Types.MIXTURE,
+                fluidFeatures(),
+                id(),
+                TextureSet.SET_FLUID));
+
+        BeamActivatedIntermediate = register(
+            new Werkstoff(
+                rgb(255, 240, 180),
+                "Beam Activated Intermediate",
+                "beam-exposed",
+                new Werkstoff.Stats(),
+                Werkstoff.Types.MIXTURE,
+                fluidFeatures(),
+                id(),
+                TextureSet.SET_FLUID));
+
+        NaquadriaLoadedIntermediate = register(
+            new Werkstoff(
+                rgb(80, 200, 100),
+                "Naquadria-Loaded Intermediate",
+                "beam/Nq**",
+                new Werkstoff.Stats(),
+                Werkstoff.Types.MIXTURE,
+                fluidFeatures(),
+                id(),
+                TextureSet.SET_FLUID));
+
+        QuantumCascadeMatrix = register(
+            new Werkstoff(
+                rgb(120, 240, 200),
+                "Quantum Cascade Matrix",
+                "QFT-cascade",
+                new Werkstoff.Stats(),
+                Werkstoff.Types.MIXTURE,
+                fluidFeatures(),
+                id(),
+                TextureSet.SET_FLUID));
+
+        PurifiedQuantumCascadeMatrix = register(
+            new Werkstoff(
+                rgb(200, 255, 240),
+                "Purified Quantum Cascade Matrix",
+                "QCM-pure",
+                new Werkstoff.Stats(),
+                Werkstoff.Types.MIXTURE,
+                fluidFeatures(),
+                id(),
+                TextureSet.SET_FLUID));
+
+        UEVPhotoresist = register(
+            new Werkstoff(
+                rgb(0, 180, 160),
+                "UEV Photoresist",
+                "QCM/PGMEA",
+                new Werkstoff.Stats(),
+                Werkstoff.Types.MIXTURE,
+                fluidFeatures(),
+                id(),
+                TextureSet.SET_FLUID));
+
+        // -------------------------
+        // PHOTORESIST CHAIN — UIV
+        // -------------------------
+        StabilizedQGPMatrix = register(
+            new Werkstoff(
+                rgb(255, 120, 60),
+                "Stabilized QGP Matrix",
+                "QGP/Grav/H2O",
+                new Werkstoff.Stats(),
+                Werkstoff.Types.MIXTURE,
+                fluidFeatures(),
+                id(),
+                TextureSet.SET_FLUID));
+
+        TranscendentQGPLattice = register(
+            new Werkstoff(
+                rgb(255, 200, 100),
+                "Transcendent QGP Lattice",
+                "TrM/QGP",
+                new Werkstoff.Stats(),
+                Werkstoff.Types.MIXTURE,
+                fluidFeatures(),
+                id(),
+                TextureSet.SET_FLUID));
+
+        CreonTriflate = register(
+            new Werkstoff(
+                rgb(200, 255, 180),
+                "Creon Triflate",
+                "Cr·OTf",
+                new Werkstoff.Stats(),
+                Werkstoff.Types.COMPOUND,
+                fluidFeatures(),
+                id(),
+                TextureSet.SET_FLUID));
+
+        QuantumFieldImprintedIntermediate = register(
+            new Werkstoff(
+                rgb(240, 220, 80),
+                "Quantum Field Imprinted Intermediate",
+                "QFI",
+                new Werkstoff.Stats(),
+                Werkstoff.Types.MIXTURE,
+                fluidFeatures(),
+                id(),
+                TextureSet.SET_FLUID));
+
+        UIVPhotoresistMatrix = register(
+            new Werkstoff(
+                rgb(200, 160, 20),
+                "UIV Photoresist Matrix",
+                "QFI/UEV",
+                new Werkstoff.Stats(),
+                Werkstoff.Types.MIXTURE,
+                fluidFeatures(),
+                id(),
+                TextureSet.SET_FLUID));
+
+        UIVPhotoresist = register(
+            new Werkstoff(
+                rgb(180, 130, 0),
+                "UIV Photoresist",
+                "UIV-matrix/PGMEA",
+                new Werkstoff.Stats(),
+                Werkstoff.Types.MIXTURE,
+                fluidFeatures(),
+                id(),
+                TextureSet.SET_FLUID));
+
+        // -------------------------
+        // PHOTORESIST CHAIN — UMV
+        // -------------------------
+        ShirabonTriflate = register(
+            new Werkstoff(
+                rgb(255, 240, 210),
+                "Shirabon Triflate",
+                "Sh·OTf",
+                new Werkstoff.Stats(),
+                Werkstoff.Types.COMPOUND,
+                fluidFeatures(),
+                id(),
+                TextureSet.SET_FLUID));
+
+        OsmiumPlasmaPrecursor = register(
+            new Werkstoff(
+                rgb(80, 90, 110),
+                "Osmium Plasma Precursor",
+                "Os-compact",
+                new Werkstoff.Stats(),
+                Werkstoff.Types.COMPOUND,
+                polymerFeatures(),
+                id(),
+                TextureSet.SET_DULL));
+
+        TachyonicPolymerBase = register(
+            new Werkstoff(
+                rgb(140, 80, 200),
+                "Tachyonic Polymer Base",
+                "Os-plasma/Sh-OTf/TCH",
+                new Werkstoff.Stats(),
+                Werkstoff.Types.MIXTURE,
+                fluidFeatures(),
+                id(),
+                TextureSet.SET_FLUID));
+
+        SpaceTimePolymerLattice = register(
+            new Werkstoff(
+                rgb(220, 200, 255),
+                "SpaceTime Polymer Lattice",
+                "ST/TCH-poly",
+                new Werkstoff.Stats(),
+                Werkstoff.Types.COMPOUND,
+                polymerFeatures(),
+                id(),
+                TextureSet.SET_DULL));
+
+        MagmatterStabilizer = register(
+            new Werkstoff(
+                rgb(40, 40, 60),
+                "Magmatter Stabilizer",
+                "Mg/SEF/TCH",
+                new Werkstoff.Stats(),
+                Werkstoff.Types.MIXTURE,
+                fluidFeatures(),
+                id(),
+                TextureSet.SET_FLUID));
+
+        NeutroniumCrystalMatrix = register(
+            new Werkstoff(
+                rgb(30, 30, 35),
+                "Neutronium Crystal Matrix",
+                "Nt-xtal",
+                new Werkstoff.Stats(),
+                Werkstoff.Types.COMPOUND,
+                polymerFeatures(),
+                id(),
+                TextureSet.SET_DULL));
+
+        MoltenTungstenStellarAlloy = register(
+            new Werkstoff(
+                rgb(255, 200, 50),
+                "Molten Tungsten Stellar Alloy",
+                "W/stellar",
+                new Werkstoff.Stats(),
+                Werkstoff.Types.MIXTURE,
+                fluidFeatures(),
+                id(),
+                TextureSet.SET_FLUID));
+
+        GravitonImprintedLattice = register(
+            new Werkstoff(
+                rgb(160, 180, 255),
+                "Graviton Imprinted Lattice",
+                "Grav/ST-poly",
+                new Werkstoff.Stats(),
+                Werkstoff.Types.COMPOUND,
+                polymerFeatures(),
+                id(),
+                TextureSet.SET_DULL));
+
+        CosmicNeutroniumTriflate = register(
+            new Werkstoff(
+                rgb(20, 20, 30),
+                "Cosmic Neutronium Triflate",
+                "CosmNt·OTf",
+                new Werkstoff.Stats(),
+                Werkstoff.Types.COMPOUND,
+                fluidFeatures(),
+                id(),
+                TextureSet.SET_FLUID));
+
+        RareEarthPlasmaBlend = register(
+            new Werkstoff(
+                rgb(255, 180, 100),
+                "Rare Earth Plasma Blend",
+                "Nd/Sm-plasma",
+                new Werkstoff.Stats(),
+                Werkstoff.Types.MIXTURE,
+                fluidFeatures(),
+                id(),
+                TextureSet.SET_FLUID));
+
+        StellarFieldMatrix = register(
+            new Werkstoff(
+                rgb(200, 220, 255),
+                "Stellar Field Matrix",
+                "Grav/Mg/Nt/CosmOTf",
+                new Werkstoff.Stats(),
+                Werkstoff.Types.COMPOUND,
+                polymerFeatures(),
+                id(),
+                TextureSet.SET_DULL));
+
+        PhotonicStellarLayer = register(
+            new Werkstoff(
+                rgb(255, 255, 200),
+                "Photonic Stellar Layer",
+                "Os/Ir/W-stellar",
+                new Werkstoff.Stats(),
+                Werkstoff.Types.COMPOUND,
+                polymerFeatures(),
+                id(),
+                TextureSet.SET_DULL));
+
+        DimensionallyBoundMatrix = register(
+            new Werkstoff(
+                rgb(180, 200, 240),
+                "Dimensionally Bound Matrix",
+                "SFM/Sh/H2O",
+                new Werkstoff.Stats(),
+                Werkstoff.Types.COMPOUND,
+                polymerFeatures(),
+                id(),
+                TextureSet.SET_DULL));
+
+        StellarPhotoresistPrecursor = register(
+            new Werkstoff(
+                rgb(210, 230, 255),
+                "Stellar Photoresist Precursor",
+                "DBM/RE-plasma",
+                new Werkstoff.Stats(),
+                Werkstoff.Types.MIXTURE,
+                fluidFeatures(),
+                id(),
+                TextureSet.SET_FLUID));
+
+        UMVPhotoresistMatrix = register(
+            new Werkstoff(
+                rgb(180, 210, 255),
+                "UMV Photoresist Matrix",
+                "stellar/UIV",
+                new Werkstoff.Stats(),
+                Werkstoff.Types.MIXTURE,
+                fluidFeatures(),
+                id(),
+                TextureSet.SET_FLUID));
+
+        UMVPhotoresist = register(
+            new Werkstoff(
+                rgb(160, 200, 255),
+                "UMV Photoresist",
+                "UMV-matrix/PGMEA",
                 new Werkstoff.Stats(),
                 Werkstoff.Types.MIXTURE,
                 fluidFeatures(),

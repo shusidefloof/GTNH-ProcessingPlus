@@ -36,7 +36,7 @@ public class CarbonFiberRecipes {
             .fluidInputs(fluid(Materials.Propene, 2000), fluid(Materials.Ammonia, 2000), fluid(Materials.Oxygen, 3000))
             .fluidOutputs(fluid(PrPMaterials.Acrylonitrile, 2000), fluid(Materials.Water, 6000))
             .duration(400)
-            .eut(TierEU.RECIPE_LuV)
+            .eut(TierEU.RECIPE_EV)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 
@@ -49,7 +49,7 @@ public class CarbonFiberRecipes {
             .fluidInputs(fluid(PrPMaterials.Acrylonitrile, 4000), fluid(Materials.NMethylIIPyrrolidone, 1000))
             .fluidOutputs(fluid(PrPMaterials.PolyacrylonitrileSolution, 1000))
             .duration(800)
-            .eut(TierEU.RECIPE_LuV)
+            .eut(TierEU.RECIPE_EV)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 
@@ -63,7 +63,7 @@ public class CarbonFiberRecipes {
             .itemOutputs(dust(PrPMaterials.Polyacrylonitrile, 4))
             .fluidOutputs(fluid(PrPMaterials.DilutedNMP, 1500))
             .duration(600)
-            .eut(TierEU.RECIPE_LuV)
+            .eut(TierEU.RECIPE_EV)
             .addTo(GTPPRecipeMaps.chemicalPlantRecipes);
     }
 
@@ -76,7 +76,7 @@ public class CarbonFiberRecipes {
             .fluidInputs(fluid(PrPMaterials.DilutedNMP, 1500))
             .fluidOutputs(fluid(Materials.NMethylIIPyrrolidone, 950), fluid(Materials.Water, 550))
             .duration(400)
-            .eut(TierEU.RECIPE_LuV)
+            .eut(TierEU.RECIPE_EV)
             .addTo(RecipeMaps.distillationTowerRecipes);
     }
 
@@ -150,7 +150,7 @@ public class CarbonFiberRecipes {
             .fluidInputs(fluid("fluid.coaltar", 2000))
             .fluidOutputs(fluid(PrPMaterials.MesophasePitch, 1000))
             .duration(800)
-            .eut(TierEU.RECIPE_LuV)
+            .eut(TierEU.RECIPE_EV)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 

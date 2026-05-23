@@ -49,7 +49,7 @@ public class BOFRecipes {
     private static void standardConversion() {
         GTValues.RA.stdBuilder()
             .itemInputs(ingot(Materials.Iron, 8), circuit(1))
-            .fluidInputs(fluid(Materials.LiquidOxygen,2000))
+            .fluidInputs(fluid(Materials.LiquidOxygen, 2000))
             .itemOutputs(ingot(Materials.Steel, 8))
             .fluidOutputs(fluid(Materials.CarbonDioxide, 1000))
             .duration(300)
@@ -65,7 +65,7 @@ public class BOFRecipes {
     private static void limedConversion() {
         GTValues.RA.stdBuilder()
             .itemInputs(ingot(Materials.Iron, 8), dust(Materials.Calcium, 2), circuit(2))
-            .fluidInputs(fluid(Materials.LiquidOxygen,2000))
+            .fluidInputs(fluid(Materials.LiquidOxygen, 2000))
             .itemOutputs(ingot(Materials.Steel, 10))
             .fluidOutputs(fluid(Materials.CarbonDioxide, 800))
             .duration(280)
@@ -81,7 +81,7 @@ public class BOFRecipes {
     private static void bulkConversion() {
         GTValues.RA.stdBuilder()
             .itemInputs(ingot(Materials.Iron, 16), circuit(3))
-            .fluidInputs(fluid(Materials.LiquidOxygen,4000))
+            .fluidInputs(fluid(Materials.LiquidOxygen, 4000))
             .itemOutputs(ingot(Materials.Steel, 16))
             .fluidOutputs(fluid(Materials.CarbonDioxide, 2000))
             .duration(500)

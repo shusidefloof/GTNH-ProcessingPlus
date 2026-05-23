@@ -84,5 +84,60 @@ public class GTNHPPRecipeMaps {
         .of("gtnhpp.recipe.bof")
         .maxIO(3, 2, 2, 2)
         .build();
+
+    /** Controlled Isotopic Doping Chamber — rare-earth dopant matrix assembly for UV photoresist (UV tier). */
+    public static final RecipeMap<RecipeMapBackend> sCIDCRecipes = RecipeMapBuilder
+        .of("gtnhpp.recipe.cidc")
+        .maxIO(6, 2, 2, 2)
+        .build();
+
+    /** Hybrid Phase Reactor — simultaneous liquid/plasma phase chemistry (UHV tier). */
+    public static final RecipeMap<RecipeMapBackend> sHPRRecipes = RecipeMapBuilder
+        .of("gtnhpp.recipe.hpr")
+        .maxIO(2, 2, 4, 2)
+        .build();
+
+    /** Subatomic Patterning Unit — quantum lattice imprinting (UIV tier). */
+    public static final RecipeMap<RecipeMapBackend> sSPURecipes = RecipeMapBuilder
+        .of("gtnhpp.recipe.spu")
+        .maxIO(4, 2, 4, 2)
+        .build();
+
+    /**
+     * QFT Tier 1 stub — TODO: wire to GoodGenerator QFT recipe map at UEV.
+     * Confirm QFT recipe map name with user before shipping.
+     */
+    public static final RecipeMap<RecipeMapBackend> sQFT1Recipes = RecipeMapBuilder
+        .of("gtnhpp.recipe.qft1")
+        .maxIO(4, 2, 4, 2)
+        .build();
+
+    /**
+     * QFT Tier 4 stub — TODO: wire to GoodGenerator QFT recipe map at UMV.
+     * Confirm QFT recipe map name with user before shipping.
+     */
+    public static final RecipeMap<RecipeMapBackend> sQFT4Recipes = RecipeMapBuilder
+        .of("gtnhpp.recipe.qft4")
+        .maxIO(4, 2, 4, 2)
+        .build();
+
+    /**
+     * Forge of the Gods stub — TODO: wire to existing FotG recipe maps at UMV.
+     * Circuit discriminates between Helioflare(1), Heliothermal(2), Heliofusion(3), Helioflux(4) modules.
+     * Confirm FotG recipe map names with user before shipping.
+     */
+    public static final RecipeMap<RecipeMapBackend> sFotGRecipes = RecipeMapBuilder
+        .of("gtnhpp.recipe.fotg")
+        .maxIO(4, 2, 4, 2)
+        .build();
+
+    /**
+     * Beamcrafter — high-energy photon beam processing (UEV tier).
+     * TODO: wire to actual Beamcrafter recipe map if GoodGenerator exposes one.
+     */
+    public static final RecipeMap<RecipeMapBackend> sBeamcrafterRecipes = RecipeMapBuilder
+        .of("gtnhpp.recipe.beamcrafter")
+        .maxIO(4, 2, 2, 2)
+        .build();
     // @formatter:on
 }

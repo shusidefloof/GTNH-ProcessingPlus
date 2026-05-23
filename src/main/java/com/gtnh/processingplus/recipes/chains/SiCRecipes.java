@@ -63,7 +63,7 @@ public class SiCRecipes {
             .fluidOutputs(fluid(Materials.Water, 800))
             .itemOutputs(dust(PrPMaterials.PurifiedSiCPowder, 4))
             .duration(600)
-            .eut(TierEU.RECIPE_UV)
+            .eut(TierEU.RECIPE_HV)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 
@@ -90,7 +90,7 @@ public class SiCRecipes {
             .itemInputs(dust(PrPMaterials.DenseSiCCompact, 1))
             .itemOutputs(plate(PrPMaterials.SinteredSiliconCarbide, 2), dust(PrPMaterials.SinteredSiliconCarbide, 2))
             .duration(200)
-            .eut(TierEU.RECIPE_UV)
+            .eut(TierEU.RECIPE_EV)
             .addTo(RecipeMaps.latheRecipes);
     }
 

@@ -35,7 +35,7 @@ public class PLARecipes {
                 fluid(Materials.Water, 500))
             .fluidOutputs(fluid(PrPMaterials.PropyleneGlycol, 1000), fluid(Materials.Water, 1500))
             .duration(300)
-            .eut(TierEU.RECIPE_LuV)
+            .eut(TierEU.RECIPE_HV)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 
@@ -49,7 +49,7 @@ public class PLARecipes {
             .fluidInputs(fluid(Materials.Water, 1000))
             .fluidOutputs(fluid(PrPMaterials.LacticAcid, 1000), fluid(Materials.Ethanol, 250))
             .duration(600)
-            .eut(TierEU.RECIPE_LuV)
+            .eut(TierEU.RECIPE_MV)
             .addTo(RecipeMaps.fermentingRecipes);
     }
 

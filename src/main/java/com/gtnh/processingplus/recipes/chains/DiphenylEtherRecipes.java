@@ -50,7 +50,7 @@ public class DiphenylEtherRecipes {
             .itemOutputs(dust(PrPMaterials.Polyacrylonitrile, 5))
             .fluidOutputs(fluid(PrPMaterials.DilutedNMP, 1500), fluid(PrPMaterials.DiphenylEther, 400))
             .duration(600)
-            .eut(TierEU.RECIPE_LuV)
+            .eut(TierEU.RECIPE_EV)
             .metadata(GTRecipeConstants.CHEMPLANT_CASING_TIER, 4)
             .addTo(GTPPRecipeMaps.chemicalPlantRecipes);
     }

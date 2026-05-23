@@ -14,11 +14,11 @@ import gregtech.api.recipe.RecipeMaps;
  * Alternate recipes that use LiquidArgon and LiquidNitrogen from the CSC in place of
  * large volumes of gas. Rewards players who invest in the cryogenic separation chain:
  *
- *   HBN blending      — N₂ 16000 + Ar 8000   → LN₂ 2000  + LAr 1000  | +25% blend yield
- *   HBN sintering     — N₂ 128000 + Ar 32000 → LN₂ 16000 + LAr 4000  | +25% hBN yield
- *   CF graphitization — Ar 16000              → LAr 2000               | +1 fiber output
- *   CRV Ti alloy      — Ar 2000               → LAr 500                | +1 ingot output
- *   CRV Naquadria     — Ar 4000               → LAr 1000               | +1 ingot output
+ * HBN blending — N₂ 16000 + Ar 8000 → LN₂ 2000 + LAr 1000 | +25% blend yield
+ * HBN sintering — N₂ 128000 + Ar 32000 → LN₂ 16000 + LAr 4000 | +25% hBN yield
+ * CF graphitization — Ar 16000 → LAr 2000 | +1 fiber output
+ * CRV Ti alloy — Ar 2000 → LAr 500 | +1 ingot output
+ * CRV Naquadria — Ar 4000 → LAr 1000 | +1 ingot output
  *
  * All cryo alternates use circuit(11) or higher to avoid recipe conflicts with the
  * gas-atmosphere base recipes.
@@ -43,9 +43,7 @@ public class CryoUpgradeRecipes {
     private static void hbnBlendingCryo() {
         GTValues.RA.stdBuilder()
             .itemInputs(dust(PrPMaterials.CrudeHBN, 4), dust(Materials.Yttrium, 16), circuit(11))
-            .fluidInputs(
-                fluid(PrPMaterials.LiquidNitrogen, 2000),
-                fluid(PrPMaterials.LiquidArgon, 1000))
+            .fluidInputs(fluid(PrPMaterials.LiquidNitrogen, 2000), fluid(PrPMaterials.LiquidArgon, 1000))
             .itemOutputs(dust(PrPMaterials.HBNPowderBlend, 10))
             .fluidOutputs(fluid(Materials.NitricOxide, 3000), fluid(Materials.Oxygen, 1500))
             .duration(480)
@@ -99,9 +97,7 @@ public class CryoUpgradeRecipes {
     private static void crvTitaniumCryo() {
         GTValues.RA.stdBuilder()
             .itemInputs(ingot(Materials.Tritanium, 4), dust(Materials.Americium, 2), circuit(12))
-            .fluidInputs(
-                fluid(PrPMaterials.HBNLubricant, 500),
-                fluid(PrPMaterials.LiquidArgon, 500))
+            .fluidInputs(fluid(PrPMaterials.HBNLubricant, 500), fluid(PrPMaterials.LiquidArgon, 500))
             .itemOutputs(ingot(PrPMaterials.AmorphousTritaniumAlloy, 5))
             .duration(640)
             .eut(TierEU.RECIPE_LuV)
@@ -118,9 +114,7 @@ public class CryoUpgradeRecipes {
     private static void crvNaquadriaCryo() {
         GTValues.RA.stdBuilder()
             .itemInputs(dust(Materials.Naquadria, 4), ingot(Materials.NaquadahEnriched, 2), circuit(13))
-            .fluidInputs(
-                fluid(PrPMaterials.HBNLubricant, 1000),
-                fluid(PrPMaterials.LiquidArgon, 1000))
+            .fluidInputs(fluid(PrPMaterials.HBNLubricant, 1000), fluid(PrPMaterials.LiquidArgon, 1000))
             .itemOutputs(ingot(PrPMaterials.AmorphousNaquadria, 3))
             .duration(960)
             .eut(TierEU.RECIPE_ZPM)

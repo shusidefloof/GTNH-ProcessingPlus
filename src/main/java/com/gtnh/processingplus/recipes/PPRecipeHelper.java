@@ -1,15 +1,19 @@
 package com.gtnh.processingplus.recipes;
 
+import java.util.List;
+
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.oredict.OreDictionary;
 
 import bartworks.system.material.Werkstoff;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
 import gregtech.api.util.GTOreDictUnificator;
 import gregtech.api.util.GTUtility;
+import gtPlusPlus.core.material.Material;
 
 /**
  * Central helper for all GTNHPP recipe definitions.
@@ -74,6 +78,30 @@ public class PPRecipeHelper {
     }
 
     // =========================
+    // ITEMS — GT++ Material
+    // =========================
+
+    /** GT++ Material objects (e.g. ELEMENT.getInstance().FERMIUM). */
+    public static ItemStack dust(Material m, int amount) {
+        ItemStack is = m.getDust(amount);
+        if (is == null) throw new IllegalStateException("No dust for GT++ material: " + m);
+        return is;
+    }
+
+    // =========================
+    // ITEMS — OreDict
+    // =========================
+
+    /** OreDict lookup — for materials not accessible at compile time (e.g. GoodGenerator Werkstoffe). */
+    public static ItemStack item(String oreDictEntry, int amount) {
+        List<ItemStack> ores = OreDictionary.getOres(oreDictEntry);
+        if (ores.isEmpty()) throw new IllegalStateException("No OreDict entry: '" + oreDictEntry + "'");
+        ItemStack copy = ores.get(0).copy();
+        copy.stackSize = amount;
+        return copy;
+    }
+
+    // =========================
     // CIRCUITS
     // =========================
 
@@ -128,6 +156,13 @@ public class PPRecipeHelper {
     // =========================
     // FLUIDS — String registry
     // =========================
+
+    /** GT++ Material objects (handles SOLID/LIQUID/GAS forms via getFluidStack). */
+    public static FluidStack fluid(Material m, int amount) {
+        FluidStack fs = m.getFluidStack(amount);
+        if (fs == null) throw new IllegalStateException("No fluid for GT++ material: " + m);
+        return fs;
+    }
 
     /** GT++ / modded / unknown registry fluids (safe string lookup). */
     public static FluidStack fluid(String name, int amount) {

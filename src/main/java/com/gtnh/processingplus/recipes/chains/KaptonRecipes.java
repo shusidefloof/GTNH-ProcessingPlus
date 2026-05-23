@@ -59,7 +59,7 @@ public class KaptonRecipes {
             .fluidInputs(fluid(Materials.Phenol, 2000), fluid(Materials.SulfuricAcid, 200))
             .fluidOutputs(fluid(PrPMaterials.DiphenylEther, 1000), fluid(Materials.Water, 1000))
             .duration(400)
-            .eut(TierEU.RECIPE_LuV)
+            .eut(TierEU.RECIPE_HV)
             .addTo(GTRecipeConstants.UniversalChemical);
     }
 
@@ -154,7 +154,7 @@ public class KaptonRecipes {
             .fluidInputs(fluid(Materials.Ethanol, 3000), fluid(Materials.Ammonia, 1000))
             .fluidOutputs(fluid(PrPMaterials.Triethylamine, 1000), fluid(Materials.Water, 3000))
             .duration(600)
-            .eut(TierEU.RECIPE_UV)
+            .eut(TierEU.RECIPE_HV)
             .addTo(GTRecipeConstants.UniversalChemical);
     }
 
@@ -169,7 +169,7 @@ public class KaptonRecipes {
             .fluidInputs(fluid(Materials.AceticAcid, 1000))
             .fluidOutputs(fluid(PrPMaterials.Ketene, 1000), fluid(Materials.Water, 1000))
             .duration(400)
-            .eut(TierEU.RECIPE_UV)
+            .eut(TierEU.RECIPE_HV)
             .addTo(GTNHPPRecipeMaps.sHTRFRecipes);
     }
 
@@ -184,7 +184,7 @@ public class KaptonRecipes {
             .fluidInputs(fluid(Materials.AceticAcid, 2000), fluid(PrPMaterials.Ketene, 1000))
             .fluidOutputs(fluid(PrPMaterials.AceticAnhydride, 1000), fluid(Materials.Water, 500))
             .duration(400)
-            .eut(TierEU.RECIPE_LuV)
+            .eut(TierEU.RECIPE_HV)
             .addTo(GTRecipeConstants.UniversalChemical);
     }
 

@@ -51,7 +51,7 @@ public class AerogelRecipes {
             .fluidInputs(fluid(PrPMaterials.Trimethylsilane, 1000), fluid(Materials.Chlorine, 1000))
             .fluidOutputs(fluid(PrPMaterials.Trimethylchlorosilane, 1000), fluid(Materials.HydrochloricAcid, 1000))
             .duration(400)
-            .eut(TierEU.RECIPE_UV)
+            .eut(TierEU.RECIPE_EV)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 
@@ -65,7 +65,7 @@ public class AerogelRecipes {
             .fluidInputs(fluid(Materials.SiliconTetrachloride, 1000), fluid(Materials.Ethanol, 4000))
             .fluidOutputs(fluid(PrPMaterials.TEOS, 1000), fluid(Materials.HydrochloricAcid, 4000))
             .duration(400)
-            .eut(TierEU.RECIPE_UV)
+            .eut(TierEU.RECIPE_EV)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 

@@ -9,6 +9,7 @@ import gregtech.api.enums.Materials;
 import gregtech.api.enums.TierEU;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.util.GTRecipeConstants;
+import gtPlusPlus.api.recipe.GTPPRecipeMaps;
 
 public class MaterialUsesRecipes {
 
@@ -34,7 +35,7 @@ public class MaterialUsesRecipes {
             .fluidOutputs(fluid(PrPMaterials.PAAAdhesive, 1000))
             .duration(300)
             .eut(TierEU.RECIPE_UV)
-            .addTo(RecipeMaps.mixerRecipes);
+            .addTo(GTPPRecipeMaps.mixerNonCellRecipes);
     }
 
     // -------------------------------------------------------------------------
@@ -51,7 +52,7 @@ public class MaterialUsesRecipes {
             .fluidOutputs(fluid(PrPMaterials.HBNLubricant, 2000))
             .duration(200)
             .eut(TierEU.RECIPE_UV)
-            .addTo(RecipeMaps.mixerRecipes);
+            .addTo(GTPPRecipeMaps.mixerNonCellRecipes);
     }
 
     // -------------------------------------------------------------------------
@@ -86,19 +87,22 @@ public class MaterialUsesRecipes {
         GTValues.RA.stdBuilder()
             .fluidInputs(molten(PrPMaterials.Nylon66, 144))
             .itemOutputs(plate(PrPMaterials.Nylon66, 1))
-            .duration(80).eut(TierEU.RECIPE_LV)
+            .duration(80)
+            .eut(TierEU.RECIPE_LV)
             .addTo(RecipeMaps.fluidSolidifierRecipes);
 
         GTValues.RA.stdBuilder()
             .fluidInputs(molten(PrPMaterials.Nylon6, 144))
             .itemOutputs(plate(PrPMaterials.Nylon6, 1))
-            .duration(80).eut(TierEU.RECIPE_LV)
+            .duration(80)
+            .eut(TierEU.RECIPE_LV)
             .addTo(RecipeMaps.fluidSolidifierRecipes);
 
         GTValues.RA.stdBuilder()
             .fluidInputs(molten(PrPMaterials.PolylacticAcid, 144))
             .itemOutputs(plate(PrPMaterials.PolylacticAcid, 1))
-            .duration(80).eut(TierEU.RECIPE_LV)
+            .duration(80)
+            .eut(TierEU.RECIPE_LV)
             .addTo(RecipeMaps.fluidSolidifierRecipes);
     }
 

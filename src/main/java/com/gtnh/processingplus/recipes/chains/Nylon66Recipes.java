@@ -84,7 +84,7 @@ public class Nylon66Recipes {
             .fluidInputs(fluid(PrPMaterials.Cyclohexene, 1000), fluid("fluid.hydrogenperoxide", 3000))
             .fluidOutputs(fluid(PrPMaterials.AdipicAcid, 1000), fluid(Materials.Water, 3000))
             .duration(300)
-            .eut(TierEU.RECIPE_LuV)
+            .eut(TierEU.RECIPE_EV)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 
@@ -154,7 +154,7 @@ public class Nylon66Recipes {
             .itemOutputs(dust(PrPMaterials.HydroxylammoniumSulfate, 1))
             .fluidOutputs(fluid(Materials.Water, 2000))
             .duration(400)
-            .eut(TierEU.RECIPE_UV)
+            .eut(TierEU.RECIPE_HV)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 
@@ -180,7 +180,7 @@ public class Nylon66Recipes {
             .fluidInputs(fluid(Materials.SulfuricAcid, 500))
             .fluidOutputs(fluid(PrPMaterials.Caprolactam, 1000))
             .duration(400)
-            .eut(TierEU.RECIPE_UV)
+            .eut(TierEU.RECIPE_EV)
             .metadata(GTRecipeConstants.CHEMPLANT_CASING_TIER, 5)
             .addTo(GTPPRecipeMaps.chemicalPlantRecipes);
 

@@ -16,9 +16,6 @@ public class FreonRecipes {
         step2_FreonSynthesis();
     }
 
-    // =========================================================
-    // 1. CHCl₃ + Cl₂ → CCl₄ + HCl (photochlorination of chloroform)
-    // =========================================================
     private static void step1_CarbonTetrachloride() {
         GTValues.RA.stdBuilder()
             .itemInputs(circuit(1))
@@ -29,10 +26,6 @@ public class FreonRecipes {
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 
-    // =========================================================
-    // 2. CCl₄ + 2 HF → CF₂Cl₂ + 2 HCl (Swarts fluorination)
-    // Requires HV Large Chemical Reactor — HF at pressure
-    // =========================================================
     private static void step2_FreonSynthesis() {
         GTValues.RA.stdBuilder()
             .itemInputs(circuit(2))

@@ -11,17 +11,9 @@ import gregtech.api.enums.TierEU;
 import gregtech.api.recipe.RecipeMaps;
 
 /**
- * Alternate recipes that use LiquidArgon and LiquidNitrogen from the CSC in place of
- * large volumes of gas. Rewards players who invest in the cryogenic separation chain:
- *
- * HBN blending — N₂ 16000 + Ar 8000 → LN₂ 2000 + LAr 1000 | +25% blend yield
- * HBN sintering — N₂ 128000 + Ar 32000 → LN₂ 16000 + LAr 4000 | +25% hBN yield
- * CF graphitization — Ar 16000 → LAr 2000 | +1 fiber output
- * CRV Ti alloy — Ar 2000 → LAr 500 | +1 ingot output
- * CRV Naquadria — Ar 4000 → LAr 1000 | +1 ingot output
- *
- * All cryo alternates use circuit(11) or higher to avoid recipe conflicts with the
- * gas-atmosphere base recipes.
+ * Alternate recipes using LiquidArgon/LiquidNitrogen from the CSC instead of large gas volumes.
+ * All use circuit(11+) to avoid conflicts with the base gas-atmosphere recipes.
+ * Reward: 25% better yields and 4-8x less fluid input.
  */
 public class CryoUpgradeRecipes {
 
@@ -33,13 +25,7 @@ public class CryoUpgradeRecipes {
         crvNaquadriaCryo();
     }
 
-    // =========================================================
-    // hBN Powder Blending — cryo atmosphere (alt to HBNRecipes step4)
-    // Cryogenic N₂+Ar atmosphere provides better inert blanket:
-    // no moisture, no oxidation → superior dopant distribution.
-    // Gas saved: N₂ 16000 + Ar 8000 → LN₂ 2000 + LAr 1000 (8× each).
-    // Yield: +25% (10 blend vs 8 base).
-    // =========================================================
+    // hBN blending with cryo atmosphere — saves N₂ 16k + Ar 8k, gives 10 blend vs 8 base
     private static void hbnBlendingCryo() {
         GTValues.RA.stdBuilder()
             .itemInputs(dust(PrPMaterials.CrudeHBN, 4), dust(Materials.Yttrium, 16), circuit(11))
@@ -51,12 +37,7 @@ public class CryoUpgradeRecipes {
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 
-    // =========================================================
-    // hBN Hot-Press Sintering — cryo-dense atmosphere (alt to HBNRecipes step5)
-    // Liquid gases deliver far denser inert atmosphere per mB.
-    // Gas saved: N₂ 128000 + Ar 32000 → LN₂ 16000 + LAr 4000 (8× each).
-    // Yield: +25% (20 hBN vs 16 base per 32 blend input).
-    // =========================================================
+    // hBN sintering with cryo-dense atmosphere — saves N₂ 128k + Ar 32k, gives 20 hBN vs 16 base
     private static void hbnSinteringCryo() {
         GTValues.RA.stdBuilder()
             .itemInputs(dust(PrPMaterials.HBNPowderBlend, 32), circuit(11))
@@ -70,13 +51,7 @@ public class CryoUpgradeRecipes {
             .addTo(GTNHPPRecipeMaps.sHPSFRecipes);
     }
 
-    // =========================================================
-    // CF Graphitization — LiquidArgon (alt to CarbonFiberRecipes step7)
-    // Liquid Ar delivers ~840× denser inert atmosphere per mB — better
-    // crystal plane alignment during 2500°C graphitization.
-    // Gas saved: Ar 16000 → LAr 2000 (8×).
-    // Yield: +1 GraphitizedCarbonFiber tow (5 vs 4 base).
-    // =========================================================
+    // CF graphitization with LAr inert atmosphere — saves Ar 16k, gives 5 fibers vs 4 base
     private static void graphitizationCryo() {
         GTValues.RA.stdBuilder()
             .itemInputs(dust(PrPMaterials.CarbonFiberTow, 4), circuit(11))
@@ -87,13 +62,7 @@ public class CryoUpgradeRecipes {
             .addTo(GTNHPPRecipeMaps.sHTRFRecipes);
     }
 
-    // =========================================================
-    // CRV Amorphous Tritanium — LiquidArgon cryo-quench (alt to CRVRecipes)
-    // Liquid Ar shock-quenches the melt ~840× faster per mB than gas Ar.
-    // Faster quench = smaller critical radius = better amorphous glass fraction.
-    // Gas saved: Ar 2000 → LAr 500 (4×).
-    // Yield: +1 ingot (5 vs 4 base).
-    // =========================================================
+    // CRV Amorphous Tritanium — LAr cryo-quench, saves Ar 2k, gives 5 ingots vs 4 base
     private static void crvTitaniumCryo() {
         GTValues.RA.stdBuilder()
             .itemInputs(ingot(Materials.Tritanium, 4), dust(Materials.Americium, 2), circuit(12))
@@ -104,13 +73,7 @@ public class CryoUpgradeRecipes {
             .addTo(GTNHPPRecipeMaps.sCRVRecipes);
     }
 
-    // =========================================================
-    // CRV Amorphous Naquadria — LiquidArgon cryo-quench (alt to CRVRecipes)
-    // Naquadria's high reactivity demands rapid quench to prevent re-crystallisation.
-    // Liquid Ar delivers the required quench rate at a fraction of the gas volume.
-    // Gas saved: Ar 4000 → LAr 1000 (4×).
-    // Yield: +1 ingot (3 vs 2 base).
-    // =========================================================
+    // CRV Amorphous Naquadria — LAr cryo-quench, saves Ar 4k, gives 3 ingots vs 2 base
     private static void crvNaquadriaCryo() {
         GTValues.RA.stdBuilder()
             .itemInputs(dust(Materials.Naquadria, 4), ingot(Materials.NaquadahEnriched, 2), circuit(13))

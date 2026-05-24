@@ -22,31 +22,26 @@ public class PhotoresistRecipes {
         mvBenzeneSensitizer();
         mvTanninSensitizer();
         mvBasicBlend();
-
         // HV
         hvNaphthaleneSensitizer();
         hvAnthraceeneSensitizer();
         hvResorcinolSensitizer();
         hvAdvancedBlend();
-
         // EV
         evAcetoxystyrene();
         evPHSResin();
         evSulfurDichloride();
         evDiphenylsulfoniumSalt();
         evEVBlend();
-
         // IV
         ivFurfural();
         ivDihydropyran();
         ivTHPProtection();
         ivIVBlend();
-
-        // LuV — Triflic Acid sub-chain (runs continuously through UMV)
+        // LuV — Triflic Acid sub-chain (reused through UMV)
         luvTrifluoromethane();
         luvSulfurTrioxide();
         luvTriflicAcid();
-
         // LuV — main chain
         luvAdamantolSynthesis();
         luvMethacrylicAcid();
@@ -59,15 +54,11 @@ public class PhotoresistRecipes {
         luvPGME();
         luvPGMEA();
         luvLuVBlend();
-
         // Byproduct recycling
         luvAmmoniumBisulfateCracking();
     }
 
-    // =========================================================
-    // MV — Formaldehyde synthesis
-    // Ethanol + O₂ → Formaldehyde + H₂O
-    // =========================================================
+    // MV: Formaldehyde — Ethanol + O₂
     private static void mvFormaldehydeSynthesis() {
         GTValues.RA.stdBuilder()
             .itemInputs(circuit(1))
@@ -78,10 +69,7 @@ public class PhotoresistRecipes {
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 
-    // =========================================================
-    // MV — Novolac synthesis
-    // Phenol + Formaldehyde + H₂SO₄ (cat) → Novolac Resin + H₂O
-    // =========================================================
+    // MV: Novolac Resin — Phenol + Formaldehyde + H₂SO₄ (cat)
     private static void mvNovolacSynthesis() {
         GTValues.RA.stdBuilder()
             .itemInputs(circuit(2))
@@ -96,10 +84,7 @@ public class PhotoresistRecipes {
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 
-    // =========================================================
-    // MV — Benzene sensitizer route
-    // Benzene + O₂ → MV Photoresist Sensitizer
-    // =========================================================
+    // MV: Sensitizer route A — Benzene + O₂
     private static void mvBenzeneSensitizer() {
         GTValues.RA.stdBuilder()
             .itemInputs(circuit(3))
@@ -110,11 +95,7 @@ public class PhotoresistRecipes {
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 
-    // =========================================================
-    // MV — Tannin sensitizer route (two steps)
-    // Step a: Wood + Water → Tannin Solution
-    // Step b: Tannin Solution → MV Photoresist Sensitizer (Distillery)
-    // =========================================================
+    // MV: Sensitizer route B — Wood → Tannin Solution → Sensitizer (Distillery)
     private static void mvTanninSensitizer() {
         GTValues.RA.stdBuilder()
             .itemInputs(dust(Materials.Wood, 4), circuit(4))
@@ -132,10 +113,7 @@ public class PhotoresistRecipes {
             .addTo(RecipeMaps.distilleryRecipes);
     }
 
-    // =========================================================
-    // MV — Basic Photoresist blend (Mixer)
-    // Novolac Resin + MV Sensitizer + Ethanol → Basic Photoresist
-    // =========================================================
+    // MV: Basic Photoresist blend — Novolac + Sensitizer + Ethanol (Mixer)
     private static void mvBasicBlend() {
         GTValues.RA.stdBuilder()
             .itemInputs(circuit(5))
@@ -149,10 +127,7 @@ public class PhotoresistRecipes {
             .addTo(GTPPRecipeMaps.mixerNonCellRecipes);
     }
 
-    // =========================================================
-    // HV — Naphthalene sensitizer route (main)
-    // Naphthalene + H₂SO₄ → HV Photoresist Sensitizer
-    // =========================================================
+    // HV: Sensitizer route A — Naphthalene + H₂SO₄
     private static void hvNaphthaleneSensitizer() {
         GTValues.RA.stdBuilder()
             .itemInputs(circuit(1))
@@ -163,10 +138,7 @@ public class PhotoresistRecipes {
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 
-    // =========================================================
-    // HV — Anthracene sensitizer route (alt)
-    // Anthracene + HNO₃ → HV Photoresist Sensitizer
-    // =========================================================
+    // HV: Sensitizer route B — Anthracene + HNO₃
     private static void hvAnthraceeneSensitizer() {
         GTValues.RA.stdBuilder()
             .itemInputs(circuit(2))
@@ -177,10 +149,7 @@ public class PhotoresistRecipes {
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 
-    // =========================================================
-    // HV — Resorcinol sensitizer route (alt)
-    // Benzene + H₂O₂ + HNO₃ → HV Photoresist Sensitizer
-    // =========================================================
+    // HV: Sensitizer route C — Benzene + H₂O₂ + HNO₃
     private static void hvResorcinolSensitizer() {
         GTValues.RA.stdBuilder()
             .itemInputs(circuit(3))
@@ -194,10 +163,7 @@ public class PhotoresistRecipes {
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 
-    // =========================================================
-    // HV — Advanced Photoresist blend (Mixer)
-    // Basic Photoresist + HV Sensitizer → Advanced Photoresist
-    // =========================================================
+    // HV: Advanced Photoresist blend — Basic + HV Sensitizer (Mixer)
     private static void hvAdvancedBlend() {
         GTValues.RA.stdBuilder()
             .itemInputs(circuit(4))
@@ -208,10 +174,7 @@ public class PhotoresistRecipes {
             .addTo(GTPPRecipeMaps.mixerNonCellRecipes);
     }
 
-    // =========================================================
-    // EV — Acetoxystyrene
-    // Styrene + Acetic Anhydride → Acetoxystyrene + Acetic Acid
-    // =========================================================
+    // EV: Acetoxystyrene — Styrene + Acetic Anhydride
     private static void evAcetoxystyrene() {
         GTValues.RA.stdBuilder()
             .itemInputs(circuit(1))
@@ -222,10 +185,7 @@ public class PhotoresistRecipes {
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 
-    // =========================================================
-    // EV — PHS Resin
-    // Acetoxystyrene + H₂O₂ + HCl (cat) → PHS Resin + Acetic Acid
-    // =========================================================
+    // EV: PHS Resin — Acetoxystyrene + H₂O₂ + HCl (cat)
     private static void evPHSResin() {
         GTValues.RA.stdBuilder()
             .itemInputs(circuit(2))
@@ -240,10 +200,7 @@ public class PhotoresistRecipes {
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 
-    // =========================================================
-    // EV — Sulfur Dichloride (PAG precursor)
-    // S + Cl₂ → SCl₂
-    // =========================================================
+    // EV: Sulfur Dichloride (PAG precursor) — S + Cl₂
     private static void evSulfurDichloride() {
         GTValues.RA.stdBuilder()
             .itemInputs(dust(Materials.Sulfur, 1))
@@ -254,10 +211,7 @@ public class PhotoresistRecipes {
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 
-    // =========================================================
-    // EV — Diphenylsulfonium Salt (PAG)
-    // SCl₂ + 2 Benzene → Diphenylsulfonium Salt + 2 HCl
-    // =========================================================
+    // EV: Diphenylsulfonium Salt (PAG) — SCl₂ + 2 Benzene
     private static void evDiphenylsulfoniumSalt() {
         GTValues.RA.stdBuilder()
             .itemInputs(circuit(3))
@@ -269,10 +223,7 @@ public class PhotoresistRecipes {
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 
-    // =========================================================
-    // EV — EV Photoresist blend (Mixer)
-    // Advanced Photoresist + PHS Resin + Diphenylsulfonium Salt → EV Photoresist
-    // =========================================================
+    // EV: EV Photoresist blend — Advanced + PHS Resin + PAG (Mixer)
     private static void evEVBlend() {
         GTValues.RA.stdBuilder()
             .itemInputs(dust(PrPMaterials.DiphenylsulfoniumSalt, 1), circuit(5))
@@ -283,10 +234,7 @@ public class PhotoresistRecipes {
             .addTo(GTPPRecipeMaps.mixerNonCellRecipes);
     }
 
-    // =========================================================
-    // IV — Furfural
-    // Crops + H₂SO₄ → Furfural + H₂O
-    // =========================================================
+    // IV: Furfural — Wheat + H₂SO₄
     private static void ivFurfural() {
         GTValues.RA.stdBuilder()
             .itemInputs(new ItemStack(Items.wheat, 4), circuit(1))
@@ -297,10 +245,7 @@ public class PhotoresistRecipes {
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 
-    // =========================================================
-    // IV — Dihydropyran
-    // Furfural → Dihydropyran + CO
-    // =========================================================
+    // IV: Dihydropyran — Furfural pyrolysis
     private static void ivDihydropyran() {
         GTValues.RA.stdBuilder()
             .itemInputs(circuit(2))
@@ -311,10 +256,7 @@ public class PhotoresistRecipes {
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 
-    // =========================================================
-    // IV — THP Protection of PHS Resin
-    // PHS Resin + Dihydropyran + HCl (cat) → THP-Protected PHS
-    // =========================================================
+    // IV: THP-Protected PHS — PHS Resin + Dihydropyran + HCl (cat)
     private static void ivTHPProtection() {
         GTValues.RA.stdBuilder()
             .itemInputs(dust(PrPMaterials.PHSResin, 2), circuit(3))
@@ -325,10 +267,7 @@ public class PhotoresistRecipes {
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 
-    // =========================================================
-    // IV — IV Photoresist blend (Mixer)
-    // EV Photoresist + THP-Protected PHS → IV Photoresist
-    // =========================================================
+    // IV: IV Photoresist blend — EV + THP-PHS (Mixer)
     private static void ivIVBlend() {
         GTValues.RA.stdBuilder()
             .itemInputs(circuit(4))
@@ -339,39 +278,7 @@ public class PhotoresistRecipes {
             .addTo(GTPPRecipeMaps.mixerNonCellRecipes);
     }
 
-    // =========================================================
-    // LuV — Adamantol (Naquadah processing gate)
-    // Naquadah + HF + H₂SO₄ → Adamantol
-    // Gates LuV photoresist behind Naquadah progression
-    // =========================================================
-    private static void luvAdamantolSynthesis() {
-        GTValues.RA.stdBuilder()
-            .itemInputs(dust(Materials.Naquadah, 1))
-            .fluidInputs(fluid(Materials.HydrofluoricAcid, 2000), fluid(Materials.SulfuricAcid, 500))
-            .itemOutputs(dust(PrPMaterials.Adamantol, 2))
-            .duration(150)
-            .eut(TierEU.RECIPE_LuV)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
-    }
-
-    // =========================================================
-    // HV — Propylene Oxide (PGME precursor)
-    // Propylene + H₂O₂ → Propylene Oxide
-    // =========================================================
-    private static void luvPropyleneOxide() {
-        GTValues.RA.stdBuilder()
-            .itemInputs(circuit(1))
-            .fluidInputs(fluid(Materials.Propene, 1000), fluid("fluid.hydrogenperoxide", 1000))
-            .fluidOutputs(fluid(PrPMaterials.PropyleneOxide, 1000))
-            .duration(80)
-            .eut(TierEU.RECIPE_HV)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
-    }
-
-    // =========================================================
-    // LuV — Triflic Acid sub-chain: step 1
-    // CHCl₃ + 3 HF → CHF₃ + 3 HCl
-    // =========================================================
+    // LuV: Trifluoromethane — CHCl₃ + 3 HF (gates Triflic Acid)
     private static void luvTrifluoromethane() {
         GTValues.RA.stdBuilder()
             .itemInputs(circuit(1))
@@ -382,10 +289,7 @@ public class PhotoresistRecipes {
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 
-    // =========================================================
-    // LuV — Triflic Acid sub-chain: step 2
-    // 2 SO₂ + O₂ → 2 SO₃
-    // =========================================================
+    // LuV: SO₃ — 2 SO₂ + O₂
     private static void luvSulfurTrioxide() {
         GTValues.RA.stdBuilder()
             .itemInputs(circuit(2))
@@ -396,10 +300,7 @@ public class PhotoresistRecipes {
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 
-    // =========================================================
-    // LuV — Triflic Acid sub-chain: step 3
-    // CHF₃ + SO₃ → Triflic Acid
-    // =========================================================
+    // LuV: Triflic Acid — CHF₃ + SO₃
     private static void luvTriflicAcid() {
         GTValues.RA.stdBuilder()
             .itemInputs(circuit(3))
@@ -410,11 +311,18 @@ public class PhotoresistRecipes {
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 
-    // =========================================================
-    // LuV — Methacrylic Acid
-    // Acetone + HCN + H₂SO₄ (recycled) → Methacrylic Acid + Ammonium Bisulfate
-    // HCN cross-chain: byproduct of Carbon Fiber Composite chain
-    // =========================================================
+    // LuV: Adamantol (Naquadah gate) — Naquadah + HF + H₂SO₄
+    private static void luvAdamantolSynthesis() {
+        GTValues.RA.stdBuilder()
+            .itemInputs(dust(Materials.Naquadah, 1))
+            .fluidInputs(fluid(Materials.HydrofluoricAcid, 2000), fluid(Materials.SulfuricAcid, 500))
+            .itemOutputs(dust(PrPMaterials.Adamantol, 2))
+            .duration(150)
+            .eut(TierEU.RECIPE_LuV)
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+    }
+
+    // LuV: Methacrylic Acid — Acetone + HCN + H₂SO₄; byproduces Ammonium Bisulfate
     private static void luvMethacrylicAcid() {
         GTValues.RA.stdBuilder()
             .itemInputs(circuit(4))
@@ -429,10 +337,7 @@ public class PhotoresistRecipes {
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 
-    // =========================================================
-    // LuV — Adamantyl Methacrylate
-    // Methacrylic Acid + Adamantol → Adamantyl Methacrylate + H₂O
-    // =========================================================
+    // LuV: Adamantyl Methacrylate — Methacrylic Acid + Adamantol
     private static void luvAdamantylMethacrylate() {
         GTValues.RA.stdBuilder()
             .itemInputs(dust(PrPMaterials.Adamantol, 1), circuit(5))
@@ -443,10 +348,7 @@ public class PhotoresistRecipes {
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 
-    // =========================================================
-    // LuV — Acetone Azine (AIBN precursor step 1)
-    // Acetone + Hydrazine → Acetone Azine + H₂O
-    // =========================================================
+    // LuV: Acetone Azine (AIBN precursor) — Acetone + Hydrazine
     private static void luvAcetoneAzine() {
         GTValues.RA.stdBuilder()
             .itemInputs(circuit(6))
@@ -457,10 +359,7 @@ public class PhotoresistRecipes {
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 
-    // =========================================================
-    // LuV — AIBN radical initiator (reused at ZPM)
-    // Acetone Azine + HCN + Cl₂ → AIBN + HCl
-    // =========================================================
+    // LuV: AIBN radical initiator — Acetone Azine + HCN + Cl₂
     private static void luvAIBN() {
         GTValues.RA.stdBuilder()
             .itemInputs(circuit(7))
@@ -475,10 +374,7 @@ public class PhotoresistRecipes {
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 
-    // =========================================================
-    // LuV — Alicyclic Resin
-    // Adamantyl Methacrylate + Methacrylic Acid + AIBN + N₂ → Alicyclic Resin
-    // =========================================================
+    // LuV: Alicyclic Resin — AdMA + MAA + AIBN + N₂ polymerization
     private static void luvAlicyclicResin() {
         GTValues.RA.stdBuilder()
             .itemInputs(dust(PrPMaterials.AIBN, 1), circuit(8))
@@ -492,10 +388,7 @@ public class PhotoresistRecipes {
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 
-    // =========================================================
-    // LuV — Triphenylsulfonium Triflate (stronger PAG)
-    // Diphenylsulfonium Salt + Triflic Acid + Benzene → Triphenylsulfonium Triflate + HCl
-    // =========================================================
+    // LuV: Triphenylsulfonium Triflate (stronger PAG) — Diphenylsulfonium + TriflicAcid + Benzene
     private static void luvTriphenylsulfoniumTriflate() {
         GTValues.RA.stdBuilder()
             .itemInputs(dust(PrPMaterials.DiphenylsulfoniumSalt, 1), circuit(9))
@@ -507,10 +400,18 @@ public class PhotoresistRecipes {
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 
-    // =========================================================
-    // LuV — PGME (solvent precursor, runs continuously through UMV)
-    // Propylene Oxide + Methanol → PGME
-    // =========================================================
+    // HV: Propylene Oxide (PGME precursor) — Propylene + H₂O₂
+    private static void luvPropyleneOxide() {
+        GTValues.RA.stdBuilder()
+            .itemInputs(circuit(1))
+            .fluidInputs(fluid(Materials.Propene, 1000), fluid("fluid.hydrogenperoxide", 1000))
+            .fluidOutputs(fluid(PrPMaterials.PropyleneOxide, 1000))
+            .duration(80)
+            .eut(TierEU.RECIPE_HV)
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+    }
+
+    // LuV: PGME solvent — Propylene Oxide + Methanol
     private static void luvPGME() {
         GTValues.RA.stdBuilder()
             .itemInputs(circuit(10))
@@ -521,10 +422,7 @@ public class PhotoresistRecipes {
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 
-    // =========================================================
-    // LuV — PGMEA solvent (runs continuously through UMV)
-    // PGME + Acetic Acid → PGMEA + H₂O
-    // =========================================================
+    // LuV: PGMEA solvent — PGME + Acetic Acid
     private static void luvPGMEA() {
         GTValues.RA.stdBuilder()
             .itemInputs(circuit(11))
@@ -535,24 +433,7 @@ public class PhotoresistRecipes {
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 
-    // =========================================================
-    // LuV — Ammonium Bisulfate cracking (byproduct of MethacrylicAcid step)
-    // (NH₄)HSO₄ → NH₃ + H₂SO₄ at ~350°C
-    // 2 dust per MethacrylicAcid batch → recovers 1000 mB H₂SO₄ + 1000 mB NH₃
-    // =========================================================
-    private static void luvAmmoniumBisulfateCracking() {
-        GTValues.RA.stdBuilder()
-            .itemInputs(dust(PrPMaterials.AmmoniumBisulfate, 2))
-            .fluidOutputs(fluid(Materials.SulfuricAcid, 1000), fluid(Materials.Ammonia, 1000))
-            .duration(200)
-            .eut(TierEU.RECIPE_EV)
-            .addTo(RecipeMaps.distillationTowerRecipes);
-    }
-
-    // =========================================================
-    // LuV — LuV Photoresist blend (Mixer, circuit 13)
-    // IV Photoresist + Alicyclic Resin + Triphenylsulfonium Triflate + PGMEA → LuV Photoresist
-    // =========================================================
+    // LuV: LuV Photoresist blend — IV + Alicyclic Resin + PAG + PGMEA (Mixer)
     private static void luvLuVBlend() {
         GTValues.RA.stdBuilder()
             .itemInputs(dust(PrPMaterials.TriphenylsulfoniumTriflate, 1), circuit(13))
@@ -564,5 +445,15 @@ public class PhotoresistRecipes {
             .duration(60)
             .eut(TierEU.RECIPE_LuV)
             .addTo(GTPPRecipeMaps.mixerNonCellRecipes);
+    }
+
+    // LuV: Ammonium Bisulfate cracking — recovers H₂SO₄ + NH₃ (byproduct of MethacrylicAcid)
+    private static void luvAmmoniumBisulfateCracking() {
+        GTValues.RA.stdBuilder()
+            .itemInputs(dust(PrPMaterials.AmmoniumBisulfate, 2))
+            .fluidOutputs(fluid(Materials.SulfuricAcid, 1000), fluid(Materials.Ammonia, 1000))
+            .duration(200)
+            .eut(TierEU.RECIPE_EV)
+            .addTo(RecipeMaps.distillationTowerRecipes);
     }
 }

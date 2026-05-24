@@ -38,21 +38,11 @@ import gregtech.api.recipe.RecipeMap;
 import gregtech.api.render.TextureFactory;
 import gregtech.api.util.MultiblockTooltipBuilder;
 
-/**
- * Basic Oxygen Furnace 3×5×3
- * Blows liquid oxygen through molten iron to rapidly decarburize and convert it to steel.
- * Three modes via integrated circuit:
- * Requires Liquid Oxygen
- */
 public class MTE_BOF extends MTEExtendedPowerMultiBlockBase<MTE_BOF> implements ISurvivalConstructable {
 
-    // Solid steel casing texture (GT page 0, index 1)
-    private static final int CASING_INDEX = 1;
+    private static final int CASING_INDEX = 1; // solid steel casing
     private static final String STRUCTURE_PIECE_MAIN = "main";
-
-    private static final int OFFSET_X = 1;
-    private static final int OFFSET_Y = 2;
-    private static final int OFFSET_Z = 0;
+    private static final int OFFSET_X = 1, OFFSET_Y = 2, OFFSET_Z = 0;
 
     private static IStructureDefinition<MTE_BOF> STRUCTURE_DEFINITION = null;
 
@@ -69,21 +59,16 @@ public class MTE_BOF extends MTEExtendedPowerMultiBlockBase<MTE_BOF> implements 
         return new MTE_BOF(this);
     }
 
-    // -------------------------------------------------------------------------
-    // Structure — 3 wide × 5 tall × 3 deep
-    // Controller at z=0, y=2 (centre height), x=1 (centre width).
-    // -------------------------------------------------------------------------
-
     @Override
     public IStructureDefinition<MTE_BOF> getStructureDefinition() {
         if (STRUCTURE_DEFINITION == null) {
             STRUCTURE_DEFINITION = StructureDefinition.<MTE_BOF>builder()
                 .addShape(
                     STRUCTURE_PIECE_MAIN,
-                    new String[][] { { "CCC", "CCC", "C~C", "CCC", "CCC" }, // z=0 front
-                        { "CCC", "CCC", "CCC", "CCC", "CCC" }, // z=1 body
-                        { "CCC", "CCC", "CCC", "CCC", "CCC" } // z=2 back
-                    })
+                    new String[][] {
+                        { "CCC", "CCC", "C~C", "CCC", "CCC" },
+                        { "CCC", "CCC", "CCC", "CCC", "CCC" },
+                        { "CCC", "CCC", "CCC", "CCC", "CCC" } })
                 .addElement(
                     'C',
                     buildHatchAdder(MTE_BOF.class)
@@ -104,16 +89,8 @@ public class MTE_BOF extends MTEExtendedPowerMultiBlockBase<MTE_BOF> implements 
     @Override
     public int survivalConstruct(ItemStack stackSize, int elementBudget, ISurvivalBuildEnvironment env) {
         if (mMachine) return -1;
-        return survivalBuildPiece(
-            STRUCTURE_PIECE_MAIN,
-            stackSize,
-            OFFSET_X,
-            OFFSET_Y,
-            OFFSET_Z,
-            elementBudget,
-            env,
-            false,
-            true);
+        return survivalBuildPiece(STRUCTURE_PIECE_MAIN, stackSize, OFFSET_X, OFFSET_Y, OFFSET_Z,
+            elementBudget, env, false, true);
     }
 
     @Override
@@ -123,13 +100,14 @@ public class MTE_BOF extends MTEExtendedPowerMultiBlockBase<MTE_BOF> implements 
     }
 
     @Override
+    public int getMaxParallelRecipes() {
+        return 4;
+    }
+
+    @Override
     public RecipeMap<?> getRecipeMap() {
         return GTNHPPRecipeMaps.sBOFRecipes;
     }
-
-    // -------------------------------------------------------------------------
-    // Rendering — EBF overlay fits the furnace aesthetic
-    // -------------------------------------------------------------------------
 
     @Override
     public ITexture[] getTexture(IGregTechTileEntity aBaseMetaTileEntity, ForgeDirection side, ForgeDirection aFacing,
@@ -157,10 +135,6 @@ public class MTE_BOF extends MTEExtendedPowerMultiBlockBase<MTE_BOF> implements 
         return new ITexture[] { casingTexturePages[0][CASING_INDEX] };
     }
 
-    // -------------------------------------------------------------------------
-    // Tooltip
-    // -------------------------------------------------------------------------
-
     @Override
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
@@ -181,21 +155,12 @@ public class MTE_BOF extends MTEExtendedPowerMultiBlockBase<MTE_BOF> implements 
         return tt;
     }
 
-    // -------------------------------------------------------------------------
-    // Info panel
-    // -------------------------------------------------------------------------
-
     @Override
     public String[] getInfoData() {
         return new String[] { StatCollector.translateToLocal("GT5U.multiblock.Progress") + ": "
-            + EnumChatFormatting.GREEN
-            + mProgresstime / 20
-            + EnumChatFormatting.RESET
+            + EnumChatFormatting.GREEN + mProgresstime / 20 + EnumChatFormatting.RESET
             + " s / "
-            + EnumChatFormatting.YELLOW
-            + mMaxProgresstime / 20
-            + EnumChatFormatting.RESET
-            + " s" };
+            + EnumChatFormatting.YELLOW + mMaxProgresstime / 20 + EnumChatFormatting.RESET + " s" };
     }
 
     @Override

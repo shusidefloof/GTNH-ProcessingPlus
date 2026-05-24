@@ -9,6 +9,7 @@ import com.gtnh.processingplus.machines.MTE_HPSF;
 import com.gtnh.processingplus.machines.MTE_HTRF;
 import com.gtnh.processingplus.machines.MTE_PCV;
 import com.gtnh.processingplus.machines.MTE_PFC;
+// import com.gtnh.processingplus.machines.MTE_PrimitiveAirIntake;
 import com.gtnh.processingplus.machines.MTE_SCD;
 import com.gtnh.processingplus.machines.MTE_SPC;
 
@@ -40,5 +41,6 @@ public class GTNHPPBlocks {
         new MTE_SPC(31508, "gtnhpp.spc", "Spectral Photolithography Chamber").getStackForm(1);
         new MTE_CSC(31509, "gtnhpp.csc", "Cryogenic Separation Column").getStackForm(1);
         new MTE_BOF(31510, "gtnhpp.bof", "Basic Oxygen Furnace").getStackForm(1);
+        // new MTE_PrimitiveAirIntake(31515, "gtnhpp.primitive_air_intake", "Primitive Air Intake").getStackForm(1);
     }
 }

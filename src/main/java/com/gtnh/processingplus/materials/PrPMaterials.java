@@ -80,6 +80,7 @@ public class PrPMaterials implements Runnable {
     // BOF slag
     // =========================
     public static Werkstoff BOFSlag;
+    public static Werkstoff SlagResidue;
 
     // =========================
     // POLYMERS & SOLIDS
@@ -2047,12 +2048,22 @@ public class PrPMaterials implements Runnable {
                 TextureSet.SET_DULL));
         BOFSlag = register(
             new Werkstoff(
-                rgb(195, 225, 248),
+                rgb(80, 75, 70),
                 "BOF Slag",
-                subscriptNumbers("??Fe50C??"),
+                "??Ca??P??",
                 new Werkstoff.Stats(),
                 Werkstoff.Types.MIXTURE,
-                ceramicFeatures(),
+                new Werkstoff.GenerationFeatures().onlyDust(),
+                id(),
+                TextureSet.SET_DULL));
+        SlagResidue = register(
+            new Werkstoff(
+                rgb(100, 90, 75),
+                "Slag Residue",
+                subscriptNumbers("Ca3(PO4)2"),
+                new Werkstoff.Stats(),
+                Werkstoff.Types.MIXTURE,
+                new Werkstoff.GenerationFeatures().onlyDust(),
                 id(),
                 TextureSet.SET_DULL));
     }

@@ -24,7 +24,6 @@ import gtPlusPlus.api.recipe.GTPPRecipeMaps;
 public class CommonProxy {
 
     public void preInit(FMLPreInitializationEvent event) {
-        // Config.synchronizeConfiguration(event.getSuggestedConfigurationFile());
         GTNHPPBlocks.registerBlocks();
         GTNHPPItems.register();
         GTNHProcessingPlus.LOG.info("GT:NH Processing+ v{} loading", Tags.VERSION);

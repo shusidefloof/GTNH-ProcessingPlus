@@ -23,11 +23,13 @@ public class CSCRecipes {
         asuMode();
         co2LiquefactionMode();
         liquidGasVaporization();
+        try {
+            nobleGasVaporization();
+        } catch (IllegalStateException e) {
+            System.err.println("[GTNHPP] Skipping CSC noble gas recipes — missing fluid: " + e.getMessage());
+        }
     }
 
-    // =========================================================
-    // Casing — stainless frame backbone, invar plates, PTFE liner, copper heat exchange
-    // =========================================================
     private static void casingRecipe() {
         GTValues.RA.stdBuilder()
             .itemInputs(
@@ -43,45 +45,60 @@ public class CSCRecipes {
             .addTo(RecipeMaps.assemblerRecipes);
     }
 
-    // =========================================================
-    // ASU mode — circuit(1)
-    // Air is cooled in stages by Freon refrigeration cycle.
-    // N₂ boils off first (-196°C), then Ar (-186°C), then O₂ (-183°C).
-    // Freon partially recovers — ~500 mB lost per cycle to leakage.
-    // =========================================================
+    // circuit(1): Air → N₂ + O₂ + Ar via Freon refrigeration. ~500 mB Freon lost per cycle.
     private static void asuMode() {
         GTValues.RA.stdBuilder()
             .itemInputs(circuit(1))
-            .fluidInputs(fluid(Materials.Air, 50000), fluid(PrPMaterials.FreonR12, 1000))
+            .fluidInputs(fluid(Materials.Air, 50000), fluid(PrPMaterials.FreonR12, 5000))
             .fluidOutputs(
-                fluid(Materials.Nitrogen, 75000),
+                fluid(Materials.Nitrogen, 35000),
                 fluid(Materials.Oxygen, 10000),
                 fluid(PrPMaterials.LiquidArgon, 5000),
-                fluid(PrPMaterials.FreonR12, 4500)) // 500 mB consumed per cycle
+                fluid(PrPMaterials.FreonR12, 4500))
             .duration(4000)
             .eut(TierEU.RECIPE_HV)
             .addTo(GTNHPPRecipeMaps.sCSCRecipes);
     }
 
-    // =========================================================
-    // CO₂ liquefaction mode — circuit(2)
-    // CO₂ compressed and cooled through Freon heat exchangers.
-    // Less deep-cold than ASU — lower EU, less Freon loss.
-    // =========================================================
+    // circuit(2): CO₂ → Liquid CO₂ via Freon heat exchangers. ~150 mB Freon lost per cycle.
     private static void co2LiquefactionMode() {
         GTValues.RA.stdBuilder()
             .itemInputs(circuit(2))
             .fluidInputs(fluid(Materials.CarbonDioxide, 10000), fluid(PrPMaterials.FreonR12, 1000))
-            .fluidOutputs(fluid(PrPMaterials.LiquidCO2, 9000), fluid(PrPMaterials.FreonR12, 850)) // 150 mB consumed per
-                                                                                                  // cycle
+            .fluidOutputs(fluid(PrPMaterials.LiquidCO2, 9000), fluid(PrPMaterials.FreonR12, 850))
             .duration(600)
             .eut(TierEU.RECIPE_HV)
             .addTo(GTNHPPRecipeMaps.sCSCRecipes);
     }
 
-    // =========================================================
-    // Liquid gas → gas (Fluid Heater — passive warming, no reagents)
-    // =========================================================
+    // circuits(3-5): Noble gas extraction — tiered air volumes, escalating Freon cost
+    private static void nobleGasVaporization() {
+        GTValues.RA.stdBuilder()
+            .itemInputs(circuit(3))
+            .fluidInputs(fluid(Materials.Air, 500000), fluid(PrPMaterials.FreonR12, 5000))
+            .fluidOutputs(fluid("neon", 700), fluid(PrPMaterials.FreonR12, 4500))
+            .duration(8000)
+            .eut(TierEU.RECIPE_HV)
+            .addTo(GTNHPPRecipeMaps.sCSCRecipes);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(circuit(4))
+            .fluidInputs(fluid(Materials.Air, 2000000), fluid(PrPMaterials.FreonR12, 10000))
+            .fluidOutputs(fluid("krypton", 425), fluid(PrPMaterials.FreonR12, 9500))
+            .duration(20000)
+            .eut(TierEU.RECIPE_HV)
+            .addTo(GTNHPPRecipeMaps.sCSCRecipes);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(circuit(5))
+            .fluidInputs(fluid(Materials.Air, 10000000), fluid(PrPMaterials.FreonR12, 40000))
+            .fluidOutputs(fluid("xenon", 250), fluid(PrPMaterials.FreonR12, 38000))
+            .duration(80000)
+            .eut(TierEU.RECIPE_HV)
+            .addTo(GTNHPPRecipeMaps.sCSCRecipes);
+    }
+
+    // Liquid gas → gas in Fluid Heater (passive warming, no reagents)
     private static void liquidGasVaporization() {
         GTValues.RA.stdBuilder()
             .fluidInputs(fluid(PrPMaterials.LiquidArgon, 1000))

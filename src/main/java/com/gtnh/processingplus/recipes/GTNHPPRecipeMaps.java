@@ -103,23 +103,5 @@ public class GTNHPPRecipeMaps {
         .maxIO(4, 2, 4, 2)
         .build();
 
-    /**
-     * Forge of the Gods stub — TODO: wire to existing FotG recipe maps at UMV.
-     * Circuit discriminates between Helioflare(1), Heliothermal(2), Heliofusion(3), Helioflux(4) modules.
-     * Confirm FotG recipe map names with user before shipping.
-     */
-    public static final RecipeMap<RecipeMapBackend> sFotGRecipes = RecipeMapBuilder
-        .of("gtnhpp.recipe.fotg")
-        .maxIO(4, 2, 4, 2)
-        .build();
-
-    /**
-     * Beamcrafter — high-energy photon beam processing (UEV tier).
-     * TODO: wire to actual Beamcrafter recipe map if GoodGenerator exposes one.
-     */
-    public static final RecipeMap<RecipeMapBackend> sBeamcrafterRecipes = RecipeMapBuilder
-        .of("gtnhpp.recipe.beamcrafter")
-        .maxIO(4, 2, 2, 2)
-        .build();
     // @formatter:on
 }

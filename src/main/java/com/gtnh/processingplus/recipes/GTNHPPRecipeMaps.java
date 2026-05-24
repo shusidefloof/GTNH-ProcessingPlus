@@ -70,7 +70,7 @@ public class GTNHPPRecipeMaps {
     /** Spectral Photolithography Chamber — light-isolated synthesis of photoresist chemistry, EV+. */
     public static final RecipeMap<RecipeMapBackend> sSPCRecipes = RecipeMapBuilder
         .of("gtnhpp.recipe.spc")
-        .maxIO(4, 2, 2, 2)
+        .maxIO(6, 2, 3, 2)
         .build();
 
     /** Cryogenic Separation Column — circuit(1) = ASU, circuit(2) = CO₂ liquefaction. */

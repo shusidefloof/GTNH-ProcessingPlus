@@ -43,7 +43,7 @@ public class CryoUpgradeRecipes {
     private static void hbnBlendingCryo() {
         GTValues.RA.stdBuilder()
             .itemInputs(dust(PrPMaterials.CrudeHBN, 4), dust(Materials.Yttrium, 16), circuit(11))
-            .fluidInputs(fluid(PrPMaterials.LiquidNitrogen, 2000), fluid(PrPMaterials.LiquidArgon, 1000))
+            .fluidInputs(fluid(Materials.Nitrogen, 2000), fluid(PrPMaterials.LiquidArgon, 1000))
             .itemOutputs(dust(PrPMaterials.HBNPowderBlend, 10))
             .fluidOutputs(fluid(Materials.NitricOxide, 3000), fluid(Materials.Oxygen, 1500))
             .duration(480)
@@ -61,7 +61,7 @@ public class CryoUpgradeRecipes {
         GTValues.RA.stdBuilder()
             .itemInputs(dust(PrPMaterials.HBNPowderBlend, 32), circuit(11))
             .fluidInputs(
-                fluid(PrPMaterials.LiquidNitrogen, 16000),
+                fluid(Materials.Nitrogen, 16000),
                 fluid(PrPMaterials.LiquidArgon, 4000),
                 fluid("oganesson", 288))
             .itemOutputs(dust(PrPMaterials.HexagonalBoronNitride, 20))

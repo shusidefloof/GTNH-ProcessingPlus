@@ -39,13 +39,10 @@ import gregtech.api.render.TextureFactory;
 import gregtech.api.util.MultiblockTooltipBuilder;
 
 /**
- * Basic Oxygen Furnace — 3×5×3 converter vessel.
+ * Basic Oxygen Furnace 3×5×3
  * Blows liquid oxygen through molten iron to rapidly decarburize and convert it to steel.
  * Three modes via integrated circuit:
- * circuit(1) = Standard: Iron × 8 + LOX 2000 → Steel × 8 + CO₂
- * circuit(2) = Limed: Iron × 8 + LOX 2000 + Calcium × 2 → Steel × 10 + CO₂ (flux improves yield)
- * circuit(3) = Bulk: Iron × 16 + LOX 4000 → Steel × 16 + CO₂ (double batch)
- * Requires Liquid Oxygen from the Cryogenic Separation Column.
+ * Requires Liquid Oxygen
  */
 public class MTE_BOF extends MTEExtendedPowerMultiBlockBase<MTE_BOF> implements ISurvivalConstructable {
 

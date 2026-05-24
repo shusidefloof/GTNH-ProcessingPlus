@@ -41,8 +41,6 @@ import gregtech.api.util.MultiblockTooltipBuilder;
 /**
  * Cryogenic Separation Column — 3×5×3 tall column structure.
  * Two modes via integrated circuit:
- * circuit(1) = ASU: Air → Liquid N₂ + Liquid O₂ + Liquid Ar + Freon recovery
- * circuit(2) = CO₂ liquefaction: CO₂ → Liquid CO₂ + Freon recovery
  * Requires continuous Freon R-12 input as refrigerant. ~200 mB lost per ASU cycle.
  */
 public class MTE_CSC extends MTEExtendedPowerMultiBlockBase<MTE_CSC> implements ISurvivalConstructable {
@@ -127,6 +125,11 @@ public class MTE_CSC extends MTEExtendedPowerMultiBlockBase<MTE_CSC> implements 
     }
 
     @Override
+    public int getMaxParallelRecipes() {
+        return 8;
+    }
+
+    @Override
     public RecipeMap<?> getRecipeMap() {
         return GTNHPPRecipeMaps.sCSCRecipes;
     }
@@ -171,7 +174,7 @@ public class MTE_CSC extends MTEExtendedPowerMultiBlockBase<MTE_CSC> implements 
         tt.addMachineType("Cryogenic Separation Column")
             .addInfo("Liquefies and separates gases via Freon R-12 refrigeration.")
             .addInfo(EnumChatFormatting.YELLOW + "circuit(1)" + EnumChatFormatting.GRAY + " — Air Separation Unit")
-            .addInfo("  Air → Liquid N₂ + Liquid O₂ + Liquid Ar | ~200 mB Freon lost per cycle")
+            .addInfo("  Air → Liquid N₂ + Liquid O₂ + Liquid Ar | ~500 mB Freon lost per cycle")
             .addInfo(EnumChatFormatting.YELLOW + "circuit(2)" + EnumChatFormatting.GRAY + " — CO₂ Liquefaction")
             .addInfo("  CO₂ → Liquid CO₂ | ~150 mB Freon lost per cycle")
             .addInfo(EnumChatFormatting.RED + "Requires continuous Freon R-12 input.")

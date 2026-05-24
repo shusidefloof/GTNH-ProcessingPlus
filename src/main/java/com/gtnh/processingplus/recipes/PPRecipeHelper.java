@@ -45,6 +45,10 @@ public class PPRecipeHelper {
         return GTOreDictUnificator.get(OrePrefixes.plate, m, amount);
     }
 
+    public static ItemStack foil(Materials m, int amount) {
+        return GTOreDictUnificator.get(OrePrefixes.foil, m, amount);
+    }
+
     public static ItemStack wireFine(Materials m, int amount) {
         return GTOreDictUnificator.get(OrePrefixes.wireFine, m, amount);
     }

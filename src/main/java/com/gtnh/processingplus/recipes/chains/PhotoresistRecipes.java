@@ -59,6 +59,9 @@ public class PhotoresistRecipes {
         luvPGME();
         luvPGMEA();
         luvLuVBlend();
+
+        // Byproduct recycling
+        luvAmmoniumBisulfateCracking();
     }
 
     // =========================================================
@@ -530,6 +533,20 @@ public class PhotoresistRecipes {
             .duration(60)
             .eut(TierEU.RECIPE_EV)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+    }
+
+    // =========================================================
+    // LuV — Ammonium Bisulfate cracking (byproduct of MethacrylicAcid step)
+    // (NH₄)HSO₄ → NH₃ + H₂SO₄ at ~350°C
+    // 2 dust per MethacrylicAcid batch → recovers 1000 mB H₂SO₄ + 1000 mB NH₃
+    // =========================================================
+    private static void luvAmmoniumBisulfateCracking() {
+        GTValues.RA.stdBuilder()
+            .itemInputs(dust(PrPMaterials.AmmoniumBisulfate, 2))
+            .fluidOutputs(fluid(Materials.SulfuricAcid, 1000), fluid(Materials.Ammonia, 1000))
+            .duration(200)
+            .eut(TierEU.RECIPE_EV)
+            .addTo(RecipeMaps.distillationTowerRecipes);
     }
 
     // =========================================================

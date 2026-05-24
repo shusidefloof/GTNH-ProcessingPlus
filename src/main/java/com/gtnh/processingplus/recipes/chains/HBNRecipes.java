@@ -19,6 +19,7 @@ public class HBNRecipes {
         stepAlt_BCl3Shortcut();
         step4_PowderBlending();
         step5_Sintering();
+        step6_WasteRecovery();
     }
 
     // =========================================================
@@ -100,5 +101,20 @@ public class HBNRecipes {
             .duration(600)
             .eut(TierEU.RECIPE_UHV)
             .addTo(GTNHPPRecipeMaps.sHPSFRecipes);
+    }
+
+    // =========================================================
+    // 6. BN Nitride Waste recovery (HTRF)
+    // Impure BN byproduct from nitriding re-annealed under N₂.
+    // 4 waste → 1 CrudeHBN; low yield reflects residual C/O contamination.
+    // =========================================================
+    private static void step6_WasteRecovery() {
+        GTValues.RA.stdBuilder()
+            .itemInputs(dust(PrPMaterials.BNitrideWaste, 4), circuit(1))
+            .fluidInputs(fluid(Materials.Nitrogen, 2000))
+            .itemOutputs(dust(PrPMaterials.CrudeHBN, 1))
+            .duration(400)
+            .eut(TierEU.RECIPE_UV)
+            .addTo(GTNHPPRecipeMaps.sHTRFRecipes);
     }
 }

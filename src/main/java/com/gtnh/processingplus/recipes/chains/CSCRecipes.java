@@ -37,7 +37,7 @@ public class CSCRecipes {
                 plate(Materials.Polytetrafluoroethylene, 2),
                 plate(Materials.Copper, 1),
                 circuit(10))
-            .itemOutputs(new ItemStack(GTNHPPBlocks.CASINGS, 4, BlockGTNHPPCasings.CSC_CASING))
+            .itemOutputs(new ItemStack(GTNHPPBlocks.CASINGS, 1, BlockGTNHPPCasings.CSC_CASING))
             .duration(400)
             .eut(TierEU.RECIPE_HV)
             .addTo(RecipeMaps.assemblerRecipes);
@@ -47,18 +47,18 @@ public class CSCRecipes {
     // ASU mode — circuit(1)
     // Air is cooled in stages by Freon refrigeration cycle.
     // N₂ boils off first (-196°C), then Ar (-186°C), then O₂ (-183°C).
-    // Freon partially recovers — ~200 mB lost per cycle to leakage.
+    // Freon partially recovers — ~500 mB lost per cycle to leakage.
     // =========================================================
     private static void asuMode() {
         GTValues.RA.stdBuilder()
             .itemInputs(circuit(1))
-            .fluidInputs(fluid(Materials.Air, 10000), fluid(PrPMaterials.FreonR12, 1000))
+            .fluidInputs(fluid(Materials.Air, 50000), fluid(PrPMaterials.FreonR12, 1000))
             .fluidOutputs(
-                fluid(PrPMaterials.LiquidNitrogen, 7500),
-                fluid(Materials.LiquidOxygen, 2000),
-                fluid(PrPMaterials.LiquidArgon, 100),
-                fluid(PrPMaterials.FreonR12, 800)) // 200 mB consumed per cycle
-            .duration(800)
+                fluid(Materials.Nitrogen, 75000),
+                fluid(Materials.Oxygen, 10000),
+                fluid(PrPMaterials.LiquidArgon, 5000),
+                fluid(PrPMaterials.FreonR12, 4500)) // 500 mB consumed per cycle
+            .duration(4000)
             .eut(TierEU.RECIPE_HV)
             .addTo(GTNHPPRecipeMaps.sCSCRecipes);
     }
@@ -83,20 +83,6 @@ public class CSCRecipes {
     // Liquid gas → gas (Fluid Heater — passive warming, no reagents)
     // =========================================================
     private static void liquidGasVaporization() {
-        GTValues.RA.stdBuilder()
-            .fluidInputs(fluid(PrPMaterials.LiquidNitrogen, 1000))
-            .fluidOutputs(fluid(Materials.Nitrogen, 1000))
-            .duration(40)
-            .eut(TierEU.RECIPE_LV)
-            .addTo(RecipeMaps.fluidHeaterRecipes);
-
-        GTValues.RA.stdBuilder()
-            .fluidInputs(fluid(Materials.LiquidOxygen, 1000))
-            .fluidOutputs(fluid(Materials.Oxygen, 1000))
-            .duration(40)
-            .eut(TierEU.RECIPE_LV)
-            .addTo(RecipeMaps.fluidHeaterRecipes);
-
         GTValues.RA.stdBuilder()
             .fluidInputs(fluid(PrPMaterials.LiquidArgon, 1000))
             .fluidOutputs(fluid(Materials.Argon, 1000))

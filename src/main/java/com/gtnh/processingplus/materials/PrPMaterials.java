@@ -314,7 +314,6 @@ public class PrPMaterials implements Runnable {
     // =========================
     // CSC OUTPUTS
     // =========================
-    public static Werkstoff LiquidNitrogen;
     public static Werkstoff LiquidArgon;
     public static Werkstoff LiquidCO2;
 
@@ -1972,16 +1971,6 @@ public class PrPMaterials implements Runnable {
         // -------------------------
         // CSC OUTPUTS
         // -------------------------
-        LiquidNitrogen = register(
-            new Werkstoff(
-                rgb(190, 215, 240),
-                "Liquid Nitrogen",
-                subscriptNumbers("N2(l)"),
-                new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
-                fluidFeatures(),
-                id(),
-                TextureSet.SET_FLUID));
 
         LiquidArgon = register(
             new Werkstoff(

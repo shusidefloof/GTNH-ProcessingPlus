@@ -1,4 +1,4 @@
-package com.gtnh.processingplus.machines;
+package com.gtnh.processingplus.machines.spc;
 
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 

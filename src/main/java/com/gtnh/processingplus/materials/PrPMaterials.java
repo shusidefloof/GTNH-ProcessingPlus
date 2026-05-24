@@ -77,6 +77,11 @@ public class PrPMaterials implements Runnable {
     }
 
     // =========================
+    // BOF slag
+    // =========================
+    public static Werkstoff BOFSlag;
+
+    // =========================
     // POLYMERS & SOLIDS
     // =========================
     public static Werkstoff Nylon66;
@@ -2035,6 +2040,16 @@ public class PrPMaterials implements Runnable {
                 rgb(195, 225, 248),
                 "Aerogel Insulation Panel",
                 subscriptNumbers("SiO2/(C)n"),
+                new Werkstoff.Stats(),
+                Werkstoff.Types.MIXTURE,
+                ceramicFeatures(),
+                id(),
+                TextureSet.SET_DULL));
+        BOFSlag = register(
+            new Werkstoff(
+                rgb(195, 225, 248),
+                "BOF Slag",
+                subscriptNumbers("??Fe50C??"),
                 new Werkstoff.Stats(),
                 Werkstoff.Types.MIXTURE,
                 ceramicFeatures(),

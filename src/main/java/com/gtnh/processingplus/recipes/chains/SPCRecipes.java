@@ -5,8 +5,8 @@ import static com.gtnh.processingplus.recipes.PPRecipeHelper.*;
 import java.util.Collection;
 
 import com.gtnh.processingplus.items.GTNHPPItems;
-import com.gtnh.processingplus.machines.MachineType;
-import com.gtnh.processingplus.machines.SPCRecipeData;
+import com.gtnh.processingplus.machines.spc.MachineType;
+import com.gtnh.processingplus.machines.spc.SPCRecipeData;
 import com.gtnh.processingplus.materials.PrPMaterials;
 import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
 

@@ -1,27 +1,27 @@
 package com.gtnh.processingplus.recipes;
 
-import com.gtnh.processingplus.recipes.chains.AerogelRecipes;
-import com.gtnh.processingplus.recipes.chains.BOFRecipes;
 import com.gtnh.processingplus.recipes.chains.CRVRecipes;
-import com.gtnh.processingplus.recipes.chains.CSCRecipes;
-import com.gtnh.processingplus.recipes.chains.CarbonFiberRecipes;
-import com.gtnh.processingplus.recipes.chains.CoalFlyashRecipes;
-import com.gtnh.processingplus.recipes.chains.CryoUpgradeRecipes;
-import com.gtnh.processingplus.recipes.chains.DiphenylEtherRecipes;
-import com.gtnh.processingplus.recipes.chains.FreonRecipes;
-import com.gtnh.processingplus.recipes.chains.HBNRecipes;
-import com.gtnh.processingplus.recipes.chains.KaptonRecipes;
-import com.gtnh.processingplus.recipes.chains.Nylon66Recipes;
-import com.gtnh.processingplus.recipes.chains.PLARecipes;
-import com.gtnh.processingplus.recipes.chains.PhotoresistRecipes;
 import com.gtnh.processingplus.recipes.chains.SPCRecipes;
-import com.gtnh.processingplus.recipes.chains.SiCRecipes;
-import com.gtnh.processingplus.recipes.chains.UEVPhotoresistRecipes;
-import com.gtnh.processingplus.recipes.chains.UHVPhotoresistRecipes;
-import com.gtnh.processingplus.recipes.chains.UIVPhotoresistRecipes;
-import com.gtnh.processingplus.recipes.chains.UMVPhotoresistRecipes;
-import com.gtnh.processingplus.recipes.chains.UVPhotoresistRecipes;
-import com.gtnh.processingplus.recipes.chains.ZPMPhotoresistRecipes;
+import com.gtnh.processingplus.recipes.chains.infrastructure.BOFRecipes;
+import com.gtnh.processingplus.recipes.chains.infrastructure.CSCRecipes;
+import com.gtnh.processingplus.recipes.chains.infrastructure.CryoUpgradeRecipes;
+import com.gtnh.processingplus.recipes.chains.infrastructure.FreonRecipes;
+import com.gtnh.processingplus.recipes.chains.materials.AerogelRecipes;
+import com.gtnh.processingplus.recipes.chains.materials.CarbonFiberRecipes;
+import com.gtnh.processingplus.recipes.chains.materials.CoalFlyashRecipes;
+import com.gtnh.processingplus.recipes.chains.materials.DiphenylEtherRecipes;
+import com.gtnh.processingplus.recipes.chains.materials.HBNRecipes;
+import com.gtnh.processingplus.recipes.chains.materials.KaptonRecipes;
+import com.gtnh.processingplus.recipes.chains.materials.Nylon66Recipes;
+import com.gtnh.processingplus.recipes.chains.materials.PLARecipes;
+import com.gtnh.processingplus.recipes.chains.materials.SiCRecipes;
+import com.gtnh.processingplus.recipes.chains.photoresist.PhotoresistRecipes;
+import com.gtnh.processingplus.recipes.chains.photoresist.UEVPhotoresistRecipes;
+import com.gtnh.processingplus.recipes.chains.photoresist.UHVPhotoresistRecipes;
+import com.gtnh.processingplus.recipes.chains.photoresist.UIVPhotoresistRecipes;
+import com.gtnh.processingplus.recipes.chains.photoresist.UMVPhotoresistRecipes;
+import com.gtnh.processingplus.recipes.chains.photoresist.UVPhotoresistRecipes;
+import com.gtnh.processingplus.recipes.chains.photoresist.ZPMPhotoresistRecipes;
 
 public class PrPlusRecipes {
 

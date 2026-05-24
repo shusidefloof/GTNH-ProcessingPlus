@@ -1,4 +1,4 @@
-package com.gtnh.processingplus.recipes.chains;
+package com.gtnh.processingplus.recipes.chains.photoresist;
 
 import static com.gtnh.processingplus.recipes.PPRecipeHelper.*;
 

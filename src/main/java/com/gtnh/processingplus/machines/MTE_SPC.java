@@ -34,6 +34,9 @@ import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.gtnh.processingplus.blocks.BlockGTNHPPCasings;
 import com.gtnh.processingplus.blocks.GTNHPPBlocks;
 import com.gtnh.processingplus.items.GTNHPPItems;
+import com.gtnh.processingplus.machines.spc.MachineType;
+import com.gtnh.processingplus.machines.spc.SPCRecipeData;
+import com.gtnh.processingplus.machines.spc.StationEntry;
 import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
 
 import cpw.mods.fml.relauncher.Side;

@@ -1,4 +1,4 @@
-package com.gtnh.processingplus.recipes.chains;
+package com.gtnh.processingplus.recipes.chains.infrastructure;
 
 import static com.gtnh.processingplus.recipes.PPRecipeHelper.*;
 
@@ -19,9 +19,9 @@ public class BOFRecipes {
 
     public static void init() {
         casingRecipe();
-        standardConversion();
         limedConversion();
-        bulkConversion();
+        limestoneConversion();
+        dolomiteConversion();
     }
 
     // =========================================================
@@ -42,30 +42,13 @@ public class BOFRecipes {
     }
 
     // =========================================================
-    // Mode 1 — Standard oxygen blowing (circuit 1)
-    // Iron + LOX → Steel + CO₂
-    // Same yield as EBF but uses liquid oxygen; faster cycle time.
-    // =========================================================
-    private static void standardConversion() {
-        GTValues.RA.stdBuilder()
-            .itemInputs(ingot(Materials.Iron, 8), circuit(1))
-            .fluidInputs(fluid(Materials.LiquidOxygen, 2000))
-            .itemOutputs(ingot(Materials.Steel, 8))
-            .fluidOutputs(fluid(Materials.CarbonDioxide, 1000))
-            .duration(300)
-            .eut(TierEU.RECIPE_HV)
-            .addTo(GTNHPPRecipeMaps.sBOFRecipes);
-    }
-
-    // =========================================================
     // Mode 2 — Calcium-fluxed blowing (circuit 2)
-    // Calcium reacts with sulfur/phosphorus impurities in the melt,
-    // allowing a cleaner high-carbon conversion — +2 extra steel per batch.
+    // Pure calcium flux. Most efficient — no carbonate overhead.
     // =========================================================
     private static void limedConversion() {
         GTValues.RA.stdBuilder()
             .itemInputs(ingot(Materials.Iron, 8), dust(Materials.Calcium, 2), circuit(2))
-            .fluidInputs(fluid(Materials.LiquidOxygen, 2000))
+            .fluidInputs(fluid(Materials.Oxygen, 2000))
             .itemOutputs(ingot(Materials.Steel, 10))
             .fluidOutputs(fluid(Materials.CarbonDioxide, 800))
             .duration(280)
@@ -74,17 +57,34 @@ public class BOFRecipes {
     }
 
     // =========================================================
-    // Mode 3 — Bulk throughput (circuit 3)
-    // Double-batch mode: scales up without additional overhead.
-    // Useful for mass-producing steel late in HV.
+    // Mode 2 — Limestone-fluxed blowing (circuit 2)
+    // Calcite (CaCO3) decomposes in the furnace to CaO + CO2.
+    // Needs more flux than pure calcium; extra CO2 from decomposition.
     // =========================================================
-    private static void bulkConversion() {
+    private static void limestoneConversion() {
         GTValues.RA.stdBuilder()
-            .itemInputs(ingot(Materials.Iron, 16), circuit(3))
-            .fluidInputs(fluid(Materials.LiquidOxygen, 4000))
-            .itemOutputs(ingot(Materials.Steel, 16))
-            .fluidOutputs(fluid(Materials.CarbonDioxide, 2000))
-            .duration(500)
+            .itemInputs(ingot(Materials.Iron, 8), dust(Materials.Calcite, 4), circuit(2))
+            .fluidInputs(fluid(Materials.Oxygen, 2000))
+            .itemOutputs(ingot(Materials.Steel, 10))
+            .fluidOutputs(fluid(Materials.CarbonDioxide, 1600))
+            .duration(320)
+            .eut(TierEU.RECIPE_HV)
+            .addTo(GTNHPPRecipeMaps.sBOFRecipes);
+    }
+
+    // =========================================================
+    // Mode 2 — Dolomite-fluxed blowing (circuit 2)
+    // Dolomite (CaMg(CO3)2) is half calcium by mole — needs twice as much.
+    // The MgO residue protects the furnace lining in real BOF practice.
+    // Most input, most CO2, but dolomite is the cheapest source.
+    // =========================================================
+    private static void dolomiteConversion() {
+        GTValues.RA.stdBuilder()
+            .itemInputs(ingot(Materials.Iron, 8), dust(Materials.Dolomite, 8), circuit(2))
+            .fluidInputs(fluid(Materials.Oxygen, 2000))
+            .itemOutputs(ingot(Materials.Steel, 10))
+            .fluidOutputs(fluid(Materials.CarbonDioxide, 1600), fluid(Materials.CarbonMonoxide, 400))
+            .duration(360)
             .eut(TierEU.RECIPE_HV)
             .addTo(GTNHPPRecipeMaps.sBOFRecipes);
     }

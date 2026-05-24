@@ -103,5 +103,18 @@ public class GTNHPPRecipeMaps {
         .maxIO(4, 2, 4, 2)
         .build();
 
+    // TODO: wire to actual external-mod recipe maps when dependencies are confirmed
+    /** Forge of the Gods — placeholder until FotG exposes a recipe map. */
+    public static final RecipeMap<RecipeMapBackend> sFotGRecipes = RecipeMapBuilder
+        .of("gtnhpp.recipe.fotg")
+        .maxIO(4, 2, 4, 2)
+        .build();
+
+    /** Beamcrafter — placeholder until GoodGenerator exposes a recipe map. */
+    public static final RecipeMap<RecipeMapBackend> sBeamcrafterRecipes = RecipeMapBuilder
+        .of("gtnhpp.recipe.beamcrafter")
+        .maxIO(2, 1, 2, 1)
+        .build();
+
     // @formatter:on
 }

@@ -6,6 +6,7 @@ import com.gtnh.processingplus.materials.PrPMaterials;
 import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
 
 import gregtech.api.enums.GTValues;
+import gregtech.api.enums.ItemList;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.TierEU;
 import gregtech.api.recipe.RecipeMaps;
@@ -32,8 +33,8 @@ public class SiCRecipes {
             .fluidOutputs(fluid(Materials.CarbonMonoxide, 2000))
             .itemOutputs(dust(PrPMaterials.CrudeSiCPowder, 2))
             .duration(400)
-            .eut(TierEU.RECIPE_UV)
-            .addTo(GTNHPPRecipeMaps.sHTRFRecipes);
+            .eut(TierEU.RECIPE_LV)
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 
     // =========================================================
@@ -48,7 +49,7 @@ public class SiCRecipes {
             .fluidOutputs(fluid(Materials.HydrochloricAcid, 4000))
             .itemOutputs(dust(PrPMaterials.PurifiedSiCPowder, 2))
             .duration(800)
-            .eut(TierEU.RECIPE_UV)
+            .eut(TierEU.RECIPE_IV)
             .addTo(GTNHPPRecipeMaps.sHTRFRecipes);
     }
 
@@ -77,8 +78,8 @@ public class SiCRecipes {
             .fluidInputs(fluid(Materials.Argon, 500))
             .itemOutputs(dust(PrPMaterials.DenseSiCCompact, 2))
             .duration(600)
-            .eut(TierEU.RECIPE_UV)
-            .addTo(GTNHPPRecipeMaps.sHPSFRecipes);
+            .eut(TierEU.RECIPE_MV)
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 
     // =========================================================
@@ -87,11 +88,12 @@ public class SiCRecipes {
     private static void step4_Machining() {
 
         GTValues.RA.stdBuilder()
-            .itemInputs(dust(PrPMaterials.DenseSiCCompact, 1))
-            .itemOutputs(plate(PrPMaterials.SinteredSiliconCarbide, 2), dust(PrPMaterials.SinteredSiliconCarbide, 2))
+            .itemInputs(dust(PrPMaterials.DenseSiCCompact, 1),
+                ItemList.Shape_Mold_Plate.get(0))
+            .itemOutputs(plate(PrPMaterials.SinteredSiliconCarbide, 4))
             .duration(200)
             .eut(TierEU.RECIPE_EV)
-            .addTo(RecipeMaps.latheRecipes);
+            .addTo(RecipeMaps.formingPressRecipes);
     }
 
     // =========================================================

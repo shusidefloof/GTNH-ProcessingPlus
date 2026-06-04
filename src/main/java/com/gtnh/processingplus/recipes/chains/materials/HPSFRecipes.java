@@ -37,8 +37,8 @@ public class HPSFRecipes {
             .itemInputs(
                 new ItemStack(GTNHPPBlocks.CASINGS, 4, BlockGTNHPPCasings.HPSF_CASING),
                 GTOreDictUnificator.get(OrePrefixes.circuit, Materials.IV, 4),
-                ItemList.Electric_Pump_IV.get(2),
-                ItemList.Field_Generator_IV.get(1))
+                ItemList.Electric_Pump_EV.get(2),
+                ItemList.Field_Generator_EV.get(1))
             .fluidInputs(molten(Materials.SolderingAlloy, 1152))
             .itemOutputs(GTNHPPBlocks.HPSF.getStackForm(1))
             .duration(800)
@@ -98,7 +98,7 @@ public class HPSFRecipes {
     private static void sinteringPath_Compact() {
         GTValues.RA.stdBuilder()
             .itemInputs(dust(PrPMaterials.RHEAPowderBlend, 4))
-            .itemOutputs(dust(PrPMaterials.RHEASinteringCompact, 1))
+            .itemOutputs(dust(PrPMaterials.RHEASinteringCompact, 2))
             .duration(200)
             .eut(TierEU.RECIPE_EV)
             .addTo(RecipeMaps.compressorRecipes);

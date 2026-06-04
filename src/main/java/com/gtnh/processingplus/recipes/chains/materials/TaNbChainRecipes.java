@@ -55,11 +55,11 @@ public class TaNbChainRecipes {
     // Aluminothermic: Nb₂O₅ + (10/3)Al → 2Nb + (5/3)Al₂O₃
     private static void pyrochlore_Reduce() {
         GTValues.RA.stdBuilder()
-            .itemInputs(dust(PrPMaterials.NiobiumPentoxide, 1), dust(Materials.Aluminium, 3))
-            .itemOutputs(ingot(Materials.Niobium, 2), item("dustAlumina", 2))
-            .duration(600)
+            .itemInputs(dust(PrPMaterials.NiobiumPentoxide, 3), dust(Materials.Aluminium, 4))
+            .itemOutputs(ingot(Materials.Niobium, 6), item("dustAlumina", 10))
+            .duration(90*20)
             .eut(TierEU.RECIPE_HV)
-            .metadata(GTRecipeConstants.COIL_HEAT, 2100)
+            .metadata(GTRecipeConstants.COIL_HEAT, 2750)
             .addTo(RecipeMaps.blastFurnaceRecipes);
     }
 
@@ -73,7 +73,7 @@ public class TaNbChainRecipes {
 
     private static void tantalite_HFLeach() {
         GTValues.RA.stdBuilder()
-            .itemInputs(item("dustTantalite", 4), circuit(2))
+            .itemInputs(item("dustTantalite", 4), item("dustPyrochlore", 4), circuit(2))
             .fluidInputs(fluid(Materials.HydrofluoricAcid, 2000))
             .fluidOutputs(fluid(PrPMaterials.MixedTaNbFluorideSolution, 2000))
             .duration(400)
@@ -96,7 +96,7 @@ public class TaNbChainRecipes {
     private static void tantalite_Strip() {
         GTValues.RA.stdBuilder()
             .fluidInputs(fluid(PrPMaterials.TaLoadedMIBK, 1000), fluid(Materials.Water, 500))
-            .itemOutputs(dust(PrPMaterials.TantalumPentoxide, 1))
+            .itemOutputs(dust(PrPMaterials.TantalumPentoxide, 4))
             .fluidOutputs(fluid(PrPMaterials.MIBK, 1000))
             .duration(300)
             .eut(TierEU.RECIPE_EV)
@@ -106,11 +106,11 @@ public class TaNbChainRecipes {
     // Aluminothermic: Ta₂O₅ + (10/3)Al → 2Ta + (5/3)Al₂O₃
     private static void tantalite_Reduce() {
         GTValues.RA.stdBuilder()
-            .itemInputs(dust(PrPMaterials.TantalumPentoxide, 1), dust(Materials.Aluminium, 3))
-            .itemOutputs(ingot(Materials.Tantalum, 2), item("dustAlumina", 2))
-            .duration(600)
+            .itemInputs(dust(PrPMaterials.TantalumPentoxide, 3), dust(Materials.Aluminium, 4))
+            .itemOutputs(ingot(Materials.Tantalum, 6), item("dustAlumina", 10))
+            .duration(90 * 20)
             .eut(TierEU.RECIPE_HV)
-            .metadata(GTRecipeConstants.COIL_HEAT, 2100)
+            .metadata(GTRecipeConstants.COIL_HEAT, 2400)
             .addTo(RecipeMaps.blastFurnaceRecipes);
     }
 

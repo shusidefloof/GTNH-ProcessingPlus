@@ -9,8 +9,11 @@ import com.gtnh.processingplus.machines.MTE_SPC;
 import com.gtnh.processingplus.machines.MTE_SPCBioModule;
 import com.gtnh.processingplus.machines.MTE_SPCCryoModule;
 import com.gtnh.processingplus.machines.MTE_SPCQuantumModule;
+import com.gtnh.processingplus.materials.PrPMaterials;
+import com.gtnh.processingplus.materials.WerkstoffCableLoader;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import gregtech.api.enums.TierEU;
 
 public class GTNHPPBlocks {
 
@@ -21,6 +24,9 @@ public class GTNHPPBlocks {
 
     /** HPSF controller instance — kept so its craft recipe can reference the controller stack. */
     public static MTE_HPSF HPSF;
+    private static final int OFFSET = 31_517;
+    private static int nextId = OFFSET;
+
 
     /** Call from CommonProxy.preInit — registers block before item/machine init. */
     public static void registerBlocks() {
@@ -45,5 +51,14 @@ public class GTNHPPBlocks {
         new MTE_SPCCryoModule(31513, "gtnhpp.spc_cryo_module", "Cryo-Stabilization Module").getStackForm(1);
         new MTE_SPCQuantumModule(31514, "gtnhpp.spc_quantum_module", "Quantum Alignment Module").getStackForm(1);
         // new MTE_PrimitiveAirIntake(31516, "gtnhpp.primitive_air_intake", "Primitive Air Intake").getStackForm(1);
+
+        // Unobtanium superconductor — lossless placeable wires + cables (ZPM); recipes auto-generated.
+        // Uses MTE IDs 31517-31528 (6 wires + 6 cables).
+        WerkstoffCableLoader
+            .register(PrPMaterials.Unobtanium, id(), 0L, 0L, 4L, TierEU.ZPM, TierEU.RECIPE_ZPM, 200, true);
+        WerkstoffCableLoader
+            .register(PrPMaterials.RefractoryHighEntropyAlloy, id(), 8,4, 6, TierEU.ZPM, TierEU.RECIPE_LV, 5*20, true);
     }
+    public static int id() {
+        return nextId += 12;}
 }

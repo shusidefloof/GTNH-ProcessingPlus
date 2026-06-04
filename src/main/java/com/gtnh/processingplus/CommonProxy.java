@@ -60,7 +60,7 @@ public class CommonProxy {
         int removed = 0;
         for (ItemStack target : targets) {
             List<GTRecipe> toRemove = new ArrayList<>();
-            for (GTRecipe recipe : RecipeMaps.assemblerRecipes.getAllRecipes()) {
+            for (GTRecipe recipe : RecipeMaps.chemicalReactorRecipes.getAllRecipes()) {
                 if (recipe.mOutputs == null || recipe.mOutputs.length == 0) continue;
                 ItemStack out = recipe.mOutputs[0];
                 if (out == null) continue;
@@ -68,7 +68,29 @@ public class CommonProxy {
                     toRemove.add(recipe);
                 }
             }
-            RecipeMaps.assemblerRecipes.getBackend()
+            for (GTRecipe recipe : RecipeMaps.multiblockChemicalReactorRecipes.getAllRecipes()) {
+                if (recipe.mOutputs == null || recipe.mOutputs.length == 0) continue;
+                ItemStack out = recipe.mOutputs[0];
+                if (out == null) continue;
+                if (out.getItem() == target.getItem() && out.getItemDamage() == target.getItemDamage()) {
+                    toRemove.add(recipe);
+                }
+            }
+            for (GTRecipe recipe : RecipeMaps.circuitAssemblerRecipes.getAllRecipes()) {
+                if (recipe.mOutputs == null || recipe.mOutputs.length == 0) continue;
+                ItemStack out = recipe.mOutputs[0];
+                if (out == null) continue;
+                if (out.getItem() == target.getItem() && out.getItemDamage() == target.getItemDamage()) {
+                    toRemove.add(recipe);
+                }
+            }
+            RecipeMaps.chemicalReactorRecipes.getBackend()
+                .removeRecipes(toRemove);
+            removed += toRemove.size();
+            RecipeMaps.multiblockChemicalReactorRecipes.getBackend()
+                .removeRecipes(toRemove);
+            removed += toRemove.size();
+            RecipeMaps.circuitAssemblerRecipes.getBackend()
                 .removeRecipes(toRemove);
             removed += toRemove.size();
         }

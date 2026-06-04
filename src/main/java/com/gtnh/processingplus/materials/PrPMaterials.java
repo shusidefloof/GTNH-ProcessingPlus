@@ -2112,12 +2112,17 @@ public class PrPMaterials implements Runnable {
                 "Vibranium",
                 "Vb",
                 new Werkstoff.Stats().setMeltingPoint(6301)
-                    .setBlastFurnace(true),
+                    .setBlastFurnace(true)
+                    .setDurOverride(1_200_000)
+                    .setSpeedOverride(14f)
+                    .setQualityOverride((byte) 6),
                 Werkstoff.Types.MATERIAL,
                 new Werkstoff.GenerationFeatures().onlyDust()
                     .addMolten()
                     .addMetalItems()
-                    .addSimpleMetalWorkingItems(),
+                    .addSimpleMetalWorkingItems()
+                    .addCraftingMetalWorkingItems()
+                    .addDoubleAndDensePlates(),
                 id(),
                 TextureSet.SET_CRYSTALLINE));
 
@@ -2127,11 +2132,16 @@ public class PrPMaterials implements Runnable {
                 "Unobtanium",
                 "Ub",
                 new Werkstoff.Stats().setMeltingPoint(7201)
-                    .setBlastFurnace(true),
+                    .setBlastFurnace(true)
+                    .setDurOverride(1_500_000)
+                    .setSpeedOverride(16f)
+                    .setQualityOverride((byte) 7),
                 Werkstoff.Types.MATERIAL,
                 new Werkstoff.GenerationFeatures().onlyDust()
+                    .addMolten()
                     .addMetalItems()
-                    .addSimpleMetalWorkingItems(),
+                    .addSimpleMetalWorkingItems()
+                    .addCraftingMetalWorkingItems(),
                 id(),
                 TextureSet.SET_SHINY));
 

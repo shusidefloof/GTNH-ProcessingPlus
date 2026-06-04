@@ -32,7 +32,6 @@ public class LuVExotics {
         vibDye();
         vibVibrantAdamantium();
         vibHotVibranium();
-        vibVibranium();
 
         // Unobtanium (9 steps) — SbF5 comes from GoodGenerator (fluid "antimony pentafluoride")
         unoFluorosulfuricAcid();
@@ -42,9 +41,9 @@ public class LuVExotics {
         unoCrystallize();
         unoLaserPurify();
         unoEuropiumChlorideRecovery();
-        unoCentrifuge();
+        unoThermalCentrifuge();
         unoClumps();
-        unoElectrolyze();
+        unoCentrifuge();
     }
 
     /** Run one recipe in isolation so a single missing material handle can't break the rest. */
@@ -117,19 +116,6 @@ public class LuVExotics {
                 .addTo(RecipeMaps.multiblockChemicalReactorRecipes));
     }
 
-    // 5. Vac Freezer — cool the hot ingot into the finished metal (explicit: Vibranium has no
-    // blast-furnace stats, so GT doesn't auto-generate this freezer recipe).
-    private static void vibVibranium() {
-        safe(
-            "vibranium ingot",
-            () -> GTValues.RA.stdBuilder()
-                .itemInputs(PrPMaterials.Vibranium.get(OrePrefixes.ingotHot, 1))
-                .itemOutputs(ingot(PrPMaterials.Vibranium, 1))
-                .duration(300)
-                .eut(TierEU.RECIPE_LuV)
-                .addTo(RecipeMaps.vacuumFreezerRecipes));
-    }
-
     // =========================================================
     // UNOBTANIUM
     // =========================================================
@@ -153,9 +139,7 @@ public class LuVExotics {
             "magic acid",
             () -> GTValues.RA.stdBuilder()
                 .itemInputs(circuit(1))
-                .fluidInputs(
-                    fluid(PrPMaterials.FluorosulfuricAcid, 1000),
-                    fluid("antimony pentafluoride", 1000))
+                .fluidInputs(fluid(PrPMaterials.FluorosulfuricAcid, 1000), fluid("antimony pentafluoride", 1000))
                 .fluidOutputs(fluid(PrPMaterials.MagicAcid, 1000))
                 .duration(200)
                 .eut(TierEU.RECIPE_IV)
@@ -169,7 +153,7 @@ public class LuVExotics {
             "unobtanium dissolution",
             () -> GTValues.RA.stdBuilder()
                 .itemInputs(GTNHPPItems.stack(GTNHPPItems.UNOBTANIUM_ORE_CONCENTRATE, 2))
-                .fluidInputs(fluid(PrPMaterials.MagicAcid, 500), fluid(Materials.DenseSuperheatedSteam, 8000))
+                .fluidInputs(fluid(PrPMaterials.MagicAcid, 500), fluid("ic2superheatedsteam", 8000))
                 .itemOutputs(dust(Materials.Endstone, 1))
                 .fluidOutputs(fluid(PrPMaterials.DirtyUnobtaniumSlurry, 900))
                 .duration(400)
@@ -233,14 +217,12 @@ public class LuVExotics {
     }
 
     // 7. Thermal Centrifuge — shatter purified crystals into shards
-    private static void unoCentrifuge() {
+    private static void unoThermalCentrifuge() {
         safe(
             "unobtanium centrifuge",
             () -> GTValues.RA.stdBuilder()
                 .itemInputs(GTNHPPItems.stack(GTNHPPItems.PURIFIED_UNOBTANIUM_CRYSTAL, 2))
-                .itemOutputs(
-                    GTNHPPItems.stack(GTNHPPItems.PURIFIED_UNOBTANIUM_SHARD, 4),
-                    dustSmall(PrPMaterials.Unobtanium, 1))
+                .itemOutputs(GTNHPPItems.stack(GTNHPPItems.PURIFIED_UNOBTANIUM_SHARD, 4))
                 .duration(400)
                 .eut(TierEU.RECIPE_LuV)
                 .addTo(RecipeMaps.thermalCentrifugeRecipes));
@@ -254,22 +236,22 @@ public class LuVExotics {
                 .itemInputs(GTNHPPItems.stack(GTNHPPItems.PURIFIED_UNOBTANIUM_SHARD, 4))
                 .fluidInputs(molten(Materials.FierySteel, 144))
                 .itemOutputs(
-                    GTNHPPItems.stack(GTNHPPItems.UNOBTANIUM_CLUMP, 5),
+                    GTNHPPItems.stack(GTNHPPItems.UNOBTANIUM_CLUMP, 1),
                     GTNHPPItems.stack(GTNHPPItems.IRON_SLAG, 1))
                 .duration(400)
                 .eut(TierEU.RECIPE_ZPM)
                 .addTo(RecipeMaps.multiblockChemicalReactorRecipes));
     }
 
-    // 9. Electrolyzer — break a clump into Unobtanium dust
-    private static void unoElectrolyze() {
+    // 9. Centrifuge — break a clump into Unobtanium dust
+    private static void unoCentrifuge() {
         safe(
-            "unobtanium electrolyze",
+            "unobtanium Centrifuge",
             () -> GTValues.RA.stdBuilder()
                 .itemInputs(GTNHPPItems.stack(GTNHPPItems.UNOBTANIUM_CLUMP, 1))
-                .itemOutputs(dust(PrPMaterials.Unobtanium, 5))
+                .itemOutputs(dust(PrPMaterials.Unobtanium, 1))
                 .duration(300)
                 .eut(TierEU.RECIPE_LuV)
-                .addTo(RecipeMaps.electrolyzerRecipes));
+                .addTo(RecipeMaps.centrifugeRecipes));
     }
 }

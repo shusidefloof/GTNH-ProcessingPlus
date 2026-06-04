@@ -100,7 +100,6 @@ public class PrPMaterials implements Runnable {
     public static Werkstoff PolyacrylonitrileSolution;
     public static Werkstoff DilutedNMP;
     public static Werkstoff Acrylonitrile;
-    public static Werkstoff HydrogenCyanide;
     public static Werkstoff CarbonFiberTow;
     public static Werkstoff GraphitizedCarbonFiber;
     public static Werkstoff Cyclohexanol;
@@ -278,22 +277,48 @@ public class PrPMaterials implements Runnable {
     // =========================
     // PHOTORESIST CHAIN — UMV
     // =========================
-    public static Werkstoff ShirabonTriflate;
-    public static Werkstoff OsmiumPlasmaPrecursor;
-    public static Werkstoff TachyonicPolymerBase;
-    public static Werkstoff SpaceTimePolymerLattice;
-    public static Werkstoff MagmatterStabilizer;
-    public static Werkstoff NeutroniumCrystalMatrix;
-    public static Werkstoff MoltenTungstenStellarAlloy;
-    public static Werkstoff GravitonImprintedLattice;
-    public static Werkstoff CosmicNeutroniumTriflate;
-    public static Werkstoff RareEarthPlasmaBlend;
-    public static Werkstoff StellarFieldMatrix;
-    public static Werkstoff PhotonicStellarLayer;
-    public static Werkstoff DimensionallyBoundMatrix;
-    public static Werkstoff StellarPhotoresistPrecursor;
     public static Werkstoff UMVPhotoresistMatrix;
     public static Werkstoff UMVPhotoresist;
+
+    // =========================
+    // NEPTUNIUM SYNTHESIS CHAIN
+    // =========================
+    public static Werkstoff NeptuniumExtractionResidue;
+    public static Werkstoff NeptuniumNitrateSolution;
+    public static Werkstoff NeptuniumOxide;
+    public static Werkstoff BariumOxide;
+    public static Werkstoff DilutedNitricAcid;
+    public static Werkstoff AmmoniumNitrateSolution;
+
+    // =========================
+    // RHEA CHAIN
+    // =========================
+    public static Werkstoff RHEAPowderBlend;
+    public static Werkstoff RHEASinteringCompact;
+    public static Werkstoff RefractoryHighEntropyAlloy;
+
+    // =========================
+    // LuV EXOTICS — Vibranium + Unobtanium
+    // =========================
+    public static Werkstoff Vibranium;
+    public static Werkstoff Unobtanium;
+    public static Werkstoff VibraniumDye;
+    public static Werkstoff FluorosulfuricAcid;
+    public static Werkstoff MagicAcid;
+    public static Werkstoff DirtyUnobtaniumSlurry;
+    public static Werkstoff WashedUnobtaniumSlurry;
+    public static Werkstoff EuropiumChloride;
+    public static Werkstoff EuropiumChlorideSolution;
+
+    // =========================
+    // TANTALUM-NIOBIUM CHAIN
+    // =========================
+    public static Werkstoff TantalumPentoxide;
+    public static Werkstoff NiobiumPentoxide;
+    public static Werkstoff NiobiumFluorideSolution;
+    public static Werkstoff MixedTaNbFluorideSolution;
+    public static Werkstoff MIBK;
+    public static Werkstoff TaLoadedMIBK;
 
     // =========================
     // AMORPHOUS METALS (CRV)
@@ -451,17 +476,6 @@ public class PrPMaterials implements Runnable {
                 subscriptNumbers("C5H9NO·H2O"),
                 new Werkstoff.Stats(),
                 Werkstoff.Types.MIXTURE,
-                fluidFeatures(),
-                id(),
-                TextureSet.SET_FLUID));
-
-        HydrogenCyanide = register(
-            new Werkstoff(
-                rgb(176, 224, 230),
-                "Hydrogen Cyanide",
-                subscriptNumbers("HCN"),
-                new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
                 fluidFeatures(),
                 id(),
                 TextureSet.SET_FLUID));
@@ -1679,159 +1693,6 @@ public class PrPMaterials implements Runnable {
         // -------------------------
         // PHOTORESIST CHAIN — UMV
         // -------------------------
-        ShirabonTriflate = register(
-            new Werkstoff(
-                rgb(255, 240, 210),
-                "Shirabon Triflate",
-                "Sh·OTf",
-                new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
-                fluidFeatures(),
-                id(),
-                TextureSet.SET_FLUID));
-
-        OsmiumPlasmaPrecursor = register(
-            new Werkstoff(
-                rgb(80, 90, 110),
-                "Osmium Plasma Precursor",
-                "Os-compact",
-                new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
-                polymerFeatures(),
-                id(),
-                TextureSet.SET_DULL));
-
-        TachyonicPolymerBase = register(
-            new Werkstoff(
-                rgb(140, 80, 200),
-                "Tachyonic Polymer Base",
-                "Os-plasma/Sh-OTf/TCH",
-                new Werkstoff.Stats(),
-                Werkstoff.Types.MIXTURE,
-                fluidFeatures(),
-                id(),
-                TextureSet.SET_FLUID));
-
-        SpaceTimePolymerLattice = register(
-            new Werkstoff(
-                rgb(220, 200, 255),
-                "SpaceTime Polymer Lattice",
-                "ST/TCH-poly",
-                new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
-                polymerFeatures(),
-                id(),
-                TextureSet.SET_DULL));
-
-        MagmatterStabilizer = register(
-            new Werkstoff(
-                rgb(40, 40, 60),
-                "Magmatter Stabilizer",
-                "Mg/SEF/TCH",
-                new Werkstoff.Stats(),
-                Werkstoff.Types.MIXTURE,
-                fluidFeatures(),
-                id(),
-                TextureSet.SET_FLUID));
-
-        NeutroniumCrystalMatrix = register(
-            new Werkstoff(
-                rgb(30, 30, 35),
-                "Neutronium Crystal Matrix",
-                "Nt-xtal",
-                new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
-                polymerFeatures(),
-                id(),
-                TextureSet.SET_DULL));
-
-        MoltenTungstenStellarAlloy = register(
-            new Werkstoff(
-                rgb(255, 200, 50),
-                "Molten Tungsten Stellar Alloy",
-                "W/stellar",
-                new Werkstoff.Stats(),
-                Werkstoff.Types.MIXTURE,
-                fluidFeatures(),
-                id(),
-                TextureSet.SET_FLUID));
-
-        GravitonImprintedLattice = register(
-            new Werkstoff(
-                rgb(160, 180, 255),
-                "Graviton Imprinted Lattice",
-                "Grav/ST-poly",
-                new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
-                polymerFeatures(),
-                id(),
-                TextureSet.SET_DULL));
-
-        CosmicNeutroniumTriflate = register(
-            new Werkstoff(
-                rgb(20, 20, 30),
-                "Cosmic Neutronium Triflate",
-                "CosmNt·OTf",
-                new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
-                fluidFeatures(),
-                id(),
-                TextureSet.SET_FLUID));
-
-        RareEarthPlasmaBlend = register(
-            new Werkstoff(
-                rgb(255, 180, 100),
-                "Rare Earth Plasma Blend",
-                "Nd/Sm-plasma",
-                new Werkstoff.Stats(),
-                Werkstoff.Types.MIXTURE,
-                fluidFeatures(),
-                id(),
-                TextureSet.SET_FLUID));
-
-        StellarFieldMatrix = register(
-            new Werkstoff(
-                rgb(200, 220, 255),
-                "Stellar Field Matrix",
-                "Grav/Mg/Nt/CosmOTf",
-                new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
-                polymerFeatures(),
-                id(),
-                TextureSet.SET_DULL));
-
-        PhotonicStellarLayer = register(
-            new Werkstoff(
-                rgb(255, 255, 200),
-                "Photonic Stellar Layer",
-                "Os/Ir/W-stellar",
-                new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
-                polymerFeatures(),
-                id(),
-                TextureSet.SET_DULL));
-
-        DimensionallyBoundMatrix = register(
-            new Werkstoff(
-                rgb(180, 200, 240),
-                "Dimensionally Bound Matrix",
-                "SFM/Sh/H2O",
-                new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
-                polymerFeatures(),
-                id(),
-                TextureSet.SET_DULL));
-
-        StellarPhotoresistPrecursor = register(
-            new Werkstoff(
-                rgb(210, 230, 255),
-                "Stellar Photoresist Precursor",
-                "DBM/RE-plasma",
-                new Werkstoff.Stats(),
-                Werkstoff.Types.MIXTURE,
-                fluidFeatures(),
-                id(),
-                TextureSet.SET_FLUID));
 
         UMVPhotoresistMatrix = register(
             new Werkstoff(
@@ -1849,6 +1710,183 @@ public class PrPMaterials implements Runnable {
                 rgb(160, 200, 255),
                 "UMV Photoresist",
                 "UMV-matrix/PGMEA",
+                new Werkstoff.Stats(),
+                Werkstoff.Types.MIXTURE,
+                fluidFeatures(),
+                id(),
+                TextureSet.SET_FLUID));
+
+        // -------------------------
+        // NEPTUNIUM SYNTHESIS CHAIN
+        // -------------------------
+        NeptuniumExtractionResidue = register(
+            new Werkstoff(
+                rgb(80, 70, 60),
+                "Neptunium Extraction Residue",
+                "Np·waste",
+                new Werkstoff.Stats(),
+                Werkstoff.Types.MIXTURE,
+                new Werkstoff.GenerationFeatures().onlyDust(),
+                id(),
+                TextureSet.SET_DULL));
+
+        NeptuniumNitrateSolution = register(
+            new Werkstoff(
+                rgb(200, 220, 180),
+                "Neptunium Nitrate Solution",
+                subscriptNumbers("Np(NO3)4(aq)"),
+                new Werkstoff.Stats(),
+                Werkstoff.Types.MIXTURE,
+                fluidFeatures(),
+                id(),
+                TextureSet.SET_FLUID));
+
+        NeptuniumOxide = register(
+            new Werkstoff(
+                rgb(70, 90, 50),
+                "Neptunium Oxide",
+                subscriptNumbers("NpO2"),
+                new Werkstoff.Stats(),
+                Werkstoff.Types.COMPOUND,
+                new Werkstoff.GenerationFeatures().onlyDust(),
+                id(),
+                TextureSet.SET_DULL));
+
+        BariumOxide = register(
+            new Werkstoff(
+                rgb(235, 235, 220),
+                "Barium Oxide",
+                "BaO",
+                new Werkstoff.Stats(),
+                Werkstoff.Types.COMPOUND,
+                new Werkstoff.GenerationFeatures().onlyDust(),
+                id(),
+                TextureSet.SET_DULL));
+
+        DilutedNitricAcid = register(
+            new Werkstoff(
+                rgb(210, 225, 200),
+                "Diluted Nitric Acid",
+                subscriptNumbers("HNO3(aq)"),
+                new Werkstoff.Stats(),
+                Werkstoff.Types.MIXTURE,
+                fluidFeatures(),
+                id(),
+                TextureSet.SET_FLUID));
+
+        AmmoniumNitrateSolution = register(
+            new Werkstoff(
+                rgb(245, 245, 220),
+                "Neptunium Ammonium Nitrate Solution",
+                subscriptNumbers("NH4NO3(aq)"),
+                new Werkstoff.Stats(),
+                Werkstoff.Types.MIXTURE,
+                fluidFeatures(),
+                id(),
+                TextureSet.SET_FLUID));
+
+        // -------------------------
+        // RHEA CHAIN
+        // -------------------------
+        RHEAPowderBlend = register(
+            new Werkstoff(
+                rgb(120, 100, 90),
+                "RHEA Powder Blend",
+                "Np/W/Ta/Ti",
+                new Werkstoff.Stats(),
+                Werkstoff.Types.MIXTURE,
+                new Werkstoff.GenerationFeatures().onlyDust(),
+                id(),
+                TextureSet.SET_DULL));
+
+        RHEASinteringCompact = register(
+            new Werkstoff(
+                rgb(100, 90, 80),
+                "RHEA Sintering Compact",
+                "Np/W/Ta/Ti*",
+                new Werkstoff.Stats(),
+                Werkstoff.Types.MIXTURE,
+                new Werkstoff.GenerationFeatures().onlyDust(),
+                id(),
+                TextureSet.SET_DULL));
+
+        RefractoryHighEntropyAlloy = register(
+            new Werkstoff(
+                rgb(100, 110, 125),
+                "Refractory High-Entropy Alloy",
+                subscriptNumbers("NpWTaTi"),
+                new Werkstoff.Stats(),
+                Werkstoff.Types.COMPOUND,
+                new Werkstoff.GenerationFeatures().onlyDust()
+                    .addMolten()
+                    .addMetalItems()
+                    .addSimpleMetalWorkingItems(),
+                id(),
+                TextureSet.SET_METALLIC));
+
+        // -------------------------
+        // TANTALUM-NIOBIUM CHAIN
+        // -------------------------
+        TantalumPentoxide = register(
+            new Werkstoff(
+                rgb(248, 248, 240),
+                "Tantalum Pentoxide",
+                subscriptNumbers("Ta2O5"),
+                new Werkstoff.Stats(),
+                Werkstoff.Types.COMPOUND,
+                new Werkstoff.GenerationFeatures().onlyDust(),
+                id(),
+                TextureSet.SET_DULL));
+
+        NiobiumPentoxide = register(
+            new Werkstoff(
+                rgb(240, 245, 255),
+                "Niobium Pentoxide",
+                subscriptNumbers("Nb2O5"),
+                new Werkstoff.Stats(),
+                Werkstoff.Types.COMPOUND,
+                new Werkstoff.GenerationFeatures().onlyDust(),
+                id(),
+                TextureSet.SET_DULL));
+
+        NiobiumFluorideSolution = register(
+            new Werkstoff(
+                rgb(180, 220, 255),
+                "Niobium Fluoride Solution",
+                subscriptNumbers("NbF5(aq)"),
+                new Werkstoff.Stats(),
+                Werkstoff.Types.MIXTURE,
+                fluidFeatures(),
+                id(),
+                TextureSet.SET_FLUID));
+
+        MixedTaNbFluorideSolution = register(
+            new Werkstoff(
+                rgb(190, 210, 245),
+                "Mixed Ta-Nb Fluoride Solution",
+                subscriptNumbers("TaF5/NbF5(aq)"),
+                new Werkstoff.Stats(),
+                Werkstoff.Types.MIXTURE,
+                fluidFeatures(),
+                id(),
+                TextureSet.SET_FLUID));
+
+        MIBK = register(
+            new Werkstoff(
+                rgb(245, 240, 200),
+                "MIBK",
+                subscriptNumbers("C6H12O"),
+                new Werkstoff.Stats(),
+                Werkstoff.Types.COMPOUND,
+                fluidFeatures(),
+                id(),
+                TextureSet.SET_FLUID));
+
+        TaLoadedMIBK = register(
+            new Werkstoff(
+                rgb(230, 220, 165),
+                "Ta-Loaded MIBK",
+                subscriptNumbers("TaF5/C6H12O"),
                 new Werkstoff.Stats(),
                 Werkstoff.Types.MIXTURE,
                 fluidFeatures(),
@@ -2066,6 +2104,113 @@ public class PrPMaterials implements Runnable {
                 new Werkstoff.GenerationFeatures().onlyDust(),
                 id(),
                 TextureSet.SET_DULL));
+
+        // ── LuV exotics — appended last to keep earlier material IDs stable ──
+        Vibranium = register(
+            new Werkstoff(
+                rgb(37, 150, 190),
+                "Vibranium",
+                "Vb",
+                new Werkstoff.Stats().setMeltingPoint(6301)
+                    .setBlastFurnace(true),
+                Werkstoff.Types.MATERIAL,
+                new Werkstoff.GenerationFeatures().onlyDust()
+                    .addMolten()
+                    .addMetalItems()
+                    .addSimpleMetalWorkingItems(),
+                id(),
+                TextureSet.SET_CRYSTALLINE));
+
+        Unobtanium = register(
+            new Werkstoff(
+                rgb(148, 34, 208),
+                "Unobtanium",
+                "Ub",
+                new Werkstoff.Stats().setMeltingPoint(7201)
+                    .setBlastFurnace(true),
+                Werkstoff.Types.MATERIAL,
+                new Werkstoff.GenerationFeatures().onlyDust()
+                    .addMetalItems()
+                    .addSimpleMetalWorkingItems(),
+                id(),
+                TextureSet.SET_SHINY));
+
+        VibraniumDye = register(
+            new Werkstoff(
+                rgb(60, 200, 90),
+                "Vibranium Dye",
+                "Vb-dye",
+                new Werkstoff.Stats(),
+                Werkstoff.Types.MIXTURE,
+                fluidFeatures(),
+                id(),
+                TextureSet.SET_SHINY));
+
+        FluorosulfuricAcid = register(
+            new Werkstoff(
+                rgb(230, 230, 150),
+                "Fluorosulfuric Acid",
+                subscriptNumbers("HSO3F"),
+                new Werkstoff.Stats(),
+                Werkstoff.Types.COMPOUND,
+                fluidFeatures(),
+                id(),
+                TextureSet.SET_FLUID));
+
+        MagicAcid = register(
+            new Werkstoff(
+                rgb(220, 60, 200),
+                "Magic Acid",
+                subscriptNumbers("HSO3F·SbF5"),
+                new Werkstoff.Stats(),
+                Werkstoff.Types.MIXTURE,
+                fluidFeatures(),
+                id(),
+                TextureSet.SET_FLUID));
+
+        DirtyUnobtaniumSlurry = register(
+            new Werkstoff(
+                rgb(110, 120, 70),
+                "Dirty Unobtanium Slurry",
+                "Ub·slurry",
+                new Werkstoff.Stats(),
+                Werkstoff.Types.MIXTURE,
+                fluidFeatures(),
+                id(),
+                TextureSet.SET_FLUID));
+
+        WashedUnobtaniumSlurry = register(
+            new Werkstoff(
+                rgb(130, 190, 140),
+                "Washed Unobtanium Slurry",
+                "Ub·slurry",
+                new Werkstoff.Stats(),
+                Werkstoff.Types.MIXTURE,
+                fluidFeatures(),
+                id(),
+                TextureSet.SET_FLUID));
+
+        EuropiumChloride = register(
+            new Werkstoff(
+                rgb(240, 200, 210),
+                "Europium Chloride",
+                subscriptNumbers("EuCl3"),
+                new Werkstoff.Stats(),
+                Werkstoff.Types.COMPOUND,
+                fluidFeatures(),
+                id(),
+                TextureSet.SET_FLUID));
+
+        EuropiumChlorideSolution = register(
+            new Werkstoff(
+                rgb(250, 225, 230),
+                "Europium Chloride Solution",
+                subscriptNumbers("EuCl3·aq"),
+                new Werkstoff.Stats(),
+                Werkstoff.Types.MIXTURE,
+                fluidFeatures(),
+                id(),
+                TextureSet.SET_FLUID));
     }
 
     // =========================

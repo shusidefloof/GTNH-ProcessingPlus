@@ -103,7 +103,7 @@ public class CarbonFiberRecipes {
             .itemInputs(dust(PrPMaterials.StabilizedPolyacrylonitrile, 4))
             .fluidInputs(fluid(Materials.Nitrogen, 2000))
             .itemOutputs(dust(PrPMaterials.CarbonFiberTow, 3))
-            .fluidOutputs(fluid(Materials.CarbonMonoxide, 500), fluid(PrPMaterials.HydrogenCyanide, 250))
+            .fluidOutputs(fluid(Materials.CarbonMonoxide, 500), fluid("hydrogencyanide", 250))
             .duration(800)
             .eut(TierEU.RECIPE_UV)
             .addTo(GTNHPPRecipeMaps.sDAFInertRecipes);

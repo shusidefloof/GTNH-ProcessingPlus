@@ -19,7 +19,6 @@ public class CryoUpgradeRecipes {
 
     public static void init() {
         hbnBlendingCryo();
-        hbnSinteringCryo();
         graphitizationCryo();
         crvTitaniumCryo();
         crvNaquadriaCryo();
@@ -35,20 +34,6 @@ public class CryoUpgradeRecipes {
             .duration(480)
             .eut(TierEU.RECIPE_UHV)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
-    }
-
-    // hBN sintering with cryo-dense atmosphere — saves N₂ 128k + Ar 32k, gives 20 hBN vs 16 base
-    private static void hbnSinteringCryo() {
-        GTValues.RA.stdBuilder()
-            .itemInputs(dust(PrPMaterials.HBNPowderBlend, 32), circuit(11))
-            .fluidInputs(
-                fluid(Materials.Nitrogen, 16000),
-                fluid(PrPMaterials.LiquidArgon, 4000),
-                fluid("oganesson", 288))
-            .itemOutputs(dust(PrPMaterials.HexagonalBoronNitride, 20))
-            .duration(600)
-            .eut(TierEU.RECIPE_UHV)
-            .addTo(GTNHPPRecipeMaps.sHPSFRecipes);
     }
 
     // CF graphitization with LAr inert atmosphere — saves Ar 16k, gives 5 fibers vs 4 base

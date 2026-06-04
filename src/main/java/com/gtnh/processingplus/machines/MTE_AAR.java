@@ -48,6 +48,7 @@ import gregtech.api.util.GTRecipe;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.MultiblockTooltipBuilder;
 import gregtech.api.util.OverclockCalculator;
+import gregtech.api.util.tooltip.TooltipHelper;
 import gregtech.common.misc.GTStructureChannels;
 
 /**
@@ -200,14 +201,37 @@ public class MTE_AAR extends MTEExtendedPowerMultiBlockBase<MTE_AAR> implements 
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType("Ammonia Atmosphere Reactor, AAR")
-            .addInfo("Operates under reactive NH₃ atmosphere at high temperature.")
+            .addInfo("High-temperature reactor operating under a reactive NH₃ atmosphere.")
             .addInfo("Required for hBN nitriding: B₄C + NH₃ → crude hBN + CO.")
-            .addInfo("Also performs metal nitriding (iron nitride, titanium nitride coatings).")
+            .addInfo("Also handles metal nitriding: iron nitride, titanium nitride coatings.")
+            .addSeparator()
             .addInfo(
-                EnumChatFormatting.RED + "Ensure continuous NH₃ supply"
+                "Heat capacity: " + TooltipHelper.coloredText("coil tier heat", EnumChatFormatting.RED)
+                    + EnumChatFormatting.GRAY
+                    + " + "
+                    + TooltipHelper.coloredText("100 K", EnumChatFormatting.YELLOW)
+                    + EnumChatFormatting.GRAY
+                    + " per "
+                    + TooltipHelper.tierText("Voltage")
+                    + EnumChatFormatting.GRAY
+                    + " tier above LV.")
+            .addInfo(
+                TooltipHelper.effText("-5% EU") + EnumChatFormatting.GRAY
+                    + " per "
+                    + TooltipHelper.coloredText("900 K", EnumChatFormatting.RED)
+                    + EnumChatFormatting.GRAY
+                    + " above the recipe requirement.")
+            .addInfo(
+                "Every " + TooltipHelper.coloredText("1800 K", EnumChatFormatting.RED)
+                    + EnumChatFormatting.GRAY
+                    + " above the recipe requirement grants 1 "
+                    + TooltipHelper.coloredText("perfect overclock", EnumChatFormatting.LIGHT_PURPLE)
+                    + EnumChatFormatting.GRAY
+                    + ".")
+            .addInfo(
+                EnumChatFormatting.RED + "Requires continuous NH₃ supply"
                     + EnumChatFormatting.GRAY
                     + " — loss of atmosphere pauses processing.")
-            .addInfo("Heat capacity: Coil tier + 100 K per voltage tier above LV.")
             .beginStructureBlock(3, 5, 3, true)
             .addController("Front face, center column, middle height")
             .addCasingInfoMin("Corrosion-Resistant Reactor Casing", 10, false)

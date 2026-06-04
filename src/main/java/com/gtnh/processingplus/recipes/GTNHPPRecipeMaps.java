@@ -1,8 +1,11 @@
 package com.gtnh.processingplus.recipes;
 
+import com.gtnh.processingplus.nei.SPCRecipeMapFrontend;
+
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.recipe.RecipeMapBackend;
 import gregtech.api.recipe.RecipeMapBuilder;
+import gregtech.nei.formatter.HeatingCoilSpecialValueFormatter;
 
 public class GTNHPPRecipeMaps {
 
@@ -11,12 +14,14 @@ public class GTNHPPRecipeMaps {
     public static final RecipeMap<RecipeMapBackend> sHTRFRecipes = RecipeMapBuilder
         .of("gtnhpp.recipe.htrf")
         .maxIO(6, 6, 3, 3)
+        .neiSpecialInfoFormatter(HeatingCoilSpecialValueFormatter.INSTANCE)
         .build();
 
     /** High Pressure Sintering Furnace — ceramic sintering, hot isostatic pressing. */
     public static final RecipeMap<RecipeMapBackend> sHPSFRecipes = RecipeMapBuilder
         .of("gtnhpp.recipe.hpsf")
         .maxIO(4, 4, 2, 2)
+        .neiSpecialInfoFormatter(HeatingCoilSpecialValueFormatter.INSTANCE)
         .build();
 
     /** Dual Atmosphere Furnace — oxidizing (air) atmosphere mode. */
@@ -71,6 +76,8 @@ public class GTNHPPRecipeMaps {
     public static final RecipeMap<RecipeMapBackend> sSPCRecipes = RecipeMapBuilder
         .of("gtnhpp.recipe.spc")
         .maxIO(6, 2, 3, 2)
+        .frontend(SPCRecipeMapFrontend::new)
+        .disableRegisterNEI()
         .build();
 
     /** Cryogenic Separation Column — circuit(1) = ASU, circuit(2) = CO₂ liquefaction. */

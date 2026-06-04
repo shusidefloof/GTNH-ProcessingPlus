@@ -27,7 +27,17 @@ public class BlockGTNHPPCasings extends Block {
     public static final int SPC_CASING = 9;
     public static final int CSC_CASING = 10;
     public static final int BOF_CASING = 11;
-    public static final int NUM_CASINGS = 12;
+    public static final int SPC_BEAM_CASING = 12;
+    public static final int SPC_FRAME_CASING = 13;
+    // SPC support-bay adapters (route an external upgrade module into the SPC)
+    public static final int BIO_ADAPTER = 14;
+    public static final int CRYO_ADAPTER = 15;
+    public static final int QUANTUM_ADAPTER = 16;
+    // External SPC upgrade-module casings
+    public static final int BIO_MODULE_CASING = 17;
+    public static final int CRYO_MODULE_CASING = 18;
+    public static final int QUANTUM_MODULE_CASING = 19;
+    public static final int NUM_CASINGS = 20;
 
     // @formatter:off
     private static final String[] DISPLAY_NAMES = {
@@ -43,6 +53,14 @@ public class BlockGTNHPPCasings extends Block {
         "Spectral Isolation Casing",             // SPC
         "Cryogenic Column Casing",               // CSC
         "Basic Oxygen Furnace Casing",           // BOF
+        "Photonic Alignment Casing",             // SPC beam column
+        "Spectral Frame Casing",                 // SPC structural frame
+        "Bio-Lithography Adapter",               // SPC support-bay port → Bio Module
+        "Cryo-Stabilization Adapter",            // SPC support-bay port → Cryo Module
+        "Quantum Alignment Adapter",             // SPC support-bay port → Quantum Module
+        "Bio Lithography Module Casing",         // Bio Module multiblock
+        "Cryo Stabilization Module Casing",      // Cryo Module multiblock
+        "Quantum Alignment Module Casing",       // Quantum Module multiblock
     };
 
     // Borrow GT5U's existing block textures as placeholders until custom art is made.
@@ -60,6 +78,14 @@ public class BlockGTNHPPCasings extends Block {
         "gregtech:iconsets/MACHINE_CASING_STABLE_TITANIUM",     // SPC: clean precision chamber
         "gregtech:iconsets/MACHINE_CASING_CLEAN_STAINLESSSTEEL", // CSC: cryogenic stainless column
         "gregtech:iconsets/MACHINE_CASING_SOLID_STEEL",          // BOF: industrial steel converter
+        "gregtech:iconsets/MACHINE_HEATPROOFCASING",             // SPC beam: photonic alignment column (dark)
+        "gregtech:iconsets/MACHINE_CASING_SOLID_STEEL",          // SPC frame: structural frame (grey)
+        "gregtech:iconsets/MACHINE_CASING_CLEAN_STAINLESSSTEEL", // Bio adapter (clean white)
+        "gregtech:iconsets/MACHINE_CASING_FROST_PROOF",          // Cryo adapter (icy)
+        "gregtech:iconsets/MACHINE_CASING_FUSION_GLASS",         // Quantum adapter (energetic)
+        "gregtech:iconsets/MACHINE_CASING_CLEAN_STAINLESSSTEEL", // Bio module casing
+        "gregtech:iconsets/MACHINE_CASING_FROST_PROOF",          // Cryo module casing
+        "gregtech:iconsets/MACHINE_CASING_RADIATIONPROOF",       // Quantum module casing
     };
     // @formatter:on
 

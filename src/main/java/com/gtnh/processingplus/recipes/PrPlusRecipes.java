@@ -11,37 +11,23 @@ import com.gtnh.processingplus.recipes.chains.materials.CarbonFiberRecipes;
 import com.gtnh.processingplus.recipes.chains.materials.CoalFlyashRecipes;
 import com.gtnh.processingplus.recipes.chains.materials.DiphenylEtherRecipes;
 import com.gtnh.processingplus.recipes.chains.materials.HBNRecipes;
+import com.gtnh.processingplus.recipes.chains.materials.HPSFRecipes;
 import com.gtnh.processingplus.recipes.chains.materials.KaptonRecipes;
+import com.gtnh.processingplus.recipes.chains.materials.LuVExotics;
+import com.gtnh.processingplus.recipes.chains.materials.NeptuniumSynthesis;
 import com.gtnh.processingplus.recipes.chains.materials.Nylon66Recipes;
 import com.gtnh.processingplus.recipes.chains.materials.PLARecipes;
 import com.gtnh.processingplus.recipes.chains.materials.SiCRecipes;
+import com.gtnh.processingplus.recipes.chains.materials.TaNbChainRecipes;
 import com.gtnh.processingplus.recipes.chains.photoresist.PhotoresistRecipes;
-import com.gtnh.processingplus.recipes.chains.photoresist.UEVPhotoresistRecipes;
-import com.gtnh.processingplus.recipes.chains.photoresist.UHVPhotoresistRecipes;
-import com.gtnh.processingplus.recipes.chains.photoresist.UIVPhotoresistRecipes;
-import com.gtnh.processingplus.recipes.chains.photoresist.UMVPhotoresistRecipes;
-import com.gtnh.processingplus.recipes.chains.photoresist.UVPhotoresistRecipes;
-import com.gtnh.processingplus.recipes.chains.photoresist.ZPMPhotoresistRecipes;
 
 public class PrPlusRecipes {
 
-    private static void tryInit(String name, Runnable init) {
-        try {
-            init.run();
-        } catch (IllegalStateException e) {
-            System.err.println("[GTNHPP] Skipping " + name + " recipes — missing fluid: " + e.getMessage());
-        }
-    }
-
     public static void init() {
         System.out.println("PrPlusRecipes init");
+        // All photoresist tiers (MV → UMV) now live in PhotoresistRecipes; its own init()
+        // handles the per-tier fault isolation for the UHV+ exotic-fluid tiers internally.
         PhotoresistRecipes.init();
-        ZPMPhotoresistRecipes.init();
-        UVPhotoresistRecipes.init();
-        tryInit("UHV photoresist", UHVPhotoresistRecipes::init);
-        tryInit("UEV photoresist", UEVPhotoresistRecipes::init);
-        tryInit("UIV photoresist", UIVPhotoresistRecipes::init);
-        tryInit("UMV photoresist", UMVPhotoresistRecipes::init);
         SPCRecipes.init();
         Nylon66Recipes.init();
         PLARecipes.init();
@@ -58,5 +44,9 @@ public class PrPlusRecipes {
         BOFRecipes.init();
         DiphenylEtherRecipes.init();
         CryoUpgradeRecipes.init();
+        NeptuniumSynthesis.init();
+        HPSFRecipes.init();
+        TaNbChainRecipes.init();
+        LuVExotics.init();
     }
 }

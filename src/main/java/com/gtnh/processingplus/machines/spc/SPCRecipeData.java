@@ -19,23 +19,33 @@ public class SPCRecipeData {
     public final int[] stationMinTiers;
     public final MachineType supportType;
     public final int supportMinTier;
+    /** External upgrade module this recipe requires (linked + adapter routed in), or null for none. */
+    public final SPCModuleType requiredModule;
 
-    private SPCRecipeData(MachineType[] types, int[] minTiers, MachineType supportType, int supportMinTier) {
+    private SPCRecipeData(MachineType[] types, int[] minTiers, MachineType supportType, int supportMinTier,
+        SPCModuleType requiredModule) {
         this.stationTypes = types;
         this.stationMinTiers = minTiers;
         this.supportType = supportType;
         this.supportMinTier = supportMinTier;
+        this.requiredModule = requiredModule;
     }
 
-    /** Register sequence data for a recipe that needs no support machine. */
+    /** Register sequence data for a recipe that needs no support machine or module. */
     public static void register(Collection<GTRecipe> recipes, MachineType[] types, int[] minTiers) {
-        register(recipes, types, minTiers, MachineType.NONE, 0);
+        register(recipes, types, minTiers, MachineType.NONE, 0, null);
     }
 
-    /** Register sequence data for a recipe that requires a support machine in the back cap. */
+    /** Register sequence data for a recipe that requires an external upgrade module. */
     public static void register(Collection<GTRecipe> recipes, MachineType[] types, int[] minTiers,
-        MachineType supportType, int supportMinTier) {
-        SPCRecipeData data = new SPCRecipeData(types, minTiers, supportType, supportMinTier);
+        SPCModuleType requiredModule) {
+        register(recipes, types, minTiers, MachineType.NONE, 0, requiredModule);
+    }
+
+    /** Register sequence data with a support machine and/or module requirement. */
+    public static void register(Collection<GTRecipe> recipes, MachineType[] types, int[] minTiers,
+        MachineType supportType, int supportMinTier, SPCModuleType requiredModule) {
+        SPCRecipeData data = new SPCRecipeData(types, minTiers, supportType, supportMinTier, requiredModule);
         for (GTRecipe r : recipes) {
             REGISTRY.put(r, data);
         }

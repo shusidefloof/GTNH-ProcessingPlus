@@ -10,6 +10,7 @@ import gregtech.api.enums.Materials;
 import gregtech.api.enums.TierEU;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.util.GTOreDictUnificator;
+import gregtech.api.util.GTRecipeConstants;
 
 public class HBNRecipes {
 
@@ -100,6 +101,7 @@ public class HBNRecipes {
             .itemOutputs(dust(PrPMaterials.HexagonalBoronNitride, 2 * 8))
             .duration(600)
             .eut(TierEU.RECIPE_UHV)
+            .metadata(GTRecipeConstants.COIL_HEAT, 2400)
             .addTo(GTNHPPRecipeMaps.sHPSFRecipes);
     }
 

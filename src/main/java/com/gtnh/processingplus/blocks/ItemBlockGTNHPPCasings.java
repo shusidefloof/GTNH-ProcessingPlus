@@ -21,4 +21,12 @@ public class ItemBlockGTNHPPCasings extends ItemBlock {
     public String getUnlocalizedName(ItemStack stack) {
         return "tile.gtnhpp.casings." + stack.getItemDamage();
     }
+
+    @Override
+    public String getItemStackDisplayName(ItemStack stack) {
+        if (field_150939_a instanceof BlockGTNHPPCasings) {
+            return ((BlockGTNHPPCasings) field_150939_a).getLocalizedName(stack.getItemDamage());
+        }
+        return super.getItemStackDisplayName(stack);
+    }
 }

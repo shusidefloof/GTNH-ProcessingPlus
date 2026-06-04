@@ -77,7 +77,7 @@ public class PLARecipes {
             .itemInputs(circuit(4))
             .fluidInputs(
                 fluid(Materials.Acetaldehyde, 1000),
-                fluid(PrPMaterials.HydrogenCyanide, 1000),
+                fluid("hydrogencyanide", 1000),
                 fluid(Materials.Ammonia, 1000),
                 fluid(Materials.Water, 2000))
             .fluidOutputs(fluid(PrPMaterials.LacticAcid, 1000), fluid("ammonium chloride", 500))

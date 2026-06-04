@@ -37,6 +37,7 @@ import gregtech.api.metatileentity.implementations.MTEExtendedPowerMultiBlockBas
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.render.TextureFactory;
 import gregtech.api.util.MultiblockTooltipBuilder;
+import gregtech.api.util.tooltip.TooltipHelper;
 
 public class MTE_BOF extends MTEExtendedPowerMultiBlockBase<MTE_BOF> implements ISurvivalConstructable {
 
@@ -65,9 +66,7 @@ public class MTE_BOF extends MTEExtendedPowerMultiBlockBase<MTE_BOF> implements 
             STRUCTURE_DEFINITION = StructureDefinition.<MTE_BOF>builder()
                 .addShape(
                     STRUCTURE_PIECE_MAIN,
-                    new String[][] {
-                        { "CCC", "CCC", "C~C", "CCC", "CCC" },
-                        { "CCC", "CCC", "CCC", "CCC", "CCC" },
+                    new String[][] { { "CCC", "CCC", "C~C", "CCC", "CCC" }, { "CCC", "CCC", "CCC", "CCC", "CCC" },
                         { "CCC", "CCC", "CCC", "CCC", "CCC" } })
                 .addElement(
                     'C',
@@ -89,8 +88,16 @@ public class MTE_BOF extends MTEExtendedPowerMultiBlockBase<MTE_BOF> implements 
     @Override
     public int survivalConstruct(ItemStack stackSize, int elementBudget, ISurvivalBuildEnvironment env) {
         if (mMachine) return -1;
-        return survivalBuildPiece(STRUCTURE_PIECE_MAIN, stackSize, OFFSET_X, OFFSET_Y, OFFSET_Z,
-            elementBudget, env, false, true);
+        return survivalBuildPiece(
+            STRUCTURE_PIECE_MAIN,
+            stackSize,
+            OFFSET_X,
+            OFFSET_Y,
+            OFFSET_Z,
+            elementBudget,
+            env,
+            false,
+            true);
     }
 
     @Override
@@ -138,9 +145,31 @@ public class MTE_BOF extends MTEExtendedPowerMultiBlockBase<MTE_BOF> implements 
     @Override
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType("Basic Oxygen Furnace")
-            .addInfo("Converts iron to steel using liquid oxygen injection.")
-            .addInfo(EnumChatFormatting.RED + "Requires Liquid Oxygen")
+        tt.addMachineType("Basic Oxygen Furnace, BOF")
+            .addInfo("Decarburizes molten iron into steel via liquid oxygen injection.")
+            .addInfo("Faster and cheaper than the EBF for pure iron-to-steel conversion.")
+            .addSeparator()
+            .addStaticParallelInfo(4)
+            .addInfo(
+                EnumChatFormatting.RED + "Requires Liquid Oxygen"
+                    + EnumChatFormatting.GRAY
+                    + " — produced by the Cryogenic Separation Column.")
+            .addSeparator()
+            .addInfo(
+                TooltipHelper.coloredText("circuit(1)", EnumChatFormatting.AQUA) + EnumChatFormatting.GRAY
+                    + "  Iron ×8 + LOX 2,000 mB → Steel ×8 + CO₂")
+            .addInfo(
+                TooltipHelper.coloredText("circuit(2)", EnumChatFormatting.AQUA) + EnumChatFormatting.GRAY
+                    + "  Iron ×8 + LOX 2,000 mB + Calcium ×2 → "
+                    + TooltipHelper.coloredText("Steel ×10", EnumChatFormatting.GREEN)
+                    + EnumChatFormatting.GRAY
+                    + " | "
+                    + TooltipHelper.effText("+25%")
+                    + EnumChatFormatting.GRAY
+                    + " yield")
+            .addInfo(
+                TooltipHelper.coloredText("circuit(3)", EnumChatFormatting.AQUA) + EnumChatFormatting.GRAY
+                    + "  Iron ×16 + LOX 4,000 mB → Steel ×16 | double batch")
             .beginStructureBlock(3, 5, 3, true)
             .addController("Front face, center")
             .addCasingInfoMin("Basic Oxygen Furnace Casing", 44, false)
@@ -158,9 +187,14 @@ public class MTE_BOF extends MTEExtendedPowerMultiBlockBase<MTE_BOF> implements 
     @Override
     public String[] getInfoData() {
         return new String[] { StatCollector.translateToLocal("GT5U.multiblock.Progress") + ": "
-            + EnumChatFormatting.GREEN + mProgresstime / 20 + EnumChatFormatting.RESET
+            + EnumChatFormatting.GREEN
+            + mProgresstime / 20
+            + EnumChatFormatting.RESET
             + " s / "
-            + EnumChatFormatting.YELLOW + mMaxProgresstime / 20 + EnumChatFormatting.RESET + " s" };
+            + EnumChatFormatting.YELLOW
+            + mMaxProgresstime / 20
+            + EnumChatFormatting.RESET
+            + " s" };
     }
 
     @Override

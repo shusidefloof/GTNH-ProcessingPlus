@@ -38,6 +38,7 @@ import gregtech.api.metatileentity.implementations.MTEExtendedPowerMultiBlockBas
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.render.TextureFactory;
 import gregtech.api.util.MultiblockTooltipBuilder;
+import gregtech.api.util.tooltip.TooltipHelper;
 
 /**
  * Ceramic Reaction Vessel — 5×5×5 structure with hBN ceramic inner lining.
@@ -160,25 +161,32 @@ public class MTE_CRV extends MTEExtendedPowerMultiBlockBase<MTE_CRV> implements 
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType("Ceramic Reaction Vessel, CRV")
-            .addInfo("The only vessel capable of containing exotic molten alloy mixtures at LuV/ZPM.")
+            .addInfo("The only multiblock capable of safely containing exotic molten alloy mixtures.")
+            .addInfo("hBN ceramic inner lining is chemically inert against molten metals.")
             .addInfo(
-                "Inner lining of " + EnumChatFormatting.YELLOW
-                    + "24 Hexagonal Boron Nitride Ceramic Blocks"
+                "Accepts up to " + TooltipHelper.coloredText("6", EnumChatFormatting.YELLOW)
                     + EnumChatFormatting.GRAY
-                    + " is structurally required.")
-            .addInfo("hBN is chemically inert against molten metals — no contamination, no reaction.")
-            .addInfo("Accepts up to 6 molten metal fluid inputs for exotic alloy synthesis.")
+                    + " molten metal fluid inputs simultaneously.")
+            .addSeparator()
+            .addInfo(
+                EnumChatFormatting.GOLD + "Inner lining: "
+                    + EnumChatFormatting.GRAY
+                    + "exactly "
+                    + TooltipHelper.coloredText("24", EnumChatFormatting.YELLOW)
+                    + EnumChatFormatting.GRAY
+                    + " Hexagonal Boron Nitride Ceramic Blocks required.")
+            .addInfo("hBN blocks are load-bearing — machine will not form without the exact count.")
             .beginStructureBlock(5, 5, 5, true)
             .addController("Front face, center")
             .addCasingInfoMin("Iridium-Reinforced Reactor Casing", 74, false)
             .addCasingInfoExactly("Hexagonal Boron Nitride Ceramic Block", 24, true)
-            .addInputBus("Any casing", 1)
-            .addInputHatch("Any casing (up to 6 fluid inputs)", 1)
-            .addOutputBus("Any casing", 1)
-            .addOutputHatch("Any casing", 1)
-            .addEnergyHatch("Any casing", 1)
-            .addMufflerHatch("Any casing", 1)
-            .addMaintenanceHatch("Any casing", 1)
+            .addInputBus("Any outer casing", 1)
+            .addInputHatch("Any outer casing, up to 6 fluid hatches", 1)
+            .addOutputBus("Any outer casing", 1)
+            .addOutputHatch("Any outer casing", 1)
+            .addEnergyHatch("Any outer casing", 1)
+            .addMufflerHatch("Any outer casing", 1)
+            .addMaintenanceHatch("Any outer casing", 1)
             .toolTipFinisher();
         return tt;
     }

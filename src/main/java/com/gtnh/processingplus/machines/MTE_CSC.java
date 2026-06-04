@@ -49,6 +49,7 @@ import gregtech.api.recipe.check.CheckRecipeResult;
 import gregtech.api.recipe.check.SimpleCheckRecipeResult;
 import gregtech.api.render.TextureFactory;
 import gregtech.api.util.MultiblockTooltipBuilder;
+import gregtech.api.util.tooltip.TooltipHelper;
 
 public class MTE_CSC extends MTEExtendedPowerMultiBlockBase<MTE_CSC> implements ISurvivalConstructable {
 
@@ -84,9 +85,7 @@ public class MTE_CSC extends MTEExtendedPowerMultiBlockBase<MTE_CSC> implements 
             STRUCTURE_DEFINITION = StructureDefinition.<MTE_CSC>builder()
                 .addShape(
                     STRUCTURE_PIECE_MAIN,
-                    new String[][] {
-                        { "CCC", "CCC", "C~C", "CCC", "CCC" },
-                        { "CCC", "CCC", "CCC", "CCC", "CCC" },
+                    new String[][] { { "CCC", "CCC", "C~C", "CCC", "CCC" }, { "CCC", "CCC", "CCC", "CCC", "CCC" },
                         { "CCC", "CCC", "CCC", "CCC", "CCC" } })
                 .addElement(
                     'C',
@@ -108,8 +107,16 @@ public class MTE_CSC extends MTEExtendedPowerMultiBlockBase<MTE_CSC> implements 
     @Override
     public int survivalConstruct(ItemStack stackSize, int elementBudget, ISurvivalBuildEnvironment env) {
         if (mMachine) return -1;
-        return survivalBuildPiece(STRUCTURE_PIECE_MAIN, stackSize, OFFSET_X, OFFSET_Y, OFFSET_Z,
-            elementBudget, env, false, true);
+        return survivalBuildPiece(
+            STRUCTURE_PIECE_MAIN,
+            stackSize,
+            OFFSET_X,
+            OFFSET_Y,
+            OFFSET_Z,
+            elementBudget,
+            env,
+            false,
+            true);
     }
 
     @Override
@@ -122,11 +129,13 @@ public class MTE_CSC extends MTEExtendedPowerMultiBlockBase<MTE_CSC> implements 
     @Override
     protected void setupProcessingLogic(ProcessingLogic logic) {
         super.setupProcessingLogic(logic);
-        Fluid freon = PrPMaterials.FreonR12.getFluidOrGas(1).getFluid();
+        Fluid freon = PrPMaterials.FreonR12.getFluidOrGas(1)
+            .getFluid();
         mCurrentPrimaryFluid = "";
         for (FluidStack fs : getStoredFluids()) {
             if (fs != null && fs.getFluid() != freon && fs.amount > 0) {
-                mCurrentPrimaryFluid = fs.getFluid().getName();
+                mCurrentPrimaryFluid = fs.getFluid()
+                    .getName();
                 break;
             }
         }
@@ -152,7 +161,8 @@ public class MTE_CSC extends MTEExtendedPowerMultiBlockBase<MTE_CSC> implements 
         }
 
         // Randomize Freon output: 0–10% extra loss beyond what the recipe planned to return
-        Fluid freon = PrPMaterials.FreonR12.getFluidOrGas(1).getFluid();
+        Fluid freon = PrPMaterials.FreonR12.getFluidOrGas(1)
+            .getFluid();
         FluidStack[] outputs = logic.getOutputFluids();
         if (outputs != null) {
             FluidStack[] modified = Arrays.copyOf(outputs, outputs.length);
@@ -161,7 +171,8 @@ public class MTE_CSC extends MTEExtendedPowerMultiBlockBase<MTE_CSC> implements 
                 if (fs == null || fs.getFluid() != freon) continue;
                 int expected = fs.amount;
                 int variance = Math.max(1, expected / 10);
-                int actual = expected - ThreadLocalRandom.current().nextInt(variance + 1);
+                int actual = expected - ThreadLocalRandom.current()
+                    .nextInt(variance + 1);
                 modified[i] = new FluidStack(fs.getFluid(), actual);
                 int deficit = expected - actual;
                 if (deficit > 0 && !mCurrentPrimaryFluid.isEmpty()) {
@@ -224,15 +235,32 @@ public class MTE_CSC extends MTEExtendedPowerMultiBlockBase<MTE_CSC> implements 
     @Override
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType("Cryogenic Separation Column")
-            .addInfo("Liquefies and separates gases via Freon R-12 refrigeration.")
-            .addInfo(EnumChatFormatting.YELLOW + "circuit(1)" + EnumChatFormatting.GRAY + " — Air Separation Unit")
-            .addInfo("  Air → Liquid N₂ + Liquid O₂ + Liquid Ar | ~500 mB Freon lost per cycle")
-            .addInfo(EnumChatFormatting.YELLOW + "circuit(2)" + EnumChatFormatting.GRAY + " — CO₂ Liquefaction")
-            .addInfo("  CO₂ → Liquid CO₂ | ~150 mB Freon lost per cycle")
-            .addInfo(EnumChatFormatting.RED + "Requires continuous Freon R-12 input.")
-            .addInfo(EnumChatFormatting.DARK_RED + "Random Freon loss each cycle creates a debt.")
-            .addInfo(EnumChatFormatting.DARK_RED + "Unpaid debt on next run causes a violent explosion!")
+        tt.addMachineType("Cryogenic Separation Column, CSC")
+            .addInfo("Liquefies and fractionally separates industrial gases via Freon R-12 refrigeration.")
+            .addSeparator()
+            .addStaticParallelInfo(8)
+            .addInfo(
+                EnumChatFormatting.RED + "Requires continuous Freon R-12 input."
+                    + EnumChatFormatting.GRAY
+                    + " Freon partially recovers each cycle.")
+            .addInfo(
+                EnumChatFormatting.GOLD + "Freon debt: "
+                    + EnumChatFormatting.GRAY
+                    + "random loss each cycle creates a deficit repaid on the next run.")
+            .addInfo(EnumChatFormatting.DARK_RED + "Unpaid debt causes an explosion on the next run!")
+            .addSeparator()
+            .addInfo(
+                TooltipHelper.coloredText("circuit(1)", EnumChatFormatting.AQUA) + EnumChatFormatting.GRAY
+                    + "  50,000 mB Air → N₂ + O₂ + LiquidAr | ~"
+                    + TooltipHelper.coloredText("500 mB", EnumChatFormatting.RED)
+                    + EnumChatFormatting.GRAY
+                    + " Freon lost")
+            .addInfo(
+                TooltipHelper.coloredText("circuit(2)", EnumChatFormatting.AQUA) + EnumChatFormatting.GRAY
+                    + "  10,000 mB CO₂ → 9,000 mB LiquidCO₂ | ~"
+                    + TooltipHelper.coloredText("150 mB", EnumChatFormatting.RED)
+                    + EnumChatFormatting.GRAY
+                    + " Freon lost")
             .beginStructureBlock(3, 5, 3, true)
             .addController("Front face, center")
             .addCasingInfoMin("Cryogenic Column Casing", 44, false)
@@ -250,14 +278,21 @@ public class MTE_CSC extends MTEExtendedPowerMultiBlockBase<MTE_CSC> implements 
     @Override
     public String[] getInfoData() {
         String deficitLine = mFreonDeficit > 0
-            ? EnumChatFormatting.RED + "Freon debt: +" + mFreonDeficit + " mB " + mDeficitFluidName + " required next run"
+            ? EnumChatFormatting.RED + "Freon debt: +"
+                + mFreonDeficit
+                + " mB "
+                + mDeficitFluidName
+                + " required next run"
             : EnumChatFormatting.GREEN + "Freon: stable";
-        return new String[] {
-            StatCollector.translateToLocal("GT5U.multiblock.Progress") + ": "
-                + EnumChatFormatting.GREEN + mProgresstime / 20 + EnumChatFormatting.RESET
-                + " s / "
-                + EnumChatFormatting.YELLOW + mMaxProgresstime / 20 + EnumChatFormatting.RESET + " s",
-            deficitLine };
+        return new String[] { StatCollector.translateToLocal("GT5U.multiblock.Progress") + ": "
+            + EnumChatFormatting.GREEN
+            + mProgresstime / 20
+            + EnumChatFormatting.RESET
+            + " s / "
+            + EnumChatFormatting.YELLOW
+            + mMaxProgresstime / 20
+            + EnumChatFormatting.RESET
+            + " s", deficitLine };
     }
 
     @Override

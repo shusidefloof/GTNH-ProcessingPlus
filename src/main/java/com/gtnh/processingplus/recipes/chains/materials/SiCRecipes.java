@@ -19,7 +19,6 @@ public class SiCRecipes {
         step2_AcidPurification();
         step3_Sintering();
         step4_Machining();
-        step5_Casing();
     }
 
     // =========================================================
@@ -61,7 +60,7 @@ public class SiCRecipes {
         GTValues.RA.stdBuilder()
             .itemInputs(dust(PrPMaterials.CrudeSiCPowder, 4))
             .fluidInputs(fluid(Materials.HydrofluoricAcid, 500), fluid(Materials.SulfuricAcid, 500))
-            .fluidOutputs(fluid(Materials.Water, 800))
+            .fluidOutputs(fluid(Materials.DilutedSulfuricAcid, 500), fluid(Materials.Water, 500))
             .itemOutputs(dust(PrPMaterials.PurifiedSiCPowder, 4))
             .duration(600)
             .eut(TierEU.RECIPE_HV)
@@ -99,18 +98,4 @@ public class SiCRecipes {
     // =========================================================
     // 5. SiC casing block for multiblocks
     // =========================================================
-    private static void step5_Casing() {
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(dust(PrPMaterials.SinteredSiliconCarbide, 9), circuit(9))
-            .fluidInputs(fluid(Materials.Argon, 1000))
-            .itemOutputs(
-                new net.minecraft.item.ItemStack(
-                    com.gtnh.processingplus.blocks.GTNHPPBlocks.CASINGS,
-                    1,
-                    com.gtnh.processingplus.blocks.BlockGTNHPPCasings.HTRF_CASING))
-            .duration(600)
-            .eut(TierEU.RECIPE_UV)
-            .addTo(GTNHPPRecipeMaps.sHPSFRecipes);
-    }
 }

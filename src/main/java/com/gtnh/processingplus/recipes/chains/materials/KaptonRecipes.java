@@ -168,8 +168,9 @@ public class KaptonRecipes {
             .itemInputs(circuit(2))
             .fluidInputs(fluid(Materials.AceticAcid, 1000))
             .fluidOutputs(fluid(PrPMaterials.Ketene, 1000), fluid(Materials.Water, 1000))
-            .duration(400)
-            .eut(TierEU.RECIPE_HV)
+            .duration(5*20)
+            .eut(TierEU.RECIPE_LV)
+            .metadata(GTRecipeConstants.COIL_HEAT, 2700)
             .addTo(GTNHPPRecipeMaps.sHTRFRecipes);
     }
 
@@ -183,8 +184,8 @@ public class KaptonRecipes {
             .itemInputs(circuit(5))
             .fluidInputs(fluid(Materials.AceticAcid, 2000), fluid(PrPMaterials.Ketene, 1000))
             .fluidOutputs(fluid(PrPMaterials.AceticAnhydride, 1000), fluid(Materials.Water, 500))
-            .duration(400)
-            .eut(TierEU.RECIPE_HV)
+            .duration(5*20)
+            .eut(TierEU.RECIPE_LV)
             .addTo(GTRecipeConstants.UniversalChemical);
     }
 

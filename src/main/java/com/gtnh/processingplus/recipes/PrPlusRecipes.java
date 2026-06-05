@@ -12,6 +12,7 @@ import com.gtnh.processingplus.recipes.chains.materials.CoalFlyashRecipes;
 import com.gtnh.processingplus.recipes.chains.materials.DiphenylEtherRecipes;
 import com.gtnh.processingplus.recipes.chains.materials.HBNRecipes;
 import com.gtnh.processingplus.recipes.chains.materials.HPSFRecipes;
+import com.gtnh.processingplus.recipes.chains.materials.HTRFRecipes;
 import com.gtnh.processingplus.recipes.chains.materials.KaptonRecipes;
 import com.gtnh.processingplus.recipes.chains.materials.LuVExotics;
 import com.gtnh.processingplus.recipes.chains.materials.NeptuniumSynthesis;
@@ -48,5 +49,6 @@ public class PrPlusRecipes {
         HPSFRecipes.init();
         TaNbChainRecipes.init();
         LuVExotics.init();
+        HTRFRecipes.init();
     }
 }

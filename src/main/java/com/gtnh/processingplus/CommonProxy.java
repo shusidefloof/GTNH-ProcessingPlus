@@ -39,63 +39,17 @@ public class CommonProxy {
 
     public void loadComplete(FMLLoadCompleteEvent event) {
         copyRecipesToCRV();
-        removeBoardRecipes();
         PrPlusRecipes.init();
+        try {
+            com.gtnh.processingplus.recipes.RecipeSwaps.run();
+        } catch (Throwable t) {
+            GTNHProcessingPlus.LOG.error("IV-hull RHEA swap failed", t);
+        }
     }
 
     public void serverStarting(FMLServerStartingEvent event) {}
 
-    /**
-     * Removes all assembler-based circuit board production recipes so the SPC + photoresist is
-     * the only path. Covers Basic, Phenolic, Plastic, Epoxy (new SPC recipes) and the four
-     * fiberglass/multifiberglass tiers that already have SPC recipes.
-     */
-    private static void removeBoardRecipes() {
-        ItemStack[] targets = { ItemList.Circuit_Board_Epoxy.get(1), ItemList.Circuit_Board_Epoxy_Advanced.get(1),
-            ItemList.Circuit_Board_Fiberglass.get(1), ItemList.Circuit_Board_Fiberglass_Advanced.get(1),
-            ItemList.Circuit_Board_Multifiberglass.get(1), ItemList.Circuit_Board_Multifiberglass_Elite.get(1),
-            ItemList.Circuit_Board_Wetware.get(1), ItemList.Circuit_Board_Wetware_Extreme.get(1),
-            ItemList.Circuit_Board_Bio.get(1), ItemList.Circuit_Board_Bio_Ultra.get(1),
-            ItemList.Circuit_Board_Optical.get(1), };
-        int removed = 0;
-        for (ItemStack target : targets) {
-            List<GTRecipe> toRemove = new ArrayList<>();
-            for (GTRecipe recipe : RecipeMaps.chemicalReactorRecipes.getAllRecipes()) {
-                if (recipe.mOutputs == null || recipe.mOutputs.length == 0) continue;
-                ItemStack out = recipe.mOutputs[0];
-                if (out == null) continue;
-                if (out.getItem() == target.getItem() && out.getItemDamage() == target.getItemDamage()) {
-                    toRemove.add(recipe);
-                }
-            }
-            for (GTRecipe recipe : RecipeMaps.multiblockChemicalReactorRecipes.getAllRecipes()) {
-                if (recipe.mOutputs == null || recipe.mOutputs.length == 0) continue;
-                ItemStack out = recipe.mOutputs[0];
-                if (out == null) continue;
-                if (out.getItem() == target.getItem() && out.getItemDamage() == target.getItemDamage()) {
-                    toRemove.add(recipe);
-                }
-            }
-            for (GTRecipe recipe : RecipeMaps.circuitAssemblerRecipes.getAllRecipes()) {
-                if (recipe.mOutputs == null || recipe.mOutputs.length == 0) continue;
-                ItemStack out = recipe.mOutputs[0];
-                if (out == null) continue;
-                if (out.getItem() == target.getItem() && out.getItemDamage() == target.getItemDamage()) {
-                    toRemove.add(recipe);
-                }
-            }
-            RecipeMaps.chemicalReactorRecipes.getBackend()
-                .removeRecipes(toRemove);
-            removed += toRemove.size();
-            RecipeMaps.multiblockChemicalReactorRecipes.getBackend()
-                .removeRecipes(toRemove);
-            removed += toRemove.size();
-            RecipeMaps.circuitAssemblerRecipes.getBackend()
-                .removeRecipes(toRemove);
-            removed += toRemove.size();
-        }
-        GTNHProcessingPlus.LOG.info("Removed {} vanilla circuit board assembler recipes.", removed);
-    }
+
 
     /** Copies all ABS recipes into the CRV recipe map at 80% EU cost. */
     private static void copyRecipesToCRV() {

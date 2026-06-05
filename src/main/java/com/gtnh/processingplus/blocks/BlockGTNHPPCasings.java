@@ -37,7 +37,9 @@ public class BlockGTNHPPCasings extends Block {
     public static final int BIO_MODULE_CASING = 17;
     public static final int CRYO_MODULE_CASING = 18;
     public static final int QUANTUM_MODULE_CASING = 19;
-    public static final int NUM_CASINGS = 20;
+    public static final int HTRF_REINFORCED_CASING = 20; // after your existing ones
+    public static final int NUM_CASINGS = 21; // bump this up by 1
+
 
     // @formatter:off
     private static final String[] DISPLAY_NAMES = {
@@ -61,6 +63,7 @@ public class BlockGTNHPPCasings extends Block {
         "Bio Lithography Module Casing",         // Bio Module multiblock
         "Cryo Stabilization Module Casing",      // Cryo Module multiblock
         "Quantum Alignment Module Casing",       // Quantum Module multiblock
+        "Heat-Treated Chemical Casing",  // HTRF reinforced
     };
 
     // Borrow GT5U's existing block textures as placeholders until custom art is made.
@@ -86,6 +89,7 @@ public class BlockGTNHPPCasings extends Block {
         "gregtech:iconsets/MACHINE_CASING_CLEAN_STAINLESSSTEEL", // Bio module casing
         "gregtech:iconsets/MACHINE_CASING_FROST_PROOF",          // Cryo module casing
         "gregtech:iconsets/MACHINE_CASING_RADIATIONPROOF",       // Quantum module casing
+        "gregtech:iconsets/MACHINE_CASING_CHEMICALLY_INERT", // SiC color, same as HTRF casing
     };
     // @formatter:on
 

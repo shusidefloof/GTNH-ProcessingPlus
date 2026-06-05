@@ -5,6 +5,7 @@ import static com.gtnh.processingplus.recipes.PPRecipeHelper.*;
 import com.gtnh.processingplus.items.GTNHPPItems;
 import com.gtnh.processingplus.materials.PrPMaterials;
 
+import bwcrossmod.galacticgreg.VoidMinerUtility;
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
@@ -44,6 +45,10 @@ public class LuVExotics {
         unoThermalCentrifuge();
         unoClumps();
         unoCentrifuge();
+
+        // Late-LuV bootstrap source for the Ore Concentrate + the ZPM Void Miner bulk drop.
+        unoEndConcentration();
+        registerEndVoidMinerDrop();
     }
 
     /** Run one recipe in isolation so a single missing material handle can't break the rest. */
@@ -199,7 +204,7 @@ public class LuVExotics {
                 .itemOutputs(GTNHPPItems.stack(GTNHPPItems.PURIFIED_UNOBTANIUM_CRYSTAL, 2))
                 .fluidOutputs(fluid(PrPMaterials.EuropiumChlorideSolution, 500))
                 .duration(500)
-                .eut(TierEU.RECIPE_ZPM)
+                .eut(TierEU.RECIPE_LuV)
                 .addTo(RecipeMaps.laserEngraverRecipes));
     }
 
@@ -210,10 +215,20 @@ public class LuVExotics {
             () -> GTValues.RA.stdBuilder()
                 .itemInputs(circuit(1))
                 .fluidInputs(fluid(PrPMaterials.EuropiumChlorideSolution, 1000))
-                .fluidOutputs(fluid(PrPMaterials.EuropiumChloride, 500), fluid(Materials.Water, 500))
+                .fluidOutputs(fluid(PrPMaterials.EuropiumChloride, 1000), fluid(Materials.Water, 500))
                 .duration(300)
                 .eut(TierEU.RECIPE_LuV)
                 .addTo(RecipeMaps.distillationTowerRecipes));
+
+        safe(
+            "europium chloride recovery",
+            () -> GTValues.RA.stdBuilder()
+                .itemInputs(circuit(1))
+                .fluidInputs(fluid(Materials.Chlorine, 1000), molten(Materials.Europium, 144))
+                .fluidOutputs(fluid(PrPMaterials.EuropiumChloride, 1000))
+                .duration(120)
+                .eut(TierEU.RECIPE_IV)
+                .addTo(RecipeMaps.multiblockChemicalReactorRecipes));
     }
 
     // 7. Thermal Centrifuge — shatter purified crystals into shards
@@ -239,7 +254,7 @@ public class LuVExotics {
                     GTNHPPItems.stack(GTNHPPItems.UNOBTANIUM_CLUMP, 1),
                     GTNHPPItems.stack(GTNHPPItems.IRON_SLAG, 1))
                 .duration(400)
-                .eut(TierEU.RECIPE_ZPM)
+                .eut(TierEU.RECIPE_LuV)
                 .addTo(RecipeMaps.multiblockChemicalReactorRecipes));
     }
 
@@ -253,5 +268,34 @@ public class LuVExotics {
                 .duration(300)
                 .eut(TierEU.RECIPE_LuV)
                 .addTo(RecipeMaps.centrifugeRecipes));
+    }
+
+    // -------------------------------------------------------------------------
+    // Late-LuV entry: Endstone is acid-leached into a single Ore Concentrate. Deliberately
+    // brutal — a huge Endstone batch plus two full buckets of precious Magic Acid for ONE
+    // concentrate — so it only exists to bootstrap Unobtanium before ZPM. Once you have ZPM
+    // components you build the Void Miner (see registerEndVoidMinerDrop) for the efficient bulk.
+    // -------------------------------------------------------------------------
+    private static void unoEndConcentration() {
+        safe(
+            "unobtanium end concentration",
+            () -> GTValues.RA.stdBuilder()
+                .itemInputs(dust(Materials.Endstone, 256), circuit(4))
+                .fluidInputs(fluid(PrPMaterials.MagicAcid, 2000))
+                .itemOutputs(GTNHPPItems.stack(GTNHPPItems.UNOBTANIUM_ORE_CONCENTRATE, 1))
+                .duration(360 * 20)
+                .eut(TierEU.RECIPE_LuV)
+                .addTo(RecipeMaps.multiblockChemicalReactorRecipes));
+    }
+
+    // Registers the Ore Concentrate as a Void Miner drop in the vanilla End ("The End", dim 1) —
+    // the efficient ZPM bulk source. The map is built once during bartworks init, so adding here
+    // (loadComplete) persists. Wrapped in safe() in case GalacticGreg/the End map isn't present.
+    private static void registerEndVoidMinerDrop() {
+        safe(
+            "end void-miner unobtanium drop",
+            () -> VoidMinerUtility.dropMapsByDimName
+                .computeIfAbsent("The End", k -> new VoidMinerUtility.DropMap())
+                .addDrop(GTNHPPItems.stack(GTNHPPItems.UNOBTANIUM_ORE_CONCENTRATE, 1), 10.0f));
     }
 }

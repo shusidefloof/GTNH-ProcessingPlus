@@ -39,7 +39,6 @@ public class PrPMaterials implements Runnable {
     private static Werkstoff.GenerationFeatures plasticFeatures() {
         return new Werkstoff.GenerationFeatures().onlyDust()
             .addMolten()
-            .addCells()
             .addSimpleMetalWorkingItems();
     }
 
@@ -1049,7 +1048,7 @@ public class PrPMaterials implements Runnable {
                 "poly(p-hydroxystyrene)",
                 new Werkstoff.Stats(),
                 Werkstoff.Types.COMPOUND,
-                moltenPolymerFeatures(),
+                plasticFeatures(),
                 id(),
                 TextureSet.SET_DULL));
 

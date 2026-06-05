@@ -14,10 +14,7 @@ import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_ELECTRIC_BLAS
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_ELECTRIC_BLAST_FURNACE_ACTIVE_GLOW;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_ELECTRIC_BLAST_FURNACE_GLOW;
 import static gregtech.api.enums.Textures.BlockIcons.casingTexturePages;
-import static gregtech.api.util.GTStructureUtility.activeCoils;
-import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
-import static gregtech.api.util.GTStructureUtility.chainItemPipeCasings;
-import static gregtech.api.util.GTStructureUtility.ofCoil;
+import static gregtech.api.util.GTStructureUtility.*;
 
 import javax.annotation.Nonnull;
 
@@ -63,6 +60,7 @@ public class MTE_HPSF extends MTEExtendedPowerMultiBlockBase<MTE_HPSF> implement
     private static final int OFFSET_X = 15;
     private static final int OFFSET_Y = 5;
     private static final int OFFSET_Z = 4;
+    private int mGlassTier = 0;
 
     private static IStructureDefinition<MTE_HPSF> STRUCTURE_DEFINITION = null;
 
@@ -145,7 +143,7 @@ public class MTE_HPSF extends MTEExtendedPowerMultiBlockBase<MTE_HPSF> implement
                             "   CAAAC           ", "    CCC            ", "                   ",
                             " BBBBBBBBB         " }, })
                 // BW glass — tiered viewport (any meta accepted)
-                .addElement('A', ofBlockAnyMeta(GameRegistry.findBlock("bartworks", "BW_GlasBlocks")))
+                .addElement('A', chainAllGlasses(-1, (t, tier) -> t.mGlassTier = tier, t -> t.mGlassTier))
                 // IC2 reinforced stone — base
                 .addElement('B', ofBlock(GameRegistry.findBlock("IC2", "blockAlloy"), 0))
                 // SCD casing — end caps + control chamber outer + hatch positions

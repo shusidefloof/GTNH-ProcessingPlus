@@ -1,7 +1,10 @@
 package com.gtnh.processingplus.recipes;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import gregtech.api.recipe.RecipeMap;
+import gregtech.api.util.GTRecipe;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -71,6 +74,24 @@ public class PPRecipeHelper {
 
     public static ItemStack plate(Werkstoff w, int amount) {
         return w.get(OrePrefixes.plate, amount);
+    }
+    public static ItemStack doublePlate(Werkstoff w, int amount) {
+        return w.get(OrePrefixes.plateDouble, amount);
+    }
+    public static ItemStack gear(Werkstoff w, int amount) {
+        return w.get(OrePrefixes.gearGt, amount);
+    }
+    public static ItemStack screw(Werkstoff w, int amount) {
+        return w.get(OrePrefixes.screw, amount);
+    }
+    public static ItemStack block(Werkstoff w, int amount) {
+        return w.get(OrePrefixes.block, amount);
+    }
+    public static ItemStack foil(Werkstoff w, int amount) {
+        return w.get(OrePrefixes.foil, amount);
+    }
+    public static ItemStack rotor(Materials m, int amount) {
+        return GTOreDictUnificator.get(OrePrefixes.rotor, m, amount);
     }
 
     public static ItemStack gem(Werkstoff w, int amount) {
@@ -187,4 +208,18 @@ public class PPRecipeHelper {
     public static void assertNotNull(Object o, String msg) {
         if (o == null) throw new IllegalStateException("GTNHPP Helper error: " + msg);
     }
+
+    public static int removeRecipesByOutput(RecipeMap<?> map, ItemStack output) {
+        List<GTRecipe> toRemove = new ArrayList<>();
+        for (GTRecipe recipe : map.getAllRecipes()) {
+            if (recipe.mOutputs != null
+                && recipe.mOutputs.length > 0
+                && GTUtility.areStacksEqual(recipe.mOutputs[0], output, false)) {
+                toRemove.add(recipe);
+            }
+        }
+        map.getBackend().removeRecipes(toRemove);
+        return toRemove.size();
+    }
+
 }

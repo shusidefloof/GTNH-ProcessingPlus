@@ -45,6 +45,7 @@ public final class WerkstoffCableLoader {
      * @param recipeEU       EU/t for the generated wiremill/assembler recipes
      * @param recipeDuration ticks for the generated recipes
      * @param canShock       whether bare wire electrocutes the player on contact
+     *
      */
     public static void register(Werkstoff w, int startId, long lossWire, long lossCable, long amperage, long voltage,
         long recipeEU, int recipeDuration, boolean canShock) {
@@ -73,6 +74,7 @@ public final class WerkstoffCableLoader {
                     false,
                     canShock).getStackForm(1L));
         }
+
         for (int i = 0; i < 6; i++) {
             GTOreDictUnificator.registerOre(
                 CABLE[i],
@@ -104,19 +106,6 @@ public final class WerkstoffCableLoader {
             GTValues.RA.stdBuilder()
                 .itemInputs(GTOreDictUnificator.get(WIRE[0], m, SIZE[i]), GTUtility.getIntegratedCircuit(SIZE[i]))
                 .itemOutputs(GTOreDictUnificator.get(WIRE[i], m, 1))
-                .duration(recipeDuration)
-                .eut(recipeEU)
-                .addTo(RecipeMaps.assemblerRecipes);
-        }
-
-        // Assembler: insulate wire with rubber -> cable
-        for (int i = 0; i < 6; i++) {
-            int rubber = Math.max(1, SIZE[i] / 4);
-            GTValues.RA.stdBuilder()
-                .itemInputs(
-                    GTOreDictUnificator.get(WIRE[i], m, 1),
-                    GTOreDictUnificator.get(OrePrefixes.plate, Materials.Rubber, rubber))
-                .itemOutputs(GTOreDictUnificator.get(CABLE[i], m, 1))
                 .duration(recipeDuration)
                 .eut(recipeEU)
                 .addTo(RecipeMaps.assemblerRecipes);

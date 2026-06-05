@@ -55,9 +55,9 @@ public class HPSFRecipes {
                 plate(Materials.TungstenSteel, 4),
                 plate(Materials.Tungsten, 2),
                 circuit(6))
-            .itemOutputs(new ItemStack(GTNHPPBlocks.CASINGS, 2, BlockGTNHPPCasings.HPSF_CASING))
-            .duration(400)
-            .eut(TierEU.RECIPE_EV)
+            .itemOutputs(new ItemStack(GTNHPPBlocks.CASINGS, 1, BlockGTNHPPCasings.HPSF_CASING))
+            .duration(50)
+            .eut(TierEU.RECIPE_LV)
             .addTo(RecipeMaps.assemblerRecipes);
 
         // High-Pressure Containment Casing (SCD casing — also used by the HPSF shell)
@@ -67,9 +67,9 @@ public class HPSFRecipes {
                 plate(Materials.Titanium, 4),
                 plate(Materials.Polytetrafluoroethylene, 2),
                 circuit(6))
-            .itemOutputs(new ItemStack(GTNHPPBlocks.CASINGS, 2, BlockGTNHPPCasings.SCD_CASING))
-            .duration(400)
-            .eut(TierEU.RECIPE_EV)
+            .itemOutputs(new ItemStack(GTNHPPBlocks.CASINGS, 1, BlockGTNHPPCasings.SCD_CASING))
+            .duration(50)
+            .eut(TierEU.RECIPE_LV)
             .addTo(RecipeMaps.assemblerRecipes);
     }
 

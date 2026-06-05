@@ -27,7 +27,7 @@ import gregtech.api.util.GTRecipe;
 public class SPCRecipes {
 
     // Voltage tier indices used in SPCRecipeData min-tier arrays
-    private static final int MV = 2, HV = 3, EV = 4, LuV = 6, UV = 8, UHV = 9, UEV = 10;
+    private static final int MV = 2, HV = 3, EV = 4, IV = 5,LuV = 6, ZPM = 7 ,UV = 8, UHV = 9, UEV = 10;
 
     public static void init() {
         casingRecipe();
@@ -52,14 +52,15 @@ public class SPCRecipes {
     private static void controllerRecipe() {
         GTValues.RA.stdBuilder()
             .itemInputs(
-                new ItemStack(GTNHPPBlocks.CASINGS, 4, BlockGTNHPPCasings.SPC_CASING),
-                GTOreDictUnificator.get(OrePrefixes.circuit, Materials.IV, 4),
-                ItemList.Sensor_IV.get(2),
-                ItemList.Emitter_IV.get(2))
-            .fluidInputs(molten(Materials.SolderingAlloy, 1152))
+                ItemList.Hull_EV.get(1),
+                item("rotorVibrantAlloy", 4),
+                ItemList.Sensor_EV.get(2),
+                ItemList.Emitter_EV.get(2),
+                GTOreDictUnificator.get(OrePrefixes.circuit, Materials.EV, 4))
+            .fluidInputs(molten(Materials.Epoxid, 1152))
             .itemOutputs(GTNHPPBlocks.SPC.getStackForm(1))
             .duration(600)
-            .eut(TierEU.RECIPE_IV)
+            .eut(TierEU.RECIPE_EV)
             .addTo(RecipeMaps.assemblerRecipes);
     }
 
@@ -83,8 +84,8 @@ public class SPCRecipes {
                 plate(Materials.Polytetrafluoroethylene, 2),
                 circuit(10))
             .itemOutputs(new ItemStack(GTNHPPBlocks.CASINGS, 1, BlockGTNHPPCasings.SPC_CASING))
-            .duration(400)
-            .eut(TierEU.RECIPE_HV)
+            .duration(50)
+            .eut(TierEU.RECIPE_LV)
             .addTo(RecipeMaps.assemblerRecipes);
 
         // Photonic Alignment Casing — central beam column
@@ -95,19 +96,19 @@ public class SPCRecipes {
                 foil(Materials.Silver, 4),
                 circuit(10))
             .itemOutputs(new ItemStack(GTNHPPBlocks.CASINGS, 1, BlockGTNHPPCasings.SPC_BEAM_CASING))
-            .duration(400)
-            .eut(TierEU.RECIPE_HV)
+            .duration(50)
+            .eut(TierEU.RECIPE_LV)
             .addTo(RecipeMaps.assemblerRecipes);
 
         // Spectral Frame Casing — structural frame
         GTValues.RA.stdBuilder()
             .itemInputs(
                 GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.StainlessSteel, 1),
-                plate(Materials.StainlessSteel, 4),
+                plate(Materials.StainlessSteel, 6),
                 circuit(10))
             .itemOutputs(new ItemStack(GTNHPPBlocks.CASINGS, 1, BlockGTNHPPCasings.SPC_FRAME_CASING))
-            .duration(400)
-            .eut(TierEU.RECIPE_HV)
+            .duration(50)
+            .eut(TierEU.RECIPE_LV)
             .addTo(RecipeMaps.assemblerRecipes);
     }
 
@@ -192,7 +193,7 @@ public class SPCRecipes {
     private static void epoxyBoardEngrave() {
         Collection<GTRecipe> recipes = GTValues.RA.stdBuilder()
             .itemInputs(ItemList.Circuit_Board_Epoxy.get(1), foil(Materials.Electrum, 8))
-            .fluidInputs(fluid(PrPMaterials.IVPhotoresist, 500))
+            .fluidInputs(fluid(PrPMaterials.EVPhotoresist, 500))
             .itemOutputs(ItemList.Circuit_Board_Epoxy_Advanced.get(1))
             .duration(3 * 20)
             .eut(TierEU.RECIPE_HV)
@@ -226,7 +227,7 @@ public class SPCRecipes {
                 ItemList.Circuit_Board_Fiberglass.get(1),
                 foil(Materials.EnergeticAlloy, 12),
                 foil(Materials.Palladium, 4))
-            .fluidInputs(fluid(PrPMaterials.EVPhotoresist, 1000))
+            .fluidInputs(fluid(PrPMaterials.IVPhotoresist, 1000))
             .itemOutputs(ItemList.Circuit_Board_Fiberglass_Advanced.get(1))
             .duration(3 * 20)
             .eut(TierEU.RECIPE_HV)
@@ -250,7 +251,7 @@ public class SPCRecipes {
         SPCRecipeData.register(
             recipes,
             new MachineType[] { MachineType.CHEMICAL_BATH, MachineType.LASER_ENGRAVER, MachineType.CHEMICAL_BATH },
-            new int[] { HV, LuV, HV });
+            new int[] { HV, IV, HV });
     }
 
     // Multifiberglass Board → Elite — [Chem Bath HV] → [Laser LuV] → [Electrolyzer LuV] → [Chem Bath HV]

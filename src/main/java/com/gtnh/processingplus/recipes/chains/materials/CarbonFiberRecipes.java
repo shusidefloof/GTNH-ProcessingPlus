@@ -2,13 +2,19 @@ package com.gtnh.processingplus.recipes.chains.materials;
 
 import static com.gtnh.processingplus.recipes.PPRecipeHelper.*;
 
+import net.minecraft.item.ItemStack;
+
+import com.gtnh.processingplus.blocks.BlockGTNHPPCasings;
+import com.gtnh.processingplus.blocks.GTNHPPBlocks;
 import com.gtnh.processingplus.materials.PrPMaterials;
 import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
 
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.Materials;
+import gregtech.api.enums.OrePrefixes;
 import gregtech.api.enums.TierEU;
 import gregtech.api.recipe.RecipeMaps;
+import gregtech.api.util.GTOreDictUnificator;
 import gtPlusPlus.api.recipe.GTPPRecipeMaps;
 
 public class CarbonFiberRecipes {

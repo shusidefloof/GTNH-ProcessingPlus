@@ -38,7 +38,8 @@ public class BlockGTNHPPCasings extends Block {
     public static final int CRYO_MODULE_CASING = 18;
     public static final int QUANTUM_MODULE_CASING = 19;
     public static final int HTRF_REINFORCED_CASING = 20; // after your existing ones
-    public static final int NUM_CASINGS = 21; // bump this up by 1
+    public static final int CF_COMPOSITE_CASING = 21; // Carbon Fiber Composite Casing (CRC structural shell)
+    public static final int NUM_CASINGS = 22;
 
 
     // @formatter:off
@@ -64,6 +65,7 @@ public class BlockGTNHPPCasings extends Block {
         "Cryo Stabilization Module Casing",      // Cryo Module multiblock
         "Quantum Alignment Module Casing",       // Quantum Module multiblock
         "Heat-Treated Chemical Casing",  // HTRF reinforced
+        "Carbon Fiber Composite Casing", // CRC structural shell
     };
 
     // Borrow GT5U's existing block textures as placeholders until custom art is made.
@@ -90,6 +92,7 @@ public class BlockGTNHPPCasings extends Block {
         "gregtech:iconsets/MACHINE_CASING_FROST_PROOF",          // Cryo module casing
         "gregtech:iconsets/MACHINE_CASING_RADIATIONPROOF",       // Quantum module casing
         "gregtech:iconsets/MACHINE_CASING_CHEMICALLY_INERT", // SiC color, same as HTRF casing
+        "gregtech:iconsets/MACHINE_HEATPROOFCASING", // CF composite: dark woven look (placeholder)
     };
     // @formatter:on
 

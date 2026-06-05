@@ -106,7 +106,7 @@ public final class RecipeSwaps {
             return;
         }
         ItemStack naquadahAlloyCable = GTOreDictUnificator.get(OrePrefixes.cableGt04, Materials.NaquadahAlloy, 1);
-        ItemStack unobtaniumCable = GTOreDictUnificator.get(OrePrefixes.cableGt01, unobtanium, 4);
+        ItemStack unobtaniumCable = GTOreDictUnificator.get(OrePrefixes.cableGt02, unobtanium, 4);
         if (naquadahAlloyCable == null || unobtaniumCable == null) {
             GTNHProcessingPlus.LOG.warn("UV-motor cable gate: cable item missing — skipped.");
             return;
@@ -240,7 +240,7 @@ public final class RecipeSwaps {
             GTNHProcessingPlus.LOG.warn("ZPM hull Unobtanium gate: no bridge material — skipped.");
             return;
         }
-        ItemStack unobtaniumCable = GTOreDictUnificator.get(OrePrefixes.cableGt01, unobtanium, 2);
+        ItemStack unobtaniumCable = GTOreDictUnificator.get(OrePrefixes.cableGt02, unobtanium, 2);
         ItemStack hullZPM = ItemList.Hull_ZPM.get(1);
         if (unobtaniumCable == null) {
             GTNHProcessingPlus.LOG.warn("ZPM hull Unobtanium gate: no Unobtanium cable (cable loader ran?) — skipped.");
@@ -279,7 +279,7 @@ public final class RecipeSwaps {
             hullZPM,
             GTModHandler.RecipeBits.BUFFERED | GTModHandler.RecipeBits.NOT_REMOVABLE,
             new Object[] { "PHP", "CMC", 'M', ItemList.Casing_ZPM, 'C',
-                GTOreDictUnificator.get(OrePrefixes.cableGt01, unobtanium, 1L), 'H',
+                GTOreDictUnificator.get(OrePrefixes.cableGt02, unobtanium, 1L), 'H',
                 OrePrefixes.plate.get(Materials.Iridium), 'P', OrePrefixes.plate.get(Materials.Polybenzimidazole) });
 
         GTNHProcessingPlus.LOG.info(
@@ -302,7 +302,7 @@ public final class RecipeSwaps {
             GTNHProcessingPlus.LOG.warn("ZPM superconductor gate: no Unobtanium bridge material — skipped.");
             return;
         }
-        ItemStack unobtaniumCable = GTOreDictUnificator.get(OrePrefixes.cableGt01, unobtanium, 2);
+        ItemStack unobtaniumCable = GTOreDictUnificator.get(OrePrefixes.cableGt02, unobtanium, 2);
         ItemStack superconductor = GTOreDictUnificator.get(OrePrefixes.wireGt01, Materials.SuperconductorZPM, 18);
         if (unobtaniumCable == null || superconductor == null) {
             GTNHProcessingPlus.LOG.warn("ZPM superconductor gate: missing item — skipped.");

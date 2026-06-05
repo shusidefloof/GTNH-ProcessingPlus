@@ -6,11 +6,13 @@ import com.gtnh.processingplus.items.GTNHPPItems;
 import com.gtnh.processingplus.materials.PrPMaterials;
 
 import bwcrossmod.galacticgreg.VoidMinerUtility;
+import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
 import gregtech.api.enums.TierEU;
 import gregtech.api.recipe.RecipeMaps;
+import gregtech.api.util.GTRecipeConstants;
 import gtPlusPlus.api.recipe.GTPPRecipeMaps;
 
 /**
@@ -135,7 +137,8 @@ public class LuVExotics {
                 .fluidOutputs(fluid(PrPMaterials.FluorosulfuricAcid, 1000))
                 .duration(200)
                 .eut(TierEU.RECIPE_EV)
-                .addTo(RecipeMaps.multiblockChemicalReactorRecipes));
+                .metadata(GTRecipeConstants.COIL_HEAT, 7300)
+                .addTo(GTNHPPRecipeMaps.sHTRFRecipes));
     }
 
     // 2. Chem Reactor — Fluorosulfuric Acid + Antimony Pentafluoride → Magic Acid (fluoroantimonic)
@@ -163,7 +166,8 @@ public class LuVExotics {
                 .fluidOutputs(fluid(PrPMaterials.DirtyUnobtaniumSlurry, 900))
                 .duration(400)
                 .eut(TierEU.RECIPE_LuV)
-                .addTo(RecipeMaps.multiblockChemicalReactorRecipes));
+                .metadata(GTRecipeConstants.COIL_HEAT, 7200)
+                .addTo(GTNHPPRecipeMaps.sHTRFRecipes));
     }
 
     // 4. Chem Bath — wash the slurry with distilled water
@@ -285,7 +289,8 @@ public class LuVExotics {
                 .itemOutputs(GTNHPPItems.stack(GTNHPPItems.UNOBTANIUM_ORE_CONCENTRATE, 1))
                 .duration(360 * 20)
                 .eut(TierEU.RECIPE_LuV)
-                .addTo(RecipeMaps.multiblockChemicalReactorRecipes));
+                .metadata(GTRecipeConstants.COIL_HEAT, 7200)
+                .addTo(GTNHPPRecipeMaps.sHTRFRecipes));
     }
 
     // Registers the Ore Concentrate as a Void Miner drop in the vanilla End ("The End", dim 1) —

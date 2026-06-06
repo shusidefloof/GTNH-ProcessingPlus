@@ -1,4 +1,4 @@
-package com.gtnh.processingplus.recipes.chains.materials;
+package com.gtnh.processingplus.recipes.chains.materials.finishedChains;
 
 import static com.gtnh.processingplus.recipes.PPRecipeHelper.*;
 
@@ -81,7 +81,7 @@ public class CoalFlyashRecipes {
             .fluidOutputs(fluid(PrPMaterials.GalliumTrichlorideSolution, 2000), fluid(Materials.Water, 1000))
             .duration(160)
             .eut(TierEU.RECIPE_HV)
-            .addTo(GTRecipeConstants.UniversalChemical);
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 
     // =========================================================
@@ -94,7 +94,7 @@ public class CoalFlyashRecipes {
             .fluidOutputs(fluid(PrPMaterials.GermaniumTetrachlorideSolution, 2000), fluid(Materials.Water, 2000))
             .duration(160)
             .eut(TierEU.RECIPE_HV)
-            .addTo(GTRecipeConstants.UniversalChemical);
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 
     // =========================================================

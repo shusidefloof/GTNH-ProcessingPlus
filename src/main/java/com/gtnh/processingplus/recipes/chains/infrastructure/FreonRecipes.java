@@ -8,6 +8,7 @@ import gregtech.api.enums.GTValues;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.TierEU;
 import gregtech.api.recipe.RecipeMaps;
+import gregtech.api.util.GTRecipeConstants;
 
 public class FreonRecipes {
 
@@ -18,12 +19,15 @@ public class FreonRecipes {
 
     private static void step1_CarbonTetrachloride() {
         GTValues.RA.stdBuilder()
-            .itemInputs(circuit(1))
-            .fluidInputs(fluid(Materials.Chloroform, 1000), fluid(Materials.Chlorine, 1000))
-            .fluidOutputs(fluid(PrPMaterials.CarbonTetrachloride, 1000), fluid(Materials.HydrochloricAcid, 1000))
+            // Chlorine + HCl as cells so it fits the single-block CR; UniversalChemical makes the
+            // all-fluid LCR copy automatically. (CHCl3 + Cl2 -> CCl4 + HCl; cell carries Cl2 -> HCl.)
+            .itemInputs(Materials.Chlorine.getCells(1), circuit(1))
+            .fluidInputs(fluid(Materials.Chloroform, 1000))
+            .itemOutputs(Materials.HydrochloricAcid.getCells(1))
+            .fluidOutputs(fluid(PrPMaterials.CarbonTetrachloride, 1000))
             .duration(200)
             .eut(TierEU.RECIPE_MV)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTRecipeConstants.UniversalChemical);
     }
 
     private static void step2_FreonSynthesis() {

@@ -1,4 +1,4 @@
-package com.gtnh.processingplus.recipes;
+package com.gtnh.processingplus.recipes.chains.materials;
 
 import static com.gtnh.processingplus.recipes.PPRecipeHelper.*;
 
@@ -49,9 +49,9 @@ public class MaterialUsesRecipes {
         GTValues.RA.stdBuilder()
             .itemInputs(dust(PrPMaterials.HexagonalBoronNitride, 2), circuit(4))
             .fluidInputs(fluid(Materials.Ethanol, 1000))
-            .fluidOutputs(fluid(PrPMaterials.HBNLubricant, 2000))
+            .fluidOutputs(fluid(PrPMaterials.HBNLubricant, 6000))
             .duration(200)
-            .eut(TierEU.RECIPE_UV)
+            .eut(TierEU.RECIPE_LuV)
             .addTo(GTPPRecipeMaps.mixerNonCellRecipes);
     }
 
@@ -118,6 +118,6 @@ public class MaterialUsesRecipes {
             .itemOutputs(dust(PrPMaterials.LoadedAerogelCatalystSupport, 2))
             .duration(600)
             .eut(TierEU.RECIPE_ZPM)
-            .addTo(GTRecipeConstants.UniversalChemical);
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 }

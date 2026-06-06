@@ -1,4 +1,4 @@
-package com.gtnh.processingplus.recipes.chains.materials;
+package com.gtnh.processingplus.recipes.chains.materials.finishedChains;
 
 import static com.gtnh.processingplus.recipes.PPRecipeHelper.*;
 
@@ -30,10 +30,11 @@ public class HBNRecipes {
 
         GTValues.RA.stdBuilder()
             .itemInputs(GTOreDictUnificator.get("dustBoronTrioxide", 4), dust(Materials.Carbon, 9))
-            .fluidOutputs(fluid(Materials.CarbonMonoxide, 2000), fluid(Materials.CarbonDioxide, 5000))
-            .itemOutputs(dust(PrPMaterials.BoronCarbide, 2))
+            .fluidOutputs(fluid(Materials.CarbonMonoxide, 2000), fluid(Materials.CarbonDioxide, 3000))
+            .itemOutputs(dust(PrPMaterials.BoronCarbide, 4))
             .duration(600)
-            .eut((int) (TierEU.RECIPE_LuV * 0.75))
+            .eut((int) (TierEU.RECIPE_EV * 0.75))
+            .metadata(GTRecipeConstants.COIL_HEAT, 1800)
             .addTo(GTNHPPRecipeMaps.sHTRFRecipes);
     }
 
@@ -47,8 +48,8 @@ public class HBNRecipes {
             .fluidInputs(fluid(Materials.Ammonia, 3000))
             .fluidOutputs(fluid(Materials.Methane, 1000), fluid(Materials.CarbonMonoxide, 500))
             .itemOutputs(dust(PrPMaterials.CrudeHBN, 2), dust(PrPMaterials.BNitrideWaste, 4))
-            .duration(240)
-            .eut(TierEU.RECIPE_UV)
+            .duration(60)
+            .eut(TierEU.RECIPE_LuV)
             .addTo(GTNHPPRecipeMaps.sAARRecipes);
     }
 
@@ -67,8 +68,8 @@ public class HBNRecipes {
                 fluid(Materials.Ammonia, 2000))
             .fluidOutputs(fluid(Materials.HydrochloricAcid, 3000), fluid(Materials.Water, 1000))
             .itemOutputs(dust(PrPMaterials.CrudeHBN, 1))
-            .duration(1200)
-            .eut(TierEU.RECIPE_UV)
+            .duration(120)
+            .eut(TierEU.RECIPE_ZPM)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 
@@ -82,8 +83,8 @@ public class HBNRecipes {
             .fluidInputs(fluid(Materials.Nitrogen, 16000), fluid(Materials.Argon, 8000))
             .itemOutputs(dust(PrPMaterials.HBNPowderBlend, 8))
             .fluidOutputs(fluid(Materials.NitricOxide, 3000), fluid(Materials.Oxygen, 1500))
-            .duration(480)
-            .eut(TierEU.RECIPE_UHV)
+            .duration(7*20)
+            .eut(TierEU.RECIPE_LuV)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 
@@ -100,7 +101,7 @@ public class HBNRecipes {
                 fluid("oganesson", 288))
             .itemOutputs(dust(PrPMaterials.HexagonalBoronNitride, 2 * 8))
             .duration(600)
-            .eut(TierEU.RECIPE_UHV)
+            .eut(TierEU.RECIPE_LuV)
             .metadata(GTRecipeConstants.COIL_HEAT, 2400)
             .addTo(GTNHPPRecipeMaps.sHPSFRecipes);
     }
@@ -116,7 +117,8 @@ public class HBNRecipes {
             .fluidInputs(fluid(Materials.Nitrogen, 2000))
             .itemOutputs(dust(PrPMaterials.CrudeHBN, 1))
             .duration(400)
-            .eut(TierEU.RECIPE_UV)
+            .eut(TierEU.RECIPE_LuV)
+            .metadata(GTRecipeConstants.COIL_HEAT, 2400)
             .addTo(GTNHPPRecipeMaps.sHTRFRecipes);
     }
 }

@@ -69,7 +69,7 @@ public class Nylon66Recipes {
                 fluid(Materials.NitrousOxide, 2000),
                 fluid(Materials.Water, 2000))
             .duration(150)
-            .eut(TierEU.RECIPE_UV)
+            .eut(TierEU.RECIPE_LuV)
             .metadata(GTRecipeConstants.CHEMPLANT_CASING_TIER, 6)
             .addTo(GTPPRecipeMaps.chemicalPlantRecipes);
     }
@@ -101,7 +101,7 @@ public class Nylon66Recipes {
                 fluid(Materials.Water, 2000))
             .fluidOutputs(fluid(PrPMaterials.AdipicAcid, 1000))
             .duration(500)
-            .eut(TierEU.RECIPE_UV)
+            .eut(TierEU.RECIPE_LuV)
             .metadata(GTRecipeConstants.CHEMPLANT_CASING_TIER, 7)
             .addTo(GTPPRecipeMaps.chemicalPlantRecipes);
     }
@@ -170,7 +170,7 @@ public class Nylon66Recipes {
             .fluidOutputs(fluid(Materials.SulfuricAcid, 1000))
             .itemOutputs(dust(PrPMaterials.CyclohexanoneOxime, 2))
             .duration(300)
-            .eut(TierEU.RECIPE_UV)
+            .eut(TierEU.RECIPE_LuV)
             .metadata(GTRecipeConstants.CHEMPLANT_CASING_TIER, 5)
             .addTo(GTPPRecipeMaps.chemicalPlantRecipes);
 
@@ -191,7 +191,7 @@ public class Nylon66Recipes {
             .fluidInputs(fluid(PrPMaterials.Caprolactam, 4000), fluid(Materials.Water, 500))
             .fluidOutputs(molten(PrPMaterials.Nylon6, 576))
             .duration(600)
-            .eut(TierEU.RECIPE_UV)
+            .eut(TierEU.RECIPE_LuV)
             .metadata(GTRecipeConstants.CHEMPLANT_CASING_TIER, 5)
             .addTo(GTPPRecipeMaps.chemicalPlantRecipes);
     }

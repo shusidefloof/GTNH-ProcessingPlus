@@ -32,6 +32,16 @@ public class GTNHPPBlocks {
 
     /** CRV controller instance — kept so its assembly-line recipe can reference the controller stack. */
     public static MTE_CRV CRV;
+
+    // Reserved MTE IDs for the four not-yet-built multiblocks. The design doc's values
+    // (CIDC 31511, HPR 31512, SPU 31513, CRC 31514) are ALREADY taken by HPSF and the three SPC
+    // modules — use these instead. They sit in the unused 31500-31504 gap, below every live machine
+    // and clear of the cable loader (id() starts at 31529). Do NOT use 31511-31514.
+    public static final int CIDC_ID = 31500;
+    public static final int HPR_ID = 31501;
+    public static final int SPU_ID = 31502;
+    public static final int CRC_ID = 31503;
+
     private static final int OFFSET = 31_517;
     private static int nextId = OFFSET;
 

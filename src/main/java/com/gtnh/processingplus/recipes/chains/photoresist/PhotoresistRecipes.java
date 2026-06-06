@@ -14,7 +14,9 @@ import com.gtnh.processingplus.materials.PrPMaterials;
 import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
 
 import gregtech.api.enums.GTValues;
+import gregtech.api.enums.ItemList;
 import gregtech.api.enums.Materials;
+import gregtech.api.enums.OrePrefixes;
 import gregtech.api.enums.TierEU;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.util.GTRecipe;
@@ -68,6 +70,7 @@ public class PhotoresistRecipes {
         ivDihydropyran();
         ivTHPProtection();
         ivIVBlend();
+        ivIVBlendEV();
         // LuV — Triflic Acid sub-chain (reused through UMV)
         luvTrifluoromethane();
         luvSulfurTrioxide();
@@ -153,7 +156,8 @@ public class PhotoresistRecipes {
             .fluidOutputs(fluid(PrPMaterials.BasicPhotoresist, 1500))
             .duration(60)
             .eut(TierEU.RECIPE_MV)
-            .addTo(GTPPRecipeMaps.mixerNonCellRecipes);
+            // Multi-fluid blend → LCR (HV) instead of the IV multi-mixer, so it's reachable below IV.
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 
     // HV: Sensitizer route A — Naphthalene + H₂SO₄
@@ -202,7 +206,7 @@ public class PhotoresistRecipes {
             .fluidOutputs(fluid(PrPMaterials.AdvancedPhotoresist, 1250))
             .duration(60)
             .eut(TierEU.RECIPE_HV)
-            .addTo(GTPPRecipeMaps.mixerNonCellRecipes);
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 
     // EV: Acetoxystyrene — Styrene + Acetic Anhydride
@@ -262,7 +266,7 @@ public class PhotoresistRecipes {
             .fluidOutputs(fluid(PrPMaterials.EVPhotoresist, 1750))
             .duration(60)
             .eut(TierEU.RECIPE_EV)
-            .addTo(GTPPRecipeMaps.mixerNonCellRecipes);
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 
     // IV: Furfural — Wheat + H₂SO₄
@@ -312,6 +316,20 @@ public class PhotoresistRecipes {
             .duration(60)
             .eut(TierEU.RECIPE_IV)
             .addTo(GTPPRecipeMaps.mixerNonCellRecipes);
+    }
+
+    // IV Photoresist — accessible EV single-block Mixer route so the IV blend doesn't strictly
+    // require the IV multi-mixer. EVPhotoresist goes in as cells (2 = 2000mB) so it fits the single
+    // Mixer's 1-fluid cap; THP-PHS stays the fluid. Slightly lower yield than the multi-mixer bulk route.
+    private static void ivIVBlendEV() {
+        GTValues.RA.stdBuilder()
+            .itemInputs(PrPMaterials.EVPhotoresist.get(OrePrefixes.cell, 2), circuit(4))
+            .fluidInputs(fluid(PrPMaterials.THPProtectedPHS, 500))
+            .itemOutputs(ItemList.Cell_Empty.get(2))
+            .fluidOutputs(fluid(PrPMaterials.IVPhotoresist, 1000))
+            .duration(80)
+            .eut(TierEU.RECIPE_EV)
+            .addTo(RecipeMaps.mixerRecipes);
     }
 
     // LuV: Trifluoromethane — CHCl₃ + 3 HF (gates Triflic Acid)

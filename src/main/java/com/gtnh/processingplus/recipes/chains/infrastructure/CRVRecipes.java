@@ -1,8 +1,7 @@
-package com.gtnh.processingplus.recipes.chains;
+package com.gtnh.processingplus.recipes.chains.infrastructure;
 
 import static com.gtnh.processingplus.recipes.PPRecipeHelper.*;
 
-import bartworks.system.material.Werkstoff;
 import com.gtnh.processingplus.blocks.BlockGTNHPPCasings;
 import com.gtnh.processingplus.blocks.GTNHPPBlocks;
 import com.gtnh.processingplus.materials.PrPMaterials;
@@ -13,12 +12,10 @@ import static gregtech.api.util.GTRecipeConstants.AssemblyLine;
 import static gregtech.api.util.GTRecipeConstants.RESEARCH_ITEM;
 import static gregtech.api.util.GTRecipeConstants.SCANNING;
 
-import gregtech.api.GregTechAPI;
 import gregtech.api.enums.*;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.util.GTOreDictUnificator;
 import gregtech.api.util.recipe.Scanning;
-import gtPlusPlus.core.fluids.GTPPFluids;
 import net.minecraft.item.ItemStack;
 
 public class CRVRecipes {

@@ -60,7 +60,7 @@ public class KaptonRecipes {
             .fluidOutputs(fluid(PrPMaterials.DiphenylEther, 1000), fluid(Materials.Water, 1000))
             .duration(400)
             .eut(TierEU.RECIPE_HV)
-            .addTo(GTRecipeConstants.UniversalChemical);
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 
     // =========================================================
@@ -80,7 +80,7 @@ public class KaptonRecipes {
             .itemOutputs(dust(PrPMaterials.ODA, 1))
             .duration(400)
             .eut(TierEU.RECIPE_UV)
-            .addTo(GTRecipeConstants.UniversalChemical);
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 
     // =========================================================
@@ -95,7 +95,7 @@ public class KaptonRecipes {
             .fluidOutputs(fluid(PrPMaterials.PAASolution, 2000))
             .duration(400)
             .eut(TierEU.RECIPE_UV)
-            .addTo(GTRecipeConstants.UniversalChemical);
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 
     // =========================================================
@@ -155,7 +155,7 @@ public class KaptonRecipes {
             .fluidOutputs(fluid(PrPMaterials.Triethylamine, 1000), fluid(Materials.Water, 3000))
             .duration(600)
             .eut(TierEU.RECIPE_HV)
-            .addTo(GTRecipeConstants.UniversalChemical);
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 
     // =========================================================
@@ -186,7 +186,7 @@ public class KaptonRecipes {
             .fluidOutputs(fluid(PrPMaterials.AceticAnhydride, 1000), fluid(Materials.Water, 500))
             .duration(5*20)
             .eut(TierEU.RECIPE_LV)
-            .addTo(GTRecipeConstants.UniversalChemical);
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 
     // =========================================================

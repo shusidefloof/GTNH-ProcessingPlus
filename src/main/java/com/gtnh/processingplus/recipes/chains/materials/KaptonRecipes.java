@@ -42,7 +42,7 @@ public class KaptonRecipes {
             .fluidOutputs(fluid(Materials.CarbonDioxide, 4000), fluid(Materials.Water, 2000))
             .itemOutputs(dust(PrPMaterials.PMDA, 2))
             .duration(600)
-            .eut(TierEU.RECIPE_LuV)
+            .eut(TierEU.RECIPE_IV)
             .metadata(GTRecipeConstants.CHEMPLANT_CASING_TIER, 5)
             .addTo(GTPPRecipeMaps.chemicalPlantRecipes);
     }
@@ -61,6 +61,19 @@ public class KaptonRecipes {
             .duration(400)
             .eut(TierEU.RECIPE_HV)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(circuit(2))
+            .fluidInputs(
+                fluid(PrPMaterials.PolyacrylonitrileSolution, 1000),
+                fluid(PrPMaterials.DiphenylEther, 500),
+                fluid(Materials.Water, 3000))
+            .itemOutputs(dust(PrPMaterials.Polyacrylonitrile, 10))
+            .fluidOutputs(fluid(PrPMaterials.DilutedNMP, 1500), fluid(PrPMaterials.DiphenylEther, 400))
+            .duration(600)
+            .eut(TierEU.RECIPE_EV)
+            .metadata(GTRecipeConstants.CHEMPLANT_CASING_TIER, 4)
+            .addTo(GTPPRecipeMaps.chemicalPlantRecipes);
     }
 
     // =========================================================
@@ -79,7 +92,7 @@ public class KaptonRecipes {
             .fluidOutputs(fluid(Materials.Water, 4000))
             .itemOutputs(dust(PrPMaterials.ODA, 1))
             .duration(400)
-            .eut(TierEU.RECIPE_UV)
+            .eut(TierEU.RECIPE_EV)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 
@@ -94,7 +107,7 @@ public class KaptonRecipes {
             .fluidInputs(fluid(Materials.NMethylIIPyrrolidone, 1000), fluid(Materials.Nitrogen, 1000))
             .fluidOutputs(fluid(PrPMaterials.PAASolution, 2000))
             .duration(400)
-            .eut(TierEU.RECIPE_UV)
+            .eut(TierEU.RECIPE_EV)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 
@@ -109,7 +122,7 @@ public class KaptonRecipes {
             .itemOutputs(dust(PrPMaterials.ConcentratedPAA, 2))
             .fluidOutputs(fluid(Materials.NMethylIIPyrrolidone, 800))
             .duration(600)
-            .eut(TierEU.RECIPE_UV)
+            .eut(TierEU.RECIPE_LuV)
             .addTo(RecipeMaps.distillationTowerRecipes);
     }
 
@@ -123,8 +136,8 @@ public class KaptonRecipes {
             .itemInputs(dust(PrPMaterials.ConcentratedPAA, 2))
             .fluidInputs(fluid(Materials.Nitrogen, 500))
             .itemOutputs(dust(PrPMaterials.PolyamicAcidFilm, 4))
-            .duration(800)
-            .eut(TierEU.RECIPE_UV)
+            .duration(400)
+            .eut(TierEU.RECIPE_LuV)
             .addTo(GTNHPPRecipeMaps.sPFCCastingRecipes);
     }
 
@@ -136,10 +149,12 @@ public class KaptonRecipes {
 
         GTValues.RA.stdBuilder()
             .itemInputs(dust(PrPMaterials.PolyamicAcidFilm, 2))
-            .fluidOutputs(fluid(Materials.Water, 1000))
-            .itemOutputs(plate(PrPMaterials.Kapton, 2))
+            .fluidInputs(fluid(PrPMaterials.AceticAnhydride, 500), fluid(PrPMaterials.Triethylamine, 200))
+            .fluidOutputs(fluid(Materials.Water, 1000),
+                fluid(Materials.AceticAcid, 500))
+            .itemOutputs(plate(PrPMaterials.Kapton, 4))
             .duration(600)
-            .eut(TierEU.RECIPE_UV)
+            .eut(TierEU.RECIPE_ZPM)
             .addTo(GTNHPPRecipeMaps.sPFCImidizationRecipes);
     }
 
@@ -195,7 +210,7 @@ public class KaptonRecipes {
     // =========================================================
     private static void stepAlt_ChemicalImidization() {
 
-        GTValues.RA.stdBuilder()
+        /*GTValues.RA.stdBuilder()
             .itemInputs(dust(PrPMaterials.PolyamicAcidFilm, 2))
             .fluidInputs(fluid(PrPMaterials.AceticAnhydride, 500), fluid(PrPMaterials.Triethylamine, 200))
             .fluidOutputs(fluid(Materials.AceticAcid, 500))
@@ -203,5 +218,6 @@ public class KaptonRecipes {
             .duration(800)
             .eut(TierEU.RECIPE_UV)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+         */
     }
 }

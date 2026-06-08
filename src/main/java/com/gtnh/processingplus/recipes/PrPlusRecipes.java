@@ -7,13 +7,9 @@ import com.gtnh.processingplus.recipes.chains.infrastructure.CSCRecipes;
 import com.gtnh.processingplus.recipes.chains.infrastructure.CryoUpgradeRecipes;
 import com.gtnh.processingplus.recipes.chains.infrastructure.FreonRecipes;
 import com.gtnh.processingplus.recipes.chains.materials.*;
-import com.gtnh.processingplus.recipes.chains.materials.finishedChains.CoalFlyashRecipes;
-import com.gtnh.processingplus.recipes.chains.materials.finishedChains.HBNRecipes;
+import com.gtnh.processingplus.recipes.chains.materials.finishedChains.*;
 import com.gtnh.processingplus.recipes.chains.infrastructure.HPSFRecipes;
 import com.gtnh.processingplus.recipes.chains.infrastructure.HTRFRecipes;
-import com.gtnh.processingplus.recipes.chains.materials.finishedChains.LuVExotics;
-import com.gtnh.processingplus.recipes.chains.materials.finishedChains.NeptuniumSynthesis;
-import com.gtnh.processingplus.recipes.chains.materials.finishedChains.TaNbChainRecipes;
 import com.gtnh.processingplus.recipes.chains.photoresist.PhotoresistRecipes;
 
 public class PrPlusRecipes {
@@ -37,7 +33,6 @@ public class PrPlusRecipes {
         FreonRecipes.init();
         CSCRecipes.init();
         BOFRecipes.init();
-        DiphenylEtherRecipes.init();
         CryoUpgradeRecipes.init();
         NeptuniumSynthesis.init();
         HPSFRecipes.init();

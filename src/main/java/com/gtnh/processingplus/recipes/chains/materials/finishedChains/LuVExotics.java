@@ -117,7 +117,7 @@ public class LuVExotics {
             () -> GTValues.RA.stdBuilder()
                 .itemInputs(GTNHPPItems.stack(GTNHPPItems.RED_HOT_VIBRANT_ADAMANTIUM, 1))
                 .fluidInputs(fluid(Materials.LifeEssence, 10000), molten(Materials.BloodInfusedIron, 144))
-                .itemOutputs(PrPMaterials.Vibranium.get(OrePrefixes.ingotHot, 1))
+                .itemOutputs(ingotHot(PrPMaterials.Vibranium, 1))
                 .duration(800)
                 .eut(TierEU.RECIPE_ZPM)
                 .addTo(RecipeMaps.multiblockChemicalReactorRecipes));

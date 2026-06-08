@@ -9,6 +9,7 @@ import gregtech.api.enums.GTValues;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.TierEU;
 import gregtech.api.recipe.RecipeMaps;
+import gregtech.api.util.GTRecipeConstants;
 
 /**
  * Alternate recipes using LiquidArgon/LiquidNitrogen from the CSC instead of large gas volumes.
@@ -44,6 +45,7 @@ public class CryoUpgradeRecipes {
             .itemOutputs(dust(PrPMaterials.GraphitizedCarbonFiber, 5))
             .duration(1000)
             .eut(TierEU.RECIPE_ZPM)
+            .metadata(GTRecipeConstants.COIL_HEAT, 4500)
             .addTo(GTNHPPRecipeMaps.sHTRFRecipes);
     }
 

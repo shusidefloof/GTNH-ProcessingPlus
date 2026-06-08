@@ -102,6 +102,18 @@ public class PPRecipeHelper {
         return w.get(OrePrefixes.stick, amount);
     }
 
+    public static ItemStack rodLong(Werkstoff w, int amount) {
+        return w.get(OrePrefixes.stickLong, amount);
+    }
+
+    public static ItemStack ingotHot(Werkstoff w, int amount) {
+        return w.get(OrePrefixes.ingotHot, amount);
+    }
+
+    public static ItemStack cell(Werkstoff w, int amount) {
+        return w.get(OrePrefixes.cell, amount);
+    }
+
     // =========================
     // ITEMS — GT++ Material
     // =========================

@@ -377,17 +377,6 @@ public class PrPMaterials implements Runnable {
                 id(),
                 TextureSet.SET_DULL));
 
-        Nylon6 = register(
-            new Werkstoff(
-                rgb(240, 240, 235),
-                "Nylon-6",
-                subscriptNumbers("(C6H11NO)n"),
-                new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
-                plasticFeatures(),
-                id(),
-                TextureSet.SET_DULL));
-
         PolylacticAcid = register(
             new Werkstoff(
                 rgb(245, 245, 240),

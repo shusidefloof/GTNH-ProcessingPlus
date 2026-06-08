@@ -7,12 +7,13 @@ import static gregtech.api.enums.HatchElement.Maintenance;
 import static gregtech.api.enums.HatchElement.Muffler;
 import static gregtech.api.enums.HatchElement.OutputBus;
 import static gregtech.api.enums.HatchElement.OutputHatch;
-import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_ELECTRIC_BLAST_FURNACE;
-import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_ELECTRIC_BLAST_FURNACE_ACTIVE;
-import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_ELECTRIC_BLAST_FURNACE_ACTIVE_GLOW;
-import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_ELECTRIC_BLAST_FURNACE_GLOW;
+import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_LARGE_CHEMICAL_REACTOR;
+import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_LARGE_CHEMICAL_REACTOR_ACTIVE;
+import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_LARGE_CHEMICAL_REACTOR_ACTIVE_GLOW;
+import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_LARGE_CHEMICAL_REACTOR_GLOW;
 import static gregtech.api.enums.Textures.BlockIcons.casingTexturePages;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
+import static gregtech.api.util.GTStructureUtility.ofFrame;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
@@ -29,6 +30,7 @@ import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import gregtech.api.enums.Materials;
 import gregtech.api.enums.SoundResource;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
@@ -37,100 +39,65 @@ import gregtech.api.metatileentity.implementations.MTEExtendedPowerMultiBlockBas
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.render.TextureFactory;
 import gregtech.api.util.MultiblockTooltipBuilder;
-import gregtech.api.util.tooltip.TooltipHelper;
 
-public class MTE_BOF extends MTEExtendedPowerMultiBlockBase<MTE_BOF> implements ISurvivalConstructable {
+/**
+ * Polycondensation Vessel — a tall hollow reaction column (5×5×7) rather than a cube. The shell is
+ * Chemically Inert Reaction Vessel casing; a stainless-steel frame "spine" runs up the hollow core
+ * as the stirring/condenser internals. Runs the step-growth polymer condensations (Nylon-6,6, PLA)
+ * on {@code sPCVRecipes}.
+ */
+public class MTE_PCV extends MTEExtendedPowerMultiBlockBase<MTE_PCV> implements ISurvivalConstructable {
 
-    private static final int CASING_INDEX = 1; // solid steel casing
+    private static final int CASING_INDEX = 11;
     private static final String STRUCTURE_PIECE_MAIN = "main";
-    private static final int OFFSET_X = 1, OFFSET_Y = 2, OFFSET_Z = 0;
+    // Controller sits on the front face, centre column, at mid-height.
+    private static final int OFFSET_X = 2;
+    private static final int OFFSET_Y = 3;
+    private static final int OFFSET_Z = 0;
 
-    private static IStructureDefinition<MTE_BOF> STRUCTURE_DEFINITION = null;
+    private static IStructureDefinition<MTE_PCV> STRUCTURE_DEFINITION = null;
 
-    public MTE_BOF(int aID, String aName, String aNameRegional) {
+    public MTE_PCV(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
     }
 
-    protected MTE_BOF(MTE_BOF prototype) {
+    protected MTE_PCV(MTE_PCV prototype) {
         super(prototype.mName);
     }
 
     @Override
     public IMetaTileEntity newMetaEntity(IGregTechTileEntity aTileEntity) {
-        return new MTE_BOF(this);
+        return new MTE_PCV(this);
     }
 
     @Override
-    public IStructureDefinition<MTE_BOF> getStructureDefinition() {
+    public IStructureDefinition<MTE_PCV> getStructureDefinition() {
         if (STRUCTURE_DEFINITION == null) {
-            STRUCTURE_DEFINITION = StructureDefinition.<MTE_BOF>builder()
+            STRUCTURE_DEFINITION = StructureDefinition.<MTE_PCV>builder()
                 .addShape(
                     STRUCTURE_PIECE_MAIN,
-                    new String[][] { { "CCC", "CCC", "C~C", "CCC", "CCC" }, { "CCC", "CCC", "CCC", "CCC", "CCC" },
-                        { "CCC", "CCC", "CCC", "CCC", "CCC" } })
+                    // shape[z][y][x] — 5 depth slices (front→back), each 7 rows (top→bottom) × 5 cols.
+                    // 'C' = PCV casing/hatch, 'F' = stainless frame spine, ' ' = hollow interior.
+                    new String[][] {
+                        // z=0 — front face (solid casing, controller centre)
+                        { "CCCCC", "CCCCC", "CCCCC", "CC~CC", "CCCCC", "CCCCC", "CCCCC" },
+                        // z=1 — hollow body ring
+                        { "CCCCC", "C   C", "C   C", "C   C", "C   C", "C   C", "CCCCC" },
+                        // z=2 — hollow body ring with central frame spine
+                        { "CCCCC", "C F C", "C F C", "C F C", "C F C", "C F C", "CCCCC" },
+                        // z=3 — hollow body ring
+                        { "CCCCC", "C   C", "C   C", "C   C", "C   C", "C   C", "CCCCC" },
+                        // z=4 — back face (solid casing)
+                        { "CCCCC", "CCCCC", "CCCCC", "CCCCC", "CCCCC", "CCCCC", "CCCCC" }, })
                 .addElement(
                     'C',
-                    buildHatchAdder(MTE_BOF.class)
+                    buildHatchAdder(MTE_PCV.class)
                         .atLeast(Energy, InputBus, InputHatch, OutputBus, OutputHatch, Maintenance, Muffler)
                         .casingIndex(CASING_INDEX)
                         .hint(1)
-                        .buildAndChain(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.BOF_CASING))
+                        .buildAndChain(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.PCV_CASING))
+                .addElement('F', ofFrame(Materials.StainlessSteel))
                 .build();
-
-            /*
-
-
-                Structure:
-
-                Blocks:
-                A -> ofBlock...(gt.blockcasings2, 13, ...);
-                B -> ofBlock...(gt.blockcasings3, 10, ...);
-                C -> ofBlock...(gt.blockcasings3, 14, ...);
-                D -> ofBlock...(tile.gtnhpp.casings, 11, ...);
-
-                Tiles:
-
-                Special Tiles:
-                E -> ofSpecialTileAdder(gregtech.api.metatileentity.BaseMetaTileEntity, ...); // You will probably want to change it to something else
-
-                Offsets:
-                -1 -1 0
-
-                Normal Scan:
-                new String[][]{{
-                    "     ",
-                    "     ",
-                    "  D  ",
-                    " BEB ",
-                    " BDB "
-                },{
-                    "  D  ",
-                    "  D  ",
-                    " D D ",
-                    "DD DD",
-                    "DDCDD"
-                },{
-                    " D D ",
-                    " D D ",
-                    "B   B",
-                    "B   B",
-                    "BCCCB"
-                },{
-                    "  D  ",
-                    "  D  ",
-                    " A A ",
-                    "DD DD",
-                    "DDCDD"
-                },{
-                    "     ",
-                    "     ",
-                    "  B  ",
-                    " ABA ",
-                    " DBD "
-                }}
-
-
-             */
         }
         return STRUCTURE_DEFINITION;
     }
@@ -162,13 +129,8 @@ public class MTE_BOF extends MTEExtendedPowerMultiBlockBase<MTE_BOF> implements 
     }
 
     @Override
-    public int getMaxParallelRecipes() {
-        return 4;
-    }
-
-    @Override
     public RecipeMap<?> getRecipeMap() {
-        return GTNHPPRecipeMaps.sBOFRecipes;
+        return GTNHPPRecipeMaps.sPCVRecipes;
     }
 
     @Override
@@ -176,20 +138,20 @@ public class MTE_BOF extends MTEExtendedPowerMultiBlockBase<MTE_BOF> implements 
         int colorIndex, boolean aActive, boolean redstoneLevel) {
         if (side == aFacing) {
             if (aActive) return new ITexture[] { casingTexturePages[0][CASING_INDEX], TextureFactory.builder()
-                .addIcon(OVERLAY_FRONT_ELECTRIC_BLAST_FURNACE_ACTIVE)
+                .addIcon(OVERLAY_FRONT_LARGE_CHEMICAL_REACTOR_ACTIVE)
                 .extFacing()
                 .build(),
                 TextureFactory.builder()
-                    .addIcon(OVERLAY_FRONT_ELECTRIC_BLAST_FURNACE_ACTIVE_GLOW)
+                    .addIcon(OVERLAY_FRONT_LARGE_CHEMICAL_REACTOR_ACTIVE_GLOW)
                     .extFacing()
                     .glow()
                     .build() };
             return new ITexture[] { casingTexturePages[0][CASING_INDEX], TextureFactory.builder()
-                .addIcon(OVERLAY_FRONT_ELECTRIC_BLAST_FURNACE)
+                .addIcon(OVERLAY_FRONT_LARGE_CHEMICAL_REACTOR)
                 .extFacing()
                 .build(),
                 TextureFactory.builder()
-                    .addIcon(OVERLAY_FRONT_ELECTRIC_BLAST_FURNACE_GLOW)
+                    .addIcon(OVERLAY_FRONT_LARGE_CHEMICAL_REACTOR_GLOW)
                     .extFacing()
                     .glow()
                     .build() };
@@ -200,34 +162,14 @@ public class MTE_BOF extends MTEExtendedPowerMultiBlockBase<MTE_BOF> implements 
     @Override
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType("Basic Oxygen Furnace, BOF")
-            .addInfo("Decarburizes molten iron into steel via liquid oxygen injection.")
-            .addInfo("Faster and cheaper than the EBF for pure iron-to-steel conversion.")
-            .addSeparator()
-            .addStaticParallelInfo(4)
-            .addInfo(
-                EnumChatFormatting.RED + "Requires Liquid Oxygen"
-                    + EnumChatFormatting.GRAY
-                    + " — produced by the Cryogenic Separation Column.")
-            .addSeparator()
-            .addInfo(
-                TooltipHelper.coloredText("circuit(1)", EnumChatFormatting.AQUA) + EnumChatFormatting.GRAY
-                    + "  Iron ×8 + LOX 2,000 mB → Steel ×8 + CO₂")
-            .addInfo(
-                TooltipHelper.coloredText("circuit(2)", EnumChatFormatting.AQUA) + EnumChatFormatting.GRAY
-                    + "  Iron ×8 + LOX 2,000 mB + Calcium ×2 → "
-                    + TooltipHelper.coloredText("Steel ×10", EnumChatFormatting.GREEN)
-                    + EnumChatFormatting.GRAY
-                    + " | "
-                    + TooltipHelper.effText("+25%")
-                    + EnumChatFormatting.GRAY
-                    + " yield")
-            .addInfo(
-                TooltipHelper.coloredText("circuit(3)", EnumChatFormatting.AQUA) + EnumChatFormatting.GRAY
-                    + "  Iron ×16 + LOX 4,000 mB → Steel ×16 | double batch")
-            .beginStructureBlock(3, 5, 3, true)
-            .addController("Front face, center")
-            .addCasingInfoMin("Basic Oxygen Furnace Casing", 44, false)
+        tt.addMachineType("Polycondensation Vessel, PCV")
+            .addInfo("A tall vacuum-assisted reaction column for step-growth polymers (Nylon-6,6, PLA).")
+            .addInfo("The hollow core holds the melt; the central frame spine is the stirring/condenser shaft.")
+            .addInfo("Drives off the condensation byproduct as the polymer chain builds.")
+            .beginStructureBlock(5, 7, 5, true)
+            .addController("Front face, centre column")
+            .addCasingInfoMin("Chemically Inert Reaction Vessel", 60, false)
+            .addOtherStructurePart("Stainless Steel Frame", "Central spine, 5 tall")
             .addInputBus("Any casing", 1)
             .addInputHatch("Any casing", 1)
             .addOutputBus("Any casing", 1)

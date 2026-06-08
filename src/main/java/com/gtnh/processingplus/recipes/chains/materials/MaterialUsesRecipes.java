@@ -92,13 +92,6 @@ public class MaterialUsesRecipes {
             .addTo(RecipeMaps.fluidSolidifierRecipes);
 
         GTValues.RA.stdBuilder()
-            .fluidInputs(molten(PrPMaterials.Nylon6, 144))
-            .itemOutputs(plate(PrPMaterials.Nylon6, 1))
-            .duration(80)
-            .eut(TierEU.RECIPE_LV)
-            .addTo(RecipeMaps.fluidSolidifierRecipes);
-
-        GTValues.RA.stdBuilder()
             .fluidInputs(molten(PrPMaterials.PolylacticAcid, 144))
             .itemOutputs(plate(PrPMaterials.PolylacticAcid, 1))
             .duration(80)

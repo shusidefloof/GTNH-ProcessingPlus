@@ -94,12 +94,14 @@ public class PhotoresistRecipes {
     // MV: Formaldehyde — Ethanol + O₂
     private static void mvFormaldehydeSynthesis() {
         GTValues.RA.stdBuilder()
-            .itemInputs(circuit(1))
-            .fluidInputs(fluid(Materials.Ethanol, 1000), fluid(Materials.Oxygen, 1000))
+            // O2 as a cell so it fits the single-block CR at MV; UniversalChemical makes the LCR copy.
+            .itemInputs(Materials.Oxygen.getCells(1), circuit(1))
+            .fluidInputs(fluid(Materials.Ethanol, 1000))
+            .itemOutputs(ItemList.Cell_Empty.get(1))
             .fluidOutputs(fluid("fluid.formaldehyde", 1000))
             .duration(60)
             .eut(TierEU.RECIPE_MV)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTRecipeConstants.UniversalChemical);
     }
 
     // MV: Novolac Resin — Phenol + Formaldehyde + H₂SO₄ (cat)
@@ -119,12 +121,14 @@ public class PhotoresistRecipes {
     // MV: Sensitizer route A — Benzene + O₂
     private static void mvBenzeneSensitizer() {
         GTValues.RA.stdBuilder()
-            .itemInputs(circuit(3))
-            .fluidInputs(fluid(Materials.Benzene, 1000), fluid(Materials.Oxygen, 2000))
+            // Benzene as a cell so it fits the single-block CR at MV (O2 stays the one fluid).
+            .itemInputs(Materials.Benzene.getCells(1), circuit(3))
+            .fluidInputs(fluid(Materials.Oxygen, 2000))
+            .itemOutputs(ItemList.Cell_Empty.get(1))
             .fluidOutputs(fluid(PrPMaterials.MVPhotoresistSensitizer, 1000))
             .duration(60)
             .eut(TierEU.RECIPE_MV)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTRecipeConstants.UniversalChemical);
     }
 
     // MV: Sensitizer route B — Wood → Tannin Solution → Sensitizer (Distillery)
@@ -135,7 +139,8 @@ public class PhotoresistRecipes {
             .fluidOutputs(fluid(PrPMaterials.TanninSolution, 2000))
             .duration(80)
             .eut(TierEU.RECIPE_MV)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            // Already 1-fluid-each-way → fits the single-block CR as-is via UniversalChemical.
+            .addTo(GTRecipeConstants.UniversalChemical);
 
         GTValues.RA.stdBuilder()
             .fluidInputs(fluid(PrPMaterials.TanninSolution, 2000))
@@ -323,7 +328,7 @@ public class PhotoresistRecipes {
     // Mixer's 1-fluid cap; THP-PHS stays the fluid. Slightly lower yield than the multi-mixer bulk route.
     private static void ivIVBlendEV() {
         GTValues.RA.stdBuilder()
-            .itemInputs(PrPMaterials.EVPhotoresist.get(OrePrefixes.cell, 2), circuit(4))
+            .itemInputs(cell(PrPMaterials.EVPhotoresist, 2), circuit(4))
             .fluidInputs(fluid(PrPMaterials.THPProtectedPHS, 500))
             .itemOutputs(ItemList.Cell_Empty.get(2))
             .fluidOutputs(fluid(PrPMaterials.IVPhotoresist, 1000))

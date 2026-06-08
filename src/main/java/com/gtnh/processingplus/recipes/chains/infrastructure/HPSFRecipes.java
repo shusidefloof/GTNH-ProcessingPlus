@@ -110,7 +110,7 @@ public class HPSFRecipes {
         GTValues.RA.stdBuilder()
             .itemInputs(dust(PrPMaterials.RHEASinteringCompact, 1), circuit(1))
             .fluidInputs(fluid(Materials.Nitrogen, 2000))
-            .itemOutputs(PrPMaterials.RefractoryHighEntropyAlloy.get(OrePrefixes.ingotHot, 1))
+            .itemOutputs(ingotHot(PrPMaterials.RefractoryHighEntropyAlloy, 1))
             .duration(600)
             .eut(TierEU.RECIPE_EV)
             .metadata(GTRecipeConstants.COIL_HEAT, 3000)
@@ -120,7 +120,7 @@ public class HPSFRecipes {
     // Step 4 — Vacuum Freezer: quench hot ingot → dense RHEA ingot
     private static void sinteringPath_Cool() {
         GTValues.RA.stdBuilder()
-            .itemInputs(PrPMaterials.RefractoryHighEntropyAlloy.get(OrePrefixes.ingotHot, 1))
+            .itemInputs(ingotHot(PrPMaterials.RefractoryHighEntropyAlloy, 1))
             .itemOutputs(ingot(PrPMaterials.RefractoryHighEntropyAlloy, 1))
             .duration(400)
             .eut(TierEU.RECIPE_EV)

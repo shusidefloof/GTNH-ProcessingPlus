@@ -1,11 +1,13 @@
-package com.gtnh.processingplus.recipes.chains.materials;
+package com.gtnh.processingplus.recipes.chains.materials.finishedChains;
 
 import static com.gtnh.processingplus.recipes.PPRecipeHelper.*;
 
+import com.gtnh.processingplus.blocks.GTNHPPBlocks;
 import com.gtnh.processingplus.materials.PrPMaterials;
 import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
 
 import gregtech.api.enums.GTValues;
+import gregtech.api.enums.ItemList;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
 import gregtech.api.enums.TierEU;
@@ -25,6 +27,7 @@ public class Nylon66Recipes {
         step6_PolymerChain();
         step0_HydroxylammoniumSulfateSynthesis();
         step7_CaprolactamRoute();
+        pcvControllerRecipe();
     }
 
     // =========================================================
@@ -33,7 +36,7 @@ public class Nylon66Recipes {
     private static void step1_PhenolToCyclohexanol() {
 
         GTValues.RA.stdBuilder()
-            .itemInputs(circuit(1), GTOreDictUnificator.get(OrePrefixes.dustSmall, "catalystCobaltTitanium", 0))
+            .itemInputs(circuit(1), item("catalystCobaltTitanium", 1))
             .fluidInputs(fluid(Materials.Phenol, 1000), fluid(Materials.Hydrogen, 3000))
             .fluidOutputs(fluid(PrPMaterials.Cyclohexanol, 1000))
             .duration(200)
@@ -51,7 +54,7 @@ public class Nylon66Recipes {
             .itemInputs(circuit(2))
             .fluidInputs(fluid(PrPMaterials.Cyclohexanol, 1000), fluid(Materials.Oxygen, 500))
             .fluidOutputs(fluid("cyclohexanone", 1000), fluid(Materials.Water, 500))
-            .duration(160)
+            .duration(100*20)
             .eut(TierEU.RECIPE_HV)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
@@ -62,14 +65,14 @@ public class Nylon66Recipes {
     private static void step3_AdipicAcidSynthesis() {
 
         GTValues.RA.stdBuilder()
-            .itemInputs(circuit(24), GTOreDictUnificator.get(OrePrefixes.dustSmall, "catalystCobaltTitanium", 0))
+            .itemInputs(circuit(24), item("catalystCobaltTitanium", 1))
             .fluidInputs(fluid("cyclohexanone", 1000), fluid(Materials.NitricAcid, 4000))
             .fluidOutputs(
                 fluid(PrPMaterials.AdipicAcid, 2000),
                 fluid(Materials.NitrousOxide, 2000),
                 fluid(Materials.Water, 2000))
             .duration(150)
-            .eut(TierEU.RECIPE_LuV)
+            .eut(TierEU.RECIPE_EV)
             .metadata(GTRecipeConstants.CHEMPLANT_CASING_TIER, 6)
             .addTo(GTPPRecipeMaps.chemicalPlantRecipes);
     }
@@ -78,12 +81,20 @@ public class Nylon66Recipes {
     // 4. Green route
     // =========================================================
     private static void step4_GreenRoute() {
-
+        GTValues.RA.stdBuilder()
+            .itemInputs(circuit(4))
+            .fluidInputs(fluid(PrPMaterials.Cyclohexanol, 1000), fluid(Materials.PhosphoricAcid, 100))
+            .fluidOutputs(fluid(PrPMaterials.Cyclohexene, 1000), fluid(Materials.Water, 1000))
+            .duration(300)
+            .eut(TierEU.RECIPE_LV)
+            .metadata(GTRecipeConstants.COIL_HEAT, 1200)
+            .addTo(GTNHPPRecipeMaps.sHTRFRecipes);
         GTValues.RA.stdBuilder()
             .itemInputs(circuit(4))
             .fluidInputs(fluid(PrPMaterials.Cyclohexene, 1000), fluid("fluid.hydrogenperoxide", 3000))
-            .fluidOutputs(fluid(PrPMaterials.AdipicAcid, 1000), fluid(Materials.Water, 3000))
-            .duration(300)
+            // Green H2O2 route: clean — no nitrous oxide byproduct (that's the dirty HNO3 route only).
+            .fluidOutputs(fluid(PrPMaterials.AdipicAcid, 3000), fluid(Materials.Water, 3000))
+            .duration(20*20)
             .eut(TierEU.RECIPE_EV)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
@@ -94,12 +105,13 @@ public class Nylon66Recipes {
     private static void step5_ButadieneRoute() {
 
         GTValues.RA.stdBuilder()
-            .itemInputs(circuit(5), GTOreDictUnificator.get(OrePrefixes.dustSmall, "catalystCobaltTitanium", 0))
+            .itemInputs(circuit(5), item("catalystCobaltTitanium", 1))
             .fluidInputs(
                 fluid(Materials.Butadiene, 2000),
                 fluid(Materials.CarbonMonoxide, 2000),
                 fluid(Materials.Water, 2000))
-            .fluidOutputs(fluid(PrPMaterials.AdipicAcid, 1000))
+            // Butadiene carbonylation route: clean — no nitrous oxide byproduct.
+            .fluidOutputs(fluid(PrPMaterials.AdipicAcid, 1000), fluid(Materials.Water, 1000))
             .duration(500)
             .eut(TierEU.RECIPE_LuV)
             .metadata(GTRecipeConstants.CHEMPLANT_CASING_TIER, 7)
@@ -117,7 +129,7 @@ public class Nylon66Recipes {
             .fluidInputs(fluid(PrPMaterials.AdipicAcid, 2000), fluid(Materials.Ammonia, 2000))
             .fluidOutputs(fluid(PrPMaterials.Adiponitrile, 1000), fluid(Materials.Water, 2000))
             .duration(350)
-            .eut(TierEU.RECIPE_ZPM)
+            .eut(TierEU.RECIPE_LuV)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
 
         // Adiponitrile + 4 H2 → HMD (liquid) (ZPM LCR)
@@ -126,16 +138,17 @@ public class Nylon66Recipes {
             .fluidInputs(fluid(PrPMaterials.Adiponitrile, 1000), fluid(Materials.Hydrogen, 4000))
             .fluidOutputs(fluid(PrPMaterials.HMD, 1000))
             .duration(300)
-            .eut(TierEU.RECIPE_ZPM)
+            .eut(TierEU.RECIPE_IV)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
 
-        // HMD + Adipic Acid → molten Nylon-6,6 + Water (ZPM PCV, 1:1 molar)
+        // HMD + Adipic Acid → molten Nylon-6,6 + Water (LuV PCV, 1:1 molar)
+        // LuV-tier so a LuV energy hatch runs it — no ZPM energy hatch required before ZPM components.
         GTValues.RA.stdBuilder()
             .itemInputs(circuit(8))
             .fluidInputs(fluid(PrPMaterials.HMD, 4000), fluid(PrPMaterials.AdipicAcid, 4000))
             .fluidOutputs(molten(PrPMaterials.Nylon66, 1152), fluid(Materials.Water, 4000))
             .duration(600)
-            .eut(TierEU.RECIPE_ZPM)
+            .eut(TierEU.RECIPE_LuV)
             .addTo(GTNHPPRecipeMaps.sPCVRecipes);
     }
 
@@ -189,10 +202,30 @@ public class Nylon66Recipes {
         GTValues.RA.stdBuilder()
             .itemInputs(circuit(9))
             .fluidInputs(fluid(PrPMaterials.Caprolactam, 4000), fluid(Materials.Water, 500))
-            .fluidOutputs(molten(PrPMaterials.Nylon6, 576))
+            .fluidOutputs(molten(Materials.Polycaprolactam, 57600))
             .duration(600)
             .eut(TierEU.RECIPE_LuV)
             .metadata(GTRecipeConstants.CHEMPLANT_CASING_TIER, 5)
             .addTo(GTPPRecipeMaps.chemicalPlantRecipes);
+    }
+
+    // =========================================================
+    // PCV controller — assembler recipe gated on the ZPM Hull, but otherwise built from LuV-tier
+    // parts so it's craftable the moment you can make a ZPM hull (no ZPM components / energy hatch).
+    // =========================================================
+    private static void pcvControllerRecipe() {
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                ItemList.Hull_ZPM.get(1),
+                GTOreDictUnificator.get(OrePrefixes.circuit, Materials.LuV, 4),
+                GTOreDictUnificator.get(OrePrefixes.pipeLarge, Materials.StainlessSteel, 4),
+                GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.StainlessSteel, 2),
+                plate(Materials.StainlessSteel, 8))
+            .fluidInputs(molten(Materials.Polytetrafluoroethylene, 1152))
+            .itemOutputs(GTNHPPBlocks.PCV.getStackForm(1))
+            .duration(600)
+            .eut(TierEU.RECIPE_LuV)
+            .addTo(RecipeMaps.assemblerRecipes);
     }
 }

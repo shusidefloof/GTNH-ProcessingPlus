@@ -9,6 +9,7 @@ import gregtech.api.enums.GTValues;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.TierEU;
 import gregtech.api.recipe.RecipeMaps;
+import gregtech.api.util.GTRecipeConstants;
 
 public class AerogelRecipes {
 
@@ -38,6 +39,7 @@ public class AerogelRecipes {
             .fluidOutputs(fluid(PrPMaterials.Trimethylsilane, 1000), fluid(Materials.HydrochloricAcid, 4000))
             .duration(600)
             .eut(TierEU.RECIPE_UV)
+            .metadata(GTRecipeConstants.COIL_HEAT, 9900)
             .addTo(GTNHPPRecipeMaps.sHTRFRecipes);
     }
 

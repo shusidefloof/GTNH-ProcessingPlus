@@ -2,6 +2,7 @@ package com.gtnh.processingplus.recipes.chains.materials;
 
 import static com.gtnh.processingplus.recipes.PPRecipeHelper.*;
 
+import gregtech.api.util.GTRecipeConstants;
 import net.minecraft.item.ItemStack;
 
 import com.gtnh.processingplus.blocks.BlockGTNHPPCasings;
@@ -128,6 +129,7 @@ public class CarbonFiberRecipes {
             .itemOutputs(dust(PrPMaterials.GraphitizedCarbonFiber, 4))
             .duration(1200)
             .eut(TierEU.RECIPE_ZPM)
+            .metadata(GTRecipeConstants.COIL_HEAT, 7000)
             .addTo(GTNHPPRecipeMaps.sHTRFRecipes);
     }
 

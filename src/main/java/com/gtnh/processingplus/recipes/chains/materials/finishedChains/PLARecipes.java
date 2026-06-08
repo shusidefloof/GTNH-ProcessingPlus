@@ -1,4 +1,4 @@
-package com.gtnh.processingplus.recipes.chains.materials;
+package com.gtnh.processingplus.recipes.chains.materials.finishedChains;
 
 import static com.gtnh.processingplus.recipes.PPRecipeHelper.*;
 
@@ -45,9 +45,9 @@ public class PLARecipes {
     private static void step1_FermentationRoute() {
 
         GTValues.RA.stdBuilder()
-            .itemInputs(new net.minecraft.item.ItemStack(net.minecraft.init.Items.reeds, 8))
+            .itemInputs(new net.minecraft.item.ItemStack(net.minecraft.init.Items.reeds, 32))
             .fluidInputs(fluid(Materials.Water, 1000))
-            .fluidOutputs(fluid(PrPMaterials.LacticAcid, 1000), fluid(Materials.Ethanol, 250))
+            .fluidOutputs(fluid(PrPMaterials.LacticAcid, 1000))
             .duration(600)
             .eut(TierEU.RECIPE_MV)
             .addTo(RecipeMaps.fermentingRecipes);
@@ -61,9 +61,9 @@ public class PLARecipes {
         GTValues.RA.stdBuilder()
             .itemInputs(circuit(3))
             .fluidInputs(fluid(PrPMaterials.PropyleneGlycol, 1000), fluid(Materials.Oxygen, 500))
-            .fluidOutputs(fluid(PrPMaterials.LacticAcid, 1000))
+            .fluidOutputs(fluid(PrPMaterials.LacticAcid, 3000))
             .duration(400)
-            .eut(TierEU.RECIPE_ZPM)
+            .eut(TierEU.RECIPE_IV)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 
@@ -80,9 +80,9 @@ public class PLARecipes {
                 fluid("hydrogencyanide", 1000),
                 fluid(Materials.Ammonia, 1000),
                 fluid(Materials.Water, 2000))
-            .fluidOutputs(fluid(PrPMaterials.LacticAcid, 1000), fluid("ammonium chloride", 500))
+            .fluidOutputs(fluid(PrPMaterials.LacticAcid, 6000), fluid("ammonium chloride", 500))
             .duration(600)
-            .eut(TierEU.RECIPE_ZPM)
+            .eut(TierEU.RECIPE_IV)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 
@@ -96,12 +96,13 @@ public class PLARecipes {
             .itemOutputs(dust(PrPMaterials.Lactide, 2))
             .fluidOutputs(fluid(Materials.Water, 500))
             .duration(400)
-            .eut(TierEU.RECIPE_ZPM)
+            .eut(TierEU.RECIPE_IV)
             .addTo(GTNHPPRecipeMaps.sPCVRecipes);
     }
 
     // =========================================================
-    // 3. Lactide + Sn catalyst → molten PLA (ZPM PCV)
+    // 3. Lactide + Sn catalyst → molten PLA (LuV PCV)
+    // LuV-tier so a LuV energy hatch runs it — consistent with the rest of the PCV.
     // =========================================================
     private static void step3_Polymerization() {
 
@@ -109,7 +110,7 @@ public class PLARecipes {
             .itemInputs(dust(PrPMaterials.Lactide, 4), dust(Materials.Tin, 1))
             .fluidOutputs(molten(PrPMaterials.PolylacticAcid, 576))
             .duration(600)
-            .eut(TierEU.RECIPE_ZPM)
+            .eut(TierEU.RECIPE_LuV)
             .addTo(GTNHPPRecipeMaps.sPCVRecipes);
     }
 }

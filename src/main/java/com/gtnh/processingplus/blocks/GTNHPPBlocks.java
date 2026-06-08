@@ -6,6 +6,7 @@ import com.gtnh.processingplus.machines.MTE_CRV;
 import com.gtnh.processingplus.machines.MTE_CSC;
 import com.gtnh.processingplus.machines.MTE_HPSF;
 import com.gtnh.processingplus.machines.MTE_HTRF;
+import com.gtnh.processingplus.machines.MTE_PCV;
 import com.gtnh.processingplus.machines.MTE_SPC;
 import com.gtnh.processingplus.machines.MTE_SPCBioModule;
 import com.gtnh.processingplus.machines.MTE_SPCCryoModule;
@@ -32,6 +33,9 @@ public class GTNHPPBlocks {
 
     /** CRV controller instance — kept so its assembly-line recipe can reference the controller stack. */
     public static MTE_CRV CRV;
+
+    /** PCV controller instance — kept so its assembler controller recipe can reference the controller stack. */
+    public static MTE_PCV PCV;
 
     // Reserved MTE IDs for the four not-yet-built multiblocks. The design doc's values
     // (CIDC 31511, HPR 31512, SPU 31513, CRC 31514) are ALREADY taken by HPSF and the three SPC
@@ -60,6 +64,8 @@ public class GTNHPPBlocks {
         new MTE_AAR(31505, "gtnhpp.aar", "Ammonia Atmosphere Reactor").getStackForm(1);
         CRV = new MTE_CRV(31507, "gtnhpp.crv", "Ceramic Reaction Vessel");
         CRV.getStackForm(1);
+        PCV = new MTE_PCV(31506, "gtnhpp.pcv", "Polycondensation Vessel");
+        PCV.getStackForm(1);
         SPC = new MTE_SPC(31508, "gtnhpp.spc", "Spectral Photolithography Chamber");
         SPC.getStackForm(1);
         new MTE_CSC(31509, "gtnhpp.csc", "Cryogenic Separation Column").getStackForm(1);

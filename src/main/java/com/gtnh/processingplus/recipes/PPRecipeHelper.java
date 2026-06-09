@@ -3,8 +3,12 @@ package com.gtnh.processingplus.recipes;
 import java.util.ArrayList;
 import java.util.List;
 
+import gregtech.api.enums.GTValues;
+import gregtech.api.enums.TierEU;
 import gregtech.api.recipe.RecipeMap;
+import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.util.GTRecipe;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -232,6 +236,23 @@ public class PPRecipeHelper {
         }
         map.getBackend().removeRecipes(toRemove);
         return toRemove.size();
+    }
+
+    public static void ebfNobleGasRecipes(long baseTime, long Eu, ItemStack input, ItemStack output, FluidStack fluidOutput) {
+        FluidStack[] nobleGasses = {fluid("oganesson", 100), fluid("xenon", 250), fluid("krypton", 400),
+            fluid("neon",550), fluid("radon", 700), fluid("argon", 850), fluid("helium", 1000), fluid("nitrogen", 1000)};
+        int i = nobleGasses.length;
+        for (FluidStack nobleGass : nobleGasses) {
+            i--;
+            double eut = (double) baseTime * (Math.pow(0.8534, i));
+            GTValues.RA.stdBuilder()
+                .itemInputs(input)
+                .itemOutputs(output)
+                .fluidInputs(nobleGass)
+                .fluidOutputs(fluidOutput)
+                .eut(Math.round(eut*20))
+                .addTo(RecipeMaps.blastFurnaceRecipes);
+        }
     }
 
 }

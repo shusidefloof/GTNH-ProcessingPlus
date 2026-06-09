@@ -10,6 +10,9 @@ import gregtech.api.enums.Materials;
 import gregtech.api.enums.TierEU;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.util.GTRecipeConstants;
+import gregtech.loaders.postload.recipes.beamcrafter.BeamCrafterMetadata;
+
+import gtnhlanth.common.beamline.Particle;
 
 public class NeptuniumSynthesis {
 
@@ -21,6 +24,10 @@ public class NeptuniumSynthesis {
         step3r2_DecomposeAmmoniumNitrate();
         step4a_CalciumThermite();
         step4b_BariumThermite();
+
+        promethium();
+        promethiumChain();
+        heavyWaterHeliumBranch();
     }
 
     // =========================================================
@@ -160,5 +167,138 @@ public class NeptuniumSynthesis {
             .eut(TierEU.RECIPE_HV)
             .metadata(GTRecipeConstants.COIL_HEAT, 1500)
             .addTo(RecipeMaps.blastFurnaceRecipes);
+    }
+
+    private static void promethium() {
+        GTValues.RA.stdBuilder()
+            .itemInputs(dust(Materials.Neodymium, 1), circuit(10))
+            .itemOutputs(dust(PrPMaterials.Neodymium146, 1))
+            .outputChances(10_00)
+            .duration(50*20)
+            .eut(TierEU.RECIPE_LuV)
+            .addTo(RecipeMaps.centrifugeRecipes);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(dust(Materials.Neodymium, 1), circuit(10))
+            .fluidInputs(fluid("xenon", 2000))
+            .itemOutputs(dust(PrPMaterials.Neodymium146, 1))
+            .duration(25*20)
+            .eut(TierEU.RECIPE_ZPM)
+            .addTo(RecipeMaps.centrifugeRecipes);
+
+        // Neutron activation: ¹⁴⁶Nd + neutron capture → ¹⁴⁷Nd. BeamCrafter collides two neutron
+        // beams into the target; no fluid needed — the "bombardment" IS the particle metadata below.
+        GTValues.RA.stdBuilder()
+            .itemInputs(dust(PrPMaterials.Neodymium146, 1))
+            .itemOutputs(dust(PrPMaterials.Neodymium147, 1))
+            .metadata(
+                RecipeMaps.BEAMCRAFTER_METADATA,
+                BeamCrafterMetadata.builder()
+                    .particleID_A(Particle.NEUTRON.getId())
+                    .particleID_B(Particle.NEUTRON.getId())
+                    .amount_A(250)
+                    .amount_B(250)
+                    .build())
+            .duration(10 * 20)
+            .eut(TierEU.RECIPE_ZPM)
+            .addTo(RecipeMaps.beamcrafterRecipes);
+    }
+
+    // =========================================================
+    // Promethium chain (late ZPM): Nd-147 → fusion → Pm plasma → crude → resin purification → Pm.
+    // No stable Pm isotope exists, so the only way to get it is to breed it — fitting for ZPM.
+    // =========================================================
+    private static void promethiumChain() {
+
+        // --- Stage 2: melt the activated isotope, then fuse a proton onto it ---
+        // Nd-147 dust → molten Nd-147 (Fluid Extractor)
+        GTValues.RA.stdBuilder()
+            .itemInputs(dust(PrPMaterials.Neodymium147, 1))
+            .fluidOutputs(molten(PrPMaterials.Neodymium147, 144))
+            .duration(8 * 20)
+            .eut(TierEU.RECIPE_IV)
+            .addTo(RecipeMaps.fluidExtractionRecipes);
+
+        // Fusion: molten Nd-147 + Hydrogen plasma → Promethium plasma (proton capture, Z 60 → 61).
+        // MK2-tier startup (400M) lands this squarely at late ZPM.
+        GTValues.RA.stdBuilder()
+            .fluidInputs(molten(PrPMaterials.Neodymium147, 144), Materials.Hydrogen.getPlasma(144))
+            .fluidOutputs(Materials.Promethium.getPlasma(144))
+            .duration(8 * 20)
+            .eut(TierEU.RECIPE_ZPM)
+            .metadata(GTRecipeConstants.FUSION_THRESHOLD, 400_000_000L)
+            .addTo(RecipeMaps.fusionRecipes);
+
+        // --- Stage 3: freeze the plasma into a crude condensate using cold helium as the coolant ---
+        // (the crude carries the Sm-147 that Pm-147 decays into). Helium comes from the heavy-water
+        // branch below, but is a standard fluid so the chain isn't hard-locked to that path.
+        GTValues.RA.stdBuilder()
+            .fluidInputs(Materials.Promethium.getPlasma(144), Materials.Helium.getGas(1000))
+            .fluidOutputs(PrPMaterials.RawPromethium.getFluidOrGas(144))
+            .duration(10 * 20)
+            .eut(TierEU.RECIPE_ZPM)
+            .addTo(RecipeMaps.vacuumFreezerRecipes);
+
+        // --- Stage 4: regenerable resin purification (all fluids) ---
+        // PRIME — make fresh resin from scratch (no loop needed, so the cycle is start-able).
+        GTValues.RA.stdBuilder()
+            .itemInputs(dust(Materials.Polytetrafluoroethylene, 2), circuit(4))
+            .fluidInputs(fluid(Materials.PhosphoricAcid, 1000))
+            .fluidOutputs(PrPMaterials.PromethiumResin.getFluidOrGas(1000))
+            .duration(12 * 20)
+            .eut(TierEU.RECIPE_LuV)
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+
+        // LOAD — resin grabs the promethium; samarium falls out as raffinate (the Pm-147 decay product).
+        GTValues.RA.stdBuilder()
+            .fluidInputs(PrPMaterials.RawPromethium.getFluidOrGas(144), PrPMaterials.PromethiumResin.getFluidOrGas(1000))
+            .itemOutputs(dust(Materials.Samarium, 1))
+            .fluidOutputs(PrPMaterials.LoadedPromethiumResin.getFluidOrGas(1000))
+            .duration(10 * 20)
+            .eut(TierEU.RECIPE_ZPM)
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+
+        // STRIP + REGENERATE — acid elutes pure promethium as a molten fluid and hands the resin back.
+        GTValues.RA.stdBuilder()
+            .fluidInputs(PrPMaterials.LoadedPromethiumResin.getFluidOrGas(1000), fluid(Materials.HydrochloricAcid, 1000))
+            .fluidOutputs(Materials.Promethium.getMolten(144), PrPMaterials.PromethiumResin.getFluidOrGas(1000))
+            .duration(10 * 20)
+            .eut(TierEU.RECIPE_ZPM)
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+    }
+
+    // =========================================================
+    // Heavy-water → cold-helium branch. Heavy water electrolyses to deuterium (feeding GT's own
+    // D-T → helium-plasma fusion); that helium plasma is then cooled — using heavy water as coolant —
+    // in the Vacuum Freezer into cold helium, which freezes the promethium plasma in Stage 3.
+    // GT cools helium plasma only via the (hardcoded) Extreme Heat Exchanger, so there's no recipe
+    // to remove — this IS the recipe-based cooling.
+    // =========================================================
+    private static void heavyWaterHeliumBranch() {
+
+        // Enrich heavy water from ordinary water (distillation — D₂O is rare, hence the low yield).
+        GTValues.RA.stdBuilder()
+            .itemInputs(circuit(1))
+            .fluidInputs(fluid(Materials.Water, 2000))
+            .fluidOutputs(PrPMaterials.HeavyWater.getFluidOrGas(100))
+            .duration(20 * 20)
+            .eut(TierEU.RECIPE_HV)
+            .addTo(RecipeMaps.distilleryRecipes);
+
+        // Heavy water electrolysis → deuterium (+ oxygen), feedstock for D-T → He plasma fusion.
+        GTValues.RA.stdBuilder()
+            .fluidInputs(PrPMaterials.HeavyWater.getFluidOrGas(1000))
+            .fluidOutputs(Materials.Deuterium.getGas(1000), Materials.Oxygen.getGas(500))
+            .duration(10 * 20)
+            .eut(TierEU.RECIPE_EV)
+            .addTo(RecipeMaps.electrolyzerRecipes);
+
+        // Cool helium plasma with heavy water → cold helium (the Stage 3 coolant).
+        GTValues.RA.stdBuilder()
+            .fluidInputs(Materials.Helium.getPlasma(1000), PrPMaterials.HeavyWater.getFluidOrGas(1000))
+            .fluidOutputs(Materials.Helium.getGas(1000))
+            .duration(10 * 20)
+            .eut(TierEU.RECIPE_ZPM)
+            .addTo(RecipeMaps.vacuumFreezerRecipes);
     }
 }

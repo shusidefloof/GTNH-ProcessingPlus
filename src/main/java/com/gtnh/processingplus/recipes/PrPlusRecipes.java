@@ -29,15 +29,14 @@ public class PrPlusRecipes {
         AerogelRecipes.init();
         MaterialUsesRecipes.init();
         CRVRecipes.init();
-        CoalFlyashRecipes.init();
         FreonRecipes.init();
         CSCRecipes.init();
         BOFRecipes.init();
         CryoUpgradeRecipes.init();
         NeptuniumSynthesis.init();
         HPSFRecipes.init();
-        TaNbChainRecipes.init();
         LuVExotics.init();
         HTRFRecipes.init();
+        PassiveableMaterials.init();
     }
 }

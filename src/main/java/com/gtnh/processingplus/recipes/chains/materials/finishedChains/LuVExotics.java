@@ -88,9 +88,9 @@ public class LuVExotics {
                 .itemInputs(circuit(1))
                 .fluidInputs(
                     fluid("dye.chemical.dyegreen", 1152),
-                    molten(Materials.Oriharukon, 36),
-                    molten(Materials.Quantium, 36))
-                .fluidOutputs(fluid(PrPMaterials.VibraniumDye, 1440))
+                    molten(Materials.Oriharukon, 72),
+                    molten(Materials.Quantium, 72))
+                .fluidOutputs(fluid(PrPMaterials.VibraniumDye, 720))
                 .duration(400)
                 .eut(TierEU.RECIPE_LuV)
                 .addTo(GTPPRecipeMaps.mixerNonCellRecipes));

@@ -288,6 +288,12 @@ public class PrPMaterials implements Runnable {
     public static Werkstoff BariumOxide;
     public static Werkstoff DilutedNitricAcid;
     public static Werkstoff AmmoniumNitrateSolution;
+    public static Werkstoff Neodymium146;
+    public static Werkstoff Neodymium147;
+    public static Werkstoff RawPromethium;
+    public static Werkstoff PromethiumResin;
+    public static Werkstoff LoadedPromethiumResin;
+    public static Werkstoff HeavyWater;
 
     // =========================
     // RHEA CHAIN
@@ -2207,6 +2213,76 @@ public class PrPMaterials implements Runnable {
                 new Werkstoff.Stats(),
                 Werkstoff.Types.MIXTURE,
                 fluidFeatures(),
+                id(),
+                TextureSet.SET_FLUID));
+
+        Neodymium146 = register(
+            new Werkstoff(
+                rgb(42, 42, 44),
+                "Neodymium 146",
+                "¹⁴⁶Nd",
+                new Werkstoff.Stats(),
+                Werkstoff.Types.MATERIAL,
+                new Werkstoff.GenerationFeatures().onlyDust(),
+                id(),
+                TextureSet.SET_METALLIC));
+
+        Neodymium147 = register(
+            new Werkstoff(
+                rgb(40, 40, 52),
+                "Neodymium 147",
+                "¹⁴⁷Nd",
+                new Werkstoff.Stats(),
+                Werkstoff.Types.MATERIAL,
+                // molten form added so it can feed the fusion reactor (proton-capture to Promethium).
+                new Werkstoff.GenerationFeatures().onlyDust().addMolten(),
+                id(),
+                TextureSet.SET_METALLIC));
+
+        // Crude promethium straight off the freezer — carries the Sm-147 that Pm-147 decays into,
+        // which is exactly what the resin purification removes.
+        RawPromethium = register(
+            new Werkstoff(
+                rgb(150, 120, 60),
+                "Raw Promethium Concentrate",
+                "crude ¹⁴⁷Pm",
+                new Werkstoff.Stats(),
+                Werkstoff.Types.MATERIAL,
+                new Werkstoff.GenerationFeatures().disable().addCells(),
+                id(),
+                TextureSet.SET_FLUID));
+
+        PromethiumResin = register(
+            new Werkstoff(
+                rgb(90, 120, 90),
+                "Promethium Extraction Resin",
+                "Pm-resin",
+                new Werkstoff.Stats(),
+                Werkstoff.Types.MATERIAL,
+                new Werkstoff.GenerationFeatures().disable().addCells(),
+                id(),
+                TextureSet.SET_FLUID));
+
+        LoadedPromethiumResin = register(
+            new Werkstoff(
+                rgb(120, 150, 80),
+                "Loaded Promethium Resin",
+                "Pm-resin (loaded)",
+                new Werkstoff.Stats(),
+                Werkstoff.Types.MATERIAL,
+                new Werkstoff.GenerationFeatures().disable().addCells(),
+                id(),
+                TextureSet.SET_FLUID));
+
+        // Heavy water (D₂O) — a real fluid now, since neither IC2 nor GT5U ship one. Cells + fluid only.
+        HeavyWater = register(
+            new Werkstoff(
+                rgb(40, 80, 120),
+                "Heavy Water",
+                "D₂O",
+                new Werkstoff.Stats(),
+                Werkstoff.Types.MATERIAL,
+                new Werkstoff.GenerationFeatures().disable().addCells(),
                 id(),
                 TextureSet.SET_FLUID));
     }

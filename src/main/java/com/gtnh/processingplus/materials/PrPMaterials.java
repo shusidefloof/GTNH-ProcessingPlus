@@ -85,7 +85,6 @@ public class PrPMaterials implements Runnable {
     // POLYMERS & SOLIDS
     // =========================
     public static Werkstoff Nylon66;
-    public static Werkstoff Nylon6;
     public static Werkstoff PolylacticAcid;
     public static Werkstoff Kapton;
     public static Werkstoff CarbonFiberComposite;
@@ -359,6 +358,7 @@ public class PrPMaterials implements Runnable {
     public static Werkstoff HBNLubricant; // hBN-suspended lubricant fluid (UHV machine fluid)
     public static Werkstoff PAAAdhesive; // polyamic acid adhesive fluid (precision bonding)
     public static Werkstoff LoadedAerogelCatalystSupport; // PGM-impregnated aerogel catalyst (CRC consumable)
+    public static Werkstoff AcetoneSaturatedGel;
     public static Werkstoff AerogelInsulationPanel; // aerogel + CF composite thermal panel
     public static Werkstoff SilicaSol;
     public static Werkstoff HydrophobicSilicaAerogel;
@@ -2071,6 +2071,18 @@ public class PrPMaterials implements Runnable {
                 polymerFeatures(),
                 id(),
                 TextureSet.SET_DULL));
+
+        AcetoneSaturatedGel = register(
+            new Werkstoff(
+                rgb(219, 198, 138),
+                "Acetone Saturated Gel",
+                subscriptNumbers("SiO2/C3H6O"),
+                new Werkstoff.Stats(),
+                Werkstoff.Types.MIXTURE,
+                polymerFeatures(),
+                id(),
+                TextureSet.SET_DULL));
+
 
         AerogelInsulationPanel = register(
             new Werkstoff(

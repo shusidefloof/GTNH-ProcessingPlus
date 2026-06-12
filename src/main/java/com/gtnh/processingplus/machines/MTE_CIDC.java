@@ -558,4 +558,6 @@ public class MTE_CIDC extends MTEExtendedPowerMultiBlockBase<MTE_CIDC> implement
     public boolean supportsVoidProtection() {
         return true;
     }
+
+
 }

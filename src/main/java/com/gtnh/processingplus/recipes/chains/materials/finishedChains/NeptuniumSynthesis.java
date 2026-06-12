@@ -3,6 +3,7 @@ package com.gtnh.processingplus.recipes.chains.materials.finishedChains;
 import static com.gtnh.processingplus.recipes.PPRecipeHelper.*;
 
 import com.gtnh.processingplus.materials.PrPMaterials;
+import static com.gtnh.processingplus.items.Intermediate.*;
 
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.ItemList;
@@ -26,7 +27,6 @@ public class NeptuniumSynthesis {
         step4b_BariumThermite();
 
         promethium();
-        promethiumChain();
         heavyWaterHeliumBranch();
     }
 
@@ -190,6 +190,7 @@ public class NeptuniumSynthesis {
         // beams into the target; no fluid needed — the "bombardment" IS the particle metadata below.
         GTValues.RA.stdBuilder()
             .itemInputs(dust(PrPMaterials.Neodymium146, 1))
+            .fluidInputs(fluid(Materials.Deuterium, 700))
             .itemOutputs(dust(PrPMaterials.Neodymium147, 1))
             .metadata(
                 RecipeMaps.BEAMCRAFTER_METADATA,
@@ -202,13 +203,11 @@ public class NeptuniumSynthesis {
             .duration(10 * 20)
             .eut(TierEU.RECIPE_ZPM)
             .addTo(RecipeMaps.beamcrafterRecipes);
-    }
 
     // =========================================================
     // Promethium chain (late ZPM): Nd-147 → fusion → Pm plasma → crude → resin purification → Pm.
     // No stable Pm isotope exists, so the only way to get it is to breed it — fitting for ZPM.
     // =========================================================
-    private static void promethiumChain() {
 
         // --- Stage 2: melt the activated isotope, then fuse a proton onto it ---
         // Nd-147 dust → molten Nd-147 (Fluid Extractor)
@@ -222,7 +221,7 @@ public class NeptuniumSynthesis {
         // Fusion: molten Nd-147 + Hydrogen plasma → Promethium plasma (proton capture, Z 60 → 61).
         // MK2-tier startup (400M) lands this squarely at late ZPM.
         GTValues.RA.stdBuilder()
-            .fluidInputs(molten(PrPMaterials.Neodymium147, 144), Materials.Hydrogen.getPlasma(144))
+            .fluidInputs(molten(PrPMaterials.Neodymium147, 144), Materials.Hydrogen.getPlasma(1000))
             .fluidOutputs(Materials.Promethium.getPlasma(144))
             .duration(8 * 20)
             .eut(TierEU.RECIPE_ZPM)
@@ -233,7 +232,7 @@ public class NeptuniumSynthesis {
         // (the crude carries the Sm-147 that Pm-147 decays into). Helium comes from the heavy-water
         // branch below, but is a standard fluid so the chain isn't hard-locked to that path.
         GTValues.RA.stdBuilder()
-            .fluidInputs(Materials.Promethium.getPlasma(144), Materials.Helium.getGas(1000))
+            .fluidInputs(Materials.Promethium.getPlasma(144), fluid(PrPMaterials.HeavyWater, 1000))
             .fluidOutputs(PrPMaterials.RawPromethium.getFluidOrGas(144))
             .duration(10 * 20)
             .eut(TierEU.RECIPE_ZPM)
@@ -242,8 +241,8 @@ public class NeptuniumSynthesis {
         // --- Stage 4: regenerable resin purification (all fluids) ---
         // PRIME — make fresh resin from scratch (no loop needed, so the cycle is start-able).
         GTValues.RA.stdBuilder()
-            .itemInputs(dust(Materials.Polytetrafluoroethylene, 2), circuit(4))
-            .fluidInputs(fluid(Materials.PhosphoricAcid, 1000))
+            .itemInputs(circuit(4))
+            .fluidInputs(fluid(Materials.PhosphoricAcid, 1000), molten(Materials.Polytetrafluoroethylene, 1000))
             .fluidOutputs(PrPMaterials.PromethiumResin.getFluidOrGas(1000))
             .duration(12 * 20)
             .eut(TierEU.RECIPE_LuV)

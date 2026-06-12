@@ -1,10 +1,10 @@
 package com.gtnh.processingplus.machines;
 
+import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlock;
 import static gregtech.api.enums.HatchElement.Energy;
 import static gregtech.api.enums.HatchElement.InputBus;
 import static gregtech.api.enums.HatchElement.InputHatch;
 import static gregtech.api.enums.HatchElement.Maintenance;
-import static gregtech.api.enums.HatchElement.Muffler;
 import static gregtech.api.enums.HatchElement.OutputBus;
 import static gregtech.api.enums.HatchElement.OutputHatch;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_LARGE_CHEMICAL_REACTOR;
@@ -13,7 +13,6 @@ import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_LARGE_CHEMICA
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_LARGE_CHEMICAL_REACTOR_GLOW;
 import static gregtech.api.enums.Textures.BlockIcons.casingTexturePages;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
-import static gregtech.api.util.GTStructureUtility.ofFrame;
 
 import java.util.List;
 
@@ -32,7 +31,6 @@ import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import gregtech.api.enums.Materials;
 import gregtech.api.enums.SoundResource;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
@@ -44,64 +42,58 @@ import gregtech.api.structure.error.StructureError;
 import gregtech.api.structure.error.StructureErrorRegistry;
 import gregtech.api.render.TextureFactory;
 import gregtech.api.util.MultiblockTooltipBuilder;
+import gregtech.api.util.tooltip.TooltipHelper;
 
 /**
- * Polycondensation Vessel — a tall hollow reaction column (5×5×7) rather than a cube. The shell is
- * Chemically Inert Reaction Vessel casing; a stainless-steel frame "spine" runs up the hollow core
- * as the stirring/condenser internals. Runs the step-growth polymer condensations (Nylon-6,6, PLA)
- * on {@code sPCVRecipes}.
+ * Subatomic Patterning Unit (SPU) — UIV-tier multiblock that imprints a quantum lattice onto the
+ * photoresist substrate. Runs the three UIV photoresist steps (stabilized QGP matrix → transcendent
+ * lattice → quantum-field imprint), so it gates UIV circuit boards.
  */
-public class MTE_PCV extends MTEExtendedPowerMultiBlockBase<MTE_PCV> implements ISurvivalConstructable {
+public class MTE_SPU extends MTEExtendedPowerMultiBlockBase<MTE_SPU> implements ISurvivalConstructable {
 
     private static final int CASING_INDEX = 11;
     private static final String STRUCTURE_PIECE_MAIN = "main";
-    // Controller sits on the front face, centre column, at mid-height.
     private static final int OFFSET_X = 2;
-    private static final int OFFSET_Y = 3;
+    private static final int OFFSET_Y = 2;
     private static final int OFFSET_Z = 0;
 
-    private static IStructureDefinition<MTE_PCV> STRUCTURE_DEFINITION = null;
+    private static IStructureDefinition<MTE_SPU> STRUCTURE_DEFINITION = null;
 
-    public MTE_PCV(int aID, String aName, String aNameRegional) {
+    public MTE_SPU(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
     }
 
-    protected MTE_PCV(MTE_PCV prototype) {
+    protected MTE_SPU(MTE_SPU prototype) {
         super(prototype.mName);
     }
 
     @Override
     public IMetaTileEntity newMetaEntity(IGregTechTileEntity aTileEntity) {
-        return new MTE_PCV(this);
+        return new MTE_SPU(this);
     }
 
     @Override
-    public IStructureDefinition<MTE_PCV> getStructureDefinition() {
+    public IStructureDefinition<MTE_SPU> getStructureDefinition() {
         if (STRUCTURE_DEFINITION == null) {
-            STRUCTURE_DEFINITION = StructureDefinition.<MTE_PCV>builder()
+            STRUCTURE_DEFINITION = StructureDefinition.<MTE_SPU>builder()
                 .addShape(
                     STRUCTURE_PIECE_MAIN,
-                    // shape[z][y][x] — 5 depth slices (front→back), each 7 rows (top→bottom) × 5 cols.
-                    // 'C' = PCV casing/hatch, 'F' = stainless frame spine, ' ' = hollow interior.
+                    // shape[z][y][x] — 5×5×5. 'U' = Subatomic Patterning Casing or hatch, 'S' = Spectral
+                    // Isolation Casing (central patterning-beam lattice column), ' ' = void
                     new String[][] {
-                        // z=0 — front face (solid casing, controller centre)
-                        { "CCCCC", "CCCCC", "CCCCC", "CC~CC", "CCCCC", "CCCCC", "CCCCC" },
-                        // z=1 — hollow body ring
-                        { "CCCCC", "C   C", "C   C", "C   C", "C   C", "C   C", "CCCCC" },
-                        // z=2 — hollow body ring with central frame spine
-                        { "CCCCC", "C F C", "C F C", "C F C", "C F C", "C F C", "CCCCC" },
-                        // z=3 — hollow body ring
-                        { "CCCCC", "C   C", "C   C", "C   C", "C   C", "C   C", "CCCCC" },
-                        // z=4 — back face (solid casing)
-                        { "CCCCC", "CCCCC", "CCCCC", "CCCCC", "CCCCC", "CCCCC", "CCCCC" }, })
+                        { "UUUUU", "UUUUU", "UU~UU", "UUUUU", "UUUUU" },
+                        { "UUUUU", "U   U", "U S U", "U   U", "UUUUU" },
+                        { "UUUUU", "U   U", "U S U", "U   U", "UUUUU" },
+                        { "UUUUU", "U   U", "U S U", "U   U", "UUUUU" },
+                        { "UUUUU", "UUUUU", "UUUUU", "UUUUU", "UUUUU" }, })
                 .addElement(
-                    'C',
-                    buildHatchAdder(MTE_PCV.class)
-                        .atLeast(Energy, InputBus, InputHatch, OutputBus, OutputHatch, Maintenance, Muffler)
+                    'U',
+                    buildHatchAdder(MTE_SPU.class)
+                        .atLeast(Energy, InputBus, InputHatch, OutputBus, OutputHatch, Maintenance)
                         .casingIndex(CASING_INDEX)
                         .hint(1)
-                        .buildAndChain(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.PCV_CASING))
-                .addElement('F', ofFrame(Materials.StainlessSteel))
+                        .buildAndChain(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.SUBATOMIC_PATTERNING_CASING))
+                .addElement('S', ofBlock(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.SPC_CASING))
                 .build();
         }
         return STRUCTURE_DEFINITION;
@@ -140,7 +132,7 @@ public class MTE_PCV extends MTEExtendedPowerMultiBlockBase<MTE_PCV> implements 
 
     @Override
     public RecipeMap<?> getRecipeMap() {
-        return GTNHPPRecipeMaps.sPCVRecipes;
+        return GTNHPPRecipeMaps.sSPURecipes;
     }
 
     @Override
@@ -172,20 +164,27 @@ public class MTE_PCV extends MTEExtendedPowerMultiBlockBase<MTE_PCV> implements 
     @Override
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType("Polycondensation Vessel, PCV")
-            .addInfo(EnumChatFormatting.GRAY + "Runs " + EnumChatFormatting.AQUA + "vacuum-assisted polymerization"
-                + EnumChatFormatting.GRAY + " reactions.")
-            .beginStructureBlock(5, 7, 5, true)
-            .addController("Front face, centre column")
-            .addCasingInfoMin("Chemically Inert Reaction Vessel", 60, false)
-            .addOtherStructurePart("Stainless Steel Frame", "Central spine, 5 tall")
-            .addInputBus("Any casing", 1)
-            .addInputHatch("Any casing", 1)
-            .addOutputBus("Any casing", 1)
-            .addOutputHatch("Any casing", 1)
-            .addEnergyHatch("Any casing", 1)
-            .addMufflerHatch("Any casing", 1)
-            .addMaintenanceHatch("Any casing", 1)
+        tt.addMachineType("Subatomic Patterning Unit, SPU")
+            .addInfo(EnumChatFormatting.GRAY + "Patterns matter at the " + EnumChatFormatting.LIGHT_PURPLE
+                + "subatomic scale" + EnumChatFormatting.GRAY + ".")
+            .addSeparator()
+            .addInfo(
+                EnumChatFormatting.GOLD + "Patterning column: "
+                    + EnumChatFormatting.GRAY
+                    + "exactly "
+                    + TooltipHelper.coloredText("3", EnumChatFormatting.YELLOW)
+                    + EnumChatFormatting.GRAY
+                    + " Spectral Isolation Casings down the centre.")
+            .beginStructureBlock(5, 5, 5, true)
+            .addController("Front face, center")
+            .addCasingInfoMin("Subatomic Patterning Casing", 90, false)
+            .addCasingInfoExactly("Spectral Isolation Casing", 3, false)
+            .addInputBus("Any shell casing", 1)
+            .addInputHatch("Any shell casing", 1)
+            .addOutputBus("Any shell casing", 1)
+            .addOutputHatch("Any shell casing", 1)
+            .addEnergyHatch("Any shell casing", 1)
+            .addMaintenanceHatch("Any shell casing", 1)
             .toolTipFinisher("_Shusi_");
         return tt;
     }

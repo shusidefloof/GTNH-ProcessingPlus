@@ -45,6 +45,11 @@ public class CommonProxy {
         } catch (Throwable t) {
             GTNHProcessingPlus.LOG.error("IV-hull RHEA swap failed", t);
         }
+        try {
+            com.gtnh.processingplus.recipes.chains.infrastructure.CACRecipes.migrateSuperconductors();
+        } catch (Throwable t) {
+            GTNHProcessingPlus.LOG.error("CAC superconductor migration failed", t);
+        }
     }
 
     public void serverStarting(FMLServerStartingEvent event) {}

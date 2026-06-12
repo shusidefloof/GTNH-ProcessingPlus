@@ -16,6 +16,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 
 import bartworks.system.material.Werkstoff;
+import com.gtnh.processingplus.items.Intermediate;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
 import gregtech.api.util.GTOreDictUnificator;
@@ -94,6 +95,7 @@ public class PPRecipeHelper {
     public static ItemStack foil(Werkstoff w, int amount) {
         return w.get(OrePrefixes.foil, amount);
     }
+    public static ItemStack densePlate(Werkstoff w, int amount) {return w.get(OrePrefixes.plateDense, amount);}
     public static ItemStack rotor(Materials m, int amount) {
         return GTOreDictUnificator.get(OrePrefixes.rotor, m, amount);
     }
@@ -141,6 +143,15 @@ public class PPRecipeHelper {
             .copy();
         copy.stackSize = amount;
         return copy;
+    }
+
+    // =========================
+    // ITEMS — Chain intermediates (shared MetaItem)
+    // =========================
+
+    /** Single-use chain intermediate from the shared {@link Intermediate} MetaItem. */
+    public static ItemStack intermediate(Intermediate i, int amount) {
+        return i.get(amount);
     }
 
     // =========================

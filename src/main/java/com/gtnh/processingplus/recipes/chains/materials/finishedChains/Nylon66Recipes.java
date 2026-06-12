@@ -4,6 +4,7 @@ import static com.gtnh.processingplus.recipes.PPRecipeHelper.*;
 
 import com.gtnh.processingplus.blocks.GTNHPPBlocks;
 import com.gtnh.processingplus.materials.PrPMaterials;
+import static com.gtnh.processingplus.items.Intermediate.*;
 import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
 
 import gregtech.api.enums.GTValues;

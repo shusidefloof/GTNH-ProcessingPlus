@@ -39,7 +39,13 @@ public class BlockGTNHPPCasings extends Block {
     public static final int QUANTUM_MODULE_CASING = 19;
     public static final int HTRF_REINFORCED_CASING = 20; // after your existing ones
     public static final int CF_COMPOSITE_CASING = 21; // Carbon Fiber Composite Casing (CRC structural shell)
-    public static final int NUM_CASINGS = 22;
+    public static final int CRYOSTAT_VACUUM_CASING = 22; // CAC outer vacuum shell
+    public static final int AEROGEL_INSULATION_BLOCK = 23; // CAC inner aerogel lining (load-bearing)
+    public static final int RADIOISOTOPE_CASING = 24; // RTG generator shell (lead-shielded)
+    public static final int ISOTOPIC_DOPING_CASING = 25; // CIDC chamber shell
+    public static final int HYBRID_PHASE_CASING = 26; // HPR reactor shell
+    public static final int SUBATOMIC_PATTERNING_CASING = 27; // SPU shell
+    public static final int NUM_CASINGS = 28;
 
 
     // @formatter:off
@@ -66,6 +72,12 @@ public class BlockGTNHPPCasings extends Block {
         "Quantum Alignment Module Casing",       // Quantum Module multiblock
         "Heat-Treated Chemical Casing",  // HTRF reinforced
         "Carbon Fiber Composite Casing", // CRC structural shell
+        "Cryostat Vacuum Casing",        // CAC outer shell
+        "Aerogel Insulation Block",      // CAC inner lining
+        "Radioisotope Thermoelectric Casing", // RTG shell
+        "Isotopic Doping Casing",             // CIDC shell
+        "Hybrid Phase Casing",                // HPR shell
+        "Subatomic Patterning Casing",        // SPU shell
     };
 
     // Borrow GT5U's existing block textures as placeholders until custom art is made.
@@ -93,6 +105,12 @@ public class BlockGTNHPPCasings extends Block {
         "gregtech:iconsets/MACHINE_CASING_RADIATIONPROOF",       // Quantum module casing
         "gregtech:iconsets/MACHINE_CASING_CHEMICALLY_INERT", // SiC color, same as HTRF casing
         "gregtech:iconsets/MACHINE_HEATPROOFCASING", // CF composite: dark woven look (placeholder)
+        "gregtech:iconsets/MACHINE_CASING_FROST_PROOF",          // CAC vacuum shell (frost)
+        "gregtech:iconsets/MACHINE_CASING_CLEAN_STAINLESSSTEEL", // CAC aerogel lining (white)
+        "gregtech:iconsets/MACHINE_CASING_RADIATIONPROOF",       // RTG shell (lead-shielded)
+        "gregtech:iconsets/MACHINE_CASING_CLEAN_STAINLESSSTEEL", // CIDC shell (clean precision)
+        "gregtech:iconsets/MACHINE_CASING_FUSION_GLASS",         // HPR shell (energetic plasma/bio)
+        "gregtech:iconsets/MACHINE_CASING_RADIATIONPROOF",       // SPU shell (high-tech)
     };
     // @formatter:on
 

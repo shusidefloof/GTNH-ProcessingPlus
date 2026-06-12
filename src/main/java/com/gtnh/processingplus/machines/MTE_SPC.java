@@ -60,6 +60,8 @@ import gregtech.api.logic.ProcessingLogic;
 import gregtech.api.metatileentity.implementations.MTEBasicMachine;
 import gregtech.api.metatileentity.implementations.MTEExtendedPowerMultiBlockBase;
 import gregtech.api.recipe.RecipeMap;
+import gregtech.api.structure.error.StructureError;
+import gregtech.api.structure.error.StructureErrorRegistry;
 import gregtech.api.recipe.check.CheckRecipeResult;
 import gregtech.api.render.TextureFactory;
 import gregtech.api.util.GTRecipe;
@@ -231,13 +233,14 @@ public class MTE_SPC extends MTEExtendedPowerMultiBlockBase<MTE_SPC> implements 
     // -------------------------------------------------------------------------
 
     @Override
-    public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
+    public void checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack, List<StructureError> errors) {
         mDetectedStations.clear();
         mInstalledAdapters.clear();
         mGlassTier = -1;
-        if (!checkPiece(PIECE_MAIN, OFFSET_X, OFFSET_Y, 0)) return false;
+        if (!checkPiece(PIECE_MAIN, OFFSET_X, OFFSET_Y, 0, errors)) return;
         mStationCount = mDetectedStations.size();
-        return mMaintenanceHatches.size() == 1 && !mEnergyHatches.isEmpty();
+        if (mMaintenanceHatches.size() != 1) errors.add(StructureErrorRegistry.UNKNOWN_STRUCTURE_ERROR);
+        if (mEnergyHatches.isEmpty()) errors.add(StructureErrorRegistry.UNKNOWN_STRUCTURE_ERROR);
     }
 
     @Override
@@ -571,7 +574,8 @@ public class MTE_SPC extends MTEExtendedPowerMultiBlockBase<MTE_SPC> implements 
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType("Spectral Photolithography Chamber, SPC")
-            .addInfo("Etches circuit boards through an in-line sequence of GT machines.")
+            .addInfo(EnumChatFormatting.GRAY + "Runs " + EnumChatFormatting.LIGHT_PURPLE
+                + "light-isolated photochemical" + EnumChatFormatting.GRAY + " processing.")
             .addInfo(
                 TooltipHelper.coloredText("6", EnumChatFormatting.YELLOW) + EnumChatFormatting.GRAY
                     + " main station bays (left wall) + "
@@ -649,7 +653,7 @@ public class MTE_SPC extends MTEExtendedPowerMultiBlockBase<MTE_SPC> implements 
             .addEnergyHatch("Any Spectral Isolation Casing", 1)
             .addMufflerHatch("Any Spectral Isolation Casing", 1)
             .addMaintenanceHatch("Any Spectral Isolation Casing", 1)
-            .toolTipFinisher();
+            .toolTipFinisher("_Shusi_");
         return tt;
     }
 

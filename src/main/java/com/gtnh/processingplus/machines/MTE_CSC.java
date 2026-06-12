@@ -17,6 +17,8 @@ import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
 import java.util.Arrays;
 import java.util.concurrent.ThreadLocalRandom;
 
+import java.util.List;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
@@ -44,7 +46,10 @@ import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.logic.ProcessingLogic;
 import gregtech.api.metatileentity.implementations.MTEExtendedPowerMultiBlockBase;
+import gregtech.api.logic.ProcessingLogic;
 import gregtech.api.recipe.RecipeMap;
+import gregtech.api.structure.error.StructureError;
+import gregtech.api.structure.error.StructureErrorRegistry;
 import gregtech.api.recipe.check.CheckRecipeResult;
 import gregtech.api.recipe.check.SimpleCheckRecipeResult;
 import gregtech.api.render.TextureFactory;
@@ -120,9 +125,9 @@ public class MTE_CSC extends MTEExtendedPowerMultiBlockBase<MTE_CSC> implements 
     }
 
     @Override
-    public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
-        if (!checkPiece(STRUCTURE_PIECE_MAIN, OFFSET_X, OFFSET_Y, OFFSET_Z)) return false;
-        return mMaintenanceHatches.size() == 1;
+    public void checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack, List<StructureError> errors) {
+        checkPiece(STRUCTURE_PIECE_MAIN, OFFSET_X, OFFSET_Y, OFFSET_Z, errors);
+        if (mMaintenanceHatches.size() != 1) errors.add(StructureErrorRegistry.UNKNOWN_STRUCTURE_ERROR);
     }
 
     // Called before inputs are consumed — capture primary (non-Freon) fluid for deficit tracking
@@ -202,6 +207,11 @@ public class MTE_CSC extends MTEExtendedPowerMultiBlockBase<MTE_CSC> implements 
     }
 
     @Override
+    protected ProcessingLogic createProcessingLogic() {
+        return new ProcessingLogic();
+    }
+
+    @Override
     public RecipeMap<?> getRecipeMap() {
         return GTNHPPRecipeMaps.sCSCRecipes;
     }
@@ -236,7 +246,8 @@ public class MTE_CSC extends MTEExtendedPowerMultiBlockBase<MTE_CSC> implements 
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType("Cryogenic Separation Column, CSC")
-            .addInfo("Liquefies and fractionally separates industrial gases via Freon R-12 refrigeration.")
+            .addInfo(EnumChatFormatting.GRAY + "Separates fluids by " + EnumChatFormatting.AQUA
+                + "cryogenic distillation" + EnumChatFormatting.GRAY + ".")
             .addSeparator()
             .addStaticParallelInfo(8)
             .addInfo(
@@ -271,7 +282,7 @@ public class MTE_CSC extends MTEExtendedPowerMultiBlockBase<MTE_CSC> implements 
             .addEnergyHatch("Any casing", 1)
             .addMufflerHatch("Any casing", 1)
             .addMaintenanceHatch("Any casing", 1)
-            .toolTipFinisher();
+            .toolTipFinisher("_Shusi_");
         return tt;
     }
 

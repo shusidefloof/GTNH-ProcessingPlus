@@ -123,5 +123,18 @@ public class GTNHPPRecipeMaps {
         .maxIO(2, 1, 2, 1)
         .build();
 
+    /** Cryogenic Annealing Cryostat — aerogel-insulated superconductor anneal, UHV-tier and up. */
+    public static final RecipeMap<RecipeMapBackend> sCACRecipes = RecipeMapBuilder
+        .of("gtnhpp.recipe.cac")
+        .maxIO(8, 2, 2, 2)
+        .build();
+
+    /** RTG fuel — placeholder map; the RTG counts betavoltaic cells directly, this only keeps getRecipeMap non-null. */
+    public static final RecipeMap<RecipeMapBackend> sRTGRecipes = RecipeMapBuilder
+        .of("gtnhpp.recipe.rtg")
+        .maxIO(1, 1, 0, 0)
+        .disableRegisterNEI()
+        .build();
+
     // @formatter:on
 }

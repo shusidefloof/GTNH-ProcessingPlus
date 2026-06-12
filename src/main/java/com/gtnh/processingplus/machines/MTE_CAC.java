@@ -1,19 +1,18 @@
 package com.gtnh.processingplus.machines;
 
+import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlock;
 import static gregtech.api.enums.HatchElement.Energy;
 import static gregtech.api.enums.HatchElement.InputBus;
 import static gregtech.api.enums.HatchElement.InputHatch;
 import static gregtech.api.enums.HatchElement.Maintenance;
-import static gregtech.api.enums.HatchElement.Muffler;
 import static gregtech.api.enums.HatchElement.OutputBus;
 import static gregtech.api.enums.HatchElement.OutputHatch;
-import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_LARGE_CHEMICAL_REACTOR;
-import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_LARGE_CHEMICAL_REACTOR_ACTIVE;
-import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_LARGE_CHEMICAL_REACTOR_ACTIVE_GLOW;
-import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_LARGE_CHEMICAL_REACTOR_GLOW;
+import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_VACUUM_FREEZER;
+import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_VACUUM_FREEZER_ACTIVE;
+import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_VACUUM_FREEZER_ACTIVE_GLOW;
+import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_VACUUM_FREEZER_GLOW;
 import static gregtech.api.enums.Textures.BlockIcons.casingTexturePages;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
-import static gregtech.api.util.GTStructureUtility.ofFrame;
 
 import java.util.List;
 
@@ -32,7 +31,6 @@ import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import gregtech.api.enums.Materials;
 import gregtech.api.enums.SoundResource;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
@@ -44,64 +42,64 @@ import gregtech.api.structure.error.StructureError;
 import gregtech.api.structure.error.StructureErrorRegistry;
 import gregtech.api.render.TextureFactory;
 import gregtech.api.util.MultiblockTooltipBuilder;
+import gregtech.api.util.tooltip.TooltipHelper;
 
 /**
- * Polycondensation Vessel — a tall hollow reaction column (5×5×7) rather than a cube. The shell is
- * Chemically Inert Reaction Vessel casing; a stainless-steel frame "spine" runs up the hollow core
- * as the stirring/condenser internals. Runs the step-growth polymer condensations (Nylon-6,6, PLA)
- * on {@code sPCVRecipes}.
+ * Cryogenic Annealing Cryostat (CAC) — a 5×7×5 vacuum cryostat tower.
+ * The superconductor wire is cryo-annealed inside a hollow vacuum core, wrapped in a load-bearing
+ * Aerogel Insulation Block lining (36 blocks) that suppresses heat ingress so the coolant load stays
+ * tractable at UHV+. Takes over every UHV-tier-and-above superconductor anneal recipe.
  */
-public class MTE_PCV extends MTEExtendedPowerMultiBlockBase<MTE_PCV> implements ISurvivalConstructable {
+public class MTE_CAC extends MTEExtendedPowerMultiBlockBase<MTE_CAC> implements ISurvivalConstructable {
 
     private static final int CASING_INDEX = 11;
     private static final String STRUCTURE_PIECE_MAIN = "main";
-    // Controller sits on the front face, centre column, at mid-height.
     private static final int OFFSET_X = 2;
     private static final int OFFSET_Y = 3;
     private static final int OFFSET_Z = 0;
 
-    private static IStructureDefinition<MTE_PCV> STRUCTURE_DEFINITION = null;
+    private static IStructureDefinition<MTE_CAC> STRUCTURE_DEFINITION = null;
 
-    public MTE_PCV(int aID, String aName, String aNameRegional) {
+    public MTE_CAC(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
     }
 
-    protected MTE_PCV(MTE_PCV prototype) {
+    protected MTE_CAC(MTE_CAC prototype) {
         super(prototype.mName);
     }
 
     @Override
     public IMetaTileEntity newMetaEntity(IGregTechTileEntity aTileEntity) {
-        return new MTE_PCV(this);
+        return new MTE_CAC(this);
     }
 
     @Override
-    public IStructureDefinition<MTE_PCV> getStructureDefinition() {
+    public IStructureDefinition<MTE_CAC> getStructureDefinition() {
         if (STRUCTURE_DEFINITION == null) {
-            STRUCTURE_DEFINITION = StructureDefinition.<MTE_PCV>builder()
+            STRUCTURE_DEFINITION = StructureDefinition.<MTE_CAC>builder()
                 .addShape(
                     STRUCTURE_PIECE_MAIN,
-                    // shape[z][y][x] — 5 depth slices (front→back), each 7 rows (top→bottom) × 5 cols.
-                    // 'C' = PCV casing/hatch, 'F' = stainless frame spine, ' ' = hollow interior.
+                    // shape[z][y][x] — 5 z-layers, 7 y-rows each, 5 x-chars
+                    // 'C' = Cryostat Vacuum Casing or hatch, 'A' = Aerogel Insulation Block (no hatches), ' ' = vacuum core
                     new String[][] {
-                        // z=0 — front face (solid casing, controller centre)
+                        // z=0: front face — all casing, controller center
                         { "CCCCC", "CCCCC", "CCCCC", "CC~CC", "CCCCC", "CCCCC", "CCCCC" },
-                        // z=1 — hollow body ring
-                        { "CCCCC", "C   C", "C   C", "C   C", "C   C", "C   C", "CCCCC" },
-                        // z=2 — hollow body ring with central frame spine
-                        { "CCCCC", "C F C", "C F C", "C F C", "C F C", "C F C", "CCCCC" },
-                        // z=3 — hollow body ring
-                        { "CCCCC", "C   C", "C   C", "C   C", "C   C", "C   C", "CCCCC" },
-                        // z=4 — back face (solid casing)
+                        // z=1: casing ring + aerogel lining + hollow vacuum core
+                        { "CCCCC", "CAAAC", "CA AC", "CA AC", "CA AC", "CAAAC", "CCCCC" },
+                        // z=2: middle layer (identical to z=1)
+                        { "CCCCC", "CAAAC", "CA AC", "CA AC", "CA AC", "CAAAC", "CCCCC" },
+                        // z=3: inner layer (identical to z=1)
+                        { "CCCCC", "CAAAC", "CA AC", "CA AC", "CA AC", "CAAAC", "CCCCC" },
+                        // z=4: back face — all casing
                         { "CCCCC", "CCCCC", "CCCCC", "CCCCC", "CCCCC", "CCCCC", "CCCCC" }, })
                 .addElement(
                     'C',
-                    buildHatchAdder(MTE_PCV.class)
-                        .atLeast(Energy, InputBus, InputHatch, OutputBus, OutputHatch, Maintenance, Muffler)
+                    buildHatchAdder(MTE_CAC.class)
+                        .atLeast(Energy, InputBus, InputHatch, OutputBus, OutputHatch, Maintenance)
                         .casingIndex(CASING_INDEX)
                         .hint(1)
-                        .buildAndChain(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.PCV_CASING))
-                .addElement('F', ofFrame(Materials.StainlessSteel))
+                        .buildAndChain(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.CRYOSTAT_VACUUM_CASING))
+                .addElement('A', ofBlock(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.AEROGEL_INSULATION_BLOCK))
                 .build();
         }
         return STRUCTURE_DEFINITION;
@@ -140,7 +138,7 @@ public class MTE_PCV extends MTEExtendedPowerMultiBlockBase<MTE_PCV> implements 
 
     @Override
     public RecipeMap<?> getRecipeMap() {
-        return GTNHPPRecipeMaps.sPCVRecipes;
+        return GTNHPPRecipeMaps.sCACRecipes;
     }
 
     @Override
@@ -148,20 +146,20 @@ public class MTE_PCV extends MTEExtendedPowerMultiBlockBase<MTE_PCV> implements 
         int colorIndex, boolean aActive, boolean redstoneLevel) {
         if (side == aFacing) {
             if (aActive) return new ITexture[] { casingTexturePages[0][CASING_INDEX], TextureFactory.builder()
-                .addIcon(OVERLAY_FRONT_LARGE_CHEMICAL_REACTOR_ACTIVE)
+                .addIcon(OVERLAY_FRONT_VACUUM_FREEZER_ACTIVE)
                 .extFacing()
                 .build(),
                 TextureFactory.builder()
-                    .addIcon(OVERLAY_FRONT_LARGE_CHEMICAL_REACTOR_ACTIVE_GLOW)
+                    .addIcon(OVERLAY_FRONT_VACUUM_FREEZER_ACTIVE_GLOW)
                     .extFacing()
                     .glow()
                     .build() };
             return new ITexture[] { casingTexturePages[0][CASING_INDEX], TextureFactory.builder()
-                .addIcon(OVERLAY_FRONT_LARGE_CHEMICAL_REACTOR)
+                .addIcon(OVERLAY_FRONT_VACUUM_FREEZER)
                 .extFacing()
                 .build(),
                 TextureFactory.builder()
-                    .addIcon(OVERLAY_FRONT_LARGE_CHEMICAL_REACTOR_GLOW)
+                    .addIcon(OVERLAY_FRONT_VACUUM_FREEZER_GLOW)
                     .extFacing()
                     .glow()
                     .build() };
@@ -172,20 +170,28 @@ public class MTE_PCV extends MTEExtendedPowerMultiBlockBase<MTE_PCV> implements 
     @Override
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType("Polycondensation Vessel, PCV")
-            .addInfo(EnumChatFormatting.GRAY + "Runs " + EnumChatFormatting.AQUA + "vacuum-assisted polymerization"
-                + EnumChatFormatting.GRAY + " reactions.")
+        tt.addMachineType("Cryogenic Annealing Cryostat, CAC")
+            .addInfo(EnumChatFormatting.GRAY + "Anneals materials at " + EnumChatFormatting.AQUA
+                + "cryogenic temperatures" + EnumChatFormatting.GRAY + " in a vacuum core.")
+            .addSeparator()
+            .addInfo(
+                EnumChatFormatting.GOLD + "Inner lining: "
+                    + EnumChatFormatting.GRAY
+                    + "exactly "
+                    + TooltipHelper.coloredText("36", EnumChatFormatting.YELLOW)
+                    + EnumChatFormatting.GRAY
+                    + " Aerogel Insulation Blocks required.")
+            .addInfo("The aerogel lining is load-bearing — the machine will not form without it.")
             .beginStructureBlock(5, 7, 5, true)
-            .addController("Front face, centre column")
-            .addCasingInfoMin("Chemically Inert Reaction Vessel", 60, false)
-            .addOtherStructurePart("Stainless Steel Frame", "Central spine, 5 tall")
-            .addInputBus("Any casing", 1)
-            .addInputHatch("Any casing", 1)
-            .addOutputBus("Any casing", 1)
-            .addOutputHatch("Any casing", 1)
-            .addEnergyHatch("Any casing", 1)
-            .addMufflerHatch("Any casing", 1)
-            .addMaintenanceHatch("Any casing", 1)
+            .addController("Front face, center")
+            .addCasingInfoMin("Cryostat Vacuum Casing", 78, false)
+            .addCasingInfoExactly("Aerogel Insulation Block", 36, true)
+            .addInputBus("Any outer casing", 1)
+            .addInputHatch("Any outer casing", 1)
+            .addOutputBus("Any outer casing", 1)
+            .addOutputHatch("Any outer casing", 1)
+            .addEnergyHatch("Any outer casing", 1)
+            .addMaintenanceHatch("Any outer casing", 1)
             .toolTipFinisher("_Shusi_");
         return tt;
     }

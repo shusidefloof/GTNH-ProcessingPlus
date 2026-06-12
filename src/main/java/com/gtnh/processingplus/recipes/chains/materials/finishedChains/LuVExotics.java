@@ -2,8 +2,8 @@ package com.gtnh.processingplus.recipes.chains.materials.finishedChains;
 
 import static com.gtnh.processingplus.recipes.PPRecipeHelper.*;
 
-import com.gtnh.processingplus.items.GTNHPPItems;
 import com.gtnh.processingplus.materials.PrPMaterials;
+import static com.gtnh.processingplus.items.Intermediate.*;
 
 import bwcrossmod.galacticgreg.VoidMinerUtility;
 import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
@@ -73,7 +73,7 @@ public class LuVExotics {
             () -> GTValues.RA.stdBuilder()
                 .itemInputs(ingot(Materials.Adamantium, 1))
                 .fluidInputs(molten(Materials.FierySteel, 144))
-                .itemOutputs(GTNHPPItems.stack(GTNHPPItems.RED_HOT_ADAMANTIUM, 1))
+                .itemOutputs(intermediate(RED_HOT_ADAMANTIUM, 1))
                 .fluidOutputs(molten(Materials.Iron, 144))
                 .duration(600)
                 .eut(TierEU.RECIPE_LuV)
@@ -101,9 +101,9 @@ public class LuVExotics {
         safe(
             "red hot vibrant adamantium",
             () -> GTValues.RA.stdBuilder()
-                .itemInputs(GTNHPPItems.stack(GTNHPPItems.RED_HOT_ADAMANTIUM, 1))
+                .itemInputs(intermediate(RED_HOT_ADAMANTIUM, 1))
                 .fluidInputs(fluid(PrPMaterials.VibraniumDye, 144))
-                .itemOutputs(GTNHPPItems.stack(GTNHPPItems.RED_HOT_VIBRANT_ADAMANTIUM, 1))
+                .itemOutputs(intermediate(RED_HOT_VIBRANT_ADAMANTIUM, 1))
                 .duration(600)
                 .eut(TierEU.RECIPE_LuV)
                 .addTo(RecipeMaps.chemicalBathRecipes));
@@ -115,7 +115,7 @@ public class LuVExotics {
         safe(
             "hot vibranium",
             () -> GTValues.RA.stdBuilder()
-                .itemInputs(GTNHPPItems.stack(GTNHPPItems.RED_HOT_VIBRANT_ADAMANTIUM, 1))
+                .itemInputs(intermediate(RED_HOT_VIBRANT_ADAMANTIUM, 1))
                 .fluidInputs(fluid(Materials.LifeEssence, 10000), molten(Materials.BloodInfusedIron, 144))
                 .itemOutputs(ingotHot(PrPMaterials.Vibranium, 1))
                 .duration(800)
@@ -160,7 +160,7 @@ public class LuVExotics {
         safe(
             "unobtanium dissolution",
             () -> GTValues.RA.stdBuilder()
-                .itemInputs(GTNHPPItems.stack(GTNHPPItems.UNOBTANIUM_ORE_CONCENTRATE, 2))
+                .itemInputs(intermediate(UNOBTANIUM_ORE_CONCENTRATE, 2))
                 .fluidInputs(fluid(PrPMaterials.MagicAcid, 500), fluid("ic2superheatedsteam", 8000))
                 .itemOutputs(dust(Materials.Endstone, 1))
                 .fluidOutputs(fluid(PrPMaterials.DirtyUnobtaniumSlurry, 900))
@@ -191,7 +191,7 @@ public class LuVExotics {
             () -> GTValues.RA.stdBuilder()
                 .itemInputs(circuit(1))
                 .fluidInputs(fluid(PrPMaterials.WashedUnobtaniumSlurry, 500))
-                .itemOutputs(GTNHPPItems.stack(GTNHPPItems.UNOBTANIUM_CRYSTAL_FRAGMENT, 2))
+                .itemOutputs(intermediate(UNOBTANIUM_CRYSTAL_FRAGMENT, 2))
                 .fluidOutputs(fluid("ic2distilledwater", 50))
                 .duration(400)
                 .eut(TierEU.RECIPE_LuV)
@@ -203,9 +203,9 @@ public class LuVExotics {
         safe(
             "unobtanium laser purify",
             () -> GTValues.RA.stdBuilder()
-                .itemInputs(GTNHPPItems.stack(GTNHPPItems.UNOBTANIUM_CRYSTAL_FRAGMENT, 2))
+                .itemInputs(intermediate(UNOBTANIUM_CRYSTAL_FRAGMENT, 2))
                 .fluidInputs(fluid(PrPMaterials.EuropiumChloride, 500))
-                .itemOutputs(GTNHPPItems.stack(GTNHPPItems.PURIFIED_UNOBTANIUM_CRYSTAL, 2))
+                .itemOutputs(intermediate(PURIFIED_UNOBTANIUM_CRYSTAL, 2))
                 .fluidOutputs(fluid(PrPMaterials.EuropiumChlorideSolution, 500))
                 .duration(500)
                 .eut(TierEU.RECIPE_LuV)
@@ -240,8 +240,8 @@ public class LuVExotics {
         safe(
             "unobtanium centrifuge",
             () -> GTValues.RA.stdBuilder()
-                .itemInputs(GTNHPPItems.stack(GTNHPPItems.PURIFIED_UNOBTANIUM_CRYSTAL, 2))
-                .itemOutputs(GTNHPPItems.stack(GTNHPPItems.PURIFIED_UNOBTANIUM_SHARD, 4))
+                .itemInputs(intermediate(PURIFIED_UNOBTANIUM_CRYSTAL, 2))
+                .itemOutputs(intermediate(PURIFIED_UNOBTANIUM_SHARD, 4))
                 .duration(400)
                 .eut(TierEU.RECIPE_LuV)
                 .addTo(RecipeMaps.thermalCentrifugeRecipes));
@@ -252,11 +252,11 @@ public class LuVExotics {
         safe(
             "unobtanium clumps",
             () -> GTValues.RA.stdBuilder()
-                .itemInputs(GTNHPPItems.stack(GTNHPPItems.PURIFIED_UNOBTANIUM_SHARD, 4))
+                .itemInputs(intermediate(PURIFIED_UNOBTANIUM_SHARD, 4))
                 .fluidInputs(molten(Materials.FierySteel, 144))
                 .itemOutputs(
-                    GTNHPPItems.stack(GTNHPPItems.UNOBTANIUM_CLUMP, 1),
-                    GTNHPPItems.stack(GTNHPPItems.IRON_SLAG, 1))
+                    intermediate(UNOBTANIUM_CLUMP, 1),
+                    intermediate(IRON_SLAG, 1))
                 .duration(400)
                 .eut(TierEU.RECIPE_LuV)
                 .addTo(RecipeMaps.multiblockChemicalReactorRecipes));
@@ -267,7 +267,7 @@ public class LuVExotics {
         safe(
             "unobtanium Centrifuge",
             () -> GTValues.RA.stdBuilder()
-                .itemInputs(GTNHPPItems.stack(GTNHPPItems.UNOBTANIUM_CLUMP, 1))
+                .itemInputs(intermediate(UNOBTANIUM_CLUMP, 1))
                 .itemOutputs(dust(PrPMaterials.Unobtanium, 1))
                 .duration(300)
                 .eut(TierEU.RECIPE_LuV)
@@ -286,7 +286,7 @@ public class LuVExotics {
             () -> GTValues.RA.stdBuilder()
                 .itemInputs(dust(Materials.Endstone, 256), circuit(4))
                 .fluidInputs(fluid(PrPMaterials.MagicAcid, 2000))
-                .itemOutputs(GTNHPPItems.stack(GTNHPPItems.UNOBTANIUM_ORE_CONCENTRATE, 1))
+                .itemOutputs(intermediate(UNOBTANIUM_ORE_CONCENTRATE, 1))
                 .duration(360 * 20)
                 .eut(TierEU.RECIPE_LuV)
                 .metadata(GTRecipeConstants.COIL_HEAT, 7200)
@@ -301,6 +301,6 @@ public class LuVExotics {
             "end void-miner unobtanium drop",
             () -> VoidMinerUtility.dropMapsByDimName
                 .computeIfAbsent("The End", k -> new VoidMinerUtility.DropMap())
-                .addDrop(GTNHPPItems.stack(GTNHPPItems.UNOBTANIUM_ORE_CONCENTRATE, 1), 10.0f));
+                .addDrop(intermediate(UNOBTANIUM_ORE_CONCENTRATE, 1), 10.0f));
     }
 }

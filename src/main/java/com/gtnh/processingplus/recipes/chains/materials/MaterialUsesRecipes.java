@@ -3,6 +3,7 @@ package com.gtnh.processingplus.recipes.chains.materials;
 import static com.gtnh.processingplus.recipes.PPRecipeHelper.*;
 
 import com.gtnh.processingplus.materials.PrPMaterials;
+import static com.gtnh.processingplus.items.Intermediate.*;
 
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.Materials;

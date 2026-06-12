@@ -7,6 +7,10 @@ import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_LARGE_CHEMICA
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_LARGE_CHEMICAL_REACTOR_GLOW;
 import static gregtech.api.enums.Textures.BlockIcons.casingTexturePages;
 
+import java.util.List;
+
+import gregtech.api.structure.error.StructureError;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -90,8 +94,8 @@ public class MTE_SPCBioModule extends MTE_SPCModuleBase<MTE_SPCBioModule> implem
     }
 
     @Override
-    public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
-        return checkPiece(STRUCTURE_PIECE_MAIN, OFFSET_X, OFFSET_Y, OFFSET_Z);
+    public void checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack, List<StructureError> errors) {
+        checkPiece(STRUCTURE_PIECE_MAIN, OFFSET_X, OFFSET_Y, OFFSET_Z, errors);
     }
 
     @Override
@@ -124,8 +128,8 @@ public class MTE_SPCBioModule extends MTE_SPCModuleBase<MTE_SPCBioModule> implem
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType("SPC Upgrade Module")
-            .addInfo("Bio-Lithography Module — enables organic circuitry in the SPC.")
-            .addInfo("Required for Wetware and Bio board recipes.")
+            .addInfo(EnumChatFormatting.GRAY + "Adds a " + EnumChatFormatting.GREEN + "bio-processing"
+                + EnumChatFormatting.GRAY + " stage to the SPC.")
             .addInfo(
                 EnumChatFormatting.GRAY + "Place within "
                     + EnumChatFormatting.RED
@@ -137,7 +141,7 @@ public class MTE_SPCBioModule extends MTE_SPCModuleBase<MTE_SPCBioModule> implem
             .beginStructureBlock(3, 3, 3, false)
             .addController("Front center")
             .addCasingInfoMin("Bio Lithography Module Casing", 26, false)
-            .toolTipFinisher();
+            .toolTipFinisher("_Shusi_");
         return tt;
     }
 }

@@ -14,6 +14,8 @@ import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_ELECTRIC_BLAS
 import static gregtech.api.enums.Textures.BlockIcons.casingTexturePages;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
 
+import java.util.List;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
@@ -34,7 +36,10 @@ import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.metatileentity.implementations.MTEExtendedPowerMultiBlockBase;
+import gregtech.api.logic.ProcessingLogic;
 import gregtech.api.recipe.RecipeMap;
+import gregtech.api.structure.error.StructureError;
+import gregtech.api.structure.error.StructureErrorRegistry;
 import gregtech.api.render.TextureFactory;
 import gregtech.api.util.MultiblockTooltipBuilder;
 import gregtech.api.util.tooltip.TooltipHelper;
@@ -156,14 +161,19 @@ public class MTE_BOF extends MTEExtendedPowerMultiBlockBase<MTE_BOF> implements 
     }
 
     @Override
-    public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
-        if (!checkPiece(STRUCTURE_PIECE_MAIN, OFFSET_X, OFFSET_Y, OFFSET_Z)) return false;
-        return mMaintenanceHatches.size() == 1;
+    public void checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack, List<StructureError> errors) {
+        checkPiece(STRUCTURE_PIECE_MAIN, OFFSET_X, OFFSET_Y, OFFSET_Z, errors);
+        if (mMaintenanceHatches.size() != 1) errors.add(StructureErrorRegistry.UNKNOWN_STRUCTURE_ERROR);
     }
 
     @Override
     public int getMaxParallelRecipes() {
         return 4;
+    }
+
+    @Override
+    protected ProcessingLogic createProcessingLogic() {
+        return new ProcessingLogic();
     }
 
     @Override
@@ -201,8 +211,8 @@ public class MTE_BOF extends MTEExtendedPowerMultiBlockBase<MTE_BOF> implements 
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType("Basic Oxygen Furnace, BOF")
-            .addInfo("Decarburizes molten iron into steel via liquid oxygen injection.")
-            .addInfo("Faster and cheaper than the EBF for pure iron-to-steel conversion.")
+            .addInfo(EnumChatFormatting.GRAY + "Refines metal with a high-purity " + EnumChatFormatting.GOLD
+                + "oxygen blast" + EnumChatFormatting.GRAY + ".")
             .addSeparator()
             .addStaticParallelInfo(4)
             .addInfo(
@@ -235,7 +245,7 @@ public class MTE_BOF extends MTEExtendedPowerMultiBlockBase<MTE_BOF> implements 
             .addEnergyHatch("Any casing", 1)
             .addMufflerHatch("Any casing", 1)
             .addMaintenanceHatch("Any casing", 1)
-            .toolTipFinisher();
+            .toolTipFinisher("_Shusi_");
         return tt;
     }
 

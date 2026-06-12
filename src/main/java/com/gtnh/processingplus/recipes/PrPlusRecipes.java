@@ -1,5 +1,10 @@
 package com.gtnh.processingplus.recipes;
 
+import com.gtnh.processingplus.recipes.chains.infrastructure.CACRecipes;
+import com.gtnh.processingplus.recipes.chains.infrastructure.CIDCRecipes;
+import com.gtnh.processingplus.recipes.chains.infrastructure.HPRRecipes;
+import com.gtnh.processingplus.recipes.chains.infrastructure.SPURecipes;
+import com.gtnh.processingplus.recipes.chains.infrastructure.RTGRecipes;
 import com.gtnh.processingplus.recipes.chains.infrastructure.CRVRecipes;
 import com.gtnh.processingplus.recipes.chains.infrastructure.SPCRecipes;
 import com.gtnh.processingplus.recipes.chains.infrastructure.BOFRecipes;
@@ -29,6 +34,11 @@ public class PrPlusRecipes {
         AerogelRecipes.init();
         MaterialUsesRecipes.init();
         CRVRecipes.init();
+        CACRecipes.init();
+        RTGRecipes.init();
+        CIDCRecipes.init();
+        HPRRecipes.init();
+        SPURecipes.init();
         FreonRecipes.init();
         CSCRecipes.init();
         BOFRecipes.init();

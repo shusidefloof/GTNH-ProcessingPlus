@@ -23,7 +23,25 @@ public class CRVRecipes {
     public static void init() {
         amorphousTritaniumAlloy();
         amorphousNaquadria();
+        prometheanNaquadria();
         controllerRecipe();
+    }
+
+    // -------------------------------------------------------------------------
+    // Promethean Naquadria — exotic alloy of Naquadria + molten Promethium, forged in the CRV under
+    // an hBN-protected lining and argon blanket. Consumes the molten Promethium from the Pm chain.
+    // -------------------------------------------------------------------------
+    private static void prometheanNaquadria() {
+        GTValues.RA.stdBuilder()
+            .itemInputs(dust(Materials.Naquadria, 4), circuit(10))
+            .fluidInputs(
+                molten(Materials.Promethium, 576),
+                fluid(PrPMaterials.HBNLubricant, 1000),
+                fluid(Materials.Argon, 4000))
+            .itemOutputs(ingot(PrPMaterials.PrometheanNaquadria, 8))
+            .duration(1200)
+            .eut(TierEU.RECIPE_ZPM)
+            .addTo(GTNHPPRecipeMaps.sCRVRecipes);
     }
 
     // -------------------------------------------------------------------------

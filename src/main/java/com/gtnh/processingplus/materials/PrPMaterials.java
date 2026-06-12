@@ -360,6 +360,10 @@ public class PrPMaterials implements Runnable {
     public static Werkstoff PAAAdhesive; // polyamic acid adhesive fluid (precision bonding)
     public static Werkstoff LoadedAerogelCatalystSupport; // PGM-impregnated aerogel catalyst (CRC consumable)
     public static Werkstoff AerogelInsulationPanel; // aerogel + CF composite thermal panel
+    public static Werkstoff SilicaSol;
+    public static Werkstoff HydrophobicSilicaAerogel;
+    public static Werkstoff PrometheanNaquadria;
+    public static Werkstoff PromethiumBetavoltaicAlloy;
 
     public static List<Werkstoff> ALL = new ArrayList<>();
 
@@ -2285,6 +2289,71 @@ public class PrPMaterials implements Runnable {
                 new Werkstoff.GenerationFeatures().disable().addCells(),
                 id(),
                 TextureSet.SET_FLUID));
+
+        SilicaSol = register(
+            new Werkstoff(
+                rgb(225, 238, 245),
+                "Silica Sol",
+                subscriptNumbers("Si(OH)4"),
+                new Werkstoff.Stats(),
+                Werkstoff.Types.COMPOUND,
+                fluidFeatures(),
+                id(),
+                TextureSet.SET_FLUID));
+
+        HydrophobicSilicaAerogel = register(
+            new Werkstoff(
+                rgb(236, 246, 255),
+                "Hydrophobic Silica Aerogel",
+                subscriptNumbers("SiO2-Si(CH3)3"),
+                new Werkstoff.Stats(),
+                Werkstoff.Types.MATERIAL,
+                ceramicFeatures(),
+                id(),
+                TextureSet.SET_FINE));
+
+        // Promethean Naquadria — a radioluminescent, radioactive exotic alloy forged in the CRV from
+        // molten Promethium + Naquadria. Full tool/structural material (dust→ingot→plate/rod/gear/...).
+        PrometheanNaquadria = register(
+            new Werkstoff(
+                rgb(60, 200, 150),
+                "Promethean Naquadria",
+                "PmNq",
+                new Werkstoff.Stats().setMeltingPoint(9000)
+                    .setBlastFurnace(true)
+                    .setRadioactive(true)
+                    .setDurOverride(2_400_000)
+                    .setSpeedOverride(18f)
+                    .setQualityOverride((byte) 7),
+                Werkstoff.Types.MIXTURE,
+                new Werkstoff.GenerationFeatures().onlyDust()
+                    .addMolten()
+                    .addMetalItems()
+                    .addSimpleMetalWorkingItems()
+                    .addCraftingMetalWorkingItems()
+                    .addDoubleAndDensePlates(),
+                id(),
+                TextureSet.SET_SHINY));
+
+        // Promethium Betavoltaic Alloy — Pm-147 dispersed in a gallium-arsenide semiconductor matrix.
+        // Its own beta decay drives charge across the GaAs junction (a nuclear battery). Forged in the
+        // CRV from molten Promethium; cast into Betavoltaic Cells to fuel the RTG generator.
+        PromethiumBetavoltaicAlloy = register(
+            new Werkstoff(
+                rgb(150, 225, 140),
+                "Promethium Betavoltaic Alloy",
+                "PmGaAs",
+                new Werkstoff.Stats().setMeltingPoint(1600)
+                    .setRadioactive(true)
+                    .setMass(160)
+                    .setProtons(61),
+                Werkstoff.Types.MIXTURE,
+                new Werkstoff.GenerationFeatures().onlyDust()
+                    .addMolten()
+                    .addMetalItems()
+                    .addSimpleMetalWorkingItems(),
+                id(),
+                TextureSet.SET_SHINY));
     }
 
     // =========================

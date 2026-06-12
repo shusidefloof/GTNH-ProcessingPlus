@@ -15,6 +15,8 @@ import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_LARGE_CHEMICA
 import static gregtech.api.enums.Textures.BlockIcons.casingTexturePages;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
 
+import java.util.List;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
@@ -35,7 +37,10 @@ import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.metatileentity.implementations.MTEExtendedPowerMultiBlockBase;
+import gregtech.api.logic.ProcessingLogic;
 import gregtech.api.recipe.RecipeMap;
+import gregtech.api.structure.error.StructureError;
+import gregtech.api.structure.error.StructureErrorRegistry;
 import gregtech.api.render.TextureFactory;
 import gregtech.api.util.MultiblockTooltipBuilder;
 import gregtech.api.util.tooltip.TooltipHelper;
@@ -121,9 +126,14 @@ public class MTE_CRV extends MTEExtendedPowerMultiBlockBase<MTE_CRV> implements 
     }
 
     @Override
-    public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
-        if (!checkPiece(STRUCTURE_PIECE_MAIN, OFFSET_X, OFFSET_Y, OFFSET_Z)) return false;
-        return mMaintenanceHatches.size() == 1;
+    public void checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack, List<StructureError> errors) {
+        checkPiece(STRUCTURE_PIECE_MAIN, OFFSET_X, OFFSET_Y, OFFSET_Z, errors);
+        if (mMaintenanceHatches.size() != 1) errors.add(StructureErrorRegistry.UNKNOWN_STRUCTURE_ERROR);
+    }
+
+    @Override
+    protected ProcessingLogic createProcessingLogic() {
+        return new ProcessingLogic();
     }
 
     @Override
@@ -161,8 +171,8 @@ public class MTE_CRV extends MTEExtendedPowerMultiBlockBase<MTE_CRV> implements 
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType("Ceramic Reaction Vessel, CRV")
-            .addInfo("The only multiblock capable of safely containing exotic molten alloy mixtures.")
-            .addInfo("hBN ceramic inner lining is chemically inert against molten metals.")
+            .addInfo(EnumChatFormatting.GRAY + "Reacts and alloys " + EnumChatFormatting.RED + "exotic molten"
+                + EnumChatFormatting.GRAY + " mixtures in an inert lining.")
             .addInfo(
                 "Accepts up to " + TooltipHelper.coloredText("6", EnumChatFormatting.YELLOW)
                     + EnumChatFormatting.GRAY
@@ -175,7 +185,7 @@ public class MTE_CRV extends MTEExtendedPowerMultiBlockBase<MTE_CRV> implements 
                     + TooltipHelper.coloredText("24", EnumChatFormatting.YELLOW)
                     + EnumChatFormatting.GRAY
                     + " Hexagonal Boron Nitride Ceramic Blocks required.")
-            .addInfo("hBN blocks are load-bearing — machine will not form without the exact count.")
+            .addInfo("hBN blocks are load-bearing; the machine will not form without the exact count.")
             .beginStructureBlock(5, 5, 5, true)
             .addController("Front face, center")
             .addCasingInfoMin("Iridium-Reinforced Reactor Casing", 74, false)
@@ -187,7 +197,7 @@ public class MTE_CRV extends MTEExtendedPowerMultiBlockBase<MTE_CRV> implements 
             .addEnergyHatch("Any outer casing", 1)
             .addMufflerHatch("Any outer casing", 1)
             .addMaintenanceHatch("Any outer casing", 1)
-            .toolTipFinisher();
+            .toolTipFinisher("_Shusi_");
         return tt;
     }
 

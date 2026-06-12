@@ -22,6 +22,7 @@ import gregtech.api.recipe.RecipeMap;
 import gregtech.api.recipe.check.CheckRecipeResult;
 import gregtech.api.recipe.check.CheckRecipeResultRegistry;
 import gregtech.api.render.TextureFactory;
+import gregtech.api.structure.error.StructureError;
 import gregtech.api.util.GTRecipe;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.MultiblockTooltipBuilder;
@@ -35,6 +36,8 @@ import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import javax.annotation.Nonnull;
+
+import java.util.List;
 
 import static gregtech.api.util.GTStructureUtility.chainAllGlasses;
 import static gregtech.api.enums.HatchElement.*;
@@ -186,15 +189,15 @@ public class MTE_HTRF  extends MTEExtendedPowerMultiBlockBase<MTE_HTRF> implemen
     }
 
     @Override
-    public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
+    public void checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack, List<StructureError> errors) {
         mHeatingCapacity = 0;
         mGlassTier = -1;
         setCoilLevel(HeatingCoilLevel.None);
-        if (!checkPiece(STRUCTURE_PIECE_MAIN, OFFSET_X, OFFSET_Y, OFFSET_Z)) return false;
-        if (getCoilLevel() == HeatingCoilLevel.None) return false;
-        if (mMaintenanceHatches.size() != 1) return false;
+        if (!checkPiece(STRUCTURE_PIECE_MAIN, OFFSET_X, OFFSET_Y, OFFSET_Z, errors)) return;
+        if (getCoilLevel() == HeatingCoilLevel.None) return;
+        if (mMaintenanceHatches.size() != 1) return;
         mHeatingCapacity = (int) getCoilLevel().getHeat() + 100 * (GTUtility.getTier(getMaxInputVoltage()) - 2);
-        return true;
+        return;
     }
 
     @Override
@@ -208,20 +211,31 @@ public class MTE_HTRF  extends MTEExtendedPowerMultiBlockBase<MTE_HTRF> implemen
 
             @Nonnull
             @Override
+            protected CheckRecipeResult validateRecipe(@Nonnull GTRecipe recipe) {
+                // Check if machine has enough heat for this recipe
+                if (recipe.mSpecialValue > mHeatingCapacity) {
+                    return CheckRecipeResultRegistry.insufficientHeat(recipe.mSpecialValue);
+                }
+                return CheckRecipeResultRegistry.SUCCESSFUL;
+            }
+
+            @Nonnull
+            @Override
             protected OverclockCalculator createOverclockCalculator(@Nonnull GTRecipe recipe) {
-                return super.createOverclockCalculator(recipe).setRecipeHeat(recipe.mSpecialValue)
+                // Configure overclock with heat bonus
+                // Every 1800K extra heat = 1 perfect OC (duration /4, power /4)
+                // Every 900K extra heat = -5% EU/t (if discount enabled)
+                return super.createOverclockCalculator(recipe)
+                    .setRecipeHeat(recipe.mSpecialValue)
                     .setMachineHeat(mHeatingCapacity)
                     .setHeatOC(true)
                     .setHeatDiscount(true);
             }
 
-            @Override
-            protected @Nonnull CheckRecipeResult validateRecipe(@Nonnull GTRecipe recipe) {
-                return recipe.mSpecialValue <= mHeatingCapacity ? CheckRecipeResultRegistry.SUCCESSFUL
-                    : CheckRecipeResultRegistry.insufficientHeat(recipe.mSpecialValue);
-            }
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
     }
+
+
 
     /** 4 base parallels, +2 per heating-coil tier. */
     @Override
@@ -268,8 +282,8 @@ public class MTE_HTRF  extends MTEExtendedPowerMultiBlockBase<MTE_HTRF> implemen
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType("High Temperature Reaction Furnace, HTRF")
-            .addInfo("Coil-heated ceramic furnace for reactions requiring temperatures above 2000K.")
-            .addInfo("The only machine capable of SiC sintering, refractory carbide, and boride synthesis.")
+            .addInfo(EnumChatFormatting.GRAY + "Drives " + EnumChatFormatting.RED + "high-temperature"
+                + EnumChatFormatting.GRAY + " chemical reactions.")
             .addSeparator()
             .addInfo(
                 "Heat capacity: "
@@ -321,7 +335,7 @@ public class MTE_HTRF  extends MTEExtendedPowerMultiBlockBase<MTE_HTRF> implemen
             .addEnergyHatch("Any Silicon Carbide Ceramic Casing", 1)
             .addMufflerHatch("Any Silicon Carbide Ceramic Casing", 1)
             .addMaintenanceHatch("Any Silicon Carbide Ceramic Casing", 1)
-            .toolTipFinisher();
+            .toolTipFinisher("_Shusi_");
         return tt;
     }
 

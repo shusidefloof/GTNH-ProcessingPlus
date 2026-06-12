@@ -2,11 +2,16 @@ package com.gtnh.processingplus.blocks;
 
 import com.gtnh.processingplus.machines.MTE_AAR;
 import com.gtnh.processingplus.machines.MTE_BOF;
+import com.gtnh.processingplus.machines.MTE_CAC;
+import com.gtnh.processingplus.machines.MTE_CIDC;
 import com.gtnh.processingplus.machines.MTE_CRV;
 import com.gtnh.processingplus.machines.MTE_CSC;
+import com.gtnh.processingplus.machines.MTE_HPR;
 import com.gtnh.processingplus.machines.MTE_HPSF;
 import com.gtnh.processingplus.machines.MTE_HTRF;
+import com.gtnh.processingplus.machines.MTE_SPU;
 import com.gtnh.processingplus.machines.MTE_PCV;
+import com.gtnh.processingplus.machines.MTE_RTG;
 import com.gtnh.processingplus.machines.MTE_SPC;
 import com.gtnh.processingplus.machines.MTE_SPCBioModule;
 import com.gtnh.processingplus.machines.MTE_SPCCryoModule;
@@ -36,6 +41,21 @@ public class GTNHPPBlocks {
 
     /** PCV controller instance — kept so its assembler controller recipe can reference the controller stack. */
     public static MTE_PCV PCV;
+
+    /** CAC controller instance — kept so its assembly-line recipe can reference the controller stack. */
+    public static MTE_CAC CAC;
+
+    /** RTG controller instance — kept so its assembly-line recipe can reference the controller stack. */
+    public static MTE_RTG RTG;
+
+    /** CIDC controller instance — kept so its assembly-line recipe can reference the controller stack. */
+    public static MTE_CIDC CIDC;
+
+    /** HPR controller instance — kept so its assembly-line recipe can reference the controller stack. */
+    public static MTE_HPR HPR;
+
+    /** SPU controller instance — kept so its assembly-line recipe can reference the controller stack. */
+    public static MTE_SPU SPU;
 
     // Reserved MTE IDs for the four not-yet-built multiblocks. The design doc's values
     // (CIDC 31511, HPR 31512, SPU 31513, CRC 31514) are ALREADY taken by HPSF and the three SPC
@@ -77,7 +97,16 @@ public class GTNHPPBlocks {
         new MTE_SPCQuantumModule(31514, "gtnhpp.spc_quantum_module", "Quantum Alignment Module").getStackForm(1);
         HTRF = new MTE_HTRF(31515, "gtnhpp.htrf", "High Temperature Reaction Furnace");
         HTRF.getStackForm(1);
-        // new MTE_PrimitiveAirIntake(31516, "gtnhpp.primitive_air_intake", "Primitive Air Intake").getStackForm(1);
+        CAC = new MTE_CAC(31516, "gtnhpp.cac", "Cryogenic Annealing Cryostat");
+        CAC.getStackForm(1);
+        RTG = new MTE_RTG(31504, "gtnhpp.rtg", "Radioisotope Thermoelectric Generator");
+        RTG.getStackForm(1);
+        CIDC = new MTE_CIDC(CIDC_ID, "gtnhpp.cidc", "Controlled Isotopic Doping Chamber");
+        CIDC.getStackForm(1);
+        HPR = new MTE_HPR(HPR_ID, "gtnhpp.hpr", "Hybrid Phase Reactor");
+        HPR.getStackForm(1);
+        SPU = new MTE_SPU(SPU_ID, "gtnhpp.spu", "Subatomic Patterning Unit");
+        SPU.getStackForm(1);
 
         // Unobtanium superconductor — lossless placeable wires + cables (ZPM); recipes auto-generated.
         // Uses MTE IDs 31517-31528 (6 wires + 6 cables).

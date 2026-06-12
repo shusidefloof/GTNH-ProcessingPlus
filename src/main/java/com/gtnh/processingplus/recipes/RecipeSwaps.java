@@ -36,6 +36,7 @@ public final class RecipeSwaps {
         gateUVComponentsWithAmorphousNaquadria();
         gateConveyorsWithNylon();
         gateRobotArmsWithNylon();
+        gateFieldGensWithPrometheanNaquadria();
     }
 
     // -------------------------------------------------------------------------
@@ -58,6 +59,18 @@ public final class RecipeSwaps {
         taxAsslineWithFluid(robotArms, PrPMaterials.Nylon66.getMolten(288), "Nylon robot-arm gate");
     }
 
+    // -------------------------------------------------------------------------
+    // Promethean Naquadria field-generator gate — the alloy's first real use. Every UHV+ field
+    // generator now also needs molten Promethean Naquadria (glowing exotic energy alloy), so the
+    // whole Promethium → CRV-alloy chain becomes required for top-tier field/energy components.
+    // -------------------------------------------------------------------------
+    private static void gateFieldGensWithPrometheanNaquadria() {
+        ItemStack[] fieldGens = { ItemList.Field_Generator_UHV.get(1), ItemList.Field_Generator_UEV.get(1),
+            ItemList.Field_Generator_UIV.get(1) };
+        taxAsslineWithFluid(fieldGens, PrPMaterials.PrometheanNaquadria.getMolten(288),
+            "Promethean Naquadria field-gen gate");
+    }
+
     /** Append a molten fluid in-place to every assembly-line recipe (real + NEI copy) whose output matches. */
     private static void taxAsslineWithFluid(ItemStack[] targets, FluidStack add, String label) {
         if (add == null) {
@@ -77,7 +90,7 @@ public final class RecipeSwaps {
             if (r.mFluidInputs != null && r.mFluidInputs.length >= 4) continue;
             r.mFluidInputs = appendFluid(r.mFluidInputs, add.copy());
         }
-        GTNHProcessingPlus.LOG.info("{}: taxed {} recipe(s) with molten Nylon-6,6.", label, taxed);
+        GTNHProcessingPlus.LOG.info("{}: taxed {} recipe(s).", label, taxed);
     }
 
     // -------------------------------------------------------------------------

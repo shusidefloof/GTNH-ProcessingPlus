@@ -18,6 +18,8 @@ import static gregtech.api.util.GTStructureUtility.ofCoil;
 
 import javax.annotation.Nonnull;
 
+import java.util.List;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
@@ -41,6 +43,8 @@ import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.logic.ProcessingLogic;
 import gregtech.api.metatileentity.implementations.MTEExtendedPowerMultiBlockBase;
 import gregtech.api.recipe.RecipeMap;
+import gregtech.api.structure.error.StructureError;
+import gregtech.api.structure.error.StructureErrorRegistry;
 import gregtech.api.recipe.check.CheckRecipeResult;
 import gregtech.api.recipe.check.CheckRecipeResultRegistry;
 import gregtech.api.render.TextureFactory;
@@ -127,14 +131,14 @@ public class MTE_AAR extends MTEExtendedPowerMultiBlockBase<MTE_AAR> implements 
     }
 
     @Override
-    public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
+    public void checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack, List<StructureError> errors) {
         mHeatingCapacity = 0;
         setCoilLevel(HeatingCoilLevel.None);
-        if (!checkPiece(STRUCTURE_PIECE_MAIN, OFFSET_X, OFFSET_Y, OFFSET_Z)) return false;
-        if (getCoilLevel() == HeatingCoilLevel.None) return false;
-        if (mMaintenanceHatches.size() != 1) return false;
+        if (!checkPiece(STRUCTURE_PIECE_MAIN, OFFSET_X, OFFSET_Y, OFFSET_Z, errors)) return;
+        if (getCoilLevel() == HeatingCoilLevel.None) errors.add(StructureErrorRegistry.UNKNOWN_STRUCTURE_ERROR);
+        if (mMaintenanceHatches.size() != 1) errors.add(StructureErrorRegistry.UNKNOWN_STRUCTURE_ERROR);
+        if (!errors.isEmpty()) return;
         mHeatingCapacity = (int) getCoilLevel().getHeat() + 100 * (GTUtility.getTier(getMaxInputVoltage()) - 2);
-        return true;
     }
 
     @Override
@@ -201,9 +205,8 @@ public class MTE_AAR extends MTEExtendedPowerMultiBlockBase<MTE_AAR> implements 
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType("Ammonia Atmosphere Reactor, AAR")
-            .addInfo("High-temperature reactor operating under a reactive NH₃ atmosphere.")
-            .addInfo("Required for hBN nitriding: B₄C + NH₃ → crude hBN + CO.")
-            .addInfo("Also handles metal nitriding: iron nitride, titanium nitride coatings.")
+            .addInfo(EnumChatFormatting.GRAY + "Runs reactions inside a reactive " + EnumChatFormatting.GREEN
+                + "ammonia atmosphere" + EnumChatFormatting.GRAY + ".")
             .addSeparator()
             .addInfo(
                 "Heat capacity: " + TooltipHelper.coloredText("coil tier heat", EnumChatFormatting.RED)
@@ -243,7 +246,7 @@ public class MTE_AAR extends MTEExtendedPowerMultiBlockBase<MTE_AAR> implements 
             .addEnergyHatch("Any casing", 1)
             .addMufflerHatch("Any casing", 1)
             .addMaintenanceHatch("Any casing", 1)
-            .toolTipFinisher();
+            .toolTipFinisher("_Shusi_");
         return tt;
     }
 

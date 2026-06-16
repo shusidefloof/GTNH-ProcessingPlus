@@ -50,7 +50,7 @@ public class MTE_BOF extends MTEExtendedPowerMultiBlockBase<MTE_BOF> implements 
 
     private static final int CASING_INDEX = 1; // solid steel casing
     private static final String STRUCTURE_PIECE_MAIN = "main";
-    private static final int OFFSET_X = 2, OFFSET_Y = 0, OFFSET_Z = 2;
+    private static final int OFFSET_X = 2, OFFSET_Y = 2, OFFSET_Z = 0;
 
     private static IStructureDefinition<MTE_BOF> STRUCTURE_DEFINITION = null;
 
@@ -74,14 +74,16 @@ public class MTE_BOF extends MTEExtendedPowerMultiBlockBase<MTE_BOF> implements 
                 .addShape(
                     STRUCTURE_PIECE_MAIN,
                     new String[][] {
-                        // z=0 — front face
-                        { "     ", "  C  ", " C C ", "  C  ", "     " },
+                        // z=0 — controller face
+                        { "     ", "  C  ", " A~A ", " ACA " },
                         // z=1
-                        { "  C  ", " C C ", "C   C", " C C ", "  C  " },
-                        // z=2 — controller layer
-                        { " A~A ", "C   C", "A   A", "C   C", " CAC " },
-                        // z=3 — back face
-                        { " ACA ", "CCBCC", "ABBBA", "CCBCC", " CAC " },
+                        { "  C  ", " C C ", "C   C", "CCBCC" },
+                        // z=2
+                        { " C C ", "C   C", "A   A", "ABBBA" },
+                        // z=3
+                        { "  C  ", " C C ", "C   C", "CCBCC" },
+                        // z=4 — back face
+                        { "     ", "  C  ", " CAC ", " CAC " },
                     })
                 .addElement('A', ofBlock(GregTechAPI.sBlockCasings3, 10))
                 .addElement('B', ofBlock(GregTechAPI.sBlockCasings3, 14))
@@ -192,7 +194,7 @@ public class MTE_BOF extends MTEExtendedPowerMultiBlockBase<MTE_BOF> implements 
             .addInfo(
                 TooltipHelper.coloredText("circuit(3)", EnumChatFormatting.AQUA) + EnumChatFormatting.GRAY
                     + "  Iron ×16 + LOX 4,000 mB → Steel ×16 | double batch")
-            .beginStructureBlock(5, 5, 4, true)
+            .beginStructureBlock(5, 4, 5, true)
             .addController("Front face, center")
             .addCasingInfoMin("Basic Oxygen Furnace Casing", 44, false)
             .addInputBus("Any casing", 1)

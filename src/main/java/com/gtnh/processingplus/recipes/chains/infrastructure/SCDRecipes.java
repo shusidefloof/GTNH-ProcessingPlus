@@ -9,8 +9,11 @@ import com.gtnh.processingplus.blocks.GTNHPPBlocks;
 import com.gtnh.processingplus.materials.PrPMaterials;
 import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-import gregtech.api.GregTechAPI;
+import static gregtech.api.util.GTRecipeBuilder.SECONDS;
+import static gregtech.api.util.GTRecipeConstants.AssemblyLine;
+import static gregtech.api.util.GTRecipeConstants.RESEARCH_ITEM;
+import static gregtech.api.util.GTRecipeConstants.SCANNING;
+
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.ItemList;
 import gregtech.api.enums.Materials;
@@ -19,6 +22,7 @@ import gregtech.api.enums.TierEU;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.util.GTOreDictUnificator;
 import gregtech.api.util.GTRecipeConstants;
+import gregtech.api.util.recipe.Scanning;
 
 public class SCDRecipes {
 
@@ -29,50 +33,48 @@ public class SCDRecipes {
     }
 
     // =========================================================
-    // SCD casing — titanium pressure-vessel shell with PTFE inner liner
+    // SCD casing — Neutronium shell, AmTi plates, PTFE liner, Osmium + Iridium seals
     // =========================================================
     private static void casingRecipe() {
         GTValues.RA.stdBuilder()
             .itemInputs(
-                GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.Titanium, 1),
-                plate(Materials.Titanium, 4),
-                plate(Materials.StainlessSteel, 2),
-                plate(Materials.Polytetrafluoroethylene, 1),
-                circuit(12))
-            .itemOutputs(new ItemStack(GTNHPPBlocks.CASINGS, 4, BlockGTNHPPCasings.SCD_CASING))
-            .duration(20 * 20)
-            .eut(TierEU.RECIPE_EV)
+                GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.Neutronium, 1),
+                plate(PrPMaterials.AmorphousTritaniumAlloy, 8),
+                plate(Materials.Polytetrafluoroethylene, 4),
+                plate(Materials.Osmium, 2),
+                plate(Materials.Iridium, 4),
+                circuit(10))
+            .itemOutputs(new ItemStack(GTNHPPBlocks.CASINGS, 2, BlockGTNHPPCasings.SCD_CASING))
+            .duration(30 * SECONDS)
+            .eut(TierEU.RECIPE_ZPM)
             .addTo(RecipeMaps.assemblerRecipes);
     }
 
     // =========================================================
-    // SCD controller — EV-tier build, handles supercritical fluid pressures
+    // SCD controller — Assembly Line, UHV scan
     // =========================================================
     private static void controllerRecipe() {
-        ItemStack controller = new ItemStack(GregTechAPI.sBlockMachines, 1, GTNHPPBlocks.SCD_ID);
-
         GTValues.RA.stdBuilder()
+            .metadata(RESEARCH_ITEM, ItemList.Machine_UV_Printer.get(1))
+            .metadata(SCANNING, new Scanning(45 * SECONDS, TierEU.RECIPE_UHV))
             .itemInputs(
-                plate(Materials.Titanium, 4),
-                plate(Materials.Polytetrafluoroethylene, 2),
-                ItemList.Hull_EV.get(1),
-                ItemList.Electric_Pump_EV.get(2),
-                item("circuitAdvanced", 2))
-            .itemOutputs(controller)
-            .duration(20 * 20)
-            .eut(TierEU.RECIPE_EV)
-            .addTo(RecipeMaps.assemblerRecipes);
-
-        GameRegistry.addShapedRecipe(
-            controller,
-            "TPT",
-            "CHC",
-            "TET",
-            'T', plate(Materials.Titanium, 1),
-            'P', plate(Materials.Polytetrafluoroethylene, 1),
-            'H', ItemList.Hull_EV.get(1),
-            'C', item("circuitAdvanced", 1),
-            'E', ItemList.Electric_Pump_EV.get(1));
+                ItemList.Hull_UV.get(64),
+                GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.Neutronium, 8),
+                plate(PrPMaterials.AmorphousTritaniumAlloy, 32),
+                plate(Materials.Polytetrafluoroethylene, 16),
+                plate(Materials.Osmium, 8),
+                ItemList.Electric_Pump_UHV.get(8),
+                ItemList.Field_Generator_UHV.get(4),
+                GTOreDictUnificator.get(OrePrefixes.circuit, Materials.UV, 8),
+                GTOreDictUnificator.get(OrePrefixes.circuit, Materials.UHV, 4),
+                GTOreDictUnificator.get(OrePrefixes.cableGt04, Materials.SuperconductorUV, 8))
+            .fluidInputs(
+                fluid("molten.indalloy140", 4608),
+                fluid(PrPMaterials.LiquidCO2, 4000))
+            .itemOutputs(GTNHPPBlocks.SCD.getStackForm(1))
+            .eut(TierEU.RECIPE_UHV)
+            .duration(45 * SECONDS)
+            .addTo(AssemblyLine);
     }
 
     // =========================================================

@@ -1,6 +1,7 @@
 package com.gtnh.processingplus.blocks;
 
 import com.gtnh.processingplus.machines.MTE_AAR;
+import com.gtnh.processingplus.machines.MTE_DAF;
 import com.gtnh.processingplus.machines.MTE_BOF;
 import com.gtnh.processingplus.machines.MTE_CAC;
 import com.gtnh.processingplus.machines.MTE_CIDC;
@@ -61,6 +62,9 @@ public class GTNHPPBlocks {
     /** SPU controller instance — kept so its assembly-line recipe can reference the controller stack. */
     public static MTE_SPU SPU;
 
+    /** DAF controller instance — kept so its assembler recipe can reference the controller stack. */
+    public static MTE_DAF DAF;
+
     // Reserved MTE IDs for the four not-yet-built multiblocks. The design doc's values
     // (CIDC 31511, HPR 31512, SPU 31513, CRC 31514) are ALREADY taken by HPSF and the three SPC
     // modules — use these instead. They sit in the unused 31500-31504 gap, below every live machine
@@ -74,6 +78,9 @@ public class GTNHPPBlocks {
     // WerkstoffCableLoader.register() uses startId+0..startId+11, and id() returns 31529 on its
     // first call — so 31517 is free. Verified by reading WerkstoffCableLoader.java.
     public static final int SCD_ID = 31517;
+
+    // DAF sits right after SCD, still within the 31518-31528 gap before cable loaders.
+    public static final int DAF_ID = 31518;
 
     private static final int OFFSET = 31_517;
     private static int nextId = OFFSET;
@@ -118,6 +125,8 @@ public class GTNHPPBlocks {
         HPR.getStackForm(1);
         SPU = new MTE_SPU(SPU_ID, "gtnhpp.spu", "Subatomic Patterning Unit");
         SPU.getStackForm(1);
+        DAF = new MTE_DAF(DAF_ID, "gtnhpp.daf", "Dual Atmosphere Furnace");
+        DAF.getStackForm(1);
 
         // Unobtanium superconductor — lossless placeable wires + cables (ZPM); recipes auto-generated.
         // Uses MTE IDs 31517-31528 (6 wires + 6 cables).

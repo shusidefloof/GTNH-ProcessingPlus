@@ -38,5 +38,6 @@ public class PrPlusRecipes {
         HTRFRecipes.init();
         PassiveableMaterials.init();
         AARRecipes.init();
+        DAFRecipes.init();
     }
 }

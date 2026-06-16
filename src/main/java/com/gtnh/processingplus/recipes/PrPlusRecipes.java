@@ -1,20 +1,8 @@
 package com.gtnh.processingplus.recipes;
 
-import com.gtnh.processingplus.recipes.chains.infrastructure.CACRecipes;
-import com.gtnh.processingplus.recipes.chains.infrastructure.CIDCRecipes;
-import com.gtnh.processingplus.recipes.chains.infrastructure.HPRRecipes;
-import com.gtnh.processingplus.recipes.chains.infrastructure.SPURecipes;
-import com.gtnh.processingplus.recipes.chains.infrastructure.RTGRecipes;
-import com.gtnh.processingplus.recipes.chains.infrastructure.CRVRecipes;
-import com.gtnh.processingplus.recipes.chains.infrastructure.SPCRecipes;
-import com.gtnh.processingplus.recipes.chains.infrastructure.BOFRecipes;
-import com.gtnh.processingplus.recipes.chains.infrastructure.CSCRecipes;
-import com.gtnh.processingplus.recipes.chains.infrastructure.CryoUpgradeRecipes;
-import com.gtnh.processingplus.recipes.chains.infrastructure.FreonRecipes;
+import com.gtnh.processingplus.recipes.chains.infrastructure.*;
 import com.gtnh.processingplus.recipes.chains.materials.*;
 import com.gtnh.processingplus.recipes.chains.materials.finishedChains.*;
-import com.gtnh.processingplus.recipes.chains.infrastructure.HPSFRecipes;
-import com.gtnh.processingplus.recipes.chains.infrastructure.HTRFRecipes;
 import com.gtnh.processingplus.recipes.chains.photoresist.PhotoresistRecipes;
 
 public class PrPlusRecipes {
@@ -42,11 +30,13 @@ public class PrPlusRecipes {
         FreonRecipes.init();
         CSCRecipes.init();
         BOFRecipes.init();
+        SCDRecipes.init();
         CryoUpgradeRecipes.init();
         NeptuniumSynthesis.init();
         HPSFRecipes.init();
         LuVExotics.init();
         HTRFRecipes.init();
         PassiveableMaterials.init();
+        AARRecipes.init();
     }
 }

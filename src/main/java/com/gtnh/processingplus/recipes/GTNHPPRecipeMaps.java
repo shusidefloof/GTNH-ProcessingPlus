@@ -1,5 +1,6 @@
 package com.gtnh.processingplus.recipes;
 
+import com.gtnh.processingplus.nei.AARNEIFormatter;
 import com.gtnh.processingplus.nei.SPCRecipeMapFrontend;
 
 import gregtech.api.recipe.RecipeMap;
@@ -57,7 +58,8 @@ public class GTNHPPRecipeMaps {
     /** Ammonia Atmosphere Reactor — reactive NH₃ gas atmosphere at high temperature. */
     public static final RecipeMap<RecipeMapBackend> sAARRecipes = RecipeMapBuilder
         .of("gtnhpp.recipe.aar")
-        .maxIO(4, 4, 2, 3)
+        .maxIO(6, 6, 6, 6)
+        .neiSpecialInfoFormatter(AARNEIFormatter.INSTANCE)
         .build();
 
     /** Supercritical Dryer — above ethanol's critical point (241°C, 63 bar). */

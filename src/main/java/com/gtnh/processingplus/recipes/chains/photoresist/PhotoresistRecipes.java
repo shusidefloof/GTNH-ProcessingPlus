@@ -11,7 +11,6 @@ import com.gtnh.processingplus.machines.spc.MachineType;
 import com.gtnh.processingplus.machines.spc.SPCModuleType;
 import com.gtnh.processingplus.machines.spc.SPCRecipeData;
 import com.gtnh.processingplus.materials.PrPMaterials;
-import static com.gtnh.processingplus.items.Intermediate.*;
 import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
 
 import gregtech.api.enums.GTValues;

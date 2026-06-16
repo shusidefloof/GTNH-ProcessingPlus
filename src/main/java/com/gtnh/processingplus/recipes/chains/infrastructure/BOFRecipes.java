@@ -7,7 +7,6 @@ import net.minecraft.item.ItemStack;
 
 import com.gtnh.processingplus.blocks.BlockGTNHPPCasings;
 import com.gtnh.processingplus.blocks.GTNHPPBlocks;
-import static com.gtnh.processingplus.items.Intermediate.*;
 import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
 
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -78,7 +77,7 @@ public class BOFRecipes {
         GTValues.RA.stdBuilder()
             .itemInputs(ingot(Materials.Iron, 8), dust(Materials.Calcium, 2), circuit(2))
             .fluidInputs(fluid(Materials.Oxygen, 200))
-            .itemOutputs(ingot(Materials.Steel, 10), dust(PrPMaterials.BOFSlag, 1))
+            .itemOutputs(ingot(Materials.Steel, 16), dust(PrPMaterials.BOFSlag, 1))
             .fluidOutputs(fluid(Materials.CarbonDioxide, 800))
             .duration(5 * 20)
             .eut(TierEU.RECIPE_MV)
@@ -89,7 +88,7 @@ public class BOFRecipes {
         GTValues.RA.stdBuilder()
             .itemInputs(ingot(Materials.Iron, 8), dust(Materials.Calcite, 4), circuit(2))
             .fluidInputs(fluid(Materials.Oxygen, 150))
-            .itemOutputs(ingot(Materials.Steel, 14), dust(PrPMaterials.BOFSlag, 2))
+            .itemOutputs(ingot(Materials.Steel, 20), dust(PrPMaterials.BOFSlag, 2))
             .fluidOutputs(fluid(Materials.CarbonDioxide, 1600))
             .duration(4 * 20)
             .eut(TierEU.RECIPE_MV)
@@ -100,7 +99,7 @@ public class BOFRecipes {
         GTValues.RA.stdBuilder()
             .itemInputs(ingot(Materials.Iron, 8), dust(Materials.Dolomite, 8), circuit(2))
             .fluidInputs(fluid(Materials.Oxygen, 125))
-            .itemOutputs(ingot(Materials.Steel, 16), dust(PrPMaterials.BOFSlag, 4))
+            .itemOutputs(ingot(Materials.Steel, 24), dust(PrPMaterials.BOFSlag, 4))
             .fluidOutputs(fluid(Materials.CarbonDioxide, 1600), fluid(Materials.CarbonMonoxide, 400))
             .duration(3 * 20)
             .eut(TierEU.RECIPE_MV)

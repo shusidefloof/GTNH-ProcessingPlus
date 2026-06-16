@@ -1,6 +1,10 @@
 package com.gtnh.processingplus.recipes;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
+
+import goodgenerator.api.recipe.GoodGeneratorRecipeMaps;
 
 import gregtech.api.enums.*;
 import gregtech.api.recipe.RecipeMaps;
@@ -37,6 +41,59 @@ public final class RecipeSwaps {
         gateConveyorsWithNylon();
         gateRobotArmsWithNylon();
         gateFieldGensWithPrometheanNaquadria();
+        gateCoALWithAmorphous();
+        gateUVCasingWithCarbonFiber();
+    }
+
+    // -------------------------------------------------------------------------
+    // Carbon Fiber UV-casing gate — the endgame ZPM carbon-fiber chain's structural sink. The UV
+    // machine casing (8 Osmium plates) now takes 4 Osmium + 4 Carbon Fiber Composite plates, so the
+    // whole PAN → graphitization → composite line becomes the structural cost of building UV machines.
+    // Both the assembler recipe and the hand-craft bypass (PPP/PwP/PPP) are gated so neither path skips
+    // the carbon fiber.
+    // -------------------------------------------------------------------------
+    private static void gateUVCasingWithCarbonFiber() {
+        ItemStack carbonPlate1 = plate(PrPMaterials.CarbonFiberComposite, 1);
+        ItemStack osmium4 = GTOreDictUnificator.get(OrePrefixes.plate, Materials.Osmium, 4);
+        ItemStack carbon4 = plate(PrPMaterials.CarbonFiberComposite, 4);
+        ItemStack casingUV = ItemList.Casing_UV.get(1);
+        if (carbonPlate1 == null || osmium4 == null || carbon4 == null) {
+            GTNHProcessingPlus.LOG.warn("UV casing carbon-fiber gate: Carbon Fiber Composite plate missing — skipped.");
+            return;
+        }
+
+        int removed = PPRecipeHelper.removeRecipesByOutput(RecipeMaps.assemblerRecipes, casingUV);
+        GTValues.RA.stdBuilder()
+            .itemInputs(osmium4, carbon4)
+            .circuit(8)
+            .itemOutputs(casingUV)
+            .duration(50)
+            .eut(TierEU.RECIPE_LV / 2)
+            .addTo(RecipeMaps.assemblerRecipes);
+
+        // Close the hand-craft bypass: remove the stock 8-Osmium crafting recipe and re-add as 4+4.
+        int craftRemoved = 0;
+        Iterator<?> it = CraftingManager.getInstance()
+            .getRecipeList()
+            .iterator();
+        while (it.hasNext()) {
+            Object o = it.next();
+            if (!(o instanceof IRecipe)) continue;
+            ItemStack out = ((IRecipe) o).getRecipeOutput();
+            if (out != null && GTUtility.areStacksEqual(out, casingUV)) {
+                it.remove();
+                craftRemoved++;
+            }
+        }
+        GTModHandler.addCraftingRecipe(
+            casingUV,
+            GTModHandler.RecipeBits.BUFFERED | GTModHandler.RecipeBits.NOT_REMOVABLE,
+            new Object[] { "PCP", "CwC", "PCP", 'P', OrePrefixes.plate.get(Materials.Osmium), 'C', carbonPlate1 });
+
+        GTNHProcessingPlus.LOG.info(
+            "UV casing carbon-fiber gate: removed {} assembler + {} crafting recipe(s), re-added with 4 Carbon Fiber Composite plates.",
+            removed,
+            craftRemoved);
     }
 
     // -------------------------------------------------------------------------
@@ -69,6 +126,58 @@ public final class RecipeSwaps {
             ItemList.Field_Generator_UIV.get(1) };
         taxAsslineWithFluid(fieldGens, PrPMaterials.PrometheanNaquadria.getMolten(288),
             "Promethean Naquadria field-gen gate");
+    }
+
+    // -------------------------------------------------------------------------
+    // CoAL amorphous-metal gate — every UHV-tier-and-above Component Assembly Line recipe now also
+    // requires Amorphous Tritanium Alloy + Amorphous Naquadria plates (the two CRV metallic-glass
+    // outputs). Since the CoAL mass-produces nearly every UHV+ machine component, this routes the
+    // whole amorphous-alloy chain through the entire late game. The plate count scales with the CoAL
+    // casing tier (UHV/UEV/UIV/UMV). Recipes are copied + re-added (not mutated) so the recipe map
+    // re-indexes the new input, and copy() preserves the COAL_CASING_TIER so the casing gate stays.
+    // -------------------------------------------------------------------------
+    private static void gateCoALWithAmorphous() {
+        final int COAL_UHV = 9; // GoodGenerator's COAL casing-tier index for UHV (UEV=10, UIV=11, UMV=12)
+        if (plate(PrPMaterials.AmorphousTritaniumAlloy, 1) == null || plate(PrPMaterials.AmorphousNaquadria, 1) == null) {
+            GTNHProcessingPlus.LOG.warn("CoAL amorphous gate: amorphous plate missing — skipped.");
+            return;
+        }
+
+        List<GTRecipe> taxed = new ArrayList<>();
+        List<ItemStack> outputsToRemove = new ArrayList<>();
+        for (GTRecipe r : GoodGeneratorRecipeMaps.componentAssemblyLineRecipes.getAllRecipes()) {
+            int tier = r.getMetadataOrDefault(gregtech.api.util.GTRecipeConstants.COAL_CASING_TIER, 0);
+            if (tier < COAL_UHV) continue;
+            if (r.mOutputs == null || r.mOutputs.length == 0) continue;
+            int n = (tier - 8) * 2; // UHV=2, UEV=4, UIV=6, UMV=8 plates of each amorphous alloy
+            GTRecipe copy = r.copy();
+            copy.mInputs = appendItems(
+                copy.mInputs,
+                plate(PrPMaterials.AmorphousTritaniumAlloy, n),
+                plate(PrPMaterials.AmorphousNaquadria, n));
+            taxed.add(copy);
+            outputsToRemove.add(r.mOutputs[0]);
+        }
+
+        int removed = 0;
+        for (ItemStack out : outputsToRemove) {
+            removed += PPRecipeHelper.removeRecipesByOutput(GoodGeneratorRecipeMaps.componentAssemblyLineRecipes, out);
+        }
+        for (GTRecipe c : taxed) {
+            GoodGeneratorRecipeMaps.componentAssemblyLineRecipes.addRecipe(c);
+        }
+        GTNHProcessingPlus.LOG.info(
+            "CoAL amorphous gate: re-added {} UHV+ component recipe(s) behind amorphous plates (removed {}).",
+            taxed.size(),
+            removed);
+    }
+
+    private static ItemStack[] appendItems(ItemStack[] arr, ItemStack... add) {
+        int base = (arr == null) ? 0 : arr.length;
+        ItemStack[] out = new ItemStack[base + add.length];
+        if (arr != null) System.arraycopy(arr, 0, out, 0, base);
+        for (int i = 0; i < add.length; i++) out[base + i] = add[i];
+        return out;
     }
 
     /** Append a molten fluid in-place to every assembly-line recipe (real + NEI copy) whose output matches. */

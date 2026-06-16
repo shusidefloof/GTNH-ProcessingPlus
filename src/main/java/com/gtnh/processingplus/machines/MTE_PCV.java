@@ -12,8 +12,8 @@ import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_LARGE_CHEMICA
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_LARGE_CHEMICAL_REACTOR_ACTIVE_GLOW;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_LARGE_CHEMICAL_REACTOR_GLOW;
 import static gregtech.api.enums.Textures.BlockIcons.casingTexturePages;
+import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlock;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
-import static gregtech.api.util.GTStructureUtility.ofFrame;
 
 import java.util.List;
 
@@ -24,15 +24,17 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import com.gtnewhorizon.structurelib.alignment.constructable.ISurvivalConstructable;
 import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
+import com.gtnewhorizon.structurelib.structure.IStructureElement;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
+import com.gtnh.processingplus.GTNHProcessingPlus;
 import com.gtnh.processingplus.blocks.BlockGTNHPPCasings;
 import com.gtnh.processingplus.blocks.GTNHPPBlocks;
 import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
 
+import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import gregtech.api.enums.Materials;
 import gregtech.api.enums.SoundResource;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
@@ -55,9 +57,9 @@ public class MTE_PCV extends MTEExtendedPowerMultiBlockBase<MTE_PCV> implements 
 
     private static final int CASING_INDEX = 11;
     private static final String STRUCTURE_PIECE_MAIN = "main";
-    // Controller sits on the front face, centre column, at mid-height.
-    private static final int OFFSET_X = 2;
-    private static final int OFFSET_Y = 3;
+    // Controller marker (~) sits at slice 0, row 8, col 4 — the front face of the main column.
+    private static final int OFFSET_X = 4;
+    private static final int OFFSET_Y = 8;
     private static final int OFFSET_Z = 0;
 
     private static IStructureDefinition<MTE_PCV> STRUCTURE_DEFINITION = null;
@@ -81,30 +83,88 @@ public class MTE_PCV extends MTEExtendedPowerMultiBlockBase<MTE_PCV> implements 
             STRUCTURE_DEFINITION = StructureDefinition.<MTE_PCV>builder()
                 .addShape(
                     STRUCTURE_PIECE_MAIN,
-                    // shape[z][y][x] — 5 depth slices (front→back), each 7 rows (top→bottom) × 5 cols.
-                    // 'C' = PCV casing/hatch, 'F' = stainless frame spine, ' ' = hollow interior.
+                    // shape[z][y][x] — 9 depth slices (front→back), each 12 rows (top→bottom) × 16 cols.
+                    // Controller (~) at slice 0, row 8, col 4. 'P' = PCV casing (hatches), legend below.
                     new String[][] {
-                        // z=0 — front face (solid casing, controller centre)
-                        { "CCCCC", "CCCCC", "CCCCC", "CC~CC", "CCCCC", "CCCCC", "CCCCC" },
-                        // z=1 — hollow body ring
-                        { "CCCCC", "C   C", "C   C", "C   C", "C   C", "C   C", "CCCCC" },
-                        // z=2 — hollow body ring with central frame spine
-                        { "CCCCC", "C F C", "C F C", "C F C", "C F C", "C F C", "CCCCC" },
-                        // z=3 — hollow body ring
-                        { "CCCCC", "C   C", "C   C", "C   C", "C   C", "C   C", "CCCCC" },
-                        // z=4 — back face (solid casing)
-                        { "CCCCC", "CCCCC", "CCCCC", "CCCCC", "CCCCC", "CCCCC", "CCCCC" }, })
+                        { "                ", "                ", "                ", "                ",
+                            "                ", "                ", "  DJ JD         ", "  DEEED         ",
+                            "  DE~ED         ", "  DEEED         ", "  DJ JD         ", "  D   D         " },
+                        { "                ", "   NNN          ", "   GNG          ", "   G G          ",
+                            "   G G          ", "  DJ JD         ", " Q RQR Q        ", " Q RRR Q        ",
+                            " Q RRR Q        ", " Q RRR Q        ", " Q RQR Q        ", "  QJ JQ         " },
+                        { "   NNN          ", "  DG GD         ", "  DG GD         ", "  DKQKD         ",
+                            "  DIBID         ", " DDRQRDD        ", "D P   P D   QQQ ", "D P   P D   IAI ",
+                            "D P   P D   IAI ", "D P   P D  DIAID", "D P   P D  DQQQD", "DQQPQPQQD  DQQQD" },
+                        { "  NSOSN         ", " NGC CGN        ", " GGC CGG        ", " GKS SKG        ",
+                            " GIBMBIG        ", " JRRLRRJ    QQQ ", "JR     RJ  QQJQQ", "JR     RJ  IB BI",
+                            "JR     RJNNIH HI", "JR     RJ  IH HI", "JR     RJ  QB BQ", " JPPPPPJ   QQJQQ" },
+                        { "  NOOON         ", " N  F  N        ", " N  F  N        ", "  Q F Q         ",
+                            "  BMFMB         ", "  QLLLQ     QQQ ", " Q     Q   QJJJQ", " R     RBNNQ   A",
+                            " R     RBOOO   A", " R     R NNQ   A", " Q     Q   Q   Q", "  QPPPQ    QJJJQ" },
+                        { "  NSOSN         ", " NGC CGN        ", " GGC CGG        ", " GKS SKG        ",
+                            " GIBMBIG        ", " JRRLRRJ    QQQ ", "JR     RJ  QQJQQ", "JR     RJ  IB BI",
+                            "JR     RJNNIH HI", "JR     RJ  IH HI", "JR     RJ  QB BQ", " JPPPPPJ   QQJQQ" },
+                        { "   NNN          ", "  DG GD         ", "  DG GD         ", "  DKQKD         ",
+                            "  DIBID         ", " DDRQRDD        ", "D P   P D   QQQ ", "D P   P D   IAI ",
+                            "D P   P D   IAI ", "D P   P D  DIAID", "D P   P D  DQQQD", "DQQPQPQQD  DQQQD" },
+                        { "                ", "   NNN          ", "   GNG          ", "   G G          ",
+                            "   G G          ", "  DJ JD         ", " Q RQR Q        ", " Q RRR Q        ",
+                            " Q RRR Q        ", " Q RRR Q        ", " Q RQR Q        ", "  QJ JQ         " },
+                        { "                ", "                ", "                ", "                ",
+                            "                ", "                ", "  DJ JD         ", "  DJ JD         ",
+                            "  DJ JD         ", "  DJ JD         ", "  DJ JD         ", "  D   D         " }, })
+                // --- PCV casing (solid structural; hatches go on the Carbon Fiber Composite casing instead) ---
+                .addElement('P', ofBlock(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.PCV_CASING))
+                // --- GregTech blocks (registry name + meta straight from the export) ---
+                .addElement('E', fb("gregtech", "gt.blockcasings", 11))
+                .addElement('G', fb("gregtech", "gt.blockcasings11", 5))
+                .addElement('H', fb("gregtech", "gt.blockframes", 71))
+                .addElement('I', fb("gregtech", "gt.blockmetal2", 14))
+                .addElement('J', fb("gregtech", "gt.blockmetal8", 3))
+                .addElement('K', fb("gregtech", "gt.blockmetal8", 10))
+                .addElement('L', fb("gregtech", "gt.sheetmetal", 71))
+                .addElement('M', fb("gregtech", "gt.sheetmetal", 73))
+                // gregtech also registers the bartworks-material sheetmetal and the solenoid/cyclotron coils
+                .addElement('D', fb("gregtech", "bw.sheetmetal", 26166))
+                .addElement('F', fb("gregtech", "gt.blockcasings.cyclotron_coils", 2))
+                // 'C' = bartworks-material frame box; modid uncertain in this GT version, null-safe handles it
+                .addElement('C', fb("gregtech", "bw.frames", 26021))
+                // --- GT++ (miscutils) blocks ---
+                .addElement('N', fb("miscutils", "gtplusplus.blockcasings.5", 0))
+                .addElement('O', fb("miscutils", "gtplusplus.blockcasings.5", 1))
+                .addElement('B', fb("miscutils", "block.Inconel792.frame", 0))
+                // --- Bartworks blocks ---
+                .addElement('A', fb("bartworks", "BW_GlasBlocks", 0))
+                // --- Carbon Fiber Composite casing = the ONLY hatch-bearing element (energy, I/O, maint, muffler) ---
                 .addElement(
-                    'C',
+                    'Q',
                     buildHatchAdder(MTE_PCV.class)
                         .atLeast(Energy, InputBus, InputHatch, OutputBus, OutputHatch, Maintenance, Muffler)
                         .casingIndex(CASING_INDEX)
                         .hint(1)
-                        .buildAndChain(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.PCV_CASING))
-                .addElement('F', ofFrame(Materials.StainlessSteel))
+                        .buildAndChain(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.CF_COMPOSITE_CASING))
+                // --- TODO: R and S were undefined bartworks tile placeholders in the export.
+                //     Temporarily mapped to PCV casing so the file forms — replace with the real blocks. ---
+                .addElement('R', ofBlock(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.PCV_CASING))
+                .addElement('S', ofBlock(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.PCV_CASING))
                 .build();
         }
         return STRUCTURE_DEFINITION;
+    }
+
+    /**
+     * Null-safe block element: resolves {modid:name} at definition-build time. If the block can't be
+     * found (wrong modid/name for this GT version) it logs a warning and falls back to PCV casing
+     * instead of throwing IllegalArgumentException (which would hard-crash the client on auto-place).
+     */
+    private static IStructureElement<MTE_PCV> fb(String modid, String name, int meta) {
+        net.minecraft.block.Block b = GameRegistry.findBlock(modid, name);
+        if (b == null) {
+            GTNHProcessingPlus.LOG.warn("PCV structure: block {}:{} not found — using PCV casing placeholder.", modid,
+                name);
+            return ofBlock(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.PCV_CASING);
+        }
+        return ofBlock(b, meta);
     }
 
     @Override
@@ -175,17 +235,17 @@ public class MTE_PCV extends MTEExtendedPowerMultiBlockBase<MTE_PCV> implements 
         tt.addMachineType("Polycondensation Vessel, PCV")
             .addInfo(EnumChatFormatting.GRAY + "Runs " + EnumChatFormatting.AQUA + "vacuum-assisted polymerization"
                 + EnumChatFormatting.GRAY + " reactions.")
-            .beginStructureBlock(5, 7, 5, true)
-            .addController("Front face, centre column")
-            .addCasingInfoMin("Chemically Inert Reaction Vessel", 60, false)
-            .addOtherStructurePart("Stainless Steel Frame", "Central spine, 5 tall")
-            .addInputBus("Any casing", 1)
-            .addInputHatch("Any casing", 1)
-            .addOutputBus("Any casing", 1)
-            .addOutputHatch("Any casing", 1)
-            .addEnergyHatch("Any casing", 1)
-            .addMufflerHatch("Any casing", 1)
-            .addMaintenanceHatch("Any casing", 1)
+            .beginStructureBlock(16, 12, 9, true)
+            .addController("Front face, main column")
+            .addCasingInfoMin("Chemically Inert Reaction Vessel (PCV casing)", 20, false)
+            .addOtherStructurePart("Carbon Fiber Composite, GT casings & frames", "Per structure hologram")
+            .addInputBus("Any Carbon Fiber Composite casing", 1)
+            .addInputHatch("Any Carbon Fiber Composite casing", 1)
+            .addOutputBus("Any Carbon Fiber Composite casing", 1)
+            .addOutputHatch("Any Carbon Fiber Composite casing", 1)
+            .addEnergyHatch("Any Carbon Fiber Composite casing", 1)
+            .addMufflerHatch("Any Carbon Fiber Composite casing", 1)
+            .addMaintenanceHatch("Any Carbon Fiber Composite casing", 1)
             .toolTipFinisher("_Shusi_");
         return tt;
     }

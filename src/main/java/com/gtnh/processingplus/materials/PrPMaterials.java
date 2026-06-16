@@ -365,6 +365,13 @@ public class PrPMaterials implements Runnable {
     public static Werkstoff PrometheanNaquadria;
     public static Werkstoff PromethiumBetavoltaicAlloy;
 
+    // =========================
+    // CARBON AEROGEL (PAN ROUTE)
+    // =========================
+    public static Werkstoff WetPANGel;     // acid-gelled PAN intermediate
+    public static Werkstoff PANAerogel;    // supercritical-dried PAN aerogel
+    public static Werkstoff CarbonAerogel; // pyrolyzed structural carbon aerogel
+
     public static List<Werkstoff> ALL = new ArrayList<>();
 
     // =========================
@@ -2366,6 +2373,40 @@ public class PrPMaterials implements Runnable {
                     .addSimpleMetalWorkingItems(),
                 id(),
                 TextureSet.SET_SHINY));
+
+        // ── Carbon aerogel (PAN route) — appended last to keep earlier material IDs stable ──
+        WetPANGel = register(
+            new Werkstoff(
+                rgb(190, 215, 230),
+                "Wet PAN Gel",
+                subscriptNumbers("(C3H3N)n·H2O"),
+                new Werkstoff.Stats(),
+                Werkstoff.Types.MIXTURE,
+                polymerFeatures(),
+                id(),
+                TextureSet.SET_DULL));
+
+        PANAerogel = register(
+            new Werkstoff(
+                rgb(220, 235, 245),
+                "PAN Aerogel",
+                subscriptNumbers("(C3H3N)n*"),
+                new Werkstoff.Stats(),
+                Werkstoff.Types.COMPOUND,
+                polymerFeatures(),
+                id(),
+                TextureSet.SET_DULL));
+
+        CarbonAerogel = register(
+            new Werkstoff(
+                rgb(30, 30, 35),
+                "Carbon Aerogel",
+                subscriptNumbers("(C)n*"),
+                new Werkstoff.Stats(),
+                Werkstoff.Types.COMPOUND,
+                fiberFeatures(),
+                id(),
+                TextureSet.SET_DULL));
     }
 
     // =========================

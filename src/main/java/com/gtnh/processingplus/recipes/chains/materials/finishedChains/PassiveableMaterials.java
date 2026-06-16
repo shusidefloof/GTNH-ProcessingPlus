@@ -1,7 +1,6 @@
 package com.gtnh.processingplus.recipes.chains.materials.finishedChains;
 
 import com.gtnh.processingplus.materials.PrPMaterials;
-import static com.gtnh.processingplus.items.Intermediate.*;
 import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.Materials;

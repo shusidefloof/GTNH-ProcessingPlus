@@ -55,11 +55,6 @@ import gregtech.api.util.OverclockCalculator;
 import gregtech.api.util.tooltip.TooltipHelper;
 import gregtech.common.misc.GTStructureChannels;
 
-/**
- * Ammonia Atmosphere Reactor — high-temperature reactive NH₃ atmosphere.
- * Used for hBN nitriding (B₄C + NH₃ → crude hBN + CO) and general metal nitriding.
- * NH₃ is consumed as recipe fluid; CO is produced as recipe fluid output.
- */
 public class MTE_AAR extends MTEExtendedPowerMultiBlockBase<MTE_AAR> implements ISurvivalConstructable {
 
     private static final int CASING_INDEX = 11;
@@ -205,8 +200,6 @@ public class MTE_AAR extends MTEExtendedPowerMultiBlockBase<MTE_AAR> implements 
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType("Ammonia Atmosphere Reactor, AAR")
-            .addInfo(EnumChatFormatting.GRAY + "Runs reactions inside a reactive " + EnumChatFormatting.GREEN
-                + "ammonia atmosphere" + EnumChatFormatting.GRAY + ".")
             .addSeparator()
             .addInfo(
                 "Heat capacity: " + TooltipHelper.coloredText("coil tier heat", EnumChatFormatting.RED)
@@ -231,10 +224,6 @@ public class MTE_AAR extends MTEExtendedPowerMultiBlockBase<MTE_AAR> implements 
                     + TooltipHelper.coloredText("perfect overclock", EnumChatFormatting.LIGHT_PURPLE)
                     + EnumChatFormatting.GRAY
                     + ".")
-            .addInfo(
-                EnumChatFormatting.RED + "Requires continuous NH₃ supply"
-                    + EnumChatFormatting.GRAY
-                    + " — loss of atmosphere pauses processing.")
             .beginStructureBlock(3, 5, 3, true)
             .addController("Front face, center column, middle height")
             .addCasingInfoMin("Corrosion-Resistant Reactor Casing", 10, false)

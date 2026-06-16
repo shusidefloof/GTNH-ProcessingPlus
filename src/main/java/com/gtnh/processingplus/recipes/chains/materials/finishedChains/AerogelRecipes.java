@@ -3,7 +3,6 @@ package com.gtnh.processingplus.recipes.chains.materials.finishedChains;
 import static com.gtnh.processingplus.recipes.PPRecipeHelper.*;
 
 import com.gtnh.processingplus.materials.PrPMaterials;
-import static com.gtnh.processingplus.items.Intermediate.*;
 import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
 
 import gregtech.api.enums.GTValues;
@@ -140,7 +139,7 @@ public class AerogelRecipes {
             .fluidInputs(fluid(Materials.Water, 1000))
             .itemOutputs(dust(PrPMaterials.AgedSilicaGel, 4))
             .duration(3200)
-            .eut(TierEU.RECIPE_UHV)
+            .eut(TierEU.RECIPE_EV)
             .addTo(GTNHPPRecipeMaps.sSCDRecipes);
     }
 
@@ -155,25 +154,28 @@ public class AerogelRecipes {
             .fluidOutputs(fluid(Materials.Water, 3000))
             .itemOutputs(dust(PrPMaterials.EthanolSaturatedGel, 4))
             .duration(800)
-            .eut(TierEU.RECIPE_UHV)
+            .eut(TierEU.RECIPE_EV)
             .addTo(GTNHPPRecipeMaps.sSCDRecipes);
     }
 
     // =========================================================
     // 4b. Acetone exchange — swap the pore ethanol for acetone, which is fully miscible with
-    // supercritical CO2 (ethanol is not). Most of the ethanol is recovered for reuse.
+    // supercritical CO2 (ethanol is not). A small LiquidCO2 co-feed strips residual water
+    // from the displaced ethanol before it exits, recovering 4000 mB (vs. ~3500 mB dry).
+    // The CO2 exits as gas and loops back to the CSC.
     // =========================================================
     private static void step4b_AcetoneExchange() {
 
         GTValues.RA.stdBuilder()
             .itemInputs(dust(PrPMaterials.EthanolSaturatedGel, 4))
-            .fluidInputs(fluid(Materials.Acetone, 4000))
-            .fluidOutputs(fluid(Materials.Ethanol, 3500))
+            .fluidInputs(fluid(Materials.Acetone, 4000), fluid(PrPMaterials.LiquidCO2, 1000))
+            .fluidOutputs(fluid(Materials.Ethanol, 4000), fluid(Materials.CarbonDioxide, 1000))
             .itemOutputs(dust(PrPMaterials.AcetoneSaturatedGel, 4))
             .duration(800)
-            .eut(TierEU.RECIPE_UHV)
+            .eut(TierEU.RECIPE_EV)
             .addTo(GTNHPPRecipeMaps.sSCDRecipes);
     }
+
 
     // =========================================================
     // 5. Supercritical CO2 drying — liquid CO2 from the CSC goes supercritical inside the dryer and
@@ -189,7 +191,7 @@ public class AerogelRecipes {
                 fluid(Materials.Acetone, 3500))
             .itemOutputs(plate(PrPMaterials.SilicaAerogel, 2))
             .duration(1000)
-            .eut(TierEU.RECIPE_UHV)
+            .eut(TierEU.RECIPE_HV)
             .addTo(GTNHPPRecipeMaps.sSCDRecipes);
     }
 
@@ -205,7 +207,7 @@ public class AerogelRecipes {
             .fluidOutputs(fluid(Materials.HydrochloricAcid, 2000))
             .itemOutputs(plate(PrPMaterials.HydrophobicSilicaAerogel, 2))
             .duration(600)
-            .eut(TierEU.RECIPE_UHV)
+            .eut(TierEU.RECIPE_UV)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 }

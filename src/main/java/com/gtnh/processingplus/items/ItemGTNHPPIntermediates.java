@@ -60,12 +60,12 @@ public class ItemGTNHPPIntermediates extends Item {
     @SideOnly(Side.CLIENT)
     private static String placeholderIcon(Intermediate it) {
         String s = it.reg;
-        if (s.contains("gel")) return "minecraft:slime_ball";
+        if (s.contains("gel")) return "minecraft:slimeball";
         if (s.contains("crystal") || s.contains("shard")) return "minecraft:quartz";
         if (s.contains("fiber") || s.contains("tow")) return "minecraft:string";
         if (s.contains("adamantium") || s.contains("clump") || s.contains("compact") || s.contains("sintering"))
             return "minecraft:iron_ingot";
-        if (s.contains("concentrate") || s.contains("ore")) return "minecraft:redstone";
+        if (s.contains("concentrate") || s.contains("ore")) return "minecraft:redstone_dust";
         if (s.contains("film") || s.contains("triflate") || s.contains("salt") || s.contains("sulfate")
             || s.contains("acetate") || s.contains("oxime") || s.contains("acid"))
             return "minecraft:paper";

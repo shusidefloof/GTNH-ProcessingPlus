@@ -9,6 +9,7 @@ import com.gtnh.processingplus.machines.MTE_CSC;
 import com.gtnh.processingplus.machines.MTE_HPR;
 import com.gtnh.processingplus.machines.MTE_HPSF;
 import com.gtnh.processingplus.machines.MTE_HTRF;
+import com.gtnh.processingplus.machines.MTE_SCD;
 import com.gtnh.processingplus.machines.MTE_SPU;
 import com.gtnh.processingplus.machines.MTE_PCV;
 import com.gtnh.processingplus.machines.MTE_RTG;
@@ -54,6 +55,9 @@ public class GTNHPPBlocks {
     /** HPR controller instance — kept so its assembly-line recipe can reference the controller stack. */
     public static MTE_HPR HPR;
 
+    /** SCD controller instance — kept so its craft recipe can reference the controller stack. */
+    public static MTE_SCD SCD;
+
     /** SPU controller instance — kept so its assembly-line recipe can reference the controller stack. */
     public static MTE_SPU SPU;
 
@@ -65,6 +69,11 @@ public class GTNHPPBlocks {
     public static final int HPR_ID = 31501;
     public static final int SPU_ID = 31502;
     public static final int CRC_ID = 31503;
+
+    // SCD sits in the gap between CAC (31516) and the first cable-loader ID (31529).
+    // WerkstoffCableLoader.register() uses startId+0..startId+11, and id() returns 31529 on its
+    // first call — so 31517 is free. Verified by reading WerkstoffCableLoader.java.
+    public static final int SCD_ID = 31517;
 
     private static final int OFFSET = 31_517;
     private static int nextId = OFFSET;
@@ -99,6 +108,8 @@ public class GTNHPPBlocks {
         HTRF.getStackForm(1);
         CAC = new MTE_CAC(31516, "gtnhpp.cac", "Cryogenic Annealing Cryostat");
         CAC.getStackForm(1);
+        SCD = new MTE_SCD(SCD_ID, "gtnhpp.scd", "Supercritical Dryer");
+        SCD.getStackForm(1);
         RTG = new MTE_RTG(31504, "gtnhpp.rtg", "Radioisotope Thermoelectric Generator");
         RTG.getStackForm(1);
         CIDC = new MTE_CIDC(CIDC_ID, "gtnhpp.cidc", "Controlled Isotopic Doping Chamber");

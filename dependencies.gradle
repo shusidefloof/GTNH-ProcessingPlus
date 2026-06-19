@@ -44,5 +44,5 @@ dependencies {
     devOnlyNonPublishable(rfg.deobf("com.github.GTNewHorizons:NewHorizonsCoreMod:2.8.279:dev"))
     // GTplusplus is optional at runtime (@Mod uses "after:" not "required-after:"), so
     // compileOnly is fine — avoids pulling its unresolvable transitive deps into the run.
-    compileOnly(rfg.deobf("com.github.GTNewHorizons:GTplusplus:1.12.11:dev")) { transitive = false }
+    compileOnly(rfg.deobf("com.github.GTNewHorizons:GTplusplus:1.11.4:dev")) { transitive = false }
 }

@@ -24,3 +24,4 @@ gt.blockmachines.gtnhpp.crv.name=Ceramic Reaction Vessel
 gt.blockmachines.gtnhpp.spc.name=Spectral Photolithography Chamber
 gt.blockmachines.gtnhpp.csc.name=Cryogenic Separation Column
 gt.blockmachines.gtnhpp.bof.name=Basic Oxygen Furnace
+gtnhpp.recipe.hpr.coil_tier=FRF Coil Tier: %s

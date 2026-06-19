@@ -813,6 +813,7 @@ public class PhotoresistRecipes {
             .fluidOutputs(fluid(PrPMaterials.BioRefinedIntermediate, 1000))
             .duration(120)
             .eut(TierEU.RECIPE_UV)
+            .specialValue(1)
             .addTo(GTNHPPRecipeMaps.sHPRRecipes);
     }
 
@@ -831,6 +832,7 @@ public class PhotoresistRecipes {
             .fluidOutputs(fluid(PrPMaterials.RadoxXenoxeneMatrix, 2500))
             .duration(200)
             .eut(TierEU.RECIPE_UHV)
+            .specialValue(2)
             .addTo(GTNHPPRecipeMaps.sHPRRecipes);
     }
 
@@ -864,6 +866,7 @@ public class PhotoresistRecipes {
             .fluidOutputs(fluid(PrPMaterials.UHVPhotoresistMatrix, 100))
             .duration(200)
             .eut(TierEU.RECIPE_UHV)
+            .specialValue(2)
             .addTo(GTNHPPRecipeMaps.sHPRRecipes);
     }
 
@@ -941,6 +944,7 @@ public class PhotoresistRecipes {
             .fluidOutputs(fluid(PrPMaterials.HypogenQuantumMatrix, 1000))
             .duration(200)
             .eut(TierEU.RECIPE_UEV)
+            .specialValue(3)
             .addTo(GTNHPPRecipeMaps.sHPRRecipes);
     }
 
@@ -1115,6 +1119,7 @@ public class PhotoresistRecipes {
             .fluidOutputs(fluid(PrPMaterials.CreonTriflate, 1000))
             .duration(100)
             .eut(TierEU.RECIPE_UEV)
+            .specialValue(4)
             .addTo(GTNHPPRecipeMaps.sHPRRecipes);
     }
 

@@ -1,5 +1,6 @@
 package com.gtnh.processingplus.machines;
 
+import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlock;
 import static gregtech.api.enums.HatchElement.Energy;
 import static gregtech.api.enums.HatchElement.InputBus;
 import static gregtech.api.enums.HatchElement.InputHatch;
@@ -16,9 +17,11 @@ import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
 
 import java.util.List;
 
+import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.common.util.ForgeDirection;
+
 
 import com.gtnewhorizon.structurelib.alignment.constructable.ISurvivalConstructable;
 import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
@@ -28,6 +31,7 @@ import com.gtnh.processingplus.blocks.BlockGTNHPPCasings;
 import com.gtnh.processingplus.blocks.GTNHPPBlocks;
 import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
 
+import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import gregtech.api.enums.SoundResource;
@@ -43,7 +47,7 @@ import gregtech.api.structure.error.StructureErrorRegistry;
 import gregtech.api.util.MultiblockTooltipBuilder;
 
 /**
- * Supercritical Dryer — 5×5×5 high-pressure autoclave.
+ * Supercritical Dryer — high-pressure autoclave for scCO₂ gel drying and extraction.
  * Brings liquid CO₂ above its critical point (31 °C, 73.8 bar) to extract pore-filling
  * solvents without surface tension collapsing the gel network, yielding aerogels and
  * enabling supercritical CO₂ extraction of resins and pharmaceuticals.
@@ -52,11 +56,24 @@ public class MTE_SCD extends MTEExtendedPowerMultiBlockBase<MTE_SCD> implements 
 
     private static final int CASING_INDEX = 11;
     private static final String STRUCTURE_PIECE_MAIN = "main";
-    private static final int OFFSET_X = 2;
-    private static final int OFFSET_Y = 2;
+    // Controller (~) is at slice z=0, row y=5, col x=7
+    private static final int OFFSET_X = 7;
+    private static final int OFFSET_Y = 5;
     private static final int OFFSET_Z = 0;
 
     private static IStructureDefinition<MTE_SCD> STRUCTURE_DEFINITION = null;
+
+    private static Block gtBlock(String name) {
+        Block b = GameRegistry.findBlock("gregtech", name);
+        if (b == null) throw new RuntimeException("SCD requires GregTech block: " + name);
+        return b;
+    }
+
+    private static Block bwBlock(String name) {
+        Block b = GameRegistry.findBlock("bartworks", name);
+        if (b == null) throw new RuntimeException("SCD requires Bartworks block: " + name);
+        return b;
+    }
 
     public MTE_SCD(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
@@ -77,19 +94,126 @@ public class MTE_SCD extends MTEExtendedPowerMultiBlockBase<MTE_SCD> implements 
             STRUCTURE_DEFINITION = StructureDefinition.<MTE_SCD>builder()
                 .addShape(
                     STRUCTURE_PIECE_MAIN,
-                    // shape[z][y][x] — 5 z-slices, 5 y-rows each, 5 x-chars
-                    // z=0 is the front face (controller position); z=4 is the back face.
                     new String[][] {
-                        // z=0: front face — controller at center
-                        { "CCCCC", "CCCCC", "CC~CC", "CCCCC", "CCCCC" },
-                        // z=1–3: solid pressure-vessel walls
-                        { "CCCCC", "CCCCC", "CCCCC", "CCCCC", "CCCCC" },
-                        { "CCCCC", "CCCCC", "CCCCC", "CCCCC", "CCCCC" },
-                        { "CCCCC", "CCCCC", "CCCCC", "CCCCC", "CCCCC" },
-                        // z=4: back face
-                        { "CCCCC", "CCCCC", "CCCCC", "CCCCC", "CCCCC" } })
+                        { // z=0 — front face; controller (~) at row 5 col 7
+                            "            ",
+                            "            ",
+                            "       C    ",
+                            "      ECE   ",
+                            "HFHFFEBDBE  ",
+                            "HGH CCD~DCC ",
+                            "HAH  EBDBE  ",
+                            "HAH   ECE   ",
+                            "HGH    C    ",
+                            "H H         "
+                        },
+                        { // z=1
+                            "            ",
+                            "            ",
+                            "      ICI   ",
+                            " FFFFIB BI  ",
+                            "FBBBBB   BI ",
+                            "GBGFBB    C ",
+                            "A A IB   BI ",
+                            "A A HIB BIH ",
+                            "GGG H ICIHH ",
+                            "    H     H "
+                        },
+                        { // z=2
+                            "            ",
+                            "      EEE   ",
+                            "     I C I  ",
+                            "    I     I ",
+                            "HFHE       E",
+                            "HGHEC     CE",
+                            "HAHE       E",
+                            "HAH I     I ",
+                            "HGH HI C IH ",
+                            "H H   EEE   "
+                        },
+                        { // z=3
+                            "            ",
+                            "      EAE   ",
+                            "    II   II ",
+                            "    I     I ",
+                            "   E       E",
+                            "   A       A",
+                            "   E       E",
+                            "    I     I ",
+                            "    II   II ",
+                            "      EAE   "
+                        },
+                        { // z=4
+                            "            ",
+                            "      EAE   ",
+                            "    II   II ",
+                            "    I     I ",
+                            "   E       E",
+                            "   A       A",
+                            "   E       E",
+                            "    I     I ",
+                            "    II   II ",
+                            "      EAE   "
+                        },
+                        { // z=5
+                            "            ",
+                            "      EAE   ",
+                            "    II   II ",
+                            "    I     I ",
+                            "   E       E",
+                            "   A       A",
+                            "   E       E",
+                            "    I     I ",
+                            "    II   II ",
+                            "      EAE   "
+                        },
+                        { // z=6
+                            "            ",
+                            "      EEE   ",
+                            "     I C I  ",
+                            "    I     I ",
+                            "HFHE       E",
+                            "HGHEC     CE",
+                            "HAHE       E",
+                            "HAH I     I ",
+                            "HGH HI C IH ",
+                            "H H   EEE   "
+                        },
+                        { // z=7
+                            "            ",
+                            "            ",
+                            "      ICI   ",
+                            " FFFFIB BI  ",
+                            "FBBBBB   BI ",
+                            "GBGFB     C ",
+                            "A A IB   BI ",
+                            "A A HIB BIH ",
+                            "GGG HHICIHH ",
+                            "    H     H "
+                        },
+                        { // z=8 — back face
+                            "            ",
+                            "            ",
+                            "       C    ",
+                            "      ECE   ",
+                            "HFHFFEBDBE  ",
+                            "HGH CCDCDCC ",
+                            "HAH  EBDBE  ",
+                            "HAH   ECE   ",
+                            "HGH    C    ",
+                            "H H         "
+                        }
+                    })
+                .addElement('A', ofBlock(bwBlock("BW_GlasBlocks"), 0))
+                .addElement('B', ofBlock(gtBlock("gt.blockcasings10"), 9))
+                .addElement('C', ofBlock(gtBlock("gt.blockcasings2"), 1))
+                .addElement('D', ofBlock(gtBlock("gt.blockcasings2"), 15))
+                .addElement('E', ofBlock(gtBlock("gt.blockcasings8"), 5))
+                .addElement('F', ofBlock(gtBlock("gt.blockframes"), 404))
+                .addElement('G', ofBlock(gtBlock("gt.blockmetal3"), 3))
+                .addElement('H', ofBlock(gtBlock("gt.sheetmetal"), 404))
                 .addElement(
-                    'C',
+                    'I',
                     buildHatchAdder(MTE_SCD.class)
                         .atLeast(Energy, InputBus, InputHatch, OutputBus, OutputHatch, Maintenance, Muffler)
                         .casingIndex(CASING_INDEX)
@@ -181,16 +305,16 @@ public class MTE_SCD extends MTEExtendedPowerMultiBlockBase<MTE_SCD> implements 
                 + " gel aging, solvent exchange, supercritical CO₂ drying,")
             .addInfo(EnumChatFormatting.GRAY + "resin/pharmaceutical extraction, PAN aerogel gelation.")
             .addInfo(EnumChatFormatting.GOLD + "Recovered CO₂ output loops back into the CSC.")
-            .beginStructureBlock(5, 5, 5, true)
-            .addController("Front face, center")
-            .addCasingInfoMin("High-Pressure Containment Casing", 115, false)
-            .addInputBus("Any casing", 1)
-            .addInputHatch("Any casing", 1)
-            .addOutputBus("Any casing", 1)
-            .addOutputHatch("Any casing", 1)
-            .addEnergyHatch("Any casing", 1)
-            .addMufflerHatch("Any casing", 1)
-            .addMaintenanceHatch("Any casing", 1)
+            .beginStructureBlock(12, 10, 9, true)
+            .addController("Front face, center (row 5, col 7)")
+            .addCasingInfoMin("High-Pressure Containment Casing", 1, false)
+            .addInputBus("Any High-Pressure Containment Casing (I)", 1)
+            .addInputHatch("Any High-Pressure Containment Casing (I)", 1)
+            .addOutputBus("Any High-Pressure Containment Casing (I)", 1)
+            .addOutputHatch("Any High-Pressure Containment Casing (I)", 1)
+            .addEnergyHatch("Any High-Pressure Containment Casing (I)", 1)
+            .addMufflerHatch("Any High-Pressure Containment Casing (I)", 1)
+            .addMaintenanceHatch("Any High-Pressure Containment Casing (I)", 1)
             .toolTipFinisher("_Shusi_");
         return tt;
     }

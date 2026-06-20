@@ -1,15 +1,14 @@
 package com.gtnh.processingplus.recipes.chains.materials.finishedChains;
 
+import static com.gtnh.processingplus.items.Intermediate.*;
 import static com.gtnh.processingplus.recipes.PPRecipeHelper.*;
 
 import com.gtnh.processingplus.materials.PrPMaterials;
-import static com.gtnh.processingplus.items.Intermediate.*;
+import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
 
 import bwcrossmod.galacticgreg.VoidMinerUtility;
-import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.Materials;
-import gregtech.api.enums.OrePrefixes;
 import gregtech.api.enums.TierEU;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.util.GTRecipeConstants;
@@ -254,9 +253,7 @@ public class LuVExotics {
             () -> GTValues.RA.stdBuilder()
                 .itemInputs(intermediate(PURIFIED_UNOBTANIUM_SHARD, 4))
                 .fluidInputs(molten(Materials.FierySteel, 144))
-                .itemOutputs(
-                    intermediate(UNOBTANIUM_CLUMP, 1),
-                    intermediate(IRON_SLAG, 1))
+                .itemOutputs(intermediate(UNOBTANIUM_CLUMP, 1), intermediate(IRON_SLAG, 1))
                 .duration(400)
                 .eut(TierEU.RECIPE_LuV)
                 .addTo(RecipeMaps.multiblockChemicalReactorRecipes));
@@ -299,8 +296,7 @@ public class LuVExotics {
     private static void registerEndVoidMinerDrop() {
         safe(
             "end void-miner unobtanium drop",
-            () -> VoidMinerUtility.dropMapsByDimName
-                .computeIfAbsent("The End", k -> new VoidMinerUtility.DropMap())
+            () -> VoidMinerUtility.dropMapsByDimName.computeIfAbsent("The End", k -> new VoidMinerUtility.DropMap())
                 .addDrop(intermediate(UNOBTANIUM_ORE_CONCENTRATE, 1), 10.0f));
     }
 }

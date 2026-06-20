@@ -36,12 +36,12 @@ import gregtech.api.enums.SoundResource;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
-import gregtech.api.metatileentity.implementations.MTEExtendedPowerMultiBlockBase;
 import gregtech.api.logic.ProcessingLogic;
+import gregtech.api.metatileentity.implementations.MTEExtendedPowerMultiBlockBase;
 import gregtech.api.recipe.RecipeMap;
+import gregtech.api.render.TextureFactory;
 import gregtech.api.structure.error.StructureError;
 import gregtech.api.structure.error.StructureErrorRegistry;
-import gregtech.api.render.TextureFactory;
 import gregtech.api.util.MultiblockTooltipBuilder;
 import gregtech.api.util.tooltip.TooltipHelper;
 
@@ -171,8 +171,12 @@ public class MTE_CRV extends MTEExtendedPowerMultiBlockBase<MTE_CRV> implements 
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType("Ceramic Reaction Vessel, CRV")
-            .addInfo(EnumChatFormatting.GRAY + "Reacts and alloys " + EnumChatFormatting.RED + "exotic molten"
-                + EnumChatFormatting.GRAY + " mixtures in an inert lining.")
+            .addInfo(
+                EnumChatFormatting.GRAY + "Reacts and alloys "
+                    + EnumChatFormatting.RED
+                    + "exotic molten"
+                    + EnumChatFormatting.GRAY
+                    + " mixtures in an inert lining.")
             .addInfo(
                 "Accepts up to " + TooltipHelper.coloredText("6", EnumChatFormatting.YELLOW)
                     + EnumChatFormatting.GRAY

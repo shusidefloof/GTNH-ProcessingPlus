@@ -1,22 +1,26 @@
 package com.gtnh.processingplus.recipes.chains.infrastructure;
 
 import static com.gtnh.processingplus.recipes.PPRecipeHelper.*;
+import static gregtech.api.util.GTRecipeBuilder.SECONDS;
+import static gregtech.api.util.GTRecipeConstants.AssemblyLine;
+import static gregtech.api.util.GTRecipeConstants.RESEARCH_ITEM;
+import static gregtech.api.util.GTRecipeConstants.SCANNING;
+
+import net.minecraft.item.ItemStack;
 
 import com.gtnh.processingplus.blocks.BlockGTNHPPCasings;
 import com.gtnh.processingplus.blocks.GTNHPPBlocks;
 import com.gtnh.processingplus.materials.PrPMaterials;
 import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
 
-import static gregtech.api.util.GTRecipeBuilder.SECONDS;
-import static gregtech.api.util.GTRecipeConstants.AssemblyLine;
-import static gregtech.api.util.GTRecipeConstants.RESEARCH_ITEM;
-import static gregtech.api.util.GTRecipeConstants.SCANNING;
-
-import gregtech.api.enums.*;
+import gregtech.api.enums.GTValues;
+import gregtech.api.enums.ItemList;
+import gregtech.api.enums.Materials;
+import gregtech.api.enums.OrePrefixes;
+import gregtech.api.enums.TierEU;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.util.GTOreDictUnificator;
 import gregtech.api.util.recipe.Scanning;
-import net.minecraft.item.ItemStack;
 
 public class CRVRecipes {
 
@@ -64,7 +68,8 @@ public class CRVRecipes {
                 GTOreDictUnificator.get(OrePrefixes.circuit, Materials.ZPM, 4),
                 GTOreDictUnificator.get(OrePrefixes.circuit, Materials.UV, 2),
                 item("cableGt16RefractoryHigh-EntropyAlloy", 16))
-            .fluidInputs(fluid("molten.indalloy140",1152),
+            .fluidInputs(
+                fluid("molten.indalloy140", 1152),
                 fluid(PrPMaterials.HBNLubricant, 1000),
                 fluid(Materials.Argon, 2000))
             .itemOutputs(GTNHPPBlocks.CRV.getStackForm(1))
@@ -73,7 +78,8 @@ public class CRVRecipes {
             .addTo(AssemblyLine);
 
         GTValues.RA.stdBuilder()
-            .itemInputs(item("frameGtIridium",1),
+            .itemInputs(
+                item("frameGtIridium", 1),
                 plate(Materials.Gadolinium, 8),
                 ItemList.Electric_Piston_IV.get(2),
                 foil(PrPMaterials.PHSResin, 4))
@@ -83,7 +89,8 @@ public class CRVRecipes {
             .addTo(RecipeMaps.assemblerRecipes);
 
         GTValues.RA.stdBuilder()
-            .itemInputs(item("frameGtDuranium",1),
+            .itemInputs(
+                item("frameGtDuranium", 1),
                 doublePlate(PrPMaterials.HexagonalBoronNitride, 6),
                 item("boltRuridit", 16),
                 ItemList.Electric_Piston_IV.get(2),

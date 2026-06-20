@@ -60,8 +60,10 @@ public class HPRRecipes {
                 ItemList.Electric_Pump_UV.get(16),
                 plate(Materials.Naquadah, 64),
                 GTOreDictUnificator.get(OrePrefixes.circuit, Materials.UV, 16),
-                GTOreDictUnificator.get(OrePrefixes.cableGt08, Materials.SuperconductorUV, 8))
-            .fluidInputs(fluid("molten.indalloy140", 11520), molten(Materials.Naquadah, 9216),
+                item("wireGt01SuperconductorUV", 8))
+            .fluidInputs(
+                fluid("molten.indalloy140", 11520),
+                molten(Materials.Naquadah, 9216),
                 molten(Materials.Naquadria, 2304))
             .itemOutputs(GTNHPPBlocks.HPR.getStackForm(1))
             .eut(TierEU.RECIPE_UHV)

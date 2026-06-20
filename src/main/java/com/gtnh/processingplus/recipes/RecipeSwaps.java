@@ -1,25 +1,32 @@
 package com.gtnh.processingplus.recipes;
 
+import static com.gtnh.processingplus.recipes.PPRecipeHelper.plate;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import goodgenerator.api.recipe.GoodGeneratorRecipeMaps;
-
-import gregtech.api.enums.*;
-import gregtech.api.recipe.RecipeMaps;
-import gregtech.api.util.*;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
-import bartworks.system.material.WerkstoffLoader;
 import com.gtnh.processingplus.GTNHProcessingPlus;
 import com.gtnh.processingplus.materials.PrPMaterials;
 
-import static com.gtnh.processingplus.recipes.PPRecipeHelper.plate;
+import bartworks.system.material.WerkstoffLoader;
+import goodgenerator.api.recipe.GoodGeneratorRecipeMaps;
+import gregtech.api.enums.GTValues;
+import gregtech.api.enums.ItemList;
+import gregtech.api.enums.Materials;
+import gregtech.api.enums.OrePrefixes;
+import gregtech.api.enums.TierEU;
+import gregtech.api.recipe.RecipeMaps;
+import gregtech.api.util.GTModHandler;
+import gregtech.api.util.GTOreDictUnificator;
+import gregtech.api.util.GTRecipe;
+import gregtech.api.util.GTUtility;
 
 public final class RecipeSwaps {
 
@@ -124,7 +131,9 @@ public final class RecipeSwaps {
     private static void gateFieldGensWithPrometheanNaquadria() {
         ItemStack[] fieldGens = { ItemList.Field_Generator_UHV.get(1), ItemList.Field_Generator_UEV.get(1),
             ItemList.Field_Generator_UIV.get(1) };
-        taxAsslineWithFluid(fieldGens, PrPMaterials.PrometheanNaquadria.getMolten(288),
+        taxAsslineWithFluid(
+            fieldGens,
+            PrPMaterials.PrometheanNaquadria.getMolten(288),
             "Promethean Naquadria field-gen gate");
     }
 
@@ -138,7 +147,8 @@ public final class RecipeSwaps {
     // -------------------------------------------------------------------------
     private static void gateCoALWithAmorphous() {
         final int COAL_UHV = 9; // GoodGenerator's COAL casing-tier index for UHV (UEV=10, UIV=11, UMV=12)
-        if (plate(PrPMaterials.AmorphousTritaniumAlloy, 1) == null || plate(PrPMaterials.AmorphousNaquadria, 1) == null) {
+        if (plate(PrPMaterials.AmorphousTritaniumAlloy, 1) == null
+            || plate(PrPMaterials.AmorphousNaquadria, 1) == null) {
             GTNHProcessingPlus.LOG.warn("CoAL amorphous gate: amorphous plate missing — skipped.");
             return;
         }
@@ -258,7 +268,9 @@ public final class RecipeSwaps {
             GTNHProcessingPlus.LOG.warn("UV-motor amorphous gate: rod item missing — skipped.");
             return;
         }
-        int gated = swapAssemblyLineInput(new ItemStack[] { ItemList.Electric_Motor_UV.get(1) }, samariumRod,
+        int gated = swapAssemblyLineInput(
+            new ItemStack[] { ItemList.Electric_Motor_UV.get(1) },
+            samariumRod,
             amorphousRod);
         GTNHProcessingPlus.LOG.info("UV motor: gated {} magnet rod(s) behind Amorphous Tritanium Alloy.", gated);
     }
@@ -279,8 +291,11 @@ public final class RecipeSwaps {
             GTNHProcessingPlus.LOG.warn("UV-motor cable gate: cable item missing — skipped.");
             return;
         }
-        int swapped = swapAssemblyLineInput(new ItemStack[] { ItemList.Electric_Motor_UV.get(1) }, naquadahAlloyCable,
-            unobtaniumCable, false);
+        int swapped = swapAssemblyLineInput(
+            new ItemStack[] { ItemList.Electric_Motor_UV.get(1) },
+            naquadahAlloyCable,
+            unobtaniumCable,
+            false);
         GTNHProcessingPlus.LOG.info("UV motor: swapped {} NaquadahAlloy cable(s) for 4x Unobtanium cable.", swapped);
     }
 
@@ -301,8 +316,7 @@ public final class RecipeSwaps {
             ItemList.Conveyor_Module_UV.get(1), ItemList.Electric_Piston_UV.get(1), ItemList.Robot_Arm_UV.get(1),
             ItemList.Emitter_UV.get(1), ItemList.Sensor_UV.get(1), ItemList.Field_Generator_UV.get(1) };
         int swapped = swapAssemblyLineInput(uvComponents, neutroniumPlate, naquadriaPlate);
-        GTNHProcessingPlus.LOG
-            .info("UV components: swapped {} Neutronium plate(s) for Amorphous Naquadria.", swapped);
+        GTNHProcessingPlus.LOG.info("UV components: swapped {} Neutronium plate(s) for Amorphous Naquadria.", swapped);
     }
 
     /**
@@ -376,13 +390,13 @@ public final class RecipeSwaps {
             if (r.mFluidInputs != null && r.mFluidInputs.length >= 4) continue;
             r.mFluidInputs = appendFluid(r.mFluidInputs, vibranium.copy());
         }
-        GTNHProcessingPlus.LOG.info("Vibranium gate: taxed {} ZPM component recipe(s) with 1296mB molten Vibranium.",
-            taxed);
+        GTNHProcessingPlus.LOG
+            .info("Vibranium gate: taxed {} ZPM component recipe(s) with 1296mB molten Vibranium.", taxed);
 
-        int swapped = swapAssemblyLineInput(zpmComponents, naquadahAlloyPlate, plate(PrPMaterials.Vibranium,1));
+        int swapped = swapAssemblyLineInput(zpmComponents, naquadahAlloyPlate, plate(PrPMaterials.Vibranium, 1));
 
-        GTNHProcessingPlus.LOG.info("Vibranium gate: swapped {} ZPM component recipe(s) with 1 Vibranium Plate",
-            swapped);
+        GTNHProcessingPlus.LOG
+            .info("Vibranium gate: swapped {} ZPM component recipe(s) with 1 Vibranium Plate", swapped);
     }
 
     private static boolean matchesAny(ItemStack stack, ItemStack[] set) {
@@ -424,9 +438,7 @@ public final class RecipeSwaps {
         int removed = PPRecipeHelper.removeRecipesByOutput(RecipeMaps.assemblerRecipes, hullZPM);
 
         GTValues.RA.stdBuilder()
-            .itemInputs(
-                unobtaniumCable,
-                ItemList.Casing_ZPM.get(1)) // new structural superconductor component
+            .itemInputs(unobtaniumCable, ItemList.Casing_ZPM.get(1)) // new structural superconductor component
             .itemOutputs(hullZPM)
             .fluidInputs(Materials.Polybenzimidazole.getMolten(288))
             .duration(50)
@@ -491,7 +503,10 @@ public final class RecipeSwaps {
         addUnobtaniumSuperconductor(Materials.SpaceTime.getMolten(32), 800, unobtaniumCable);
 
         addUnobtaniumSuperconductorToUHV(Materials.Helium.getGas(20_000), 80 * 20, unobtaniumCable);
-        addUnobtaniumSuperconductorToUHV((WerkstoffLoader.LiquidHelium.getFluidOrGas(20_000)), 64 * 20, unobtaniumCable);
+        addUnobtaniumSuperconductorToUHV(
+            (WerkstoffLoader.LiquidHelium.getFluidOrGas(20_000)),
+            64 * 20,
+            unobtaniumCable);
         addUnobtaniumSuperconductorToUHV(Materials.SpaceTime.getMolten(40), 40 * 20, unobtaniumCable);
 
         GTNHProcessingPlus.LOG
@@ -505,8 +520,7 @@ public final class RecipeSwaps {
                 GTOreDictUnificator.get(OrePrefixes.wireGt01, Materials.SuperconductorZPMBase, 18),
                 GTOreDictUnificator.get(OrePrefixes.pipeTiny, Materials.Naquadah, 12),
                 unobtaniumCable.copy(),
-                ItemList.Electric_Pump_ZPM.get(1)
-                )
+                ItemList.Electric_Pump_ZPM.get(1))
             .circuit(9)
             .itemOutputs(GTOreDictUnificator.get(OrePrefixes.wireGt01, Materials.SuperconductorZPM, 20))
             .fluidInputs(coolant)
@@ -522,8 +536,7 @@ public final class RecipeSwaps {
                 GTOreDictUnificator.get(OrePrefixes.wireGt01, Materials.SuperconductorUVBase, 21),
                 GTOreDictUnificator.get(OrePrefixes.pipeTiny, Materials.Neutronium, 14),
                 unobtaniumCable.copy(),
-                ItemList.Electric_Pump_UV.get(1)
-            )
+                ItemList.Electric_Pump_UV.get(1))
             .circuit(9)
             .itemOutputs(GTOreDictUnificator.get(OrePrefixes.wireGt01, Materials.SuperconductorZPM, 23))
             .fluidInputs(coolant)
@@ -533,19 +546,12 @@ public final class RecipeSwaps {
     }
 
     private static void removeBoardRecipes() {
-        ItemStack[] targets = {
-            ItemList.Circuit_Board_Epoxy.get(1),
-            ItemList.Circuit_Board_Epoxy_Advanced.get(1),
-            ItemList.Circuit_Board_Fiberglass.get(1),
-            ItemList.Circuit_Board_Fiberglass_Advanced.get(1),
-            ItemList.Circuit_Board_Multifiberglass.get(1),
-            ItemList.Circuit_Board_Multifiberglass_Elite.get(1),
-            ItemList.Circuit_Board_Wetware.get(1),
-            ItemList.Circuit_Board_Wetware_Extreme.get(1),
-            ItemList.Circuit_Board_Bio.get(1),
-            ItemList.Circuit_Board_Bio_Ultra.get(1),
-            ItemList.Circuit_Board_Optical.get(1),
-        };
+        ItemStack[] targets = { ItemList.Circuit_Board_Epoxy.get(1), ItemList.Circuit_Board_Epoxy_Advanced.get(1),
+            ItemList.Circuit_Board_Fiberglass.get(1), ItemList.Circuit_Board_Fiberglass_Advanced.get(1),
+            ItemList.Circuit_Board_Multifiberglass.get(1), ItemList.Circuit_Board_Multifiberglass_Elite.get(1),
+            ItemList.Circuit_Board_Wetware.get(1), ItemList.Circuit_Board_Wetware_Extreme.get(1),
+            ItemList.Circuit_Board_Bio.get(1), ItemList.Circuit_Board_Bio_Ultra.get(1),
+            ItemList.Circuit_Board_Optical.get(1), };
 
         int removed = 0;
         for (ItemStack target : targets) {
@@ -573,7 +579,9 @@ public final class RecipeSwaps {
 
         // Remove existing crafting table recipe
         int removed = 0;
-        Iterator<?> it = CraftingManager.getInstance().getRecipeList().iterator();
+        Iterator<?> it = CraftingManager.getInstance()
+            .getRecipeList()
+            .iterator();
         while (it.hasNext()) {
             Object o = it.next();
             if (!(o instanceof IRecipe)) continue;
@@ -600,14 +608,9 @@ public final class RecipeSwaps {
         GTModHandler.addCraftingRecipe(
             hullIV,
             GTModHandler.RecipeBits.BUFFERED | GTModHandler.RecipeBits.NOT_REMOVABLE,
-            new Object[] {
-                "PHP",
-                "CMC",
-                'M', ItemList.Casing_IV.get(1),
-                'C', rheaCable,
-                'H', GTOreDictUnificator.get(OrePrefixes.plate, Materials.TungstenSteel, 1L),
-                'P', GTOreDictUnificator.get(OrePrefixes.plate, Materials.Polytetrafluoroethylene, 1L)
-            });
+            new Object[] { "PHP", "CMC", 'M', ItemList.Casing_IV.get(1), 'C', rheaCable, 'H',
+                GTOreDictUnificator.get(OrePrefixes.plate, Materials.TungstenSteel, 1L), 'P',
+                GTOreDictUnificator.get(OrePrefixes.plate, Materials.Polytetrafluoroethylene, 1L) });
 
         GTNHProcessingPlus.LOG.info("IV hull: removed {} stock recipe(s), re-added with RHEA cable.", removed);
     }

@@ -9,8 +9,6 @@ import static gregtech.api.enums.Textures.BlockIcons.casingTexturePages;
 
 import java.util.List;
 
-import gregtech.api.structure.error.StructureError;
-
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -27,6 +25,7 @@ import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.render.TextureFactory;
+import gregtech.api.structure.error.StructureError;
 import gregtech.api.util.MultiblockTooltipBuilder;
 
 /**
@@ -127,8 +126,12 @@ public class MTE_SPCQuantumModule extends MTE_SPCModuleBase<MTE_SPCQuantumModule
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType("SPC Upgrade Module")
-            .addInfo(EnumChatFormatting.GRAY + "Adds a " + EnumChatFormatting.LIGHT_PURPLE + "quantum-alignment"
-                + EnumChatFormatting.GRAY + " stage to the SPC.")
+            .addInfo(
+                EnumChatFormatting.GRAY + "Adds a "
+                    + EnumChatFormatting.LIGHT_PURPLE
+                    + "quantum-alignment"
+                    + EnumChatFormatting.GRAY
+                    + " stage to the SPC.")
             .addInfo(
                 EnumChatFormatting.GRAY + "Place within "
                     + EnumChatFormatting.RED

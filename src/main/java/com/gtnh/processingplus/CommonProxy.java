@@ -1,10 +1,5 @@
 package com.gtnh.processingplus;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import net.minecraft.item.ItemStack;
-
 import com.gtnh.processingplus.blocks.GTNHPPBlocks;
 import com.gtnh.processingplus.items.GTNHPPItems;
 import com.gtnh.processingplus.loader.MaterialLoader;
@@ -16,8 +11,6 @@ import cpw.mods.fml.common.event.FMLLoadCompleteEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
-import gregtech.api.enums.ItemList;
-import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.util.GTRecipe;
 import gtPlusPlus.api.recipe.GTPPRecipeMaps;
 
@@ -53,8 +46,6 @@ public class CommonProxy {
     }
 
     public void serverStarting(FMLServerStartingEvent event) {}
-
-
 
     /** Copies all ABS recipes into the CRV recipe map at 80% EU cost. */
     private static void copyRecipesToCRV() {

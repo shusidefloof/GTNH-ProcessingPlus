@@ -1,7 +1,12 @@
 package com.gtnh.processingplus.recipes.chains.materials.finishedChains;
 
+import static com.gtnh.processingplus.recipes.PPRecipeHelper.*;
+import static com.gtnh.processingplus.recipes.PPRecipeHelper.dust;
+import static com.gtnh.processingplus.recipes.PPRecipeHelper.fluid;
+
 import com.gtnh.processingplus.materials.PrPMaterials;
 import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
+
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
@@ -9,13 +14,9 @@ import gregtech.api.enums.TierEU;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.util.GTOreDictUnificator;
 import gregtech.api.util.GTRecipeConstants;
-import gtPlusPlus.api.recipe.GTPPRecipeMaps;
-
-import static com.gtnh.processingplus.recipes.PPRecipeHelper.*;
-import static com.gtnh.processingplus.recipes.PPRecipeHelper.dust;
-import static com.gtnh.processingplus.recipes.PPRecipeHelper.fluid;
 
 public class PassiveableMaterials {
+
     public static void init() {
         biomassInit();
         coalFlyash();
@@ -26,7 +27,8 @@ public class PassiveableMaterials {
         GTValues.RA.stdBuilder()
             .itemInputs(circuit(2))
             .fluidInputs(fluid(Materials.Biomass, 10000))
-            .fluidOutputs(fluid(Materials.CarbonDioxide, 2000),
+            .fluidOutputs(
+                fluid(Materials.CarbonDioxide, 2000),
                 fluid(Materials.Phenol, 500),
                 fluid(Materials.AceticAcid, 350),
                 fluid(PrPMaterials.Ketene, 300))
@@ -39,7 +41,8 @@ public class PassiveableMaterials {
         GTValues.RA.stdBuilder()
             .itemInputs(circuit(3))
             .fluidInputs(fluid(Materials.FermentedBiomass, 10000))
-            .fluidOutputs(fluid(Materials.CarbonDioxide, 2000),
+            .fluidOutputs(
+                fluid(Materials.CarbonDioxide, 2000),
                 fluid(Materials.Methane, 600),
                 fluid(Materials.Ethanol, 500),
                 fluid(Materials.MethylAcetate, 250))
@@ -65,7 +68,6 @@ public class PassiveableMaterials {
             .duration(200)
             .eut(TierEU.RECIPE_HV)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
-
 
         // =========================================================
         // 2. Sulfuric acid leach — dissolves Ga and Ge, silica stays
@@ -184,7 +186,6 @@ public class PassiveableMaterials {
             .eut(TierEU.RECIPE_HV)
             .metadata(GTRecipeConstants.COIL_HEAT, 2750)
             .addTo(RecipeMaps.blastFurnaceRecipes);
-
 
         // =========================================================
         // TANTALITE → TANTALUM (+ Nb raffinate byproduct)

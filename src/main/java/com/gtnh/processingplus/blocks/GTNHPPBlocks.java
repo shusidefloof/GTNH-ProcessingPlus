@@ -1,28 +1,27 @@
 package com.gtnh.processingplus.blocks;
 
 import com.gtnh.processingplus.machines.MTE_AAR;
-import com.gtnh.processingplus.machines.MTE_DAF;
 import com.gtnh.processingplus.machines.MTE_BOF;
 import com.gtnh.processingplus.machines.MTE_CAC;
 import com.gtnh.processingplus.machines.MTE_CIDC;
 import com.gtnh.processingplus.machines.MTE_CRV;
 import com.gtnh.processingplus.machines.MTE_CSC;
+import com.gtnh.processingplus.machines.MTE_DAF;
 import com.gtnh.processingplus.machines.MTE_HPR;
 import com.gtnh.processingplus.machines.MTE_HPSF;
 import com.gtnh.processingplus.machines.MTE_HTRF;
-import com.gtnh.processingplus.machines.MTE_SCD;
-import com.gtnh.processingplus.machines.MTE_SPU;
 import com.gtnh.processingplus.machines.MTE_PCV;
 import com.gtnh.processingplus.machines.MTE_RTG;
+import com.gtnh.processingplus.machines.MTE_SCD;
 import com.gtnh.processingplus.machines.MTE_SPC;
 import com.gtnh.processingplus.machines.MTE_SPCBioModule;
 import com.gtnh.processingplus.machines.MTE_SPCCryoModule;
 import com.gtnh.processingplus.machines.MTE_SPCQuantumModule;
+import com.gtnh.processingplus.machines.MTE_SPU;
 import com.gtnh.processingplus.materials.PrPMaterials;
 import com.gtnh.processingplus.materials.WerkstoffCableLoader;
 
 import cpw.mods.fml.common.registry.GameRegistry;
-import gregtech.api.enums.Materials;
 import gregtech.api.enums.TierEU;
 
 public class GTNHPPBlocks {
@@ -85,7 +84,6 @@ public class GTNHPPBlocks {
     private static final int OFFSET = 31_517;
     private static int nextId = OFFSET;
 
-
     /** Call from CommonProxy.preInit — registers block before item/machine init. */
     public static void registerBlocks() {
         CASINGS = new BlockGTNHPPCasings();
@@ -131,16 +129,8 @@ public class GTNHPPBlocks {
         // Unobtanium superconductor — lossless placeable wires + cables (ZPM); recipes auto-generated.
         // Uses MTE IDs 31517-31528 (6 wires + 6 cables).
         // Unobtanium: superconductor wires + cables insulated with Polyphenylene Sulfide (no rubber recipe).
-        WerkstoffCableLoader.register(
-            PrPMaterials.Unobtanium,
-            id(),
-            0L,
-            0L,
-            4L,
-            TierEU.ZPM,
-            TierEU.RECIPE_LuV,
-            200,
-            true);
+        WerkstoffCableLoader
+            .register(PrPMaterials.Unobtanium, id(), 0L, 0L, 4L, TierEU.ZPM, TierEU.RECIPE_LuV, 200, true);
         // RHEA: cables insulated with Polyphenylene Sulfide foil, like Tungsten.
         WerkstoffCableLoader.register(
             PrPMaterials.RefractoryHighEntropyAlloy,
@@ -153,6 +143,8 @@ public class GTNHPPBlocks {
             5 * 20,
             true);
     }
+
     public static int id() {
-        return nextId += 12;}
+        return nextId += 12;
+    }
 }

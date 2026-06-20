@@ -5,10 +5,10 @@ import static com.gtnh.processingplus.recipes.PPRecipeHelper.*;
 import com.gtnh.processingplus.materials.PrPMaterials;
 
 import gregtech.api.enums.GTValues;
+import gregtech.api.enums.ItemList;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.TierEU;
 import gregtech.api.recipe.RecipeMaps;
-import gregtech.api.util.GTRecipeConstants;
 import gtPlusPlus.api.recipe.GTPPRecipeMaps;
 
 public class MaterialUsesRecipes {
@@ -81,10 +81,12 @@ public class MaterialUsesRecipes {
     // -------------------------------------------------------------------------
     // -------------------------------------------------------------------------
     // Thermoplastic solidification — molten polymer → plates via fluid solidifier
-    // 144 mB = 1 plate (GT standard unit)
+    // 144 mB = 1 plate (GT standard unit); mold is checked but not consumed.
+    // PHSResin plates are the precursor for PHSResin foils (bender auto-recipe).
     // -------------------------------------------------------------------------
     private static void plasticSolidification() {
         GTValues.RA.stdBuilder()
+            .itemInputs(ItemList.Shape_Mold_Plate.get(0))
             .fluidInputs(molten(PrPMaterials.Nylon66, 144))
             .itemOutputs(plate(PrPMaterials.Nylon66, 1))
             .duration(80)
@@ -92,8 +94,17 @@ public class MaterialUsesRecipes {
             .addTo(RecipeMaps.fluidSolidifierRecipes);
 
         GTValues.RA.stdBuilder()
+            .itemInputs(ItemList.Shape_Mold_Plate.get(0))
             .fluidInputs(molten(PrPMaterials.PolylacticAcid, 144))
             .itemOutputs(plate(PrPMaterials.PolylacticAcid, 1))
+            .duration(80)
+            .eut(TierEU.RECIPE_LV)
+            .addTo(RecipeMaps.fluidSolidifierRecipes);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(ItemList.Shape_Mold_Plate.get(0))
+            .fluidInputs(molten(PrPMaterials.PHSResin, 144))
+            .itemOutputs(plate(PrPMaterials.PHSResin, 1))
             .duration(80)
             .eut(TierEU.RECIPE_LV)
             .addTo(RecipeMaps.fluidSolidifierRecipes);

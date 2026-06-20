@@ -35,12 +35,12 @@ import gregtech.api.enums.SoundResource;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
-import gregtech.api.metatileentity.implementations.MTEExtendedPowerMultiBlockBase;
 import gregtech.api.logic.ProcessingLogic;
+import gregtech.api.metatileentity.implementations.MTEExtendedPowerMultiBlockBase;
 import gregtech.api.recipe.RecipeMap;
+import gregtech.api.render.TextureFactory;
 import gregtech.api.structure.error.StructureError;
 import gregtech.api.structure.error.StructureErrorRegistry;
-import gregtech.api.render.TextureFactory;
 import gregtech.api.util.MultiblockTooltipBuilder;
 import gregtech.api.util.tooltip.TooltipHelper;
 
@@ -80,7 +80,8 @@ public class MTE_CAC extends MTEExtendedPowerMultiBlockBase<MTE_CAC> implements 
                 .addShape(
                     STRUCTURE_PIECE_MAIN,
                     // shape[z][y][x] — 5 z-layers, 7 y-rows each, 5 x-chars
-                    // 'C' = Cryostat Vacuum Casing or hatch, 'A' = Aerogel Insulation Block (no hatches), ' ' = vacuum core
+                    // 'C' = Cryostat Vacuum Casing or hatch, 'A' = Aerogel Insulation Block (no hatches), ' ' = vacuum
+                    // core
                     new String[][] {
                         // z=0: front face — all casing, controller center
                         { "CCCCC", "CCCCC", "CCCCC", "CC~CC", "CCCCC", "CCCCC", "CCCCC" },
@@ -171,8 +172,12 @@ public class MTE_CAC extends MTEExtendedPowerMultiBlockBase<MTE_CAC> implements 
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType("Cryogenic Annealing Cryostat, CAC")
-            .addInfo(EnumChatFormatting.GRAY + "Anneals materials at " + EnumChatFormatting.AQUA
-                + "cryogenic temperatures" + EnumChatFormatting.GRAY + " in a vacuum core.")
+            .addInfo(
+                EnumChatFormatting.GRAY + "Anneals materials at "
+                    + EnumChatFormatting.AQUA
+                    + "cryogenic temperatures"
+                    + EnumChatFormatting.GRAY
+                    + " in a vacuum core.")
             .addSeparator()
             .addInfo(
                 EnumChatFormatting.GOLD + "Inner lining: "

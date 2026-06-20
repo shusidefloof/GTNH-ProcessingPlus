@@ -1,6 +1,10 @@
 package com.gtnh.processingplus.recipes.chains.infrastructure;
 
 import static com.gtnh.processingplus.recipes.PPRecipeHelper.*;
+import static gregtech.api.util.GTRecipeBuilder.SECONDS;
+import static gregtech.api.util.GTRecipeConstants.AssemblyLine;
+import static gregtech.api.util.GTRecipeConstants.RESEARCH_ITEM;
+import static gregtech.api.util.GTRecipeConstants.SCANNING;
 
 import net.minecraft.item.ItemStack;
 
@@ -8,11 +12,6 @@ import com.gtnh.processingplus.blocks.BlockGTNHPPCasings;
 import com.gtnh.processingplus.blocks.GTNHPPBlocks;
 import com.gtnh.processingplus.materials.PrPMaterials;
 import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
-
-import static gregtech.api.util.GTRecipeBuilder.SECONDS;
-import static gregtech.api.util.GTRecipeConstants.AssemblyLine;
-import static gregtech.api.util.GTRecipeConstants.RESEARCH_ITEM;
-import static gregtech.api.util.GTRecipeConstants.SCANNING;
 
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.ItemList;
@@ -67,10 +66,8 @@ public class SCDRecipes {
                 ItemList.Field_Generator_UHV.get(4),
                 GTOreDictUnificator.get(OrePrefixes.circuit, Materials.UV, 8),
                 GTOreDictUnificator.get(OrePrefixes.circuit, Materials.UHV, 4),
-                GTOreDictUnificator.get(OrePrefixes.cableGt04, Materials.SuperconductorUV, 8))
-            .fluidInputs(
-                fluid("molten.indalloy140", 4608),
-                fluid(PrPMaterials.LiquidCO2, 4000))
+                item("wireGt01SuperconductorUV", 8))
+            .fluidInputs(fluid("molten.indalloy140", 4608), fluid(PrPMaterials.LiquidCO2, 4000))
             .itemOutputs(GTNHPPBlocks.SCD.getStackForm(1))
             .eut(TierEU.RECIPE_UHV)
             .duration(45 * SECONDS)
@@ -80,28 +77,26 @@ public class SCDRecipes {
     // =========================================================
     // Carbon aerogel chain (PAN route) — design doc v1.1
     //
-    // Step A (SCD):  PolyacrylonitrileSolution + H₂O → WetPANGel + DilutedNMP
-    //   Water triggers gelation of the PAN/NMP dope; the majority of NMP is
-    //   displaced and recovered as diluted NMP (same by-product as the PAN chain).
+    // Step A (SCD): PolyacrylonitrileSolution + H₂O → WetPANGel + DilutedNMP
+    // Water triggers gelation of the PAN/NMP dope; the majority of NMP is
+    // displaced and recovered as diluted NMP (same by-product as the PAN chain).
     //
-    // Step B (SCD):  WetPANGel + LiquidCO₂ → PANAerogel + CO₂ gas
-    //   Supercritical CO₂ drying — identical mechanism to the silica route but
-    //   without the acetone exchange step (PAN is directly CO₂-compatible at
-    //   supercritical conditions after water removal in Step A).
+    // Step B (SCD): WetPANGel + LiquidCO₂ → PANAerogel + CO₂ gas
+    // Supercritical CO₂ drying — identical mechanism to the silica route but
+    // without the acetone exchange step (PAN is directly CO₂-compatible at
+    // supercritical conditions after water removal in Step A).
     //
     // Step C (HTRF): PANAerogel → CarbonAerogel + CO₂ + NH₃
-    //   Pyrolysis / carbonization at ~3600 K. PAN's nitrile groups cyclize,
-    //   then aromatize to a turbostratic carbon network; oxygen and nitrogen
-    //   off-gas as CO₂ and NH₃.
+    // Pyrolysis / carbonization at ~3600 K. PAN's nitrile groups cyclize,
+    // then aromatize to a turbostratic carbon network; oxygen and nitrogen
+    // off-gas as CO₂ and NH₃.
     // =========================================================
     private static void carbonAerogelChain() {
 
         // Step A — PAN sol-gel (SCD, water-triggered gelation)
         GTValues.RA.stdBuilder()
             .itemInputs(circuit(3))
-            .fluidInputs(
-                fluid(PrPMaterials.PolyacrylonitrileSolution, 4000),
-                fluid(Materials.Water, 1000))
+            .fluidInputs(fluid(PrPMaterials.PolyacrylonitrileSolution, 4000), fluid(Materials.Water, 1000))
             .itemOutputs(dust(PrPMaterials.WetPANGel, 4))
             .fluidOutputs(fluid(PrPMaterials.DilutedNMP, 3000))
             .duration(1200)

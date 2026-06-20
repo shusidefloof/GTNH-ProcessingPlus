@@ -47,7 +47,6 @@ public class BlockGTNHPPCasings extends Block {
     public static final int SUBATOMIC_PATTERNING_CASING = 27; // SPU shell
     public static final int NUM_CASINGS = 28;
 
-
     // @formatter:off
     private static final String[] DISPLAY_NAMES = {
         "Silicon Carbide Ceramic Casing",       // HTRF

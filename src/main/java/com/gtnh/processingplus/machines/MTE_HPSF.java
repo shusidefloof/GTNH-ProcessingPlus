@@ -1,7 +1,6 @@
 package com.gtnh.processingplus.machines;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlock;
-import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlockAnyMeta;
 import static gregtech.api.enums.HatchElement.Energy;
 import static gregtech.api.enums.HatchElement.InputBus;
 import static gregtech.api.enums.HatchElement.InputHatch;
@@ -16,9 +15,9 @@ import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_ELECTRIC_BLAS
 import static gregtech.api.enums.Textures.BlockIcons.casingTexturePages;
 import static gregtech.api.util.GTStructureUtility.*;
 
-import javax.annotation.Nonnull;
-
 import java.util.List;
+
+import javax.annotation.Nonnull;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
@@ -45,11 +44,11 @@ import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.logic.ProcessingLogic;
 import gregtech.api.metatileentity.implementations.MTEExtendedPowerMultiBlockBase;
 import gregtech.api.recipe.RecipeMap;
-import gregtech.api.structure.error.StructureError;
-import gregtech.api.structure.error.StructureErrorRegistry;
 import gregtech.api.recipe.check.CheckRecipeResult;
 import gregtech.api.recipe.check.CheckRecipeResultRegistry;
 import gregtech.api.render.TextureFactory;
+import gregtech.api.structure.error.StructureError;
+import gregtech.api.structure.error.StructureErrorRegistry;
 import gregtech.api.util.GTRecipe;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.MultiblockTooltipBuilder;
@@ -148,7 +147,7 @@ public class MTE_HPSF extends MTEExtendedPowerMultiBlockBase<MTE_HPSF> implement
                             " BBBBBBBBB         " }, })
                 // BW glass — tiered viewport (any meta accepted)
                 .addElement('A', chainAllGlasses(-1, (t, tier) -> t.mGlassTier = tier, t -> t.mGlassTier))
-                //.addElement('A', chainAllGlasses())
+                // .addElement('A', chainAllGlasses())
                 // IC2 reinforced stone — base
                 .addElement('B', ofBlock(GameRegistry.findBlock("IC2", "blockAlloy"), 0))
                 // SCD casing — end caps + control chamber outer + hatch positions
@@ -227,24 +226,19 @@ public class MTE_HPSF extends MTEExtendedPowerMultiBlockBase<MTE_HPSF> implement
         mGlassTier = -1;
         setCoilLevel(HeatingCoilLevel.None);
 
-        if (!checkPiece(STRUCTURE_PIECE_MAIN, OFFSET_X, OFFSET_Y, OFFSET_Z, errors))
-            return;
+        if (!checkPiece(STRUCTURE_PIECE_MAIN, OFFSET_X, OFFSET_Y, OFFSET_Z, errors)) return;
 
         if (mGlassTier <= 0) {
             errors.add(StructureErrorRegistry.UNKNOWN_STRUCTURE_ERROR);
         }
 
-        if (getCoilLevel() == HeatingCoilLevel.None)
-            errors.add(StructureErrorRegistry.UNKNOWN_STRUCTURE_ERROR);
+        if (getCoilLevel() == HeatingCoilLevel.None) errors.add(StructureErrorRegistry.UNKNOWN_STRUCTURE_ERROR);
 
-        if (mPipeCasingTier == -1)
-            errors.add(StructureErrorRegistry.UNKNOWN_STRUCTURE_ERROR);
+        if (mPipeCasingTier == -1) errors.add(StructureErrorRegistry.UNKNOWN_STRUCTURE_ERROR);
 
-        if (mMaintenanceHatches.size() != 1)
-            errors.add(StructureErrorRegistry.UNKNOWN_STRUCTURE_ERROR);
+        if (mMaintenanceHatches.size() != 1) errors.add(StructureErrorRegistry.UNKNOWN_STRUCTURE_ERROR);
 
-        if (!errors.isEmpty())
-            return;
+        if (!errors.isEmpty()) return;
 
         mHeatingCapacity = (int) getCoilLevel().getHeat() + 100 * (GTUtility.getTier(getMaxInputVoltage()) - 2);
     }
@@ -340,8 +334,12 @@ public class MTE_HPSF extends MTEExtendedPowerMultiBlockBase<MTE_HPSF> implement
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType("High Pressure Sintering Furnace, HPSF")
-            .addInfo(EnumChatFormatting.GRAY + "Sinters powders under " + EnumChatFormatting.GOLD
-                + "high pressure and heat" + EnumChatFormatting.GRAY + ".")
+            .addInfo(
+                EnumChatFormatting.GRAY + "Sinters powders under "
+                    + EnumChatFormatting.GOLD
+                    + "high pressure and heat"
+                    + EnumChatFormatting.GRAY
+                    + ".")
             .addSeparator()
             .addInfo(
                 "Heat capacity: " + TooltipHelper.coloredText("coil tier heat", EnumChatFormatting.RED)

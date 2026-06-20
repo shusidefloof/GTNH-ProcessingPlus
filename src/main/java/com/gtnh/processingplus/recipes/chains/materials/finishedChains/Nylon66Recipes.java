@@ -54,7 +54,7 @@ public class Nylon66Recipes {
             .itemInputs(circuit(2))
             .fluidInputs(fluid(PrPMaterials.Cyclohexanol, 1000), fluid(Materials.Oxygen, 500))
             .fluidOutputs(fluid("cyclohexanone", 1000), fluid(Materials.Water, 500))
-            .duration(100*20)
+            .duration(100 * 20)
             .eut(TierEU.RECIPE_HV)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
@@ -94,7 +94,7 @@ public class Nylon66Recipes {
             .fluidInputs(fluid(PrPMaterials.Cyclohexene, 1000), fluid("fluid.hydrogenperoxide", 3000))
             // Green H2O2 route: clean — no nitrous oxide byproduct (that's the dirty HNO3 route only).
             .fluidOutputs(fluid(PrPMaterials.AdipicAcid, 3000), fluid(Materials.Water, 3000))
-            .duration(20*20)
+            .duration(20 * 20)
             .eut(TierEU.RECIPE_EV)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }

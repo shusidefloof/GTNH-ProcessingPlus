@@ -15,9 +15,8 @@ import static gregtech.api.enums.Textures.BlockIcons.casingTexturePages;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
 
 import java.util.Arrays;
-import java.util.concurrent.ThreadLocalRandom;
-
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -46,13 +45,12 @@ import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.logic.ProcessingLogic;
 import gregtech.api.metatileentity.implementations.MTEExtendedPowerMultiBlockBase;
-import gregtech.api.logic.ProcessingLogic;
 import gregtech.api.recipe.RecipeMap;
-import gregtech.api.structure.error.StructureError;
-import gregtech.api.structure.error.StructureErrorRegistry;
 import gregtech.api.recipe.check.CheckRecipeResult;
 import gregtech.api.recipe.check.SimpleCheckRecipeResult;
 import gregtech.api.render.TextureFactory;
+import gregtech.api.structure.error.StructureError;
+import gregtech.api.structure.error.StructureErrorRegistry;
 import gregtech.api.util.MultiblockTooltipBuilder;
 import gregtech.api.util.tooltip.TooltipHelper;
 
@@ -246,8 +244,12 @@ public class MTE_CSC extends MTEExtendedPowerMultiBlockBase<MTE_CSC> implements 
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType("Cryogenic Separation Column, CSC")
-            .addInfo(EnumChatFormatting.GRAY + "Separates fluids by " + EnumChatFormatting.AQUA
-                + "cryogenic distillation" + EnumChatFormatting.GRAY + ".")
+            .addInfo(
+                EnumChatFormatting.GRAY + "Separates fluids by "
+                    + EnumChatFormatting.AQUA
+                    + "cryogenic distillation"
+                    + EnumChatFormatting.GRAY
+                    + ".")
             .addSeparator()
             .addStaticParallelInfo(8)
             .addInfo(

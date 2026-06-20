@@ -61,8 +61,10 @@ public class CIDCRecipes {
                 ItemList.Emitter_UV.get(16),
                 plate(Materials.Duranium, 64),
                 GTOreDictUnificator.get(OrePrefixes.circuit, Materials.UV, 8),
-                GTOreDictUnificator.get(OrePrefixes.cableGt08, Materials.SuperconductorUV, 8))
-            .fluidInputs(fluid("molten.indalloy140", 6912), molten(Materials.Tin, 4608),
+                item("wireGt01SuperconductorUV", 8))
+            .fluidInputs(
+                fluid("molten.indalloy140", 6912),
+                molten(Materials.Tin, 4608),
                 fluid(PrPMaterials.TriflicAcid, 4000))
             .itemOutputs(GTNHPPBlocks.CIDC.getStackForm(1))
             .eut(TierEU.RECIPE_UV)

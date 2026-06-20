@@ -22,7 +22,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.common.util.ForgeDirection;
 
-
 import com.gtnewhorizon.structurelib.alignment.constructable.ISurvivalConstructable;
 import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
@@ -94,116 +93,33 @@ public class MTE_SCD extends MTEExtendedPowerMultiBlockBase<MTE_SCD> implements 
             STRUCTURE_DEFINITION = StructureDefinition.<MTE_SCD>builder()
                 .addShape(
                     STRUCTURE_PIECE_MAIN,
-                    new String[][] {
-                        { // z=0 — front face; controller (~) at row 5 col 7
-                            "            ",
-                            "            ",
-                            "       C    ",
-                            "      ECE   ",
-                            "HFHFFEBDBE  ",
-                            "HGH CCD~DCC ",
-                            "HAH  EBDBE  ",
-                            "HAH   ECE   ",
-                            "HGH    C    ",
-                            "H H         "
-                        },
+                    new String[][] { { // z=0 — front face; controller (~) at row 5 col 7
+                        "            ", "            ", "       C    ", "      ECE   ", "HFHFFEBDBE  ", "HGH CCD~DCC ",
+                        "HAH  EBDBE  ", "HAH   ECE   ", "HGH    C    ", "H H         " },
                         { // z=1
-                            "            ",
-                            "            ",
-                            "      ICI   ",
-                            " FFFFIB BI  ",
-                            "FBBBBB   BI ",
-                            "GBGFBB    C ",
-                            "A A IB   BI ",
-                            "A A HIB BIH ",
-                            "GGG H ICIHH ",
-                            "    H     H "
-                        },
+                            "            ", "            ", "      ICI   ", " FFFFIB BI  ", "FBBBBB   BI ",
+                            "GBGFBB    C ", "A A IB   BI ", "A A HIB BIH ", "GGG H ICIHH ", "    H     H " },
                         { // z=2
-                            "            ",
-                            "      EEE   ",
-                            "     I C I  ",
-                            "    I     I ",
-                            "HFHE       E",
-                            "HGHEC     CE",
-                            "HAHE       E",
-                            "HAH I     I ",
-                            "HGH HI C IH ",
-                            "H H   EEE   "
-                        },
+                            "            ", "      EEE   ", "     I C I  ", "    I     I ", "HFHE       E",
+                            "HGHEC     CE", "HAHE       E", "HAH I     I ", "HGH HI C IH ", "H H   EEE   " },
                         { // z=3
-                            "            ",
-                            "      EAE   ",
-                            "    II   II ",
-                            "    I     I ",
-                            "   E       E",
-                            "   A       A",
-                            "   E       E",
-                            "    I     I ",
-                            "    II   II ",
-                            "      EAE   "
-                        },
+                            "            ", "      EAE   ", "    II   II ", "    I     I ", "   E       E",
+                            "   A       A", "   E       E", "    I     I ", "    II   II ", "      EAE   " },
                         { // z=4
-                            "            ",
-                            "      EAE   ",
-                            "    II   II ",
-                            "    I     I ",
-                            "   E       E",
-                            "   A       A",
-                            "   E       E",
-                            "    I     I ",
-                            "    II   II ",
-                            "      EAE   "
-                        },
+                            "            ", "      EAE   ", "    II   II ", "    I     I ", "   E       E",
+                            "   A       A", "   E       E", "    I     I ", "    II   II ", "      EAE   " },
                         { // z=5
-                            "            ",
-                            "      EAE   ",
-                            "    II   II ",
-                            "    I     I ",
-                            "   E       E",
-                            "   A       A",
-                            "   E       E",
-                            "    I     I ",
-                            "    II   II ",
-                            "      EAE   "
-                        },
+                            "            ", "      EAE   ", "    II   II ", "    I     I ", "   E       E",
+                            "   A       A", "   E       E", "    I     I ", "    II   II ", "      EAE   " },
                         { // z=6
-                            "            ",
-                            "      EEE   ",
-                            "     I C I  ",
-                            "    I     I ",
-                            "HFHE       E",
-                            "HGHEC     CE",
-                            "HAHE       E",
-                            "HAH I     I ",
-                            "HGH HI C IH ",
-                            "H H   EEE   "
-                        },
+                            "            ", "      EEE   ", "     I C I  ", "    I     I ", "HFHE       E",
+                            "HGHEC     CE", "HAHE       E", "HAH I     I ", "HGH HI C IH ", "H H   EEE   " },
                         { // z=7
-                            "            ",
-                            "            ",
-                            "      ICI   ",
-                            " FFFFIB BI  ",
-                            "FBBBBB   BI ",
-                            "GBGFB     C ",
-                            "A A IB   BI ",
-                            "A A HIB BIH ",
-                            "GGG HHICIHH ",
-                            "    H     H "
-                        },
+                            "            ", "            ", "      ICI   ", " FFFFIB BI  ", "FBBBBB   BI ",
+                            "GBGFB     C ", "A A IB   BI ", "A A HIB BIH ", "GGG HHICIHH ", "    H     H " },
                         { // z=8 — back face
-                            "            ",
-                            "            ",
-                            "       C    ",
-                            "      ECE   ",
-                            "HFHFFEBDBE  ",
-                            "HGH CCDCDCC ",
-                            "HAH  EBDBE  ",
-                            "HAH   ECE   ",
-                            "HGH    C    ",
-                            "H H         "
-                        }
-                    })
+                            "            ", "            ", "       C    ", "      ECE   ", "HFHFFEBDBE  ",
+                            "HGH CCDCDCC ", "HAH  EBDBE  ", "HAH   ECE   ", "HGH    C    ", "H H         " } })
                 .addElement('A', ofBlock(bwBlock("BW_GlasBlocks"), 0))
                 .addElement('B', ofBlock(gtBlock("gt.blockcasings10"), 9))
                 .addElement('C', ofBlock(gtBlock("gt.blockcasings2"), 1))
@@ -245,8 +161,7 @@ public class MTE_SCD extends MTEExtendedPowerMultiBlockBase<MTE_SCD> implements 
     }
 
     @Override
-    public void checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack,
-        List<StructureError> errors) {
+    public void checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack, List<StructureError> errors) {
         checkPiece(STRUCTURE_PIECE_MAIN, OFFSET_X, OFFSET_Y, OFFSET_Z, errors);
         if (mMaintenanceHatches.size() != 1) errors.add(StructureErrorRegistry.UNKNOWN_STRUCTURE_ERROR);
     }
@@ -291,18 +206,32 @@ public class MTE_SCD extends MTEExtendedPowerMultiBlockBase<MTE_SCD> implements 
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType("Supercritical Dryer, SCD")
-            .addInfo(EnumChatFormatting.GRAY + "Brings liquid CO" + EnumChatFormatting.GRAY
-                + "₂ above its critical point " + EnumChatFormatting.AQUA
-                + "(31 °C, 73.8 bar)" + EnumChatFormatting.GRAY + " inside the pressure vessel.")
+            .addInfo(
+                EnumChatFormatting.GRAY + "Brings liquid CO"
+                    + EnumChatFormatting.GRAY
+                    + "₂ above its critical point "
+                    + EnumChatFormatting.AQUA
+                    + "(31 °C, 73.8 bar)"
+                    + EnumChatFormatting.GRAY
+                    + " inside the pressure vessel.")
             .addInfo(EnumChatFormatting.GRAY + "Eliminates surface tension during gel drying — preserving the")
-            .addInfo(EnumChatFormatting.GRAY + "nanoporous network to produce " + EnumChatFormatting.AQUA
-                + "aerogels" + EnumChatFormatting.GRAY + " and performing " + EnumChatFormatting.AQUA
-                + "scCO₂ extraction" + EnumChatFormatting.GRAY + ".")
+            .addInfo(
+                EnumChatFormatting.GRAY + "nanoporous network to produce "
+                    + EnumChatFormatting.AQUA
+                    + "aerogels"
+                    + EnumChatFormatting.GRAY
+                    + " and performing "
+                    + EnumChatFormatting.AQUA
+                    + "scCO₂ extraction"
+                    + EnumChatFormatting.GRAY
+                    + ".")
             .addSeparator()
             .addStaticParallelInfo(8)
             .addSeparator()
-            .addInfo(EnumChatFormatting.YELLOW + "Processes:" + EnumChatFormatting.GRAY
-                + " gel aging, solvent exchange, supercritical CO₂ drying,")
+            .addInfo(
+                EnumChatFormatting.YELLOW + "Processes:"
+                    + EnumChatFormatting.GRAY
+                    + " gel aging, solvent exchange, supercritical CO₂ drying,")
             .addInfo(EnumChatFormatting.GRAY + "resin/pharmaceutical extraction, PAN aerogel gelation.")
             .addInfo(EnumChatFormatting.GOLD + "Recovered CO₂ output loops back into the CSC.")
             .beginStructureBlock(12, 10, 9, true)

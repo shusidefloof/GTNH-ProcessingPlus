@@ -7,10 +7,8 @@ import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
 
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.Materials;
-import gregtech.api.enums.OrePrefixes;
 import gregtech.api.enums.TierEU;
 import gregtech.api.recipe.RecipeMaps;
-import gregtech.api.util.GTOreDictUnificator;
 import gregtech.api.util.GTRecipeConstants;
 import gtPlusPlus.api.recipe.GTPPRecipeMaps;
 
@@ -37,7 +35,7 @@ public class KaptonRecipes {
     private static void step1_PMDASynthesis() {
 
         GTValues.RA.stdBuilder()
-            .itemInputs(circuit(3), GTOreDictUnificator.get(OrePrefixes.dustSmall, "catalystVanadiumPalladium", 0))
+            .itemInputs(circuit(3))
             .fluidInputs(fluid("fluid.naphthalene", 2000), fluid(Materials.Oxygen, 9000))
             .fluidOutputs(fluid(Materials.CarbonDioxide, 4000), fluid(Materials.Water, 2000))
             .itemOutputs(dust(PrPMaterials.PMDA, 2))
@@ -150,8 +148,7 @@ public class KaptonRecipes {
         GTValues.RA.stdBuilder()
             .itemInputs(dust(PrPMaterials.PolyamicAcidFilm, 2))
             .fluidInputs(fluid(PrPMaterials.AceticAnhydride, 500), fluid(PrPMaterials.Triethylamine, 200))
-            .fluidOutputs(fluid(Materials.Water, 1000),
-                fluid(Materials.AceticAcid, 500))
+            .fluidOutputs(fluid(Materials.Water, 1000), fluid(Materials.AceticAcid, 500))
             .itemOutputs(plate(PrPMaterials.Kapton, 4))
             .duration(600)
             .eut(TierEU.RECIPE_ZPM)
@@ -183,7 +180,7 @@ public class KaptonRecipes {
             .itemInputs(circuit(2))
             .fluidInputs(fluid(Materials.AceticAcid, 1000))
             .fluidOutputs(fluid(PrPMaterials.Ketene, 1000), fluid(Materials.Water, 1000))
-            .duration(5*20)
+            .duration(5 * 20)
             .eut(TierEU.RECIPE_LV)
             .metadata(GTRecipeConstants.COIL_HEAT, 2700)
             .addTo(GTNHPPRecipeMaps.sHTRFRecipes);
@@ -199,7 +196,7 @@ public class KaptonRecipes {
             .itemInputs(circuit(5))
             .fluidInputs(fluid(Materials.AceticAcid, 2000), fluid(PrPMaterials.Ketene, 1000))
             .fluidOutputs(fluid(PrPMaterials.AceticAnhydride, 1000), fluid(Materials.Water, 500))
-            .duration(5*20)
+            .duration(5 * 20)
             .eut(TierEU.RECIPE_LV)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
@@ -210,14 +207,15 @@ public class KaptonRecipes {
     // =========================================================
     private static void stepAlt_ChemicalImidization() {
 
-        /*GTValues.RA.stdBuilder()
-            .itemInputs(dust(PrPMaterials.PolyamicAcidFilm, 2))
-            .fluidInputs(fluid(PrPMaterials.AceticAnhydride, 500), fluid(PrPMaterials.Triethylamine, 200))
-            .fluidOutputs(fluid(Materials.AceticAcid, 500))
-            .itemOutputs(plate(PrPMaterials.Kapton, 2))
-            .duration(800)
-            .eut(TierEU.RECIPE_UV)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+        /*
+         * GTValues.RA.stdBuilder()
+         * .itemInputs(dust(PrPMaterials.PolyamicAcidFilm, 2))
+         * .fluidInputs(fluid(PrPMaterials.AceticAnhydride, 500), fluid(PrPMaterials.Triethylamine, 200))
+         * .fluidOutputs(fluid(Materials.AceticAcid, 500))
+         * .itemOutputs(plate(PrPMaterials.Kapton, 2))
+         * .duration(800)
+         * .eut(TierEU.RECIPE_UV)
+         * .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
          */
     }
 }

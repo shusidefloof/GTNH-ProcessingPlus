@@ -3,23 +3,22 @@ package com.gtnh.processingplus.recipes;
 import java.util.ArrayList;
 import java.util.List;
 
-import gregtech.api.enums.GTValues;
-import gregtech.api.enums.TierEU;
-import gregtech.api.recipe.RecipeMap;
-import gregtech.api.recipe.RecipeMaps;
-import gregtech.api.util.GTRecipe;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 
-import bartworks.system.material.Werkstoff;
 import com.gtnh.processingplus.items.Intermediate;
+
+import bartworks.system.material.Werkstoff;
+import gregtech.api.enums.GTValues;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
+import gregtech.api.recipe.RecipeMap;
+import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.util.GTOreDictUnificator;
+import gregtech.api.util.GTRecipe;
 import gregtech.api.util.GTUtility;
 import gtPlusPlus.core.material.Material;
 
@@ -80,22 +79,31 @@ public class PPRecipeHelper {
     public static ItemStack plate(Werkstoff w, int amount) {
         return w.get(OrePrefixes.plate, amount);
     }
+
     public static ItemStack doublePlate(Werkstoff w, int amount) {
         return w.get(OrePrefixes.plateDouble, amount);
     }
+
     public static ItemStack gear(Werkstoff w, int amount) {
         return w.get(OrePrefixes.gearGt, amount);
     }
+
     public static ItemStack screw(Werkstoff w, int amount) {
         return w.get(OrePrefixes.screw, amount);
     }
+
     public static ItemStack block(Werkstoff w, int amount) {
         return w.get(OrePrefixes.block, amount);
     }
+
     public static ItemStack foil(Werkstoff w, int amount) {
         return w.get(OrePrefixes.foil, amount);
     }
-    public static ItemStack densePlate(Werkstoff w, int amount) {return w.get(OrePrefixes.plateDense, amount);}
+
+    public static ItemStack densePlate(Werkstoff w, int amount) {
+        return w.get(OrePrefixes.plateDense, amount);
+    }
+
     public static ItemStack rotor(Materials m, int amount) {
         return GTOreDictUnificator.get(OrePrefixes.rotor, m, amount);
     }
@@ -239,19 +247,21 @@ public class PPRecipeHelper {
     public static int removeRecipesByOutput(RecipeMap<?> map, ItemStack output) {
         List<GTRecipe> toRemove = new ArrayList<>();
         for (GTRecipe recipe : map.getAllRecipes()) {
-            if (recipe.mOutputs != null
-                && recipe.mOutputs.length > 0
+            if (recipe.mOutputs != null && recipe.mOutputs.length > 0
                 && GTUtility.areStacksEqual(recipe.mOutputs[0], output, false)) {
                 toRemove.add(recipe);
             }
         }
-        map.getBackend().removeRecipes(toRemove);
+        map.getBackend()
+            .removeRecipes(toRemove);
         return toRemove.size();
     }
 
-    public static void ebfNobleGasRecipes(long baseTime, long Eu, ItemStack input, ItemStack output, FluidStack fluidOutput) {
-        FluidStack[] nobleGasses = {fluid("oganesson", 100), fluid("xenon", 250), fluid("krypton", 400),
-            fluid("neon",550), fluid("radon", 700), fluid("argon", 850), fluid("helium", 1000), fluid("nitrogen", 1000)};
+    public static void ebfNobleGasRecipes(long baseTime, long Eu, ItemStack input, ItemStack output,
+        FluidStack fluidOutput) {
+        FluidStack[] nobleGasses = { fluid("oganesson", 100), fluid("xenon", 250), fluid("krypton", 400),
+            fluid("neon", 550), fluid("radon", 700), fluid("argon", 850), fluid("helium", 1000),
+            fluid("nitrogen", 1000) };
         int i = nobleGasses.length;
         for (FluidStack nobleGass : nobleGasses) {
             i--;
@@ -261,7 +271,7 @@ public class PPRecipeHelper {
                 .itemOutputs(output)
                 .fluidInputs(nobleGass)
                 .fluidOutputs(fluidOutput)
-                .eut(Math.round(eut*20))
+                .eut(Math.round(eut * 20))
                 .addTo(RecipeMaps.blastFurnaceRecipes);
         }
     }

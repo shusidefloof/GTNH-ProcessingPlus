@@ -96,8 +96,10 @@ public class RTGRecipes {
                 ItemList.Electric_Pump_UV.get(16),
                 ItemList.Electric_Piston_UV.get(16),
                 GTOreDictUnificator.get(OrePrefixes.circuit, Materials.UV, 8),
-                GTOreDictUnificator.get(OrePrefixes.cableGt08, Materials.SuperconductorUV, 8))
-            .fluidInputs(fluid("molten.indalloy140", 6912), molten(Materials.Lead, 4608),
+                item("wireGt01SuperconductorUV", 8))
+            .fluidInputs(
+                fluid("molten.indalloy140", 6912),
+                molten(Materials.Lead, 4608),
                 PrPMaterials.PromethiumBetavoltaicAlloy.getMolten(2304))
             .itemOutputs(GTNHPPBlocks.RTG.getStackForm(1))
             .eut(TierEU.RECIPE_UV)

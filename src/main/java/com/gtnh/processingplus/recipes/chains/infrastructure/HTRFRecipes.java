@@ -41,7 +41,8 @@ public class HTRFRecipes {
             .eut(TierEU.RECIPE_EV)
             .addTo(RecipeMaps.assemblerRecipes);
         GTValues.RA.stdBuilder()
-            .itemInputs(plate(Materials.BlackSteel, 3),
+            .itemInputs(
+                plate(Materials.BlackSteel, 3),
                 plate(Materials.Polytetrafluoroethylene, 3),
                 item("frameGtBlackSteel", 1))
             .itemOutputs(
@@ -53,7 +54,8 @@ public class HTRFRecipes {
             .eut(TierEU.RECIPE_LV)
             .addTo(RecipeMaps.assemblerRecipes);
         GTValues.RA.stdBuilder()
-            .itemInputs(doublePlate(PrPMaterials.SinteredSiliconCarbide, 6),
+            .itemInputs(
+                doublePlate(PrPMaterials.SinteredSiliconCarbide, 6),
                 gear(PrPMaterials.SinteredSiliconCarbide, 1),
                 screw(PrPMaterials.SinteredSiliconCarbide, 2),
                 item("frameGtBlackSteel", 1))

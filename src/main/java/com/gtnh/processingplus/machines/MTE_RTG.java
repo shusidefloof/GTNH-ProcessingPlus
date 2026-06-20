@@ -1,6 +1,5 @@
 package com.gtnh.processingplus.machines;
 
-import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlock;
 import static gregtech.api.enums.HatchElement.Dynamo;
 import static gregtech.api.enums.HatchElement.InputBus;
 import static gregtech.api.enums.HatchElement.Maintenance;
@@ -38,14 +37,13 @@ import gregtech.api.metatileentity.implementations.MTEExtendedPowerMultiBlockBas
 import gregtech.api.metatileentity.implementations.MTEHatch;
 import gregtech.api.metatileentity.implementations.MTEHatchDynamo;
 import gregtech.api.recipe.RecipeMap;
-import gregtech.api.structure.error.StructureError;
-import gregtech.api.structure.error.StructureErrorRegistry;
 import gregtech.api.recipe.check.CheckRecipeResult;
 import gregtech.api.recipe.check.CheckRecipeResultRegistry;
 import gregtech.api.render.TextureFactory;
+import gregtech.api.structure.error.StructureError;
+import gregtech.api.structure.error.StructureErrorRegistry;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.MultiblockTooltipBuilder;
-import gregtech.api.util.tooltip.TooltipHelper;
 
 /**
  * Radioisotope Thermoelectric Generator (RTG) — a UV-tier multiblock power source.
@@ -89,16 +87,14 @@ public class MTE_RTG extends MTEExtendedPowerMultiBlockBase<MTE_RTG> implements 
                 .addShape(
                     STRUCTURE_PIECE_MAIN,
                     // shape[z][y][x] — 5×5×5, 'C' = Radioisotope casing or hatch, ' ' = shielded core void
-                    new String[][] {
-                        { "CCCCC", "CCCCC", "CC~CC", "CCCCC", "CCCCC" },
+                    new String[][] { { "CCCCC", "CCCCC", "CC~CC", "CCCCC", "CCCCC" },
                         { "CCCCC", "C   C", "C   C", "C   C", "CCCCC" },
                         { "CCCCC", "C   C", "C   C", "C   C", "CCCCC" },
                         { "CCCCC", "C   C", "C   C", "C   C", "CCCCC" },
                         { "CCCCC", "CCCCC", "CCCCC", "CCCCC", "CCCCC" }, })
                 .addElement(
                     'C',
-                    buildHatchAdder(MTE_RTG.class)
-                        .atLeast(Dynamo, InputBus, Maintenance)
+                    buildHatchAdder(MTE_RTG.class).atLeast(Dynamo, InputBus, Maintenance)
                         .casingIndex(CASING_INDEX)
                         .hint(1)
                         .buildAndChain(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.RADIOISOTOPE_CASING))
@@ -263,10 +259,18 @@ public class MTE_RTG extends MTEExtendedPowerMultiBlockBase<MTE_RTG> implements 
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType("Radioisotope Thermoelectric Generator, RTG")
-            .addInfo(EnumChatFormatting.GRAY + "Generates power by burning " + EnumChatFormatting.YELLOW
-                + "fuel cells" + EnumChatFormatting.GRAY + ", scaling with how fast you feed them.")
-            .addInfo(EnumChatFormatting.GRAY + "Output is capped by your " + EnumChatFormatting.YELLOW
-                + "Dynamo hatch capacity" + EnumChatFormatting.GRAY + ".")
+            .addInfo(
+                EnumChatFormatting.GRAY + "Generates power by burning "
+                    + EnumChatFormatting.YELLOW
+                    + "fuel cells"
+                    + EnumChatFormatting.GRAY
+                    + ", scaling with how fast you feed them.")
+            .addInfo(
+                EnumChatFormatting.GRAY + "Output is capped by your "
+                    + EnumChatFormatting.YELLOW
+                    + "Dynamo hatch capacity"
+                    + EnumChatFormatting.GRAY
+                    + ".")
             .beginStructureBlock(5, 5, 5, false)
             .addController("Front face, center")
             .addCasingInfoMin("Radioisotope Thermoelectric Casing", 90, false)
@@ -279,17 +283,21 @@ public class MTE_RTG extends MTEExtendedPowerMultiBlockBase<MTE_RTG> implements 
 
     @Override
     public String[] getInfoData() {
-        return new String[] { StatCollector.translateToLocal("GT5U.multiblock.Progress") + ": "
-            + EnumChatFormatting.GREEN
-            + mProgresstime / 20
-            + EnumChatFormatting.RESET
-            + " s / "
-            + EnumChatFormatting.YELLOW
-            + mMaxProgresstime / 20
-            + EnumChatFormatting.RESET
-            + " s",
-            StatCollector.translateToLocal("GT5U.multiblock.energy") + ": " + EnumChatFormatting.GREEN + mEUt
-                + EnumChatFormatting.RESET + " EU/t" };
+        return new String[] {
+            StatCollector.translateToLocal("GT5U.multiblock.Progress") + ": "
+                + EnumChatFormatting.GREEN
+                + mProgresstime / 20
+                + EnumChatFormatting.RESET
+                + " s / "
+                + EnumChatFormatting.YELLOW
+                + mMaxProgresstime / 20
+                + EnumChatFormatting.RESET
+                + " s",
+            StatCollector.translateToLocal("GT5U.multiblock.energy") + ": "
+                + EnumChatFormatting.GREEN
+                + mEUt
+                + EnumChatFormatting.RESET
+                + " EU/t" };
     }
 
     @Override

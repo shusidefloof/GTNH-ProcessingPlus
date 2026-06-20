@@ -10,7 +10,6 @@ import gregtech.api.enums.ItemList;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.TierEU;
 import gregtech.api.recipe.RecipeMaps;
-import gregtech.api.util.GTRecipeConstants;
 
 public class SiCRecipes {
 
@@ -88,8 +87,7 @@ public class SiCRecipes {
     private static void step4_Machining() {
 
         GTValues.RA.stdBuilder()
-            .itemInputs(dust(PrPMaterials.DenseSiCCompact, 1),
-                ItemList.Shape_Mold_Plate.get(0))
+            .itemInputs(dust(PrPMaterials.DenseSiCCompact, 1), ItemList.Shape_Mold_Plate.get(0))
             .itemOutputs(plate(PrPMaterials.SinteredSiliconCarbide, 4))
             .duration(200)
             .eut(TierEU.RECIPE_EV)

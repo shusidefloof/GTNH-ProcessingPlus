@@ -5,12 +5,14 @@ import net.minecraft.item.ItemStack;
 /**
  * LuV-exotic solid intermediates, held on one shared MetaItem ({@link ItemGTNHPPIntermediates}).
  *
- * <p>These are the non-chemical "physical state" steps of the Vibranium/Unobtanium chains (red-hot
+ * <p>
+ * These are the non-chemical "physical state" steps of the Vibranium/Unobtanium chains (red-hot
  * ingots, crystal fragments/shards, clumps, slag, ore concentrate) — they aren't real compounds, so
  * they live as plain items rather than Werkstoffe. Each constant's {@code ordinal()} is its item
  * damage value, so only append, never reorder.
  *
- * <p>{@code reg} is the texture stem: art goes at
+ * <p>
+ * {@code reg} is the texture stem: art goes at
  * {@code assets/gtnhprp/textures/items/intermediates/<reg>.png}.
  */
 public enum Intermediate {

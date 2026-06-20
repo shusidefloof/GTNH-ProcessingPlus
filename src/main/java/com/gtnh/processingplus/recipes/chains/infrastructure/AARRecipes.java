@@ -5,17 +5,18 @@ import java.util.List;
 
 import net.minecraftforge.fluids.FluidStack;
 
+import com.gtnh.processingplus.GTNHProcessingPlus;
+import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
+
 import gregtech.api.enums.Materials;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.util.GTRecipe;
 
-import com.gtnh.processingplus.GTNHProcessingPlus;
-import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
-
 /**
  * Ammonia Atmosphere Reactor recipes.
  *
- * <p>The AAR maintains its own reactive NH3 atmosphere, so any Large Chemical Reactor recipe that
+ * <p>
+ * The AAR maintains its own reactive NH3 atmosphere, so any Large Chemical Reactor recipe that
  * consumes ammonia can run inside it without the player supplying ammonia. Rather than hand-author
  * each one, we mirror every LCR recipe that takes ammonia as a fluid input into the AAR map with the
  * ammonia stripped out. This runs in loadComplete (last in {@link com.gtnh.processingplus.recipes.PrPlusRecipes}),

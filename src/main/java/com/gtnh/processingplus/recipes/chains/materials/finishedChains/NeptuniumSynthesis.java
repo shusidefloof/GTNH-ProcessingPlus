@@ -11,7 +11,6 @@ import gregtech.api.enums.TierEU;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.util.GTRecipeConstants;
 import gregtech.loaders.postload.recipes.beamcrafter.BeamCrafterMetadata;
-
 import gtnhlanth.common.beamline.Particle;
 
 public class NeptuniumSynthesis {
@@ -173,7 +172,7 @@ public class NeptuniumSynthesis {
             .itemInputs(dust(Materials.Neodymium, 1), circuit(10))
             .itemOutputs(dust(PrPMaterials.Neodymium146, 1))
             .outputChances(10_00)
-            .duration(50*20)
+            .duration(50 * 20)
             .eut(TierEU.RECIPE_LuV)
             .addTo(RecipeMaps.centrifugeRecipes);
 
@@ -181,7 +180,7 @@ public class NeptuniumSynthesis {
             .itemInputs(dust(Materials.Neodymium, 1), circuit(10))
             .fluidInputs(fluid("xenon", 2000))
             .itemOutputs(dust(PrPMaterials.Neodymium146, 1))
-            .duration(25*20)
+            .duration(25 * 20)
             .eut(TierEU.RECIPE_ZPM)
             .addTo(RecipeMaps.centrifugeRecipes);
 
@@ -203,10 +202,10 @@ public class NeptuniumSynthesis {
             .eut(TierEU.RECIPE_ZPM)
             .addTo(RecipeMaps.beamcrafterRecipes);
 
-    // =========================================================
-    // Promethium chain (late ZPM): Nd-147 → fusion → Pm plasma → crude → resin purification → Pm.
-    // No stable Pm isotope exists, so the only way to get it is to breed it — fitting for ZPM.
-    // =========================================================
+        // =========================================================
+        // Promethium chain (late ZPM): Nd-147 → fusion → Pm plasma → crude → resin purification → Pm.
+        // No stable Pm isotope exists, so the only way to get it is to breed it — fitting for ZPM.
+        // =========================================================
 
         // --- Stage 2: melt the activated isotope, then fuse a proton onto it ---
         // Nd-147 dust → molten Nd-147 (Fluid Extractor)
@@ -249,7 +248,9 @@ public class NeptuniumSynthesis {
 
         // LOAD — resin grabs the promethium; samarium falls out as raffinate (the Pm-147 decay product).
         GTValues.RA.stdBuilder()
-            .fluidInputs(PrPMaterials.RawPromethium.getFluidOrGas(144), PrPMaterials.PromethiumResin.getFluidOrGas(1000))
+            .fluidInputs(
+                PrPMaterials.RawPromethium.getFluidOrGas(144),
+                PrPMaterials.PromethiumResin.getFluidOrGas(1000))
             .itemOutputs(dust(Materials.Samarium, 1))
             .fluidOutputs(PrPMaterials.LoadedPromethiumResin.getFluidOrGas(1000))
             .duration(10 * 20)
@@ -258,7 +259,9 @@ public class NeptuniumSynthesis {
 
         // STRIP + REGENERATE — acid elutes pure promethium as a molten fluid and hands the resin back.
         GTValues.RA.stdBuilder()
-            .fluidInputs(PrPMaterials.LoadedPromethiumResin.getFluidOrGas(1000), fluid(Materials.HydrochloricAcid, 1000))
+            .fluidInputs(
+                PrPMaterials.LoadedPromethiumResin.getFluidOrGas(1000),
+                fluid(Materials.HydrochloricAcid, 1000))
             .fluidOutputs(Materials.Promethium.getMolten(144), PrPMaterials.PromethiumResin.getFluidOrGas(1000))
             .duration(10 * 20)
             .eut(TierEU.RECIPE_ZPM)

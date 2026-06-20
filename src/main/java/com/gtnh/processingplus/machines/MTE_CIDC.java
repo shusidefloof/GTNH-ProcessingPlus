@@ -12,18 +12,10 @@ import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_LARGE_CHEMICA
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_LARGE_CHEMICAL_REACTOR_ACTIVE_GLOW;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_LARGE_CHEMICAL_REACTOR_GLOW;
 import static gregtech.api.enums.Textures.BlockIcons.casingTexturePages;
+import static gregtech.api.metatileentity.implementations.MTEEnhancedMultiBlockBase.*;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
 import static gregtech.api.util.GTStructureUtility.chainAllGlasses;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-import com.gtnewhorizon.structurelib.structure.StructureUtility;
-import com.gtnh.processingplus.materials.PrPMaterials;
-import bartworks.system.material.WerkstoffLoader;
-import gtnhlanth.common.register.LanthItemList;
-import gregtech.api.GregTechAPI;
-import gregtech.api.recipe.check.CheckRecipeResult;
-import gregtech.api.structure.error.StructureError;
-import gregtech.api.structure.error.StructureErrorRegistry;
 import java.util.List;
 
 import net.minecraft.item.ItemStack;
@@ -35,22 +27,29 @@ import com.gtnewhorizon.structurelib.alignment.constructable.ISurvivalConstructa
 import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
+import com.gtnewhorizon.structurelib.structure.StructureUtility;
 import com.gtnh.processingplus.blocks.BlockGTNHPPCasings;
 import com.gtnh.processingplus.blocks.GTNHPPBlocks;
+import com.gtnh.processingplus.materials.PrPMaterials;
 import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
 
+import bartworks.system.material.WerkstoffLoader;
+import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import gregtech.api.GregTechAPI;
 import gregtech.api.enums.SoundResource;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
-import gregtech.api.metatileentity.implementations.MTEExtendedPowerMultiBlockBase;
 import gregtech.api.logic.ProcessingLogic;
+import gregtech.api.metatileentity.implementations.MTEExtendedPowerMultiBlockBase;
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.render.TextureFactory;
+import gregtech.api.structure.error.StructureError;
+import gregtech.api.structure.error.StructureErrorRegistry;
 import gregtech.api.util.MultiblockTooltipBuilder;
-import static gregtech.api.metatileentity.implementations.MTEEnhancedMultiBlockBase.*;
+import gtnhlanth.common.register.LanthItemList;
 
 /**
  * Controlled Isotopic Doping Chamber (CIDC) — UV-tier multiblock that assembles the RE-Doped
@@ -89,321 +88,119 @@ public class MTE_CIDC extends MTEExtendedPowerMultiBlockBase<MTE_CIDC> implement
                 .addShape(
                     STRUCTURE_PIECE_MAIN,
                     /*
-
-
-
-
-                    Structure:
-
-                    Blocks:
-                    A -> ofBlock...(BW_GlasBlocks, 0, ...);
-                    B -> ofBlock...(bw.frames, 26021, ...);
-                    C -> ofBlock...(casing.electrode, 0, ...);
-                    D -> ofBlock...(gt.blockcasings, 15, ...);
-                    E -> ofBlock...(gt.blockcasings11, 3, ...);
-                    F -> ofBlock...(gt.blockcasings13, 1, ...);
-                    G -> ofBlock...(gt.blockcasings4, 1, ...);
-                    H -> ofBlock...(gt.blockcasings9, 0, ...);
-                    I -> ofBlock...(gt.blockcasings9, 1, ...);
-                    J -> ofBlock...(gt.blockframes, 129, ...);
-                    K -> ofBlock...(gtplusplus.blockcasings.2, 11, ...);
-                    L -> ofBlock...(tile.gtnhpp.casings, 0, ...);
-                    M -> ofBlock...(tile.gtnhpp.casings, 9, ...);
-                    N -> ofBlock...(tile.gtnhpp.casings, 25, ...);
-
-                    Tiles:
-
-                    Special Tiles:
-                    O -> ofSpecialTileAdder(bartworks.system.material.BWTileEntityMetaGeneratedBlocksCasingAdvanced, ...); // You will probably want to change it to something else
-                    P -> ofSpecialTileAdder(gregtech.api.metatileentity.BaseMetaTileEntity, ...); // You will probably want to change it to something else
-
-                    Offsets:
-                    -1 -1 -1
+                     * Structure:
+                     * Blocks:
+                     * A -> ofBlock...(BW_GlasBlocks, 0, ...);
+                     * B -> ofBlock...(bw.frames, 26021, ...);
+                     * C -> ofBlock...(casing.electrode, 0, ...);
+                     * D -> ofBlock...(gt.blockcasings, 15, ...);
+                     * E -> ofBlock...(gt.blockcasings11, 3, ...);
+                     * F -> ofBlock...(gt.blockcasings13, 1, ...);
+                     * G -> ofBlock...(gt.blockcasings4, 1, ...);
+                     * H -> ofBlock...(gt.blockcasings9, 0, ...);
+                     * I -> ofBlock...(gt.blockcasings9, 1, ...);
+                     * J -> ofBlock...(gt.blockframes, 129, ...);
+                     * K -> ofBlock...(gtplusplus.blockcasings.2, 11, ...);
+                     * L -> ofBlock...(tile.gtnhpp.casings, 0, ...);
+                     * M -> ofBlock...(tile.gtnhpp.casings, 9, ...);
+                     * N -> ofBlock...(tile.gtnhpp.casings, 25, ...);
+                     * Tiles:
+                     * Special Tiles:
+                     * O -> ofSpecialTileAdder(bartworks.system.material.BWTileEntityMetaGeneratedBlocksCasingAdvanced,
+                     * ...); // You will probably want to change it to something else
+                     * P -> ofSpecialTileAdder(gregtech.api.metatileentity.BaseMetaTileEntity, ...); // You will
+                     * probably want to change it to something else
+                     * Offsets:
+                     * -1 -1 -1
                      */
-
-
-
 
                     // shape[z][y][x] — 15 slices (z) × 16 rows (y) × 15 chars (x).
                     // See the block legend below for what each letter maps to; ' ' = empty.
-                    new String[][]{{
-                        "               ",
-                        "LLL         LLL",
-                        "L K         K L",
-                        "L K         K L",
-                        "L K         K L",
-                        "L K         K L",
-                        "L K         K L",
-                        "L K         K L",
-                        "L K         K L",
-                        "L K         K L",
-                        "L K         K L",
-                        "L K         K L",
-                        "L K         K L",
-                        "L K         K L",
-                        "L K         K L",
-                        "LLLLN     NLLLL"
-                    },{
-                        "               ",
-                        "LNL         LNL",
-                        " J AN     NA J ",
-                        " J ANN   NNA J ",
-                        " J ANN   NNA J ",
-                        " J AAN   NAA J ",
-                        " J AAN   NAA J ",
-                        " J AAN   NAA J ",
-                        " J AAN   NAA J ",
-                        " J AAN   NAA J ",
-                        " J AAN   NAA J ",
-                        " J AAN   NAA J ",
-                        " J AAN   NAA J ",
-                        " J ANN   NNA J ",
-                        " J ANN   NNA J ",
-                        "LJLNNNL LNNNLJL"
-                    },{
-                        "               ",
-                        "LLLLL     LLLLL",
-                        "K L  LL LL  L K",
-                        "K L   NLN   L K",
-                        "K L   AAA   L K",
-                        "K L   AAA   L K",
-                        "K L   AAA   L K",
-                        "K L   AAA   L K",
-                        "K L   AAA   L K",
-                        "K L   AAA   L K",
-                        "K L  NAAAN  L K",
-                        "K L  NAAAN  L K",
-                        "K L  NAAAN  L K",
-                        "K L  NNNNN  L K",
-                        "K L  NN~NN  L K",
-                        "LLLLNNNNNNNLLLL"
-                    },{
-                        "               ",
-                        "  LN       NL  ",
-                        " A NNNLLLNNN A ",
-                        " A  MM   MM  A ",
-                        " A           A ",
-                        " A           A ",
-                        " A           A ",
-                        " A           A ",
-                        " A           A ",
-                        " A           A ",
-                        " A           A ",
-                        " A           A ",
-                        " A           A ",
-                        " A           A ",
-                        " A           A ",
-                        "LNLLLGGNGGLLLNL"
-                    },{
-                        "               ",
-                        "  L   PPP   L  ",
-                        " N NNN   NNN N ",
-                        " N MMMGGGMMM N ",
-                        " N   M G M   N ",
-                        " A           A ",
-                        " A           A ",
-                        " A           A ",
-                        " A           A ",
-                        " A           A ",
-                        " A           A ",
-                        " A           A ",
-                        " A           A ",
-                        " N           N ",
-                        " N           N ",
-                        "NNNLLLGGGLLLNNN"
-                    },{
-                        "       P       ",
-                        "     PPPPP     ",
-                        "  LNNN   NNNL  ",
-                        " N MMMHHHMMM N ",
-                        " N  MMNNNMM  N ",
-                        " N   MNNNM   N ",
-                        " N    N N    N ",
-                        " N           N ",
-                        " N           N ",
-                        " N           N ",
-                        " NN         NN ",
-                        " NN         NN ",
-                        " NN  B   B  NN ",
-                        " NN  OKKKO  NN ",
-                        " NN  OJ JO  NN ",
-                        " NNGLLLGLLLGNN "
-                    },{
-                        "      PPP      ",
-                        "    PPPPPPP    ",
-                        "  LL       LL  ",
-                        "  N GHIHIHG N  ",
-                        "  A  NI IN  A  ",
-                        "  A  NDDDN  A  ",
-                        "  A  NININ  A  ",
-                        "  A   FEF   A  ",
-                        "  A   FEF   A  ",
-                        "  A    E    A  ",
-                        "  A         A  ",
-                        "  A         A  ",
-                        "  A         A  ",
-                        "  A  KKKKK  A  ",
-                        "  N  J   J  N  ",
-                        " LNGGLLLLLGGNL "
-                    },{
-                        "     PPPPP     ",
-                        "    PPPPPPP    ",
-                        "   L       L   ",
-                        "  L GHHHHHG L  ",
-                        "  A GN C NG A  ",
-                        "  A  NDCDN  A  ",
-                        "  A   NCN   A  ",
-                        "  A   ECE   A  ",
-                        "  A   EME   A  ",
-                        "  A   EME   A  ",
-                        "  A    M    A  ",
-                        "  A         A  ",
-                        "  A         A  ",
-                        "  A  KKKKK  A  ",
-                        "  L    M    L  ",
-                        "  NNGGLLLGGNN  "
-                    },{
-                        "      PPP      ",
-                        "    PPPPPPP    ",
-                        "  LL       LL  ",
-                        "  N GHIHIHG N  ",
-                        "  A  NI IN  A  ",
-                        "  A  NDDDN  A  ",
-                        "  A  NININ  A  ",
-                        "  A   FEF   A  ",
-                        "  A   FEF   A  ",
-                        "  A    E    A  ",
-                        "  A         A  ",
-                        "  A         A  ",
-                        "  A         A  ",
-                        "  A  KKKKK  A  ",
-                        "  N  J   J  N  ",
-                        " LNGGLLLLLGGNL "
-                    },{
-                        "       P       ",
-                        "     PPPPP     ",
-                        "  LNNN   NNNL  ",
-                        " N MMMHHHMMM N ",
-                        " N  MMNNNMM  N ",
-                        " N   MNNNM   N ",
-                        " N    N N    N ",
-                        " N           N ",
-                        " N           N ",
-                        " N           N ",
-                        " NN         NN ",
-                        " NN         NN ",
-                        " NN  B   B  NN ",
-                        " NN  OKKKO  NN ",
-                        " NN  OJ JO  NN ",
-                        " NNGLLLGLLLGNN "
-                    },{
-                        "               ",
-                        "  L   PPP   L  ",
-                        " N NNN   NNN N ",
-                        " N MMMGGGMMM N ",
-                        " N   M G M   N ",
-                        " A           A ",
-                        " A           A ",
-                        " A           A ",
-                        " A           A ",
-                        " A           A ",
-                        " A           A ",
-                        " A           A ",
-                        " A           A ",
-                        " N           N ",
-                        " N           N ",
-                        "NNNLLLGGGLLLNNN"
-                    },{
-                        "               ",
-                        "  LN       NL  ",
-                        " A NNNLLLNNN A ",
-                        " A  MM   MM  A ",
-                        " A           A ",
-                        " A           A ",
-                        " A           A ",
-                        " A           A ",
-                        " A           A ",
-                        " A           A ",
-                        " A           A ",
-                        " A           A ",
-                        " A           A ",
-                        " A           A ",
-                        " A           A ",
-                        "LNLLLGGNGGLLLNL"
-                    },{
-                        "               ",
-                        "LLLLL     LLLLL",
-                        "K L NLL LLN L K",
-                        "K L   NLN   L K",
-                        "K L   AAA   L K",
-                        "K L   AAA   L K",
-                        "K L   AAA   L K",
-                        "K L   AAA   L K",
-                        "K L   AAA   L K",
-                        "K L  NAAAN  L K",
-                        "K L  NAAAN  L K",
-                        "K L  NAAAN  L K",
-                        "K L  NAAAN  L K",
-                        "K L  NAAAN  L K",
-                        "K L  NNLNN  L K",
-                        "LLLLNNNNNNNLLLL"
-                    },{
-                        "               ",
-                        "LNL         LNL",
-                        " J AN     NA J ",
-                        " J ANN   NNA J ",
-                        " J ANN   NNA J ",
-                        " J AAN   NAA J ",
-                        " J AAN   NAA J ",
-                        " J AAN   NAA J ",
-                        " J AAN   NAA J ",
-                        " J AAN   NAA J ",
-                        " J AAN   NAA J ",
-                        " J AAN   NAA J ",
-                        " J AAN   NAA J ",
-                        " J ANN   NNA J ",
-                        " J ANN   NNA J ",
-                        "LJLNNNL LNNNLJL"
-                    },{
-                        "               ",
-                        "LLL         LLL",
-                        "L K         K L",
-                        "L K         K L",
-                        "L K         K L",
-                        "L K         K L",
-                        "L K         K L",
-                        "L K         K L",
-                        "L K         K L",
-                        "L K         K L",
-                        "L K         K L",
-                        "L K         K L",
-                        "L K         K L",
-                        "L K         K L",
-                        "L K         K L",
-                        "LLLL       LLLL"
-                    }})
+                    new String[][] {
+                        { "               ", "LLL         LLL", "L K         K L", "L K         K L", "L K         K L",
+                            "L K         K L", "L K         K L", "L K         K L", "L K         K L",
+                            "L K         K L", "L K         K L", "L K         K L", "L K         K L",
+                            "L K         K L", "L K         K L", "LLLLN     NLLLL" },
+                        { "               ", "LNL         LNL", " J AN     NA J ", " J ANN   NNA J ", " J ANN   NNA J ",
+                            " J AAN   NAA J ", " J AAN   NAA J ", " J AAN   NAA J ", " J AAN   NAA J ",
+                            " J AAN   NAA J ", " J AAN   NAA J ", " J AAN   NAA J ", " J AAN   NAA J ",
+                            " J ANN   NNA J ", " J ANN   NNA J ", "LJLNNNL LNNNLJL" },
+                        { "               ", "LLLLL     LLLLL", "K L  LL LL  L K", "K L   NLN   L K", "K L   AAA   L K",
+                            "K L   AAA   L K", "K L   AAA   L K", "K L   AAA   L K", "K L   AAA   L K",
+                            "K L   AAA   L K", "K L  NAAAN  L K", "K L  NAAAN  L K", "K L  NAAAN  L K",
+                            "K L  NNNNN  L K", "K L  NN~NN  L K", "LLLLNNNNNNNLLLL" },
+                        { "               ", "  LN       NL  ", " A NNNLLLNNN A ", " A  MM   MM  A ", " A           A ",
+                            " A           A ", " A           A ", " A           A ", " A           A ",
+                            " A           A ", " A           A ", " A           A ", " A           A ",
+                            " A           A ", " A           A ", "LNLLLGGNGGLLLNL" },
+                        { "               ", "  L   PPP   L  ", " N NNN   NNN N ", " N MMMGGGMMM N ", " N   M G M   N ",
+                            " A           A ", " A           A ", " A           A ", " A           A ",
+                            " A           A ", " A           A ", " A           A ", " A           A ",
+                            " N           N ", " N           N ", "NNNLLLGGGLLLNNN" },
+                        { "       P       ", "     PPPPP     ", "  LNNN   NNNL  ", " N MMMHHHMMM N ", " N  MMNNNMM  N ",
+                            " N   MNNNM   N ", " N    N N    N ", " N           N ", " N           N ",
+                            " N           N ", " NN         NN ", " NN         NN ", " NN  B   B  NN ",
+                            " NN  OKKKO  NN ", " NN  OJ JO  NN ", " NNGLLLGLLLGNN " },
+                        { "      PPP      ", "    PPPPPPP    ", "  LL       LL  ", "  N GHIHIHG N  ", "  A  NI IN  A  ",
+                            "  A  NDDDN  A  ", "  A  NININ  A  ", "  A   FEF   A  ", "  A   FEF   A  ",
+                            "  A    E    A  ", "  A         A  ", "  A         A  ", "  A         A  ",
+                            "  A  KKKKK  A  ", "  N  J   J  N  ", " LNGGLLLLLGGNL " },
+                        { "     PPPPP     ", "    PPPPPPP    ", "   L       L   ", "  L GHHHHHG L  ", "  A GN C NG A  ",
+                            "  A  NDCDN  A  ", "  A   NCN   A  ", "  A   ECE   A  ", "  A   EME   A  ",
+                            "  A   EME   A  ", "  A    M    A  ", "  A         A  ", "  A         A  ",
+                            "  A  KKKKK  A  ", "  L    M    L  ", "  NNGGLLLGGNN  " },
+                        { "      PPP      ", "    PPPPPPP    ", "  LL       LL  ", "  N GHIHIHG N  ", "  A  NI IN  A  ",
+                            "  A  NDDDN  A  ", "  A  NININ  A  ", "  A   FEF   A  ", "  A   FEF   A  ",
+                            "  A    E    A  ", "  A         A  ", "  A         A  ", "  A         A  ",
+                            "  A  KKKKK  A  ", "  N  J   J  N  ", " LNGGLLLLLGGNL " },
+                        { "       P       ", "     PPPPP     ", "  LNNN   NNNL  ", " N MMMHHHMMM N ", " N  MMNNNMM  N ",
+                            " N   MNNNM   N ", " N    N N    N ", " N           N ", " N           N ",
+                            " N           N ", " NN         NN ", " NN         NN ", " NN  B   B  NN ",
+                            " NN  OKKKO  NN ", " NN  OJ JO  NN ", " NNGLLLGLLLGNN " },
+                        { "               ", "  L   PPP   L  ", " N NNN   NNN N ", " N MMMGGGMMM N ", " N   M G M   N ",
+                            " A           A ", " A           A ", " A           A ", " A           A ",
+                            " A           A ", " A           A ", " A           A ", " A           A ",
+                            " N           N ", " N           N ", "NNNLLLGGGLLLNNN" },
+                        { "               ", "  LN       NL  ", " A NNNLLLNNN A ", " A  MM   MM  A ", " A           A ",
+                            " A           A ", " A           A ", " A           A ", " A           A ",
+                            " A           A ", " A           A ", " A           A ", " A           A ",
+                            " A           A ", " A           A ", "LNLLLGGNGGLLLNL" },
+                        { "               ", "LLLLL     LLLLL", "K L NLL LLN L K", "K L   NLN   L K", "K L   AAA   L K",
+                            "K L   AAA   L K", "K L   AAA   L K", "K L   AAA   L K", "K L   AAA   L K",
+                            "K L  NAAAN  L K", "K L  NAAAN  L K", "K L  NAAAN  L K", "K L  NAAAN  L K",
+                            "K L  NAAAN  L K", "K L  NNLNN  L K", "LLLLNNNNNNNLLLL" },
+                        { "               ", "LNL         LNL", " J AN     NA J ", " J ANN   NNA J ", " J ANN   NNA J ",
+                            " J AAN   NAA J ", " J AAN   NAA J ", " J AAN   NAA J ", " J AAN   NAA J ",
+                            " J AAN   NAA J ", " J AAN   NAA J ", " J AAN   NAA J ", " J AAN   NAA J ",
+                            " J ANN   NNA J ", " J ANN   NNA J ", "LJLNNNL LNNNLJL" },
+                        { "               ", "LLL         LLL", "L K         K L", "L K         K L", "L K         K L",
+                            "L K         K L", "L K         K L", "L K         K L", "L K         K L",
+                            "L K         K L", "L K         K L", "L K         K L", "L K         K L",
+                            "L K         K L", "L K         K L", "LLLL       LLLL" } })
 
                 /*
-                    Block legend (from the in-game structure export):
-                    A -> any tiered glass (BW glass etc.)        — chainAllGlasses()
-                    B -> Sintered Silicon Carbide bolted casing  — BWBlockCasingsAdvanced (meta = Werkstoff id)
-                    C -> gtnhlanth electrode casing              — LanthItemList.ELECTRODE_CASING
-                    D -> gt.blockcasings:15                      — sBlockCasings1
-                    E -> gt.blockcasings11:3                     — sBlockCasings11
-                    F -> gt.blockcasings13:1                     — sBlockCasings13
-                    G -> gt.blockcasings4:1                      — sBlockCasings4
-                    H -> gt.blockcasings9:0                      — sBlockCasings9
-                    I -> gt.blockcasings9:1                      — sBlockCasings9
-                    J -> gt.blockframes:129                      — sBlockFrames
-                    K -> gtplusplus.blockcasings.2:11 (miscutils)
-                    L -> tile.gtnhpp.casings:0  (Silicon Carbide Ceramic Casing)
-                    M -> tile.gtnhpp.casings:9  (Spectral Isolation Casing — plain, lower dome cells)
-                    N -> tile.gtnhpp.casings:25 (Isotopic Doping Casing — chamber shell, no hatches)
-                    O -> Sintered Silicon Carbide plain casing   — BWBlockCasings (meta = Werkstoff id)
-                    P -> top-dome M cells (Spectral Isolation Casing) — ONLY hatch-capable cells
+                 * Block legend (from the in-game structure export):
+                 * A -> any tiered glass (BW glass etc.) — chainAllGlasses()
+                 * B -> Sintered Silicon Carbide bolted casing — BWBlockCasingsAdvanced (meta = Werkstoff id)
+                 * C -> gtnhlanth electrode casing — LanthItemList.ELECTRODE_CASING
+                 * D -> gt.blockcasings:15 — sBlockCasings1
+                 * E -> gt.blockcasings11:3 — sBlockCasings11
+                 * F -> gt.blockcasings13:1 — sBlockCasings13
+                 * G -> gt.blockcasings4:1 — sBlockCasings4
+                 * H -> gt.blockcasings9:0 — sBlockCasings9
+                 * I -> gt.blockcasings9:1 — sBlockCasings9
+                 * J -> gt.blockframes:129 — sBlockFrames
+                 * K -> gtplusplus.blockcasings.2:11 (miscutils)
+                 * L -> tile.gtnhpp.casings:0 (Silicon Carbide Ceramic Casing)
+                 * M -> tile.gtnhpp.casings:9 (Spectral Isolation Casing — plain, lower dome cells)
+                 * N -> tile.gtnhpp.casings:25 (Isotopic Doping Casing — chamber shell, no hatches)
+                 * O -> Sintered Silicon Carbide plain casing — BWBlockCasings (meta = Werkstoff id)
+                 * P -> top-dome M cells (Spectral Isolation Casing) — ONLY hatch-capable cells
                  */
                 .addElement('A', chainAllGlasses())
-                .addElement('B', ofBlock(WerkstoffLoader.BWBlockCasingsAdvanced, PrPMaterials.SinteredSiliconCarbide.getId()))
+                .addElement(
+                    'B',
+                    ofBlock(WerkstoffLoader.BWBlockCasingsAdvanced, PrPMaterials.SinteredSiliconCarbide.getId()))
                 .addElement('C', ofBlock(LanthItemList.ELECTRODE_CASING, 0))
                 .addElement('D', StructureUtility.ofBlock(GregTechAPI.sBlockCasings1, 15))
                 .addElement('E', StructureUtility.ofBlock(GregTechAPI.sBlockCasings11, 3))
@@ -510,8 +307,12 @@ public class MTE_CIDC extends MTEExtendedPowerMultiBlockBase<MTE_CIDC> implement
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType("Controlled Isotopic Doping Chamber, CIDC")
-            .addInfo(EnumChatFormatting.GRAY + "Performs " + EnumChatFormatting.LIGHT_PURPLE + "precision doping"
-                + EnumChatFormatting.GRAY + " under controlled isolation.")
+            .addInfo(
+                EnumChatFormatting.GRAY + "Performs "
+                    + EnumChatFormatting.LIGHT_PURPLE
+                    + "precision doping"
+                    + EnumChatFormatting.GRAY
+                    + " under controlled isolation.")
             .addSeparator()
             .beginStructureBlock(15, 16, 15, true)
             .addController("Front face, center")
@@ -558,6 +359,5 @@ public class MTE_CIDC extends MTEExtendedPowerMultiBlockBase<MTE_CIDC> implement
     public boolean supportsVoidProtection() {
         return true;
     }
-
 
 }

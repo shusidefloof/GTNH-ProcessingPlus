@@ -1,6 +1,7 @@
 package com.gtnh.processingplus.recipes.chains.infrastructure;
 
 import static com.gtnh.processingplus.recipes.PPRecipeHelper.*;
+import static gregtech.api.util.GTRecipeBuilder.SECONDS;
 
 import net.minecraft.item.ItemStack;
 
@@ -14,8 +15,6 @@ import gregtech.api.enums.OrePrefixes;
 import gregtech.api.enums.TierEU;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.util.GTOreDictUnificator;
-
-import static gregtech.api.util.GTRecipeBuilder.SECONDS;
 
 public class DAFRecipes {
 
@@ -48,7 +47,7 @@ public class DAFRecipes {
                 ItemList.Field_Generator_UV.get(1),
                 GTOreDictUnificator.get(OrePrefixes.circuit, Materials.LuV, 4),
                 GTOreDictUnificator.get(OrePrefixes.circuit, Materials.ZPM, 2),
-                GTOreDictUnificator.get(OrePrefixes.cableGt04, Materials.SuperconductorUV, 4))
+                item("wireGt01SuperconductorUV", 4))
             .fluidInputs(molten(Materials.SolderingAlloy, 2304))
             .itemOutputs(GTNHPPBlocks.DAF.getStackForm(1))
             .duration(60 * SECONDS)

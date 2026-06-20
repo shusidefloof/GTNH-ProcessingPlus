@@ -368,8 +368,8 @@ public class PrPMaterials implements Runnable {
     // =========================
     // CARBON AEROGEL (PAN ROUTE)
     // =========================
-    public static Werkstoff WetPANGel;     // acid-gelled PAN intermediate
-    public static Werkstoff PANAerogel;    // supercritical-dried PAN aerogel
+    public static Werkstoff WetPANGel; // acid-gelled PAN intermediate
+    public static Werkstoff PANAerogel; // supercritical-dried PAN aerogel
     public static Werkstoff CarbonAerogel; // pyrolyzed structural carbon aerogel
 
     public static List<Werkstoff> ALL = new ArrayList<>();
@@ -2090,7 +2090,6 @@ public class PrPMaterials implements Runnable {
                 id(),
                 TextureSet.SET_DULL));
 
-
         AerogelInsulationPanel = register(
             new Werkstoff(
                 rgb(195, 225, 248),
@@ -2258,7 +2257,8 @@ public class PrPMaterials implements Runnable {
                 new Werkstoff.Stats(),
                 Werkstoff.Types.MATERIAL,
                 // molten form added so it can feed the fusion reactor (proton-capture to Promethium).
-                new Werkstoff.GenerationFeatures().onlyDust().addMolten(),
+                new Werkstoff.GenerationFeatures().onlyDust()
+                    .addMolten(),
                 id(),
                 TextureSet.SET_METALLIC));
 
@@ -2271,7 +2271,8 @@ public class PrPMaterials implements Runnable {
                 "crude ¹⁴⁷Pm",
                 new Werkstoff.Stats(),
                 Werkstoff.Types.MATERIAL,
-                new Werkstoff.GenerationFeatures().disable().addCells(),
+                new Werkstoff.GenerationFeatures().disable()
+                    .addCells(),
                 id(),
                 TextureSet.SET_FLUID));
 
@@ -2282,7 +2283,8 @@ public class PrPMaterials implements Runnable {
                 "Pm-resin",
                 new Werkstoff.Stats(),
                 Werkstoff.Types.MATERIAL,
-                new Werkstoff.GenerationFeatures().disable().addCells(),
+                new Werkstoff.GenerationFeatures().disable()
+                    .addCells(),
                 id(),
                 TextureSet.SET_FLUID));
 
@@ -2293,7 +2295,8 @@ public class PrPMaterials implements Runnable {
                 "Pm-resin (loaded)",
                 new Werkstoff.Stats(),
                 Werkstoff.Types.MATERIAL,
-                new Werkstoff.GenerationFeatures().disable().addCells(),
+                new Werkstoff.GenerationFeatures().disable()
+                    .addCells(),
                 id(),
                 TextureSet.SET_FLUID));
 
@@ -2305,7 +2308,8 @@ public class PrPMaterials implements Runnable {
                 "D₂O",
                 new Werkstoff.Stats(),
                 Werkstoff.Types.MATERIAL,
-                new Werkstoff.GenerationFeatures().disable().addCells(),
+                new Werkstoff.GenerationFeatures().disable()
+                    .addCells(),
                 id(),
                 TextureSet.SET_FLUID));
 

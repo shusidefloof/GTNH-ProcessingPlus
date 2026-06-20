@@ -60,10 +60,10 @@ import gregtech.api.logic.ProcessingLogic;
 import gregtech.api.metatileentity.implementations.MTEBasicMachine;
 import gregtech.api.metatileentity.implementations.MTEExtendedPowerMultiBlockBase;
 import gregtech.api.recipe.RecipeMap;
-import gregtech.api.structure.error.StructureError;
-import gregtech.api.structure.error.StructureErrorRegistry;
 import gregtech.api.recipe.check.CheckRecipeResult;
 import gregtech.api.render.TextureFactory;
+import gregtech.api.structure.error.StructureError;
+import gregtech.api.structure.error.StructureErrorRegistry;
 import gregtech.api.util.GTRecipe;
 import gregtech.api.util.MultiblockTooltipBuilder;
 import gregtech.api.util.tooltip.TooltipHelper;
@@ -574,8 +574,12 @@ public class MTE_SPC extends MTEExtendedPowerMultiBlockBase<MTE_SPC> implements 
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType("Spectral Photolithography Chamber, SPC")
-            .addInfo(EnumChatFormatting.GRAY + "Runs " + EnumChatFormatting.LIGHT_PURPLE
-                + "light-isolated photochemical" + EnumChatFormatting.GRAY + " processing.")
+            .addInfo(
+                EnumChatFormatting.GRAY + "Runs "
+                    + EnumChatFormatting.LIGHT_PURPLE
+                    + "light-isolated photochemical"
+                    + EnumChatFormatting.GRAY
+                    + " processing.")
             .addInfo(
                 TooltipHelper.coloredText("6", EnumChatFormatting.YELLOW) + EnumChatFormatting.GRAY
                     + " main station bays (left wall) + "

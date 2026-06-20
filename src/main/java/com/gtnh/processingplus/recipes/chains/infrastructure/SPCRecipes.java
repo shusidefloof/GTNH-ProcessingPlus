@@ -28,7 +28,7 @@ import gregtech.api.util.GTRecipe;
 public class SPCRecipes {
 
     // Voltage tier indices used in SPCRecipeData min-tier arrays
-    private static final int MV = 2, HV = 3, EV = 4, IV = 5,LuV = 6, ZPM = 7 ,UV = 8, UHV = 9, UEV = 10;
+    private static final int MV = 2, HV = 3, EV = 4, IV = 5, LuV = 6, ZPM = 7, UV = 8, UHV = 9, UEV = 10;
 
     public static void init() {
         casingRecipe();
@@ -408,68 +408,108 @@ public class SPCRecipes {
             AS = MachineType.ASSEMBLER, EL = MachineType.ELECTROLYZER;
 
         // Epoxy Advanced — IV photoresist (was EV)
-        premium(new ItemStack[] { ItemList.Circuit_Board_Epoxy.get(1), foil(Materials.Electrum, 8) },
-            new FluidStack[] { fluid(PrPMaterials.IVPhotoresist, 500) }, ItemList.Circuit_Board_Epoxy_Advanced.get(4),
-            3 * 20, TierEU.RECIPE_HV, new MachineType[] { CB, MX, LE, CB }, new int[] { HV, EV, HV, HV }, null);
+        premium(
+            new ItemStack[] { ItemList.Circuit_Board_Epoxy.get(1), foil(Materials.Electrum, 8) },
+            new FluidStack[] { fluid(PrPMaterials.IVPhotoresist, 500) },
+            ItemList.Circuit_Board_Epoxy_Advanced.get(4),
+            3 * 20,
+            TierEU.RECIPE_HV,
+            new MachineType[] { CB, MX, LE, CB },
+            new int[] { HV, EV, HV, HV },
+            null);
 
         // Fiberglass Advanced — LuV photoresist (was IV)
         premium(
             new ItemStack[] { ItemList.Circuit_Board_Fiberglass.get(1), foil(Materials.EnergeticAlloy, 12),
                 foil(Materials.Palladium, 4) },
             new FluidStack[] { fluid(PrPMaterials.LuVPhotoresist, 1000) },
-            ItemList.Circuit_Board_Fiberglass_Advanced.get(4), 3 * 20, TierEU.RECIPE_HV,
-            new MachineType[] { CB, LE, AS, CB }, new int[] { MV, HV, EV, HV }, null);
+            ItemList.Circuit_Board_Fiberglass_Advanced.get(4),
+            3 * 20,
+            TierEU.RECIPE_HV,
+            new MachineType[] { CB, LE, AS, CB },
+            new int[] { MV, HV, EV, HV },
+            null);
 
         // Multifiberglass — ZPM photoresist (was LuV)
-        premium(new ItemStack[] { ItemList.Circuit_Board_Fiberglass.get(2), foil(Materials.Iridium, 16) },
+        premium(
+            new ItemStack[] { ItemList.Circuit_Board_Fiberglass.get(2), foil(Materials.Iridium, 16) },
             new FluidStack[] { fluid(Materials.SulfuricAcid, 1000), fluid(PrPMaterials.ZPMPhotoresist, 500) },
-            ItemList.Circuit_Board_Multifiberglass.get(4), 3 * 20, TierEU.RECIPE_EV, new MachineType[] { CB, LE, CB },
-            new int[] { HV, IV, HV }, null);
+            ItemList.Circuit_Board_Multifiberglass.get(4),
+            3 * 20,
+            TierEU.RECIPE_EV,
+            new MachineType[] { CB, LE, CB },
+            new int[] { HV, IV, HV },
+            null);
 
         // Multifiberglass Elite — ZPM photoresist (was LuV)
-        premium(new ItemStack[] { ItemList.Circuit_Board_Multifiberglass.get(1), foil(Materials.Platinum, 8) },
+        premium(
+            new ItemStack[] { ItemList.Circuit_Board_Multifiberglass.get(1), foil(Materials.Platinum, 8) },
             new FluidStack[] { fluid(PrPMaterials.ZPMPhotoresist, 2000) },
-            ItemList.Circuit_Board_Multifiberglass_Elite.get(4), 4 * 20, TierEU.RECIPE_EV,
-            new MachineType[] { CB, LE, EL, CB }, new int[] { HV, LuV, LuV, HV }, null);
+            ItemList.Circuit_Board_Multifiberglass_Elite.get(4),
+            4 * 20,
+            TierEU.RECIPE_EV,
+            new MachineType[] { CB, LE, EL, CB },
+            new int[] { HV, LuV, LuV, HV },
+            null);
 
         // Wetware — UV photoresist (was ZPM)
         premium(
             new ItemStack[] { ItemList.Circuit_Board_Multifiberglass.get(2), foil(Materials.NiobiumTitanium, 16),
                 foil(Materials.NaquadahEnriched, 8), ItemList.Circuit_Parts_PetriDish.get(1) },
             new FluidStack[] { fluid(Materials.GrowthMediumSterilized, 500), fluid(PrPMaterials.UVPhotoresist, 1000) },
-            ItemList.Circuit_Board_Wetware.get(4), 4 * 20, TierEU.RECIPE_EV, new MachineType[] { CB, MX, LE, CB },
-            new int[] { HV, UV, UV, HV }, SPCModuleType.BIO);
+            ItemList.Circuit_Board_Wetware.get(4),
+            4 * 20,
+            TierEU.RECIPE_EV,
+            new MachineType[] { CB, MX, LE, CB },
+            new int[] { HV, UV, UV, HV },
+            SPCModuleType.BIO);
 
         // Wetware Extreme — UHV photoresist (was UV)
         premium(
             new ItemStack[] { ItemList.Circuit_Board_Wetware.get(1), foil(Materials.NiobiumTitanium, 64),
                 foil(Materials.Naquadah, 16) },
             new FluidStack[] { fluid(PrPMaterials.UHVPhotoresist, 5000) },
-            ItemList.Circuit_Board_Wetware_Extreme.get(4), 7 * 20, TierEU.RECIPE_LuV,
-            new MachineType[] { CB, EL, LE, CB }, new int[] { HV, UV, UV, UV }, SPCModuleType.BIO);
+            ItemList.Circuit_Board_Wetware_Extreme.get(4),
+            7 * 20,
+            TierEU.RECIPE_LuV,
+            new MachineType[] { CB, EL, LE, CB },
+            new int[] { HV, UV, UV, UV },
+            SPCModuleType.BIO);
 
         // Bio — UHV photoresist (was UV)
         premium(
             new ItemStack[] { ItemList.Circuit_Board_Wetware.get(2), foil(Materials.Neutronium, 16),
                 foil(Materials.SuperconductorUVBase, 8), ItemList.Circuit_Parts_PetriDish.get(4) },
             new FluidStack[] { fluid(Materials.BioMediumSterilized, 1000), fluid(PrPMaterials.UHVPhotoresist, 500) },
-            ItemList.Circuit_Board_Bio.get(4), 7 * 20, TierEU.RECIPE_UV, new MachineType[] { CB, MX, LE, CB },
-            new int[] { UV, UHV, UHV, UV }, SPCModuleType.BIO);
+            ItemList.Circuit_Board_Bio.get(4),
+            7 * 20,
+            TierEU.RECIPE_UV,
+            new MachineType[] { CB, MX, LE, CB },
+            new int[] { UV, UHV, UHV, UV },
+            SPCModuleType.BIO);
 
         // Bio Ultra — UEV photoresist (was UHV)
         premium(
             new ItemStack[] { ItemList.Circuit_Board_Bio.get(2), foil(Materials.Neutronium, 24),
                 foil(Materials.Osmium, 8), ItemList.Circuit_Parts_PetriDish.get(1) },
-            new FluidStack[] { fluid(PrPMaterials.UEVPhotoresist, 1000) }, ItemList.Circuit_Board_Bio_Ultra.get(4),
-            7 * 20, TierEU.RECIPE_EV, new MachineType[] { CB, MX, LE, CB }, new int[] { UV, UHV, UHV, UHV },
+            new FluidStack[] { fluid(PrPMaterials.UEVPhotoresist, 1000) },
+            ItemList.Circuit_Board_Bio_Ultra.get(4),
+            7 * 20,
+            TierEU.RECIPE_EV,
+            new MachineType[] { CB, MX, LE, CB },
+            new int[] { UV, UHV, UHV, UHV },
             SPCModuleType.BIO);
 
         // Optical — UIV photoresist (was UEV); base outputs 2, premium outputs 4. Gives UIV a use.
         premium(
             new ItemStack[] { GTNHPPItems.opticalBoardRaw(1), item("foilChromaticGlass", 16),
                 plate(Materials.MysteriousCrystal, 4) },
-            new FluidStack[] { fluid(PrPMaterials.UIVPhotoresist, 1000) }, ItemList.Circuit_Board_Optical.get(4),
-            7 * 20, TierEU.RECIPE_ZPM, new MachineType[] { LE, EL, CB, LE }, new int[] { UEV, UEV, UHV, UEV },
+            new FluidStack[] { fluid(PrPMaterials.UIVPhotoresist, 1000) },
+            ItemList.Circuit_Board_Optical.get(4),
+            7 * 20,
+            TierEU.RECIPE_ZPM,
+            new MachineType[] { LE, EL, CB, LE },
+            new int[] { UEV, UEV, UHV, UEV },
             SPCModuleType.CRYO);
     }
 

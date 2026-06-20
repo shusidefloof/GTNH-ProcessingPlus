@@ -176,7 +176,6 @@ public class AerogelRecipes {
             .addTo(GTNHPPRecipeMaps.sSCDRecipes);
     }
 
-
     // =========================================================
     // 5. Supercritical CO2 drying — liquid CO2 from the CSC goes supercritical inside the dryer and
     // extracts the pore acetone without surface tension collapsing the network. Both the CO2 (as gas)
@@ -187,8 +186,7 @@ public class AerogelRecipes {
         GTValues.RA.stdBuilder()
             .itemInputs(dust(PrPMaterials.AcetoneSaturatedGel, 4))
             .fluidInputs(fluid(PrPMaterials.LiquidCO2, 8000))
-            .fluidOutputs(fluid(Materials.CarbonDioxide, 8000),
-                fluid(Materials.Acetone, 3500))
+            .fluidOutputs(fluid(Materials.CarbonDioxide, 8000), fluid(Materials.Acetone, 3500))
             .itemOutputs(plate(PrPMaterials.SilicaAerogel, 2))
             .duration(1000)
             .eut(TierEU.RECIPE_HV)

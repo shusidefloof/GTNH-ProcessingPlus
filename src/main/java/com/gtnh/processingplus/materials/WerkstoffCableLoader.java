@@ -30,7 +30,6 @@ public final class WerkstoffCableLoader {
     private static final float[] WIRE_THICK = { 0.125F, 0.25F, 0.375F, 0.5F, 0.625F, 0.75F };
     private static final float[] CABLE_THICK = { 0.25F, 0.375F, 0.5F, 0.625F, 0.75F, 0.875F };
 
-
     private WerkstoffCableLoader() {}
 
     /**

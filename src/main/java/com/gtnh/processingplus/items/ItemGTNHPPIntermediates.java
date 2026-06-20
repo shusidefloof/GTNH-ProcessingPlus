@@ -15,7 +15,8 @@ import cpw.mods.fml.relauncher.SideOnly;
  * One shared item holding every single-use chain intermediate as a metadata sub-item (see
  * {@link Intermediate}). One item id + one texture folder replaces ~47 individual Werkstoffe.
  *
- * <p>Mirrors {@code BlockGTNHPPCasings}: per-meta display names and per-meta icons registered in a
+ * <p>
+ * Mirrors {@code BlockGTNHPPCasings}: per-meta display names and per-meta icons registered in a
  * loop. Textures live at {@code assets/gtnhprp/textures/items/intermediates/<reg>.png}.
  */
 public class ItemGTNHPPIntermediates extends Item {
@@ -51,8 +52,8 @@ public class ItemGTNHPPIntermediates extends Item {
         Intermediate[] values = Intermediate.values();
         icons = new IIcon[values.length];
         for (int i = 0; i < values.length; i++) {
-            icons[i] = register.registerIcon(
-                USE_PLACEHOLDERS ? placeholderIcon(values[i]) : "gtnhprp:intermediates/" + values[i].reg);
+            icons[i] = register
+                .registerIcon(USE_PLACEHOLDERS ? placeholderIcon(values[i]) : "gtnhprp:intermediates/" + values[i].reg);
         }
     }
 
@@ -66,9 +67,12 @@ public class ItemGTNHPPIntermediates extends Item {
         if (s.contains("adamantium") || s.contains("clump") || s.contains("compact") || s.contains("sintering"))
             return "minecraft:iron_ingot";
         if (s.contains("concentrate") || s.contains("ore")) return "minecraft:redstone_dust";
-        if (s.contains("film") || s.contains("triflate") || s.contains("salt") || s.contains("sulfate")
-            || s.contains("acetate") || s.contains("oxime") || s.contains("acid"))
-            return "minecraft:paper";
+        if (s.contains("film") || s.contains("triflate")
+            || s.contains("salt")
+            || s.contains("sulfate")
+            || s.contains("acetate")
+            || s.contains("oxime")
+            || s.contains("acid")) return "minecraft:paper";
         // powders / oxides / slags / residues / blends / carbide / nitride / default → grey dust
         return "minecraft:gunpowder";
     }

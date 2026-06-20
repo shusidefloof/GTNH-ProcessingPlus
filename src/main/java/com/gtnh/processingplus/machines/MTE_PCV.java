@@ -1,5 +1,6 @@
 package com.gtnh.processingplus.machines;
 
+import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlock;
 import static gregtech.api.enums.HatchElement.Energy;
 import static gregtech.api.enums.HatchElement.InputBus;
 import static gregtech.api.enums.HatchElement.InputHatch;
@@ -12,7 +13,6 @@ import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_LARGE_CHEMICA
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_LARGE_CHEMICAL_REACTOR_ACTIVE_GLOW;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_LARGE_CHEMICAL_REACTOR_GLOW;
 import static gregtech.api.enums.Textures.BlockIcons.casingTexturePages;
-import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlock;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
 
 import java.util.List;
@@ -23,7 +23,6 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import bartworks.system.material.Werkstoff;
 import com.gtnewhorizon.structurelib.alignment.constructable.ISurvivalConstructable;
 import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.IStructureElement;
@@ -35,6 +34,7 @@ import com.gtnh.processingplus.blocks.GTNHPPBlocks;
 import com.gtnh.processingplus.materials.PrPMaterials;
 import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
 
+import bartworks.system.material.Werkstoff;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -43,12 +43,12 @@ import gregtech.api.enums.SoundResource;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
-import gregtech.api.metatileentity.implementations.MTEExtendedPowerMultiBlockBase;
 import gregtech.api.logic.ProcessingLogic;
+import gregtech.api.metatileentity.implementations.MTEExtendedPowerMultiBlockBase;
 import gregtech.api.recipe.RecipeMap;
+import gregtech.api.render.TextureFactory;
 import gregtech.api.structure.error.StructureError;
 import gregtech.api.structure.error.StructureErrorRegistry;
-import gregtech.api.render.TextureFactory;
 import gregtech.api.util.MultiblockTooltipBuilder;
 
 public class MTE_PCV extends MTEExtendedPowerMultiBlockBase<MTE_PCV> implements ISurvivalConstructable {
@@ -85,131 +85,50 @@ public class MTE_PCV extends MTEExtendedPowerMultiBlockBase<MTE_PCV> implements 
                     // Controller (~) at slice 0, row 9, col 4.
                     new String[][] {
                         // z=0 — front face (controller column)
-                        { "                ",
-                          "                ",
-                          "                ",
-                          "                ",
-                          "                ",
-                          "                ",
-                          "                ",
-                          "  DJ JD         ",
-                          "  DEEED         ",
-                          "  DE~ED         ",
-                          "  DEEED         ",
-                          "  DJ JD         ",
-                          "  D   D         " },
+                        { "                ", "                ", "                ", "                ",
+                            "                ", "                ", "                ", "  DJ JD         ",
+                            "  DEEED         ", "  DE~ED         ", "  DEEED         ", "  DJ JD         ",
+                            "  D   D         " },
                         // z=1
-                        { "                ",
-                          "                ",
-                          "   NNN          ",
-                          "   GNG          ",
-                          "   G G          ",
-                          "   G G          ",
-                          "  DJ JD         ",
-                          " Q RQR Q        ",
-                          " Q RRR Q        ",
-                          " Q RRR Q        ",
-                          " Q RRR Q        ",
-                          " Q RQR Q        ",
-                          "  QJ JQ         " },
+                        { "                ", "                ", "   NNN          ", "   GNG          ",
+                            "   G G          ", "   G G          ", "  DJ JD         ", " Q RQR Q        ",
+                            " Q RRR Q        ", " Q RRR Q        ", " Q RRR Q        ", " Q RQR Q        ",
+                            "  QJ JQ         " },
                         // z=2
-                        { "                ",
-                          "   NNN          ",
-                          "  DG GD         ",
-                          "  DG GD         ",
-                          "  DKQKD         ",
-                          "  DIBID         ",
-                          " DDRQRDD        ",
-                          "D P   P D   QQQ ",
-                          "D P   P D   IAI ",
-                          "D P   P D   IAI ",
-                          "D P   P D  DIAID",
-                          "D P   P D  DQQQD",
-                          "DQQPQPQQD  DQQQD" },
+                        { "                ", "   NNN          ", "  DG GD         ", "  DG GD         ",
+                            "  DKQKD         ", "  DIBID         ", " DDRQRDD        ", "D P   P D   QQQ ",
+                            "D P   P D   IAI ", "D P   P D   IAI ", "D P   P D  DIAID", "D P   P D  DQQQD",
+                            "DQQPQPQQD  DQQQD" },
                         // z=3
-                        { "   DND          ",
-                          "  NSOSN         ",
-                          " NGC CGN        ",
-                          " GGC CGG        ",
-                          " GKS SKG        ",
-                          " GIBMBIG        ",
-                          " JRRLRRJ    QQQ ",
-                          "JR     RJ  QQJQQ",
-                          "JR     RJ  IB BI",
-                          "JR     RJNNIH HI",
-                          "JR     RJ  IH HI",
-                          "JR     RJ  QB BQ",
-                          " JPPPPPJ   QQJQQ" },
+                        { "   DND          ", "  NSOSN         ", " NGC CGN        ", " GGC CGG        ",
+                            " GKS SKG        ", " GIBMBIG        ", " JRRLRRJ    QQQ ", "JR     RJ  QQJQQ",
+                            "JR     RJ  IB BI", "JR     RJNNIH HI", "JR     RJ  IH HI", "JR     RJ  QB BQ",
+                            " JPPPPPJ   QQJQQ" },
                         // z=4 — centre slice
-                        { "   NNN          ",
-                          "  NOOON         ",
-                          " N  F  N        ",
-                          " N  F  N        ",
-                          "  Q F Q         ",
-                          "  BMFMB         ",
-                          "  QLLLQ     QQQ ",
-                          " Q     Q   QJJJQ",
-                          " R     RBNNQ   A",
-                          " R     RBOOO   A",
-                          " R     R NNQ   A",
-                          " Q     Q   Q   Q",
-                          "  QPPPQ    QJJJQ" },
+                        { "   NNN          ", "  NOOON         ", " N  F  N        ", " N  F  N        ",
+                            "  Q F Q         ", "  BMFMB         ", "  QLLLQ     QQQ ", " Q     Q   QJJJQ",
+                            " R     RBNNQ   A", " R     RBOOO   A", " R     R NNQ   A", " Q     Q   Q   Q",
+                            "  QPPPQ    QJJJQ" },
                         // z=5 (mirror of z=3)
-                        { "   DND          ",
-                          "  NSOSN         ",
-                          " NGC CGN        ",
-                          " GGC CGG        ",
-                          " GKS SKG        ",
-                          " GIBMBIG        ",
-                          " JRRLRRJ    QQQ ",
-                          "JR     RJ  QQJQQ",
-                          "JR     RJ  IB BI",
-                          "JR     RJNNIH HI",
-                          "JR     RJ  IH HI",
-                          "JR     RJ  QB BQ",
-                          " JPPPPPJ   QQJQQ" },
+                        { "   DND          ", "  NSOSN         ", " NGC CGN        ", " GGC CGG        ",
+                            " GKS SKG        ", " GIBMBIG        ", " JRRLRRJ    QQQ ", "JR     RJ  QQJQQ",
+                            "JR     RJ  IB BI", "JR     RJNNIH HI", "JR     RJ  IH HI", "JR     RJ  QB BQ",
+                            " JPPPPPJ   QQJQQ" },
                         // z=6 (mirror of z=2)
-                        { "                ",
-                          "   NNN          ",
-                          "  DG GD         ",
-                          "  DG GD         ",
-                          "  DKQKD         ",
-                          "  DIBID         ",
-                          " DDRQRDD        ",
-                          "D P   P D   QQQ ",
-                          "D P   P D   IAI ",
-                          "D P   P D   IAI ",
-                          "D P   P D  DIAID",
-                          "D P   P D  DQQQD",
-                          "DQQPQPQQD  DQQQD" },
+                        { "                ", "   NNN          ", "  DG GD         ", "  DG GD         ",
+                            "  DKQKD         ", "  DIBID         ", " DDRQRDD        ", "D P   P D   QQQ ",
+                            "D P   P D   IAI ", "D P   P D   IAI ", "D P   P D  DIAID", "D P   P D  DQQQD",
+                            "DQQPQPQQD  DQQQD" },
                         // z=7 (mirror of z=1)
-                        { "                ",
-                          "                ",
-                          "   NNN          ",
-                          "   GNG          ",
-                          "   G G          ",
-                          "   G G          ",
-                          "  DJ JD         ",
-                          " Q RQR Q        ",
-                          " Q RRR Q        ",
-                          " Q RRR Q        ",
-                          " Q RRR Q        ",
-                          " Q RQR Q        ",
-                          "  QJ JQ         " },
+                        { "                ", "                ", "   NNN          ", "   GNG          ",
+                            "   G G          ", "   G G          ", "  DJ JD         ", " Q RQR Q        ",
+                            " Q RRR Q        ", " Q RRR Q        ", " Q RRR Q        ", " Q RQR Q        ",
+                            "  QJ JQ         " },
                         // z=8 — back face
-                        { "                ",
-                          "                ",
-                          "                ",
-                          "                ",
-                          "                ",
-                          "                ",
-                          "                ",
-                          "  DJ JD         ",
-                          "  DJ JD         ",
-                          "  DJ JD         ",
-                          "  DJ JD         ",
-                          "  DJ JD         ",
-                          "  D   D         " }, })
+                        { "                ", "                ", "                ", "                ",
+                            "                ", "                ", "                ", "  DJ JD         ",
+                            "  DJ JD         ", "  DJ JD         ", "  DJ JD         ", "  DJ JD         ",
+                            "  D   D         " }, })
                 // --- PCV casing (solid structural; hatches go on the Carbon Fiber Composite casing instead) ---
                 .addElement('P', ofBlock(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.PCV_CASING))
                 // --- GregTech blocks ---
@@ -257,7 +176,8 @@ public class MTE_PCV extends MTEExtendedPowerMultiBlockBase<MTE_PCV> implements 
     private static IStructureElement<MTE_PCV> fb(String modid, String name, int meta) {
         Block b = GameRegistry.findBlock(modid, name);
         if (b == null) {
-            GTNHProcessingPlus.LOG.warn("PCV structure: block {}:{} not found — using PCV casing placeholder.", modid, name);
+            GTNHProcessingPlus.LOG
+                .warn("PCV structure: block {}:{} not found — using PCV casing placeholder.", modid, name);
             return ofBlock(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.PCV_CASING);
         }
         return ofBlock(b, meta);
@@ -270,12 +190,15 @@ public class MTE_PCV extends MTEExtendedPowerMultiBlockBase<MTE_PCV> implements 
     private static IStructureElement<MTE_PCV> werkstoffBlock(Werkstoff w) {
         ItemStack s = w.get(OrePrefixes.block, 1);
         if (s == null || s.getItem() == null) {
-            GTNHProcessingPlus.LOG.warn("PCV structure: block form of {} not found — using PCV casing placeholder.", w.getDefaultName());
+            GTNHProcessingPlus.LOG
+                .warn("PCV structure: block form of {} not found — using PCV casing placeholder.", w.getDefaultName());
             return ofBlock(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.PCV_CASING);
         }
         Block b = Block.getBlockFromItem(s.getItem());
         if (b == null) {
-            GTNHProcessingPlus.LOG.warn("PCV structure: block form of {} resolved to null — using PCV casing placeholder.", w.getDefaultName());
+            GTNHProcessingPlus.LOG.warn(
+                "PCV structure: block form of {} resolved to null — using PCV casing placeholder.",
+                w.getDefaultName());
             return ofBlock(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.PCV_CASING);
         }
         return ofBlock(b, s.getItemDamage());
@@ -347,12 +270,18 @@ public class MTE_PCV extends MTEExtendedPowerMultiBlockBase<MTE_PCV> implements 
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType("Polycondensation Vessel, PCV")
-            .addInfo(EnumChatFormatting.GRAY + "Runs " + EnumChatFormatting.AQUA + "vacuum-assisted polymerization"
-                + EnumChatFormatting.GRAY + " reactions.")
+            .addInfo(
+                EnumChatFormatting.GRAY + "Runs "
+                    + EnumChatFormatting.AQUA
+                    + "vacuum-assisted polymerization"
+                    + EnumChatFormatting.GRAY
+                    + " reactions.")
             .beginStructureBlock(16, 13, 9, true)
             .addController("Front face, main column")
             .addCasingInfoMin("Chemically Inert Reaction Vessel (PCV casing)", 20, false)
-            .addOtherStructurePart("Pm Betavoltaic Alloy blocks, Inconel-792 frames, GT casings & frames", "Per structure hologram")
+            .addOtherStructurePart(
+                "Pm Betavoltaic Alloy blocks, Inconel-792 frames, GT casings & frames",
+                "Per structure hologram")
             .addInputBus("Any Carbon Fiber Composite casing", 1)
             .addInputHatch("Any Carbon Fiber Composite casing", 1)
             .addOutputBus("Any Carbon Fiber Composite casing", 1)

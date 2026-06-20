@@ -61,8 +61,10 @@ public class SPURecipes {
                 ItemList.Robot_Arm_UV.get(16),
                 plate(Materials.Naquadria, 64),
                 GTOreDictUnificator.get(OrePrefixes.circuit, Materials.UV, 24),
-                GTOreDictUnificator.get(OrePrefixes.cableGt16, Materials.SuperconductorUV, 16))
-            .fluidInputs(fluid("molten.indalloy140", 18432), molten(Materials.Naquadria, 13824),
+                item("wireGt01SuperconductorUV", 16))
+            .fluidInputs(
+                fluid("molten.indalloy140", 18432),
+                molten(Materials.Naquadria, 13824),
                 molten(Materials.Naquadah, 4608))
             .itemOutputs(GTNHPPBlocks.SPU.getStackForm(1))
             .eut(TierEU.RECIPE_UIV)

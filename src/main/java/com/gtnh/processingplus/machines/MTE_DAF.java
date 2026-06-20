@@ -1,6 +1,5 @@
 package com.gtnh.processingplus.machines;
 
-import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlock;
 import static gregtech.api.enums.HatchElement.Energy;
 import static gregtech.api.enums.HatchElement.InputBus;
 import static gregtech.api.enums.HatchElement.InputHatch;
@@ -118,7 +117,16 @@ public class MTE_DAF extends MTEExtendedPowerMultiBlockBase<MTE_DAF> implements 
     @Override
     public int survivalConstruct(ItemStack stackSize, int elementBudget, ISurvivalBuildEnvironment env) {
         if (mMachine) return -1;
-        return survivalBuildPiece(STRUCTURE_PIECE_MAIN, stackSize, OFFSET_X, OFFSET_Y, OFFSET_Z, elementBudget, env, false, true);
+        return survivalBuildPiece(
+            STRUCTURE_PIECE_MAIN,
+            stackSize,
+            OFFSET_X,
+            OFFSET_Y,
+            OFFSET_Z,
+            elementBudget,
+            env,
+            false,
+            true);
     }
 
     // ── Validation ───────────────────────────────────────────────────────────────
@@ -144,7 +152,8 @@ public class MTE_DAF extends MTEExtendedPowerMultiBlockBase<MTE_DAF> implements 
     // ── Mode toggle ──────────────────────────────────────────────────────────────
 
     @Override
-    public void onScrewdriverRightClick(ForgeDirection side, EntityPlayer aPlayer, float aX, float aY, float aZ, ItemStack aStack) {
+    public void onScrewdriverRightClick(ForgeDirection side, EntityPlayer aPlayer, float aX, float aY, float aZ,
+        ItemStack aStack) {
         mIsOxidizing = !mIsOxidizing;
         GTUtility.sendChatToPlayer(aPlayer, "DAF atmosphere: " + (mIsOxidizing ? "Oxidizing (O2)" : "Inert (N2/Ar)"));
     }
@@ -198,10 +207,18 @@ public class MTE_DAF extends MTEExtendedPowerMultiBlockBase<MTE_DAF> implements 
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType("Dual Atmosphere Furnace, DAF")
             .addInfo(EnumChatFormatting.GRAY + "Sealed reaction chamber with switchable atmosphere.")
-            .addInfo(EnumChatFormatting.AQUA + "Screwdriver" + EnumChatFormatting.GRAY
-                + " toggles between " + EnumChatFormatting.RED + "Oxidizing (O₂)"
-                + EnumChatFormatting.GRAY + " and " + EnumChatFormatting.AQUA + "Inert (N₂/Ar)"
-                + EnumChatFormatting.GRAY + " mode.")
+            .addInfo(
+                EnumChatFormatting.AQUA + "Screwdriver"
+                    + EnumChatFormatting.GRAY
+                    + " toggles between "
+                    + EnumChatFormatting.RED
+                    + "Oxidizing (O₂)"
+                    + EnumChatFormatting.GRAY
+                    + " and "
+                    + EnumChatFormatting.AQUA
+                    + "Inert (N₂/Ar)"
+                    + EnumChatFormatting.GRAY
+                    + " mode.")
             .beginStructureBlock(5, 5, 5, true)
             .addController("Centre of the front face")
             .addCasingInfoMin("Dual-Sealed Atmosphere Casing", 20, false)
@@ -222,13 +239,16 @@ public class MTE_DAF extends MTEExtendedPowerMultiBlockBase<MTE_DAF> implements 
     public String[] getInfoData() {
         return new String[] {
             StatCollector.translateToLocal("GT5U.multiblock.Progress") + ": "
-                + EnumChatFormatting.GREEN + mProgresstime / 20
-                + EnumChatFormatting.RESET + " s / "
-                + EnumChatFormatting.YELLOW + mMaxProgresstime / 20
-                + EnumChatFormatting.RESET + " s",
-            "Atmosphere: " + (mIsOxidizing
-                ? EnumChatFormatting.RED + "Oxidizing"
-                : EnumChatFormatting.AQUA + "Inert") };
+                + EnumChatFormatting.GREEN
+                + mProgresstime / 20
+                + EnumChatFormatting.RESET
+                + " s / "
+                + EnumChatFormatting.YELLOW
+                + mMaxProgresstime / 20
+                + EnumChatFormatting.RESET
+                + " s",
+            "Atmosphere: "
+                + (mIsOxidizing ? EnumChatFormatting.RED + "Oxidizing" : EnumChatFormatting.AQUA + "Inert") };
     }
 
     // ── Sound / flags ────────────────────────────────────────────────────────────
@@ -240,11 +260,17 @@ public class MTE_DAF extends MTEExtendedPowerMultiBlockBase<MTE_DAF> implements 
     }
 
     @Override
-    public boolean supportsInputSeparation() { return true; }
+    public boolean supportsInputSeparation() {
+        return true;
+    }
 
     @Override
-    public boolean supportsSingleRecipeLocking() { return true; }
+    public boolean supportsSingleRecipeLocking() {
+        return true;
+    }
 
     @Override
-    public boolean supportsVoidProtection() { return true; }
+    public boolean supportsVoidProtection() {
+        return true;
+    }
 }

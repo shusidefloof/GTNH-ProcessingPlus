@@ -38,8 +38,8 @@ public class CACRecipes {
      * Gating it here would soft-lock progression, so it stays on its stock assembler recipe. The CAC
      * only takes the genuinely post-UHV conductors (SuperconductorUHV and up).
      */
-    private static final Materials[] CAC_SUPERCONDUCTORS = { Materials.SuperconductorUHV,
-        Materials.SuperconductorUEV, Materials.SuperconductorUIV, Materials.SuperconductorUMV };
+    private static final Materials[] CAC_SUPERCONDUCTORS = { Materials.SuperconductorUHV, Materials.SuperconductorUEV,
+        Materials.SuperconductorUIV, Materials.SuperconductorUMV };
 
     public static void init() {
         casingRecipes();
@@ -95,8 +95,11 @@ public class CACRecipes {
                 ItemList.Electric_Piston_UHV.get(32),
                 ItemList.Electric_Pump_UHV.get(32),
                 GTOreDictUnificator.get(OrePrefixes.circuit, Materials.UV, 16),
-                GTOreDictUnificator.get(OrePrefixes.cableGt08, Materials.SuperconductorUV, 8))
-            .fluidInputs(fluid("molten.indalloy140",  11520), PrPMaterials.PrometheanNaquadria.getMolten(10368), molten(Materials.SuperconductorUVBase, 2304))
+                item("wireGt01SuperconductorUV", 8))
+            .fluidInputs(
+                fluid("molten.indalloy140", 11520),
+                PrPMaterials.PrometheanNaquadria.getMolten(10368),
+                molten(Materials.SuperconductorUVBase, 2304))
             .itemOutputs(GTNHPPBlocks.CAC.getStackForm(1))
             .eut(TierEU.RECIPE_UHV)
             .duration(60 * SECONDS)

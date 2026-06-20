@@ -35,12 +35,12 @@ import gregtech.api.enums.SoundResource;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
-import gregtech.api.metatileentity.implementations.MTEExtendedPowerMultiBlockBase;
 import gregtech.api.logic.ProcessingLogic;
+import gregtech.api.metatileentity.implementations.MTEExtendedPowerMultiBlockBase;
 import gregtech.api.recipe.RecipeMap;
+import gregtech.api.render.TextureFactory;
 import gregtech.api.structure.error.StructureError;
 import gregtech.api.structure.error.StructureErrorRegistry;
-import gregtech.api.render.TextureFactory;
 import gregtech.api.util.MultiblockTooltipBuilder;
 import gregtech.api.util.tooltip.TooltipHelper;
 
@@ -80,8 +80,7 @@ public class MTE_SPU extends MTEExtendedPowerMultiBlockBase<MTE_SPU> implements 
                     STRUCTURE_PIECE_MAIN,
                     // shape[z][y][x] — 5×5×5. 'U' = Subatomic Patterning Casing or hatch, 'S' = Spectral
                     // Isolation Casing (central patterning-beam lattice column), ' ' = void
-                    new String[][] {
-                        { "UUUUU", "UUUUU", "UU~UU", "UUUUU", "UUUUU" },
+                    new String[][] { { "UUUUU", "UUUUU", "UU~UU", "UUUUU", "UUUUU" },
                         { "UUUUU", "U   U", "U S U", "U   U", "UUUUU" },
                         { "UUUUU", "U   U", "U S U", "U   U", "UUUUU" },
                         { "UUUUU", "U   U", "U S U", "U   U", "UUUUU" },
@@ -165,8 +164,12 @@ public class MTE_SPU extends MTEExtendedPowerMultiBlockBase<MTE_SPU> implements 
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType("Subatomic Patterning Unit, SPU")
-            .addInfo(EnumChatFormatting.GRAY + "Patterns matter at the " + EnumChatFormatting.LIGHT_PURPLE
-                + "subatomic scale" + EnumChatFormatting.GRAY + ".")
+            .addInfo(
+                EnumChatFormatting.GRAY + "Patterns matter at the "
+                    + EnumChatFormatting.LIGHT_PURPLE
+                    + "subatomic scale"
+                    + EnumChatFormatting.GRAY
+                    + ".")
             .addSeparator()
             .addInfo(
                 EnumChatFormatting.GOLD + "Patterning column: "

@@ -83,7 +83,7 @@ public class HBNRecipes {
             .fluidInputs(fluid(Materials.Nitrogen, 16000), fluid(Materials.Argon, 8000))
             .itemOutputs(dust(PrPMaterials.HBNPowderBlend, 8))
             .fluidOutputs(fluid(Materials.NitricOxide, 3000), fluid(Materials.Oxygen, 1500))
-            .duration(7*20)
+            .duration(7 * 20)
             .eut(TierEU.RECIPE_LuV)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }

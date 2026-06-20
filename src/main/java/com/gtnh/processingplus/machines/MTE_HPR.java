@@ -106,238 +106,124 @@ public class MTE_HPR extends MTEExtendedPowerMultiBlockBase<MTE_HPR> implements 
             STRUCTURE_DEFINITION = StructureDefinition.<MTE_HPR>builder()
                 .addShape(
                     STRUCTURE_PIECE_MAIN,
-                    new String[][] {
-                        { // z=0 — outer frame ring (pressure walls only)
-                            "                             ",
-                            "              D              ",
-                            "             D D             ",
-                            "            D   D            ",
-                            "             D D             ",
-                            "              D              ",
-                            "                             ",
-                            "                             ",
-                            "                             ",
-                            "                             ",
-                            "                             ",
-                            "                             ",
-                            "   D          D          D   ",
-                            "  D D        DCD        D D  ",
-                            " D   D      DC CD      D   D ",
-                            "  D D        DCD        D D  ",
-                            "   D          D          D   ",
-                            "                             ",
-                            "                             ",
-                            "                             ",
-                            "                             ",
-                            "                             ",
-                            "                             ",
-                            "              D              ",
-                            "             D D             ",
-                            "            D   D            ",
-                            "             D D             ",
-                            "              D              ",
-                            "                             "
-                        },
+                    new String[][] { { // z=0 — outer frame ring (pressure walls only)
+                        "                             ", "              D              ",
+                        "             D D             ", "            D   D            ",
+                        "             D D             ", "              D              ",
+                        "                             ", "                             ",
+                        "                             ", "                             ",
+                        "                             ", "                             ",
+                        "   D          D          D   ", "  D D        DCD        D D  ",
+                        " D   D      DC CD      D   D ", "  D D        DCD        D D  ",
+                        "   D          D          D   ", "                             ",
+                        "                             ", "                             ",
+                        "                             ", "                             ",
+                        "                             ", "              D              ",
+                        "             D D             ", "            D   D            ",
+                        "             D D             ", "              D              ",
+                        "                             " },
                         { // z=1 — front vessel faces; controller (~) at row 14 col 14
-                            "              D              ",
-                            "             BFB             ",
-                            "            BFFFB            ",
-                            "           DFFFFFD           ",
-                            "            BFFFB            ",
-                            "             BFB             ",
-                            "              D              ",
-                            "                             ",
-                            "                             ",
-                            "                             ",
-                            "                             ",
-                            "   D          D          D   ",
-                            "  BFB        BFB        BFB  ",
-                            " BFFFB      BFFFB      BFFFB ",
-                            "DFFFFFD    DFF~FFD    DFFFFFD",
-                            " BFFFB      BFFFB      BFFFB ",
-                            "  BFB        BFB        BFB  ",
-                            "   D          D          D   ",
-                            "                             ",
-                            "                             ",
-                            "                             ",
-                            "                             ",
-                            "              D              ",
-                            "             BFB             ",
-                            "            BFFFB            ",
-                            "           DFFFFFD           ",
-                            "            BFFFB            ",
-                            "             BFB             ",
-                            "              D              "
-                        },
+                            "              D              ", "             BFB             ",
+                            "            BFFFB            ", "           DFFFFFD           ",
+                            "            BFFFB            ", "             BFB             ",
+                            "              D              ", "                             ",
+                            "                             ", "                             ",
+                            "                             ", "   D          D          D   ",
+                            "  BFB        BFB        BFB  ", " BFFFB      BFFFB      BFFFB ",
+                            "DFFFFFD    DFF~FFD    DFFFFFD", " BFFFB      BFFFB      BFFFB ",
+                            "  BFB        BFB        BFB  ", "   D          D          D   ",
+                            "                             ", "                             ",
+                            "                             ", "                             ",
+                            "              D              ", "             BFB             ",
+                            "            BFFFB            ", "           DFFFFFD           ",
+                            "            BFFFB            ", "             BFB             ",
+                            "              D              " },
                         { // z=2 — glass conduit connections
-                            "             D D             ",
-                            "            BFFFB            ",
-                            "           DF   FD           ",
-                            "        DCCCF   FCCCD        ",
-                            "           DF   FD           ",
-                            "            BFFFB            ",
-                            "             D D             ",
-                            "              C              ",
-                            "   D          C          D   ",
-                            "   C          C          C   ",
-                            "   C          C          C   ",
-                            "  DCD        DCD        DCD  ",
-                            " BFFFB      BFFFB      BFFFB ",
-                            "DF   FD    DF   FD    DF   FD",
-                            " F   F CCCCCF   FCCCCC F   F ",
-                            "DF   FD    DF   FD    DF   FD",
-                            " BFFFB      BFFFB      BFFFB ",
-                            "  DCD        DCD        DCD  ",
-                            "   C          C          C   ",
-                            "   C          C          C   ",
-                            "   D          C          D   ",
-                            "              C              ",
-                            "             D D             ",
-                            "            BFFFB            ",
-                            "           DF   FD           ",
-                            "        DCCCF   FCCCD        ",
-                            "           DF   FD           ",
-                            "            BFFFB            ",
-                            "             D D             "
-                        },
+                            "             D D             ", "            BFFFB            ",
+                            "           DF   FD           ", "        DCCCF   FCCCD        ",
+                            "           DF   FD           ", "            BFFFB            ",
+                            "             D D             ", "              C              ",
+                            "   D          C          D   ", "   C          C          C   ",
+                            "   C          C          C   ", "  DCD        DCD        DCD  ",
+                            " BFFFB      BFFFB      BFFFB ", "DF   FD    DF   FD    DF   FD",
+                            " F   F CCCCCF   FCCCCC F   F ", "DF   FD    DF   FD    DF   FD",
+                            " BFFFB      BFFFB      BFFFB ", "  DCD        DCD        DCD  ",
+                            "   C          C          C   ", "   C          C          C   ",
+                            "   D          C          D   ", "              C              ",
+                            "             D D             ", "            BFFFB            ",
+                            "           DF   FD           ", "        DCCCF   FCCCD        ",
+                            "           DF   FD           ", "            BFFFB            ",
+                            "             D D             " },
                         { // z=3 — central reaction core with FRF coils and radiation frames
-                            "            D   D            ",
-                            "           DFFFFFD           ",
-                            "        DCCCF   FCCCD        ",
-                            "      BBBAAAF   FAAABBB      ",
-                            "     BB DCCCF   FCCCD BB     ",
-                            "    BB     DFFFFFD     BB    ",
-                            "   BB       D   D       BB   ",
-                            "   B         CEC         B   ",
-                            "  DBD        CEC        DBD  ",
-                            "  CAC        CEC        CAC  ",
-                            "  CAC        CEC        CAC  ",
-                            " DCACD      DCECD      DCACD ",
-                            "DFFFFFD    DFFFFFD    DFFFFFD",
-                            " F   F CCCCCF   FCCCCC F   F ",
-                            " F   F EEEEEF   FEEEEE F   F ",
-                            " F   F CCCCCF   FCCCCC F   F ",
-                            "DFFFFFD    DFFFFFD    DFFFFFD",
-                            " DCACD      DCECD      DCACD ",
-                            "  CAC        CEC        CAC  ",
-                            "  CAC        CEC        CAC  ",
-                            "  DBD        CEC        DBD  ",
-                            "   B         CEC         B   ",
-                            "   BB       D   D       BB   ",
-                            "    BB     DFFFFFD     BB    ",
-                            "     BB DCCCF   FCCCD BB     ",
-                            "      BBBAAAF   FAAABBB      ",
-                            "        DCCCF   FCCCD        ",
-                            "           DFFFFFD           ",
-                            "            D   D            "
-                        },
+                            "            D   D            ", "           DFFFFFD           ",
+                            "        DCCCF   FCCCD        ", "      BBBAAAF   FAAABBB      ",
+                            "     BB DCCCF   FCCCD BB     ", "    BB     DFFFFFD     BB    ",
+                            "   BB       D   D       BB   ", "   B         CEC         B   ",
+                            "  DBD        CEC        DBD  ", "  CAC        CEC        CAC  ",
+                            "  CAC        CEC        CAC  ", " DCACD      DCECD      DCACD ",
+                            "DFFFFFD    DFFFFFD    DFFFFFD", " F   F CCCCCF   FCCCCC F   F ",
+                            " F   F EEEEEF   FEEEEE F   F ", " F   F CCCCCF   FCCCCC F   F ",
+                            "DFFFFFD    DFFFFFD    DFFFFFD", " DCACD      DCECD      DCACD ",
+                            "  CAC        CEC        CAC  ", "  CAC        CEC        CAC  ",
+                            "  DBD        CEC        DBD  ", "   B         CEC         B   ",
+                            "   BB       D   D       BB   ", "    BB     DFFFFFD     BB    ",
+                            "     BB DCCCF   FCCCD BB     ", "      BBBAAAF   FAAABBB      ",
+                            "        DCCCF   FCCCD        ", "           DFFFFFD           ",
+                            "            D   D            " },
                         { // z=4 — mirror of z=2
-                            "             D D             ",
-                            "            BFFFB            ",
-                            "           DF   FD           ",
-                            "        DCCCF   FCCCD        ",
-                            "           DF   FD           ",
-                            "            BFFFB            ",
-                            "             D D             ",
-                            "              C              ",
-                            "   D          C          D   ",
-                            "   C          C          C   ",
-                            "   C          C          C   ",
-                            "  DCD        DCD        DCD  ",
-                            " BFFFB      BFFFB      BFFFB ",
-                            "DF   FD    DF   FD    DF   FD",
-                            " F   F CCCCCF   FCCCCC F   F ",
-                            "DF   FD    DF   FD    DF   FD",
-                            " BFFFB      BFFFB      BFFFB ",
-                            "  DCD        DCD        DCD  ",
-                            "   C          C          C   ",
-                            "   C          C          C   ",
-                            "   D          C          D   ",
-                            "              C              ",
-                            "             D D             ",
-                            "            BFFFB            ",
-                            "           DF   FD           ",
-                            "        DCCCF   FCCCD        ",
-                            "           DF   FD           ",
-                            "            BFFFB            ",
-                            "             D D             "
-                        },
+                            "             D D             ", "            BFFFB            ",
+                            "           DF   FD           ", "        DCCCF   FCCCD        ",
+                            "           DF   FD           ", "            BFFFB            ",
+                            "             D D             ", "              C              ",
+                            "   D          C          D   ", "   C          C          C   ",
+                            "   C          C          C   ", "  DCD        DCD        DCD  ",
+                            " BFFFB      BFFFB      BFFFB ", "DF   FD    DF   FD    DF   FD",
+                            " F   F CCCCCF   FCCCCC F   F ", "DF   FD    DF   FD    DF   FD",
+                            " BFFFB      BFFFB      BFFFB ", "  DCD        DCD        DCD  ",
+                            "   C          C          C   ", "   C          C          C   ",
+                            "   D          C          D   ", "              C              ",
+                            "             D D             ", "            BFFFB            ",
+                            "           DF   FD           ", "        DCCCF   FCCCD        ",
+                            "           DF   FD           ", "            BFFFB            ",
+                            "             D D             " },
                         { // z=5 — mirror of z=1 (back vessel faces, no controller)
-                            "              D              ",
-                            "             BFB             ",
-                            "            BFFFB            ",
-                            "           DFFFFFD           ",
-                            "            BFFFB            ",
-                            "             BFB             ",
-                            "              D              ",
-                            "                             ",
-                            "                             ",
-                            "                             ",
-                            "                             ",
-                            "   D          D          D   ",
-                            "  BFB        BFB        BFB  ",
-                            " BFFFB      BFFFB      BFFFB ",
-                            "DFFFFFD    DFFFFFD    DFFFFFD",
-                            " BFFFB      BFFFB      BFFFB ",
-                            "  BFB        BFB        BFB  ",
-                            "   D          D          D   ",
-                            "                             ",
-                            "                             ",
-                            "                             ",
-                            "                             ",
-                            "              D              ",
-                            "             BFB             ",
-                            "            BFFFB            ",
-                            "           DFFFFFD           ",
-                            "            BFFFB            ",
-                            "             BFB             ",
-                            "              D              "
-                        },
+                            "              D              ", "             BFB             ",
+                            "            BFFFB            ", "           DFFFFFD           ",
+                            "            BFFFB            ", "             BFB             ",
+                            "              D              ", "                             ",
+                            "                             ", "                             ",
+                            "                             ", "   D          D          D   ",
+                            "  BFB        BFB        BFB  ", " BFFFB      BFFFB      BFFFB ",
+                            "DFFFFFD    DFFFFFD    DFFFFFD", " BFFFB      BFFFB      BFFFB ",
+                            "  BFB        BFB        BFB  ", "   D          D          D   ",
+                            "                             ", "                             ",
+                            "                             ", "                             ",
+                            "              D              ", "             BFB             ",
+                            "            BFFFB            ", "           DFFFFFD           ",
+                            "            BFFFB            ", "             BFB             ",
+                            "              D              " },
                         { // z=6 — back outer frame ring
-                            "                             ",
-                            "              D              ",
-                            "             D D             ",
-                            "            D   D            ",
-                            "             D D             ",
-                            "              D              ",
-                            "                             ",
-                            "                             ",
-                            "                             ",
-                            "                             ",
-                            "                             ",
-                            "                             ",
-                            "   D          D          D   ",
-                            "  D D        DCD        D D  ",
-                            " D   D      DCCCD      D   D ",
-                            "  D D        DCD        D D  ",
-                            "   D          D          D   ",
-                            "                             ",
-                            "                             ",
-                            "                             ",
-                            "                             ",
-                            "                             ",
-                            "                             ",
-                            "              D              ",
-                            "             D D             ",
-                            "            D   D            ",
-                            "             D D             ",
-                            "              D              ",
-                            "                             "
-                        }
-                    })
-                .addElement(
-                    'A',
-                    ofBlocksTiered(
-                        (block, meta) -> {
-                            for (int i = 0; i < coilBlocks.length; i++) {
-                                if (block == coilBlocks[i] && meta == 0) return i;
-                            }
-                            return null;
-                        },
-                        coilTiers,
-                        -1,
-                        (h, t) -> h.mCoilTier = t,
-                        h -> h.mCoilTier))
+                            "                             ", "              D              ",
+                            "             D D             ", "            D   D            ",
+                            "             D D             ", "              D              ",
+                            "                             ", "                             ",
+                            "                             ", "                             ",
+                            "                             ", "                             ",
+                            "   D          D          D   ", "  D D        DCD        D D  ",
+                            " D   D      DCCCD      D   D ", "  D D        DCD        D D  ",
+                            "   D          D          D   ", "                             ",
+                            "                             ", "                             ",
+                            "                             ", "                             ",
+                            "                             ", "              D              ",
+                            "             D D             ", "            D   D            ",
+                            "             D D             ", "              D              ",
+                            "                             " } })
+                .addElement('A', ofBlocksTiered((block, meta) -> {
+                    for (int i = 0; i < coilBlocks.length; i++) {
+                        if (block == coilBlocks[i] && meta == 0) return i;
+                    }
+                    return null;
+                }, coilTiers, -1, (h, t) -> h.mCoilTier = t, h -> h.mCoilTier))
                 .addElement('B', ofBlock(ggBlock("MAR_Casing"), 0))
                 .addElement('C', ofBlock(ggBlock("fieldRestrictingGlass"), 0))
                 .addElement(
@@ -446,21 +332,40 @@ public class MTE_HPR extends MTEExtendedPowerMultiBlockBase<MTE_HPR> implements 
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType("Hybrid Phase Reactor, HPR")
-            .addInfo(EnumChatFormatting.GRAY + "Runs simultaneous " + EnumChatFormatting.RED
-                + "liquid and plasma phase" + EnumChatFormatting.GRAY + " reactions.")
-            .addInfo(EnumChatFormatting.GRAY + "Three phase-separated reaction vessels connected by "
-                + EnumChatFormatting.AQUA + "field-restricting conduits" + EnumChatFormatting.GRAY + ".")
-            .addSeparator()
             .addInfo(
-                EnumChatFormatting.GOLD + "FRF Coil tier (A blocks) determines available recipes:")
-            .addInfo(EnumChatFormatting.GRAY + "  " + EnumChatFormatting.WHITE + "Tier I"
-                + EnumChatFormatting.GRAY + " — FRF_Coil_1 | "
-                + EnumChatFormatting.WHITE + "Tier II"
-                + EnumChatFormatting.GRAY + " — FRF_Coil_2")
-            .addInfo(EnumChatFormatting.GRAY + "  " + EnumChatFormatting.WHITE + "Tier III"
-                + EnumChatFormatting.GRAY + " — FRF_Coil_3 | "
-                + EnumChatFormatting.WHITE + "Tier IV"
-                + EnumChatFormatting.GRAY + " — FRF_Coil_4")
+                EnumChatFormatting.GRAY + "Runs simultaneous "
+                    + EnumChatFormatting.RED
+                    + "liquid and plasma phase"
+                    + EnumChatFormatting.GRAY
+                    + " reactions.")
+            .addInfo(
+                EnumChatFormatting.GRAY + "Three phase-separated reaction vessels connected by "
+                    + EnumChatFormatting.AQUA
+                    + "field-restricting conduits"
+                    + EnumChatFormatting.GRAY
+                    + ".")
+            .addSeparator()
+            .addInfo(EnumChatFormatting.GOLD + "FRF Coil tier (A blocks) determines available recipes:")
+            .addInfo(
+                EnumChatFormatting.GRAY + "  "
+                    + EnumChatFormatting.WHITE
+                    + "Tier I"
+                    + EnumChatFormatting.GRAY
+                    + " — FRF_Coil_1 | "
+                    + EnumChatFormatting.WHITE
+                    + "Tier II"
+                    + EnumChatFormatting.GRAY
+                    + " — FRF_Coil_2")
+            .addInfo(
+                EnumChatFormatting.GRAY + "  "
+                    + EnumChatFormatting.WHITE
+                    + "Tier III"
+                    + EnumChatFormatting.GRAY
+                    + " — FRF_Coil_3 | "
+                    + EnumChatFormatting.WHITE
+                    + "Tier IV"
+                    + EnumChatFormatting.GRAY
+                    + " — FRF_Coil_4")
             .beginStructureBlock(29, 29, 7, true)
             .addController("Second layer from front, center vessel center")
             .addOtherStructurePart("FRF Coil (any tier)", "Core reaction rings (A)", 1)
@@ -480,17 +385,15 @@ public class MTE_HPR extends MTEExtendedPowerMultiBlockBase<MTE_HPR> implements 
         String tierLine = mCoilTier >= 0 && mCoilTier < TIER_DISPLAY.length
             ? EnumChatFormatting.AQUA + "FRF Coil: " + EnumChatFormatting.WHITE + TIER_DISPLAY[mCoilTier]
             : EnumChatFormatting.RED + "FRF Coil: not formed";
-        return new String[] {
-            StatCollector.translateToLocal("GT5U.multiblock.Progress") + ": "
-                + EnumChatFormatting.GREEN
-                + mProgresstime / 20
-                + EnumChatFormatting.RESET
-                + " s / "
-                + EnumChatFormatting.YELLOW
-                + mMaxProgresstime / 20
-                + EnumChatFormatting.RESET
-                + " s",
-            tierLine };
+        return new String[] { StatCollector.translateToLocal("GT5U.multiblock.Progress") + ": "
+            + EnumChatFormatting.GREEN
+            + mProgresstime / 20
+            + EnumChatFormatting.RESET
+            + " s / "
+            + EnumChatFormatting.YELLOW
+            + mMaxProgresstime / 20
+            + EnumChatFormatting.RESET
+            + " s", tierLine };
     }
 
     @Override

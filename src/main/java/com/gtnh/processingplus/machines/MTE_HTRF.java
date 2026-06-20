@@ -1,5 +1,24 @@
 package com.gtnh.processingplus.machines;
 
+import static gregtech.api.enums.HatchElement.*;
+import static gregtech.api.enums.HatchElement.Maintenance;
+import static gregtech.api.enums.HatchElement.Muffler;
+import static gregtech.api.enums.HatchElement.OutputBus;
+import static gregtech.api.enums.HatchElement.OutputHatch;
+import static gregtech.api.enums.Textures.BlockIcons.*;
+import static gregtech.api.util.GTStructureUtility.*;
+import static gregtech.api.util.GTStructureUtility.chainAllGlasses;
+
+import java.util.List;
+
+import javax.annotation.Nonnull;
+
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.StatCollector;
+import net.minecraftforge.common.util.ForgeDirection;
+
 import com.gtnewhorizon.structurelib.alignment.constructable.ISurvivalConstructable;
 import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
@@ -8,6 +27,7 @@ import com.gtnewhorizon.structurelib.structure.StructureUtility;
 import com.gtnh.processingplus.blocks.BlockGTNHPPCasings;
 import com.gtnh.processingplus.blocks.GTNHPPBlocks;
 import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import gregtech.api.GregTechAPI;
@@ -29,26 +49,9 @@ import gregtech.api.util.MultiblockTooltipBuilder;
 import gregtech.api.util.OverclockCalculator;
 import gregtech.api.util.tooltip.TooltipHelper;
 import gregtech.common.misc.GTStructureChannels;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.StatCollector;
-import net.minecraftforge.common.util.ForgeDirection;
 
-import javax.annotation.Nonnull;
+public class MTE_HTRF extends MTEExtendedPowerMultiBlockBase<MTE_HTRF> implements ISurvivalConstructable {
 
-import java.util.List;
-
-import static gregtech.api.util.GTStructureUtility.chainAllGlasses;
-import static gregtech.api.enums.HatchElement.*;
-import static gregtech.api.enums.HatchElement.Maintenance;
-import static gregtech.api.enums.HatchElement.Muffler;
-import static gregtech.api.enums.HatchElement.OutputBus;
-import static gregtech.api.enums.HatchElement.OutputHatch;
-import static gregtech.api.enums.Textures.BlockIcons.*;
-import static gregtech.api.util.GTStructureUtility.*;
-
-public class MTE_HTRF  extends MTEExtendedPowerMultiBlockBase<MTE_HTRF> implements ISurvivalConstructable {
     private static final int CASING_INDEX = 11;
     private static final String STRUCTURE_PIECE_MAIN = "main";
     private static final int OFFSET_X = 3;
@@ -80,89 +83,38 @@ public class MTE_HTRF  extends MTEExtendedPowerMultiBlockBase<MTE_HTRF> implemen
             STRUCTURE_DEFINITION = StructureDefinition.<MTE_HTRF>builder()
                 .addShape(
                     STRUCTURE_PIECE_MAIN,
-                    new String[][]{{
-                        "       ",
-                        "       ",
-                        "  FFF  ",
-                        "   B   ",
-                        "   ~   ",
-                        "   B   ",
-                        " CFFFC ",
-                        "CC   CC",
-                        "CB   BC"
-                    },{
-                        "       ",
-                        "  EFE  ",
-                        " FADAF ",
-                        " BDDDB ",
-                        " BDDDB ",
-                        " BDDDB ",
-                        "CFADAFC",
-                        "CFEFEFC",
-                        "BB   BB"
-                    },{
-                        "  EEE  ",
-                        " EAEAE ",
-                        "FA   AF",
-                        " D   D ",
-                        " D   D ",
-                        " D   D ",
-                        "FA   AF",
-                        " EAEAE ",
-                        "  EEE  "
-                    },{
-                        "  EEE  ",
-                        " FEAEF ",
-                        "FD   DF",
-                        "BD   DB",
-                        "BD   DB",
-                        "BD   DB",
-                        "FD   DF",
-                        " FEAEF ",
-                        "  EEE  "
-                    },{
-                        "  EEE  ",
-                        " EAEAE ",
-                        "FA   AF",
-                        " D   D ",
-                        " D   D ",
-                        " D   D ",
-                        "FA   AF",
-                        " EAEAE ",
-                        "  EEE  "
-                    },{
-                        "       ",
-                        "  EEE  ",
-                        " FADAF ",
-                        " BDDDB ",
-                        " BDDDB ",
-                        " BDDDB ",
-                        "CFADAFC",
-                        "CFEFEFC",
-                        "BB   BB"
-                    },{
-                        "       ",
-                        "       ",
-                        "  FFF  ",
-                        "   B   ",
-                        "   B   ",
-                        "   B   ",
-                        " CFFFC ",
-                        "CC   CC",
-                        "CB   BC"
-                    }}
-                )
-                .addElement('A', GTStructureChannels.HEATING_COIL
-                    .use(activeCoils(ofCoil(MTE_HTRF::setCoilLevel, MTE_HTRF::getCoilLevel))))
+                    new String[][] {
+                        { "       ", "       ", "  FFF  ", "   B   ", "   ~   ", "   B   ", " CFFFC ", "CC   CC",
+                            "CB   BC" },
+                        { "       ", "  EFE  ", " FADAF ", " BDDDB ", " BDDDB ", " BDDDB ", "CFADAFC", "CFEFEFC",
+                            "BB   BB" },
+                        { "  EEE  ", " EAEAE ", "FA   AF", " D   D ", " D   D ", " D   D ", "FA   AF", " EAEAE ",
+                            "  EEE  " },
+                        { "  EEE  ", " FEAEF ", "FD   DF", "BD   DB", "BD   DB", "BD   DB", "FD   DF", " FEAEF ",
+                            "  EEE  " },
+                        { "  EEE  ", " EAEAE ", "FA   AF", " D   D ", " D   D ", " D   D ", "FA   AF", " EAEAE ",
+                            "  EEE  " },
+                        { "       ", "  EEE  ", " FADAF ", " BDDDB ", " BDDDB ", " BDDDB ", "CFADAFC", "CFEFEFC",
+                            "BB   BB" },
+                        { "       ", "       ", "  FFF  ", "   B   ", "   B   ", "   B   ", " CFFFC ", "CC   CC",
+                            "CB   BC" } })
+                .addElement(
+                    'A',
+                    GTStructureChannels.HEATING_COIL
+                        .use(activeCoils(ofCoil(MTE_HTRF::setCoilLevel, MTE_HTRF::getCoilLevel))))
                 .addElement('B', StructureUtility.ofBlock(GregTechAPI.sBlockCasings8, 0))
                 .addElement('C', StructureUtility.ofBlock(GregTechAPI.sBlockFrames, 360))
                 .addElement('D', chainAllGlasses(-1, (t, tier) -> t.mGlassTier = tier, t -> t.mGlassTier))
-                .addElement('E', buildHatchAdder(MTE_HTRF.class)
-                    .atLeast(Energy, InputBus, InputHatch, OutputBus, OutputHatch, Maintenance, Muffler)
-                    .casingIndex(CASING_INDEX)
-                    .hint(1)
-                    .buildAndChain(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.HTRF_CASING))
-                .addElement('F', StructureUtility.ofBlock(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.HTRF_REINFORCED_CASING))
+                .addElement(
+                    'E',
+                    buildHatchAdder(MTE_HTRF.class)
+                        .atLeast(Energy, InputBus, InputHatch, OutputBus, OutputHatch, Maintenance, Muffler)
+                        .casingIndex(CASING_INDEX)
+                        .hint(1)
+                        .buildAndChain(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.HTRF_CASING))
+                .addElement(
+                    'F',
+                    StructureUtility.ofBlock(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.HTRF_REINFORCED_CASING))
                 .build();
         }
         return STRUCTURE_DEFINITION;
@@ -225,8 +177,7 @@ public class MTE_HTRF  extends MTEExtendedPowerMultiBlockBase<MTE_HTRF> implemen
                 // Configure overclock with heat bonus
                 // Every 1800K extra heat = 1 perfect OC (duration /4, power /4)
                 // Every 900K extra heat = -5% EU/t (if discount enabled)
-                return super.createOverclockCalculator(recipe)
-                    .setRecipeHeat(recipe.mSpecialValue)
+                return super.createOverclockCalculator(recipe).setRecipeHeat(recipe.mSpecialValue)
                     .setMachineHeat(mHeatingCapacity)
                     .setHeatOC(true)
                     .setHeatDiscount(true);
@@ -234,8 +185,6 @@ public class MTE_HTRF  extends MTEExtendedPowerMultiBlockBase<MTE_HTRF> implemen
 
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
     }
-
-
 
     /** 4 base parallels, +2 per heating-coil tier. */
     @Override
@@ -254,7 +203,7 @@ public class MTE_HTRF  extends MTEExtendedPowerMultiBlockBase<MTE_HTRF> implemen
 
     @Override
     public ITexture[] getTexture(IGregTechTileEntity aBaseMetaTileEntity, ForgeDirection side, ForgeDirection aFacing,
-                                 int colorIndex, boolean aActive, boolean redstoneLevel) {
+        int colorIndex, boolean aActive, boolean redstoneLevel) {
         if (side == aFacing) {
             if (aActive) return new ITexture[] { casingTexturePages[0][CASING_INDEX], TextureFactory.builder()
                 .addIcon(OVERLAY_FRONT_ELECTRIC_BLAST_FURNACE_ACTIVE)
@@ -282,35 +231,35 @@ public class MTE_HTRF  extends MTEExtendedPowerMultiBlockBase<MTE_HTRF> implemen
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType("High Temperature Reaction Furnace, HTRF")
-            .addInfo(EnumChatFormatting.GRAY + "Drives " + EnumChatFormatting.RED + "high-temperature"
-                + EnumChatFormatting.GRAY + " chemical reactions.")
+            .addInfo(
+                EnumChatFormatting.GRAY + "Drives "
+                    + EnumChatFormatting.RED
+                    + "high-temperature"
+                    + EnumChatFormatting.GRAY
+                    + " chemical reactions.")
             .addSeparator()
             .addInfo(
-                "Heat capacity: "
-                    + TooltipHelper.coloredText("coil tier heat", EnumChatFormatting.RED)
+                "Heat capacity: " + TooltipHelper.coloredText("coil tier heat", EnumChatFormatting.RED)
                     + EnumChatFormatting.GRAY
                     + " + "
                     + TooltipHelper.coloredText("100K", EnumChatFormatting.YELLOW)
                     + EnumChatFormatting.GRAY
                     + " per voltage tier above LV.")
             .addInfo(
-                "Every "
-                    + TooltipHelper.coloredText("1800K", EnumChatFormatting.RED)
+                "Every " + TooltipHelper.coloredText("1800K", EnumChatFormatting.RED)
                     + EnumChatFormatting.GRAY
                     + " above the recipe requirement grants 1 "
                     + TooltipHelper.coloredText("perfect overclock", EnumChatFormatting.LIGHT_PURPLE)
                     + EnumChatFormatting.GRAY
                     + ".")
             .addInfo(
-                TooltipHelper.effText("-5% EU")
-                    + EnumChatFormatting.GRAY
+                TooltipHelper.effText("-5% EU") + EnumChatFormatting.GRAY
                     + " per "
                     + TooltipHelper.coloredText("900K", EnumChatFormatting.RED)
                     + EnumChatFormatting.GRAY
                     + " above the recipe requirement.")
             .addInfo(
-                "Parallels: "
-                    + TooltipHelper.coloredText("4", EnumChatFormatting.YELLOW)
+                "Parallels: " + TooltipHelper.coloredText("4", EnumChatFormatting.YELLOW)
                     + EnumChatFormatting.GRAY
                     + " base + "
                     + TooltipHelper.coloredText("2", EnumChatFormatting.YELLOW)

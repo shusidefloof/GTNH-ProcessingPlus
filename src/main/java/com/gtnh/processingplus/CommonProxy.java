@@ -31,8 +31,16 @@ public class CommonProxy {
     public void postInit(FMLPostInitializationEvent event) {}
 
     public void loadComplete(FMLLoadCompleteEvent event) {
-        copyRecipesToCRV();
-        PrPlusRecipes.init();
+        try {
+            copyRecipesToCRV();
+        } catch (Throwable t) {
+            GTNHProcessingPlus.LOG.error("ABS→CRV recipe copy failed (GT++ present?)", t);
+        }
+        try {
+            PrPlusRecipes.init();
+        } catch (Throwable t) {
+            GTNHProcessingPlus.LOG.error("Recipe registration failed", t);
+        }
         try {
             com.gtnh.processingplus.recipes.RecipeSwaps.run();
         } catch (Throwable t) {

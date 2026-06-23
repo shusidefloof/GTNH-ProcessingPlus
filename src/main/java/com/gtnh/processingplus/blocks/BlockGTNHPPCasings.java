@@ -45,7 +45,10 @@ public class BlockGTNHPPCasings extends Block {
     public static final int ISOTOPIC_DOPING_CASING = 25; // CIDC chamber shell
     public static final int HYBRID_PHASE_CASING = 26; // HPR reactor shell
     public static final int SUBATOMIC_PATTERNING_CASING = 27; // SPU shell
-    public static final int NUM_CASINGS = 28;
+    public static final int DAF_CASING_LUV = 28; // DAF LuV-tier chamber shell
+    public static final int DAF_CASING_UV = 29;  // DAF UV-tier chamber shell
+    public static final int DAF_CASING_UEV = 30; // DAF UEV-tier chamber shell
+    public static final int NUM_CASINGS = 31;
 
     // @formatter:off
     private static final String[] DISPLAY_NAMES = {
@@ -77,6 +80,9 @@ public class BlockGTNHPPCasings extends Block {
         "Isotopic Doping Casing",             // CIDC shell
         "Hybrid Phase Casing",                // HPR shell
         "Subatomic Patterning Casing",        // SPU shell
+        "Advanced Atmosphere Casing",         // DAF LuV chamber
+        "Pristine Atmosphere Casing",         // DAF UV chamber
+        "Absolute Atmosphere Casing",         // DAF UEV chamber
     };
 
     // Borrow GT5U's existing block textures as placeholders until custom art is made.
@@ -110,6 +116,9 @@ public class BlockGTNHPPCasings extends Block {
         "gregtech:iconsets/MACHINE_CASING_CLEAN_STAINLESSSTEEL", // CIDC shell (clean precision)
         "gregtech:iconsets/MACHINE_CASING_FUSION_GLASS",         // HPR shell (energetic plasma/bio)
         "gregtech:iconsets/MACHINE_CASING_RADIATIONPROOF",       // SPU shell (high-tech)
+        "gregtech:iconsets/MACHINE_CASING_STABLE_TITANIUM",      // DAF LuV: titanium-sealed
+        "gregtech:iconsets/MACHINE_CASING_RADIATIONPROOF",       // DAF UV: radiation-proof alloy
+        "gregtech:iconsets/MACHINE_CASING_FUSION_GLASS",         // DAF UEV: transcendent shell
     };
     // @formatter:on
 

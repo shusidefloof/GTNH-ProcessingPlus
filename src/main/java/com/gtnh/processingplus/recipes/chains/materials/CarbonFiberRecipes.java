@@ -88,7 +88,7 @@ public class CarbonFiberRecipes {
 
         GTValues.RA.stdBuilder()
             .itemInputs(dust(PrPMaterials.Polyacrylonitrile, 4))
-            .fluidInputs(fluid(Materials.Oxygen, 2000))
+            .fluidInputs(fluid(Materials.Oxygen, 4)) // 4 mB/t continuous; ~2400 mB total over 600t
             .itemOutputs(dust(PrPMaterials.StabilizedPolyacrylonitrile, 4))
             .duration(600)
             .eut(TierEU.RECIPE_UV)
@@ -102,7 +102,7 @@ public class CarbonFiberRecipes {
 
         GTValues.RA.stdBuilder()
             .itemInputs(dust(PrPMaterials.StabilizedPolyacrylonitrile, 4))
-            .fluidInputs(fluid(Materials.Nitrogen, 2000))
+            .fluidInputs(fluid(Materials.Nitrogen, 3)) // 3 mB/t continuous purge; ~2400 mB total over 800t
             .itemOutputs(dust(PrPMaterials.CarbonFiberTow, 3))
             .fluidOutputs(fluid(Materials.CarbonMonoxide, 500), fluid("hydrogencyanide", 250))
             .duration(800)
@@ -163,7 +163,8 @@ public class CarbonFiberRecipes {
     private static void stepAlt_PitchStabilization() {
 
         GTValues.RA.stdBuilder()
-            .fluidInputs(fluid(PrPMaterials.MesophasePitch, 1000), fluid(Materials.Oxygen, 2000))
+            // Both fluids are continuous per-tick inputs; ~1200 mB Pitch + ~2400 mB O₂ total over 1200t
+            .fluidInputs(fluid(PrPMaterials.MesophasePitch, 1), fluid(Materials.Oxygen, 2))
             .itemOutputs(dust(PrPMaterials.StabilizedPolyacrylonitrile, 3))
             .duration(1200)
             .eut(TierEU.RECIPE_UV)

@@ -20,6 +20,9 @@ public class DAFRecipes {
 
     public static void init() {
         casingRecipe();
+        casingRecipeLuV();
+        casingRecipeUV();
+        casingRecipeUEV();
         controllerRecipe();
     }
 
@@ -34,6 +37,49 @@ public class DAFRecipes {
             .itemOutputs(new ItemStack(GTNHPPBlocks.CASINGS, 1, BlockGTNHPPCasings.DAF_CASING))
             .duration(30 * SECONDS)
             .eut(TierEU.RECIPE_LV)
+            .addTo(RecipeMaps.assemblerRecipes);
+    }
+
+    // Advanced Atmosphere Casing — LuV chamber shell, titanium-sealed
+    private static void casingRecipeLuV() {
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.Titanium, 1),
+                plate(Materials.Titanium, 4),
+                plate(Materials.TungstenSteel, 2),
+                plate(Materials.Iridium, 2),
+                circuit(8))
+            .itemOutputs(new ItemStack(GTNHPPBlocks.CASINGS, 1, BlockGTNHPPCasings.DAF_CASING_LUV))
+            .duration(45 * SECONDS)
+            .eut(TierEU.RECIPE_EV)
+            .addTo(RecipeMaps.assemblerRecipes);
+    }
+
+    // Pristine Atmosphere Casing — UV chamber shell, neutronium-lined
+    private static void casingRecipeUV() {
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.Osmium, 1),
+                plate(Materials.Osmium, 4),
+                plate(Materials.Iridium, 4),
+                circuit(10))
+            .itemOutputs(new ItemStack(GTNHPPBlocks.CASINGS, 1, BlockGTNHPPCasings.DAF_CASING_UV))
+            .duration(60 * SECONDS)
+            .eut(TierEU.RECIPE_IV)
+            .addTo(RecipeMaps.assemblerRecipes);
+    }
+
+    // Absolute Atmosphere Casing — UEV chamber shell, transcendent alloy
+    private static void casingRecipeUEV() {
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.Neutronium, 1),
+                plate(Materials.Neutronium, 4),
+                plate(Materials.Osmium, 4),
+                circuit(12))
+            .itemOutputs(new ItemStack(GTNHPPBlocks.CASINGS, 1, BlockGTNHPPCasings.DAF_CASING_UEV))
+            .duration(90 * SECONDS)
+            .eut(TierEU.RECIPE_LuV)
             .addTo(RecipeMaps.assemblerRecipes);
     }
 

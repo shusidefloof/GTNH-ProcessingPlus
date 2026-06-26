@@ -16,15 +16,38 @@ final class PrPMaterialCompat {
     private PrPMaterialCompat() {}
 
     static Werkstoff registerOrReuse(List<Werkstoff> ownedMaterials, String fieldName, String displayName,
-        Supplier<Werkstoff> localFactory, String... holderClasses) {
+        Supplier<Werkstoff> localFactory, boolean deferForExternalHolder, String... holderClasses) {
 
-        Werkstoff external = findExternal(fieldName, displayName, holderClasses);
-        if (external != null) {
-            GTNHProcessingPlus.LOG.info("Reusing external Werkstoff '{}' from another mod", displayName);
-            return external;
+        boolean externalHolderFieldExists = false;
+        for (String holderClass : holderClasses) {
+            try {
+                Class<?> cls = Class.forName(holderClass);
+                Field field = cls.getField(fieldName);
+                externalHolderFieldExists = true;
+
+                Object value = field.get(null);
+                if (value instanceof Werkstoff) {
+                    GTNHProcessingPlus.LOG.info("Reusing external Werkstoff '{}' from another mod", displayName);
+                    return (Werkstoff) value;
+                }
+            } catch (ReflectiveOperationException | LinkageError ignored) {
+                // Try the remaining holders and Werkstoff maps below.
+            }
         }
 
-        if (hasExternalHolderField(fieldName, holderClasses)) {
+        Werkstoff byVarName = getWerkstoffMapValue("werkstoffVarNameHashMap", fieldName);
+        if (byVarName != null) {
+            GTNHProcessingPlus.LOG.info("Reusing external Werkstoff '{}' from another mod", displayName);
+            return byVarName;
+        }
+
+        Werkstoff byName = getWerkstoffMapValue("werkstoffNameHashMap", displayName);
+        if (byName != null) {
+            GTNHProcessingPlus.LOG.info("Reusing external Werkstoff '{}' from another mod", displayName);
+            return byName;
+        }
+
+        if (deferForExternalHolder && externalHolderFieldExists) {
             GTNHProcessingPlus.LOG
                 .info("Deferring external Werkstoff '{}' until its owner initializes it", displayName);
             return null;
@@ -35,52 +58,15 @@ final class PrPMaterialCompat {
         return local;
     }
 
-    static Werkstoff resolveExternal(String fieldName, String displayName, String... holderClasses) {
-        return findExternal(fieldName, displayName, holderClasses);
-    }
-
     static boolean isExternal(Werkstoff material, String holderClass, String fieldName) {
         if (material == null) return false;
-        return material == getHolderField(holderClass, fieldName);
-    }
-
-    private static Werkstoff findExternal(String fieldName, String displayName, String... holderClasses) {
-        for (String holderClass : holderClasses) {
-            Werkstoff fromHolder = getHolderField(holderClass, fieldName);
-            if (fromHolder != null) return fromHolder;
-        }
-
-        Werkstoff byVarName = getWerkstoffMapValue("werkstoffVarNameHashMap", fieldName);
-        if (byVarName != null) return byVarName;
-
-        return getWerkstoffMapValue("werkstoffNameHashMap", displayName);
-    }
-
-    private static boolean hasExternalHolderField(String fieldName, String... holderClasses) {
-        for (String holderClass : holderClasses) {
-            if (hasHolderField(holderClass, fieldName)) return true;
-        }
-        return false;
-    }
-
-    private static boolean hasHolderField(String holderClass, String fieldName) {
-        try {
-            Class<?> cls = Class.forName(holderClass);
-            cls.getField(fieldName);
-            return true;
-        } catch (ReflectiveOperationException | LinkageError ignored) {
-            return false;
-        }
-    }
-
-    private static Werkstoff getHolderField(String holderClass, String fieldName) {
         try {
             Class<?> cls = Class.forName(holderClass);
             Field field = cls.getField(fieldName);
             Object value = field.get(null);
-            return value instanceof Werkstoff ? (Werkstoff) value : null;
+            return material == value;
         } catch (ReflectiveOperationException | LinkageError ignored) {
-            return null;
+            return false;
         }
     }
 

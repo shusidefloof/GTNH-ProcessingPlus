@@ -4,8 +4,7 @@ import static bartworks.util.BWUtil.subscriptNumbers;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import com.gtnh.processingplus.GTNHProcessingPlus;
+import java.util.function.Supplier;
 
 import bartworks.system.material.Werkstoff;
 import gregtech.api.enums.TextureSet;
@@ -864,7 +863,8 @@ public class PrPMaterials implements Runnable {
                 Werkstoff.Types.COMPOUND,
                 polymerFeatures(),
                 hydroxylammoniumSulfateId,
-                TextureSet.SET_DULL));
+                TextureSet.SET_DULL),
+            true);
 
         Caprolactam = register(
             new Werkstoff(
@@ -1191,7 +1191,8 @@ public class PrPMaterials implements Runnable {
                 Werkstoff.Types.COMPOUND,
                 polymerFeatures(),
                 ammoniumBisulfateId,
-                TextureSet.SET_DULL));
+                TextureSet.SET_DULL),
+            true);
 
         Adamantol = register(
             new Werkstoff(
@@ -2435,27 +2436,36 @@ public class PrPMaterials implements Runnable {
 
     public static void resolveDeferredExternalMaterials() {
         if (HydroxylammoniumSulfate == null) {
-            HydroxylammoniumSulfate = requireExternal("HydroxylammoniumSulfate", "Hydroxylammonium Sulfate");
+            HydroxylammoniumSulfate = registerOrReuseExternal(
+                "HydroxylammoniumSulfate",
+                "Hydroxylammonium Sulfate",
+                () -> {
+                    throw new IllegalStateException(
+                        "Deferred external Werkstoff was not initialized: Hydroxylammonium Sulfate");
+                },
+                false);
         }
         if (AmmoniumBisulfate == null) {
-            AmmoniumBisulfate = requireExternal("AmmoniumBisulfate", "Ammonium Bisulfate");
+            AmmoniumBisulfate = registerOrReuseExternal(
+                "AmmoniumBisulfate",
+                "Ammonium Bisulfate",
+                () -> {
+                    throw new IllegalStateException(
+                        "Deferred external Werkstoff was not initialized: Ammonium Bisulfate");
+                },
+                false);
         }
     }
 
     private static Werkstoff registerOrReuseExternal(String fieldName, String displayName,
-        java.util.function.Supplier<Werkstoff> localFactory) {
-        return PrPMaterialCompat
-            .registerOrReuse(ALL, fieldName, displayName, localFactory, PrPMaterialCompat.GTNL_MATERIALS);
-    }
-
-    private static Werkstoff requireExternal(String fieldName, String displayName) {
-        Werkstoff external = PrPMaterialCompat
-            .resolveExternal(fieldName, displayName, PrPMaterialCompat.GTNL_MATERIALS);
-        if (external == null) {
-            throw new IllegalStateException("Deferred external Werkstoff was not initialized: " + displayName);
-        }
-        GTNHProcessingPlus.LOG.info("Resolved deferred external Werkstoff '{}'", displayName);
-        return external;
+        Supplier<Werkstoff> localFactory, boolean deferForExternalHolder) {
+        return PrPMaterialCompat.registerOrReuse(
+            ALL,
+            fieldName,
+            displayName,
+            localFactory,
+            deferForExternalHolder,
+            PrPMaterialCompat.GTNL_MATERIALS);
     }
 
     private static short[] rgb(int r, int g, int b) {

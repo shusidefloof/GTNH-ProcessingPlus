@@ -3,6 +3,7 @@ package com.gtnh.processingplus.items;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -61,6 +62,7 @@ public class GTNHPPItems {
         // Single shared MetaItem for all demoted dust-only chain intermediates (see Intermediate enum).
         INTERMEDIATES = new ItemGTNHPPIntermediates();
         GameRegistry.registerItem(INTERMEDIATES, "intermediates");
+        OreDictionary.registerOre("dustAmmoniumBisulfate", Intermediate.AMMONIUM_BISULFATE_DUST.get(1));
     }
 
     public static ItemStack scorchedBoard(int amount) {

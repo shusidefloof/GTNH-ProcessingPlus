@@ -4,6 +4,7 @@ import static bartworks.util.BWUtil.subscriptNumbers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Supplier;
 
 import bartworks.system.material.Werkstoff;
 import gregtech.api.enums.TextureSet;
@@ -850,16 +851,20 @@ public class PrPMaterials implements Runnable {
                 id(),
                 TextureSet.SET_DULL));
 
-        HydroxylammoniumSulfate = register(
-            new Werkstoff(
+        final int hydroxylammoniumSulfateId = id();
+        HydroxylammoniumSulfate = registerOrReuseExternal(
+            "HydroxylammoniumSulfate",
+            "Hydroxylammonium Sulfate",
+            () -> new Werkstoff(
                 rgb(245, 245, 245),
                 "Hydroxylammonium Sulfate",
                 subscriptNumbers("(NH3OH)2SO4"),
                 new Werkstoff.Stats(),
                 Werkstoff.Types.COMPOUND,
                 polymerFeatures(),
-                id(),
-                TextureSet.SET_DULL));
+                hydroxylammoniumSulfateId,
+                TextureSet.SET_DULL),
+            true);
 
         Caprolactam = register(
             new Werkstoff(
@@ -1174,16 +1179,20 @@ public class PrPMaterials implements Runnable {
                 id(),
                 TextureSet.SET_FLUID));
 
-        AmmoniumBisulfate = register(
-            new Werkstoff(
+        final int ammoniumBisulfateId = id();
+        AmmoniumBisulfate = registerOrReuseExternal(
+            "AmmoniumBisulfate",
+            "Ammonium Bisulfate",
+            () -> new Werkstoff(
                 rgb(245, 245, 245),
                 "Ammonium Bisulfate",
                 subscriptNumbers("(NH4)HSO4"),
                 new Werkstoff.Stats(),
                 Werkstoff.Types.COMPOUND,
                 polymerFeatures(),
-                id(),
-                TextureSet.SET_DULL));
+                ammoniumBisulfateId,
+                TextureSet.SET_DULL),
+            true);
 
         Adamantol = register(
             new Werkstoff(
@@ -2419,6 +2428,44 @@ public class PrPMaterials implements Runnable {
     private static Werkstoff register(Werkstoff w) {
         ALL.add(w);
         return w;
+    }
+
+    public static boolean isExternalAmmoniumBisulfate() {
+        return PrPMaterialCompat.isExternal(AmmoniumBisulfate, PrPMaterialCompat.GTNL_MATERIALS, "AmmoniumBisulfate");
+    }
+
+    public static void resolveDeferredExternalMaterials() {
+        if (HydroxylammoniumSulfate == null) {
+            HydroxylammoniumSulfate = registerOrReuseExternal(
+                "HydroxylammoniumSulfate",
+                "Hydroxylammonium Sulfate",
+                () -> {
+                    throw new IllegalStateException(
+                        "Deferred external Werkstoff was not initialized: Hydroxylammonium Sulfate");
+                },
+                false);
+        }
+        if (AmmoniumBisulfate == null) {
+            AmmoniumBisulfate = registerOrReuseExternal(
+                "AmmoniumBisulfate",
+                "Ammonium Bisulfate",
+                () -> {
+                    throw new IllegalStateException(
+                        "Deferred external Werkstoff was not initialized: Ammonium Bisulfate");
+                },
+                false);
+        }
+    }
+
+    private static Werkstoff registerOrReuseExternal(String fieldName, String displayName,
+        Supplier<Werkstoff> localFactory, boolean deferForExternalHolder) {
+        return PrPMaterialCompat.registerOrReuse(
+            ALL,
+            fieldName,
+            displayName,
+            localFactory,
+            deferForExternalHolder,
+            PrPMaterialCompat.GTNL_MATERIALS);
     }
 
     private static short[] rgb(int r, int g, int b) {

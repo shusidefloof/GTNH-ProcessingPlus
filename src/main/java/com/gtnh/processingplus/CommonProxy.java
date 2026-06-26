@@ -3,6 +3,7 @@ package com.gtnh.processingplus;
 import com.gtnh.processingplus.blocks.GTNHPPBlocks;
 import com.gtnh.processingplus.items.GTNHPPItems;
 import com.gtnh.processingplus.loader.MaterialLoader;
+import com.gtnh.processingplus.materials.PrPMaterials;
 import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
 import com.gtnh.processingplus.recipes.PrPlusRecipes;
 
@@ -37,6 +38,7 @@ public class CommonProxy {
             GTNHProcessingPlus.LOG.error("ABS→CRV recipe copy failed (GT++ present?)", t);
         }
         try {
+            PrPMaterials.resolveDeferredExternalMaterials();
             PrPlusRecipes.init();
         } catch (Throwable t) {
             GTNHProcessingPlus.LOG.error("Recipe registration failed", t);

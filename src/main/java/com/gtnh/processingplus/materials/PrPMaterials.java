@@ -5,6 +5,8 @@ import static bartworks.util.BWUtil.subscriptNumbers;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.gtnh.processingplus.GTNHProcessingPlus;
+
 import bartworks.system.material.Werkstoff;
 import gregtech.api.enums.TextureSet;
 
@@ -2431,10 +2433,29 @@ public class PrPMaterials implements Runnable {
         return PrPMaterialCompat.isExternal(AmmoniumBisulfate, PrPMaterialCompat.GTNL_MATERIALS, "AmmoniumBisulfate");
     }
 
+    public static void resolveDeferredExternalMaterials() {
+        if (HydroxylammoniumSulfate == null) {
+            HydroxylammoniumSulfate = requireExternal("HydroxylammoniumSulfate", "Hydroxylammonium Sulfate");
+        }
+        if (AmmoniumBisulfate == null) {
+            AmmoniumBisulfate = requireExternal("AmmoniumBisulfate", "Ammonium Bisulfate");
+        }
+    }
+
     private static Werkstoff registerOrReuseExternal(String fieldName, String displayName,
         java.util.function.Supplier<Werkstoff> localFactory) {
         return PrPMaterialCompat
             .registerOrReuse(ALL, fieldName, displayName, localFactory, PrPMaterialCompat.GTNL_MATERIALS);
+    }
+
+    private static Werkstoff requireExternal(String fieldName, String displayName) {
+        Werkstoff external = PrPMaterialCompat
+            .resolveExternal(fieldName, displayName, PrPMaterialCompat.GTNL_MATERIALS);
+        if (external == null) {
+            throw new IllegalStateException("Deferred external Werkstoff was not initialized: " + displayName);
+        }
+        GTNHProcessingPlus.LOG.info("Resolved deferred external Werkstoff '{}'", displayName);
+        return external;
     }
 
     private static short[] rgb(int r, int g, int b) {

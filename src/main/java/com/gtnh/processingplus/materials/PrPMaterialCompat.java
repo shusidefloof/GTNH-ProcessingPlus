@@ -24,9 +24,19 @@ final class PrPMaterialCompat {
             return external;
         }
 
+        if (hasExternalHolderField(fieldName, holderClasses)) {
+            GTNHProcessingPlus.LOG
+                .info("Deferring external Werkstoff '{}' until its owner initializes it", displayName);
+            return null;
+        }
+
         Werkstoff local = localFactory.get();
         ownedMaterials.add(local);
         return local;
+    }
+
+    static Werkstoff resolveExternal(String fieldName, String displayName, String... holderClasses) {
+        return findExternal(fieldName, displayName, holderClasses);
     }
 
     static boolean isExternal(Werkstoff material, String holderClass, String fieldName) {
@@ -44,6 +54,23 @@ final class PrPMaterialCompat {
         if (byVarName != null) return byVarName;
 
         return getWerkstoffMapValue("werkstoffNameHashMap", displayName);
+    }
+
+    private static boolean hasExternalHolderField(String fieldName, String... holderClasses) {
+        for (String holderClass : holderClasses) {
+            if (hasHolderField(holderClass, fieldName)) return true;
+        }
+        return false;
+    }
+
+    private static boolean hasHolderField(String holderClass, String fieldName) {
+        try {
+            Class<?> cls = Class.forName(holderClass);
+            cls.getField(fieldName);
+            return true;
+        } catch (ReflectiveOperationException | LinkageError ignored) {
+            return false;
+        }
     }
 
     private static Werkstoff getHolderField(String holderClass, String fieldName) {

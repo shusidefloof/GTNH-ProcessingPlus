@@ -24,7 +24,8 @@ public enum Intermediate {
     PURIFIED_UNOBTANIUM_CRYSTAL("purified_unobtanium_crystal", "Purified Unobtanium Crystal"),
     PURIFIED_UNOBTANIUM_SHARD("purified_unobtanium_shard", "Purified Unobtanium Crystal Shard"),
     UNOBTANIUM_CLUMP("unobtanium_clump", "Unobtanium Clump"),
-    IRON_SLAG("iron_slag", "Iron Slag");
+    IRON_SLAG("iron_slag", "Iron Slag"),
+    AMMONIUM_BISULFATE_DUST("ammonium_bisulfate_dust", "Ammonium Bisulfate Dust");
 
     public final String reg;
     public final String display;

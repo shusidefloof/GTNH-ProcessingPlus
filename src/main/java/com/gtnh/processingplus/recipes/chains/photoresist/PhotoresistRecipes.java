@@ -7,6 +7,7 @@ import java.util.Collection;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
+import com.gtnh.processingplus.items.Intermediate;
 import com.gtnh.processingplus.machines.spc.MachineType;
 import com.gtnh.processingplus.machines.spc.SPCModuleType;
 import com.gtnh.processingplus.machines.spc.SPCRecipeData;
@@ -388,7 +389,7 @@ public class PhotoresistRecipes {
                 fluid(Materials.Acetone, 1000),
                 fluid("hydrogencyanide", 1000),
                 fluid(Materials.SulfuricAcid, 100))
-            .itemOutputs(dust(PrPMaterials.AmmoniumBisulfate, 2))
+            .itemOutputs(ammoniumBisulfateDust(2))
             .fluidOutputs(fluid(PrPMaterials.MethacrylicAcid, 1000))
             .duration(120)
             .eut(TierEU.RECIPE_IV)
@@ -516,11 +517,17 @@ public class PhotoresistRecipes {
     // LuV: Ammonium Bisulfate cracking — recovers H₂SO₄ + NH₃ (byproduct of MethacrylicAcid)
     private static void luvAmmoniumBisulfateCracking() {
         GTValues.RA.stdBuilder()
-            .itemInputs(dust(PrPMaterials.AmmoniumBisulfate, 2))
+            .itemInputs(ammoniumBisulfateDust(2))
             .fluidOutputs(fluid(Materials.SulfuricAcid, 1000), fluid(Materials.Ammonia, 1000))
             .duration(200)
             .eut(TierEU.RECIPE_EV)
             .addTo(RecipeMaps.distillationTowerRecipes);
+    }
+
+    private static ItemStack ammoniumBisulfateDust(int amount) {
+        if (PrPMaterials.isExternalAmmoniumBisulfate())
+            return intermediate(Intermediate.AMMONIUM_BISULFATE_DUST, amount);
+        return dust(PrPMaterials.AmmoniumBisulfate, amount);
     }
 
     private static void initZpm() {

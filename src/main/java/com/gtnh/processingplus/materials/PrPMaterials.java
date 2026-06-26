@@ -850,15 +850,18 @@ public class PrPMaterials implements Runnable {
                 id(),
                 TextureSet.SET_DULL));
 
-        HydroxylammoniumSulfate = register(
-            new Werkstoff(
+        final int hydroxylammoniumSulfateId = id();
+        HydroxylammoniumSulfate = registerOrReuseExternal(
+            "HydroxylammoniumSulfate",
+            "Hydroxylammonium Sulfate",
+            () -> new Werkstoff(
                 rgb(245, 245, 245),
                 "Hydroxylammonium Sulfate",
                 subscriptNumbers("(NH3OH)2SO4"),
                 new Werkstoff.Stats(),
                 Werkstoff.Types.COMPOUND,
                 polymerFeatures(),
-                id(),
+                hydroxylammoniumSulfateId,
                 TextureSet.SET_DULL));
 
         Caprolactam = register(
@@ -1174,15 +1177,18 @@ public class PrPMaterials implements Runnable {
                 id(),
                 TextureSet.SET_FLUID));
 
-        AmmoniumBisulfate = register(
-            new Werkstoff(
+        final int ammoniumBisulfateId = id();
+        AmmoniumBisulfate = registerOrReuseExternal(
+            "AmmoniumBisulfate",
+            "Ammonium Bisulfate",
+            () -> new Werkstoff(
                 rgb(245, 245, 245),
                 "Ammonium Bisulfate",
                 subscriptNumbers("(NH4)HSO4"),
                 new Werkstoff.Stats(),
                 Werkstoff.Types.COMPOUND,
                 polymerFeatures(),
-                id(),
+                ammoniumBisulfateId,
                 TextureSet.SET_DULL));
 
         Adamantol = register(
@@ -2419,6 +2425,16 @@ public class PrPMaterials implements Runnable {
     private static Werkstoff register(Werkstoff w) {
         ALL.add(w);
         return w;
+    }
+
+    public static boolean isExternalAmmoniumBisulfate() {
+        return PrPMaterialCompat.isExternal(AmmoniumBisulfate, PrPMaterialCompat.GTNL_MATERIALS, "AmmoniumBisulfate");
+    }
+
+    private static Werkstoff registerOrReuseExternal(String fieldName, String displayName,
+        java.util.function.Supplier<Werkstoff> localFactory) {
+        return PrPMaterialCompat
+            .registerOrReuse(ALL, fieldName, displayName, localFactory, PrPMaterialCompat.GTNL_MATERIALS);
     }
 
     private static short[] rgb(int r, int g, int b) {

@@ -24,6 +24,12 @@ public class GTNHPPItems {
     /** Shared MetaItem holding every single-use chain intermediate ({@link Intermediate}). */
     public static Item INTERMEDIATES;
 
+    /** Consumed by the HPR to retune its resonance field when jumping between frequencies (1 per step). */
+    public static Item PHASE_SYNCHRONIZER;
+
+    /** Consumed by the HPR to manually decrease the resonance field frequency by 1 step. */
+    public static Item PHASE_DESYNCHRONIZER;
+
     /**
      * Register a plain single-meta item. The display name is hard-coded via getItemStackDisplayName
      * (matching how the casings name themselves) so it shows correctly regardless of lang/domain.
@@ -59,6 +65,9 @@ public class GTNHPPItems {
             "Promethium Betavoltaic Cell",
             "minecraft:glowstone_dust");
 
+        PHASE_SYNCHRONIZER = simpleItem("phase_synchronizer", "Phase Synchronizer", "minecraft:blaze_powder");
+        PHASE_DESYNCHRONIZER = simpleItem("phase_desynchronizer", "Phase Desynchronizer", "minecraft:ender_pearl");
+
         // Single shared MetaItem for all demoted dust-only chain intermediates (see Intermediate enum).
         INTERMEDIATES = new ItemGTNHPPIntermediates();
         GameRegistry.registerItem(INTERMEDIATES, "intermediates");
@@ -75,5 +84,13 @@ public class GTNHPPItems {
 
     public static ItemStack betavoltaicCell(int amount) {
         return new ItemStack(PROMETHIUM_BETAVOLTAIC_CELL, amount);
+    }
+
+    public static ItemStack phaseSynchronizer(int amount) {
+        return new ItemStack(PHASE_SYNCHRONIZER, amount);
+    }
+
+    public static ItemStack phaseDesynchronizer(int amount) {
+        return new ItemStack(PHASE_DESYNCHRONIZER, amount);
     }
 }

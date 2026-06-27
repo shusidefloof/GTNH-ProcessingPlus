@@ -14,6 +14,7 @@ import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_LARGE_CHEMICA
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_LARGE_CHEMICAL_REACTOR_GLOW;
 import static gregtech.api.enums.Textures.BlockIcons.casingTexturePages;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
+import static gregtech.api.util.GTStructureUtility.ofFrame;
 
 import java.util.List;
 
@@ -33,6 +34,8 @@ import com.gtnh.processingplus.blocks.BlockGTNHPPCasings;
 import com.gtnh.processingplus.blocks.GTNHPPBlocks;
 import com.gtnh.processingplus.materials.PrPMaterials;
 import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
+
+import gtPlusPlus.core.material.MaterialsAlloy;
 
 import bartworks.system.material.Werkstoff;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -148,10 +151,8 @@ public class MTE_PCV extends MTEExtendedPowerMultiBlockBase<MTE_PCV> implements 
                 // --- GT++ (miscutils) blocks ---
                 .addElement('N', fb("miscutils", "gtplusplus.blockcasings.5", 0))
                 .addElement('O', fb("miscutils", "gtplusplus.blockcasings.5", 1))
-                // B = Inconel-792 frame (GT++ registered under miscutils)
-                .addElement('B', fb("miscutils", "block.Inconel792.frame", 0))
-                // S = also Inconel-792 frame (same block, same meta)
-                .addElement('S', fb("miscutils", "block.Inconel792.frame", 0))
+                .addElement('B', ofFrame(MaterialsAlloy.INCONEL_792))
+                .addElement('S', ofFrame(MaterialsAlloy.INCONEL_792))
                 // --- Bartworks blocks ---
                 .addElement('A', fb("bartworks", "BW_GlasBlocks", 0))
                 // --- R = block of Promethium Betavoltaic Alloy (registered by bartworks from addMetalItems()) ---

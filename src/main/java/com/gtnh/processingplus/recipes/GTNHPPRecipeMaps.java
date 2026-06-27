@@ -1,13 +1,13 @@
 package com.gtnh.processingplus.recipes;
 
 import com.gtnh.processingplus.nei.AARNEIFormatter;
+import com.gtnh.processingplus.nei.HPRNEIFormatter;
 import com.gtnh.processingplus.nei.SPCRecipeMapFrontend;
 
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.recipe.RecipeMapBackend;
 import gregtech.api.recipe.RecipeMapBuilder;
 import gregtech.nei.formatter.HeatingCoilSpecialValueFormatter;
-import gregtech.nei.formatter.SimpleSpecialValueFormatter;
 
 public class GTNHPPRecipeMaps {
 
@@ -105,7 +105,7 @@ public class GTNHPPRecipeMaps {
     public static final RecipeMap<RecipeMapBackend> sHPRRecipes = RecipeMapBuilder
         .of("gtnhpp.recipe.hpr")
         .maxIO(2, 2, 4, 2)
-        .neiSpecialInfoFormatter(new SimpleSpecialValueFormatter("gtnhpp.recipe.hpr.coil_tier"))
+        .neiSpecialInfoFormatter(HPRNEIFormatter.INSTANCE)
         .build();
 
     /** Subatomic Patterning Unit — quantum lattice imprinting (UIV tier). */

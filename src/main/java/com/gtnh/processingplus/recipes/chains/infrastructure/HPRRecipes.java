@@ -10,6 +10,7 @@ import net.minecraft.item.ItemStack;
 
 import com.gtnh.processingplus.blocks.BlockGTNHPPCasings;
 import com.gtnh.processingplus.blocks.GTNHPPBlocks;
+import com.gtnh.processingplus.items.GTNHPPItems;
 
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.ItemList;
@@ -25,6 +26,8 @@ public class HPRRecipes {
     public static void init() {
         casingRecipe();
         controllerRecipe();
+        phaseSynchronizerRecipe();
+        phaseDesynchronizerRecipe();
     }
 
     // -------------------------------------------------------------------------
@@ -42,6 +45,42 @@ public class HPRRecipes {
             .itemOutputs(new ItemStack(GTNHPPBlocks.CASINGS, 1, BlockGTNHPPCasings.HYBRID_PHASE_CASING))
             .eut(TierEU.RECIPE_LuV)
             .duration(10 * SECONDS)
+            .addTo(RecipeMaps.assemblerRecipes);
+    }
+
+    // -------------------------------------------------------------------------
+    // Phase Synchronizer — consumed by the HPR to retune its resonance field.
+    // 1 consumed per frequency step jumped; large jumps also reduce output.
+    // -------------------------------------------------------------------------
+    private static void phaseSynchronizerRecipe() {
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                ItemList.Field_Generator_ZPM.get(1),
+                GTOreDictUnificator.get(OrePrefixes.circuit, Materials.ZPM, 2),
+                plate(Materials.NaquadahAlloy, 4),
+                foil(Materials.Iridium, 4))
+            .fluidInputs(fluid("molten.solderingalloy", 576))
+            .itemOutputs(GTNHPPItems.phaseSynchronizer(4))
+            .eut(TierEU.RECIPE_ZPM)
+            .duration(30 * SECONDS)
+            .addTo(RecipeMaps.assemblerRecipes);
+    }
+
+    // -------------------------------------------------------------------------
+    // Phase Desynchronizer — deliberately collapses the resonance field by 1 step.
+    // Cheaper than a Synchronizer; useful for downshifting without burning fatigue.
+    // -------------------------------------------------------------------------
+    private static void phaseDesynchronizerRecipe() {
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                ItemList.Field_Generator_LuV.get(1),
+                GTOreDictUnificator.get(OrePrefixes.circuit, Materials.LuV, 2),
+                plate(Materials.NaquadahAlloy, 2),
+                foil(Materials.Naquadah, 4))
+            .fluidInputs(fluid("molten.solderingalloy", 288))
+            .itemOutputs(GTNHPPItems.phaseDesynchronizer(4))
+            .eut(TierEU.RECIPE_LuV)
+            .duration(20 * SECONDS)
             .addTo(RecipeMaps.assemblerRecipes);
     }
 

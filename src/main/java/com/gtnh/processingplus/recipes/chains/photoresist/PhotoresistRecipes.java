@@ -819,7 +819,7 @@ public class PhotoresistRecipes {
             .fluidOutputs(fluid(PrPMaterials.BioRefinedIntermediate, 1000))
             .duration(120)
             .eut(TierEU.RECIPE_UV)
-            .specialValue(1)
+            .specialValue(1 | (1 << 4) | (0 << 8)) // coil=Tier I, freqTag=1, freqRequired=0
             .addTo(GTNHPPRecipeMaps.sHPRRecipes);
     }
 
@@ -838,7 +838,7 @@ public class PhotoresistRecipes {
             .fluidOutputs(fluid(PrPMaterials.RadoxXenoxeneMatrix, 2500))
             .duration(200)
             .eut(TierEU.RECIPE_UHV)
-            .specialValue(2)
+            .specialValue(2 | (2 << 4) | (1 << 8)) // coil=Tier II, freqTag=2, freqRequired=1
             .addTo(GTNHPPRecipeMaps.sHPRRecipes);
     }
 
@@ -872,7 +872,7 @@ public class PhotoresistRecipes {
             .fluidOutputs(fluid(PrPMaterials.UHVPhotoresistMatrix, 100))
             .duration(200)
             .eut(TierEU.RECIPE_UHV)
-            .specialValue(2)
+            .specialValue(2 | (2 << 4) | (1 << 8)) // coil=Tier II, freqTag=2, freqRequired=1
             .addTo(GTNHPPRecipeMaps.sHPRRecipes);
     }
 
@@ -950,7 +950,7 @@ public class PhotoresistRecipes {
             .fluidOutputs(fluid(PrPMaterials.HypogenQuantumMatrix, 1000))
             .duration(200)
             .eut(TierEU.RECIPE_UEV)
-            .specialValue(3)
+            .specialValue(3 | (3 << 4) | (2 << 8)) // coil=Tier III, freqTag=3, freqRequired=2
             .addTo(GTNHPPRecipeMaps.sHPRRecipes);
     }
 
@@ -1125,7 +1125,7 @@ public class PhotoresistRecipes {
             .fluidOutputs(fluid(PrPMaterials.CreonTriflate, 1000))
             .duration(100)
             .eut(TierEU.RECIPE_UEV)
-            .specialValue(4)
+            .specialValue(4 | (4 << 4) | (3 << 8)) // coil=Tier IV, freqTag=4, freqRequired=3
             .addTo(GTNHPPRecipeMaps.sHPRRecipes);
     }
 

@@ -70,10 +70,10 @@ import gregtech.api.util.shutdown.ShutDownReasonRegistry;
  *
  * The machine tier is determined by the atmosphere casing (G), glass (A), and item
  * pipe casing (C) used in the structure:
- *   Tier 1 (IV)  — Dual-Sealed Atmosphere Casing + IV glass + Tin pipe
- *   Tier 2 (LuV) — Advanced Atmosphere Casing + LuV glass + Electrum pipe
- *   Tier 3 (UV)  — Pristine Atmosphere Casing + UV glass + Osmium pipe
- *   Tier 4 (UEV) — Absolute Atmosphere Casing + UEV glass + Quantium pipe
+ * Tier 1 (IV) — Dual-Sealed Atmosphere Casing + IV glass + Tin pipe
+ * Tier 2 (LuV) — Advanced Atmosphere Casing + LuV glass + Electrum pipe
+ * Tier 3 (UV) — Pristine Atmosphere Casing + UV glass + Osmium pipe
+ * Tier 4 (UEV) — Absolute Atmosphere Casing + UEV glass + Quantium pipe
  *
  * Consumes 1 mB/t of the active atmosphere gas while running.
  */
@@ -87,63 +87,26 @@ public class MTE_DAF extends MTEExtendedPowerMultiBlockBase<MTE_DAF> implements 
     private static final int OFFSET_Y = 3;
     private static final int OFFSET_Z = 1;
 
-
     private static final String[] TIER_NAMES = { "Invalid", "IV", "LuV", "UV", "UEV" };
 
     // ── Structure shape (7 layers × 7 rows × 18 cols) ───────────────────────────
-    // A=BW glass  B=GT casing:11  C=item pipe  D=NHCM casing  E=GT frame
-    // F=sheet metal  G=DAF atmo casing (tiered)  ~=controller
+    // A=BW glass B=GT casing:11 C=item pipe D=NHCM casing E=GT frame
+    // F=sheet metal G=DAF atmo casing (tiered) ~=controller
     private static final String[][] SHAPE_MAIN = {
-        { " E   E       E   E ",
-          " F   FBBBBBBBF   F ",
-          " FD DF B   B FD DF ",
-          " FD DF       FD DF ",
-          " FD DF B   B FD DF ",
-          " F   FBBBBBBBF   F ",
-          " E   E       E   E " },
-        { " F   FBBBBBBBF   F ",
-          "  GGGGB     BGGGG  ",
-          " BDCD AGGGGGA DCDB ",
-          " BDCD AGA~AGA DCDB ",
-          " BDCD AGGGGGA DCDB ",
-          "  GGGGB     BGGGG  ",
-          " F   FBBBBBBBF   F " },
-        { " FD DFBB   BBFD DF ",
-          " BDCD AGGGGGA DCDB ",
-          "B                 B",
-          "B                 B",
-          "B                 B",
-          " BDCD AGGGGGA DCDB",
-          " FD DFBB   BBFD DF" },
-        { " FD DFB     BFD DF",
-          " BDCD AGAAAGA DCDB",
-          "B                 B",
-          "B                 B",
-          "B                 B",
-          " BDCD AGAAAGA DCDB ",
-          " FD DFB     BFD DF " },
-        { " FD DFBB   BBFD DF ",
-          " BDCD AGGGGGA DCDB ",
-          "B                 B",
-          "B                 B",
-          "B                 B",
-          " BDCD AGGGGGA DCDB ",
-          " FD DFBB   BBFD DF " },
-        { " F   FBBBBBBBF   F ",
-          "  GGGGB     BGGGG  ",
-          " BDCD AGGGGGA DCDB ",
-          " BDCD AGAAAGA DCDB ",
-          " BDCD AGGGGGA DCDB ",
-          "  GGGGB     BGGGG  ",
-          " F   FBBBBBBBF   F " },
-        { " E   E       E   E ",
-          " F   FBBBBBBBF   F ",
-          " FD DF B   B FD DF ",
-          " FD DF       FD DF ",
-          " FD DF B   B FD DF ",
-          " F   FBBBBBBBF   F ",
-          " E   E       E   E " }
-    };
+        { " E   E       E   E ", " F   FBBBBBBBF   F ", " FD DF B   B FD DF ", " FD DF       FD DF ",
+            " FD DF B   B FD DF ", " F   FBBBBBBBF   F ", " E   E       E   E " },
+        { " F   FBBBBBBBF   F ", "  GGGGB     BGGGG  ", " BDCD AGGGGGA DCDB ", " BDCD AGA~AGA DCDB ",
+            " BDCD AGGGGGA DCDB ", "  GGGGB     BGGGG  ", " F   FBBBBBBBF   F " },
+        { " FD DFBB   BBFD DF ", " BDCD AGGGGGA DCDB ", "B                 B", "B                 B",
+            "B                 B", " BDCD AGGGGGA DCDB", " FD DFBB   BBFD DF" },
+        { " FD DFB     BFD DF", " BDCD AGAAAGA DCDB", "B                 B", "B                 B",
+            "B                 B", " BDCD AGAAAGA DCDB ", " FD DFB     BFD DF " },
+        { " FD DFBB   BBFD DF ", " BDCD AGGGGGA DCDB ", "B                 B", "B                 B",
+            "B                 B", " BDCD AGGGGGA DCDB ", " FD DFBB   BBFD DF " },
+        { " F   FBBBBBBBF   F ", "  GGGGB     BGGGG  ", " BDCD AGGGGGA DCDB ", " BDCD AGAAAGA DCDB ",
+            " BDCD AGGGGGA DCDB ", "  GGGGB     BGGGG  ", " F   FBBBBBBBF   F " },
+        { " E   E       E   E ", " F   FBBBBBBBF   F ", " FD DF B   B FD DF ", " FD DF       FD DF ",
+            " FD DF B   B FD DF ", " F   FBBBBBBBF   F ", " E   E       E   E " } };
 
     private boolean mIsOxidizing = true;
     private int mGlassTier = 0;
@@ -177,18 +140,27 @@ public class MTE_DAF extends MTEExtendedPowerMultiBlockBase<MTE_DAF> implements 
             ITierConverter<Byte> atmoCasingConverter = (block, meta) -> {
                 if (block != GTNHPPBlocks.CASINGS) return null;
                 switch (meta) {
-                    case BlockGTNHPPCasings.DAF_CASING:     return (byte) 1;
-                    case BlockGTNHPPCasings.DAF_CASING_LUV: return (byte) 2;
-                    case BlockGTNHPPCasings.DAF_CASING_UV:  return (byte) 3;
-                    case BlockGTNHPPCasings.DAF_CASING_UEV: return (byte) 4;
-                    default: return null;
+                    case BlockGTNHPPCasings.DAF_CASING:
+                        return (byte) 1;
+                    case BlockGTNHPPCasings.DAF_CASING_LUV:
+                        return (byte) 2;
+                    case BlockGTNHPPCasings.DAF_CASING_UV:
+                        return (byte) 3;
+                    case BlockGTNHPPCasings.DAF_CASING_UEV:
+                        return (byte) 4;
+                    default:
+                        return null;
                 }
             };
             List<Pair<net.minecraft.block.Block, Integer>> atmoCasingReps = new ArrayList<>();
-            atmoCasingReps.add(Pair.<net.minecraft.block.Block, Integer>of(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.DAF_CASING));
-            atmoCasingReps.add(Pair.<net.minecraft.block.Block, Integer>of(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.DAF_CASING_LUV));
-            atmoCasingReps.add(Pair.<net.minecraft.block.Block, Integer>of(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.DAF_CASING_UV));
-            atmoCasingReps.add(Pair.<net.minecraft.block.Block, Integer>of(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.DAF_CASING_UEV));
+            atmoCasingReps
+                .add(Pair.<net.minecraft.block.Block, Integer>of(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.DAF_CASING));
+            atmoCasingReps.add(
+                Pair.<net.minecraft.block.Block, Integer>of(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.DAF_CASING_LUV));
+            atmoCasingReps.add(
+                Pair.<net.minecraft.block.Block, Integer>of(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.DAF_CASING_UV));
+            atmoCasingReps.add(
+                Pair.<net.minecraft.block.Block, Integer>of(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.DAF_CASING_UEV));
 
             STRUCTURE_DEFINITION = StructureDefinition.<MTE_DAF>builder()
                 .addShape(STRUCTURE_PIECE_MAIN, SHAPE_MAIN)
@@ -213,12 +185,14 @@ public class MTE_DAF extends MTEExtendedPowerMultiBlockBase<MTE_DAF> implements 
                 // F = GT sheet metal (meta 306)
                 .addElement('F', ofBlock(GameRegistry.findBlock("gregtech", "gt.sheetmetal"), 306))
                 // G = atmosphere casing — tiered DAF casing; records which tier was built
-                .addElement('G', ofBlocksTiered(
-                    atmoCasingConverter,
-                    atmoCasingReps,
-                    (byte) -1,
-                    (mte, tier) -> mte.mAtmoCasingTier = tier,
-                    mte -> mte.mAtmoCasingTier))
+                .addElement(
+                    'G',
+                    ofBlocksTiered(
+                        atmoCasingConverter,
+                        atmoCasingReps,
+                        (byte) -1,
+                        (mte, tier) -> mte.mAtmoCasingTier = tier,
+                        mte -> mte.mAtmoCasingTier))
                 .build();
         }
         return STRUCTURE_DEFINITION;
@@ -247,8 +221,7 @@ public class MTE_DAF extends MTEExtendedPowerMultiBlockBase<MTE_DAF> implements 
     // ── Validation ───────────────────────────────────────────────────────────────
 
     @Override
-    public void checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack,
-        List<StructureError> errors) {
+    public void checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack, List<StructureError> errors) {
         mGlassTier = -1;
         mPipeCasingTier = -1;
         mAtmoCasingTier = -1;
@@ -290,8 +263,7 @@ public class MTE_DAF extends MTEExtendedPowerMultiBlockBase<MTE_DAF> implements 
         @Nonnull
         @Override
         protected CheckRecipeResult validateRecipe(@Nonnull GTRecipe recipe) {
-            return recipe.mSpecialValue <= mSpecialTier
-                ? CheckRecipeResultRegistry.SUCCESSFUL
+            return recipe.mSpecialValue <= mSpecialTier ? CheckRecipeResultRegistry.SUCCESSFUL
                 : CheckRecipeResultRegistry.NO_RECIPE;
         }
     }
@@ -313,9 +285,7 @@ public class MTE_DAF extends MTEExtendedPowerMultiBlockBase<MTE_DAF> implements 
         if (!super.onRunningTick(aStack)) return false;
 
         // Drain 1 mB/t of the active atmosphere gas
-        FluidStack atmo = mIsOxidizing
-            ? Materials.Oxygen.getFluid(1)
-            : Materials.Nitrogen.getFluid(1);
+        FluidStack atmo = mIsOxidizing ? Materials.Oxygen.getFluid(1) : Materials.Nitrogen.getFluid(1);
         if (!depleteInput(atmo)) {
             stopMachine(ShutDownReasonRegistry.POWER_LOSS);
             return false;
@@ -342,9 +312,7 @@ public class MTE_DAF extends MTEExtendedPowerMultiBlockBase<MTE_DAF> implements 
     public void onScrewdriverRightClick(ForgeDirection side, EntityPlayer aPlayer, float aX, float aY, float aZ,
         ItemStack aStack) {
         mIsOxidizing = !mIsOxidizing;
-        GTUtility.sendChatToPlayer(
-            aPlayer,
-            "DAF atmosphere: " + (mIsOxidizing ? "Oxidizing (O₂)" : "Inert (N₂/Ar)"));
+        GTUtility.sendChatToPlayer(aPlayer, "DAF atmosphere: " + (mIsOxidizing ? "Oxidizing (O₂)" : "Inert (N₂/Ar)"));
     }
 
     // ── NBT persistence ──────────────────────────────────────────────────────────
@@ -471,12 +439,12 @@ public class MTE_DAF extends MTEExtendedPowerMultiBlockBase<MTE_DAF> implements 
                 + mMaxProgresstime / 20
                 + EnumChatFormatting.RESET
                 + " s",
-            "Atmosphere: "
-                + (mIsOxidizing
-                    ? EnumChatFormatting.RED + "Oxidizing (O₂)"
-                    : EnumChatFormatting.AQUA + "Inert (N₂/Ar)"),
+            "Atmosphere: " + (mIsOxidizing ? EnumChatFormatting.RED + "Oxidizing (O₂)"
+                : EnumChatFormatting.AQUA + "Inert (N₂/Ar)"),
             "DAF Tier: " + EnumChatFormatting.YELLOW + tierName + EnumChatFormatting.RESET,
-            "Glass tier: " + EnumChatFormatting.AQUA + mGlassTier + EnumChatFormatting.RESET
+            "Glass tier: " + EnumChatFormatting.AQUA
+                + mGlassTier
+                + EnumChatFormatting.RESET
                 + " / Pipe tier: "
                 + EnumChatFormatting.AQUA
                 + mPipeCasingTier

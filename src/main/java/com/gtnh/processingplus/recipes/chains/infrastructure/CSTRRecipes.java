@@ -67,10 +67,15 @@ public class CSTRRecipes {
             "SHS",
             "MCM",
             "SPS",
-            'S', plate(Materials.Titanium, 1),
-            'H', ItemList.Hull_IV.get(1),
-            'M', ItemList.Electric_Motor_IV.get(1),
-            'C', circuit(8),
-            'P', ItemList.Electric_Pump_IV.get(1));
+            'S',
+            plate(Materials.Titanium, 1),
+            'H',
+            ItemList.Hull_IV.get(1),
+            'M',
+            ItemList.Electric_Motor_IV.get(1),
+            'C',
+            circuit(8),
+            'P',
+            ItemList.Electric_Pump_IV.get(1));
     }
 }

@@ -207,15 +207,14 @@ public class KaptonRecipes {
     // =========================================================
     private static void stepAlt_ChemicalImidization() {
 
-
-         GTValues.RA.stdBuilder()
-         .itemInputs(dust(PrPMaterials.PolyamicAcidFilm, 2))
-         .fluidInputs(fluid(PrPMaterials.AceticAnhydride, 500), fluid(PrPMaterials.Triethylamine, 200))
-         .fluidOutputs(fluid(Materials.AceticAcid, 500))
-         .itemOutputs(plate(PrPMaterials.Kapton, 2))
-         .duration(800)
-         .eut(TierEU.RECIPE_UV)
-         .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+        GTValues.RA.stdBuilder()
+            .itemInputs(dust(PrPMaterials.PolyamicAcidFilm, 2))
+            .fluidInputs(fluid(PrPMaterials.AceticAnhydride, 500), fluid(PrPMaterials.Triethylamine, 200))
+            .fluidOutputs(fluid(Materials.AceticAcid, 500))
+            .itemOutputs(plate(PrPMaterials.Kapton, 2))
+            .duration(800)
+            .eut(TierEU.RECIPE_UV)
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
 
     }
 }

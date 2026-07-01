@@ -2,11 +2,11 @@ package com.gtnh.processingplus.recipes;
 
 import com.gtnh.processingplus.recipes.chains.infrastructure.AARRecipes;
 import com.gtnh.processingplus.recipes.chains.infrastructure.BOFRecipes;
-import com.gtnh.processingplus.recipes.chains.infrastructure.CSTRRecipes;
 import com.gtnh.processingplus.recipes.chains.infrastructure.CACRecipes;
 import com.gtnh.processingplus.recipes.chains.infrastructure.CIDCRecipes;
 import com.gtnh.processingplus.recipes.chains.infrastructure.CRVRecipes;
 import com.gtnh.processingplus.recipes.chains.infrastructure.CSCRecipes;
+import com.gtnh.processingplus.recipes.chains.infrastructure.CSTRRecipes;
 import com.gtnh.processingplus.recipes.chains.infrastructure.CryoUpgradeRecipes;
 import com.gtnh.processingplus.recipes.chains.infrastructure.DAFRecipes;
 import com.gtnh.processingplus.recipes.chains.infrastructure.FreonRecipes;

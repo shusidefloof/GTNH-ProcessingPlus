@@ -31,8 +31,7 @@ public class HPRNEIFormatter implements INEISpecialInfoFormatter {
         lines.add(EnumChatFormatting.GOLD + "FRF Coil: " + EnumChatFormatting.WHITE + coilStr);
 
         if (freqTag > 0) {
-            StringBuilder freqLine = new StringBuilder()
-                .append(EnumChatFormatting.AQUA)
+            StringBuilder freqLine = new StringBuilder().append(EnumChatFormatting.AQUA)
                 .append("Resonance: ")
                 .append(EnumChatFormatting.WHITE)
                 .append("Tunes field to Freq ")

@@ -33,7 +33,7 @@ public class HBNRecipes {
             .itemInputs(GTOreDictUnificator.get("dustBoronTrioxide", 4), dust(Materials.Carbon, 9))
             .fluidOutputs(fluid(Materials.CarbonMonoxide, 2000), fluid(Materials.CarbonDioxide, 3000))
             .itemOutputs(dust(PrPMaterials.BoronCarbide, 4))
-            .duration(600)
+            .duration(5*20)
             .eut((int) (TierEU.RECIPE_EV * 0.75))
             .metadata(GTRecipeConstants.COIL_HEAT, 1800)
             .addTo(GTNHPPRecipeMaps.sHTRFRecipes);
@@ -49,8 +49,8 @@ public class HBNRecipes {
             .fluidInputs(fluid(Materials.Ammonia, 3000))
             .fluidOutputs(fluid(Materials.Methane, 1000), fluid(Materials.CarbonMonoxide, 500))
             .itemOutputs(dust(PrPMaterials.CrudeHBN, 2), dust(PrPMaterials.BNitrideWaste, 4))
-            .duration(60)
-            .eut(TierEU.RECIPE_LuV)
+            .duration(3 * 20)
+            .eut(TierEU.RECIPE_EV)
             .addTo(GTNHPPRecipeMaps.sAARRecipes);
     }
 
@@ -69,8 +69,8 @@ public class HBNRecipes {
                 fluid(Materials.Ammonia, 2000))
             .fluidOutputs(fluid(Materials.HydrochloricAcid, 3000), fluid(Materials.Water, 1000))
             .itemOutputs(dust(PrPMaterials.CrudeHBN, 1))
-            .duration(120)
-            .eut(TierEU.RECIPE_ZPM)
+            .duration(6 * 20)
+            .eut(TierEU.RECIPE_IV)
             .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
     }
 
@@ -101,8 +101,8 @@ public class HBNRecipes {
                 fluid(Materials.Argon, 4000 * 8),
                 fluid("oganesson", 288))
             .itemOutputs(dust(PrPMaterials.HexagonalBoronNitride, 2 * 8))
-            .duration(600)
-            .eut(TierEU.RECIPE_LuV)
+            .duration(10 * 20)
+            .eut(TierEU.RECIPE_IV)
             .metadata(GTRecipeConstants.COIL_HEAT, 2400)
             .addTo(GTNHPPRecipeMaps.sHPSFRecipes);
     }
@@ -117,9 +117,9 @@ public class HBNRecipes {
             .itemInputs(dust(PrPMaterials.BNitrideWaste, 4), circuit(1))
             .fluidInputs(fluid(Materials.Nitrogen, 2000))
             .itemOutputs(dust(PrPMaterials.CrudeHBN, 1))
-            .duration(400)
-            .eut(TierEU.RECIPE_LuV)
-            .metadata(GTRecipeConstants.COIL_HEAT, 2400)
+            .duration(10 * 20)
+            .eut(TierEU.RECIPE_ZPM)
+            .metadata(GTRecipeConstants.COIL_HEAT, 6400)
             .addTo(GTNHPPRecipeMaps.sHTRFRecipes);
     }
 }

@@ -32,7 +32,7 @@ public class SiCRecipes {
             .fluidOutputs(fluid(Materials.CarbonMonoxide, 2000))
             .itemOutputs(dust(PrPMaterials.CrudeSiCPowder, 2))
             .duration(400)
-            .eut(TierEU.RECIPE_LV)
+            .eut(TierEU.RECIPE_EV)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 
@@ -77,7 +77,7 @@ public class SiCRecipes {
             .fluidInputs(fluid(Materials.Argon, 500))
             .itemOutputs(dust(PrPMaterials.DenseSiCCompact, 2))
             .duration(600)
-            .eut(TierEU.RECIPE_MV)
+            .eut(TierEU.RECIPE_EV)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 
@@ -93,8 +93,4 @@ public class SiCRecipes {
             .eut(TierEU.RECIPE_EV)
             .addTo(RecipeMaps.formingPressRecipes);
     }
-
-    // =========================================================
-    // 5. SiC casing block for multiblocks
-    // =========================================================
 }

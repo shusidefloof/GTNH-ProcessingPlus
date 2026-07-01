@@ -106,8 +106,8 @@ public class AerogelRecipes {
                 fluid(Materials.HydrofluoricAcid, 100))
             .fluidOutputs(fluid(PrPMaterials.SilicaSol, 1000), fluid(Materials.Ethanol, 4000))
             .duration(600)
-            .eut(TierEU.RECIPE_UHV)
-            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
+            .eut(TierEU.RECIPE_LuV)
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 
     // =========================================================
@@ -121,8 +121,8 @@ public class AerogelRecipes {
             .itemOutputs(dust(PrPMaterials.WetSilicaGel, 2))
             .fluidOutputs(fluid(Materials.Water, 1000))
             .duration(800)
-            .eut(TierEU.RECIPE_UHV)
-            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
+            .eut(TierEU.RECIPE_LuV)
+            .addTo(GTNHPPRecipeMaps.sPCVRecipes);
     }
 
     // =========================================================
@@ -137,12 +137,11 @@ public class AerogelRecipes {
             .itemOutputs(dust(PrPMaterials.AgedSilicaGel, 4))
             .duration(3200)
             .eut(TierEU.RECIPE_EV)
-            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
+            .addTo(RecipeMaps.chemicalBathRecipes);
     }
 
     // =========================================================
-    // 4. Solvent Exchange — water displaced by ethanol under continuous flow (CSTR).
-    // Ethanol percolates through the gel matrix, carrying water out; classic CSTR operation.
+    // 4. Solvent Exchange — water displaced by ethanol (Chemical Bath).
     // =========================================================
     private static void step4_SolventExchange() {
 
@@ -153,7 +152,7 @@ public class AerogelRecipes {
             .itemOutputs(dust(PrPMaterials.EthanolSaturatedGel, 4))
             .duration(800)
             .eut(TierEU.RECIPE_EV)
-            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
+            .addTo(RecipeMaps.chemicalBathRecipes);
     }
 
     // =========================================================

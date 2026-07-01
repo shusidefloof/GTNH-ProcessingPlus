@@ -69,7 +69,6 @@ public class PhotoresistRecipes {
         ivFurfural();
         ivDihydropyran();
         ivTHPProtection();
-        ivIVBlend();
         ivIVBlendEV();
         // LuV — Triflic Acid sub-chain (reused through UMV)
         luvTrifluoromethane();
@@ -312,15 +311,17 @@ public class PhotoresistRecipes {
             .addTo(GTNHPPRecipeMaps.sHTRFRecipes);
     }
 
-    // IV: IV Photoresist blend — EV + THP-PHS (Mixer)
-    private static void ivIVBlend() {
+    // IV Photoresist — EV single-block Mixer fallback using cells so it doesn't require the IV multi-mixer.
+    // EVPhotoresist goes in as cells (2 = 2000 mB); THP-PHS stays the fluid. Slightly lower yield.
+    private static void ivIVBlendEV() {
         GTValues.RA.stdBuilder()
-            .itemInputs(circuit(4))
-            .fluidInputs(fluid(PrPMaterials.EVPhotoresist, 1250 * 2), fluid(PrPMaterials.THPProtectedPHS, 500))
-            .fluidOutputs(fluid(PrPMaterials.IVPhotoresist, 1250))
-            .duration(60)
-            .eut(TierEU.RECIPE_IV)
-            .addTo(GTPPRecipeMaps.mixerNonCellRecipes);
+            .itemInputs(cell(PrPMaterials.EVPhotoresist, 2), circuit(4))
+            .fluidInputs(fluid(PrPMaterials.THPProtectedPHS, 500))
+            .itemOutputs(ItemList.Cell_Empty.get(2))
+            .fluidOutputs(fluid(PrPMaterials.IVPhotoresist, 1000))
+            .duration(80)
+            .eut(TierEU.RECIPE_EV)
+            .addTo(RecipeMaps.mixerRecipes);
     }
 
     // LuV: Trifluoromethane — CHCl₃ + 3 HF (gates Triflic Acid)

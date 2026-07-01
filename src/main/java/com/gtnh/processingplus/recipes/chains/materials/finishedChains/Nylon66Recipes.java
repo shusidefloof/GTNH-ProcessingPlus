@@ -39,7 +39,7 @@ public class Nylon66Recipes {
             .itemInputs(circuit(1), item("catalystCobaltTitanium", 1))
             .fluidInputs(fluid(Materials.Phenol, 1000), fluid(Materials.Hydrogen, 3000))
             .fluidOutputs(fluid(PrPMaterials.Cyclohexanol, 1000))
-            .duration(200)
+            .duration(10 * 20)
             .eut(TierEU.RECIPE_HV)
             .metadata(GTRecipeConstants.CHEMPLANT_CASING_TIER, 3)
             .addTo(GTPPRecipeMaps.chemicalPlantRecipes);
@@ -54,7 +54,7 @@ public class Nylon66Recipes {
             .itemInputs(circuit(2))
             .fluidInputs(fluid(PrPMaterials.Cyclohexanol, 1000), fluid(Materials.Oxygen, 500))
             .fluidOutputs(fluid("cyclohexanone", 1000), fluid(Materials.Water, 500))
-            .duration(100 * 20)
+            .duration(10 * 20)
             .eut(TierEU.RECIPE_HV)
             .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
     }
@@ -71,7 +71,7 @@ public class Nylon66Recipes {
                 fluid(PrPMaterials.AdipicAcid, 2000),
                 fluid(Materials.NitrousOxide, 2000),
                 fluid(Materials.Water, 2000))
-            .duration(150)
+            .duration(400)
             .eut(TierEU.RECIPE_EV)
             .metadata(GTRecipeConstants.CHEMPLANT_CASING_TIER, 6)
             .addTo(GTPPRecipeMaps.chemicalPlantRecipes);
@@ -202,7 +202,7 @@ public class Nylon66Recipes {
         GTValues.RA.stdBuilder()
             .itemInputs(circuit(9))
             .fluidInputs(fluid(PrPMaterials.Caprolactam, 4000), fluid(Materials.Water, 500))
-            .fluidOutputs(molten(Materials.Polycaprolactam, 57600))
+            .fluidOutputs(molten(Materials.Polycaprolactam, 1152))
             .duration(600)
             .eut(TierEU.RECIPE_LuV)
             .metadata(GTRecipeConstants.CHEMPLANT_CASING_TIER, 5)

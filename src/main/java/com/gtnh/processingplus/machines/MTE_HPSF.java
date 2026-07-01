@@ -150,14 +150,14 @@ public class MTE_HPSF extends MTEExtendedPowerMultiBlockBase<MTE_HPSF> implement
                 // .addElement('A', chainAllGlasses())
                 // IC2 reinforced stone — base
                 .addElement('B', ofBlock(GameRegistry.findBlock("IC2", "blockAlloy"), 0))
-                // SCD casing — end caps + control chamber outer + hatch positions
+                // HPSF casing — end caps + control chamber outer + hatch positions
                 .addElement(
                     'C',
                     buildHatchAdder(MTE_HPSF.class)
                         .atLeast(Energy, InputBus, InputHatch, OutputBus, OutputHatch, Maintenance, Muffler)
                         .casingIndex(CASING_INDEX)
                         .hint(1)
-                        .buildAndChain(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.SCD_CASING))
+                        .buildAndChain(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.HPSF_CASING))
                 // Item pipe casings — tier (1-8) sets parallel count as 2^(tier-1)
                 // All D positions must be the same tier.
                 .addElement(
@@ -375,7 +375,6 @@ public class MTE_HPSF extends MTEExtendedPowerMultiBlockBase<MTE_HPSF> implement
             .beginStructureBlock(11, 8, 13, true)
             .addController("Center of the 3×3 face on the control chamber")
             .addCasingInfoMin("Hardened Pressure Vessel Casing", 1, false)
-            .addCasingInfoMin("High-Pressure Containment Casing", 1, false)
             .addCasingInfoMin("Dual-Sealed Atmosphere Pipe Casing", 1, false)
             .addOtherStructurePart("Heating Coils", "Inner sintering chamber lining")
             .addOtherStructurePart("TungstenSteel Frames", "Structural ring support")

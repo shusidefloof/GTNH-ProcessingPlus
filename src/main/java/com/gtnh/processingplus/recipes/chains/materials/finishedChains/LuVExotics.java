@@ -74,8 +74,8 @@ public class LuVExotics {
                 .fluidInputs(molten(Materials.FierySteel, 144))
                 .itemOutputs(intermediate(RED_HOT_ADAMANTIUM, 1))
                 .fluidOutputs(molten(Materials.Iron, 144))
-                .duration(600)
-                .eut(TierEU.RECIPE_LuV)
+                .duration(5 * 20)
+                .eut(TierEU.RECIPE_EV)
                 .addTo(RecipeMaps.chemicalBathRecipes));
     }
 
@@ -90,8 +90,8 @@ public class LuVExotics {
                     molten(Materials.Oriharukon, 72),
                     molten(Materials.Quantium, 72))
                 .fluidOutputs(fluid(PrPMaterials.VibraniumDye, 720))
-                .duration(400)
-                .eut(TierEU.RECIPE_LuV)
+                .duration(5 * 20)
+                .eut(TierEU.RECIPE_IV)
                 .addTo(GTPPRecipeMaps.mixerNonCellRecipes));
     }
 
@@ -103,8 +103,8 @@ public class LuVExotics {
                 .itemInputs(intermediate(RED_HOT_ADAMANTIUM, 1))
                 .fluidInputs(fluid(PrPMaterials.VibraniumDye, 144))
                 .itemOutputs(intermediate(RED_HOT_VIBRANT_ADAMANTIUM, 1))
-                .duration(600)
-                .eut(TierEU.RECIPE_LuV)
+                .duration(10 * 20)
+                .eut(TierEU.RECIPE_EV)
                 .addTo(RecipeMaps.chemicalBathRecipes));
     }
 
@@ -117,7 +117,7 @@ public class LuVExotics {
                 .itemInputs(intermediate(RED_HOT_VIBRANT_ADAMANTIUM, 1))
                 .fluidInputs(fluid(Materials.LifeEssence, 10000), molten(Materials.BloodInfusedIron, 144))
                 .itemOutputs(ingotHot(PrPMaterials.Vibranium, 1))
-                .duration(800)
+                .duration(20)
                 .eut(TierEU.RECIPE_ZPM)
                 .addTo(RecipeMaps.multiblockChemicalReactorRecipes));
     }
@@ -134,7 +134,7 @@ public class LuVExotics {
                 .itemInputs(circuit(1))
                 .fluidInputs(fluid(Materials.HydrofluoricAcid, 1000), fluid(Materials.SulfurTrioxide, 1000))
                 .fluidOutputs(fluid(PrPMaterials.FluorosulfuricAcid, 1000))
-                .duration(200)
+                .duration(10 * 20)
                 .eut(TierEU.RECIPE_EV)
                 .metadata(GTRecipeConstants.COIL_HEAT, 7300)
                 .addTo(GTNHPPRecipeMaps.sHTRFRecipes));
@@ -148,7 +148,7 @@ public class LuVExotics {
                 .itemInputs(circuit(1))
                 .fluidInputs(fluid(PrPMaterials.FluorosulfuricAcid, 1000), fluid("antimony pentafluoride", 1000))
                 .fluidOutputs(fluid(PrPMaterials.MagicAcid, 1000))
-                .duration(200)
+                .duration(5 * 20)
                 .eut(TierEU.RECIPE_IV)
                 .addTo(GTNHPPRecipeMaps.sCSTRRecipes));
     }
@@ -163,7 +163,7 @@ public class LuVExotics {
                 .fluidInputs(fluid(PrPMaterials.MagicAcid, 500), fluid("ic2superheatedsteam", 8000))
                 .itemOutputs(dust(Materials.Endstone, 1))
                 .fluidOutputs(fluid(PrPMaterials.DirtyUnobtaniumSlurry, 900))
-                .duration(400)
+                .duration(2 * 20)
                 .eut(TierEU.RECIPE_LuV)
                 .metadata(GTRecipeConstants.COIL_HEAT, 7200)
                 .addTo(GTNHPPRecipeMaps.sHTRFRecipes));
@@ -178,8 +178,8 @@ public class LuVExotics {
                 .fluidInputs(fluid(PrPMaterials.DirtyUnobtaniumSlurry, 1000), fluid("ic2distilledwater", 1000))
                 .itemOutputs(dust(Materials.Endstone, 1))
                 .fluidOutputs(fluid(PrPMaterials.WashedUnobtaniumSlurry, 1000))
-                .duration(300)
-                .eut(TierEU.RECIPE_LuV)
+                .duration(15 * 20)
+                .eut(TierEU.RECIPE_EV)
                 .addTo(RecipeMaps.chemicalBathRecipes));
     }
 
@@ -192,7 +192,7 @@ public class LuVExotics {
                 .fluidInputs(fluid(PrPMaterials.WashedUnobtaniumSlurry, 500))
                 .itemOutputs(intermediate(UNOBTANIUM_CRYSTAL_FRAGMENT, 2))
                 .fluidOutputs(fluid("ic2distilledwater", 50))
-                .duration(400)
+                .duration(5 * 20)
                 .eut(TierEU.RECIPE_LuV)
                 .addTo(RecipeMaps.autoclaveRecipes));
     }
@@ -206,7 +206,7 @@ public class LuVExotics {
                 .fluidInputs(fluid(PrPMaterials.EuropiumChloride, 500))
                 .itemOutputs(intermediate(PURIFIED_UNOBTANIUM_CRYSTAL, 2))
                 .fluidOutputs(fluid(PrPMaterials.EuropiumChlorideSolution, 500))
-                .duration(500)
+                .duration(7 * 20)
                 .eut(TierEU.RECIPE_LuV)
                 .addTo(RecipeMaps.laserEngraverRecipes));
     }
@@ -219,7 +219,7 @@ public class LuVExotics {
                 .itemInputs(circuit(1))
                 .fluidInputs(fluid(PrPMaterials.EuropiumChlorideSolution, 1000))
                 .fluidOutputs(fluid(PrPMaterials.EuropiumChloride, 1000), fluid(Materials.Water, 500))
-                .duration(300)
+                .duration(2 * 20)
                 .eut(TierEU.RECIPE_LuV)
                 .addTo(RecipeMaps.distillationTowerRecipes));
 
@@ -229,7 +229,7 @@ public class LuVExotics {
                 .itemInputs(circuit(1))
                 .fluidInputs(fluid(Materials.Chlorine, 1000), molten(Materials.Europium, 144))
                 .fluidOutputs(fluid(PrPMaterials.EuropiumChloride, 1000))
-                .duration(120)
+                .duration(6 * 20)
                 .eut(TierEU.RECIPE_IV)
                 .addTo(GTNHPPRecipeMaps.sCSTRRecipes));
     }
@@ -241,8 +241,8 @@ public class LuVExotics {
             () -> GTValues.RA.stdBuilder()
                 .itemInputs(intermediate(PURIFIED_UNOBTANIUM_CRYSTAL, 2))
                 .itemOutputs(intermediate(PURIFIED_UNOBTANIUM_SHARD, 4))
-                .duration(400)
-                .eut(TierEU.RECIPE_LuV)
+                .duration(5 * 20)
+                .eut(TierEU.RECIPE_HV)
                 .addTo(RecipeMaps.thermalCentrifugeRecipes));
     }
 
@@ -254,8 +254,8 @@ public class LuVExotics {
                 .itemInputs(intermediate(PURIFIED_UNOBTANIUM_SHARD, 4))
                 .fluidInputs(molten(Materials.FierySteel, 144))
                 .itemOutputs(intermediate(UNOBTANIUM_CLUMP, 1), intermediate(IRON_SLAG, 1))
-                .duration(400)
-                .eut(TierEU.RECIPE_LuV)
+                .duration(5 * 20)
+                .eut(TierEU.RECIPE_EV)
                 .addTo(GTNHPPRecipeMaps.sCSTRRecipes));
     }
 
@@ -266,28 +266,31 @@ public class LuVExotics {
             () -> GTValues.RA.stdBuilder()
                 .itemInputs(intermediate(UNOBTANIUM_CLUMP, 1))
                 .itemOutputs(dust(PrPMaterials.Unobtanium, 1))
-                .duration(300)
-                .eut(TierEU.RECIPE_LuV)
+                .duration(15 * 20)
+                .eut(TierEU.RECIPE_EV)
                 .addTo(RecipeMaps.centrifugeRecipes));
     }
 
     // -------------------------------------------------------------------------
-    // Late-LuV entry: Endstone is acid-leached into a single Ore Concentrate. Deliberately
-    // brutal — a huge Endstone batch plus two full buckets of precious Magic Acid for ONE
-    // concentrate — so it only exists to bootstrap Unobtanium before ZPM. Once you have ZPM
-    // components you build the Void Miner (see registerEndVoidMinerDrop) for the efficient bulk.
+    // Late-LuV entry: Sifting Endstone for Ore Concentrate — 5% concentrate chance, ~5120 blocks
+    // per 2 ingots. Byproducts (tungstate, platinum powder, sand, helium) ensure every run is
+    // rewarding even on a miss. Void Miner is the efficient ZPM bulk source.
     // -------------------------------------------------------------------------
     private static void unoEndConcentration() {
         safe(
             "unobtanium end concentration",
             () -> GTValues.RA.stdBuilder()
-                .itemInputs(dust(Materials.Endstone, 256), circuit(4))
-                .fluidInputs(fluid(PrPMaterials.MagicAcid, 8000))
-                .itemOutputs(intermediate(UNOBTANIUM_ORE_CONCENTRATE, 1))
-                .duration(360 * 20)
-                .eut(TierEU.RECIPE_LuV)
-                .metadata(GTRecipeConstants.COIL_HEAT, 7200)
-                .addTo(GTNHPPRecipeMaps.sHTRFRecipes));
+                .itemInputs(item("endstone", 64))
+                .itemOutputs(
+                    intermediate(UNOBTANIUM_ORE_CONCENTRATE, 1),
+                    dust(Materials.Tungstate, 4),
+                    item("dustPlatinumMetallicPowder", 3),
+                    item("sand", 48))
+                .outputChances(500, 3750, 2500, 9000)
+                .fluidOutputs(fluid(Materials.Helium, 5760))
+                .duration(60 * 20)
+                .eut(TierEU.RECIPE_HV)
+                .addTo(RecipeMaps.sifterRecipes));
     }
 
     // Registers the Ore Concentrate as a Void Miner drop in the vanilla End ("The End", dim 1) —

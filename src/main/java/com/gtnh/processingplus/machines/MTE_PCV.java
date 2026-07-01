@@ -32,16 +32,13 @@ import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.gtnh.processingplus.GTNHProcessingPlus;
 import com.gtnh.processingplus.blocks.BlockGTNHPPCasings;
 import com.gtnh.processingplus.blocks.GTNHPPBlocks;
-import com.gtnh.processingplus.materials.PrPMaterials;
 import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
 
 import gtPlusPlus.core.material.MaterialsAlloy;
 
-import bartworks.system.material.Werkstoff;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import gregtech.api.enums.OrePrefixes;
 import gregtech.api.enums.SoundResource;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
@@ -155,7 +152,6 @@ public class MTE_PCV extends MTEExtendedPowerMultiBlockBase<MTE_PCV> implements 
                 .addElement('S', ofFrame(MaterialsAlloy.INCONEL_792))
                 // --- Bartworks blocks ---
                 .addElement('A', fb("bartworks", "BW_GlasBlocks", 0))
-                // --- R = block of Promethium Betavoltaic Alloy (registered by bartworks from addMetalItems()) ---
                 .addElement('R', fb("bartworks", "BW_GlasBlocks", 0))
                 // --- Carbon Fiber Composite casing = the ONLY hatch-bearing element ---
                 .addElement(
@@ -184,26 +180,6 @@ public class MTE_PCV extends MTEExtendedPowerMultiBlockBase<MTE_PCV> implements 
         return ofBlock(b, meta);
     }
 
-    /**
-     * Resolves a Werkstoff's block form (OrePrefixes.block) at definition-build time. Falls back to
-     * PCV casing if bartworks hasn't registered the block for this material.
-     */
-    private static IStructureElement<MTE_PCV> werkstoffBlock(Werkstoff w) {
-        ItemStack s = w.get(OrePrefixes.block, 1);
-        if (s == null || s.getItem() == null) {
-            GTNHProcessingPlus.LOG
-                .warn("PCV structure: block form of {} not found — using PCV casing placeholder.", w.getDefaultName());
-            return ofBlock(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.PCV_CASING);
-        }
-        Block b = Block.getBlockFromItem(s.getItem());
-        if (b == null) {
-            GTNHProcessingPlus.LOG.warn(
-                "PCV structure: block form of {} resolved to null — using PCV casing placeholder.",
-                w.getDefaultName());
-            return ofBlock(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.PCV_CASING);
-        }
-        return ofBlock(b, s.getItemDamage());
-    }
 
     @Override
     public void construct(ItemStack stackSize, boolean hintsOnly) {
@@ -281,7 +257,7 @@ public class MTE_PCV extends MTEExtendedPowerMultiBlockBase<MTE_PCV> implements 
             .addController("Front face, main column")
             .addCasingInfoMin("Chemically Inert Reaction Vessel (PCV casing)", 20, false)
             .addOtherStructurePart(
-                "Pm Betavoltaic Alloy blocks, Inconel-792 frames, GT casings & frames",
+                "Borosilicate Glass blocks, Inconel-792 frames, GT casings & frames",
                 "Per structure hologram")
             .addInputBus("Any Carbon Fiber Composite casing", 1)
             .addInputHatch("Any Carbon Fiber Composite casing", 1)

@@ -9,6 +9,7 @@ import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.TierEU;
+import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.util.GTRecipeConstants;
 
 public class AerogelRecipes {
@@ -65,7 +66,7 @@ public class AerogelRecipes {
     }
 
     // =========================================================
-    // ALT: Trimethylchlorosilane synthesis — (CH3)3SiH + Cl2 → TMCS + HCl (CSTR)
+    // ALT: Trimethylchlorosilane synthesis — (CH3)3SiH + Cl2 → TMCS + HCl (LCR)
     // =========================================================
     private static void stepAlt_TrimethylchlorosilaneSynthesis() {
 
@@ -75,7 +76,7 @@ public class AerogelRecipes {
             .fluidOutputs(fluid(PrPMaterials.Trimethylchlorosilane, 1000), fluid(Materials.HydrochloricAcid, 1000))
             .duration(400)
             .eut(TierEU.RECIPE_EV)
-            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 
     // =========================================================
@@ -89,7 +90,7 @@ public class AerogelRecipes {
             .fluidOutputs(fluid(PrPMaterials.TEOS, 1000), fluid(Materials.HydrochloricAcid, 4000))
             .duration(400)
             .eut(TierEU.RECIPE_EV)
-            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 
     // =========================================================
@@ -207,7 +208,7 @@ public class AerogelRecipes {
     }
 
     // =========================================================
-    // 6. Hydrophobic surface modification — TMCS caps surface silanol groups (CSTR).
+    // 6. Hydrophobic surface modification — TMCS caps surface silanol groups (Chemical Bath).
     // =========================================================
     private static void step6_HydrophobicTreatment() {
 
@@ -218,6 +219,6 @@ public class AerogelRecipes {
             .itemOutputs(plate(PrPMaterials.HydrophobicSilicaAerogel, 2))
             .duration(600)
             .eut(TierEU.RECIPE_UV)
-            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
+            .addTo(RecipeMaps.chemicalBathRecipes);
     }
 }

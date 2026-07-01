@@ -296,8 +296,7 @@ public class NeptuniumSynthesis {
             .addTo(RecipeMaps.electrolyzerRecipes);
 
         GTValues.RA.stdBuilder()
-            .fluidInputs(fluid(Materials.Deuterium, 2000),
-                fluid(Materials.Oxygen, 1000))
+            .fluidInputs(fluid(Materials.Deuterium, 2000), fluid(Materials.Oxygen, 1000))
             .fluidOutputs(fluid(PrPMaterials.HeavyWater, 1000))
             .duration(5 * 20)
             .eut(TierEU.RECIPE_HV)

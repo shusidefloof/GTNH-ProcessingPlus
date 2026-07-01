@@ -46,9 +46,9 @@ public class BlockGTNHPPCasings extends Block {
     public static final int HYBRID_PHASE_CASING = 26; // HPR reactor shell
     public static final int SUBATOMIC_PATTERNING_CASING = 27; // SPU shell
     public static final int DAF_CASING_LUV = 28; // DAF LuV-tier chamber shell
-    public static final int DAF_CASING_UV = 29;  // DAF UV-tier chamber shell
+    public static final int DAF_CASING_UV = 29; // DAF UV-tier chamber shell
     public static final int DAF_CASING_UEV = 30; // DAF UEV-tier chamber shell
-    public static final int CSTR_CASING = 31;    // Continuous Stirred Tank Reactor shell
+    public static final int CSTR_CASING = 31; // Continuous Stirred Tank Reactor shell
     public static final int NUM_CASINGS = 32;
 
     // @formatter:off

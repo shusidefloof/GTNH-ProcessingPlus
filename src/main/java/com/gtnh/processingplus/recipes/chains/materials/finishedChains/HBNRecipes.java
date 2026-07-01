@@ -5,8 +5,6 @@ import static com.gtnh.processingplus.recipes.PPRecipeHelper.*;
 import com.gtnh.processingplus.materials.PrPMaterials;
 import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
 
-import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
-
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.TierEU;
@@ -33,7 +31,7 @@ public class HBNRecipes {
             .itemInputs(GTOreDictUnificator.get("dustBoronTrioxide", 4), dust(Materials.Carbon, 9))
             .fluidOutputs(fluid(Materials.CarbonMonoxide, 2000), fluid(Materials.CarbonDioxide, 3000))
             .itemOutputs(dust(PrPMaterials.BoronCarbide, 4))
-            .duration(5*20)
+            .duration(5 * 20)
             .eut((int) (TierEU.RECIPE_EV * 0.75))
             .metadata(GTRecipeConstants.COIL_HEAT, 1800)
             .addTo(GTNHPPRecipeMaps.sHTRFRecipes);

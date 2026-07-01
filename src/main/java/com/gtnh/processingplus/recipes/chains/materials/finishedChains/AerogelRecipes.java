@@ -179,14 +179,14 @@ public class AerogelRecipes {
     // without any liquid-vapour interface. Both the recovered CO₂ (loops to CSC) and acetone are
     // vented during controlled depressurisation.
     //
-    //   Stage 1 — Acetone flush (~10 mB/t): acetone is circulated through the gel to ensure full
-    //             pore saturation and displace any remaining water before CO₂ is introduced.
-    //   Stage 2 — scCO₂ infusion: Liquid CO₂ from the CSC is pumped in (~24 mB/t baseline).
-    //             Freon R-12 lowers the critical temperature and completes stage 2 in half the time.
-    //   Stage 3 — Controlled depressurisation (empty hatch): CO₂ vented slowly. Any fluid present
-    //             at this point contaminates the pore structure → degraded (collapsed) output.
+    // Stage 1 — Acetone flush (~10 mB/t): acetone is circulated through the gel to ensure full
+    // pore saturation and displace any remaining water before CO₂ is introduced.
+    // Stage 2 — scCO₂ infusion: Liquid CO₂ from the CSC is pumped in (~24 mB/t baseline).
+    // Freon R-12 lowers the critical temperature and completes stage 2 in half the time.
+    // Stage 3 — Controlled depressurisation (empty hatch): CO₂ vented slowly. Any fluid present
+    // at this point contaminates the pore structure → degraded (collapsed) output.
     //
-    // Perfect output:  SilicaAerogel plate × 2 + CO₂ gas 8 000 mB + Acetone 3 500 mB (recovered).
+    // Perfect output: SilicaAerogel plate × 2 + CO₂ gas 8 000 mB + Acetone 3 500 mB (recovered).
     // Degraded output: AcetoneSaturatedGel dust × 2 (collapsed gel; re-submittable for another attempt).
     // =========================================================
     private static void step5_SupercriticalDrying() {
@@ -194,15 +194,14 @@ public class AerogelRecipes {
         GTValues.RA.stdBuilder()
             .itemInputs(dust(PrPMaterials.AcetoneSaturatedGel, 4))
             .itemOutputs(
-                plate(PrPMaterials.SilicaAerogel, 2),              // [0] perfect
-                dust(PrPMaterials.AcetoneSaturatedGel, 2))          // [1] degraded
+                plate(PrPMaterials.SilicaAerogel, 2), // [0] perfect
+                dust(PrPMaterials.AcetoneSaturatedGel, 2)) // [1] degraded
             .fluidOutputs(
-                fluid(Materials.CarbonDioxide, 8000),               // CO₂ recovery loop
-                fluid(Materials.Acetone, 3500))                     // acetone recovery
+                fluid(Materials.CarbonDioxide, 8000), // CO₂ recovery loop
+                fluid(Materials.Acetone, 3500)) // acetone recovery
             .duration(1000)
             .eut(TierEU.RECIPE_HV)
-            .metadata(GTRecipeConstants.COIL_HEAT,
-                MTE_SCD.encodeStageData(MTE_SCD.STAGE1_ACETONE, 10, 24))
+            .metadata(GTRecipeConstants.COIL_HEAT, MTE_SCD.encodeStageData(MTE_SCD.STAGE1_ACETONE, 10, 24))
             .addTo(GTNHPPRecipeMaps.sSCDRecipes);
     }
 

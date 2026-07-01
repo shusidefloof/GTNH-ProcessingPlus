@@ -80,12 +80,20 @@ public class MTE_HPR extends MTEExtendedPowerMultiBlockBase<MTE_HPR> implements 
     private int mIdleTicks = 0;
 
     // mSpecialValue bit layout for HPR recipes:
-    //   bits 0-3  → coil tier required (1-indexed; 0 = any)
-    //   bits 4-7  → frequency tag (1-4; 0 = no frequency mechanic for this recipe)
-    //   bits 8-11 → minimum field frequency required (0-4)
-    static int getCoilTierRequired(GTRecipe r) { return r.mSpecialValue & 0xF; }
-    static int getFrequencyTag(GTRecipe r)      { return (r.mSpecialValue >> 4) & 0xF; }
-    static int getFrequencyRequired(GTRecipe r) { return (r.mSpecialValue >> 8) & 0xF; }
+    // bits 0-3 → coil tier required (1-indexed; 0 = any)
+    // bits 4-7 → frequency tag (1-4; 0 = no frequency mechanic for this recipe)
+    // bits 8-11 → minimum field frequency required (0-4)
+    static int getCoilTierRequired(GTRecipe r) {
+        return r.mSpecialValue & 0xF;
+    }
+
+    static int getFrequencyTag(GTRecipe r) {
+        return (r.mSpecialValue >> 4) & 0xF;
+    }
+
+    static int getFrequencyRequired(GTRecipe r) {
+        return (r.mSpecialValue >> 8) & 0xF;
+    }
 
     private static IStructureDefinition<MTE_HPR> STRUCTURE_DEFINITION = null;
 
@@ -297,17 +305,44 @@ public class MTE_HPR extends MTEExtendedPowerMultiBlockBase<MTE_HPR> implements 
             int num, den;
             if (delta > 0) {
                 // Frequency switch: jump penalty, fatigue irrelevant (already reset)
-                if (delta == 1)     { num = 10; den = 10; } // normal
-                else if (delta == 2){ num =  7; den = 10; } // -30%
-                else                { num =  5; den = 10; } // -50%
+                if (delta == 1) {
+                    num = 10;
+                    den = 10;
+                } // normal
+                else if (delta == 2) {
+                    num = 7;
+                    den = 10;
+                } // -30%
+                else {
+                    num = 5;
+                    den = 10;
+                } // -50%
             } else {
                 // Same frequency: fatigue degrades output over time
-                if (fatigue <= 2)               { num = 15; den = 10;   } // +50% fresh-switch bonus (3 runs)
-                else if (fatigue <= 4)          { num = 10; den = 10;   } // normal
-                else if (fatigue <= 10)         { num =  8; den = 10;   } // -20% degraded
-                else if (fatigue <= 18)         { num =  6; den = 10;   } // -40% saturated
-                else if (fatigue < FATIGUE_SHUTDOWN) { num = 5; den = 10; } // -50% fully saturated
-                else                            { num =  1; den = 1000; } // coil saturated — near-zero output
+                if (fatigue <= 2) {
+                    num = 15;
+                    den = 10;
+                } // +50% fresh-switch bonus (3 runs)
+                else if (fatigue <= 4) {
+                    num = 10;
+                    den = 10;
+                } // normal
+                else if (fatigue <= 10) {
+                    num = 8;
+                    den = 10;
+                } // -20% degraded
+                else if (fatigue <= 18) {
+                    num = 6;
+                    den = 10;
+                } // -40% saturated
+                else if (fatigue < FATIGUE_SHUTDOWN) {
+                    num = 5;
+                    den = 10;
+                } // -50% fully saturated
+                else {
+                    num = 1;
+                    den = 1000;
+                } // coil saturated — near-zero output
             }
             if (num == den) return;
 
@@ -460,37 +495,48 @@ public class MTE_HPR extends MTEExtendedPowerMultiBlockBase<MTE_HPR> implements 
             .addInfo("Use higher tier coils to unlock more recipes.")
             .addSeparator()
             .addInfo(EnumChatFormatting.GOLD + "Resonance Field Frequency (0-4):")
+            .addInfo(EnumChatFormatting.GRAY + "  Recipes require a minimum field frequency to start.")
             .addInfo(
-                EnumChatFormatting.GRAY + "  Recipes require a minimum field frequency to start.")
-            .addInfo(
-                EnumChatFormatting.GRAY + "  Each recipe tunes the field to its own frequency when run using a " + EnumChatFormatting.WHITE
+                EnumChatFormatting.GRAY + "  Each recipe tunes the field to its own frequency when run using a "
+                    + EnumChatFormatting.WHITE
                     + "Phase Synchronizer")
             .addInfo(
                 EnumChatFormatting.GRAY + "  Jumping frequency costs "
                     + EnumChatFormatting.WHITE
                     + "Phase Synchronizers"
                     + EnumChatFormatting.GRAY
-                    + " (1 per step)," + "and can only jump one frequency level.")
-            .addInfo(
-                EnumChatFormatting.RED + "  20 idle ticks (1s) with no recipe resets the field to 0.")
+                    + " (1 per step),"
+                    + "and can only jump one frequency level.")
+            .addInfo(EnumChatFormatting.RED + "  20 idle ticks (1s) with no recipe resets the field to 0.")
             .addSeparator()
             .addInfo(EnumChatFormatting.GOLD + "Resonance Fatigue:")
             .addInfo(
-                EnumChatFormatting.GRAY + "  On recipe completion the Resonance fatigue is increased by 1, Fatigue affects the machine output multiplier:")
+                EnumChatFormatting.GRAY
+                    + "  On recipe completion the Resonance fatigue is increased by 1, Fatigue affects the machine output multiplier:")
             .addInfo(
                 EnumChatFormatting.GRAY + "  Fatigue 1-3: "
-                    + EnumChatFormatting.GREEN + "+50%"
-                    + EnumChatFormatting.GRAY + "  |  4-5: "
-                    + EnumChatFormatting.WHITE + "100%"
-                    + EnumChatFormatting.GRAY + "  |  6-11: "
-                    + EnumChatFormatting.YELLOW + "-20%"
-                    + EnumChatFormatting.GRAY + "  |  12-19: "
-                    + EnumChatFormatting.RED + "-40%")
+                    + EnumChatFormatting.GREEN
+                    + "+50%"
+                    + EnumChatFormatting.GRAY
+                    + "  |  4-5: "
+                    + EnumChatFormatting.WHITE
+                    + "100%"
+                    + EnumChatFormatting.GRAY
+                    + "  |  6-11: "
+                    + EnumChatFormatting.YELLOW
+                    + "-20%"
+                    + EnumChatFormatting.GRAY
+                    + "  |  12-19: "
+                    + EnumChatFormatting.RED
+                    + "-40%")
             .addInfo(
                 EnumChatFormatting.GRAY + "  20-99: "
-                    + EnumChatFormatting.DARK_RED + "-50%"
-                    + EnumChatFormatting.GRAY + "  |  100+: "
-                    + EnumChatFormatting.DARK_RED + "~0% (coil saturated)")
+                    + EnumChatFormatting.DARK_RED
+                    + "-50%"
+                    + EnumChatFormatting.GRAY
+                    + "  |  100+: "
+                    + EnumChatFormatting.DARK_RED
+                    + "~0% (coil saturated)")
             .beginStructureBlock(29, 29, 7, true)
             .addController("Second layer from front, center vessel center")
             .addOtherStructurePart("FRF Coil (any tier)", "Core reaction rings (A)", 1)
@@ -510,10 +556,8 @@ public class MTE_HPR extends MTEExtendedPowerMultiBlockBase<MTE_HPR> implements 
         String tierLine = mCoilTier >= 0 && mCoilTier < TIER_DISPLAY.length
             ? EnumChatFormatting.AQUA + "FRF Coil: " + EnumChatFormatting.WHITE + TIER_DISPLAY[mCoilTier]
             : EnumChatFormatting.RED + "FRF Coil: not formed";
-        String freqLine = mFieldFrequency == 0
-            ? EnumChatFormatting.RED + "Resonance Field: Untuned (Frequency 0)"
-            : EnumChatFormatting.AQUA + "Resonance Field: " + EnumChatFormatting.WHITE + "Frequency "
-                + mFieldFrequency;
+        String freqLine = mFieldFrequency == 0 ? EnumChatFormatting.RED + "Resonance Field: Untuned (Frequency 0)"
+            : EnumChatFormatting.AQUA + "Resonance Field: " + EnumChatFormatting.WHITE + "Frequency " + mFieldFrequency;
         String fatigueLine;
         if (mFieldFrequency == 0) {
             fatigueLine = EnumChatFormatting.GRAY + "Resonance Fatigue: N/A";
@@ -530,15 +574,15 @@ public class MTE_HPR extends MTEExtendedPowerMultiBlockBase<MTE_HPR> implements 
         } else {
             fatigueLine = EnumChatFormatting.DARK_RED + "Resonance Fatigue: " + mResonanceFatigue + " (~0% SATURATED)";
         }
-        return new String[] {
-            StatCollector.translateToLocal("GT5U.multiblock.Progress") + ": "
-                + EnumChatFormatting.GREEN + mProgresstime / 20
-                + EnumChatFormatting.RESET + " s / "
-                + EnumChatFormatting.YELLOW + mMaxProgresstime / 20
-                + EnumChatFormatting.RESET + " s",
-            tierLine,
-            freqLine,
-            fatigueLine };
+        return new String[] { StatCollector.translateToLocal("GT5U.multiblock.Progress") + ": "
+            + EnumChatFormatting.GREEN
+            + mProgresstime / 20
+            + EnumChatFormatting.RESET
+            + " s / "
+            + EnumChatFormatting.YELLOW
+            + mMaxProgresstime / 20
+            + EnumChatFormatting.RESET
+            + " s", tierLine, freqLine, fatigueLine };
     }
 
     @Override

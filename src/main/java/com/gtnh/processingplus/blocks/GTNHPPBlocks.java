@@ -2,11 +2,11 @@ package com.gtnh.processingplus.blocks;
 
 import com.gtnh.processingplus.machines.MTE_AAR;
 import com.gtnh.processingplus.machines.MTE_BOF;
-import com.gtnh.processingplus.machines.MTE_CSTR;
 import com.gtnh.processingplus.machines.MTE_CAC;
 import com.gtnh.processingplus.machines.MTE_CIDC;
 import com.gtnh.processingplus.machines.MTE_CRV;
 import com.gtnh.processingplus.machines.MTE_CSC;
+import com.gtnh.processingplus.machines.MTE_CSTR;
 import com.gtnh.processingplus.machines.MTE_DAF;
 import com.gtnh.processingplus.machines.MTE_HPR;
 import com.gtnh.processingplus.machines.MTE_HPSF;

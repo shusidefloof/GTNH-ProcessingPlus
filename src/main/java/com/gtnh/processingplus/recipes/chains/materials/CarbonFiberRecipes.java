@@ -163,8 +163,8 @@ public class CarbonFiberRecipes {
     private static void stepAlt_PitchStabilization() {
 
         GTValues.RA.stdBuilder()
-            // Both fluids are continuous per-tick inputs; ~1200 mB Pitch + ~2400 mB O₂ total over 1200t
-            .fluidInputs(fluid(PrPMaterials.MesophasePitch, 1), fluid(Materials.Oxygen, 2))
+            // Both fluids are continuous per-tick inputs; ~6000 mB Pitch + ~12000 * 5 mB O₂ total over 1200t
+            .fluidInputs(fluid(PrPMaterials.MesophasePitch, 5), fluid(Materials.Oxygen, 2))
             .itemOutputs(dust(PrPMaterials.StabilizedPolyacrylonitrile, 3))
             .duration(1200)
             .eut(TierEU.RECIPE_UV)

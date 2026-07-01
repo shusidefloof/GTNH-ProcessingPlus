@@ -3,11 +3,11 @@ package com.gtnh.processingplus.recipes.chains.infrastructure;
 import static com.gtnh.processingplus.recipes.PPRecipeHelper.*;
 
 import com.gtnh.processingplus.materials.PrPMaterials;
+import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
 
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.TierEU;
-import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.util.GTRecipeConstants;
 
 public class FreonRecipes {
@@ -37,6 +37,6 @@ public class FreonRecipes {
             .fluidOutputs(fluid(PrPMaterials.FreonR12, 1000), fluid(Materials.HydrochloricAcid, 2000))
             .duration(400)
             .eut(TierEU.RECIPE_HV)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
     }
 }

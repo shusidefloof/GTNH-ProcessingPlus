@@ -10,6 +10,7 @@ import net.minecraft.item.ItemStack;
 
 import com.gtnh.processingplus.blocks.BlockGTNHPPCasings;
 import com.gtnh.processingplus.blocks.GTNHPPBlocks;
+import com.gtnh.processingplus.machines.MTE_SCD;
 import com.gtnh.processingplus.materials.PrPMaterials;
 import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
 
@@ -26,9 +27,23 @@ import gregtech.api.util.recipe.Scanning;
 public class SCDRecipes {
 
     public static void init() {
+        registerStageFluids();
         casingRecipe();
         controllerRecipe();
         carbonAerogelChain();
+    }
+
+    // =========================================================
+    // Stage fluid registration — must run before recipe additions
+    // =========================================================
+    private static void registerStageFluids() {
+        // Stage 1 fluids (solvent purge)
+        MTE_SCD.registerStage1Fluid(MTE_SCD.STAGE1_ACETONE, fluid(Materials.Acetone, 1).getFluid());
+        MTE_SCD.registerStage1Fluid(MTE_SCD.STAGE1_ETHANOL, fluid(Materials.Ethanol, 1).getFluid());
+
+        // Stage 2 supercritical fluids — extraTicksPerTick: 0 = 1× baseline, 1 = 2× faster
+        MTE_SCD.registerStage2Fluid(fluid(PrPMaterials.LiquidCO2, 1).getFluid(), 0);   // Liquid CO₂: baseline
+        MTE_SCD.registerStage2Fluid(fluid(PrPMaterials.FreonR12, 1).getFluid(), 1);     // Freon R-12: 2× faster
     }
 
     // =========================================================
@@ -77,23 +92,22 @@ public class SCDRecipes {
     // =========================================================
     // Carbon aerogel chain (PAN route) — design doc v1.1
     //
-    // Step A (SCD): PolyacrylonitrileSolution + H₂O → WetPANGel + DilutedNMP
-    // Water triggers gelation of the PAN/NMP dope; the majority of NMP is
-    // displaced and recovered as diluted NMP (same by-product as the PAN chain).
+    // Step A (PCV): PolyacrylonitrileSolution + H₂O → WetPANGel + DilutedNMP
+    //   Water triggers gelation of the PAN/NMP dope; NMP is displaced and
+    //   recovered as diluted NMP. Moved to PCV (polycondensation/gelation step).
     //
-    // Step B (SCD): WetPANGel + LiquidCO₂ → PANAerogel + CO₂ gas
-    // Supercritical CO₂ drying — identical mechanism to the silica route but
-    // without the acetone exchange step (PAN is directly CO₂-compatible at
-    // supercritical conditions after water removal in Step A).
+    // Step B (SCD, 3-stage): WetPANGel → PANAerogel + CO₂ gas
+    //   Stage 1 (empty hatch): PAN gel enters pre-dried — no solvent exchange needed.
+    //   Stage 2 (Liquid CO₂ / Freon R-12): supercritical CO₂ extraction.
+    //     ~24 mB/t with Liquid CO₂ → ~8 L total; Freon R-12 halves stage-2 time.
+    //   Stage 3 (empty hatch): depressurization — fluid contamination degrades the aerogel.
     //
     // Step C (HTRF): PANAerogel → CarbonAerogel + CO₂ + NH₃
-    // Pyrolysis / carbonization at ~3600 K. PAN's nitrile groups cyclize,
-    // then aromatize to a turbostratic carbon network; oxygen and nitrogen
-    // off-gas as CO₂ and NH₃.
+    //   Pyrolysis / carbonization at ~3600 K.
     // =========================================================
     private static void carbonAerogelChain() {
 
-        // Step A — PAN sol-gel (SCD, water-triggered gelation)
+        // Step A — PAN sol-gel (PCV, water-triggered gelation)
         GTValues.RA.stdBuilder()
             .itemInputs(circuit(3))
             .fluidInputs(fluid(PrPMaterials.PolyacrylonitrileSolution, 4000), fluid(Materials.Water, 1000))
@@ -101,16 +115,23 @@ public class SCDRecipes {
             .fluidOutputs(fluid(PrPMaterials.DilutedNMP, 3000))
             .duration(1200)
             .eut(TierEU.RECIPE_EV)
-            .addTo(GTNHPPRecipeMaps.sSCDRecipes);
+            .addTo(GTNHPPRecipeMaps.sPCVRecipes);
 
-        // Step B — supercritical CO₂ drying (SCD)
+        // Step B — supercritical CO₂ drying (SCD, 3-stage mechanic)
+        //   Stage 1: Ethanol flush (~10 mB/t) — displaces residual water from the PAN gel pores
+        //     before CO₂ is introduced; ethanol is miscible with both water and CO₂.
+        //   Stage 2: Liquid CO₂ baseline (24 mB/t × ~333 t ≈ 8 000 mB); Freon R-12 halves stage-2 time.
+        //   Stage 3: empty hatch. Fluid present → degraded output (WetPANGel × 2, gel collapsed).
         GTValues.RA.stdBuilder()
             .itemInputs(dust(PrPMaterials.WetPANGel, 4))
-            .fluidInputs(fluid(PrPMaterials.LiquidCO2, 8000))
-            .itemOutputs(dust(PrPMaterials.PANAerogel, 4))
+            .itemOutputs(
+                dust(PrPMaterials.PANAerogel, 4),  // [0] perfect: aerogel network intact
+                dust(PrPMaterials.WetPANGel, 2))   // [1] degraded: gel collapsed, half returned
             .fluidOutputs(fluid(Materials.CarbonDioxide, 8000))
             .duration(1000)
             .eut(TierEU.RECIPE_EV)
+            .metadata(GTRecipeConstants.COIL_HEAT,
+                MTE_SCD.encodeStageData(MTE_SCD.STAGE1_ETHANOL, 10, 24))
             .addTo(GTNHPPRecipeMaps.sSCDRecipes);
 
         // Step C — pyrolysis / carbonization (HTRF)

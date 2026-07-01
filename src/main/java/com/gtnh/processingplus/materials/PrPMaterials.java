@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.function.Supplier;
 
 import bartworks.system.material.Werkstoff;
+import gregtech.api.enums.OrePrefixes;
 import gregtech.api.enums.TextureSet;
 
 public class PrPMaterials implements Runnable {
@@ -2383,7 +2384,8 @@ public class PrPMaterials implements Runnable {
                 new Werkstoff.GenerationFeatures().onlyDust()
                     .addMolten()
                     .addMetalItems()
-                    .addSimpleMetalWorkingItems(),
+                    .addSimpleMetalWorkingItems()
+                    .addPrefix(OrePrefixes.block),
                 id(),
                 TextureSet.SET_SHINY));
 

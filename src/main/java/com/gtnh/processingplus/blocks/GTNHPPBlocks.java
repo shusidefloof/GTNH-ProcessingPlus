@@ -2,6 +2,7 @@ package com.gtnh.processingplus.blocks;
 
 import com.gtnh.processingplus.machines.MTE_AAR;
 import com.gtnh.processingplus.machines.MTE_BOF;
+import com.gtnh.processingplus.machines.MTE_CSTR;
 import com.gtnh.processingplus.machines.MTE_CAC;
 import com.gtnh.processingplus.machines.MTE_CIDC;
 import com.gtnh.processingplus.machines.MTE_CRV;
@@ -64,6 +65,9 @@ public class GTNHPPBlocks {
     /** DAF controller instance — kept so its assembler recipe can reference the controller stack. */
     public static MTE_DAF DAF;
 
+    /** CSTR controller instance — kept so its assembler recipe can reference the controller stack. */
+    public static MTE_CSTR CSTR;
+
     // Reserved MTE IDs for the four not-yet-built multiblocks. The design doc's values
     // (CIDC 31511, HPR 31512, SPU 31513, CRC 31514) are ALREADY taken by HPSF and the three SPC
     // modules — use these instead. They sit in the unused 31500-31504 gap, below every live machine
@@ -80,6 +84,9 @@ public class GTNHPPBlocks {
 
     // DAF sits right after SCD, still within the 31518-31528 gap before cable loaders.
     public static final int DAF_ID = 31518;
+
+    // CSTR sits right after DAF, still within the 31519-31528 gap before cable loaders.
+    public static final int CSTR_ID = 31519;
 
     private static final int OFFSET = 31_517;
     private static int nextId = OFFSET;
@@ -125,6 +132,8 @@ public class GTNHPPBlocks {
         SPU.getStackForm(1);
         DAF = new MTE_DAF(DAF_ID, "gtnhpp.daf", "Dual Atmosphere Furnace");
         DAF.getStackForm(1);
+        CSTR = new MTE_CSTR(CSTR_ID, "gtnhpp.cstr", "Continuous Stirred Tank Reactor");
+        CSTR.getStackForm(1);
 
         // Unobtanium superconductor — lossless placeable wires + cables (ZPM); recipes auto-generated.
         // Uses MTE IDs 31517-31528 (6 wires + 6 cables).

@@ -5,10 +5,11 @@ import static com.gtnh.processingplus.recipes.PPRecipeHelper.*;
 import com.gtnh.processingplus.materials.PrPMaterials;
 import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
 
+import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
+
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.TierEU;
-import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.util.GTOreDictUnificator;
 import gregtech.api.util.GTRecipeConstants;
 
@@ -54,7 +55,7 @@ public class HBNRecipes {
     }
 
     // =========================================================
-    // ALT: BCl3 shortcut — B2O3 + Cl2 + HF + NH3 → CrudeHBN + HCl (UV LCR)
+    // ALT: BCl3 shortcut — B2O3 + Cl2 + HF + NH3 → CrudeHBN + HCl (ZPM CSTR)
     // Skips BoronCarbide intermediate; HF flux gates behind fluorine infrastructure.
     // Lower B2O3 efficiency than main route (1:1 vs 2:4) — sidepath, not shortcut.
     // =========================================================
@@ -70,7 +71,7 @@ public class HBNRecipes {
             .itemOutputs(dust(PrPMaterials.CrudeHBN, 1))
             .duration(120)
             .eut(TierEU.RECIPE_ZPM)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
     }
 
     // =========================================================
@@ -85,7 +86,7 @@ public class HBNRecipes {
             .fluidOutputs(fluid(Materials.NitricOxide, 3000), fluid(Materials.Oxygen, 1500))
             .duration(7 * 20)
             .eut(TierEU.RECIPE_LuV)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
     }
 
     // =========================================================

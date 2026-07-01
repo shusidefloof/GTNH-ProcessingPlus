@@ -58,7 +58,7 @@ public class KaptonRecipes {
             .fluidOutputs(fluid(PrPMaterials.DiphenylEther, 1000), fluid(Materials.Water, 1000))
             .duration(400)
             .eut(TierEU.RECIPE_HV)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
 
         GTValues.RA.stdBuilder()
             .itemInputs(circuit(2))
@@ -91,7 +91,7 @@ public class KaptonRecipes {
             .itemOutputs(dust(PrPMaterials.ODA, 1))
             .duration(400)
             .eut(TierEU.RECIPE_EV)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
     }
 
     // =========================================================
@@ -105,8 +105,8 @@ public class KaptonRecipes {
             .fluidInputs(fluid(Materials.NMethylIIPyrrolidone, 1000), fluid(Materials.Nitrogen, 1000))
             .fluidOutputs(fluid(PrPMaterials.PAASolution, 2000))
             .duration(400)
-            .eut(TierEU.RECIPE_EV)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .eut(TierEU.RECIPE_LuV)
+            .addTo(GTNHPPRecipeMaps.sPCVRecipes);
     }
 
     // =========================================================
@@ -167,7 +167,7 @@ public class KaptonRecipes {
             .fluidOutputs(fluid(PrPMaterials.Triethylamine, 1000), fluid(Materials.Water, 3000))
             .duration(600)
             .eut(TierEU.RECIPE_HV)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
     }
 
     // =========================================================
@@ -198,7 +198,7 @@ public class KaptonRecipes {
             .fluidOutputs(fluid(PrPMaterials.AceticAnhydride, 1000), fluid(Materials.Water, 500))
             .duration(5 * 20)
             .eut(TierEU.RECIPE_LV)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
     }
 
     // =========================================================

@@ -156,7 +156,7 @@ public class MTE_PCV extends MTEExtendedPowerMultiBlockBase<MTE_PCV> implements 
                 // --- Bartworks blocks ---
                 .addElement('A', fb("bartworks", "BW_GlasBlocks", 0))
                 // --- R = block of Promethium Betavoltaic Alloy (registered by bartworks from addMetalItems()) ---
-                .addElement('R', werkstoffBlock(PrPMaterials.PromethiumBetavoltaicAlloy))
+                .addElement('R', fb("bartworks", "BW_GlasBlocks", 0))
                 // --- Carbon Fiber Composite casing = the ONLY hatch-bearing element ---
                 .addElement(
                     'Q',

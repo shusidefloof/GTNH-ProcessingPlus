@@ -2,6 +2,7 @@ package com.gtnh.processingplus.recipes;
 
 import com.gtnh.processingplus.recipes.chains.infrastructure.AARRecipes;
 import com.gtnh.processingplus.recipes.chains.infrastructure.BOFRecipes;
+import com.gtnh.processingplus.recipes.chains.infrastructure.CSTRRecipes;
 import com.gtnh.processingplus.recipes.chains.infrastructure.CACRecipes;
 import com.gtnh.processingplus.recipes.chains.infrastructure.CIDCRecipes;
 import com.gtnh.processingplus.recipes.chains.infrastructure.CRVRecipes;
@@ -54,6 +55,7 @@ public class PrPlusRecipes {
         FreonRecipes.init();
         CSCRecipes.init();
         BOFRecipes.init();
+        CSTRRecipes.init();
         SCDRecipes.init();
         CryoUpgradeRecipes.init();
         NeptuniumSynthesis.init();

@@ -249,7 +249,7 @@ public class MTE_DAF extends MTEExtendedPowerMultiBlockBase<MTE_DAF> implements 
     @Override
     public void checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack,
         List<StructureError> errors) {
-        mGlassTier = 0;
+        mGlassTier = -1;
         mPipeCasingTier = -1;
         mAtmoCasingTier = -1;
         mSpecialTier = 0;

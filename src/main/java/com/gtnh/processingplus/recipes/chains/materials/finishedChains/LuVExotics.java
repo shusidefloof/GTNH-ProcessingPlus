@@ -140,7 +140,7 @@ public class LuVExotics {
                 .addTo(GTNHPPRecipeMaps.sHTRFRecipes));
     }
 
-    // 2. Chem Reactor — Fluorosulfuric Acid + Antimony Pentafluoride → Magic Acid (fluoroantimonic)
+    // 2. CSTR — Fluorosulfuric Acid + Antimony Pentafluoride → Magic Acid (fluoroantimonic)
     private static void unoMagicAcid() {
         safe(
             "magic acid",
@@ -150,7 +150,7 @@ public class LuVExotics {
                 .fluidOutputs(fluid(PrPMaterials.MagicAcid, 1000))
                 .duration(200)
                 .eut(TierEU.RECIPE_IV)
-                .addTo(RecipeMaps.multiblockChemicalReactorRecipes));
+                .addTo(GTNHPPRecipeMaps.sCSTRRecipes));
     }
 
     // 3. Dissolution (GT++ Dissolution Tank map isn't exposed here — using the LCR as a substitute):
@@ -231,7 +231,7 @@ public class LuVExotics {
                 .fluidOutputs(fluid(PrPMaterials.EuropiumChloride, 1000))
                 .duration(120)
                 .eut(TierEU.RECIPE_IV)
-                .addTo(RecipeMaps.multiblockChemicalReactorRecipes));
+                .addTo(GTNHPPRecipeMaps.sCSTRRecipes));
     }
 
     // 7. Thermal Centrifuge — shatter purified crystals into shards
@@ -246,7 +246,7 @@ public class LuVExotics {
                 .addTo(RecipeMaps.thermalCentrifugeRecipes));
     }
 
-    // 8. Chem Reactor — reduce shards with Fiery Steel into clumps
+    // 8. CSTR — reduce shards with Fiery Steel into clumps
     private static void unoClumps() {
         safe(
             "unobtanium clumps",
@@ -256,7 +256,7 @@ public class LuVExotics {
                 .itemOutputs(intermediate(UNOBTANIUM_CLUMP, 1), intermediate(IRON_SLAG, 1))
                 .duration(400)
                 .eut(TierEU.RECIPE_LuV)
-                .addTo(RecipeMaps.multiblockChemicalReactorRecipes));
+                .addTo(GTNHPPRecipeMaps.sCSTRRecipes));
     }
 
     // 9. Centrifuge — break a clump into Unobtanium dust
@@ -282,7 +282,7 @@ public class LuVExotics {
             "unobtanium end concentration",
             () -> GTValues.RA.stdBuilder()
                 .itemInputs(dust(Materials.Endstone, 256), circuit(4))
-                .fluidInputs(fluid(PrPMaterials.MagicAcid, 2000))
+                .fluidInputs(fluid(PrPMaterials.MagicAcid, 8000))
                 .itemOutputs(intermediate(UNOBTANIUM_ORE_CONCENTRATE, 1))
                 .duration(360 * 20)
                 .eut(TierEU.RECIPE_LuV)

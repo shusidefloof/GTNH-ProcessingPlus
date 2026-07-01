@@ -3,6 +3,7 @@ package com.gtnh.processingplus.recipes.chains.materials.finishedChains;
 import static com.gtnh.processingplus.recipes.PPRecipeHelper.*;
 
 import com.gtnh.processingplus.materials.PrPMaterials;
+import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
 
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.ItemList;
@@ -46,7 +47,7 @@ public class NeptuniumSynthesis {
             .fluidOutputs(fluid(PrPMaterials.DilutedNitricAcid, 2000))
             .duration(600)
             .eut(TierEU.RECIPE_EV)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
 
         // Dual rod — 2×
         GTValues.RA.stdBuilder()
@@ -59,7 +60,7 @@ public class NeptuniumSynthesis {
             .fluidOutputs(fluid(PrPMaterials.DilutedNitricAcid, 4000))
             .duration(1000)
             .eut(TierEU.RECIPE_EV)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
 
         // Quad rod — 4×
         GTValues.RA.stdBuilder()
@@ -72,7 +73,7 @@ public class NeptuniumSynthesis {
             .fluidOutputs(fluid(PrPMaterials.DilutedNitricAcid, 8000))
             .duration(1800)
             .eut(TierEU.RECIPE_EV)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
     }
 
     // =========================================================
@@ -88,7 +89,7 @@ public class NeptuniumSynthesis {
             .fluidOutputs(fluid(PrPMaterials.NeptuniumNitrateSolution, 2000))
             .duration(400)
             .eut(TierEU.RECIPE_EV)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
     }
 
     // =========================================================
@@ -107,7 +108,7 @@ public class NeptuniumSynthesis {
             .fluidOutputs(fluid(PrPMaterials.AmmoniumNitrateSolution, 2000))
             .duration(400)
             .eut(TierEU.RECIPE_EV)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
     }
 
     // =========================================================
@@ -244,7 +245,7 @@ public class NeptuniumSynthesis {
             .fluidOutputs(PrPMaterials.PromethiumResin.getFluidOrGas(1000))
             .duration(12 * 20)
             .eut(TierEU.RECIPE_LuV)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
 
         // LOAD — resin grabs the promethium; samarium falls out as raffinate (the Pm-147 decay product).
         GTValues.RA.stdBuilder()
@@ -255,7 +256,7 @@ public class NeptuniumSynthesis {
             .fluidOutputs(PrPMaterials.LoadedPromethiumResin.getFluidOrGas(1000))
             .duration(10 * 20)
             .eut(TierEU.RECIPE_ZPM)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
 
         // STRIP + REGENERATE — acid elutes pure promethium as a molten fluid and hands the resin back.
         GTValues.RA.stdBuilder()
@@ -265,7 +266,7 @@ public class NeptuniumSynthesis {
             .fluidOutputs(Materials.Promethium.getMolten(144), PrPMaterials.PromethiumResin.getFluidOrGas(1000))
             .duration(10 * 20)
             .eut(TierEU.RECIPE_ZPM)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
     }
 
     // =========================================================
@@ -289,10 +290,18 @@ public class NeptuniumSynthesis {
         // Heavy water electrolysis → deuterium (+ oxygen), feedstock for D-T → He plasma fusion.
         GTValues.RA.stdBuilder()
             .fluidInputs(PrPMaterials.HeavyWater.getFluidOrGas(1000))
-            .fluidOutputs(Materials.Deuterium.getGas(1000), Materials.Oxygen.getGas(500))
+            .fluidOutputs(Materials.Deuterium.getGas(2000), Materials.Oxygen.getGas(1000))
             .duration(10 * 20)
             .eut(TierEU.RECIPE_EV)
             .addTo(RecipeMaps.electrolyzerRecipes);
+
+        GTValues.RA.stdBuilder()
+            .fluidInputs(fluid(Materials.Deuterium, 2000),
+                fluid(Materials.Oxygen, 1000))
+            .fluidOutputs(fluid(PrPMaterials.HeavyWater, 1000))
+            .duration(5 * 20)
+            .eut(TierEU.RECIPE_HV)
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
 
         // Cool helium plasma with heavy water → cold helium (the Stage 3 coolant).
         GTValues.RA.stdBuilder()

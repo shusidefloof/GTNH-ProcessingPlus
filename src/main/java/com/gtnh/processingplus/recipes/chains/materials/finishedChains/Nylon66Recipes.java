@@ -56,7 +56,7 @@ public class Nylon66Recipes {
             .fluidOutputs(fluid("cyclohexanone", 1000), fluid(Materials.Water, 500))
             .duration(100 * 20)
             .eut(TierEU.RECIPE_HV)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
     }
 
     // =========================================================
@@ -96,7 +96,7 @@ public class Nylon66Recipes {
             .fluidOutputs(fluid(PrPMaterials.AdipicAcid, 3000), fluid(Materials.Water, 3000))
             .duration(20 * 20)
             .eut(TierEU.RECIPE_EV)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
     }
 
     // =========================================================
@@ -123,23 +123,23 @@ public class Nylon66Recipes {
     // =========================================================
     private static void step6_PolymerChain() {
 
-        // Adipic Acid + NH3 → Adiponitrile (liquid) + Water (ZPM LCR)
+        // Adipic Acid + NH3 → Adiponitrile (liquid) + Water (CSTR)
         GTValues.RA.stdBuilder()
             .itemInputs(circuit(6))
             .fluidInputs(fluid(PrPMaterials.AdipicAcid, 2000), fluid(Materials.Ammonia, 2000))
             .fluidOutputs(fluid(PrPMaterials.Adiponitrile, 1000), fluid(Materials.Water, 2000))
             .duration(350)
             .eut(TierEU.RECIPE_LuV)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
 
-        // Adiponitrile + 4 H2 → HMD (liquid) (ZPM LCR)
+        // Adiponitrile + 4 H2 → HMD (liquid) (CSTR)
         GTValues.RA.stdBuilder()
             .itemInputs(circuit(7))
             .fluidInputs(fluid(PrPMaterials.Adiponitrile, 1000), fluid(Materials.Hydrogen, 4000))
             .fluidOutputs(fluid(PrPMaterials.HMD, 1000))
             .duration(300)
             .eut(TierEU.RECIPE_IV)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
 
         // HMD + Adipic Acid → molten Nylon-6,6 + Water (LuV PCV, 1:1 molar)
         // LuV-tier so a LuV energy hatch runs it — no ZPM energy hatch required before ZPM components.
@@ -168,7 +168,7 @@ public class Nylon66Recipes {
             .fluidOutputs(fluid(Materials.Water, 2000))
             .duration(400)
             .eut(TierEU.RECIPE_HV)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
     }
 
     // =========================================================

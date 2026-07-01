@@ -470,7 +470,7 @@ public class MTE_HPR extends MTEExtendedPowerMultiBlockBase<MTE_HPR> implements 
                     + EnumChatFormatting.WHITE
                     + "Phase Synchronizers"
                     + EnumChatFormatting.GRAY
-                    + " (1 per step).")
+                    + " (1 per step)," + "and can only jump one frequency level.")
             .addInfo(
                 EnumChatFormatting.RED + "  20 idle ticks (1s) with no recipe resets the field to 0.")
             .addSeparator()

@@ -282,7 +282,7 @@ public class PhotoresistRecipes {
             .fluidOutputs(fluid(PrPMaterials.Furfural, 1000))
             .duration(100)
             .eut(TierEU.RECIPE_HV)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
     }
 
     // IV: Dihydropyran — Furfural pyrolysis
@@ -323,20 +323,6 @@ public class PhotoresistRecipes {
             .addTo(GTPPRecipeMaps.mixerNonCellRecipes);
     }
 
-    // IV Photoresist — accessible EV single-block Mixer route so the IV blend doesn't strictly
-    // require the IV multi-mixer. EVPhotoresist goes in as cells (2 = 2000mB) so it fits the single
-    // Mixer's 1-fluid cap; THP-PHS stays the fluid. Slightly lower yield than the multi-mixer bulk route.
-    private static void ivIVBlendEV() {
-        GTValues.RA.stdBuilder()
-            .itemInputs(cell(PrPMaterials.EVPhotoresist, 2), circuit(4))
-            .fluidInputs(fluid(PrPMaterials.THPProtectedPHS, 500))
-            .itemOutputs(ItemList.Cell_Empty.get(2))
-            .fluidOutputs(fluid(PrPMaterials.IVPhotoresist, 1000))
-            .duration(80)
-            .eut(TierEU.RECIPE_EV)
-            .addTo(RecipeMaps.mixerRecipes);
-    }
-
     // LuV: Trifluoromethane — CHCl₃ + 3 HF (gates Triflic Acid)
     private static void luvTrifluoromethane() {
         GTValues.RA.stdBuilder()
@@ -345,7 +331,7 @@ public class PhotoresistRecipes {
             .fluidOutputs(fluid(PrPMaterials.Trifluoromethane, 1000))
             .duration(80)
             .eut(TierEU.RECIPE_EV)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
     }
 
     // LuV: SO₃ — 2 SO₂ + O₂
@@ -367,7 +353,7 @@ public class PhotoresistRecipes {
             .fluidOutputs(fluid(PrPMaterials.TriflicAcid, 1000))
             .duration(100)
             .eut(TierEU.RECIPE_IV)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
     }
 
     // LuV: Adamantol (Adamantium gate) — Adamantium + HF + H₂SO₄
@@ -378,7 +364,7 @@ public class PhotoresistRecipes {
             .itemOutputs(dust(PrPMaterials.Adamantol, 2))
             .duration(150)
             .eut(TierEU.RECIPE_IV)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
     }
 
     // LuV: Methacrylic Acid — Acetone + HCN + H₂SO₄; byproduces Ammonium Bisulfate
@@ -393,7 +379,7 @@ public class PhotoresistRecipes {
             .fluidOutputs(fluid(PrPMaterials.MethacrylicAcid, 1000))
             .duration(120)
             .eut(TierEU.RECIPE_IV)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
     }
 
     // LuV: Adamantyl Methacrylate — Methacrylic Acid + Adamantol
@@ -416,7 +402,7 @@ public class PhotoresistRecipes {
             .fluidOutputs(fluid(PrPMaterials.AcetoneAzine, 1000))
             .duration(80)
             .eut(TierEU.RECIPE_HV)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
     }
 
     // LuV: AIBN radical initiator — Acetone Azine + HCN + Cl₂
@@ -431,7 +417,7 @@ public class PhotoresistRecipes {
             .fluidOutputs(fluid(Materials.HydrochloricAcid, 2000))
             .duration(120)
             .eut(TierEU.RECIPE_IV)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
     }
 
     // LuV: Alicyclic Resin — AdMA + MAA + AIBN + N₂ polymerization
@@ -475,7 +461,7 @@ public class PhotoresistRecipes {
             .fluidOutputs(fluid(PrPMaterials.PropyleneOxide, 1000))
             .duration(80)
             .eut(TierEU.RECIPE_HV)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
     }
 
     // LuV: PGME solvent — Propylene Oxide + Methanol
@@ -486,7 +472,7 @@ public class PhotoresistRecipes {
             .fluidOutputs(fluid(PrPMaterials.PGME, 1000))
             .duration(60)
             .eut(TierEU.RECIPE_EV)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
     }
 
     // LuV: PGMEA solvent — PGME + Acetic Acid
@@ -497,7 +483,7 @@ public class PhotoresistRecipes {
             .fluidOutputs(fluid(PrPMaterials.PGMEA, 1000))
             .duration(60)
             .eut(TierEU.RECIPE_EV)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
     }
 
     // LuV: LuV Photoresist blend — IV + Alicyclic Resin + PAG + PGMEA (Mixer)
@@ -589,7 +575,7 @@ public class PhotoresistRecipes {
             .fluidOutputs(fluid(PrPMaterials.HFIMAMonomer, 2000))
             .duration(4 * 20)
             .eut(TierEU.RECIPE_ZPM)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
     }
 
     // =========================================================
@@ -604,7 +590,7 @@ public class PhotoresistRecipes {
             .fluidOutputs(fluid(PrPMaterials.GBLMAMonomer, 2000))
             .duration(4 * 20)
             .eut(TierEU.RECIPE_ZPM)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
     }
 
     // =========================================================
@@ -619,7 +605,7 @@ public class PhotoresistRecipes {
             .fluidOutputs(fluid(PrPMaterials.HAdMAMonomer, 2000))
             .duration(4 * 20)
             .eut(TierEU.RECIPE_ZPM)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
     }
 
     // =========================================================
@@ -638,7 +624,8 @@ public class PhotoresistRecipes {
             .fluidOutputs(molten(PrPMaterials.ArFCopolymerResin, 1000))
             .duration(5 * 20)
             .eut(TierEU.RECIPE_ZPM)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .metadata(GTRecipeConstants.COIL_HEAT, 3600)
+            .addTo(GTNHPPRecipeMaps.sHTRFRecipes);
     }
 
     // =========================================================
@@ -702,7 +689,7 @@ public class PhotoresistRecipes {
             .fluidOutputs(fluid(Materials.Water, 1000))
             .duration(80)
             .eut(TierEU.RECIPE_LuV)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
     }
 
     // =========================================================
@@ -717,7 +704,7 @@ public class PhotoresistRecipes {
             .fluidOutputs(fluid(Materials.Water, 1000))
             .duration(60)
             .eut(TierEU.RECIPE_LuV)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
     }
 
     // =========================================================
@@ -732,7 +719,7 @@ public class PhotoresistRecipes {
             .fluidOutputs(fluid(Materials.Water, 1000))
             .duration(60)
             .eut(TierEU.RECIPE_LuV)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
     }
 
     // =========================================================
@@ -748,7 +735,7 @@ public class PhotoresistRecipes {
             .fluidOutputs(fluid(Materials.HydrochloricAcid, 1000))
             .duration(80)
             .eut(TierEU.RECIPE_LuV)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
     }
 
     // =========================================================
@@ -854,7 +841,7 @@ public class PhotoresistRecipes {
             .fluidOutputs(fluid(PrPMaterials.LivingSolderAcetate, 1000))
             .duration(80)
             .eut(TierEU.RECIPE_UV)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
     }
 
     // =========================================================
@@ -919,7 +906,7 @@ public class PhotoresistRecipes {
             .fluidOutputs(fluid(PrPMaterials.TengamTriflate, 1000))
             .duration(80)
             .eut(TierEU.RECIPE_UHV)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
     }
 
     // =========================================================
@@ -966,7 +953,7 @@ public class PhotoresistRecipes {
             .fluidOutputs(fluid(PrPMaterials.FermiumTriflate, 1000))
             .duration(80)
             .eut(TierEU.RECIPE_UHV)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
     }
 
     // =========================================================

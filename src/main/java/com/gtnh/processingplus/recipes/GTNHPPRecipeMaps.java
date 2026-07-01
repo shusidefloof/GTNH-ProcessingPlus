@@ -44,6 +44,12 @@ public class GTNHPPRecipeMaps {
         .maxIO(4, 4, 3, 3)
         .build();
 
+    /** Continuous Stirred Tank Reactor — continuous-flow liquid-phase chemistry (IV tier). */
+    public static final RecipeMap<RecipeMapBackend> sCSTRRecipes = RecipeMapBuilder
+        .of("gtnhpp.recipe.cstr")
+        .maxIO(4, 4, 3, 3)
+        .build();
+
     /** Precision Film Caster — casting mode (room temperature film formation). */
     public static final RecipeMap<RecipeMapBackend> sPFCCastingRecipes = RecipeMapBuilder
         .of("gtnhpp.recipe.pfc.casting")
@@ -63,10 +69,15 @@ public class GTNHPPRecipeMaps {
         .neiSpecialInfoFormatter(AARNEIFormatter.INSTANCE)
         .build();
 
-    /** Supercritical Dryer — above ethanol's critical point (241°C, 63 bar). */
+    /**
+     * Supercritical Dryer — 3-stage stall mechanic (see MTE_SCD).
+     * Recipe format: 1 item input, 2 item outputs (perfect + degraded), 0 fluid inputs, ≤2 fluid outputs.
+     * Stage fluids are consumed per-tick by the machine, not declared as recipe fluid inputs.
+     * Stage fluid parameters are encoded in mSpecialValue via {@link MTE_SCD#encodeStageData}.
+     */
     public static final RecipeMap<RecipeMapBackend> sSCDRecipes = RecipeMapBuilder
         .of("gtnhpp.recipe.scd")
-        .maxIO(4, 4, 2, 2)
+        .maxIO(1, 2, 0, 2)
         .build();
 
     /** Ceramic Reaction Vessel — hBN-lined vessel for exotic molten alloy synthesis at LuV/ZPM. */

@@ -4,6 +4,8 @@ import static com.gtnh.processingplus.recipes.PPRecipeHelper.*;
 
 import com.gtnh.processingplus.materials.PrPMaterials;
 
+import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
+
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.ItemList;
 import gregtech.api.enums.Materials;
@@ -122,6 +124,6 @@ public class MaterialUsesRecipes {
             .itemOutputs(dust(PrPMaterials.LoadedAerogelCatalystSupport, 2))
             .duration(600)
             .eut(TierEU.RECIPE_ZPM)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
     }
 }

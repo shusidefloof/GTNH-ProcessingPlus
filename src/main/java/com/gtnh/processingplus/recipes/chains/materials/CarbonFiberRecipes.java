@@ -51,7 +51,7 @@ public class CarbonFiberRecipes {
             .fluidOutputs(fluid(PrPMaterials.PolyacrylonitrileSolution, 1000))
             .duration(800)
             .eut(TierEU.RECIPE_EV)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
     }
 
     // =========================================================
@@ -142,7 +142,7 @@ public class CarbonFiberRecipes {
     }
 
     // =========================================================
-    // ALT: Coal Tar → Mesophase Pitch (LuV LCR)
+    // ALT: Coal Tar → Mesophase Pitch (CSTR — thermal treatment of liquid coal tar)
     // Pyrolyse Oven coal tar heat-treated to mesophase
     // =========================================================
     private static void stepAlt_CoalTarToMesophasePitch() {
@@ -153,7 +153,7 @@ public class CarbonFiberRecipes {
             .fluidOutputs(fluid(PrPMaterials.MesophasePitch, 1000))
             .duration(800)
             .eut(TierEU.RECIPE_EV)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
     }
 
     // =========================================================

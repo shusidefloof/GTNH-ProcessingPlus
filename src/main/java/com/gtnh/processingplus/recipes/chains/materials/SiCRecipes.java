@@ -64,7 +64,7 @@ public class SiCRecipes {
             .itemOutputs(dust(PrPMaterials.PurifiedSiCPowder, 4))
             .duration(600)
             .eut(TierEU.RECIPE_HV)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
     }
 
     // =========================================================

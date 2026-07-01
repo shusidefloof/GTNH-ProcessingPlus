@@ -8,7 +8,6 @@ import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.TierEU;
-import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.util.GTRecipeConstants;
 
 /**
@@ -34,7 +33,7 @@ public class CryoUpgradeRecipes {
             .fluidOutputs(fluid(Materials.NitricOxide, 3000), fluid(Materials.Oxygen, 1500))
             .duration(480)
             .eut(TierEU.RECIPE_UHV)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
     }
 
     // CF graphitization with LAr inert atmosphere — saves Ar 16k, gives 5 fibers vs 4 base

@@ -81,7 +81,7 @@ public class PassiveableMaterials {
             .fluidOutputs(fluid(PrPMaterials.MetalLeachate, 4000))
             .duration(300)
             .eut(TierEU.RECIPE_HV)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
 
         // =========================================================
         // 3. pH adjustment — NH₃ raises pH, precipitates hydroxides
@@ -97,7 +97,7 @@ public class PassiveableMaterials {
             .fluidOutputs(fluid(Materials.Water, 1000), fluid(Materials.Ammonia, 200))
             .duration(200)
             .eut(TierEU.RECIPE_HV)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
 
         // =========================================================
         // 4a. Ga(OH)₃ + 3 HCl → GaCl₃ solution + H₂O
@@ -109,7 +109,7 @@ public class PassiveableMaterials {
             .fluidOutputs(fluid(PrPMaterials.GalliumTrichlorideSolution, 2000), fluid(Materials.Water, 1000))
             .duration(160)
             .eut(TierEU.RECIPE_HV)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
 
         // =========================================================
         // 4b. Ge(OH)₄ + 4 HCl → GeCl₄ + H₂O
@@ -121,7 +121,7 @@ public class PassiveableMaterials {
             .fluidOutputs(fluid(PrPMaterials.GermaniumTetrachlorideSolution, 2000), fluid(Materials.Water, 2000))
             .duration(160)
             .eut(TierEU.RECIPE_HV)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
 
         // =========================================================
         // 5a. GaCl₃ solution → Ga dust + HCl (electroreduction)
@@ -148,7 +148,7 @@ public class PassiveableMaterials {
             .fluidOutputs(fluid(Materials.HydrochloricAcid, 4000))
             .duration(280)
             .eut(TierEU.RECIPE_HV)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
     }
 
     private static void TaNbChain() {
@@ -166,7 +166,7 @@ public class PassiveableMaterials {
             .fluidOutputs(fluid(PrPMaterials.NiobiumFluorideSolution, 2000))
             .duration(400)
             .eut(TierEU.RECIPE_EV)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
 
         // NH₃ precipitates Nb(OH)₅; calcination collapses it to Nb₂O₅.
         // HF is recovered — feed back into leach steps.
@@ -176,7 +176,7 @@ public class PassiveableMaterials {
             .fluidOutputs(fluid(Materials.HydrofluoricAcid, 1000))
             .duration(400)
             .eut(TierEU.RECIPE_EV)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
 
         // Aluminothermic: Nb₂O₅ + (10/3)Al → 2Nb + (5/3)Al₂O₃
         GTValues.RA.stdBuilder()
@@ -201,7 +201,7 @@ public class PassiveableMaterials {
             .fluidOutputs(fluid(PrPMaterials.MixedTaNbFluorideSolution, 2000))
             .duration(400)
             .eut(TierEU.RECIPE_EV)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
 
         // MIBK preferentially extracts Ta into the organic phase;
         // Nb stays in the aqueous raffinate as NiobiumFluorideSolution.
@@ -210,7 +210,7 @@ public class PassiveableMaterials {
             .fluidOutputs(fluid(PrPMaterials.TaLoadedMIBK, 1000), fluid(PrPMaterials.NiobiumFluorideSolution, 1000))
             .duration(400)
             .eut(TierEU.RECIPE_EV)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
 
         // Water back-extraction strips Ta from organic; MIBK is fully recovered.
         GTValues.RA.stdBuilder()
@@ -219,7 +219,7 @@ public class PassiveableMaterials {
             .fluidOutputs(fluid(PrPMaterials.MIBK, 1000))
             .duration(300)
             .eut(TierEU.RECIPE_EV)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
 
         // Aluminothermic: Ta₂O₅ + (10/3)Al → 2Ta + (5/3)Al₂O₃
         GTValues.RA.stdBuilder()
@@ -241,6 +241,6 @@ public class PassiveableMaterials {
             .fluidOutputs(fluid(PrPMaterials.MIBK, 1000), fluid(Materials.Water, 1000))
             .duration(300)
             .eut(TierEU.RECIPE_EV)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
     }
 }

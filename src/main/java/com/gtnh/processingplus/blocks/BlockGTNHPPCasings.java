@@ -48,7 +48,8 @@ public class BlockGTNHPPCasings extends Block {
     public static final int DAF_CASING_LUV = 28; // DAF LuV-tier chamber shell
     public static final int DAF_CASING_UV = 29;  // DAF UV-tier chamber shell
     public static final int DAF_CASING_UEV = 30; // DAF UEV-tier chamber shell
-    public static final int NUM_CASINGS = 31;
+    public static final int CSTR_CASING = 31;    // Continuous Stirred Tank Reactor shell
+    public static final int NUM_CASINGS = 32;
 
     // @formatter:off
     private static final String[] DISPLAY_NAMES = {
@@ -83,6 +84,7 @@ public class BlockGTNHPPCasings extends Block {
         "Advanced Atmosphere Casing",         // DAF LuV chamber
         "Pristine Atmosphere Casing",         // DAF UV chamber
         "Absolute Atmosphere Casing",         // DAF UEV chamber
+        "Agitated Reaction Vessel Casing",    // CSTR shell
     };
 
     // Borrow GT5U's existing block textures as placeholders until custom art is made.
@@ -119,6 +121,7 @@ public class BlockGTNHPPCasings extends Block {
         "gregtech:iconsets/MACHINE_CASING_STABLE_TITANIUM",      // DAF LuV: titanium-sealed
         "gregtech:iconsets/MACHINE_CASING_RADIATIONPROOF",       // DAF UV: radiation-proof alloy
         "gregtech:iconsets/MACHINE_CASING_FUSION_GLASS",         // DAF UEV: transcendent shell
+        "gregtech:iconsets/MACHINE_CASING_CLEAN_STAINLESSSTEEL", // CSTR: chemically inert stainless vessel
     };
     // @formatter:on
 

@@ -257,6 +257,57 @@ public class PPRecipeHelper {
         return toRemove.size();
     }
 
+    // =========================
+    // ARRAY / COLLECTION UTILITIES
+    // =========================
+
+    public static ItemStack[] appendItems(ItemStack[] arr, ItemStack... add) {
+        int base = (arr == null) ? 0 : arr.length;
+        ItemStack[] out = new ItemStack[base + add.length];
+        if (arr != null) System.arraycopy(arr, 0, out, 0, base);
+        for (int i = 0; i < add.length; i++) out[base + i] = add[i];
+        return out;
+    }
+
+    public static FluidStack[] appendFluid(FluidStack[] arr, FluidStack add) {
+        if (arr == null || arr.length == 0) return new FluidStack[] { add };
+        FluidStack[] out = new FluidStack[arr.length + 1];
+        System.arraycopy(arr, 0, out, 0, arr.length);
+        out[arr.length] = add;
+        return out;
+    }
+
+    /** Remove all slots whose item matches any of {@code toStrip}. Null entries in {@code toStrip} are ignored. */
+    public static ItemStack[] stripItems(ItemStack[] inputs, ItemStack... toStrip) {
+        List<ItemStack> result = new ArrayList<>();
+        outer: for (ItemStack s : inputs) {
+            if (s != null) {
+                for (ItemStack strip : toStrip) {
+                    if (strip != null && GTUtility.areStacksEqual(s, strip)) continue outer;
+                }
+            }
+            result.add(s);
+        }
+        return result.toArray(new ItemStack[0]);
+    }
+
+    /** Sum of {@code stackSize} for every slot in {@code inputs} that matches {@code probe}. */
+    public static int countItems(ItemStack[] inputs, ItemStack probe) {
+        int n = 0;
+        for (ItemStack s : inputs) {
+            if (s != null && GTUtility.areStacksEqual(s, probe)) n += s.stackSize;
+        }
+        return n;
+    }
+
+    public static boolean matchesAny(ItemStack stack, ItemStack[] set) {
+        if (stack == null) return false;
+        for (ItemStack t : set) {
+            if (t != null && GTUtility.areStacksEqual(stack, t)) return true;
+        }
+        return false;
+    }
+
     public static void ebfNobleGasRecipes(long baseTime, long Eu, ItemStack input, ItemStack output,
         FluidStack fluidOutput) {
         FluidStack[] nobleGasses = { fluid("oganesson", 100), fluid("xenon", 250), fluid("krypton", 400),

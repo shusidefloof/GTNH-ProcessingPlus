@@ -265,6 +265,7 @@ public class MTE_DAF extends MTEExtendedPowerMultiBlockBase<MTE_DAF> implements 
         protected CheckRecipeResult validateRecipe(@Nonnull GTRecipe recipe) {
             return recipe.mSpecialValue <= mSpecialTier ? CheckRecipeResultRegistry.SUCCESSFUL
                 : CheckRecipeResultRegistry.NO_RECIPE;
+
         }
     }
 

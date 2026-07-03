@@ -173,7 +173,7 @@ public class NeptuniumSynthesis {
             .itemInputs(dust(Materials.Neodymium, 1), circuit(10))
             .itemOutputs(dust(PrPMaterials.Neodymium146, 1))
             .outputChances(10_00)
-            .duration(50 * 20)
+            .duration(15 * 20)
             .eut(TierEU.RECIPE_LuV)
             .addTo(RecipeMaps.centrifugeRecipes);
 
@@ -181,7 +181,7 @@ public class NeptuniumSynthesis {
             .itemInputs(dust(Materials.Neodymium, 1), circuit(10))
             .fluidInputs(fluid("xenon", 2000))
             .itemOutputs(dust(PrPMaterials.Neodymium146, 1))
-            .duration(25 * 20)
+            .duration(14 * 10)
             .eut(TierEU.RECIPE_ZPM)
             .addTo(RecipeMaps.centrifugeRecipes);
 

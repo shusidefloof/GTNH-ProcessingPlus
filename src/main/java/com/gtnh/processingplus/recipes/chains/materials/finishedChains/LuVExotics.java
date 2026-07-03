@@ -286,7 +286,7 @@ public class LuVExotics {
                     dust(Materials.Tungstate, 4),
                     item("dustPlatinumMetallicPowder", 3),
                     item("sand", 48))
-                .outputChances(500, 3750, 2500, 9000)
+                .outputChances(750, 3750, 2500, 9000)
                 .fluidOutputs(fluid(Materials.Helium, 5760))
                 .duration(60 * 20)
                 .eut(TierEU.RECIPE_HV)

@@ -25,7 +25,7 @@ public class PrPMaterials implements Runnable {
     // GENERATION PROFILES
     // =========================
     private static Werkstoff.GenerationFeatures polymerFeatures() {
-        return new Werkstoff.GenerationFeatures().onlyDust()
+        return new Werkstoff.GenerationFeatures()
             .addCells();
     }
 
@@ -57,7 +57,7 @@ public class PrPMaterials implements Runnable {
     }
 
     private static Werkstoff.GenerationFeatures fluidFeatures() {
-        return new Werkstoff.GenerationFeatures().onlyDust()
+        return new Werkstoff.GenerationFeatures()
             .addCells();
     }
 
@@ -66,6 +66,16 @@ public class PrPMaterials implements Runnable {
         return new Werkstoff.GenerationFeatures().onlyDust()
             .addMetalItems()
             .addSimpleMetalWorkingItems();
+    }
+
+    // Plasma-quenched amorphous metals — same as metalCeramic but with a molten fluid form so
+    // CoAL recipes can consume them as a fluid instead of keeping them as rods/plates.
+    private static Werkstoff.GenerationFeatures amorphousMetalFeatures() {
+        return new Werkstoff.GenerationFeatures().onlyDust()
+            .addMetalItems()
+            .addSimpleMetalWorkingItems()
+            .addDoubleAndDensePlates()
+            .addMolten();
     }
 
     // Hard ceramics used in gear contexts — dust + gems + simple + crafting metalworking
@@ -1917,7 +1927,7 @@ public class PrPMaterials implements Runnable {
                 "Ti-Am*",
                 new Werkstoff.Stats(),
                 Werkstoff.Types.COMPOUND,
-                metalCeramicFeatures(),
+                amorphousMetalFeatures(),
                 id(),
                 TextureSet.SET_METALLIC));
 
@@ -1928,7 +1938,7 @@ public class PrPMaterials implements Runnable {
                 "Nq**",
                 new Werkstoff.Stats(),
                 Werkstoff.Types.COMPOUND,
-                metalCeramicFeatures(),
+                amorphousMetalFeatures(),
                 id(),
                 TextureSet.SET_METALLIC));
 

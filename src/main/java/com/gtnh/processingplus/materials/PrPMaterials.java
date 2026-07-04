@@ -25,8 +25,7 @@ public class PrPMaterials implements Runnable {
     // GENERATION PROFILES
     // =========================
     private static Werkstoff.GenerationFeatures polymerFeatures() {
-        return new Werkstoff.GenerationFeatures()
-            .addCells();
+        return new Werkstoff.GenerationFeatures().addCells();
     }
 
     // Thermoplastic polymers used in molten-form blending — dust + cells + molten, no metalworking
@@ -57,7 +56,7 @@ public class PrPMaterials implements Runnable {
     }
 
     private static Werkstoff.GenerationFeatures fluidFeatures() {
-        return new Werkstoff.GenerationFeatures()
+        return new Werkstoff.GenerationFeatures().disable()
             .addCells();
     }
 

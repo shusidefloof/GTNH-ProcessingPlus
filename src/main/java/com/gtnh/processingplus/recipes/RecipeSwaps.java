@@ -7,6 +7,7 @@ import static com.gtnh.processingplus.recipes.PPRecipeHelper.densePlate;
 import static com.gtnh.processingplus.recipes.PPRecipeHelper.matchesAny;
 import static com.gtnh.processingplus.recipes.PPRecipeHelper.plate;
 import static com.gtnh.processingplus.recipes.PPRecipeHelper.stripItems;
+import static gregtech.api.util.GTRecipeConstants.COAL_CASING_TIER;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -177,9 +178,8 @@ public final class RecipeSwaps {
             return;
         }
         ItemStack[] zpmComponents = { ItemList.Electric_Motor_ZPM.get(1), ItemList.Electric_Pump_ZPM.get(1),
-            ItemList.Conveyor_Module_ZPM.get(1), ItemList.Electric_Piston_ZPM.get(1),
-            ItemList.Robot_Arm_ZPM.get(1), ItemList.Emitter_ZPM.get(1), ItemList.Sensor_ZPM.get(1),
-            ItemList.Field_Generator_ZPM.get(1) };
+            ItemList.Conveyor_Module_ZPM.get(1), ItemList.Electric_Piston_ZPM.get(1), ItemList.Robot_Arm_ZPM.get(1),
+            ItemList.Emitter_ZPM.get(1), ItemList.Sensor_ZPM.get(1), ItemList.Field_Generator_ZPM.get(1) };
         int n = modifyCoALRecipes(zpmComponents, c -> c.mFluidInputs = appendFluid(c.mFluidInputs, vibranium.copy()));
         GTNHProcessingPlus.LOG.info("CoAL Vibranium gate: updated {} ZPM recipe(s) with 62208mB molten Vibranium.", n);
     }
@@ -188,7 +188,8 @@ public final class RecipeSwaps {
         FluidStack samariumProbe = Materials.Samarium.getMolten(1);
         FluidStack amorphousProbe = PrPMaterials.AmorphousTritaniumAlloy.getMolten(1);
         if (samariumProbe == null || amorphousProbe == null) {
-            GTNHProcessingPlus.LOG.warn("CoAL UV motor gate: Samarium or Amorphous Tritanium molten missing — skipped.");
+            GTNHProcessingPlus.LOG
+                .warn("CoAL UV motor gate: Samarium or Amorphous Tritanium molten missing — skipped.");
             return;
         }
         Fluid samarium = samariumProbe.getFluid();
@@ -200,18 +201,16 @@ public final class RecipeSwaps {
     }
 
     private static void normalizeCoALCircuits() {
-        int n = modifyCoALRecipes(
-            r -> r.mInputs != null && hasCircuit(r.mInputs),
-            copy -> {
-                ItemStack circuit = null;
-                List<ItemStack> rest = new ArrayList<>();
-                for (ItemStack s : copy.mInputs) {
-                    if (circuit == null && isCircuit(s)) circuit = s;
-                    else rest.add(s);
-                }
-                if (circuit != null) rest.add(circuit);
-                copy.mInputs = rest.toArray(new ItemStack[0]);
-            });
+        int n = modifyCoALRecipes(r -> r.mInputs != null && hasCircuit(r.mInputs), copy -> {
+            ItemStack circuit = null;
+            List<ItemStack> rest = new ArrayList<>();
+            for (ItemStack s : copy.mInputs) {
+                if (circuit == null && isCircuit(s)) circuit = s;
+                else rest.add(s);
+            }
+            if (circuit != null) rest.add(circuit);
+            copy.mInputs = rest.toArray(new ItemStack[0]);
+        });
         GTNHProcessingPlus.LOG.info("normalizeCoALCircuits: moved circuit to last slot in {} recipe(s).", n);
     }
 
@@ -244,8 +243,7 @@ public final class RecipeSwaps {
         }
         for (ItemStack out : toRemove)
             PPRecipeHelper.removeRecipesByOutput(GoodGeneratorRecipeMaps.componentAssemblyLineRecipes, out);
-        for (GTRecipe c : toAdd)
-            GoodGeneratorRecipeMaps.componentAssemblyLineRecipes.addRecipe(c);
+        for (GTRecipe c : toAdd) GoodGeneratorRecipeMaps.componentAssemblyLineRecipes.addRecipe(c);
         return toAdd.size();
     }
 
@@ -317,14 +315,13 @@ public final class RecipeSwaps {
         }
         Fluid lube = lubeProbe.getFluid();
         Fluid hbn = hbnProbe.getFluid();
-
-        int swapped = 0;
-        for (GTRecipe r : GoodGeneratorRecipeMaps.componentAssemblyLineRecipes.getAllRecipes()) {
-            int tier = r.getMetadataOrDefault(gregtech.api.util.GTRecipeConstants.COAL_CASING_TIER, 0);
-            if (tier < COAL_LUV) continue;
-            swapped += swapFluid(r.mFluidInputs, lube, hbn);
-        }
-        GTNHProcessingPlus.LOG.info("CoAL hBN gate: swapped {} LuV+ CoAL Lubricant(s) to hBN Lubricant.", swapped);
+        int n = modifyCoALRecipes(r -> {
+            if (r.getMetadataOrDefault(COAL_CASING_TIER, 0) < COAL_LUV) return false;
+            if (r.mFluidInputs == null) return false;
+            for (FluidStack f : r.mFluidInputs) if (f != null && f.getFluid() == lube) return true;
+            return false;
+        }, copy -> swapFluid(copy.mFluidInputs, lube, hbn));
+        GTNHProcessingPlus.LOG.info("CoAL hBN gate: swapped {} LuV+ CoAL Lubricant(s) to hBN Lubricant.", n);
     }
 
     /** Replaces every {@code from}-fluid stack in the array with an equal-amount {@code to} stack. */
@@ -465,16 +462,13 @@ public final class RecipeSwaps {
             int plateCount = countItems(r.mInputs, naquadriaPlate1);
             if (plateCount == 0) continue;
             int denseCount = Math.max(1, Math.round(plateCount * 64 * 0.75f / 9));
-            coalTaxed += modifyCoALRecipes(
-                new ItemStack[] { r.mOutput },
-                copy -> {
-                    copy.mInputs = stripItems(copy.mInputs, neutroniumPlate1, neutroniumDensePlate1);
-                    copy.mInputs = appendItems(copy.mInputs, densePlate(PrPMaterials.AmorphousNaquadria, denseCount));
-                });
+            coalTaxed += modifyCoALRecipes(new ItemStack[] { r.mOutput }, copy -> {
+                copy.mInputs = stripItems(copy.mInputs, neutroniumPlate1, neutroniumDensePlate1);
+                copy.mInputs = appendItems(copy.mInputs, densePlate(PrPMaterials.AmorphousNaquadria, denseCount));
+            });
         }
-        GTNHProcessingPlus.LOG.info(
-            "UV components CoAL: added Amorphous Naquadria dense plates to {} UV CoAL recipe(s).",
-            coalTaxed);
+        GTNHProcessingPlus.LOG
+            .info("UV components CoAL: added Amorphous Naquadria dense plates to {} UV CoAL recipe(s).", coalTaxed);
     }
 
     /**
@@ -559,11 +553,14 @@ public final class RecipeSwaps {
         // replace those with 10 dense Vibranium plates (count changes, so keepCount = false).
         ItemStack naquadahAlloyDensePlate = GTOreDictUnificator.get(OrePrefixes.plateDense, Materials.NaquadahAlloy, 1);
         ItemStack vibraniumDense10 = densePlate(PrPMaterials.Vibranium, 10);
-        ItemStack[] densePlateComponents = { ItemList.Field_Generator_ZPM.get(1),
-            ItemList.Electric_Pump_ZPM.get(1), ItemList.Electric_Piston_ZPM.get(1),
-            ItemList.Conveyor_Module_ZPM.get(1) };
+        ItemStack[] densePlateComponents = { ItemList.Field_Generator_ZPM.get(1), ItemList.Electric_Pump_ZPM.get(1),
+            ItemList.Electric_Piston_ZPM.get(1), ItemList.Conveyor_Module_ZPM.get(1) };
         if (naquadahAlloyDensePlate != null && vibraniumDense10 != null) {
-            int denseSwapped = swapAssemblyLineInput(densePlateComponents, naquadahAlloyDensePlate, vibraniumDense10, false);
+            int denseSwapped = swapAssemblyLineInput(
+                densePlateComponents,
+                naquadahAlloyDensePlate,
+                vibraniumDense10,
+                false);
             GTNHProcessingPlus.LOG.info(
                 "Vibranium gate: swapped {} dense NaquadahAlloy plate(s) for 10 dense Vibranium plates.",
                 denseSwapped);
@@ -571,8 +568,8 @@ public final class RecipeSwaps {
 
         // CoAL: GoodGenerator generated these before run(), so they still have NaquadahAlloy plates.
         // Mirror what gateUVComponentsWithAmorphousNaquadria does for UV:
-        //   regular plates  → strip NaquadahAlloy, append dense Vibranium (count × 64 × 0.75 / 9)
-        //   dense plates    → strip dense NaquadahAlloy, append dense Vibranium (count × 64 × 0.75)
+        // regular plates → strip NaquadahAlloy, append dense Vibranium (count × 64 × 0.75 / 9)
+        // dense plates → strip dense NaquadahAlloy, append dense Vibranium (count × 64 × 0.75)
         // Counts are read from the now-updated assembly-line recipe so they match exactly.
         if (naquadahAlloyPlate != null && naquadahAlloyDensePlate != null) {
             ItemStack vibPlate1 = plate(PrPMaterials.Vibranium, 1);
@@ -587,24 +584,23 @@ public final class RecipeSwaps {
                     if (regularCount == 0 && denseAsmCount == 0) continue;
                     final int regularDenseOut = Math.max(1, Math.round(regularCount * 64 * 0.75f / 9));
                     final int denseDenseOut = Math.round(denseAsmCount * 64 * 0.75f);
-                    coalTotal += modifyCoALRecipes(
-                        new ItemStack[] { asmR.mOutput },
-                        copy -> {
-                            copy.mInputs = stripItems(copy.mInputs, naquadahAlloyPlate,
-                                isDense ? naquadahAlloyDensePlate : null);
-                            if (regularCount > 0) {
-                                ItemStack dv = densePlate(PrPMaterials.Vibranium, regularDenseOut);
-                                if (dv != null) copy.mInputs = appendItems(copy.mInputs, dv);
-                            }
-                            if (denseDenseOut > 0) {
-                                ItemStack dv = densePlate(PrPMaterials.Vibranium, denseDenseOut);
-                                if (dv != null) copy.mInputs = appendItems(copy.mInputs, dv);
-                            }
-                        });
+                    coalTotal += modifyCoALRecipes(new ItemStack[] { asmR.mOutput }, copy -> {
+                        copy.mInputs = stripItems(
+                            copy.mInputs,
+                            naquadahAlloyPlate,
+                            isDense ? naquadahAlloyDensePlate : null);
+                        if (regularCount > 0) {
+                            ItemStack dv = densePlate(PrPMaterials.Vibranium, regularDenseOut);
+                            if (dv != null) copy.mInputs = appendItems(copy.mInputs, dv);
+                        }
+                        if (denseDenseOut > 0) {
+                            ItemStack dv = densePlate(PrPMaterials.Vibranium, denseDenseOut);
+                            if (dv != null) copy.mInputs = appendItems(copy.mInputs, dv);
+                        }
+                    });
                 }
-                GTNHProcessingPlus.LOG.info(
-                    "Vibranium gate: updated {} ZPM CoAL recipe(s) with dense Vibranium plates.",
-                    coalTotal);
+                GTNHProcessingPlus.LOG
+                    .info("Vibranium gate: updated {} ZPM CoAL recipe(s) with dense Vibranium plates.", coalTotal);
             }
         }
     }
@@ -830,7 +826,8 @@ public final class RecipeSwaps {
         for (GTRecipe.RecipeAssemblyLine r : GTRecipe.RecipeAssemblyLine.sAssemblylineRecipes) {
             if (r.mOutput == null) continue;
             String name = r.mOutput.getDisplayName();
-            if (name == null || !name.toLowerCase().contains("void miner")) continue;
+            if (name == null || !name.toLowerCase()
+                .contains("void miner")) continue;
             r.mInputs = appendItems(r.mInputs, unobtGear4.copy());
             if (r.mOreDictAlt != null) {
                 ItemStack[][] newAlt = new ItemStack[r.mOreDictAlt.length + 1][];
@@ -843,12 +840,12 @@ public final class RecipeSwaps {
         for (GTRecipe r : RecipeMaps.assemblylineVisualRecipes.getAllRecipes()) {
             if (r.mOutputs == null || r.mOutputs.length == 0 || r.mOutputs[0] == null) continue;
             String name = r.mOutputs[0].getDisplayName();
-            if (name == null || !name.toLowerCase().contains("void miner")) continue;
+            if (name == null || !name.toLowerCase()
+                .contains("void miner")) continue;
             r.mInputs = appendItems(r.mInputs, unobtGear4.copy());
         }
 
-        GTNHProcessingPlus.LOG.info(
-            "Void miner Unobtanium gate: appended 4 Unobtanium gears to {} assembly-line recipe(s).",
-            modified);
+        GTNHProcessingPlus.LOG
+            .info("Void miner Unobtanium gate: appended 4 Unobtanium gears to {} assembly-line recipe(s).", modified);
     }
 }

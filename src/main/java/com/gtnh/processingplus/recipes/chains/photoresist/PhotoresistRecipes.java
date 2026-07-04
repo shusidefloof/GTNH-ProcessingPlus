@@ -620,8 +620,7 @@ public class PhotoresistRecipes {
             .fluidInputs(
                 fluid(PrPMaterials.HFIMAMonomer, 1000),
                 fluid(PrPMaterials.GBLMAMonomer, 1000),
-                fluid(PrPMaterials.HAdMAMonomer, 1000),
-                fluid(Materials.Nitrogen, 2000))
+                fluid(PrPMaterials.HAdMAMonomer, 1000))
             .fluidOutputs(molten(PrPMaterials.ArFCopolymerResin, 1000))
             .duration(5 * 20)
             .eut(TierEU.RECIPE_ZPM)

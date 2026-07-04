@@ -25,6 +25,7 @@ import gregtech.api.util.GTRecipe;
 public class AARRecipes {
 
     public static void init() {
+
         migrateAmmoniaRecipesToAAR();
     }
 

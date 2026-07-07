@@ -35,6 +35,8 @@
  */
 dependencies {
     runtimeOnlyNonPublishable("com.github.GTNewHorizons:NotEnoughItems:2.8.101-GTNH:dev")
+    // Better Questing — runtime-only so the questbook loads in the dev client; not used by any code here.
+    runtimeOnlyNonPublishable("com.github.GTNewHorizons:BetterQuesting:3.8.72-GTNH:dev")
 
     // devOnlyNonPublishable = compileOnly + runtimeOnly, but not published to Maven.
     // GT5 and NHCM are hard requirements, so they must be on the runtime classpath in dev.

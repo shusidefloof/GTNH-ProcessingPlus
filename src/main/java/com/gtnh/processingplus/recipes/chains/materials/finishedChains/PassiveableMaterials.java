@@ -81,7 +81,7 @@ public class PassiveableMaterials {
             .fluidOutputs(fluid(PrPMaterials.MetalLeachate, 4000))
             .duration(300)
             .eut(TierEU.RECIPE_HV)
-            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
 
         // =========================================================
         // 3. pH adjustment — NH₃ raises pH, precipitates hydroxides
@@ -97,7 +97,7 @@ public class PassiveableMaterials {
             .fluidOutputs(fluid(Materials.Water, 1000), fluid(Materials.Ammonia, 200))
             .duration(200)
             .eut(TierEU.RECIPE_HV)
-            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
 
         // =========================================================
         // 4a. Ga(OH)₃ + 3 HCl → GaCl₃ solution + H₂O
@@ -109,7 +109,7 @@ public class PassiveableMaterials {
             .fluidOutputs(fluid(PrPMaterials.GalliumTrichlorideSolution, 2000), fluid(Materials.Water, 1000))
             .duration(160)
             .eut(TierEU.RECIPE_HV)
-            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
 
         // =========================================================
         // 4b. Ge(OH)₄ + 4 HCl → GeCl₄ + H₂O
@@ -121,7 +121,7 @@ public class PassiveableMaterials {
             .fluidOutputs(fluid(PrPMaterials.GermaniumTetrachlorideSolution, 2000), fluid(Materials.Water, 2000))
             .duration(160)
             .eut(TierEU.RECIPE_HV)
-            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
 
         // =========================================================
         // 5a. GaCl₃ solution → Ga dust + HCl (electroreduction)
@@ -148,7 +148,7 @@ public class PassiveableMaterials {
             .fluidOutputs(fluid(Materials.HydrochloricAcid, 4000))
             .duration(280)
             .eut(TierEU.RECIPE_HV)
-            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 
     private static void TaNbChain() {

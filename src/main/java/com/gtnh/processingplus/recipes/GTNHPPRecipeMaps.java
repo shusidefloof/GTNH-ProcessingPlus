@@ -94,7 +94,11 @@ public class GTNHPPRecipeMaps {
         .disableRegisterNEI()
         .build();
 
-    /** Cryogenic Separation Column — circuit(1) = ASU, circuit(2) = CO₂ liquefaction. */
+    /**
+     * Cryogenic Separation Column — circuit(1) = ASU, circuit(2) = CO₂ liquefaction, circuit(3-5) = noble
+     * gas extraction, circuit(6) = natural gas fractionation, circuit(7) = LPG fractionation, circuit(8) =
+     * Helium extraction from natural gas.
+     */
     public static final RecipeMap<RecipeMapBackend> sCSCRecipes = RecipeMapBuilder
         .of("gtnhpp.recipe.csc")
         .maxIO(2, 1, 2, 4)

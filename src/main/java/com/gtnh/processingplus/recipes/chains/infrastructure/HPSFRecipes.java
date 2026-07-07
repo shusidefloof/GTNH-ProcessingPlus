@@ -59,6 +59,18 @@ public class HPSFRecipes {
             .duration(50)
             .eut(TierEU.RECIPE_LV)
             .addTo(RecipeMaps.assemblerRecipes);
+
+        // Pressure Vessel Ring Casing — heavier, HSSS-framed variant for the main vessel ring
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.HSSS, 1),
+                plate(Materials.TungstenSteel, 4),
+                plate(Materials.Tungsten, 4),
+                circuit(6))
+            .itemOutputs(new ItemStack(GTNHPPBlocks.CASINGS, 1, BlockGTNHPPCasings.PRESSURE_VESSEL_RING_CASING))
+            .duration(100)
+            .eut(TierEU.RECIPE_EV)
+            .addTo(RecipeMaps.assemblerRecipes);
     }
 
     // =========================================================

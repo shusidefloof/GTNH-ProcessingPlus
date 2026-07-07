@@ -32,11 +32,13 @@ import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.gtnh.processingplus.GTNHProcessingPlus;
 import com.gtnh.processingplus.blocks.BlockGTNHPPCasings;
 import com.gtnh.processingplus.blocks.GTNHPPBlocks;
+import com.gtnh.processingplus.materials.PrPMaterials;
 import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import gregtech.api.enums.OrePrefixes;
 import gregtech.api.enums.SoundResource;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
@@ -60,6 +62,17 @@ public class MTE_PCV extends MTEExtendedPowerMultiBlockBase<MTE_PCV> implements 
     private static final int OFFSET_Z = 0;
 
     private static IStructureDefinition<MTE_PCV> STRUCTURE_DEFINITION = null;
+
+    // Promethium Betavoltaic Alloy rebolted casing (OrePrefixes.blockCasingAdvanced) — resolved from the
+    // actual ItemStack the Werkstoff produces rather than hardcoding a magic damage value.
+    private static final Block PROMETHIUM_BETAVOLTAIC_BLOCK;
+    private static final int PROMETHIUM_BETAVOLTAIC_BLOCK_META;
+
+    static {
+        ItemStack block = PrPMaterials.PromethiumBetavoltaicAlloy.get(OrePrefixes.blockCasingAdvanced, 1);
+        PROMETHIUM_BETAVOLTAIC_BLOCK = Block.getBlockFromItem(block.getItem());
+        PROMETHIUM_BETAVOLTAIC_BLOCK_META = block.getItemDamage();
+    }
 
     public MTE_PCV(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
@@ -151,7 +164,8 @@ public class MTE_PCV extends MTEExtendedPowerMultiBlockBase<MTE_PCV> implements 
                 .addElement('S', ofFrame(MaterialsAlloy.INCONEL_792))
                 // --- Bartworks blocks ---
                 .addElement('A', fb("bartworks", "BW_GlasBlocks", 0))
-                .addElement('R', fb("bartworks", "BW_GlasBlocks", 0))
+                // R = Promethium Betavoltaic Alloy rebolted casing (PrPMaterials), not a glass placeholder
+                .addElement('R', ofBlock(PROMETHIUM_BETAVOLTAIC_BLOCK, PROMETHIUM_BETAVOLTAIC_BLOCK_META))
                 // --- Carbon Fiber Composite casing = the ONLY hatch-bearing element ---
                 .addElement(
                     'Q',
@@ -255,7 +269,7 @@ public class MTE_PCV extends MTEExtendedPowerMultiBlockBase<MTE_PCV> implements 
             .addController("Front face, main column")
             .addCasingInfoMin("Chemically Inert Reaction Vessel (PCV casing)", 20, false)
             .addOtherStructurePart(
-                "Borosilicate Glass blocks, Inconel-792 frames, GT casings & frames",
+                "Borosilicate Glass blocks, Promethium Betavoltaic Alloy rebolted casing, Inconel-792 frames, GT casings & frames",
                 "Per structure hologram")
             .addInputBus("Any Carbon Fiber Composite casing", 1)
             .addInputHatch("Any Carbon Fiber Composite casing", 1)

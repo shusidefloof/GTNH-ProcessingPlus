@@ -129,19 +129,15 @@ public class MTE_HPSF extends MTEExtendedPowerMultiBlockBase<MTE_HPSF> implement
                         { "     I             ", "   IEEEI           ", "   E   E           ", "  IE   EI     FFF  ",
                             "  GE   EG     CCC  ", "  GIEEEIG     CCC  ", "  G  IH G     CCC  ",
                             "BBBBBBBBBBB  BBBBB " },
-                        // Layer 9 — mirror of layer 3
                         { "    JIJ            ", "   HE EH           ", "  JE   EJ          ", "  I     I          ",
                             "  JE   EJ          ", "   HE EH           ", "    JIJ            ",
                             "BBBBBBBBBBB   BBB  " },
-                        // Layer 10 — mirror of layer 2
                         { "    JIJ            ", "   H   H           ", "  J     J          ", "  I     I          ",
                             "  J     J          ", "   H   H           ", "    JIJ            ",
                             "BBBBBBBBBBB        " },
-                        // Layer 11 — mirror of layer 1
                         { "    III            ", "   I   I           ", "  I     I          ", " GI     IG         ",
                             " GI     IG         ", " GGI   IGG         ", " G  III  G         ",
                             "BBBBBBBBBBB        " },
-                        // Layer 12 — rear end cap
                         { "                   ", "    CCC            ", "   CAAAC           ", "   CAAAC           ",
                             "   CAAAC           ", "    CCC            ", "                   ",
                             " BBBBBBBBB         " }, })
@@ -183,14 +179,14 @@ public class MTE_HPSF extends MTEExtendedPowerMultiBlockBase<MTE_HPSF> implement
                 .addElement('G', ofBlock(GameRegistry.findBlock("gregtech", "gt.blockframes"), 334))
                 // HPSF casing — transition zones (structural only)
                 .addElement('H', ofBlock(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.HPSF_CASING))
-                // HPSF casing — main pressure vessel ring + hatch positions
+                // Pressure Vessel Ring Casing — main pressure vessel ring + hatch positions
                 .addElement(
                     'I',
                     buildHatchAdder(MTE_HPSF.class)
                         .atLeast(Energy, InputBus, InputHatch, OutputBus, OutputHatch, Maintenance, Muffler)
                         .casingIndex(CASING_INDEX)
                         .hint(1)
-                        .buildAndChain(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.HPSF_CASING))
+                        .buildAndChain(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.PRESSURE_VESSEL_RING_CASING))
                 .addElement('J', ofBlock(GameRegistry.findBlock("gregtech", "gt.blockcasings3"), 10))
                 .build();
         }
@@ -375,6 +371,7 @@ public class MTE_HPSF extends MTEExtendedPowerMultiBlockBase<MTE_HPSF> implement
             .beginStructureBlock(11, 8, 13, true)
             .addController("Center of the 3×3 face on the control chamber")
             .addCasingInfoMin("Hardened Pressure Vessel Casing", 1, false)
+            .addCasingInfoMin("Pressure Vessel Ring Casing", 1, false)
             .addCasingInfoMin("Dual-Sealed Atmosphere Pipe Casing", 1, false)
             .addOtherStructurePart("Heating Coils", "Inner sintering chamber lining")
             .addOtherStructurePart("TungstenSteel Frames", "Structural ring support")

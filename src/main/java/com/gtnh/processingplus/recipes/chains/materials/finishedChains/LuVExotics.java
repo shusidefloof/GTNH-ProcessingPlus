@@ -25,6 +25,11 @@ import gtPlusPlus.api.recipe.GTPPRecipeMaps;
  * <p>
  * <b>Unobtanium</b> — a Void-Miner-only material. The ore yields an Ore Concentrate that ordinary
  * acids can't touch, so it is dissolved with Magic Acid (fluoroantimonic superacid).
+ *
+ * <p>
+ * <b>Jiritsu</b> — this mod's own pale blue-white UIV structural alloy, a third entry alongside
+ * GT5's Churitsu (neutral) and GoodGenerator's Tairitsu (opposition). Aerogel dusts are pressure-fused
+ * with molten Naquadah into Raw Jiritsu, then stabilized under an inert Helium blanket.
  */
 public class LuVExotics {
 
@@ -34,6 +39,10 @@ public class LuVExotics {
         vibDye();
         vibVibrantAdamantium();
         vibHotVibranium();
+
+        // Jiritsu (2 steps)
+        jirRawJiritsu();
+        jirHotJiritsu();
 
         // Unobtanium (9 steps) — SbF5 comes from GoodGenerator (fluid "antimony pentafluoride")
         unoFluorosulfuricAcid();
@@ -119,6 +128,39 @@ public class LuVExotics {
                 .itemOutputs(ingotHot(PrPMaterials.Vibranium, 1))
                 .duration(20)
                 .eut(TierEU.RECIPE_ZPM)
+                .addTo(RecipeMaps.multiblockChemicalReactorRecipes));
+    }
+
+    // =========================================================
+    // JIRITSU
+    // =========================================================
+
+    // 1. Autoclave — pressure-fuse both aerogel dusts with a molten Naquadah backbone into Raw Jiritsu
+    private static void jirRawJiritsu() {
+        safe(
+            "raw jiritsu",
+            () -> GTValues.RA.stdBuilder()
+                .itemInputs(
+                    dust(PrPMaterials.HydrophobicSilicaAerogel, 2),
+                    dust(PrPMaterials.AerogelInsulationPanel, 2))
+                .fluidInputs(molten(Materials.Naquadah, 72))
+                .itemOutputs(dust(PrPMaterials.RawJiritsu, 3))
+                .duration(10 * 20)
+                .eut(TierEU.RECIPE_ZPM)
+                .addTo(RecipeMaps.autoclaveRecipes));
+    }
+
+    // 2. Multiblock Chemical Reactor — stabilize Raw Jiritsu under an inert Helium blanket so the
+    // lattice can stand on its own (self-reliance) rather than needing a reactive support medium.
+    private static void jirHotJiritsu() {
+        safe(
+            "hot jiritsu",
+            () -> GTValues.RA.stdBuilder()
+                .itemInputs(dust(PrPMaterials.RawJiritsu, 3))
+                .fluidInputs(fluid(Materials.Helium, 1000))
+                .itemOutputs(ingotHot(PrPMaterials.Jiritsu, 1))
+                .duration(15 * 20)
+                .eut(TierEU.RECIPE_UIV)
                 .addTo(RecipeMaps.multiblockChemicalReactorRecipes));
     }
 

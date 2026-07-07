@@ -13,6 +13,8 @@ import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_VACUUM_FREEZE
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_VACUUM_FREEZER_GLOW;
 import static gregtech.api.enums.Textures.BlockIcons.casingTexturePages;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
+import static gregtech.api.util.GTStructureUtility.chainAllGlasses;
+import static gregtech.api.util.GTStructureUtility.ofSolenoidCoil;
 
 import java.util.List;
 
@@ -25,12 +27,11 @@ import com.gtnewhorizon.structurelib.alignment.constructable.ISurvivalConstructa
 import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
-import com.gtnh.processingplus.blocks.BlockGTNHPPCasings;
-import com.gtnh.processingplus.blocks.GTNHPPBlocks;
 import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import gregtech.api.GregTechAPI;
 import gregtech.api.enums.SoundResource;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
@@ -41,24 +42,37 @@ import gregtech.api.recipe.RecipeMap;
 import gregtech.api.render.TextureFactory;
 import gregtech.api.structure.error.StructureError;
 import gregtech.api.structure.error.StructureErrorRegistry;
+import gregtech.api.util.GTUtility;
 import gregtech.api.util.MultiblockTooltipBuilder;
 import gregtech.api.util.tooltip.TooltipHelper;
+import gregtech.common.misc.GTStructureChannels;
+import gtPlusPlus.core.block.ModBlocks;
 
 /**
- * Cryogenic Annealing Cryostat (CAC) — a 5×7×5 vacuum cryostat tower.
- * The superconductor wire is cryo-annealed inside a hollow vacuum core, wrapped in a load-bearing
- * Aerogel Insulation Block lining (36 blocks) that suppresses heat ingress so the coolant load stays
- * tractable at UHV+. Takes over every UHV-tier-and-above superconductor anneal recipe.
+ * Cryogenic Annealing Cryostat (CAC) — a 15×13×7 vacuum cryostat tower, structure designed by
+ * Lord of Turtle. The superconductor wire is cryo-annealed inside a hollow glass vacuum core, wrapped
+ * in a Solenoid Superconductor Coil column (tier scales parallels and EU discount, MTELatex-style) and
+ * a shell of GT/GT++ endgame casings. Takes over every UHV-tier-and-above superconductor anneal recipe.
  */
 public class MTE_CAC extends MTEExtendedPowerMultiBlockBase<MTE_CAC> implements ISurvivalConstructable {
 
     private static final int CASING_INDEX = 11;
     private static final String STRUCTURE_PIECE_MAIN = "main";
-    private static final int OFFSET_X = 2;
-    private static final int OFFSET_Y = 3;
+    // "Transposed Scan" export: outer/row axes are swapped vs. a normal scan, so the true shape is
+    // [z=7][y=13][x=15] with the controller marker '~' at z=0, y=11, x=7 (near the top of the front face).
+    private static final int OFFSET_X = 7;
+    private static final int OFFSET_Y = 11;
     private static final int OFFSET_Z = 0;
 
     private static IStructureDefinition<MTE_CAC> STRUCTURE_DEFINITION = null;
+
+    // Base parallel multiplier before the solenoid tier and voltage tier scale it (see getMaxParallelRecipes).
+    private static final int BASE_PARALLEL = 2;
+    // EU discount per solenoid voltage tier, same formula MTELatex uses for its item-pipe-tier fluid discount.
+    private static final float EU_DISCOUNT_PER_TIER = 0.0625F;
+
+    // Detected solenoid voltage tier (MV=2 .. UMV=12), null until the structure is checked.
+    private Byte mSolenoidTier = null;
 
     public MTE_CAC(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
@@ -79,28 +93,57 @@ public class MTE_CAC extends MTEExtendedPowerMultiBlockBase<MTE_CAC> implements 
             STRUCTURE_DEFINITION = StructureDefinition.<MTE_CAC>builder()
                 .addShape(
                     STRUCTURE_PIECE_MAIN,
-                    // shape[z][y][x] — 5 z-layers, 7 y-rows each, 5 x-chars
-                    // 'C' = Cryostat Vacuum Casing or hatch, 'A' = Aerogel Insulation Block (no hatches), ' ' = vacuum
-                    // core
+                    /*
+                     * Block legend (from the in-game structure export, credit: Lord of Turtle):
+                     * A -> BW_GlasBlocks — any tiered BartWorks glass (hollow vacuum core)
+                     * B -> gt.blockcasings.cyclotron_coils — any tier Solenoid Superconductor Coil (core
+                     * column; tier scales parallels and EU discount, see getMaxParallelRecipes)
+                     * C -> gt.blockcasings10:14 — Solidifier Radiator
+                     * D -> gt.blockcasings11:5 — Quantium Item Pipe Casing
+                     * E -> gt.blockcasings12:7 — Ultimately Static Machine Casing
+                     * F -> gt.blockframes:966 — Orichalcum Frame Box
+                     * G -> gtplusplus.blockcasings.3:3 — Bedrock Miner Casing (GT++)
+                     * H -> gtplusplus.blockspecialcasings.2:3 — Custom Machine Casing 4 (GT++, hatch-capable shell)
+                     */
                     new String[][] {
-                        // z=0: front face — all casing, controller center
-                        { "CCCCC", "CCCCC", "CCCCC", "CC~CC", "CCCCC", "CCCCC", "CCCCC" },
-                        // z=1: casing ring + aerogel lining + hollow vacuum core
-                        { "CCCCC", "CAAAC", "CA AC", "CA AC", "CA AC", "CAAAC", "CCCCC" },
-                        // z=2: middle layer (identical to z=1)
-                        { "CCCCC", "CAAAC", "CA AC", "CA AC", "CA AC", "CAAAC", "CCCCC" },
-                        // z=3: inner layer (identical to z=1)
-                        { "CCCCC", "CAAAC", "CA AC", "CA AC", "CA AC", "CAAAC", "CCCCC" },
-                        // z=4: back face — all casing
-                        { "CCCCC", "CCCCC", "CCCCC", "CCCCC", "CCCCC", "CCCCC", "CCCCC" }, })
+                        { "    HHHHHHH    ", "    F HHH F    ", "    F HHH F    ", "    F     F    ", "    F     F    ",
+                            "    F     F    ", "    F     F    ", "    F     F    ", "    F     F    ",
+                            "    F     F    ", "    F HHH F    ", "    F H~H F    ", "    HHHHHHH    " },
+                        { "    HHHHHHH    ", "     AAAAA     ", "    HAAAAAH    ", "     AAAAA     ", "     AAAAA     ",
+                            "     AAAAA     ", "     AAAAA     ", "     AAAAA     ", "     AAAAA     ",
+                            "     AAAAA     ", "    HAAAAAH    ", "     AAAAA     ", "    HHHHHHH    " },
+                        { "C   HHHHHHH   C", " C  HAG GAH  C ", "  C HA   AH C  ", "     AG GA     ", "     A   A     ",
+                            "C C  AG GA  C C", " C   A   A   C ", "C C  AG GA  C C", "     A   A     ",
+                            "     AG GA     ", "  C HA   AH C  ", " C  HAG GAH  C ", "C   HHHHHHH   C" },
+                        { "C   HHHHHHH   C", " EEEHA B AHEEE ", " EC HA B AH CE ", " E   A B A   E ", " E   A B A   E ",
+                            "CEC  A B A  CEC", " EEEDA B ADEEE ", "CEC  A B A  CEC", " E   A B A   E ",
+                            " E   A B A   E ", " EC HA B AH CE ", " EEEHA B AHEEE ", "C   HHHHHHH   C" },
+                        { "C   HHHHHHH   C", " C  HAG GAH  C ", "  C HA   AH C  ", "     AG GA     ", "     A   A     ",
+                            "C C  AG GA  C C", " C   A   A   C ", "C C  AG GA  C C", "     A   A     ",
+                            "     AG GA     ", "  C HA   AH C  ", " C  HAG GAH  C ", "C   HHHHHHH   C" },
+                        { "    HHHHHHH    ", "     AAAAA     ", "    HAAAAAH    ", "     AAAAA     ", "     AAAAA     ",
+                            "     AAAAA     ", "     AAAAA     ", "     AAAAA     ", "     AAAAA     ",
+                            "     AAAAA     ", "    HAAAAAH    ", "     AAAAA     ", "    HHHHHHH    " },
+                        { "    HHHHHHH    ", "    F HHH F    ", "    F HHH F    ", "    F     F    ", "    F     F    ",
+                            "    F     F    ", "    F     F    ", "    F     F    ", "    F     F    ",
+                            "    F     F    ", "    F HHH F    ", "    F HHH F    ", "    HHHHHHH    " } })
+                .addElement('A', chainAllGlasses())
                 .addElement(
-                    'C',
+                    'B',
+                    GTStructureChannels.SOLENOID
+                        .use(ofSolenoidCoil(MTE_CAC::setSolenoidTier, MTE_CAC::getSolenoidTier)))
+                .addElement('C', ofBlock(GregTechAPI.sBlockCasings10, 14))
+                .addElement('D', ofBlock(GregTechAPI.sBlockCasings11, 5))
+                .addElement('E', ofBlock(GregTechAPI.sBlockCasings12, 7))
+                .addElement('F', ofBlock(GregTechAPI.sBlockFrames, 966))
+                .addElement('G', ofBlock(ModBlocks.blockCasings3Misc, 3))
+                .addElement(
+                    'H',
                     buildHatchAdder(MTE_CAC.class)
                         .atLeast(Energy, InputBus, InputHatch, OutputBus, OutputHatch, Maintenance)
                         .casingIndex(CASING_INDEX)
                         .hint(1)
-                        .buildAndChain(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.CRYOSTAT_VACUUM_CASING))
-                .addElement('A', ofBlock(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.AEROGEL_INSULATION_BLOCK))
+                        .buildAndChain(ModBlocks.blockCustomMachineCasings, 3))
                 .build();
         }
         return STRUCTURE_DEFINITION;
@@ -128,13 +171,37 @@ public class MTE_CAC extends MTEExtendedPowerMultiBlockBase<MTE_CAC> implements 
 
     @Override
     public void checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack, List<StructureError> errors) {
+        mSolenoidTier = null;
         checkPiece(STRUCTURE_PIECE_MAIN, OFFSET_X, OFFSET_Y, OFFSET_Z, errors);
         if (mMaintenanceHatches.size() != 1) errors.add(StructureErrorRegistry.UNKNOWN_STRUCTURE_ERROR);
     }
 
     @Override
     protected ProcessingLogic createProcessingLogic() {
-        return new ProcessingLogic();
+        return new ProcessingLogic().setMaxParallelSupplier(this::getTrueParallel)
+            .setEuModifier(1.0F - getSolenoidDiscount());
+    }
+
+    // Parallels scale with both the solenoid coil's voltage tier and the machine's input voltage tier —
+    // same shape as MTEIndustrialForgeHammer's solenoid-scaled parallel count.
+    @Override
+    public int getMaxParallelRecipes() {
+        return BASE_PARALLEL * (mSolenoidTier == null ? 1 : mSolenoidTier)
+            * GTUtility.getTier(this.getMaxInputVoltage());
+    }
+
+    // EU discount per solenoid tier — same 0.0625-per-tier formula MTELatex uses for its item-pipe-tier
+    // fluid discount, just applied to EU cost instead of a fluid input amount.
+    private float getSolenoidDiscount() {
+        return EU_DISCOUNT_PER_TIER * (mSolenoidTier == null ? 0 : mSolenoidTier);
+    }
+
+    private Byte getSolenoidTier() {
+        return mSolenoidTier;
+    }
+
+    private void setSolenoidTier(byte tier) {
+        mSolenoidTier = tier;
     }
 
     @Override
@@ -180,24 +247,43 @@ public class MTE_CAC extends MTEExtendedPowerMultiBlockBase<MTE_CAC> implements 
                     + " in a vacuum core.")
             .addSeparator()
             .addInfo(
-                EnumChatFormatting.GOLD + "Inner lining: "
+                EnumChatFormatting.GOLD + "Core column: "
                     + EnumChatFormatting.GRAY
-                    + "exactly "
-                    + TooltipHelper.coloredText("36", EnumChatFormatting.YELLOW)
+                    + "a Solenoid Superconductor Coil (any tier) down the centre, wrapped in glass.")
+            .addInfo(
+                EnumChatFormatting.GOLD + "Higher solenoid tiers"
                     + EnumChatFormatting.GRAY
-                    + " Aerogel Insulation Blocks required.")
-            .addInfo("The aerogel lining is load-bearing — the machine will not form without it.")
-            .beginStructureBlock(5, 7, 5, true)
-            .addController("Front face, center")
-            .addCasingInfoMin("Cryostat Vacuum Casing", 78, false)
-            .addCasingInfoExactly("Aerogel Insulation Block", 36, true)
-            .addInputBus("Any outer casing", 1)
-            .addInputHatch("Any outer casing", 1)
-            .addOutputBus("Any outer casing", 1)
-            .addOutputHatch("Any outer casing", 1)
-            .addEnergyHatch("Any outer casing", 1)
-            .addMaintenanceHatch("Any outer casing", 1)
-            .toolTipFinisher("_Shusi_");
+                    + " grant more parallels and a bigger EU discount ("
+                    + TooltipHelper.coloredText("6.25% per tier", EnumChatFormatting.YELLOW)
+                    + EnumChatFormatting.GRAY
+                    + ").")
+            .beginStructureBlock(15, 13, 7, true)
+            .addController("See NEI structure preview")
+            .addCasingInfoMin("Custom Machine Casing 4 (GT++)", 145, false)
+            .addOtherStructurePart("BartWorks Glass (any tier)", "Hollow vacuum core")
+            .addOtherStructurePart("Solenoid Superconductor Coil (any tier)", "Central column")
+            .addOtherStructurePart("Solidifier Radiator / Quantium Item Pipe Casing", "Corner + edge accents")
+            .addOtherStructurePart("Ultimately Static Machine Casing", "Side accents")
+            .addOtherStructurePart("Orichalcum Frame Box", "Structural corner posts")
+            .addOtherStructurePart("Bedrock Miner Casing (GT++)", "Ring accents")
+            .addInputBus("Any Custom Machine Casing 4", 1)
+            .addInputHatch("Any Custom Machine Casing 4", 1)
+            .addOutputBus("Any Custom Machine Casing 4", 1)
+            .addOutputHatch("Any Custom Machine Casing 4", 1)
+            .addEnergyHatch("Any Custom Machine Casing 4", 1)
+            .addMaintenanceHatch("Any Custom Machine Casing 4", 1)
+            .addSubChannelUsage(GTStructureChannels.SOLENOID)
+            .toolTipFinisher(
+                "_Shusi_",
+                EnumChatFormatting.GREEN + ""
+                    + EnumChatFormatting.BOLD
+                    + "Lord_"
+                    + EnumChatFormatting.AQUA
+                    + EnumChatFormatting.BOLD
+                    + "of_"
+                    + EnumChatFormatting.DARK_GREEN
+                    + EnumChatFormatting.BOLD
+                    + "Turtle27");
         return tt;
     }
 

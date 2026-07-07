@@ -1,5 +1,6 @@
 package com.gtnh.processingplus.machines;
 
+import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlock;
 import static gregtech.api.enums.HatchElement.Energy;
 import static gregtech.api.enums.HatchElement.InputBus;
 import static gregtech.api.enums.HatchElement.InputHatch;
@@ -13,10 +14,15 @@ import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_LARGE_CHEMICA
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_LARGE_CHEMICAL_REACTOR_GLOW;
 import static gregtech.api.enums.Textures.BlockIcons.casingTexturePages;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
+import static gregtech.api.util.GTUtility.validMTEList;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
+
+import javax.annotation.Nonnull;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -31,18 +37,21 @@ import com.gtnewhorizon.structurelib.alignment.constructable.ISurvivalConstructa
 import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
-import com.gtnh.processingplus.blocks.BlockGTNHPPCasings;
-import com.gtnh.processingplus.blocks.GTNHPPBlocks;
 import com.gtnh.processingplus.materials.PrPMaterials;
 import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import gregtech.api.GregTechAPI;
 import gregtech.api.enums.GTValues;
+import gregtech.api.enums.Materials;
 import gregtech.api.enums.SoundResource;
+import gregtech.api.interfaces.IHatchElement;
 import gregtech.api.interfaces.ITexture;
+import gregtech.api.interfaces.IToolStats;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
+import gregtech.api.items.MetaGeneratedTool;
 import gregtech.api.logic.ProcessingLogic;
 import gregtech.api.metatileentity.implementations.MTEExtendedPowerMultiBlockBase;
 import gregtech.api.recipe.RecipeMap;
@@ -51,14 +60,25 @@ import gregtech.api.recipe.check.SimpleCheckRecipeResult;
 import gregtech.api.render.TextureFactory;
 import gregtech.api.structure.error.StructureError;
 import gregtech.api.structure.error.StructureErrorRegistry;
+import gregtech.api.util.GTRecipe;
+import gregtech.api.util.IGTHatchAdder;
 import gregtech.api.util.MultiblockTooltipBuilder;
+import gregtech.api.util.TurbineStatCalculator;
+import gregtech.api.util.shutdown.ShutDownReason;
 import gregtech.api.util.tooltip.TooltipHelper;
+import gtPlusPlus.xmod.gregtech.api.metatileentity.implementations.MTEHatchTurbine;
 
+/**
+ * Cryogenic Separation Column (CSC) — a 15×6×7 fractional-distillation tower, structure designed by
+ * Lord of Turtle.
+ */
 public class MTE_CSC extends MTEExtendedPowerMultiBlockBase<MTE_CSC> implements ISurvivalConstructable {
 
     private static final int CASING_INDEX = 11;
     private static final String STRUCTURE_PIECE_MAIN = "main";
-    private static final int OFFSET_X = 1, OFFSET_Y = 2, OFFSET_Z = 0;
+    // "Transposed Scan" export: outer/row axes are swapped vs. a normal scan, so the true shape is
+    // [z=7][y=6][x=15] with the controller marker '~' at z=0, y=3, x=7 (front face, mid-height).
+    private static final int OFFSET_X = 7, OFFSET_Y = 3, OFFSET_Z = 0;
 
     private static IStructureDefinition<MTE_CSC> STRUCTURE_DEFINITION = null;
 
@@ -68,6 +88,15 @@ public class MTE_CSC extends MTEExtendedPowerMultiBlockBase<MTE_CSC> implements 
 
     // Transient: primary fluid captured before inputs are consumed each run
     private String mCurrentPrimaryFluid = "";
+
+    // Rotor Assembly hatches (MTEHatchTurbine) — each holds a real turbine rotor item (right-click to
+    // insert, same as GT5's Large Turbines/Spinmatron). Summed rotor optimal flow gives a speed bonus.
+    public ArrayList<MTEHatchTurbine> mRotorAssemblies = new ArrayList<>();
+
+    // Speed-bonus tuning: higher combined rotor optimal flow -> lower (faster) duration multiplier,
+    // floored so a rotor can never make the recipe instant.
+    private static final double ROTOR_SPEED_DIVISOR = 500.0;
+    private static final double ROTOR_SPEED_FLOOR = 0.001;
 
     public MTE_CSC(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
@@ -88,15 +117,54 @@ public class MTE_CSC extends MTEExtendedPowerMultiBlockBase<MTE_CSC> implements 
             STRUCTURE_DEFINITION = StructureDefinition.<MTE_CSC>builder()
                 .addShape(
                     STRUCTURE_PIECE_MAIN,
-                    new String[][] { { "CCC", "CCC", "C~C", "CCC", "CCC" }, { "CCC", "CCC", "CCC", "CCC", "CCC" },
-                        { "CCC", "CCC", "CCC", "CCC", "CCC" } })
+                    /*
+                     * Block legend (from the in-game structure export, credit: Lord of Turtle):
+                     * A -> gt.blockcasings2:1 — Frost Proof Machine Casing (hatch-capable shell)
+                     * B -> gt.blockcasings8:4 — Extreme Engine Intake Casing (top/bottom cap accent)
+                     * C -> gt.blockframes:407 — Energetic Silver Frame Box
+                     * F -> Rotor Assembly (MTEHatchTurbine, "hatch.turbine" — the real placeable GT++
+                     * rotor-assembly block/hatch, same class GT5's MTESpinmatron uses; insert a turbine
+                     * rotor tool and its optimal gas flow stat speeds up recipes, see getRotorSpeedBonus)
+                     * G -> gt.blockcasings8:4 — Air Intake (hatch-capable, Muffler only)
+                     */
+                    new String[][] {
+                        { "               ", "     CAAAC     ", "     AAAAA     ", "    CAA~AAC    ", "     AAAAA     ",
+                            "     CAAAC     " },
+                        { "     BABAB     ", "    CA   AC    ", "    A     A    ", "   CA     AC   ", "    A     A    ",
+                            "    CAAAAAC    " },
+                        { "    ABABABA    ", "   CA     AC   ", "AAAA       AAAA", "GGGA       AGGG", "AAAA       AAAA",
+                            "C  CAAAAAAAC  C" },
+                        { "    ABABABA    ", "   CA     AC   ", "DDDA       ADDD", "F          A  F", "DDDA       ADDD",
+                            "   CAAAAAAAC   " },
+                        { "    ABABABA    ", "   CA     AC   ", "AAAA       AAAA", "GGGA       AGGG", "AAAA       AAAA",
+                            "C  CAAAAAAAC  C" },
+                        { "     BABAB     ", "    CA   AC    ", "    A     A    ", "   CA     AC   ", "    A     A    ",
+                            "    CAAAAAC    " },
+                        { "               ", "     CAAAC     ", "     AAAAA     ", "    CAAAAAC    ", "     AAAAA     ",
+                            "     CAAAC     " } })
                 .addElement(
-                    'C',
+                    'A',
                     buildHatchAdder(MTE_CSC.class)
                         .atLeast(Energy, InputBus, InputHatch, OutputBus, OutputHatch, Maintenance, Muffler)
                         .casingIndex(CASING_INDEX)
                         .hint(1)
-                        .buildAndChain(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.CSC_CASING))
+                        .buildAndChain(GregTechAPI.sBlockCasings2, 1))
+                .addElement('B', ofBlock(GregTechAPI.sBlockCasings8, 4))
+                .addElement('C', ofBlock(GregTechAPI.sBlockFrames, 407))
+                .addElement(
+                    'D',
+                    buildHatchAdder(MTE_CSC.class)
+                        .atLeast(Energy, InputBus, OutputBus, OutputHatch, Maintenance, Muffler)
+                        .casingIndex(CASING_INDEX)
+                        .hint(1)
+                        .buildAndChain(GregTechAPI.sBlockCasings2, 1))
+                .addElement('F', CSCHatchElement.ROTOR_ASSEMBLY.newAny(CASING_INDEX, 2))
+                .addElement(
+                    'G',
+                    buildHatchAdder(MTE_CSC.class).atLeast(InputHatch)
+                        .casingIndex(CASING_INDEX)
+                        .hint(2)
+                        .buildAndChain(GregTechAPI.sBlockCasings2, 1))
                 .build();
         }
         return STRUCTURE_DEFINITION;
@@ -124,8 +192,50 @@ public class MTE_CSC extends MTEExtendedPowerMultiBlockBase<MTE_CSC> implements 
 
     @Override
     public void checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack, List<StructureError> errors) {
+        mRotorAssemblies.clear();
         checkPiece(STRUCTURE_PIECE_MAIN, OFFSET_X, OFFSET_Y, OFFSET_Z, errors);
         if (mMaintenanceHatches.size() != 1) errors.add(StructureErrorRegistry.UNKNOWN_STRUCTURE_ERROR);
+    }
+
+    public boolean addRotorAssembly(final IGregTechTileEntity aTileEntity, final int aBaseCasingIndex) {
+        if (aTileEntity == null) return false;
+        final IMetaTileEntity aMetaTileEntity = aTileEntity.getMetaTileEntity();
+        if (aMetaTileEntity instanceof MTEHatchTurbine turbine) {
+            turbine.updateTexture(aBaseCasingIndex);
+            mRotorAssemblies.add(turbine);
+            return true;
+        }
+        return false;
+    }
+
+    private enum CSCHatchElement implements IHatchElement<MTE_CSC> {
+
+        ROTOR_ASSEMBLY(MTE_CSC::addRotorAssembly, MTEHatchTurbine.class) {
+
+            @Override
+            public long count(MTE_CSC t) {
+                return t.mRotorAssemblies.size();
+            }
+        };
+
+        private final List<Class<? extends IMetaTileEntity>> mteClasses;
+        private final IGTHatchAdder<MTE_CSC> adder;
+
+        @SafeVarargs
+        CSCHatchElement(IGTHatchAdder<MTE_CSC> adder, Class<? extends IMetaTileEntity>... mteClasses) {
+            this.mteClasses = Collections.unmodifiableList(Arrays.asList(mteClasses));
+            this.adder = adder;
+        }
+
+        @Override
+        public List<? extends Class<? extends IMetaTileEntity>> mteClasses() {
+            return mteClasses;
+        }
+
+        @Override
+        public IGTHatchAdder<? super MTE_CSC> adder() {
+            return adder;
+        }
     }
 
     // Called before inputs are consumed — capture primary (non-Freon) fluid for deficit tracking
@@ -206,7 +316,71 @@ public class MTE_CSC extends MTEExtendedPowerMultiBlockBase<MTE_CSC> implements 
 
     @Override
     protected ProcessingLogic createProcessingLogic() {
-        return new ProcessingLogic();
+        return new ProcessingLogic() {
+
+            @Override
+            protected CheckRecipeResult onRecipeStart(@Nonnull GTRecipe recipe) {
+                setTurbineActive();
+                return super.onRecipeStart(recipe);
+            }
+        }.setSpeedBonusSupplier(this::getRotorSpeedBonus);
+    }
+
+    @Override
+    public void stopMachine(@Nonnull ShutDownReason reason) {
+        setTurbineInactive();
+        super.stopMachine(reason);
+    }
+
+    @Override
+    public void onPostTick(IGregTechTileEntity aBaseMetaTileEntity, long aTick) {
+        super.onPostTick(aBaseMetaTileEntity, aTick);
+        if (aTick % 100 == 0) {
+            if (!getBaseMetaTileEntity().isActive() && !this.mRotorAssemblies.isEmpty()) {
+                setTurbineInactive();
+            }
+        }
+    }
+
+    private void setTurbineActive() {
+        for (MTEHatchTurbine hatch : validMTEList(mRotorAssemblies)) {
+            hatch.setActive(true);
+            hatch.onTextureUpdate();
+        }
+    }
+
+    private void setTurbineInactive() {
+        for (MTEHatchTurbine hatch : validMTEList(mRotorAssemblies)) {
+            hatch.setActive(false);
+            hatch.onTextureUpdate();
+        }
+    }
+
+    // Sums TurbineStatCalculator.getOptimalGasFlow() across every valid rotor item inserted into the
+    // Rotor Assembly hatches, then converts it into a duration multiplier (< 1 = faster). Gas flow (not
+    // the base/steam/plasma variants) since the CSC's whole job is cryogenic gas separation (air, CO2).
+    // Mirrors how real GT5 turbines derive optimal flow from the rotor's speed multiplier, material tool
+    // speed, and material gas multiplier, without the flow-matching/loose-efficiency curve those use for
+    // EU generation — CSC recipes are fixed-amount, not a tunable fluid stream, so only the raw rotor
+    // stat carries over.
+    private double getRotorSpeedBonus() {
+        double totalFlow = 0;
+        for (MTEHatchTurbine hatch : validMTEList(mRotorAssemblies)) {
+            ItemStack rotor = hatch.getTurbine();
+            if (!isValidRotor(rotor)) continue;
+            totalFlow += new TurbineStatCalculator((MetaGeneratedTool) rotor.getItem(), rotor).getOptimalGasFlow();
+        }
+        if (totalFlow <= 0) return 1.0;
+        return Math.max(ROTOR_SPEED_FLOOR, 1.0 / (1.0 + totalFlow / ROTOR_SPEED_DIVISOR));
+    }
+
+    private static boolean isValidRotor(ItemStack aStack) {
+        if (aStack == null || !(aStack.getItem() instanceof MetaGeneratedTool tool)) return false;
+        if (aStack.getItemDamage() < 170 || aStack.getItemDamage() > 179) return false;
+        IToolStats stats = tool.getToolStats(aStack);
+        if (stats == null || stats.getSpeedMultiplier() <= 0) return false;
+        Materials material = MetaGeneratedTool.getPrimaryMaterial(aStack);
+        return material != null && material.mToolSpeed > 0;
     }
 
     @Override
@@ -263,28 +437,43 @@ public class MTE_CSC extends MTEExtendedPowerMultiBlockBase<MTE_CSC> implements 
             .addInfo(EnumChatFormatting.DARK_RED + "Unpaid debt causes an explosion on the next run!")
             .addSeparator()
             .addInfo(
-                TooltipHelper.coloredText("circuit(1)", EnumChatFormatting.AQUA) + EnumChatFormatting.GRAY
-                    + "  50,000 mB Air → N₂ + O₂ + LiquidAr | ~"
-                    + TooltipHelper.coloredText("500 mB", EnumChatFormatting.RED)
+                EnumChatFormatting.GRAY + "Each rotor's "
+                    + TooltipHelper.coloredText("Optimal Gas Flow", EnumChatFormatting.YELLOW)
                     + EnumChatFormatting.GRAY
-                    + " Freon lost")
+                    + " stat is added together across both slots.")
             .addInfo(
-                TooltipHelper.coloredText("circuit(2)", EnumChatFormatting.AQUA) + EnumChatFormatting.GRAY
-                    + "  10,000 mB CO₂ → 9,000 mB LiquidCO₂ | ~"
-                    + TooltipHelper.coloredText("150 mB", EnumChatFormatting.RED)
+                "" + EnumChatFormatting.DARK_GRAY
+                    + EnumChatFormatting.ITALIC
+                    + "Purely a speed buff rotors don't consume fluid or take damage here.")
+            .addInfo(
+                EnumChatFormatting.WHITE + "Duration: "
                     + EnumChatFormatting.GRAY
-                    + " Freon lost")
-            .beginStructureBlock(3, 5, 3, true)
-            .addController("Front face, center")
-            .addCasingInfoMin("Cryogenic Column Casing", 44, false)
-            .addInputBus("Any casing", 1)
-            .addInputHatch("Any casing", 1)
-            .addOutputBus("Any casing", 1)
-            .addOutputHatch("Any casing", 1)
-            .addEnergyHatch("Any casing", 1)
-            .addMufflerHatch("Any casing", 1)
-            .addMaintenanceHatch("Any casing", 1)
-            .toolTipFinisher("_Shusi_");
+                    + "×= max(0.001, 1 / (1 + ΣOptimalGasFlow / 500))")
+            .beginStructureBlock(15, 6, 7, true)
+            .addController("See NEI structure preview")
+            .addCasingInfoMin("Frost Proof Machine Casing", 100, false)
+            .addOtherStructurePart("Extreme Engine Intake Casing", "Top/bottom cap accent")
+            .addOtherStructurePart("Energetic Silver Frame Box", "Structural framing")
+            .addOtherStructurePart("Rotor Assembly", "Center slice, front-facing (2 required)")
+            .addMufflerHatch("Air Intake (Extreme Engine Intake Casing only)", 2)
+            .addInputBus("Any Frost Proof Machine Casing", 1)
+            .addInputHatch("Any Frost Proof Machine Casing", 1)
+            .addOutputBus("Any Frost Proof Machine Casing", 1)
+            .addOutputHatch("Any Frost Proof Machine Casing", 1)
+            .addEnergyHatch("Any Frost Proof Machine Casing", 1)
+            .addMufflerHatch("Any Frost Proof Machine Casing", 1)
+            .addMaintenanceHatch("Any Frost Proof Machine Casing", 1)
+            .toolTipFinisher(
+                "_Shusi_",
+                EnumChatFormatting.GREEN + ""
+                    + EnumChatFormatting.BOLD
+                    + "Lord_"
+                    + EnumChatFormatting.AQUA
+                    + EnumChatFormatting.BOLD
+                    + "of_"
+                    + EnumChatFormatting.DARK_GREEN
+                    + EnumChatFormatting.BOLD
+                    + "Turtle27");
         return tt;
     }
 
@@ -297,15 +486,67 @@ public class MTE_CSC extends MTEExtendedPowerMultiBlockBase<MTE_CSC> implements 
                 + mDeficitFluidName
                 + " required next run"
             : EnumChatFormatting.GREEN + "Freon: stable";
-        return new String[] { StatCollector.translateToLocal("GT5U.multiblock.Progress") + ": "
-            + EnumChatFormatting.GREEN
-            + mProgresstime / 20
-            + EnumChatFormatting.RESET
-            + " s / "
-            + EnumChatFormatting.YELLOW
-            + mMaxProgresstime / 20
-            + EnumChatFormatting.RESET
-            + " s", deficitLine };
+        List<String> lines = new ArrayList<>();
+        lines.add(
+            StatCollector.translateToLocal("GT5U.multiblock.Progress") + ": "
+                + EnumChatFormatting.GREEN
+                + mProgresstime / 20
+                + EnumChatFormatting.RESET
+                + " s / "
+                + EnumChatFormatting.YELLOW
+                + mMaxProgresstime / 20
+                + EnumChatFormatting.RESET
+                + " s");
+        lines.add(deficitLine);
+        lines.addAll(getRotorDebugLines());
+        return lines.toArray(new String[0]);
+    }
+
+    // Diagnostic breakdown of the Rotor Assembly speed bonus — shows exactly what each hatch sees so we
+    // can tell "no item in slot" from "item rejected by isValidRotor" from "item accepted, flow computed".
+    private List<String> getRotorDebugLines() {
+        List<String> lines = new ArrayList<>();
+        int i = 0;
+        for (MTEHatchTurbine hatch : validMTEList(mRotorAssemblies)) {
+            i++;
+            ItemStack rotor = hatch.getTurbine();
+            if (rotor == null) {
+                lines.add(
+                    EnumChatFormatting.GRAY + "Rotor Assembly "
+                        + i
+                        + ": "
+                        + EnumChatFormatting.RED
+                        + "no rotor detected (getTurbine() == null)");
+                continue;
+            }
+            if (!isValidRotor(rotor)) {
+                lines.add(
+                    EnumChatFormatting.GRAY + "Rotor Assembly "
+                        + i
+                        + ": "
+                        + EnumChatFormatting.RED
+                        + "rejected — "
+                        + rotor.getDisplayName());
+                continue;
+            }
+            double flow = new TurbineStatCalculator((MetaGeneratedTool) rotor.getItem(), rotor).getOptimalGasFlow();
+            lines.add(
+                EnumChatFormatting.GRAY + "Rotor Assembly "
+                    + i
+                    + ": "
+                    + EnumChatFormatting.GREEN
+                    + rotor.getDisplayName()
+                    + EnumChatFormatting.GRAY
+                    + " — OptimalGasFlow="
+                    + String.format("%.1f", flow));
+        }
+        lines.add(
+            EnumChatFormatting.GOLD + "Rotor speed multiplier: "
+                + EnumChatFormatting.YELLOW
+                + String.format("%.3f", getRotorSpeedBonus())
+                + EnumChatFormatting.GRAY
+                + " (lower = faster, 1.0 = no rotors)");
+        return lines;
     }
 
     @Override

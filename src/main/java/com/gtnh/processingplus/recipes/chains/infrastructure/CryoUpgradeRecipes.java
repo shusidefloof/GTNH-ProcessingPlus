@@ -41,10 +41,10 @@ public class CryoUpgradeRecipes {
         GTValues.RA.stdBuilder()
             .itemInputs(dust(PrPMaterials.CarbonFiberTow, 4), circuit(11))
             .fluidInputs(fluid(PrPMaterials.LiquidArgon, 2000))
-            .itemOutputs(dust(PrPMaterials.GraphitizedCarbonFiber, 5))
+            .itemOutputs(dust(PrPMaterials.GraphitizedCarbonFiber, 4))
             .duration(1000)
             .eut(TierEU.RECIPE_ZPM)
-            .metadata(GTRecipeConstants.COIL_HEAT, 4500)
+            .metadata(GTRecipeConstants.COIL_HEAT, 7100)
             .addTo(GTNHPPRecipeMaps.sHTRFRecipes);
     }
 
@@ -53,7 +53,7 @@ public class CryoUpgradeRecipes {
         GTValues.RA.stdBuilder()
             .itemInputs(ingot(Materials.Tritanium, 4), dust(Materials.Americium, 2), circuit(12))
             .fluidInputs(fluid(PrPMaterials.HBNLubricant, 500), fluid(PrPMaterials.LiquidArgon, 500))
-            .itemOutputs(ingot(PrPMaterials.AmorphousTritaniumAlloy, 5))
+            .itemOutputs(ingot(PrPMaterials.AmorphousTritaniumAlloy, 4))
             .duration(640)
             .eut(TierEU.RECIPE_LuV)
             .addTo(GTNHPPRecipeMaps.sCRVRecipes);
@@ -64,7 +64,7 @@ public class CryoUpgradeRecipes {
         GTValues.RA.stdBuilder()
             .itemInputs(dust(Materials.Naquadria, 4), ingot(Materials.NaquadahEnriched, 2), circuit(13))
             .fluidInputs(fluid(PrPMaterials.HBNLubricant, 1000), fluid(PrPMaterials.LiquidArgon, 1000))
-            .itemOutputs(ingot(PrPMaterials.AmorphousNaquadria, 3))
+            .itemOutputs(ingot(PrPMaterials.AmorphousNaquadria, 2))
             .duration(960)
             .eut(TierEU.RECIPE_ZPM)
             .addTo(GTNHPPRecipeMaps.sCRVRecipes);

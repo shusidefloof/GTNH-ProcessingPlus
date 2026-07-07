@@ -243,4 +243,8 @@ public class PassiveableMaterials {
             .eut(TierEU.RECIPE_EV)
             .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
     }
+
+    private static void netherStar() {
+
+    }
 }

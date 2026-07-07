@@ -20,35 +20,35 @@ public class BlockGTNHPPCasings extends Block {
     public static final int DAF_CASING = 2;
     public static final int PCV_CASING = 3;
     public static final int PFC_CASING = 4;
-    public static final int AAR_CASING = 5;
-    public static final int SCD_CASING = 6;
-    public static final int CRV_CASING = 7;
-    public static final int HBN_CERAMIC_BLOCK = 8;
-    public static final int SPC_CASING = 9;
-    public static final int CSC_CASING = 10;
-    public static final int BOF_CASING = 11;
-    public static final int SPC_BEAM_CASING = 12;
-    public static final int SPC_FRAME_CASING = 13;
+    public static final int SCD_CASING = 5;
+    public static final int CRV_CASING = 6;
+    public static final int HBN_CERAMIC_BLOCK = 7;
+    public static final int SPC_CASING = 8;
+    public static final int CSC_CASING = 9;
+    public static final int BOF_CASING = 10;
+    public static final int SPC_BEAM_CASING = 11;
+    public static final int SPC_FRAME_CASING = 12;
     // SPC support-bay adapters (route an external upgrade module into the SPC)
-    public static final int BIO_ADAPTER = 14;
-    public static final int CRYO_ADAPTER = 15;
-    public static final int QUANTUM_ADAPTER = 16;
+    public static final int BIO_ADAPTER = 13;
+    public static final int CRYO_ADAPTER = 14;
+    public static final int QUANTUM_ADAPTER = 15;
     // External SPC upgrade-module casings
-    public static final int BIO_MODULE_CASING = 17;
-    public static final int CRYO_MODULE_CASING = 18;
-    public static final int QUANTUM_MODULE_CASING = 19;
-    public static final int HTRF_REINFORCED_CASING = 20; // after your existing ones
-    public static final int CF_COMPOSITE_CASING = 21; // Carbon Fiber Composite Casing (CRC structural shell)
-    public static final int CRYOSTAT_VACUUM_CASING = 22; // CAC outer vacuum shell
-    public static final int AEROGEL_INSULATION_BLOCK = 23; // CAC inner aerogel lining (load-bearing)
-    public static final int RADIOISOTOPE_CASING = 24; // RTG generator shell (lead-shielded)
-    public static final int ISOTOPIC_DOPING_CASING = 25; // CIDC chamber shell
-    public static final int HYBRID_PHASE_CASING = 26; // HPR reactor shell
-    public static final int SUBATOMIC_PATTERNING_CASING = 27; // SPU shell
-    public static final int DAF_CASING_LUV = 28; // DAF LuV-tier chamber shell
-    public static final int DAF_CASING_UV = 29; // DAF UV-tier chamber shell
-    public static final int DAF_CASING_UEV = 30; // DAF UEV-tier chamber shell
-    public static final int CSTR_CASING = 31; // Continuous Stirred Tank Reactor shell
+    public static final int BIO_MODULE_CASING = 16;
+    public static final int CRYO_MODULE_CASING = 17;
+    public static final int QUANTUM_MODULE_CASING = 18;
+    public static final int HTRF_REINFORCED_CASING = 19; // after your existing ones
+    public static final int CF_COMPOSITE_CASING = 20; // Carbon Fiber Composite Casing (CRC structural shell)
+    public static final int CRYOSTAT_VACUUM_CASING = 21; // CAC outer vacuum shell
+    public static final int AEROGEL_INSULATION_BLOCK = 22; // CAC inner aerogel lining (load-bearing)
+    public static final int RADIOISOTOPE_CASING = 23; // RTG generator shell (lead-shielded)
+    public static final int ISOTOPIC_DOPING_CASING = 24; // CIDC chamber shell
+    public static final int HYBRID_PHASE_CASING = 25; // HPR reactor shell
+    public static final int SUBATOMIC_PATTERNING_CASING = 26; // SPU shell
+    public static final int DAF_CASING_LUV = 27; // DAF LuV-tier chamber shell
+    public static final int DAF_CASING_UV = 28; // DAF UV-tier chamber shell
+    public static final int DAF_CASING_UEV = 29; // DAF UEV-tier chamber shell
+    public static final int CSTR_CASING = 30; // Continuous Stirred Tank Reactor shell
+    public static final int PRESSURE_VESSEL_RING_CASING = 31; // HPSF main pressure vessel ring
     public static final int NUM_CASINGS = 32;
 
     // @formatter:off
@@ -58,7 +58,6 @@ public class BlockGTNHPPCasings extends Block {
         "Dual-Sealed Atmosphere Casing",         // DAF
         "Chemically Inert Reaction Vessel",      // PCV
         "Precision Cleanroom Casing",            // PFC
-        "Corrosion-Resistant Reactor Casing",    // AAR
         "High-Pressure Containment Casing",      // SCD
         "Iridium-Reinforced Reactor Casing",     // CRV outer shell
         "Hexagonal Boron Nitride Ceramic Block", // CRV inner lining
@@ -85,6 +84,7 @@ public class BlockGTNHPPCasings extends Block {
         "Pristine Atmosphere Casing",         // DAF UV chamber
         "Absolute Atmosphere Casing",         // DAF UEV chamber
         "Agitated Reaction Vessel Casing",    // CSTR shell
+        "Pressure Vessel Ring Casing",        // HPSF main pressure vessel ring
     };
 
     // Borrow GT5U's existing block textures as placeholders until custom art is made.
@@ -95,7 +95,6 @@ public class BlockGTNHPPCasings extends Block {
         "gregtech:iconsets/MACHINE_CASING_SOLID_STEEL",         // DAF: industrial steel
         "gregtech:iconsets/MACHINE_CASING_CLEAN_STAINLESSSTEEL",// PCV: chemical / clean steel
         "gregtech:iconsets/MACHINE_CASING_STABLE_TITANIUM",     // PFC: precision titanium
-        "gregtech:iconsets/MACHINE_CASING_RADIATIONPROOF",      // AAR: corrosion/radiation proof
         "gregtech:iconsets/MACHINE_CASING_STABLE_TITANIUM",     // SCD: high-pressure titanium
         "gregtech:iconsets/MACHINE_CASING_ROBUST_TUNGSTENSTEEL",// CRV outer: LuV-tier reactor shell
         "gregtech:iconsets/MACHINE_CASING_CLEAN_STAINLESSSTEEL",// hBN ceramic: white/inert lining
@@ -122,6 +121,7 @@ public class BlockGTNHPPCasings extends Block {
         "gregtech:iconsets/MACHINE_CASING_RADIATIONPROOF",       // DAF UV: radiation-proof alloy
         "gregtech:iconsets/MACHINE_CASING_FUSION_GLASS",         // DAF UEV: transcendent shell
         "gregtech:iconsets/MACHINE_CASING_CLEAN_STAINLESSSTEEL", // CSTR: chemically inert stainless vessel
+        "gregtech:iconsets/MACHINE_CASING_ROBUST_TUNGSTENSTEEL", // HPSF ring: reinforced tungsten band
     };
     // @formatter:on
 

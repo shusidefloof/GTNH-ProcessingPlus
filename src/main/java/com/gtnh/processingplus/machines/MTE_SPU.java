@@ -27,10 +27,13 @@ import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.gtnh.processingplus.blocks.BlockGTNHPPCasings;
 import com.gtnh.processingplus.blocks.GTNHPPBlocks;
+import com.gtnh.processingplus.materials.PrPMaterials;
 import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
 
+import bartworks.system.material.WerkstoffLoader;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import gregtech.api.GregTechAPI;
 import gregtech.api.enums.SoundResource;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
@@ -42,7 +45,8 @@ import gregtech.api.render.TextureFactory;
 import gregtech.api.structure.error.StructureError;
 import gregtech.api.structure.error.StructureErrorRegistry;
 import gregtech.api.util.MultiblockTooltipBuilder;
-import gregtech.api.util.tooltip.TooltipHelper;
+import tectech.thing.block.BlockQuantumGlass;
+import tectech.thing.casing.TTCasingsContainer;
 
 /**
  * Subatomic Patterning Unit (SPU) — UIV-tier multiblock that imprints a quantum lattice onto the
@@ -53,9 +57,10 @@ public class MTE_SPU extends MTEExtendedPowerMultiBlockBase<MTE_SPU> implements 
 
     private static final int CASING_INDEX = 11;
     private static final String STRUCTURE_PIECE_MAIN = "main";
-    private static final int OFFSET_X = 2;
-    private static final int OFFSET_Y = 2;
-    private static final int OFFSET_Z = 0;
+    // Controller marker '~' sits at slice z=2, row y=14, char x=7 in the exported shape.
+    private static final int OFFSET_X = 7;
+    private static final int OFFSET_Y = 14;
+    private static final int OFFSET_Z = 2;
 
     private static IStructureDefinition<MTE_SPU> STRUCTURE_DEFINITION = null;
 
@@ -78,21 +83,98 @@ public class MTE_SPU extends MTEExtendedPowerMultiBlockBase<MTE_SPU> implements 
             STRUCTURE_DEFINITION = StructureDefinition.<MTE_SPU>builder()
                 .addShape(
                     STRUCTURE_PIECE_MAIN,
-                    // shape[z][y][x] — 5×5×5. 'U' = Subatomic Patterning Casing or hatch, 'S' = Spectral
-                    // Isolation Casing (central patterning-beam lattice column), ' ' = void
-                    new String[][] { { "UUUUU", "UUUUU", "UU~UU", "UUUUU", "UUUUU" },
-                        { "UUUUU", "U   U", "U S U", "U   U", "UUUUU" },
-                        { "UUUUU", "U   U", "U S U", "U   U", "UUUUU" },
-                        { "UUUUU", "U   U", "U S U", "U   U", "UUUUU" },
-                        { "UUUUU", "UUUUU", "UUUUU", "UUUUU", "UUUUU" }, })
+                    /*
+                     * Block legend (from the in-game structure export):
+                     * A -> bw.sheetmetal — Jiritsu sheet metal (PrPMaterials, pale blue-white UIV alloy)
+                     * B -> gt.blockcasings4:1 — Clean Stainless Steel Machine Casing (hatch-capable shell)
+                     * C -> gt.blockcasingsSE:1 — Space Elevator Support Structure
+                     * D -> gt.blockcasingsTT:12 — Ultimate Molecular Casing (TecTech)
+                     * E -> gt.blockcasingsTT:13 — Ultimate Advanced Molecular Casing (TecTech)
+                     * F -> gt.blockframes:405 — Stellar Alloy Frame Box
+                     * G -> tile.quantumGlass:0 — Quantum Glass (TecTech)
+                     * H -> BWBlockCasingsAdvanced (bolted) — Aerogel Insulation Panel (PrPMaterials)
+                     * I -> BWBlockCasings (plain) — Aerogel Insulation Panel (PrPMaterials)
+                     * K -> single legacy Subatomic Patterning Casing block, kept at local (0,0,0)
+                     */
+                    new String[][] {
+                        { "K              ", "               ", "               ", "               ", "       B       ",
+                            "      BBB      ", "     B   B     ", "    B     B    ", "   BB     BB   ",
+                            "    B     B    ", "     B   B     ", "      BBB      ", "       B       ",
+                            "               ", "               ", "               " },
+                        { "               ", "               ", "               ", "       B       ", "               ",
+                            "               ", "    A BFB A    ", "     BF FB     ", "  B FF   FF B  ",
+                            "     BF FB     ", "    A BFB A    ", "               ", "       B       ",
+                            "       B       ", "               ", "               " },
+                        { "               ", "               ", "       B       ", "               ", "               ",
+                            "   AA F F AA   ", "   AA     AA   ", "               ", " B F       F B ",
+                            "               ", "   AA     AA   ", "   AA F F AA   ", "               ",
+                            "      BBB      ", "      B~B      ", "      BBB      " },
+                        { "               ", "       B       ", "               ", "               ", "   AAF   FAA   ",
+                            "  AAA     AAA  ", "  AA       AA  ", "               ", "B F         F B",
+                            "               ", "  AA       AA  ", "  AAA     AAA  ", "   AAF   FAA   ",
+                            "      BBB      ", "      BBB      ", "      BBB      " },
+                        { "               ", "      BBB      ", "     BB BB     ", "    A F F A    ", "   AA     AA   ",
+                            "  AAC     CAA  ", " AA C     C AA ", "B   C     C   B", "BF  C     C  FB",
+                            "B   C     C   B", " AA C     C AA ", "  AAC     CAA  ", "   AA     AA   ",
+                            "    A F F A    ", "     B   B     ", "      BBB      " },
+                        { "       B       ", "     BBIBB     ", "    BB F BB    ", "               ", "   F       F   ",
+                            "               ", "B      D      B", " B    EGE    B ", " F   DGGGD   F ",
+                            " B    EGE    B ", "B      D      B", "               ", "   F       F   ",
+                            "               ", "    BB F BB    ", "     BBIBB     " },
+                        { "      BBB      ", "    BBHHHBB    ", "    B     B    ", "    F     F    ", "               ",
+                            "B F         F B", " B    EGE    B ", " F   E   E   F ", "     G   G     ",
+                            " F   E   E   F ", " B    EGE    B ", "B F         F B", "               ",
+                            "  BBF     FBB  ", "  BBB     BBB  ", "  BBBBHHHBBBB  " },
+                        { "     BBBBB     ", "   BBIHHHIBB   ", "  B  F   F  B  ", " B           B ", "B             B",
+                            "B             B", " F   DGGGD   F ", "     G   G     ", "     G   G     ",
+                            "     G   G     ", " F   DGGGD   F ", "B             B", "BB           BB",
+                            " BBB       BBB ", "  BB F   F BB  ", "  BBBIHHHIBBB  " },
+                        { "      BBB      ", "    BBHHHBB    ", "    B     B    ", "    F     F    ", "               ",
+                            "B F         F B", " B    EGE    B ", " F   E   E   F ", "     G   G     ",
+                            " F   E   E   F ", " B    EGE    B ", "B F         F B", "               ",
+                            "  BBF     FBB  ", "  BBB     BBB  ", "  BBBBHHHBBBB  " },
+                        { "       B       ", "     BBIBB     ", "    BB F BB    ", "               ", "   F       F   ",
+                            "               ", "B      D      B", " B    EGE    B ", " F   DGGGD   F ",
+                            " B    EGE    B ", "B      D      B", "               ", "   F       F   ",
+                            "               ", "    BB F BB    ", "     BBIBB     " },
+                        { "               ", "      BBB      ", "     BB BB     ", "    A F F A    ", "   AA     AA   ",
+                            "  AAC     CAA  ", " AA C     C AA ", "B   C     C   B", "BF  C     C  FB",
+                            "B   C     C   B", " AA C     C AA ", "  AAC     CAA  ", "   AA     AA   ",
+                            "    A F F A    ", "     BB BB     ", "      BBB      " },
+                        { "               ", "       B       ", "               ", "               ", "   AAF   FAA   ",
+                            "  AAA     AAA  ", "  AA       AA  ", "               ", "B F         F B",
+                            "               ", "  AA       AA  ", "  AAA     AAA  ", "   AAF   FAA   ",
+                            "      BBB      ", "      BBB      ", "      BBB      " },
+                        { "               ", "               ", "       B       ", "               ", "               ",
+                            "   AA F F AA   ", "   AA     AA   ", "               ", " B F       F B ",
+                            "               ", "   AA     AA   ", "   AA F F AA   ", "               ",
+                            "      BBB      ", "      BBB      ", "      BBB      " },
+                        { "               ", "               ", "               ", "       B       ", "               ",
+                            "               ", "    A BFB A    ", "     BF FB     ", "  B FF   FF B  ",
+                            "     BF FB     ", "    A BFB A    ", "               ", "       B       ",
+                            "       B       ", "               ", "               " },
+                        { "               ", "               ", "               ", "               ", "       B       ",
+                            "      BBB      ", "     B   B     ", "    B     B    ", "   BB     BB   ",
+                            "    B     B    ", "     B   B     ", "      BBB      ", "       B       ",
+                            "               ", "               ", "               " } })
+                .addElement('K', ofBlock(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.SUBATOMIC_PATTERNING_CASING))
+                .addElement('A', ofBlock(GregTechAPI.sBlockSheetmetalBW, PrPMaterials.Jiritsu.getId()))
                 .addElement(
-                    'U',
+                    'B',
                     buildHatchAdder(MTE_SPU.class)
                         .atLeast(Energy, InputBus, InputHatch, OutputBus, OutputHatch, Maintenance)
                         .casingIndex(CASING_INDEX)
                         .hint(1)
-                        .buildAndChain(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.SUBATOMIC_PATTERNING_CASING))
-                .addElement('S', ofBlock(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.SPC_CASING))
+                        .buildAndChain(GregTechAPI.sBlockCasings4, 1))
+                .addElement('C', ofBlock(GregTechAPI.sBlockCasingsSE, 1))
+                .addElement('D', ofBlock(TTCasingsContainer.sBlockCasingsTT, 12))
+                .addElement('E', ofBlock(TTCasingsContainer.sBlockCasingsTT, 13))
+                .addElement('F', ofBlock(GregTechAPI.sBlockFrames, 405))
+                .addElement('G', ofBlock(BlockQuantumGlass.INSTANCE, 0))
+                .addElement(
+                    'H',
+                    ofBlock(WerkstoffLoader.BWBlockCasingsAdvanced, PrPMaterials.AerogelInsulationPanel.getId()))
+                .addElement('I', ofBlock(WerkstoffLoader.BWBlockCasings, PrPMaterials.AerogelInsulationPanel.getId()))
                 .build();
         }
         return STRUCTURE_DEFINITION;
@@ -171,23 +253,23 @@ public class MTE_SPU extends MTEExtendedPowerMultiBlockBase<MTE_SPU> implements 
                     + EnumChatFormatting.GRAY
                     + ".")
             .addSeparator()
-            .addInfo(
-                EnumChatFormatting.GOLD + "Patterning column: "
-                    + EnumChatFormatting.GRAY
-                    + "exactly "
-                    + TooltipHelper.coloredText("3", EnumChatFormatting.YELLOW)
-                    + EnumChatFormatting.GRAY
-                    + " Spectral Isolation Casings down the centre.")
-            .beginStructureBlock(5, 5, 5, true)
-            .addController("Front face, center")
-            .addCasingInfoMin("Subatomic Patterning Casing", 90, false)
-            .addCasingInfoExactly("Spectral Isolation Casing", 3, false)
-            .addInputBus("Any shell casing", 1)
-            .addInputHatch("Any shell casing", 1)
-            .addOutputBus("Any shell casing", 1)
-            .addOutputHatch("Any shell casing", 1)
-            .addEnergyHatch("Any shell casing", 1)
-            .addMaintenanceHatch("Any shell casing", 1)
+            .beginStructureBlock(15, 16, 15, true)
+            .addController("See NEI structure preview")
+            .addCasingInfoMin("Clean Stainless Steel Machine Casing", 90, false)
+            .addOtherStructurePart("Jiritsu Sheet Metal", "Diagonal support ribs")
+            .addOtherStructurePart("Space Elevator Support Structure", "Equatorial ring")
+            .addOtherStructurePart("Ultimate Molecular Casing", "Inner core (TecTech)")
+            .addOtherStructurePart("Ultimate Advanced Molecular Casing", "Inner core (TecTech)")
+            .addOtherStructurePart("Stellar Alloy Frame Box", "Structural framing")
+            .addOtherStructurePart("Quantum Glass", "Core viewport")
+            .addOtherStructurePart("Aerogel Insulation Panel Casing (bolted + plain)", "Equatorial paneling")
+            .addOtherStructurePart("Subatomic Patterning Casing", "Single legacy block, local (0,0,0)")
+            .addInputBus("Any Clean Stainless Steel Machine Casing", 1)
+            .addInputHatch("Any Clean Stainless Steel Machine Casing", 1)
+            .addOutputBus("Any Clean Stainless Steel Machine Casing", 1)
+            .addOutputHatch("Any Clean Stainless Steel Machine Casing", 1)
+            .addEnergyHatch("Any Clean Stainless Steel Machine Casing", 1)
+            .addMaintenanceHatch("Any Clean Stainless Steel Machine Casing", 1)
             .toolTipFinisher("_Shusi_");
         return tt;
     }

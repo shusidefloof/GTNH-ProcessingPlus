@@ -1,5 +1,6 @@
 package com.gtnh.processingplus.machines;
 
+import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlock;
 import static gregtech.api.enums.HatchElement.Energy;
 import static gregtech.api.enums.HatchElement.InputBus;
 import static gregtech.api.enums.HatchElement.InputHatch;
@@ -20,6 +21,7 @@ import java.util.List;
 
 import javax.annotation.Nonnull;
 
+import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
@@ -29,12 +31,12 @@ import com.gtnewhorizon.structurelib.alignment.constructable.ISurvivalConstructa
 import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
-import com.gtnh.processingplus.blocks.BlockGTNHPPCasings;
-import com.gtnh.processingplus.blocks.GTNHPPBlocks;
 import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
 
+import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import gregtech.api.GregTechAPI;
 import gregtech.api.enums.HeatingCoilLevel;
 import gregtech.api.enums.SoundResource;
 import gregtech.api.interfaces.ITexture;
@@ -54,16 +56,35 @@ import gregtech.api.util.MultiblockTooltipBuilder;
 import gregtech.api.util.OverclockCalculator;
 import gregtech.api.util.tooltip.TooltipHelper;
 import gregtech.common.misc.GTStructureChannels;
+import gtPlusPlus.core.material.MaterialsElements;
 
 public class MTE_AAR extends MTEExtendedPowerMultiBlockBase<MTE_AAR> implements ISurvivalConstructable {
 
     private static final int CASING_INDEX = 11;
     private static final String STRUCTURE_PIECE_MAIN = "main";
-    private static final int OFFSET_X = 1;
+    // Controller marker '~' sits at slice z=0, row y=2, char x=2 in the exported shape.
+    private static final int OFFSET_X = 2;
     private static final int OFFSET_Y = 2;
     private static final int OFFSET_Z = 0;
 
     private static IStructureDefinition<MTE_AAR> STRUCTURE_DEFINITION = null;
+
+    // Iodine frame box has no fixed meta in GT++'s material system, so resolve it from the actual
+    // ItemStack the material produces rather than hardcoding a magic damage value.
+    private static final Block IODINE_FRAME_BLOCK;
+    private static final int IODINE_FRAME_META;
+
+    static {
+        ItemStack frame = MaterialsElements.getInstance().IODINE.getFrameBox(1);
+        IODINE_FRAME_BLOCK = Block.getBlockFromItem(frame.getItem());
+        IODINE_FRAME_META = frame.getItemDamage();
+    }
+
+    private static Block miscutilsBlock(String name) {
+        Block b = GameRegistry.findBlock("miscutils", name);
+        if (b == null) throw new RuntimeException("AAR requires GT++ block: " + name);
+        return b;
+    }
 
     private HeatingCoilLevel mCoilLevel = HeatingCoilLevel.None;
     private int mHeatingCapacity = 0;
@@ -87,19 +108,33 @@ public class MTE_AAR extends MTEExtendedPowerMultiBlockBase<MTE_AAR> implements 
             STRUCTURE_DEFINITION = StructureDefinition.<MTE_AAR>builder()
                 .addShape(
                     STRUCTURE_PIECE_MAIN,
-                    new String[][] { { "CCC", "CHC", "C~C", "CHC", "CCC" }, { "CCC", "H H", "H H", "H H", "CCC" },
-                        { "CCC", "CHC", "CHC", "CHC", "CCC" }, })
+                    /*
+                     * Block legend (from the in-game structure export):
+                     * A -> Iodine Frame Box (GT++) — structural shell
+                     * B -> gt.blockcasings5 — any tier Heating Coil (drives mCoilLevel via activeCoils)
+                     * C -> gt.blockcasings8:0 — Chemically Inert Machine Casing (hatch-capable shell)
+                     * D -> gt.blockcasings9:0 — PBI Pipe Casing (internal piping)
+                     * E -> miscutils.blockcasings:14 — Coil (Blast Smelter) Casing, reused as outer shell
+                     */
+                    new String[][] { { "CEEEC", "ACCCA", "CC~CC", "ACCCA", "CEEEC" },
+                        { "ECCCE", "CD DC", "CD DC", "CD DC", "ECCCE" },
+                        { "ECCCE", "C D C", "B D B", "C D C", "ECCCE" },
+                        { "ECCCE", "CD DC", "CD DC", "CD DC", "ECCCE" },
+                        { "CEEEC", "ACCCA", "CCBCC", "ACCCA", "CEEEC" } })
+                .addElement('A', ofBlock(IODINE_FRAME_BLOCK, IODINE_FRAME_META))
+                .addElement(
+                    'B',
+                    GTStructureChannels.HEATING_COIL
+                        .use(activeCoils(ofCoil(MTE_AAR::setCoilLevel, MTE_AAR::getCoilLevel))))
                 .addElement(
                     'C',
                     buildHatchAdder(MTE_AAR.class)
                         .atLeast(Energy, InputBus, InputHatch, OutputBus, OutputHatch, Maintenance, Muffler)
                         .casingIndex(CASING_INDEX)
                         .hint(1)
-                        .buildAndChain(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.AAR_CASING))
-                .addElement(
-                    'H',
-                    GTStructureChannels.HEATING_COIL
-                        .use(activeCoils(ofCoil(MTE_AAR::setCoilLevel, MTE_AAR::getCoilLevel))))
+                        .buildAndChain(GregTechAPI.sBlockCasings8, 0))
+                .addElement('D', ofBlock(GregTechAPI.sBlockCasings9, 0))
+                .addElement('E', ofBlock(miscutilsBlock("miscutils.blockcasings"), 14))
                 .build();
         }
         return STRUCTURE_DEFINITION;
@@ -224,17 +259,20 @@ public class MTE_AAR extends MTEExtendedPowerMultiBlockBase<MTE_AAR> implements 
                     + TooltipHelper.coloredText("perfect overclock", EnumChatFormatting.LIGHT_PURPLE)
                     + EnumChatFormatting.GRAY
                     + ".")
-            .beginStructureBlock(3, 5, 3, true)
-            .addController("Front face, center column, middle height")
-            .addCasingInfoMin("Corrosion-Resistant Reactor Casing", 10, false)
-            .addOtherStructurePart("Heating Coils", "Inner ring, middle 3 layers")
-            .addInputBus("Any casing", 1)
-            .addInputHatch("Any casing", 1)
-            .addOutputBus("Any casing", 1)
-            .addOutputHatch("Any casing", 1)
-            .addEnergyHatch("Any casing", 1)
-            .addMufflerHatch("Any casing", 1)
-            .addMaintenanceHatch("Any casing", 1)
+            .beginStructureBlock(5, 5, 5, true)
+            .addController("Front face, center")
+            .addCasingInfoMin("Chemically Inert Machine Casing", 55, false)
+            .addOtherStructurePart("Iodine Frame Box", "Outer corner posts")
+            .addOtherStructurePart("PBI Pipe Casing", "Inner cross-section piping")
+            .addOtherStructurePart("Coil (Blast Smelter) Casing", "Outer shell edges")
+            .addOtherStructurePart("Heating Coils (any tier)", "4 blocks, top/bottom center + middle layer flanks")
+            .addInputBus("Any Chemically Inert Machine Casing", 1)
+            .addInputHatch("Any Chemically Inert Machine Casing", 1)
+            .addOutputBus("Any Chemically Inert Machine Casing", 1)
+            .addOutputHatch("Any Chemically Inert Machine Casing", 1)
+            .addEnergyHatch("Any Chemically Inert Machine Casing", 1)
+            .addMufflerHatch("Any Chemically Inert Machine Casing", 1)
+            .addMaintenanceHatch("Any Chemically Inert Machine Casing", 1)
             .toolTipFinisher("_Shusi_");
         return tt;
     }

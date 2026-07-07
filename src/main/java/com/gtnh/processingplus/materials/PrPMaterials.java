@@ -382,6 +382,9 @@ public class PrPMaterials implements Runnable {
     public static Werkstoff PANAerogel; // supercritical-dried PAN aerogel
     public static Werkstoff CarbonAerogel; // pyrolyzed structural carbon aerogel
 
+    public static Werkstoff RawJiritsu; // unrefined aerogel/Naquadah lattice dust (Jiritsu precursor)
+    public static Werkstoff Jiritsu; // self-supporting aerogel/Naquadah lattice alloy (UIV structural)
+
     public static List<Werkstoff> ALL = new ArrayList<>();
 
     // =========================
@@ -2429,6 +2432,42 @@ public class PrPMaterials implements Runnable {
                 fiberFeatures(),
                 id(),
                 TextureSet.SET_DULL));
+
+        // Jiritsu (自立, "self-reliance") — the mod's own pale blue-white UIV structural alloy, a
+        // third entry alongside GT5's Churitsu (neutral) and GoodGenerator's Tairitsu (opposition).
+        // Fuses the fragile Hydrophobic Silica Aerogel + Aerogel Insulation Panel lattice with a
+        // molten Naquadah backbone so the aerogel can finally stand on its own as a load-bearing
+        // metal — pressure-fused into Raw Jiritsu, then stabilized under an inert Helium blanket.
+        RawJiritsu = register(
+            new Werkstoff(
+                rgb(190, 210, 225),
+                "Raw Jiritsu",
+                subscriptNumbers("(SiO2)n*Nq"),
+                new Werkstoff.Stats(),
+                Werkstoff.Types.MIXTURE,
+                new Werkstoff.GenerationFeatures().onlyDust(),
+                id(),
+                TextureSet.SET_DULL));
+
+        Jiritsu = register(
+            new Werkstoff(
+                rgb(210, 232, 250),
+                "Jiritsu",
+                subscriptNumbers("(SiO2)nNq"),
+                new Werkstoff.Stats().setMeltingPoint(8800)
+                    .setBlastFurnace(true)
+                    .setDurOverride(2_000_000)
+                    .setSpeedOverride(16f)
+                    .setQualityOverride((byte) 7),
+                Werkstoff.Types.MATERIAL,
+                new Werkstoff.GenerationFeatures().onlyDust()
+                    .addMolten()
+                    .addMetalItems()
+                    .addSimpleMetalWorkingItems()
+                    .addCraftingMetalWorkingItems()
+                    .addDoubleAndDensePlates(),
+                id(),
+                TextureSet.SET_CRYSTALLINE));
     }
 
     // =========================

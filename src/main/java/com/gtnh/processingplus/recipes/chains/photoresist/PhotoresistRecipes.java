@@ -7,7 +7,6 @@ import java.util.Collection;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
-import com.gtnh.processingplus.items.Intermediate;
 import com.gtnh.processingplus.machines.spc.MachineType;
 import com.gtnh.processingplus.machines.spc.SPCModuleType;
 import com.gtnh.processingplus.machines.spc.SPCRecipeData;
@@ -139,7 +138,7 @@ public class PhotoresistRecipes {
             .duration(80)
             .eut(TierEU.RECIPE_MV)
             // Already 1-fluid-each-way → fits the single-block CR as-is via UniversalChemical.
-            .addTo(GTRecipeConstants.UniversalChemical);
+            .addTo(RecipeMaps.chemicalBathRecipes);
 
         GTValues.RA.stdBuilder()
             .fluidInputs(fluid(PrPMaterials.TanninSolution, 2000))
@@ -170,7 +169,7 @@ public class PhotoresistRecipes {
             .itemInputs(circuit(1))
             .fluidInputs(fluid("fluid.naphthalene", 1000), fluid(Materials.SulfuricAcid, 500))
             .fluidOutputs(fluid(PrPMaterials.HVPhotoresistSensitizer, 1000))
-            .duration(4 * 20)
+            .duration(15 * 20)
             .eut(TierEU.RECIPE_MV)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
@@ -181,7 +180,7 @@ public class PhotoresistRecipes {
             .itemInputs(circuit(2))
             .fluidInputs(fluid("fluid.anthracene", 1000), fluid(Materials.NitricAcid, 500))
             .fluidOutputs(fluid(PrPMaterials.HVPhotoresistSensitizer, 1000))
-            .duration(4 * 20)
+            .duration(5 * 20)
             .eut(TierEU.RECIPE_MV)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
@@ -194,8 +193,11 @@ public class PhotoresistRecipes {
                 fluid(Materials.Benzene, 1000),
                 fluid("fluid.hydrogenperoxide", 500),
                 fluid(Materials.NitricAcid, 500))
-            .fluidOutputs(fluid(PrPMaterials.HVPhotoresistSensitizer, 5000))
-            .duration(3 * 20)
+            .fluidOutputs(
+                fluid(PrPMaterials.HVPhotoresistSensitizer, 5000),
+                fluid(Materials.Water, 500),
+                fluid(Materials.NitrousOxide, 250))
+            .duration(3 * 10)
             .eut(TierEU.RECIPE_HV)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
@@ -217,7 +219,7 @@ public class PhotoresistRecipes {
     private static void evAcetoxystyrene() {
         GTValues.RA.stdBuilder()
             .itemInputs(circuit(1))
-            .fluidInputs(fluid(Materials.Styrene, 1000), fluid(PrPMaterials.AceticAnhydride, 1000))
+            .fluidInputs(fluid(Materials.Styrene, 1000), fluid("molten.aceticanhydride", 1000))
             .fluidOutputs(fluid(PrPMaterials.Acetoxystyrene, 1000))
             .duration(80)
             .eut(TierEU.RECIPE_MV)
@@ -512,8 +514,6 @@ public class PhotoresistRecipes {
     }
 
     private static ItemStack ammoniumBisulfateDust(int amount) {
-        if (PrPMaterials.isExternalAmmoniumBisulfate())
-            return intermediate(Intermediate.AMMONIUM_BISULFATE_DUST, amount);
         return dust(PrPMaterials.AmmoniumBisulfate, amount);
     }
 

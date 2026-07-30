@@ -47,7 +47,7 @@ public class NeptuniumSynthesis {
             .fluidOutputs(fluid(PrPMaterials.DilutedNitricAcid, 2000))
             .duration(600)
             .eut(TierEU.RECIPE_EV)
-            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
 
         // Dual rod — 2×
         GTValues.RA.stdBuilder()
@@ -60,7 +60,7 @@ public class NeptuniumSynthesis {
             .fluidOutputs(fluid(PrPMaterials.DilutedNitricAcid, 4000))
             .duration(1000)
             .eut(TierEU.RECIPE_EV)
-            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
 
         // Quad rod — 4×
         GTValues.RA.stdBuilder()
@@ -73,7 +73,7 @@ public class NeptuniumSynthesis {
             .fluidOutputs(fluid(PrPMaterials.DilutedNitricAcid, 8000))
             .duration(1800)
             .eut(TierEU.RECIPE_EV)
-            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 
     // =========================================================
@@ -108,7 +108,7 @@ public class NeptuniumSynthesis {
             .fluidOutputs(fluid(PrPMaterials.AmmoniumNitrateSolution, 2000))
             .duration(400)
             .eut(TierEU.RECIPE_EV)
-            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 
     // =========================================================

@@ -254,20 +254,40 @@ public class MTE_CSC extends MTEExtendedPowerMultiBlockBase<MTE_CSC> implements 
         }
     }
 
+    // Sums the stored amount of a fluid by registry name, for the ±2% deficit-repayment check.
+    private int getStoredAmount(String fluidName) {
+        int total = 0;
+        for (FluidStack fs : getStoredFluids()) {
+            if (fs != null && fs.getFluid() != null && fs.getFluid()
+                .getName()
+                .equals(fluidName)) {
+                total += fs.amount;
+            }
+        }
+        return total;
+    }
+
     // Called after recipe succeeds and inputs are consumed — enforce deficit, randomize Freon
     @Override
     protected CheckRecipeResult postCheckRecipe(CheckRecipeResult result, ProcessingLogic logic) {
         result = super.postCheckRecipe(result, logic);
         if (!result.wasSuccessful()) return result;
 
-        // Enforce deficit from previous run. If unpayable the machine explodes and inputs are forfeit.
+        // Enforce deficit from previous run. Repayment must land within ±2% of the exact deficit —
+        // too little (can't cover the debt) OR too much (overpressuring the loop) both explode.
         if (mFreonDeficit > 0 && !mDeficitFluidName.isEmpty()) {
-            FluidStack debt = FluidRegistry.getFluidStack(mDeficitFluidName, mFreonDeficit);
-            if (debt == null || !depleteInput(debt)) {
+            int stored = getStoredAmount(mDeficitFluidName);
+            double lowerBound = mFreonDeficit * 0.98;
+            double upperBound = mFreonDeficit * 1.02;
+            if (stored < lowerBound || stored > upperBound) {
                 getBaseMetaTileEntity().doExplosion(GTValues.V[4] * 16);
                 mFreonDeficit = 0;
                 mDeficitFluidName = "";
                 return SimpleCheckRecipeResult.ofFailure("freon_debt_explosion");
+            }
+            int toDeplete = Math.min(stored, mFreonDeficit);
+            if (toDeplete > 0) {
+                depleteInput(FluidRegistry.getFluidStack(mDeficitFluidName, toDeplete));
             }
             mFreonDeficit = 0;
             mDeficitFluidName = "";

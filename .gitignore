@@ -3,7 +3,14 @@
 /libs/
 /.idea/
 /.vscode/
-/run/
+/run/*
+!/run/client/
+/run/client/*
+!/run/client/saves/
+/run/client/saves/*
+!/run/client/saves/*/
+/run/client/saves/*/*
+!/run/client/saves/*/betterquesting/
 /build/
 /eclipse/
 .classpath

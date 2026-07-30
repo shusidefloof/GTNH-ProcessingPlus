@@ -165,7 +165,6 @@ public class PrPMaterials implements Runnable {
     // KAPTON CHEMICAL IMIDIZATION
     // =========================
     public static Werkstoff Triethylamine;
-    public static Werkstoff AceticAnhydride;
     public static Werkstoff Ketene;
 
     // =========================
@@ -903,16 +902,10 @@ public class PrPMaterials implements Runnable {
                 id(),
                 TextureSet.SET_FLUID));
 
-        AceticAnhydride = register(
-            new Werkstoff(
-                rgb(245, 245, 240),
-                "Acetic Anhydride",
-                subscriptNumbers("C4H6O3"),
-                new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
-                fluidFeatures(),
-                id(),
-                TextureSet.SET_FLUID));
+        // Acetic Anhydride is sourced from GT++'s own material (fluid "molten.aceticanhydride")
+        // instead of a local Werkstoff. This id() call just burns the slot so every ID after it
+        // (see "ID SPACE (keep stable!)" above) doesn't shift.
+        id();
 
         Ketene = register(
             new Werkstoff(
@@ -2125,7 +2118,7 @@ public class PrPMaterials implements Runnable {
             new Werkstoff(
                 rgb(80, 75, 70),
                 "BOF Slag",
-                "??Ca??P??",
+                subscriptNumbers("CaO/FeO/SiO2/MgO/MnO"),
                 new Werkstoff.Stats(),
                 Werkstoff.Types.MIXTURE,
                 new Werkstoff.GenerationFeatures().onlyDust(),
@@ -2135,7 +2128,7 @@ public class PrPMaterials implements Runnable {
             new Werkstoff(
                 rgb(100, 90, 75),
                 "Slag Residue",
-                subscriptNumbers("Ca3(PO4)2"),
+                subscriptNumbers("CaO/SiO2/MgO/Al2O3"),
                 new Werkstoff.Stats(),
                 Werkstoff.Types.MIXTURE,
                 new Werkstoff.GenerationFeatures().onlyDust(),

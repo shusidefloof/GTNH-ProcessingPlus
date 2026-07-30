@@ -137,8 +137,8 @@ public class HPSFRecipes {
             .itemInputs(item("ingotNeptunium", 1), dust(Materials.Tantalum, 1), dust(Materials.Titanium, 1))
             .fluidInputs(molten(Materials.Tungsten, 144))
             .fluidOutputs(molten(PrPMaterials.RefractoryHighEntropyAlloy, 288))
-            .duration(200)
-            .eut(TierEU.RECIPE_IV)
+            .duration(100 * 20)
+            .eut(TierEU.RECIPE_LuV)
             .addTo(GTPPRecipeMaps.alloyBlastSmelterRecipes);
     }
 

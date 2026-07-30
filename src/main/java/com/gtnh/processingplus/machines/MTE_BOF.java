@@ -1,13 +1,7 @@
 package com.gtnh.processingplus.machines;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlock;
-import static gregtech.api.enums.HatchElement.Energy;
-import static gregtech.api.enums.HatchElement.InputBus;
-import static gregtech.api.enums.HatchElement.InputHatch;
-import static gregtech.api.enums.HatchElement.Maintenance;
-import static gregtech.api.enums.HatchElement.Muffler;
-import static gregtech.api.enums.HatchElement.OutputBus;
-import static gregtech.api.enums.HatchElement.OutputHatch;
+import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_ELECTRIC_BLAST_FURNACE;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_ELECTRIC_BLAST_FURNACE_ACTIVE;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_ELECTRIC_BLAST_FURNACE_ACTIVE_GLOW;
@@ -15,6 +9,7 @@ import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_ELECTRIC_BLAS
 import static gregtech.api.enums.Textures.BlockIcons.casingTexturePages;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.item.ItemStack;
@@ -46,11 +41,18 @@ import gregtech.api.structure.error.StructureErrorRegistry;
 import gregtech.api.util.MultiblockTooltipBuilder;
 import gregtech.api.util.tooltip.TooltipHelper;
 
+/**
+ * Basic Oxygen Furnace (BOF) — a 5×4×5 steelmaking converter that refines iron into steel
+ * using a high-purity liquid oxygen blast. Accepts flux additives (calcium, calcite, dolomite)
+ * to increase yield and produce recoverable BOF slag.
+ */
 public class MTE_BOF extends MTEExtendedPowerMultiBlockBase<MTE_BOF> implements ISurvivalConstructable {
 
-    private static final int CASING_INDEX = 1; // solid steel casing
+    private static final int CASING_INDEX = 1;
     private static final String STRUCTURE_PIECE_MAIN = "main";
     private static final int OFFSET_X = 2, OFFSET_Y = 2, OFFSET_Z = 0;
+
+    private final static int PARALLELS = 4;
 
     private static IStructureDefinition<MTE_BOF> STRUCTURE_DEFINITION = null;
 
@@ -73,23 +75,24 @@ public class MTE_BOF extends MTEExtendedPowerMultiBlockBase<MTE_BOF> implements 
             STRUCTURE_DEFINITION = StructureDefinition.<MTE_BOF>builder()
                 .addShape(
                     STRUCTURE_PIECE_MAIN,
+                    /*
+                     * Block legend:
+                     * A -> sBlockCasings3:10 — Solid Steel Machine Casing (structural shell)
+                     * B -> sBlockCasings3:14 — Steel Turbine Casing (inner liner / tuyere zone)
+                     * C -> BOF Casing (hatch-capable outer shell)
+                     */
                     new String[][] {
-                        // z=0 — controller face
                         { "     ", "  C  ", " A~A ", " ACA " },
-                        // z=1
                         { "  C  ", " C C ", "C   C", "CCBCC" },
-                        // z=2
                         { " C C ", "C   C", "A   A", "ABBBA" },
-                        // z=3
                         { "  C  ", " C C ", "C   C", "CCBCC" },
-                        // z=4 — back face
                         { "     ", "  C  ", " CAC ", " CAC " }, })
                 .addElement('A', ofBlock(GregTechAPI.sBlockCasings3, 10))
                 .addElement('B', ofBlock(GregTechAPI.sBlockCasings3, 14))
                 .addElement(
                     'C',
                     buildHatchAdder(MTE_BOF.class)
-                        .atLeast(Energy, InputBus, InputHatch, OutputBus, OutputHatch, Maintenance, Muffler)
+                        .atLeast(Energy.or(ExoticEnergy), InputBus, InputHatch, OutputBus, OutputHatch, Maintenance, Muffler)
                         .casingIndex(CASING_INDEX)
                         .hint(1)
                         .buildAndChain(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.BOF_CASING))
@@ -126,7 +129,7 @@ public class MTE_BOF extends MTEExtendedPowerMultiBlockBase<MTE_BOF> implements 
 
     @Override
     public int getMaxParallelRecipes() {
-        return 4;
+        return PARALLELS;
     }
 
     @Override
@@ -170,33 +173,11 @@ public class MTE_BOF extends MTEExtendedPowerMultiBlockBase<MTE_BOF> implements 
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType("Basic Oxygen Furnace, BOF")
             .addInfo(
-                EnumChatFormatting.GRAY + "Refines metal with a high-purity "
-                    + EnumChatFormatting.GOLD
-                    + "oxygen blast"
-                    + EnumChatFormatting.GRAY
-                    + ".")
+                TooltipHelper
+                    .coloredText(TooltipHelper.italicText("Refining metal with high purity oxygen blasts"), EnumChatFormatting.DARK_GRAY))
+            .addStaticParallelInfo(PARALLELS)
             .addSeparator()
-            .addStaticParallelInfo(4)
-            .addInfo(
-                EnumChatFormatting.RED + "Requires Liquid Oxygen"
-                    + EnumChatFormatting.GRAY
-                    + " — produced by the Cryogenic Separation Column.")
-            .addSeparator()
-            .addInfo(
-                TooltipHelper.coloredText("circuit(1)", EnumChatFormatting.AQUA) + EnumChatFormatting.GRAY
-                    + "  Iron ×8 + LOX 2,000 mB → Steel ×8 + CO₂")
-            .addInfo(
-                TooltipHelper.coloredText("circuit(2)", EnumChatFormatting.AQUA) + EnumChatFormatting.GRAY
-                    + "  Iron ×8 + LOX 2,000 mB + Calcium ×2 → "
-                    + TooltipHelper.coloredText("Steel ×10", EnumChatFormatting.GREEN)
-                    + EnumChatFormatting.GRAY
-                    + " | "
-                    + TooltipHelper.effText("+25%")
-                    + EnumChatFormatting.GRAY
-                    + " yield")
-            .addInfo(
-                TooltipHelper.coloredText("circuit(3)", EnumChatFormatting.AQUA) + EnumChatFormatting.GRAY
-                    + "  Iron ×16 + LOX 4,000 mB → Steel ×16 | double batch")
+            .addTecTechHatchInfo()
             .beginStructureBlock(5, 4, 5, true)
             .addController("Front face, center")
             .addCasingInfoMin("Basic Oxygen Furnace Casing", 44, false)
@@ -213,15 +194,18 @@ public class MTE_BOF extends MTEExtendedPowerMultiBlockBase<MTE_BOF> implements 
 
     @Override
     public String[] getInfoData() {
-        return new String[] { StatCollector.translateToLocal("GT5U.multiblock.Progress") + ": "
-            + EnumChatFormatting.GREEN
-            + mProgresstime / 20
-            + EnumChatFormatting.RESET
-            + " s / "
-            + EnumChatFormatting.YELLOW
-            + mMaxProgresstime / 20
-            + EnumChatFormatting.RESET
-            + " s" };
+        List<String> lines = new ArrayList<>();
+        lines.add(
+            StatCollector.translateToLocal("GT5U.multiblock.Progress") + ": "
+                + EnumChatFormatting.GREEN
+                + mProgresstime / 20
+                + EnumChatFormatting.RESET
+                + " s / "
+                + EnumChatFormatting.YELLOW
+                + mMaxProgresstime / 20
+                + EnumChatFormatting.RESET
+                + " s");
+        return lines.toArray(new String[0]);
     }
 
     @Override

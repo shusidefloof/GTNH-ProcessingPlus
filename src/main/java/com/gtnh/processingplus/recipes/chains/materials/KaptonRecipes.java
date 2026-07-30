@@ -23,8 +23,6 @@ public class KaptonRecipes {
         step6_FilmCasting();
         step7_ImidizationToKapton();
         stepPrereq_TriethylamineSynthesis();
-        stepPrereq_KeteneSynthesis();
-        stepAlt_AceticAnhydrideSynthesis();
         stepAlt_ChemicalImidization();
     }
 
@@ -147,7 +145,7 @@ public class KaptonRecipes {
 
         GTValues.RA.stdBuilder()
             .itemInputs(dust(PrPMaterials.PolyamicAcidFilm, 2))
-            .fluidInputs(fluid(PrPMaterials.AceticAnhydride, 500), fluid(PrPMaterials.Triethylamine, 200))
+            .fluidInputs(fluid("molten.aceticanhydride", 500), fluid(PrPMaterials.Triethylamine, 200))
             .fluidOutputs(fluid(Materials.Water, 1000), fluid(Materials.AceticAcid, 500))
             .itemOutputs(plate(PrPMaterials.Kapton, 4))
             .duration(600)
@@ -171,37 +169,6 @@ public class KaptonRecipes {
     }
 
     // =========================================================
-    // PREREQ: Ketene synthesis — acetic acid pyrolysis (UV HTRF)
-    // CH3COOH → CH2=C=O + H2O
-    // =========================================================
-    private static void stepPrereq_KeteneSynthesis() {
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(circuit(2))
-            .fluidInputs(fluid(Materials.AceticAcid, 1000))
-            .fluidOutputs(fluid(PrPMaterials.Ketene, 1000), fluid(Materials.Water, 1000))
-            .duration(5 * 20)
-            .eut(TierEU.RECIPE_LV)
-            .metadata(GTRecipeConstants.COIL_HEAT, 2700)
-            .addTo(GTNHPPRecipeMaps.sHTRFRecipes);
-    }
-
-    // =========================================================
-    // ALT: Acetic Anhydride synthesis (LuV LCR prerequisite)
-    // AceticAcid + Ketene → AceticAnhydride + Water
-    // =========================================================
-    private static void stepAlt_AceticAnhydrideSynthesis() {
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(circuit(5))
-            .fluidInputs(fluid(Materials.AceticAcid, 2000), fluid(PrPMaterials.Ketene, 1000))
-            .fluidOutputs(fluid(PrPMaterials.AceticAnhydride, 1000), fluid(Materials.Water, 500))
-            .duration(5 * 20)
-            .eut(TierEU.RECIPE_LV)
-            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
-    }
-
-    // =========================================================
     // ALT: Chemical imidization → Kapton plate (UV LCR)
     // Faster than thermal; consumes AceticAnhydride + Triethylamine
     // =========================================================
@@ -209,7 +176,7 @@ public class KaptonRecipes {
 
         GTValues.RA.stdBuilder()
             .itemInputs(dust(PrPMaterials.PolyamicAcidFilm, 2))
-            .fluidInputs(fluid(PrPMaterials.AceticAnhydride, 500), fluid(PrPMaterials.Triethylamine, 200))
+            .fluidInputs(fluid("molten.aceticanhydride", 500), fluid(PrPMaterials.Triethylamine, 200))
             .fluidOutputs(fluid(Materials.AceticAcid, 500))
             .itemOutputs(plate(PrPMaterials.Kapton, 2))
             .duration(800)

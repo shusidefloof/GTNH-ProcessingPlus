@@ -27,7 +27,7 @@ public class BOFRecipes {
         limestoneConversion();
         dolomiteConversion();
         slagSeparation();
-        slagAcidRefine();
+        slagResidueSift();
     }
 
     private static void casingOrBlockRecipe() {
@@ -76,10 +76,10 @@ public class BOFRecipes {
     private static void limedConversion() {
         GTValues.RA.stdBuilder()
             .itemInputs(ingot(Materials.Iron, 8), dust(Materials.Calcium, 2), circuit(2))
-            .fluidInputs(fluid(Materials.Oxygen, 200))
+            .fluidInputs(fluid(Materials.Oxygen, 800))
             .itemOutputs(ingot(Materials.Steel, 16), dust(PrPMaterials.BOFSlag, 1))
             .fluidOutputs(fluid(Materials.CarbonDioxide, 800))
-            .duration(5 * 20)
+            .duration(5 * 8 * 20)
             .eut(TierEU.RECIPE_MV)
             .addTo(GTNHPPRecipeMaps.sBOFRecipes);
     }
@@ -87,10 +87,10 @@ public class BOFRecipes {
     private static void limestoneConversion() {
         GTValues.RA.stdBuilder()
             .itemInputs(ingot(Materials.Iron, 8), dust(Materials.Calcite, 4), circuit(2))
-            .fluidInputs(fluid(Materials.Oxygen, 150))
+            .fluidInputs(fluid(Materials.Oxygen, 1600))
             .itemOutputs(ingot(Materials.Steel, 20), dust(PrPMaterials.BOFSlag, 2))
             .fluidOutputs(fluid(Materials.CarbonDioxide, 1600))
-            .duration(4 * 20)
+            .duration(4 * 8 * 20)
             .eut(TierEU.RECIPE_MV)
             .addTo(GTNHPPRecipeMaps.sBOFRecipes);
     }
@@ -98,31 +98,34 @@ public class BOFRecipes {
     private static void dolomiteConversion() {
         GTValues.RA.stdBuilder()
             .itemInputs(ingot(Materials.Iron, 8), dust(Materials.Dolomite, 8), circuit(2))
-            .fluidInputs(fluid(Materials.Oxygen, 125))
+            .fluidInputs(fluid(Materials.Oxygen, 1800))
             .itemOutputs(ingot(Materials.Steel, 24), dust(PrPMaterials.BOFSlag, 4))
             .fluidOutputs(fluid(Materials.CarbonDioxide, 1600), fluid(Materials.CarbonMonoxide, 400))
-            .duration(3 * 20)
+            .duration(3 * 8 * 20)
             .eut(TierEU.RECIPE_MV)
             .addTo(GTNHPPRecipeMaps.sBOFRecipes);
     }
 
     private static void slagSeparation() {
         GTValues.RA.stdBuilder()
-            .itemInputs(dust(PrPMaterials.BOFSlag, 4))
-            .itemOutputs(dust(Materials.Iron, 2), dust(Materials.Manganese, 1), dust(PrPMaterials.SlagResidue, 8))
+            .itemInputs(dust(PrPMaterials.BOFSlag, 5))
+            .itemOutputs(dust(PrPMaterials.SlagResidue, 2), dust(Materials.Iron, 2), dust(Materials.Manganese, 1))
             .duration(3 * 20)
             .eut(TierEU.RECIPE_LV)
             .addTo(RecipeMaps.centrifugeRecipes);
     }
 
-    private static void slagAcidRefine() {
+    private static void slagResidueSift() {
         GTValues.RA.stdBuilder()
             .itemInputs(dust(PrPMaterials.SlagResidue, 4))
-            .fluidInputs(fluid(Materials.SulfuricAcid, 1000))
-            .itemOutputs(dust(Materials.Calcium, 2), dust(Materials.Phosphorus, 1))
-            .fluidOutputs(fluid(Materials.DilutedSulfuricAcid, 1000))
-            .duration(2 * 20)
+            .itemOutputs(
+                dust(Materials.Quicklime, 2),
+                dust(Materials.SiliconDioxide, 1),
+                dust(Materials.Magnesia, 1),
+                dust(Materials.Aluminiumoxide, 1))
+            .outputChances(10000, 6000, 4000, 1000)
+            .duration(3 * 20)
             .eut(TierEU.RECIPE_LV)
-            .addTo(RecipeMaps.chemicalBathRecipes);
+            .addTo(RecipeMaps.sifterRecipes);
     }
 }

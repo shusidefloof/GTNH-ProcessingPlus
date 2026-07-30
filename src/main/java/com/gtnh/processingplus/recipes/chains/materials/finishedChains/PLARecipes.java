@@ -64,7 +64,7 @@ public class PLARecipes {
             .fluidOutputs(fluid(PrPMaterials.LacticAcid, 3000))
             .duration(400)
             .eut(TierEU.RECIPE_IV)
-            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 
     // =========================================================
@@ -83,7 +83,7 @@ public class PLARecipes {
             .fluidOutputs(fluid(PrPMaterials.LacticAcid, 6000), fluid("ammonium chloride", 500))
             .duration(600)
             .eut(TierEU.RECIPE_IV)
-            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 
     // =========================================================

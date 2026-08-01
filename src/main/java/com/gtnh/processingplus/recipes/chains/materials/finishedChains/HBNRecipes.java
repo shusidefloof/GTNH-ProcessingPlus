@@ -67,8 +67,8 @@ public class HBNRecipes {
                 fluid(Materials.Ammonia, 2000))
             .fluidOutputs(fluid(Materials.HydrochloricAcid, 3000), fluid(Materials.Water, 1000))
             .itemOutputs(dust(PrPMaterials.CrudeHBN, 1))
-            .duration(6 * 20)
-            .eut(TierEU.RECIPE_IV)
+            .duration(15 * 20)
+            .eut(TierEU.RECIPE_ZPM)
             .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
     }
 
@@ -96,8 +96,7 @@ public class HBNRecipes {
             .itemInputs(dust(PrPMaterials.HBNPowderBlend, 4 * 8))
             .fluidInputs(
                 fluid(Materials.Nitrogen, 16000 * 8),
-                fluid(Materials.Argon, 4000 * 8),
-                fluid("oganesson", 288))
+                fluid(Materials.Argon, 4000 * 8))
             .itemOutputs(dust(PrPMaterials.HexagonalBoronNitride, 2 * 8))
             .duration(10 * 20)
             .eut(TierEU.RECIPE_IV)

@@ -90,7 +90,7 @@ public class CarbonFiberRecipes {
             .itemInputs(dust(PrPMaterials.Polyacrylonitrile, 4))
             .fluidInputs(fluid(Materials.Oxygen, 4)) // 4 mB/t continuous; ~2400 mB total over 600t
             .itemOutputs(dust(PrPMaterials.StabilizedPolyacrylonitrile, 4))
-            .duration(600)
+            .duration(75 * 20)
             .eut(TierEU.RECIPE_UV)
             .addTo(GTNHPPRecipeMaps.sDAFOxidizingRecipes);
     }
@@ -105,7 +105,7 @@ public class CarbonFiberRecipes {
             .fluidInputs(fluid(Materials.Nitrogen, 3)) // 3 mB/t continuous purge; ~2400 mB total over 800t
             .itemOutputs(dust(PrPMaterials.CarbonFiberTow, 3))
             .fluidOutputs(fluid(Materials.CarbonMonoxide, 500), fluid("hydrogencyanide", 250))
-            .duration(800)
+            .duration(100 * 20)
             .eut(TierEU.RECIPE_UV)
             .addTo(GTNHPPRecipeMaps.sDAFInertRecipes);
     }
@@ -166,7 +166,7 @@ public class CarbonFiberRecipes {
             // Both fluids are continuous per-tick inputs; ~6000 mB Pitch + ~12000 * 5 mB O₂ total over 1200t
             .fluidInputs(fluid(PrPMaterials.MesophasePitch, 5), fluid(Materials.Oxygen, 2))
             .itemOutputs(dust(PrPMaterials.StabilizedPolyacrylonitrile, 3))
-            .duration(1200)
+            .duration(75 * 2 * 20)
             .eut(TierEU.RECIPE_UV)
             .addTo(GTNHPPRecipeMaps.sDAFOxidizingRecipes);
     }

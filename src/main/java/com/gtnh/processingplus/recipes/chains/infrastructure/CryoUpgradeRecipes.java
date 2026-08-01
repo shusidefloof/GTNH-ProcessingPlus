@@ -29,14 +29,14 @@ public class CryoUpgradeRecipes {
         GTValues.RA.stdBuilder()
             .itemInputs(dust(PrPMaterials.CrudeHBN, 4), dust(Materials.Yttrium, 16), circuit(11))
             .fluidInputs(fluid(Materials.Nitrogen, 2000), fluid(PrPMaterials.LiquidArgon, 1000))
-            .itemOutputs(dust(PrPMaterials.HBNPowderBlend, 10))
+            .itemOutputs(dust(PrPMaterials.HBNPowderBlend, 4*4))
             .fluidOutputs(fluid(Materials.NitricOxide, 3000), fluid(Materials.Oxygen, 1500))
             .duration(480)
             .eut(TierEU.RECIPE_UHV)
             .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
     }
 
-    // CF graphitization with LAr inert atmosphere — saves Ar 16k, gives 5 fibers vs 4 base
+    // CF graphitization with LAr inert atmosphere saves Ar 16k, gives 5 fibers vs 4 base
     private static void graphitizationCryo() {
         GTValues.RA.stdBuilder()
             .itemInputs(dust(PrPMaterials.CarbonFiberTow, 4), circuit(11))

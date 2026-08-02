@@ -15,6 +15,8 @@ import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_LARGE_CHEMICA
 import static gregtech.api.enums.Textures.BlockIcons.casingTexturePages;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
 
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 import net.minecraft.item.ItemStack;
@@ -33,6 +35,7 @@ import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import gregtech.api.enums.SoundResource;
+import gregtech.api.gui.modularui.GTUITextures;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
@@ -44,6 +47,7 @@ import gregtech.api.structure.error.StructureError;
 import gregtech.api.structure.error.StructureErrorRegistry;
 import gregtech.api.util.MultiblockTooltipBuilder;
 import gregtech.api.util.tooltip.TooltipHelper;
+import gtPlusPlus.api.recipe.GTPPRecipeMaps;
 
 /**
  * Ceramic Reaction Vessel — 5×5×5 structure with hBN ceramic inner lining.
@@ -57,6 +61,10 @@ public class MTE_CRV extends MTEExtendedPowerMultiBlockBase<MTE_CRV> implements 
     private static final int OFFSET_X = 2;
     private static final int OFFSET_Y = 2;
     private static final int OFFSET_Z = 0;
+
+    // Machine modes — native CRV recipes, or the shared GT++ Alloy Blast Smelter recipe pool.
+    private static final int MACHINEMODE_CRV = 0;
+    private static final int MACHINEMODE_ABS = 1;
 
     private static IStructureDefinition<MTE_CRV> STRUCTURE_DEFINITION = null;
 
@@ -133,12 +141,41 @@ public class MTE_CRV extends MTEExtendedPowerMultiBlockBase<MTE_CRV> implements 
 
     @Override
     protected ProcessingLogic createProcessingLogic() {
+        if (machineMode == MACHINEMODE_ABS) {
+            // 400% speed (1/4 duration) and up to 8 parallels, ABS-mode only.
+            return new ProcessingLogic().setSpeedBonus(1F / 4F)
+                .setMaxParallelSupplier(this::getTrueParallel);
+        }
         return new ProcessingLogic();
     }
 
     @Override
     public RecipeMap<?> getRecipeMap() {
+        if (machineMode == MACHINEMODE_ABS) {
+            return GTPPRecipeMaps.alloyBlastSmelterRecipes;
+        }
         return GTNHPPRecipeMaps.sCRVRecipes;
+    }
+
+    @Override
+    public Collection<RecipeMap<?>> getAvailableRecipeMaps() {
+        return Arrays.asList(GTNHPPRecipeMaps.sCRVRecipes, GTPPRecipeMaps.alloyBlastSmelterRecipes);
+    }
+
+    @Override
+    public int getMaxParallelRecipes() {
+        return machineMode == MACHINEMODE_ABS ? 8 : super.getMaxParallelRecipes();
+    }
+
+    @Override
+    public boolean supportsMachineModeSwitch() {
+        return true;
+    }
+
+    @Override
+    public void setMachineModeIcons() {
+        machineModeIcons.add(GTUITextures.OVERLAY_BUTTON_MACHINEMODE_DEFAULT);
+        machineModeIcons.add(GTUITextures.OVERLAY_BUTTON_MACHINEMODE_COMPRESSING);
     }
 
     @Override
@@ -190,6 +227,22 @@ public class MTE_CRV extends MTEExtendedPowerMultiBlockBase<MTE_CRV> implements 
                     + EnumChatFormatting.GRAY
                     + " Hexagonal Boron Nitride Ceramic Blocks required.")
             .addInfo("hBN blocks are load-bearing; the machine will not form without the exact count.")
+            .addSeparator()
+            .addInfo(
+                EnumChatFormatting.GOLD + "Mode switch: "
+                    + EnumChatFormatting.GRAY
+                    + "GUI button toggles between native CRV recipes and the shared "
+                    + EnumChatFormatting.YELLOW
+                    + "Alloy Blast Smelter"
+                    + EnumChatFormatting.GRAY
+                    + " recipe pool.")
+            .addInfo(
+                "  ABS mode runs at " + TooltipHelper.coloredText("400%", EnumChatFormatting.GREEN)
+                    + EnumChatFormatting.GRAY
+                    + " speed with up to "
+                    + TooltipHelper.coloredText("8", EnumChatFormatting.YELLOW)
+                    + EnumChatFormatting.GRAY
+                    + " parallels.")
             .beginStructureBlock(5, 5, 5, true)
             .addController("Front face, center")
             .addCasingInfoMin("Iridium-Reinforced Reactor Casing", 74, false)

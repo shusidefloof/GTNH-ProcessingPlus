@@ -109,7 +109,7 @@ public class MTE_SCD extends MTEExtendedPowerMultiBlockBase<MTE_SCD> implements 
 
     /**
      * Encodes stage fluid parameters into a mSpecialValue int for recipe registration.
-     * 
+     *
      * <pre>
      *   bits  0-3  : stage 1 fluid ID (0-15)
      *   bits  4-11 : stage 1 per-tick drain in mB (0-255; 0 when stage1 is empty check)
@@ -692,10 +692,9 @@ public class MTE_SCD extends MTEExtendedPowerMultiBlockBase<MTE_SCD> implements 
             .addInfo(
                 EnumChatFormatting.GRAY + "Right-click the controller face with a "
                     + EnumChatFormatting.WHITE
-                    + "data stick"
+                    + "scanner"
                     + EnumChatFormatting.GRAY
                     + " to read current stage and status.")
-            .addSeparator()
             .beginStructureBlock(12, 10, 9, true)
             .addController("Front face, center (row 5, col 7)")
             .addCasingInfoMin("High-Pressure Containment Casing", 1, false)

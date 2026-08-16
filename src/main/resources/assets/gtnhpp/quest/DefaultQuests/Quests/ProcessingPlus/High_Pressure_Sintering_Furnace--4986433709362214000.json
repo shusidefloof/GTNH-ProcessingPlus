@@ -1,0 +1,80 @@
+{
+  "tasks:9": {
+    "0:10": {
+      "index:3": 0,
+      "groupDetect:1": 0,
+      "requiredItems:9": {
+        "0:10": {
+          "Damage:2": 31511,
+          "Count:3": 1,
+          "id:8": "gregtech:gt.blockmachines",
+          "OreDict:8": ""
+        }
+      },
+      "partialMatch:1": 1,
+      "consume:1": 0,
+      "autoConsume:1": 0,
+      "requireOnlyOneItem:1": 0,
+      "taskID:8": "bq_standard:retrieval",
+      "ignoreNBT:1": 1
+    }
+  },
+  "properties:10": {
+    "betterquesting:10": {
+      "notification_pos_y:3": -2147483648,
+      "notification_subtitle_scale:5": -1,
+      "visibility:8": "NORMAL",
+      "notification_style:8": "default",
+      "notification_duration:5": -1,
+      "completion_particle:8": "default",
+      "isMain:1": 1,
+      "lockedProgress:1": 0,
+      "repeat_relative:1": 1,
+      "notification_fade_out:5": -1,
+      "repeatTime:3": -1,
+      "snd_complete:8": "random.levelup",
+      "notification_pos_x:3": -2147483648,
+      "particle_count:3": -1,
+      "countAsQuest:1": 1,
+      "autoClaim:1": 0,
+      "globalShare:1": 0,
+      "desc:8": "§6Sinters powders under high pressure and heat§r. Heat capacity is coil-tier heat plus §e100K§r per voltage tier above LV; every §c1800K§r over the recipe's requirement grants a perfect overclock, and running §c900K§r hot cuts EU cost by 5% per step. Again just like the EBF. §eParallels§r scale as 2^(pipe tier - 1) off the item pipe casing in the control chamber.\n\n§cRequires a continuous Nitrogen supply§r it's consumed every time a recipe is ran. [warn](WIP dont worry about this for now!)[/warn]",
+      "notification_icon_scale:5": -1,
+      "notification_show_icon:8": "default",
+      "notification_fade_in:5": -1,
+      "icon:10": {
+        "id:8": "gregtech:gt.blockmachines",
+        "Count:3": 1,
+        "Damage:2": 31511,
+        "OreDict:8": ""
+      },
+      "isSilent:1": 0,
+      "notification_subtitle:8": "",
+      "snd_update:8": "random.levelup",
+      "questLogic:8": "AND",
+      "name:8": "High Pressure Sintering Furnace",
+      "simultaneous:1": 0,
+      "taskLogic:8": "AND",
+      "notification_title_scale:5": -1,
+      "notification_title:8": "",
+      "completion_animation:8": "default",
+      "notification_icon_offset_y:3": -2147483648,
+      "confetti_icon:10": {
+        "id:8": "minecraft:stick",
+        "Count:3": 0,
+        "Damage:2": 0,
+        "OreDict:8": ""
+      },
+      "notification_effect:3": -1
+    }
+  },
+  "questIDLow:4": -4986433709362214000,
+  "questIDHigh:4": -1438817221569001000,
+  "preRequisites:9": {
+    "0:10": {
+      "questIDLow:4": -7519587440605316000,
+      "questIDHigh:4": 1995950255882456300
+    }
+  },
+  "rewards:9": {}
+}

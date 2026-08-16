@@ -3,6 +3,7 @@ package com.gtnh.processingplus;
 import com.gtnh.processingplus.blocks.GTNHPPBlocks;
 import com.gtnh.processingplus.items.GTNHPPItems;
 import com.gtnh.processingplus.loader.MaterialLoader;
+import com.gtnh.processingplus.loader.QuestLoader;
 import com.gtnh.processingplus.materials.PrPMaterials;
 import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
 import com.gtnh.processingplus.recipes.PrPlusRecipes;
@@ -12,6 +13,7 @@ import cpw.mods.fml.common.event.FMLLoadCompleteEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
+import gregtech.api.enums.Mods;
 import gregtech.api.util.GTRecipe;
 import gtPlusPlus.api.recipe.GTPPRecipeMaps;
 
@@ -23,6 +25,10 @@ public class CommonProxy {
         GTNHProcessingPlus.LOG.info("GT:NH Processing+ v{} loading", Tags.VERSION);
 
         MaterialLoader.load();
+
+        if (Mods.BetterQuesting.isModLoaded()) {
+            QuestLoader.registry();
+        }
     }
 
     public void init(FMLInitializationEvent event) {

@@ -1,0 +1,118 @@
+{
+  "tasks:9": {
+    "0:10": {
+      "index:3": 0,
+      "groupDetect:1": 0,
+      "requiredItems:9": {
+        "0:10": {
+          "Damage:2": 0,
+          "Count:3": 1,
+          "id:8": "miscutils:Naphthalene",
+          "OreDict:8": ""
+        },
+        "1:10": {
+          "Damage:2": 0,
+          "Count:3": 1,
+          "id:8": "miscutils:Anthracene",
+          "OreDict:8": ""
+        },
+        "2:10": {
+          "Damage:2": 30686,
+          "Count:3": 1,
+          "id:8": "gregtech:gt.metaitem.01",
+          "OreDict:8": ""
+        }
+      },
+      "partialMatch:1": 1,
+      "consume:1": 0,
+      "autoConsume:1": 0,
+      "requireOnlyOneItem:1": 0,
+      "taskID:8": "bq_standard:optional_retrieval",
+      "ignoreNBT:1": 1
+    },
+    "1:10": {
+      "index:3": 1,
+      "groupDetect:1": 0,
+      "requiredItems:9": {
+        "0:10": {
+          "Damage:2": 26053,
+          "Count:3": 1,
+          "id:8": "bartworks:gt.bwMetaGeneratedcell",
+          "OreDict:8": ""
+        }
+      },
+      "partialMatch:1": 1,
+      "consume:1": 0,
+      "autoConsume:1": 0,
+      "requireOnlyOneItem:1": 0,
+      "taskID:8": "bq_standard:retrieval",
+      "ignoreNBT:1": 1
+    }
+  },
+  "properties:10": {
+    "betterquesting:10": {
+      "notification_pos_y:3": -2147483648,
+      "notification_subtitle_scale:5": -1,
+      "visibility:8": "NORMAL",
+      "notification_style:8": "default",
+      "notification_duration:5": -1,
+      "completion_particle:8": "default",
+      "isMain:1": 0,
+      "lockedProgress:1": 0,
+      "repeat_relative:1": 1,
+      "notification_fade_out:5": -1,
+      "repeatTime:3": -1,
+      "snd_complete:8": "random.levelup",
+      "notification_pos_x:3": -2147483648,
+      "particle_count:3": -1,
+      "countAsQuest:1": 1,
+      "autoClaim:1": 0,
+      "globalShare:1": 0,
+      "desc:8": "Same sensitizer, three different recipes: Naphthalene, Anthracene, or Benzene, each oxidized down a slightly different path. The Benzene route needs a chem plant or two but gives noticeably better yield than the other two.",
+      "notification_icon_scale:5": -1,
+      "notification_show_icon:8": "default",
+      "notification_fade_in:5": -1,
+      "icon:10": {
+        "id:8": "bartworks:gt.bwMetaGeneratedcell",
+        "Count:3": 1,
+        "Damage:2": 26053,
+        "OreDict:8": ""
+      },
+      "isSilent:1": 0,
+      "notification_subtitle:8": "",
+      "snd_update:8": "random.levelup",
+      "questLogic:8": "OR",
+      "name:8": "HV Photoresist Sensitizer",
+      "simultaneous:1": 0,
+      "taskLogic:8": "AND",
+      "notification_title_scale:5": -1,
+      "notification_title:8": "",
+      "completion_animation:8": "default",
+      "notification_icon_offset_y:3": -2147483648,
+      "confetti_icon:10": {
+        "id:8": "minecraft:stick",
+        "Count:3": 0,
+        "Damage:2": 0,
+        "OreDict:8": ""
+      },
+      "notification_effect:3": -1
+    }
+  },
+  "questIDLow:4": -6660967992355942000,
+  "questIDHigh:4": 5407208150019556000,
+  "preRequisites:9": {
+    "0:10": {
+      "questIDLow:4": -6077919620178118000,
+      "questIDHigh:4": -4731256073459908000
+    },
+    "1:10": {
+      "questIDLow:4": -5154346786486729000,
+      "questIDHigh:4": 9068669345072368000
+    },
+    "2:10": {
+      "questIDLow:4": -5986003671000656000,
+      "questIDHigh:4": -6581678539387093000
+    }
+  },
+  "rewards:9": {}
+}

@@ -1,0 +1,16 @@
+{
+  "betterquesting:10": {
+    "livesMax:3": 10,
+    "home_anchor_x:5": 0.5,
+    "home_offset_x:3": -128,
+    "home_image:8": "betterquesting:textures/gui/default_title.png",
+    "livesDef:3": 3,
+    "pack_name:8": "",
+    "pack_version:3": 0,
+    "editMode:1": 0,
+    "hardcore:1": 0,
+    "party_enable:1": 1,
+    "home_offset_y:3": 0,
+    "home_anchor_y:5": 0
+  }
+}

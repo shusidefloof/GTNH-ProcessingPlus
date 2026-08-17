@@ -74,7 +74,8 @@ import gtPlusPlus.xmod.gregtech.api.metatileentity.implementations.MTEHatchTurbi
  */
 public class MTE_CSC extends MTEExtendedPowerMultiBlockBase<MTE_CSC> implements ISurvivalConstructable {
 
-    private static final int CASING_INDEX = 11;
+    // FrostProofMachineCasing (sBlockCasings2 meta1) — matches CSC's actual wall (sBlockCasings2, meta1).
+    private static final int CASING_INDEX = 17;
     private static final String STRUCTURE_PIECE_MAIN = "main";
     // "Transposed Scan" export: outer/row axes are swapped vs. a normal scan, so the true shape is
     // [z=7][y=6][x=15] with the controller marker '~' at z=0, y=3, x=7 (front face, mid-height).

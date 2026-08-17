@@ -976,18 +976,23 @@ public class PhotoresistRecipes {
     }
 
     // =========================================================
-    // UEV — Beam Activation (Beamcrafter)
+    // UEV — Beam Activation (SPC — Laser Engraver station, requires Quantum Module)
     // QuantumPrimedIntermediate → BeamActivatedIntermediate
     // High-energy photon beam restructures the quantum lattice
     // =========================================================
     private static void uevBeamActivation() {
-        GTValues.RA.stdBuilder()
+        Collection<GTRecipe> recipes = GTValues.RA.stdBuilder()
             .itemInputs(circuit(2))
             .fluidInputs(fluid(PrPMaterials.QuantumPrimedIntermediate, 1000))
             .fluidOutputs(fluid(PrPMaterials.BeamActivatedIntermediate, 1000))
             .duration(120)
             .eut(TierEU.RECIPE_UEV)
-            .addTo(GTNHPPRecipeMaps.sBeamcrafterRecipes);
+            .addTo(GTNHPPRecipeMaps.sSPCRecipes);
+        SPCRecipeData.register(
+            recipes,
+            new MachineType[] { MachineType.LASER_ENGRAVER },
+            new int[] { MV },
+            SPCModuleType.QUANTUM);
     }
 
     // =========================================================

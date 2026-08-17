@@ -3,10 +3,8 @@ package com.gtnh.processingplus.machines;
 import static gregtech.api.enums.HatchElement.Dynamo;
 import static gregtech.api.enums.HatchElement.InputBus;
 import static gregtech.api.enums.HatchElement.Maintenance;
-import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_LARGE_CHEMICAL_REACTOR;
-import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_LARGE_CHEMICAL_REACTOR_ACTIVE;
-import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_LARGE_CHEMICAL_REACTOR_ACTIVE_GLOW;
-import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_LARGE_CHEMICAL_REACTOR_GLOW;
+import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_MASSFAB;
+import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_MASSFAB_ACTIVE;
 import static gregtech.api.enums.Textures.BlockIcons.casingTexturePages;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
 
@@ -54,7 +52,8 @@ import gregtech.api.util.MultiblockTooltipBuilder;
  */
 public class MTE_RTG extends MTEExtendedPowerMultiBlockBase<MTE_RTG> implements ISurvivalConstructable {
 
-    private static final int CASING_INDEX = 11;
+    // RadiationProofMachineCasing (sBlockCasings3 meta11) — matches RADIOISOTOPE_CASING's borrowed texture.
+    private static final int CASING_INDEX = 43;
     private static final String STRUCTURE_PIECE_MAIN = "main";
     private static final int OFFSET_X = 2;
     private static final int OFFSET_Y = 2;
@@ -233,24 +232,15 @@ public class MTE_RTG extends MTEExtendedPowerMultiBlockBase<MTE_RTG> implements 
     public ITexture[] getTexture(IGregTechTileEntity aBaseMetaTileEntity, ForgeDirection side, ForgeDirection aFacing,
         int colorIndex, boolean aActive, boolean redstoneLevel) {
         if (side == aFacing) {
+            // OVERLAY_FRONT_MASSFAB has no _GLOW/_ACTIVE_GLOW variant — base icon only, no glow layer.
             if (aActive) return new ITexture[] { casingTexturePages[0][CASING_INDEX], TextureFactory.builder()
-                .addIcon(OVERLAY_FRONT_LARGE_CHEMICAL_REACTOR_ACTIVE)
+                .addIcon(OVERLAY_FRONT_MASSFAB_ACTIVE)
                 .extFacing()
-                .build(),
-                TextureFactory.builder()
-                    .addIcon(OVERLAY_FRONT_LARGE_CHEMICAL_REACTOR_ACTIVE_GLOW)
-                    .extFacing()
-                    .glow()
-                    .build() };
+                .build() };
             return new ITexture[] { casingTexturePages[0][CASING_INDEX], TextureFactory.builder()
-                .addIcon(OVERLAY_FRONT_LARGE_CHEMICAL_REACTOR)
+                .addIcon(OVERLAY_FRONT_MASSFAB)
                 .extFacing()
-                .build(),
-                TextureFactory.builder()
-                    .addIcon(OVERLAY_FRONT_LARGE_CHEMICAL_REACTOR_GLOW)
-                    .extFacing()
-                    .glow()
-                    .build() };
+                .build() };
         }
         return new ITexture[] { casingTexturePages[0][CASING_INDEX] };
     }

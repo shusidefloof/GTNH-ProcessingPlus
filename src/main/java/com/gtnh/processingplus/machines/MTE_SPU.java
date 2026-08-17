@@ -55,7 +55,8 @@ import tectech.thing.casing.TTCasingsContainer;
  */
 public class MTE_SPU extends MTEExtendedPowerMultiBlockBase<MTE_SPU> implements ISurvivalConstructable {
 
-    private static final int CASING_INDEX = 11;
+    // CleanStainlessSteelMachineCasing (sBlockCasings4 meta1) — matches SPU's actual wall (sBlockCasings4, meta1).
+    private static final int CASING_INDEX = 49;
     private static final String STRUCTURE_PIECE_MAIN = "main";
     // Controller marker '~' sits at slice z=2, row y=14, char x=7 in the exported shape.
     private static final int OFFSET_X = 7;

@@ -19,6 +19,8 @@ import static gregtech.api.util.GTStructureUtility.chainAllGlasses;
 import static gregtech.api.util.GTStructureUtility.chainItemPipeCasings;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 import javax.annotation.Nonnull;
@@ -272,6 +274,15 @@ public class MTE_DAF extends MTEExtendedPowerMultiBlockBase<MTE_DAF> implements 
     @Override
     public RecipeMap<?> getRecipeMap() {
         return mIsOxidizing ? GTNHPPRecipeMaps.sDAFOxidizingRecipes : GTNHPPRecipeMaps.sDAFInertRecipes;
+    }
+
+    // getRecipeMap() only reflects whichever atmosphere is currently toggled, so NEI's default
+    // catalyst lookup (which reads getRecipeMap() once, on a fresh oxidizing-by-default instance)
+    // never discovers the inert recipes. Overriding this exposes both maps to NEI regardless of
+    // the controller's current toggle state.
+    @Override
+    public Collection<RecipeMap<?>> getAvailableRecipeMaps() {
+        return Arrays.asList(GTNHPPRecipeMaps.sDAFOxidizingRecipes, GTNHPPRecipeMaps.sDAFInertRecipes);
     }
 
     @Override

@@ -8,10 +8,10 @@ import static gregtech.api.enums.HatchElement.Maintenance;
 import static gregtech.api.enums.HatchElement.Muffler;
 import static gregtech.api.enums.HatchElement.OutputBus;
 import static gregtech.api.enums.HatchElement.OutputHatch;
-import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_LARGE_CHEMICAL_REACTOR;
-import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_LARGE_CHEMICAL_REACTOR_ACTIVE;
-import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_LARGE_CHEMICAL_REACTOR_ACTIVE_GLOW;
-import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_LARGE_CHEMICAL_REACTOR_GLOW;
+import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_MEGA_CHEMICAL_REACTOR;
+import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_MEGA_CHEMICAL_REACTOR_ACTIVE;
+import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_MEGA_CHEMICAL_REACTOR_ACTIVE_GLOW;
+import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_MEGA_CHEMICAL_REACTOR_GLOW;
 import static gregtech.api.enums.Textures.BlockIcons.casingTexturePages;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
 
@@ -56,7 +56,8 @@ import gtPlusPlus.api.recipe.GTPPRecipeMaps;
  */
 public class MTE_CRV extends MTEExtendedPowerMultiBlockBase<MTE_CRV> implements ISurvivalConstructable {
 
-    private static final int CASING_INDEX = 11;
+    // RobustTungstenSteelMachineCasing (sBlockCasings4 meta0) — matches CRV_CASING's borrowed texture.
+    private static final int CASING_INDEX = 48;
     private static final String STRUCTURE_PIECE_MAIN = "main";
     private static final int OFFSET_X = 2;
     private static final int OFFSET_Y = 2;
@@ -157,6 +158,9 @@ public class MTE_CRV extends MTEExtendedPowerMultiBlockBase<MTE_CRV> implements 
         return GTNHPPRecipeMaps.sCRVRecipes;
     }
 
+    // getRecipeMap() only reflects whichever mode is currently selected, so NEI's default catalyst
+    // lookup (which reads getRecipeMap() once, on a fresh MACHINEMODE_CRV-by-default instance) never
+    // discovers the ABS-mode recipes. Overriding this exposes both maps to NEI regardless of mode.
     @Override
     public Collection<RecipeMap<?>> getAvailableRecipeMaps() {
         return Arrays.asList(GTNHPPRecipeMaps.sCRVRecipes, GTPPRecipeMaps.alloyBlastSmelterRecipes);
@@ -183,20 +187,20 @@ public class MTE_CRV extends MTEExtendedPowerMultiBlockBase<MTE_CRV> implements 
         int colorIndex, boolean aActive, boolean redstoneLevel) {
         if (side == aFacing) {
             if (aActive) return new ITexture[] { casingTexturePages[0][CASING_INDEX], TextureFactory.builder()
-                .addIcon(OVERLAY_FRONT_LARGE_CHEMICAL_REACTOR_ACTIVE)
+                .addIcon(OVERLAY_FRONT_MEGA_CHEMICAL_REACTOR_ACTIVE)
                 .extFacing()
                 .build(),
                 TextureFactory.builder()
-                    .addIcon(OVERLAY_FRONT_LARGE_CHEMICAL_REACTOR_ACTIVE_GLOW)
+                    .addIcon(OVERLAY_FRONT_MEGA_CHEMICAL_REACTOR_ACTIVE_GLOW)
                     .extFacing()
                     .glow()
                     .build() };
             return new ITexture[] { casingTexturePages[0][CASING_INDEX], TextureFactory.builder()
-                .addIcon(OVERLAY_FRONT_LARGE_CHEMICAL_REACTOR)
+                .addIcon(OVERLAY_FRONT_MEGA_CHEMICAL_REACTOR)
                 .extFacing()
                 .build(),
                 TextureFactory.builder()
-                    .addIcon(OVERLAY_FRONT_LARGE_CHEMICAL_REACTOR_GLOW)
+                    .addIcon(OVERLAY_FRONT_MEGA_CHEMICAL_REACTOR_GLOW)
                     .extFacing()
                     .glow()
                     .build() };

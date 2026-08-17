@@ -101,7 +101,7 @@ public class BlockGTNHPPCasings extends Block {
         "gregtech:iconsets/MACHINE_CASING_STABLE_TITANIUM",     // SPC: clean precision chamber
         "gregtech:iconsets/MACHINE_CASING_CLEAN_STAINLESSSTEEL", // CSC: cryogenic stainless column
         "gregtech:iconsets/MACHINE_CASING_SOLID_STEEL",          // BOF: industrial steel converter
-        "gregtech:iconsets/MACHINE_HEATPROOFCASING",             // SPC beam: photonic alignment column (dark)
+        "gregtech:iconsets/MACHINE_CASING_CLEAN_STAINLESSSTEEL", // SPC beam: photonic alignment column (dark)
         "gregtech:iconsets/MACHINE_CASING_SOLID_STEEL",          // SPC frame: structural frame (grey)
         "gregtech:iconsets/MACHINE_CASING_CLEAN_STAINLESSSTEEL", // Bio adapter (clean white)
         "gregtech:iconsets/MACHINE_CASING_FROST_PROOF",          // Cryo adapter (icy)

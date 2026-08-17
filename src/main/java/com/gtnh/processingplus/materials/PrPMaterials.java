@@ -381,7 +381,7 @@ public class PrPMaterials implements Runnable {
     public static Werkstoff PANAerogel; // supercritical-dried PAN aerogel
     public static Werkstoff CarbonAerogel; // pyrolyzed structural carbon aerogel
 
-    public static Werkstoff RawJiritsu; // unrefined aerogel/Naquadah lattice dust (Jiritsu precursor)
+    public static Werkstoff JiritsuAlloy; // aerogel lattice fused with a blend of pale blue-white alloys (Jiritsu precursor)
     public static Werkstoff Jiritsu; // self-supporting aerogel/Naquadah lattice alloy (UIV structural)
 
     public static List<Werkstoff> ALL = new ArrayList<>();
@@ -401,7 +401,7 @@ public class PrPMaterials implements Runnable {
                 "Nylon-6,6",
                 subscriptNumbers("C12H22N2O2"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 plasticFeatures(),
                 id(),
                 TextureSet.SET_DULL));
@@ -412,7 +412,7 @@ public class PrPMaterials implements Runnable {
                 "Polylactic Acid",
                 subscriptNumbers("C3H4O2"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 plasticFeatures(),
                 id(),
                 TextureSet.SET_DULL));
@@ -423,7 +423,7 @@ public class PrPMaterials implements Runnable {
                 "Kapton",
                 subscriptNumbers("C22H10N2O5"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 ceramicFeatures(),
                 id(),
                 TextureSet.SET_DULL));
@@ -434,7 +434,7 @@ public class PrPMaterials implements Runnable {
                 "Carbon Fiber Composite",
                 subscriptNumbers("(C)n"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 fiberFeatures(),
                 id(),
                 TextureSet.SET_DULL));
@@ -459,7 +459,7 @@ public class PrPMaterials implements Runnable {
                 "Polyacrylonitrile",
                 subscriptNumbers("(C3H3N)n"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 polymerFeatures(),
                 id(),
                 TextureSet.SET_DULL));
@@ -470,7 +470,7 @@ public class PrPMaterials implements Runnable {
                 "Stabilized Polyacrylonitrile",
                 subscriptNumbers("(C3H3N)nO"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 polymerFeatures(),
                 id(),
                 TextureSet.SET_DULL));
@@ -503,7 +503,7 @@ public class PrPMaterials implements Runnable {
                 "Acrylonitrile",
                 subscriptNumbers("C3H3N"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 fluidFeatures(),
                 id(),
                 TextureSet.SET_FLUID));
@@ -514,7 +514,7 @@ public class PrPMaterials implements Runnable {
                 "Cyclohexanol",
                 subscriptNumbers("C6H12O"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 fluidFeatures(),
                 id(),
                 TextureSet.SET_FLUID));
@@ -525,7 +525,7 @@ public class PrPMaterials implements Runnable {
                 "Cyclohexene",
                 subscriptNumbers("C6H10"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 fluidFeatures(),
                 id(),
                 TextureSet.SET_FLUID));
@@ -536,7 +536,7 @@ public class PrPMaterials implements Runnable {
                 "Diphenyl Ether",
                 subscriptNumbers("C12H10O"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 fluidFeatures(),
                 id(),
                 TextureSet.SET_FLUID));
@@ -547,7 +547,7 @@ public class PrPMaterials implements Runnable {
                 "Adipic Acid",
                 subscriptNumbers("C6H10O4"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 fluidFeatures(),
                 id(),
                 TextureSet.SET_FLUID));
@@ -558,7 +558,7 @@ public class PrPMaterials implements Runnable {
                 "Carbon Fiber Tow",
                 subscriptNumbers("(C)n"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 fiberFeatures(),
                 id(),
                 TextureSet.SET_DULL));
@@ -569,7 +569,7 @@ public class PrPMaterials implements Runnable {
                 "Graphitized Carbon Fiber",
                 subscriptNumbers("(C)n*"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 fiberFeatures(),
                 id(),
                 TextureSet.SET_DULL));
@@ -583,7 +583,7 @@ public class PrPMaterials implements Runnable {
                 "Tetraethyl Orthosilicate",
                 subscriptNumbers("Si(OC2H5)4"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 fluidFeatures(),
                 id(),
                 TextureSet.SET_FLUID));
@@ -594,7 +594,7 @@ public class PrPMaterials implements Runnable {
                 "Polyamic Acid Solution",
                 subscriptNumbers("C22H14N2O7"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 fluidFeatures(),
                 id(),
                 TextureSet.SET_FLUID));
@@ -619,7 +619,7 @@ public class PrPMaterials implements Runnable {
                 "Purified SiC Powder",
                 subscriptNumbers("SiC"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 ceramicFeatures(),
                 id(),
                 TextureSet.SET_DULL));
@@ -630,7 +630,7 @@ public class PrPMaterials implements Runnable {
                 "Dense SiC Compact",
                 subscriptNumbers("SiC"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 metalCeramicFeatures(),
                 id(),
                 TextureSet.SET_METALLIC));
@@ -641,7 +641,7 @@ public class PrPMaterials implements Runnable {
                 "Sintered Silicon Carbide",
                 subscriptNumbers("SiC"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 ceramicFeatures(),
                 id(),
                 TextureSet.SET_DULL));
@@ -655,7 +655,7 @@ public class PrPMaterials implements Runnable {
                 "Boron Carbide",
                 subscriptNumbers("B4C"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 gearedCeramicFeatures(),
                 id(),
                 TextureSet.SET_DULL));
@@ -699,7 +699,7 @@ public class PrPMaterials implements Runnable {
                 "Dense hBN Ceramic",
                 subscriptNumbers("BN"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 metalCeramicFeatures(),
                 id(),
                 TextureSet.SET_DULL));
@@ -710,7 +710,7 @@ public class PrPMaterials implements Runnable {
                 "Hexagonal Boron Nitride",
                 subscriptNumbers("BN"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 ceramicFeatures(),
                 id(),
                 TextureSet.SET_DULL));
@@ -760,7 +760,7 @@ public class PrPMaterials implements Runnable {
                 "Adiponitrile",
                 subscriptNumbers("C6H8N2"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 fluidFeatures(),
                 id(),
                 TextureSet.SET_FLUID));
@@ -771,7 +771,7 @@ public class PrPMaterials implements Runnable {
                 "Hexamethylenediamine",
                 subscriptNumbers("C6H16N2"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 fluidFeatures(),
                 id(),
                 TextureSet.SET_FLUID));
@@ -785,7 +785,7 @@ public class PrPMaterials implements Runnable {
                 "Lactic Acid",
                 subscriptNumbers("C3H6O3"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 fluidFeatures(),
                 id(),
                 TextureSet.SET_FLUID));
@@ -796,7 +796,7 @@ public class PrPMaterials implements Runnable {
                 "Lactide",
                 subscriptNumbers("C6H8O4"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 polymerFeatures(),
                 id(),
                 TextureSet.SET_DULL));
@@ -810,7 +810,7 @@ public class PrPMaterials implements Runnable {
                 "PMDA",
                 subscriptNumbers("C10H2O6"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 polymerFeatures(),
                 id(),
                 TextureSet.SET_DULL));
@@ -821,7 +821,7 @@ public class PrPMaterials implements Runnable {
                 "ODA",
                 subscriptNumbers("C12H12N2O"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 polymerFeatures(),
                 id(),
                 TextureSet.SET_DULL));
@@ -832,7 +832,7 @@ public class PrPMaterials implements Runnable {
                 "Concentrated Polyamic Acid",
                 subscriptNumbers("C22H14N2O7"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 polymerFeatures(),
                 id(),
                 TextureSet.SET_DULL));
@@ -843,7 +843,7 @@ public class PrPMaterials implements Runnable {
                 "Polyamic Acid Film",
                 subscriptNumbers("C22H14N2O7"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 polymerFeatures(),
                 id(),
                 TextureSet.SET_DULL));
@@ -857,7 +857,7 @@ public class PrPMaterials implements Runnable {
                 "Cyclohexanone Oxime",
                 subscriptNumbers("C6H11NO"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 polymerFeatures(),
                 id(),
                 TextureSet.SET_DULL));
@@ -871,7 +871,7 @@ public class PrPMaterials implements Runnable {
                 "Hydroxylammonium Sulfate",
                 subscriptNumbers("(NH3OH)2SO4"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 polymerFeatures(),
                 hydroxylammoniumSulfateId,
                 TextureSet.SET_DULL),
@@ -883,7 +883,7 @@ public class PrPMaterials implements Runnable {
                 "Caprolactam",
                 subscriptNumbers("C6H11NO"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 fluidFeatures(),
                 id(),
                 TextureSet.SET_FLUID));
@@ -897,7 +897,7 @@ public class PrPMaterials implements Runnable {
                 "Triethylamine",
                 subscriptNumbers("N(C2H5)3"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 fluidFeatures(),
                 id(),
                 TextureSet.SET_FLUID));
@@ -913,7 +913,7 @@ public class PrPMaterials implements Runnable {
                 "Ketene",
                 subscriptNumbers("C2H2O"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 fluidFeatures(),
                 id(),
                 TextureSet.SET_FLUID));
@@ -927,7 +927,7 @@ public class PrPMaterials implements Runnable {
                 "Mesophase Pitch",
                 subscriptNumbers("(C)n"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 fluidFeatures(),
                 id(),
                 TextureSet.SET_FLUID));
@@ -941,7 +941,7 @@ public class PrPMaterials implements Runnable {
                 "Trimethylsilane",
                 subscriptNumbers("(CH3)3SiH"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 fluidFeatures(),
                 id(),
                 TextureSet.SET_FLUID));
@@ -952,7 +952,7 @@ public class PrPMaterials implements Runnable {
                 "Trimethylchlorosilane",
                 subscriptNumbers("(CH3)3SiCl"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 fluidFeatures(),
                 id(),
                 TextureSet.SET_FLUID));
@@ -966,7 +966,7 @@ public class PrPMaterials implements Runnable {
                 "Propylene Glycol",
                 subscriptNumbers("C3H8O2"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 fluidFeatures(),
                 id(),
                 TextureSet.SET_FLUID));
@@ -980,7 +980,7 @@ public class PrPMaterials implements Runnable {
                 "Novolac Resin",
                 subscriptNumbers("(C7H6O)n"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 moltenPolymerFeatures(),
                 id(),
                 TextureSet.SET_DULL));
@@ -1052,7 +1052,7 @@ public class PrPMaterials implements Runnable {
                 "Acetoxystyrene",
                 subscriptNumbers("C10H10O2"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 fluidFeatures(),
                 id(),
                 TextureSet.SET_FLUID));
@@ -1063,7 +1063,7 @@ public class PrPMaterials implements Runnable {
                 "PHS Resin",
                 "poly(p-hydroxystyrene)",
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 plasticFeatures(),
                 id(),
                 TextureSet.SET_DULL));
@@ -1074,7 +1074,7 @@ public class PrPMaterials implements Runnable {
                 "Sulfur Dichloride",
                 subscriptNumbers("SCl2"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 fluidFeatures(),
                 id(),
                 TextureSet.SET_FLUID));
@@ -1085,7 +1085,7 @@ public class PrPMaterials implements Runnable {
                 "Diphenylsulfonium Salt",
                 subscriptNumbers("(C6H5)2S·Cl"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 polymerFeatures(),
                 id(),
                 TextureSet.SET_DULL));
@@ -1110,7 +1110,7 @@ public class PrPMaterials implements Runnable {
                 "Furfural",
                 subscriptNumbers("C5H4O2"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 fluidFeatures(),
                 id(),
                 TextureSet.SET_FLUID));
@@ -1121,7 +1121,7 @@ public class PrPMaterials implements Runnable {
                 "Dihydropyran",
                 subscriptNumbers("C5H8O"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 fluidFeatures(),
                 id(),
                 TextureSet.SET_FLUID));
@@ -1132,7 +1132,7 @@ public class PrPMaterials implements Runnable {
                 "THP-Protected PHS",
                 "PHS·THP",
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 fluidFeatures(),
                 id(),
                 TextureSet.SET_FLUID));
@@ -1157,7 +1157,7 @@ public class PrPMaterials implements Runnable {
                 "Trifluoromethane",
                 subscriptNumbers("CHF3"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 fluidFeatures(),
                 id(),
                 TextureSet.SET_FLUID));
@@ -1168,7 +1168,7 @@ public class PrPMaterials implements Runnable {
                 "Triflic Acid",
                 subscriptNumbers("CF3SO3H"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 fluidFeatures(),
                 id(),
                 TextureSet.SET_FLUID));
@@ -1179,7 +1179,7 @@ public class PrPMaterials implements Runnable {
                 "Methacrylic Acid",
                 subscriptNumbers("C4H6O2"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 fluidFeatures(),
                 id(),
                 TextureSet.SET_FLUID));
@@ -1193,7 +1193,7 @@ public class PrPMaterials implements Runnable {
                 "Ammonium Bisulfate",
                 subscriptNumbers("(NH4)HSO4"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 polymerFeatures(),
                 ammoniumBisulfateId,
                 TextureSet.SET_DULL),
@@ -1205,7 +1205,7 @@ public class PrPMaterials implements Runnable {
                 "Adamantol",
                 subscriptNumbers("C10H16O"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 polymerFeatures(),
                 id(),
                 TextureSet.SET_DULL));
@@ -1216,7 +1216,7 @@ public class PrPMaterials implements Runnable {
                 "Adamantyl Methacrylate",
                 subscriptNumbers("Ad·C4H5O2"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 fluidFeatures(),
                 id(),
                 TextureSet.SET_FLUID));
@@ -1227,7 +1227,7 @@ public class PrPMaterials implements Runnable {
                 "Acetone Azine",
                 subscriptNumbers("C6H12N2"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 fluidFeatures(),
                 id(),
                 TextureSet.SET_FLUID));
@@ -1238,7 +1238,7 @@ public class PrPMaterials implements Runnable {
                 "AIBN",
                 subscriptNumbers("C8H12N4"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 polymerFeatures(),
                 id(),
                 TextureSet.SET_DULL));
@@ -1249,7 +1249,7 @@ public class PrPMaterials implements Runnable {
                 "Alicyclic Resin",
                 "poly(AdMA·MAA)",
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 moltenPolymerFeatures(),
                 id(),
                 TextureSet.SET_DULL));
@@ -1260,7 +1260,7 @@ public class PrPMaterials implements Runnable {
                 "Triphenylsulfonium Triflate",
                 subscriptNumbers("(C6H5)3S·OTf"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 polymerFeatures(),
                 id(),
                 TextureSet.SET_DULL));
@@ -1271,7 +1271,7 @@ public class PrPMaterials implements Runnable {
                 "Propylene Oxide",
                 subscriptNumbers("C3H6O"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 fluidFeatures(),
                 id(),
                 TextureSet.SET_FLUID));
@@ -1282,7 +1282,7 @@ public class PrPMaterials implements Runnable {
                 "PGME",
                 subscriptNumbers("C4H10O2"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 fluidFeatures(),
                 id(),
                 TextureSet.SET_FLUID));
@@ -1293,7 +1293,7 @@ public class PrPMaterials implements Runnable {
                 "PGMEA",
                 subscriptNumbers("C6H12O3"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 fluidFeatures(),
                 id(),
                 TextureSet.SET_FLUID));
@@ -1318,7 +1318,7 @@ public class PrPMaterials implements Runnable {
                 "Hexafluoroacetone",
                 subscriptNumbers("(CF3)2CO"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 fluidFeatures(),
                 id(),
                 TextureSet.SET_FLUID));
@@ -1329,7 +1329,7 @@ public class PrPMaterials implements Runnable {
                 "HFIMA Monomer",
                 subscriptNumbers("C7H7F6O2"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 fluidFeatures(),
                 id(),
                 TextureSet.SET_FLUID));
@@ -1340,7 +1340,7 @@ public class PrPMaterials implements Runnable {
                 "GBLMA Monomer",
                 subscriptNumbers("C9H14O4"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 fluidFeatures(),
                 id(),
                 TextureSet.SET_FLUID));
@@ -1351,7 +1351,7 @@ public class PrPMaterials implements Runnable {
                 "HAdMA Monomer",
                 subscriptNumbers("C14H22O3"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 fluidFeatures(),
                 id(),
                 TextureSet.SET_FLUID));
@@ -1362,7 +1362,7 @@ public class PrPMaterials implements Runnable {
                 "ArF Copolymer Resin",
                 "poly(GBLMA·HAdMA·HFIMA)",
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 moltenPolymerFeatures(),
                 id(),
                 TextureSet.SET_DULL));
@@ -1398,7 +1398,7 @@ public class PrPMaterials implements Runnable {
                 "Erbium Triflate",
                 subscriptNumbers("Er(OTf)3"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 polymerFeatures(),
                 id(),
                 TextureSet.SET_DULL));
@@ -1409,7 +1409,7 @@ public class PrPMaterials implements Runnable {
                 "Ytterbium Acetate",
                 subscriptNumbers("Yb(OAc)3"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 polymerFeatures(),
                 id(),
                 TextureSet.SET_DULL));
@@ -1420,7 +1420,7 @@ public class PrPMaterials implements Runnable {
                 "Terbium Chloride",
                 subscriptNumbers("TbCl3"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 polymerFeatures(),
                 id(),
                 TextureSet.SET_DULL));
@@ -1431,7 +1431,7 @@ public class PrPMaterials implements Runnable {
                 "Terbium Acetylacetonate",
                 subscriptNumbers("Tb(acac)3"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 polymerFeatures(),
                 id(),
                 TextureSet.SET_DULL));
@@ -1536,7 +1536,7 @@ public class PrPMaterials implements Runnable {
                 "Tengam Triflate",
                 "Tg·OTf",
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 fluidFeatures(),
                 id(),
                 TextureSet.SET_FLUID));
@@ -1569,7 +1569,7 @@ public class PrPMaterials implements Runnable {
                 "Fermium Triflate",
                 "Fm·OTf",
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 fluidFeatures(),
                 id(),
                 TextureSet.SET_FLUID));
@@ -1671,7 +1671,7 @@ public class PrPMaterials implements Runnable {
                 "Creon Triflate",
                 "Cr·OTf",
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 fluidFeatures(),
                 id(),
                 TextureSet.SET_FLUID));
@@ -1766,7 +1766,7 @@ public class PrPMaterials implements Runnable {
                 "Neptunium Oxide",
                 subscriptNumbers("NpO2"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 new Werkstoff.GenerationFeatures().onlyDust(),
                 id(),
                 TextureSet.SET_DULL));
@@ -1777,7 +1777,7 @@ public class PrPMaterials implements Runnable {
                 "Barium Oxide",
                 "BaO",
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 new Werkstoff.GenerationFeatures().onlyDust(),
                 id(),
                 TextureSet.SET_DULL));
@@ -1835,7 +1835,7 @@ public class PrPMaterials implements Runnable {
                 "Refractory High-Entropy Alloy",
                 subscriptNumbers("NpWTaTi"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 new Werkstoff.GenerationFeatures().onlyDust()
                     .addMolten()
                     .addMetalItems()
@@ -1852,7 +1852,7 @@ public class PrPMaterials implements Runnable {
                 "Tantalum Pentoxide",
                 subscriptNumbers("Ta2O5"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 new Werkstoff.GenerationFeatures().onlyDust(),
                 id(),
                 TextureSet.SET_DULL));
@@ -1863,7 +1863,7 @@ public class PrPMaterials implements Runnable {
                 "Niobium Pentoxide",
                 subscriptNumbers("Nb2O5"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 new Werkstoff.GenerationFeatures().onlyDust(),
                 id(),
                 TextureSet.SET_DULL));
@@ -1896,7 +1896,7 @@ public class PrPMaterials implements Runnable {
                 "MIBK",
                 subscriptNumbers("C6H12O"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 fluidFeatures(),
                 id(),
                 TextureSet.SET_FLUID));
@@ -1921,7 +1921,7 @@ public class PrPMaterials implements Runnable {
                 "Amorphous Tritanium Alloy",
                 "Ti-Am*",
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 amorphousMetalFeatures(),
                 id(),
                 TextureSet.SET_METALLIC));
@@ -1932,7 +1932,7 @@ public class PrPMaterials implements Runnable {
                 "Amorphous Naquadria",
                 "Nq**",
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 amorphousMetalFeatures(),
                 id(),
                 TextureSet.SET_METALLIC));
@@ -1968,7 +1968,7 @@ public class PrPMaterials implements Runnable {
                 "Gallium Hydroxide",
                 subscriptNumbers("Ga(OH)3"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 new Werkstoff.GenerationFeatures().onlyDust(),
                 id(),
                 TextureSet.SET_DULL));
@@ -1979,7 +1979,7 @@ public class PrPMaterials implements Runnable {
                 "Germanium Hydroxide",
                 subscriptNumbers("Ge(OH)4"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 new Werkstoff.GenerationFeatures().onlyDust(),
                 id(),
                 TextureSet.SET_DULL));
@@ -2001,7 +2001,7 @@ public class PrPMaterials implements Runnable {
                 "Germanium Tetrachloride",
                 subscriptNumbers("GeCl4"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 fluidFeatures(),
                 id(),
                 TextureSet.SET_FLUID));
@@ -2015,7 +2015,7 @@ public class PrPMaterials implements Runnable {
                 "Carbon Tetrachloride",
                 subscriptNumbers("CCl4"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 fluidFeatures(),
                 id(),
                 TextureSet.SET_FLUID));
@@ -2026,7 +2026,7 @@ public class PrPMaterials implements Runnable {
                 "Freon R-12",
                 subscriptNumbers("CF2Cl2"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 fluidFeatures(),
                 id(),
                 TextureSet.SET_FLUID));
@@ -2041,7 +2041,7 @@ public class PrPMaterials implements Runnable {
                 "Liquid Argon",
                 "Ar(l)",
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 fluidFeatures(),
                 id(),
                 TextureSet.SET_FLUID));
@@ -2052,7 +2052,7 @@ public class PrPMaterials implements Runnable {
                 "Liquid Carbon Dioxide",
                 subscriptNumbers("CO2(l)"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 fluidFeatures(),
                 id(),
                 TextureSet.SET_FLUID));
@@ -2192,7 +2192,7 @@ public class PrPMaterials implements Runnable {
                 "Fluorosulfuric Acid",
                 subscriptNumbers("HSO3F"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 fluidFeatures(),
                 id(),
                 TextureSet.SET_FLUID));
@@ -2236,7 +2236,7 @@ public class PrPMaterials implements Runnable {
                 "Europium Chloride",
                 subscriptNumbers("EuCl3"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 fluidFeatures(),
                 id(),
                 TextureSet.SET_FLUID));
@@ -2333,7 +2333,7 @@ public class PrPMaterials implements Runnable {
                 "Silica Sol",
                 subscriptNumbers("Si(OH)4"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 fluidFeatures(),
                 id(),
                 TextureSet.SET_FLUID));
@@ -2410,7 +2410,7 @@ public class PrPMaterials implements Runnable {
                 "PAN Aerogel",
                 subscriptNumbers("(C3H3N)n*"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 polymerFeatures(),
                 id(),
                 TextureSet.SET_DULL));
@@ -2421,21 +2421,22 @@ public class PrPMaterials implements Runnable {
                 "Carbon Aerogel",
                 subscriptNumbers("(C)n*"),
                 new Werkstoff.Stats(),
-                Werkstoff.Types.COMPOUND,
+                Werkstoff.Types.MIXTURE,
                 fiberFeatures(),
                 id(),
                 TextureSet.SET_DULL));
 
         // Jiritsu (自立, "self-reliance") — the mod's own pale blue-white UIV structural alloy, a
         // third entry alongside GT5's Churitsu (neutral) and GoodGenerator's Tairitsu (opposition).
-        // Fuses the fragile Hydrophobic Silica Aerogel + Aerogel Insulation Panel lattice with a
-        // molten Naquadah backbone so the aerogel can finally stand on its own as a load-bearing
-        // metal — pressure-fused into Raw Jiritsu, then stabilized under an inert Helium blanket.
-        RawJiritsu = register(
+        // Mirrors how Churitsu/Tairitsu are themselves built: a multiblock-mixed blend of several
+        // prestige alloys, here all pale blue-white ones (Trinium, Ultimet, Energetic Silver,
+        // Crystalline Alloy) fused with the fragile aerogel lattice and a molten Naquadah backbone
+        // — Jiritsu Alloy — then stabilized under an inert Helium blanket into Hot Jiritsu.
+        JiritsuAlloy = register(
             new Werkstoff(
-                rgb(190, 210, 225),
-                "Raw Jiritsu",
-                subscriptNumbers("(SiO2)n*Nq"),
+                rgb(195, 205, 225),
+                "Jiritsu Alloy",
+                subscriptNumbers("(SiO2)n*Nq/M"),
                 new Werkstoff.Stats(),
                 Werkstoff.Types.MIXTURE,
                 new Werkstoff.GenerationFeatures().onlyDust(),

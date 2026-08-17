@@ -8,11 +8,9 @@ import static gregtech.api.enums.HatchElement.InputHatch;
 import static gregtech.api.enums.HatchElement.Maintenance;
 import static gregtech.api.enums.HatchElement.OutputBus;
 import static gregtech.api.enums.HatchElement.OutputHatch;
-import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_LARGE_CHEMICAL_REACTOR;
-import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_LARGE_CHEMICAL_REACTOR_ACTIVE;
-import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_LARGE_CHEMICAL_REACTOR_ACTIVE_GLOW;
-import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_LARGE_CHEMICAL_REACTOR_GLOW;
-import static gregtech.api.enums.Textures.BlockIcons.casingTexturePages;
+import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FUSION1;
+import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FUSION1_GLOW;
+import static gregtech.api.enums.Textures.BlockIcons.getCasingTextureForId;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
 
 import java.util.ArrayList;
@@ -59,7 +57,10 @@ import gregtech.api.util.shutdown.ShutDownReasonRegistry;
 
 public class MTE_HPR extends MTEExtendedPowerMultiBlockBase<MTE_HPR> implements ISurvivalConstructable {
 
-    private static final int CASING_INDEX = 11;
+    // GoodGenerator's pressureResistantWalls isn't in GT5U's shared casing texture registry — we register it
+    // ourselves (CommonProxy.registerExternalCasingTextures()) into page 100, slot 0 = 100*128 = 12800.
+    public static final int PRESSURE_RESISTANT_WALLS_CASING_INDEX = 12800;
+    private static final int CASING_INDEX = PRESSURE_RESISTANT_WALLS_CASING_INDEX;
     private static final String STRUCTURE_PIECE_MAIN = "main";
     // Controller (~) is at slice z=1, row y=14, col x=14
     private static final int OFFSET_X = 14;
@@ -454,26 +455,23 @@ public class MTE_HPR extends MTEExtendedPowerMultiBlockBase<MTE_HPR> implements 
     public ITexture[] getTexture(IGregTechTileEntity aBaseMetaTileEntity, ForgeDirection side, ForgeDirection aFacing,
         int colorIndex, boolean aActive, boolean redstoneLevel) {
         if (side == aFacing) {
-            if (aActive) return new ITexture[] { casingTexturePages[0][CASING_INDEX], TextureFactory.builder()
-                .addIcon(OVERLAY_FRONT_LARGE_CHEMICAL_REACTOR_ACTIVE)
+            // OVERLAY_FUSION1 has no separate _ACTIVE variant (matches the real Fusion Reactor's own
+            // getTexture pattern) — same base icon either way, the glow layer is what shows it's running.
+            if (aActive) return new ITexture[] { getCasingTextureForId(CASING_INDEX), TextureFactory.builder()
+                .addIcon(OVERLAY_FUSION1)
                 .extFacing()
                 .build(),
                 TextureFactory.builder()
-                    .addIcon(OVERLAY_FRONT_LARGE_CHEMICAL_REACTOR_ACTIVE_GLOW)
+                    .addIcon(OVERLAY_FUSION1_GLOW)
                     .extFacing()
                     .glow()
                     .build() };
-            return new ITexture[] { casingTexturePages[0][CASING_INDEX], TextureFactory.builder()
-                .addIcon(OVERLAY_FRONT_LARGE_CHEMICAL_REACTOR)
+            return new ITexture[] { getCasingTextureForId(CASING_INDEX), TextureFactory.builder()
+                .addIcon(OVERLAY_FUSION1)
                 .extFacing()
-                .build(),
-                TextureFactory.builder()
-                    .addIcon(OVERLAY_FRONT_LARGE_CHEMICAL_REACTOR_GLOW)
-                    .extFacing()
-                    .glow()
-                    .build() };
+                .build() };
         }
-        return new ITexture[] { casingTexturePages[0][CASING_INDEX] };
+        return new ITexture[] { getCasingTextureForId(CASING_INDEX) };
     }
 
     @Override

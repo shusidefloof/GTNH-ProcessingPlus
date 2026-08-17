@@ -52,6 +52,7 @@ import gregtech.common.misc.GTStructureChannels;
 
 public class MTE_HTRF extends MTEExtendedPowerMultiBlockBase<MTE_HTRF> implements ISurvivalConstructable {
 
+    // HeatProofMachineCasing (sBlockCasings1 meta11) — matches HTRF_CASING's borrowed texture.
     private static final int CASING_INDEX = 11;
     private static final String STRUCTURE_PIECE_MAIN = "main";
     private static final int OFFSET_X = 3;

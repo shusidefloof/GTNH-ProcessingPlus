@@ -1,10 +1,10 @@
 package com.gtnh.processingplus.machines;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlock;
-import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_LARGE_CHEMICAL_REACTOR;
-import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_LARGE_CHEMICAL_REACTOR_ACTIVE;
-import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_LARGE_CHEMICAL_REACTOR_ACTIVE_GLOW;
-import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_LARGE_CHEMICAL_REACTOR_GLOW;
+import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_FRIDGE;
+import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_FRIDGE_ACTIVE;
+import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_FRIDGE_ACTIVE_GLOW;
+import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_FRIDGE_GLOW;
 import static gregtech.api.enums.Textures.BlockIcons.casingTexturePages;
 
 import java.util.List;
@@ -34,7 +34,8 @@ import gregtech.api.util.MultiblockTooltipBuilder;
  */
 public class MTE_SPCCryoModule extends MTE_SPCModuleBase<MTE_SPCCryoModule> implements ISurvivalConstructable {
 
-    private static final int CASING_INDEX = 11;
+    // FrostProofMachineCasing (sBlockCasings2 meta1) — matches CRYO_MODULE_CASING's borrowed texture.
+    private static final int CASING_INDEX = 17;
     private static final String STRUCTURE_PIECE_MAIN = "main";
     private static final int OFFSET_X = 1, OFFSET_Y = 1, OFFSET_Z = 0;
 
@@ -101,20 +102,20 @@ public class MTE_SPCCryoModule extends MTE_SPCModuleBase<MTE_SPCCryoModule> impl
         int colorIndex, boolean aActive, boolean redstoneLevel) {
         if (side == aFacing) {
             if (aActive) return new ITexture[] { casingTexturePages[0][CASING_INDEX], TextureFactory.builder()
-                .addIcon(OVERLAY_FRONT_LARGE_CHEMICAL_REACTOR_ACTIVE)
+                .addIcon(OVERLAY_FRONT_FRIDGE_ACTIVE)
                 .extFacing()
                 .build(),
                 TextureFactory.builder()
-                    .addIcon(OVERLAY_FRONT_LARGE_CHEMICAL_REACTOR_ACTIVE_GLOW)
+                    .addIcon(OVERLAY_FRONT_FRIDGE_ACTIVE_GLOW)
                     .extFacing()
                     .glow()
                     .build() };
             return new ITexture[] { casingTexturePages[0][CASING_INDEX], TextureFactory.builder()
-                .addIcon(OVERLAY_FRONT_LARGE_CHEMICAL_REACTOR)
+                .addIcon(OVERLAY_FRONT_FRIDGE)
                 .extFacing()
                 .build(),
                 TextureFactory.builder()
-                    .addIcon(OVERLAY_FRONT_LARGE_CHEMICAL_REACTOR_GLOW)
+                    .addIcon(OVERLAY_FRONT_FRIDGE_GLOW)
                     .extFacing()
                     .glow()
                     .build() };

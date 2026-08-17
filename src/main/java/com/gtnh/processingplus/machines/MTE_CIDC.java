@@ -59,7 +59,8 @@ import gtnhlanth.common.register.LanthItemList;
  */
 public class MTE_CIDC extends MTEExtendedPowerMultiBlockBase<MTE_CIDC> implements ISurvivalConstructable {
 
-    private static final int CASING_INDEX = 11;
+    // StableTitaniumMachineCasing (sBlockCasings4 meta2) — matches SPC_CASING's borrowed texture.
+    private static final int CASING_INDEX = 50;
     private static final String STRUCTURE_PIECE_MAIN = "main";
     // Controller marker '~' sits at slice z=2, row y=14, char x=7 in the exported shape.
     private static final int OFFSET_X = 7;

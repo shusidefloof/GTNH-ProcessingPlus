@@ -35,7 +35,8 @@ import gregtech.api.util.MultiblockTooltipBuilder;
  */
 public class MTE_SPCBioModule extends MTE_SPCModuleBase<MTE_SPCBioModule> implements ISurvivalConstructable {
 
-    private static final int CASING_INDEX = 11;
+    // CleanStainlessSteelMachineCasing (sBlockCasings4 meta1) — matches BIO_MODULE_CASING's borrowed texture.
+    private static final int CASING_INDEX = 49;
     private static final String STRUCTURE_PIECE_MAIN = "main";
     private static final int OFFSET_X = 1, OFFSET_Y = 1, OFFSET_Z = 0;
 

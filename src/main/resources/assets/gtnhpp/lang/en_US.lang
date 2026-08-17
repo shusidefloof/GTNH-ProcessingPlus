@@ -24,4 +24,28 @@ gt.blockmachines.gtnhpp.crv.name=Ceramic Reaction Vessel
 gt.blockmachines.gtnhpp.spc.name=Spectral Photolithography Chamber
 gt.blockmachines.gtnhpp.csc.name=Cryogenic Separation Column
 gt.blockmachines.gtnhpp.bof.name=Basic Oxygen Furnace
+
+# Recipe map names (NEI category titles) — RecipeMapBuilder.of(key) uses `key` directly as a
+# StatCollector.translateToLocal lookup, so without an entry here NEI shows the raw key string.
+gtnhpp.recipe.htrf=High Temperature Reaction Furnace
+gtnhpp.recipe.hpsf=High Pressure Sintering Furnace
+gtnhpp.recipe.daf.oxidizing=Dual Atmosphere Furnace (Oxidizing)
+gtnhpp.recipe.daf.inert=Dual Atmosphere Furnace (Inert)
+gtnhpp.recipe.pcv=Polycondensation Vessel
+gtnhpp.recipe.cstr=Continuous Stirred Tank Reactor
+gtnhpp.recipe.pfc.casting=Precision Film Caster (Casting)
+gtnhpp.recipe.pfc.imidization=Precision Film Caster (Imidization)
+gtnhpp.recipe.aar=Ammonia Atmosphere Reactor
+gtnhpp.recipe.scd=Supercritical Dryer
+gtnhpp.recipe.crv=Ceramic Reaction Vessel
+gtnhpp.recipe.spc=Spectral Photolithography Chamber
+gtnhpp.recipe.csc=Cryogenic Separation Column
+gtnhpp.recipe.bof=Basic Oxygen Furnace
+gtnhpp.recipe.cidc=Controlled Isotopic Doping Chamber
+gtnhpp.recipe.hpr=Hybrid Phase Reactor
+gtnhpp.recipe.spu=Subatomic Patterning Unit
+gtnhpp.recipe.fotg=Forge of the Gods
+gtnhpp.recipe.cac=Cryogenic Annealing Cryostat
+gtnhpp.recipe.rtg=Radioisotope Thermoelectric Generator
+
 gtnhpp.recipe.hpr.coil_tier=FRF Coil Tier: %s

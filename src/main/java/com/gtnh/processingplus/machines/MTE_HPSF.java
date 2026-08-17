@@ -58,7 +58,9 @@ import gregtech.common.misc.GTStructureChannels;
 
 public class MTE_HPSF extends MTEExtendedPowerMultiBlockBase<MTE_HPSF> implements ISurvivalConstructable {
 
-    private static final int CASING_INDEX = 11;
+    // RobustTungstenSteelMachineCasing (sBlockCasings4 meta0) — matches HPSF_CASING/
+    // PRESSURE_VESSEL_RING_CASING's borrowed texture.
+    private static final int CASING_INDEX = 48;
     private static final String STRUCTURE_PIECE_MAIN = "main";
     private static final int OFFSET_X = 15;
     private static final int OFFSET_Y = 5;

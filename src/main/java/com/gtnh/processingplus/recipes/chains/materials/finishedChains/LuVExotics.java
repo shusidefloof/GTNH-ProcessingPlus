@@ -28,8 +28,10 @@ import gtPlusPlus.api.recipe.GTPPRecipeMaps;
  *
  * <p>
  * <b>Jiritsu</b> — this mod's own pale blue-white UIV structural alloy, a third entry alongside
- * GT5's Churitsu (neutral) and GoodGenerator's Tairitsu (opposition). Aerogel dusts are pressure-fused
- * with molten Naquadah into Raw Jiritsu, then stabilized under an inert Helium blanket.
+ * GT5's Churitsu (neutral) and GoodGenerator's Tairitsu (opposition). A multiblock Mixer fuses the
+ * aerogel lattice with a blend of pale blue-white alloys (Trinium, Ultimet, Energetic Silver,
+ * Crystalline Alloy) and a molten Naquadah backbone into Jiritsu Alloy, then stabilized under an
+ * inert Helium blanket into Hot Jiritsu.
  */
 public class LuVExotics {
 
@@ -41,7 +43,7 @@ public class LuVExotics {
         vibHotVibranium();
 
         // Jiritsu (2 steps)
-        jirRawJiritsu();
+        jirJiritsuAlloy();
         jirHotJiritsu();
 
         // Unobtanium (9 steps) — SbF5 comes from GoodGenerator (fluid "antimony pentafluoride")
@@ -135,33 +137,39 @@ public class LuVExotics {
     // JIRITSU
     // =========================================================
 
-    // 1. Autoclave — pressure-fuse both aerogel dusts with a molten Naquadah backbone into Raw Jiritsu
-    private static void jirRawJiritsu() {
+    // 1. Multiblock Mixer — fuse both aerogel dusts with a blend of pale blue-white alloys (Trinium,
+    // Ultimet, Energetic Silver, Crystalline Alloy) and a molten Naquadah backbone into Jiritsu Alloy.
+    private static void jirJiritsuAlloy() {
         safe(
-            "raw jiritsu",
+            "jiritsu alloy",
             () -> GTValues.RA.stdBuilder()
                 .itemInputs(
                     dust(PrPMaterials.HydrophobicSilicaAerogel, 2),
-                    dust(PrPMaterials.AerogelInsulationPanel, 2))
+                    dust(PrPMaterials.AerogelInsulationPanel, 2),
+                    dust(Materials.Trinium, 2),
+                    dust(Materials.Ultimet, 2),
+                    dust(Materials.EnergeticSilver, 2),
+                    dust(Materials.CrystallineAlloy, 2))
                 .fluidInputs(molten(Materials.Naquadah, 72))
-                .itemOutputs(dust(PrPMaterials.RawJiritsu, 3))
-                .duration(10 * 20)
-                .eut(TierEU.RECIPE_ZPM)
-                .addTo(RecipeMaps.autoclaveRecipes));
+                .itemOutputs(dust(PrPMaterials.JiritsuAlloy, 6))
+                .duration(15 * 20)
+                .eut(TierEU.RECIPE_UHV)
+                .addTo(GTPPRecipeMaps.mixerNonCellRecipes));
     }
 
-    // 2. Multiblock Chemical Reactor — stabilize Raw Jiritsu under an inert Helium blanket so the
+    // 2. Multiblock Chemical Reactor — stabilize Jiritsu Alloy under an inert Helium blanket so the
     // lattice can stand on its own (self-reliance) rather than needing a reactive support medium.
     private static void jirHotJiritsu() {
         safe(
             "hot jiritsu",
             () -> GTValues.RA.stdBuilder()
-                .itemInputs(dust(PrPMaterials.RawJiritsu, 3))
+                .itemInputs(dust(PrPMaterials.JiritsuAlloy, 6))
                 .fluidInputs(fluid(Materials.Helium, 1000))
                 .itemOutputs(ingotHot(PrPMaterials.Jiritsu, 1))
                 .duration(15 * 20)
+                .metadata(GTRecipeConstants.COIL_HEAT, 8800)
                 .eut(TierEU.RECIPE_UIV)
-                .addTo(RecipeMaps.multiblockChemicalReactorRecipes));
+                .addTo(RecipeMaps.blastFurnaceRecipes));
     }
 
     // =========================================================

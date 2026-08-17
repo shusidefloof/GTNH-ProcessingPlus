@@ -52,8 +52,8 @@ import gregtech.api.util.MultiblockTooltipBuilder;
  */
 public class MTE_CSTR extends MTEExtendedPowerMultiBlockBase<MTE_CSTR> implements ISurvivalConstructable {
 
-    // casingTexturePages[0][3] = Robust Titanium Machine Casing (IV-tier visual)
-    private static final int CASING_INDEX = 3;
+    // CleanStainlessSteelMachineCasing (sBlockCasings4 meta1) — matches CSTR_CASING's borrowed texture.
+    private static final int CASING_INDEX = 49;
     private static final String STRUCTURE_PIECE_MAIN = "main";
     // Controller (~) at z=0, y=1, x=1
     private static final int OFFSET_X = 1;

@@ -136,12 +136,6 @@ public class GTNHPPRecipeMaps {
         .maxIO(4, 2, 4, 2)
         .build();
 
-    /** Beamcrafter — placeholder until GoodGenerator exposes a recipe map. */
-    public static final RecipeMap<RecipeMapBackend> sBeamcrafterRecipes = RecipeMapBuilder
-        .of("gtnhpp.recipe.beamcrafter")
-        .maxIO(2, 1, 2, 1)
-        .build();
-
     /** Cryogenic Annealing Cryostat — aerogel-insulated superconductor anneal, UHV-tier and up. */
     public static final RecipeMap<RecipeMapBackend> sCACRecipes = RecipeMapBuilder
         .of("gtnhpp.recipe.cac")

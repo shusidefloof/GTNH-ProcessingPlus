@@ -14,7 +14,6 @@ import gregtech.api.enums.TierEU;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.util.GTOreDictUnificator;
 import gregtech.api.util.GTRecipeConstants;
-import gtPlusPlus.api.recipe.GTPPRecipeMaps;
 
 public class Nylon66Recipes {
 
@@ -42,7 +41,7 @@ public class Nylon66Recipes {
             .duration(10 * 20)
             .eut(TierEU.RECIPE_HV)
             .metadata(GTRecipeConstants.CHEMPLANT_CASING_TIER, 3)
-            .addTo(GTPPRecipeMaps.chemicalPlantRecipes);
+            .addTo(RecipeMaps.chemicalPlantRecipes);
     }
 
     // =========================================================
@@ -74,7 +73,7 @@ public class Nylon66Recipes {
             .duration(400)
             .eut(TierEU.RECIPE_EV)
             .metadata(GTRecipeConstants.CHEMPLANT_CASING_TIER, 6)
-            .addTo(GTPPRecipeMaps.chemicalPlantRecipes);
+            .addTo(RecipeMaps.chemicalPlantRecipes);
     }
 
     // =========================================================
@@ -115,7 +114,7 @@ public class Nylon66Recipes {
             .duration(500)
             .eut(TierEU.RECIPE_LuV)
             .metadata(GTRecipeConstants.CHEMPLANT_CASING_TIER, 7)
-            .addTo(GTPPRecipeMaps.chemicalPlantRecipes);
+            .addTo(RecipeMaps.chemicalPlantRecipes);
     }
 
     // =========================================================
@@ -185,7 +184,7 @@ public class Nylon66Recipes {
             .duration(300)
             .eut(TierEU.RECIPE_LuV)
             .metadata(GTRecipeConstants.CHEMPLANT_CASING_TIER, 5)
-            .addTo(GTPPRecipeMaps.chemicalPlantRecipes);
+            .addTo(RecipeMaps.chemicalPlantRecipes);
 
         // B: Cyclohexanone Oxime + H2SO4 → Caprolactam (Beckmann rearrangement)
         GTValues.RA.stdBuilder()
@@ -195,7 +194,7 @@ public class Nylon66Recipes {
             .duration(400)
             .eut(TierEU.RECIPE_EV)
             .metadata(GTRecipeConstants.CHEMPLANT_CASING_TIER, 5)
-            .addTo(GTPPRecipeMaps.chemicalPlantRecipes);
+            .addTo(RecipeMaps.chemicalPlantRecipes);
 
         // C: Caprolactam + H2O → molten Nylon-6 (ring-opening polymerization, Chemical Plant)
         // Note: ROP of caprolactam produces Nylon-6, not Nylon-6,6. Distinct polymer.
@@ -206,7 +205,7 @@ public class Nylon66Recipes {
             .duration(600)
             .eut(TierEU.RECIPE_LuV)
             .metadata(GTRecipeConstants.CHEMPLANT_CASING_TIER, 5)
-            .addTo(GTPPRecipeMaps.chemicalPlantRecipes);
+            .addTo(RecipeMaps.chemicalPlantRecipes);
     }
 
     // =========================================================

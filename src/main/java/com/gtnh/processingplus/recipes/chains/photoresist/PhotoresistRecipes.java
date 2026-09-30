@@ -20,7 +20,6 @@ import gregtech.api.enums.TierEU;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.util.GTRecipe;
 import gregtech.api.util.GTRecipeConstants;
-import gtPlusPlus.api.recipe.GTPPRecipeMaps;
 import gtPlusPlus.core.material.MaterialMisc;
 
 public class PhotoresistRecipes {
@@ -61,6 +60,14 @@ public class PhotoresistRecipes {
         // EV
         evAcetoxystyrene();
         evPHSResin();
+        evBariumOxideSynthesis();
+        evBariumPeroxideSynthesis();
+        evHydrogenPeroxidePrimitive();
+        evBariumWasteWaterDistillation();
+        evBariumOxideElectrolysis();
+        evBariumPeroxideElectrolysis();
+        evBariumChlorideElectrolysis();
+        evPHSResinPrimitive();
         evSulfurDichloride();
         evDiphenylsulfoniumSalt();
         evEVBlend();
@@ -234,11 +241,110 @@ public class PhotoresistRecipes {
                 fluid(PrPMaterials.Acetoxystyrene, 2000),
                 fluid("fluid.hydrogenperoxide", 1000),
                 fluid(Materials.HydrochloricAcid, 100))
-            .fluidOutputs(molten(PrPMaterials.PHSResin, 1000), fluid(Materials.AceticAcid, 2000))
+            .fluidOutputs(molten(PrPMaterials.PHSResin, 144 * 9), fluid(Materials.AceticAcid, 2000))
             .duration(150)
             .metadata(GTRecipeConstants.COIL_HEAT, 4500)
             .eut(TierEU.RECIPE_EV)
             .addTo(GTNHPPRecipeMaps.sHTRFRecipes);
+    }
+
+    // EV: PHS Resin (primitive route) — Acetoxystyrene + Impure H₂O₂ + HCl (cat); lower yield than the
+    // clean-H₂O₂ route since the crude peroxide brings contaminants along with it.
+    private static void evPHSResinPrimitive() {
+        GTValues.RA.stdBuilder()
+            .itemInputs(circuit(2))
+            .fluidInputs(
+                fluid(PrPMaterials.Acetoxystyrene, 2000),
+                fluid(PrPMaterials.ImpureHydrogenPeroxide, 1000),
+                fluid(Materials.HydrochloricAcid, 100))
+            .fluidOutputs(molten(PrPMaterials.PHSResin, 144 * 3), fluid(Materials.AceticAcid, 2000))
+            .duration(20 * 25)
+            .metadata(GTRecipeConstants.COIL_HEAT, 4500)
+            .eut(TierEU.RECIPE_EV)
+            .addTo(GTNHPPRecipeMaps.sHTRFRecipes);
+    }
+
+    private static void evBariumOxideSynthesis() {
+        GTValues.RA.stdBuilder()
+            .itemInputs(dust(Materials.Barium, 1), circuit(1))
+            .fluidInputs(fluid(Materials.Oxygen, 1000))
+            .itemOutputs(dust(PrPMaterials.BariumOxide, 2))
+            .duration(40 * 20)
+            .eut(TierEU.RECIPE_LV)
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+    }
+
+    // EV: Barium Peroxide — 2 BaO + O₂ ⇌ 2 BaO₂ (Brin process)
+    private static void evBariumPeroxideSynthesis() {
+        GTValues.RA.stdBuilder()
+            .itemInputs(dust(PrPMaterials.BariumOxide, 4))
+            .fluidInputs(fluid(Materials.Oxygen, 2000))
+            .itemOutputs(dust(PrPMaterials.BariumPeroxide, 6))
+            .duration(10 * 20)
+            .eut(TierEU.RECIPE_LV)
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+    }
+
+    // EV: Impure Hydrogen Peroxide — Barium Peroxide + 2 HCl → BaCl₂ (waste) + H₂O₂ (impure)
+    // Crude acid-digestion route: no clean water source needed, but the barium ends up dissolved in the output
+    // therefore being impure
+    private static void evHydrogenPeroxidePrimitive() {
+        GTValues.RA.stdBuilder()
+            .itemInputs(dust(PrPMaterials.BariumPeroxide, 1))
+            .fluidInputs(fluid(Materials.HydrochloricAcid, 2000))
+            .fluidOutputs(
+                fluid(PrPMaterials.ImpureHydrogenPeroxide, 1000),
+                fluid(PrPMaterials.BariumRichWasteWater, 1000))
+            .duration(150)
+            .eut(TierEU.RECIPE_MV)
+            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+    }
+
+    // EV: Barium-Rich Waste Water reclamation (Distillery) — recovers the dissolved BaCl₂ instead of
+    // just dumping the wastewater. TODO: possibly a third output here once we know what else is
+    // dissolved in it besides BaCl2.
+    private static void evBariumWasteWaterDistillation() {
+        GTValues.RA.stdBuilder()
+            .fluidInputs(fluid(PrPMaterials.BariumRichWasteWater, 1000))
+            .itemOutputs(dust(PrPMaterials.BariumChloride, 2))
+            .fluidOutputs(fluid(Materials.Water, 1000))
+            .duration(100)
+            .eut(TierEU.RECIPE_MV)
+            .addTo(RecipeMaps.distilleryRecipes);
+    }
+
+    // EV: Barium Oxide electrolysis — 2 BaO → 2 Ba + O₂ (reverse of evBariumOxideSynthesis)
+    private static void evBariumOxideElectrolysis() {
+        GTValues.RA.stdBuilder()
+            .itemInputs(dust(PrPMaterials.BariumOxide, 2))
+            .itemOutputs(dust(Materials.Barium, 1))
+            .fluidOutputs(fluid(Materials.Oxygen, 1000))
+            .duration(120)
+            .eut(TierEU.RECIPE_LV)
+            .addTo(RecipeMaps.electrolyzerRecipes);
+    }
+
+    // EV: Barium Peroxide electrolysis — BaO₂ → Ba + O₂ (straight to Barium; BaO₂ carries twice the
+    // oxygen per Ba that BaO does, hence double the O₂ yield vs evBariumOxideElectrolysis)
+    private static void evBariumPeroxideElectrolysis() {
+        GTValues.RA.stdBuilder()
+            .itemInputs(dust(PrPMaterials.BariumPeroxide, 3))
+            .itemOutputs(dust(Materials.Barium, 1))
+            .fluidOutputs(fluid(Materials.Oxygen, 2000))
+            .duration(120)
+            .eut(TierEU.RECIPE_LV)
+            .addTo(RecipeMaps.electrolyzerRecipes);
+    }
+
+    // EV: Barium Chloride electrolysis (molten-salt/Downs-process style) — BaCl₂ → Ba + Cl₂
+    private static void evBariumChlorideElectrolysis() {
+        GTValues.RA.stdBuilder()
+            .itemInputs(dust(PrPMaterials.BariumChloride, 3))
+            .itemOutputs(dust(Materials.Barium, 1))
+            .fluidOutputs(fluid(Materials.Chlorine, 2000))
+            .duration(120)
+            .eut(TierEU.RECIPE_LV)
+            .addTo(RecipeMaps.electrolyzerRecipes);
     }
 
     // EV: Sulfur Dichloride (PAG precursor) — S + Cl₂
@@ -500,7 +606,7 @@ public class PhotoresistRecipes {
             .fluidOutputs(fluid(PrPMaterials.LuVPhotoresist, 3750))
             .duration(60)
             .eut(TierEU.RECIPE_LuV)
-            .addTo(GTPPRecipeMaps.mixerNonCellRecipes);
+            .addTo(RecipeMaps.mixerNonCellRecipes);
     }
 
     // LuV: Ammonium Bisulfate cracking — recovers H₂SO₄ + NH₃ (byproduct of MethacrylicAcid)
@@ -643,7 +749,7 @@ public class PhotoresistRecipes {
             .fluidOutputs(fluid(PrPMaterials.ZPMPhotoresist, 1250))
             .duration(60)
             .eut(TierEU.RECIPE_ZPM)
-            .addTo(GTPPRecipeMaps.mixerNonCellRecipes);
+            .addTo(RecipeMaps.mixerNonCellRecipes);
     }
 
     private static void initUv() {
@@ -783,7 +889,7 @@ public class PhotoresistRecipes {
             .fluidOutputs(fluid(PrPMaterials.UVPhotoresist, 1000))
             .duration(60)
             .eut(TierEU.RECIPE_UV)
-            .addTo(GTPPRecipeMaps.mixerNonCellRecipes);
+            .addTo(RecipeMaps.mixerNonCellRecipes);
     }
 
     private static void initUhv() {
@@ -878,7 +984,7 @@ public class PhotoresistRecipes {
             .fluidOutputs(fluid(PrPMaterials.UHVPhotoresist, 500))
             .duration(60)
             .eut(TierEU.RECIPE_UHV)
-            .addTo(GTPPRecipeMaps.mixerNonCellRecipes);
+            .addTo(RecipeMaps.mixerNonCellRecipes);
     }
 
     private static void initUev() {
@@ -972,7 +1078,7 @@ public class PhotoresistRecipes {
             .eut(TierEU.RECIPE_UEV)
             .metadata(GTRecipeConstants.QFT_CATALYST, item("catalystRawIntelligence", 0))
             .metadata(GTRecipeConstants.QFT_FOCUS_TIER, 3)
-            .addTo(GTPPRecipeMaps.quantumForceTransformerRecipes);
+            .addTo(RecipeMaps.quantumForceTransformerRecipes);
     }
 
     // =========================================================
@@ -1010,7 +1116,7 @@ public class PhotoresistRecipes {
             .eut(TierEU.RECIPE_UEV)
             .metadata(GTRecipeConstants.QFT_CATALYST, item("catalystRawIntelligence", 0))
             .metadata(GTRecipeConstants.QFT_FOCUS_TIER, 3)
-            .addTo(GTPPRecipeMaps.quantumForceTransformerRecipes);
+            .addTo(RecipeMaps.quantumForceTransformerRecipes);
     }
 
     // =========================================================
@@ -1026,7 +1132,7 @@ public class PhotoresistRecipes {
             .eut(TierEU.RECIPE_UEV)
             .metadata(GTRecipeConstants.QFT_CATALYST, item("catalystRawIntelligence", 0))
             .metadata(GTRecipeConstants.QFT_FOCUS_TIER, 3)
-            .addTo(GTPPRecipeMaps.quantumForceTransformerRecipes);
+            .addTo(RecipeMaps.quantumForceTransformerRecipes);
     }
 
     // =========================================================
@@ -1063,7 +1169,7 @@ public class PhotoresistRecipes {
             .fluidOutputs(fluid(PrPMaterials.UEVPhotoresist, 1000))
             .duration(60)
             .eut(TierEU.RECIPE_UEV)
-            .addTo(GTPPRecipeMaps.mixerNonCellRecipes);
+            .addTo(RecipeMaps.mixerNonCellRecipes);
     }
 
     private static void initUiv() {
@@ -1174,7 +1280,7 @@ public class PhotoresistRecipes {
             .fluidOutputs(fluid(PrPMaterials.UIVPhotoresist, 1000))
             .duration(60)
             .eut(TierEU.RECIPE_UIV)
-            .addTo(GTPPRecipeMaps.mixerNonCellRecipes);
+            .addTo(RecipeMaps.mixerNonCellRecipes);
     }
 
     private static void initUmv() {
@@ -1197,6 +1303,6 @@ public class PhotoresistRecipes {
             .fluidOutputs(fluid(PrPMaterials.UMVPhotoresist, 1000))
             .duration(60)
             .eut(TierEU.RECIPE_UMV)
-            .addTo(GTPPRecipeMaps.mixerNonCellRecipes);
+            .addTo(RecipeMaps.mixerNonCellRecipes);
     }
 }

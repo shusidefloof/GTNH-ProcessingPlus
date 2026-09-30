@@ -64,8 +64,8 @@ public class CSTRRecipes {
 
         GameRegistry.addShapedRecipe(
             controller,
-            "SHS",
-            "MCM",
+            "SDS",
+            "MHM",
             "SPS",
             'S',
             plate(Materials.Titanium, 1),
@@ -73,9 +73,9 @@ public class CSTRRecipes {
             ItemList.Hull_IV.get(1),
             'M',
             ItemList.Electric_Motor_IV.get(1),
-            'C',
-            circuit(8),
             'P',
-            ItemList.Electric_Pump_IV.get(1));
+            ItemList.Electric_Pump_IV.get(1),
+            'D',
+            GTOreDictUnificator.get(OrePrefixes.plateDouble, Materials.Silver, 1));
     }
 }

@@ -26,9 +26,9 @@ import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
-import gregtech.api.enums.Mods;
-
 import com.gtnh.processingplus.GTNHProcessingPlus;
+
+import gregtech.api.enums.Mods;
 
 /**
  * Ships the "Processing Plus" quest book inside the mod jar so players don't need to manually
@@ -90,9 +90,8 @@ public class QuestLoader {
         List<String> next = new ArrayList<>();
         boolean changed = false;
         for (String line : lines) {
-            boolean isStaleCopyOfOurs = !ourKeys.contains(line)
-                && ourNameSuffixes.stream()
-                    .anyMatch(line::endsWith);
+            boolean isStaleCopyOfOurs = !ourKeys.contains(line) && ourNameSuffixes.stream()
+                .anyMatch(line::endsWith);
             if (isStaleCopyOfOurs) {
                 changed = true;
                 continue;

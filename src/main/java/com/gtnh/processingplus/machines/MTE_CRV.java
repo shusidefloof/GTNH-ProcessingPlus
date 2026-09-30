@@ -42,12 +42,12 @@ import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.logic.ProcessingLogic;
 import gregtech.api.metatileentity.implementations.MTEExtendedPowerMultiBlockBase;
 import gregtech.api.recipe.RecipeMap;
+import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.render.TextureFactory;
 import gregtech.api.structure.error.StructureError;
 import gregtech.api.structure.error.StructureErrorRegistry;
 import gregtech.api.util.MultiblockTooltipBuilder;
 import gregtech.api.util.tooltip.TooltipHelper;
-import gtPlusPlus.api.recipe.GTPPRecipeMaps;
 
 /**
  * Ceramic Reaction Vessel — 5×5×5 structure with hBN ceramic inner lining.
@@ -153,7 +153,7 @@ public class MTE_CRV extends MTEExtendedPowerMultiBlockBase<MTE_CRV> implements 
     @Override
     public RecipeMap<?> getRecipeMap() {
         if (machineMode == MACHINEMODE_ABS) {
-            return GTPPRecipeMaps.alloyBlastSmelterRecipes;
+            return RecipeMaps.alloyBlastSmelterRecipes;
         }
         return GTNHPPRecipeMaps.sCRVRecipes;
     }
@@ -163,7 +163,7 @@ public class MTE_CRV extends MTEExtendedPowerMultiBlockBase<MTE_CRV> implements 
     // discovers the ABS-mode recipes. Overriding this exposes both maps to NEI regardless of mode.
     @Override
     public Collection<RecipeMap<?>> getAvailableRecipeMaps() {
-        return Arrays.asList(GTNHPPRecipeMaps.sCRVRecipes, GTPPRecipeMaps.alloyBlastSmelterRecipes);
+        return Arrays.asList(GTNHPPRecipeMaps.sCRVRecipes, RecipeMaps.alloyBlastSmelterRecipes);
     }
 
     @Override

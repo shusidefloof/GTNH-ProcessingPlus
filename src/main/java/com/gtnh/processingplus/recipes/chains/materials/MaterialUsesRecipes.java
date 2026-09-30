@@ -10,7 +10,6 @@ import gregtech.api.enums.ItemList;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.TierEU;
 import gregtech.api.recipe.RecipeMaps;
-import gtPlusPlus.api.recipe.GTPPRecipeMaps;
 
 public class MaterialUsesRecipes {
 
@@ -36,7 +35,7 @@ public class MaterialUsesRecipes {
             .fluidOutputs(fluid(PrPMaterials.PAAAdhesive, 1000))
             .duration(300)
             .eut(TierEU.RECIPE_UV)
-            .addTo(GTPPRecipeMaps.mixerNonCellRecipes);
+            .addTo(RecipeMaps.mixerNonCellRecipes);
     }
 
     // -------------------------------------------------------------------------
@@ -53,7 +52,7 @@ public class MaterialUsesRecipes {
             .fluidOutputs(fluid(PrPMaterials.HBNLubricant, 6000))
             .duration(200)
             .eut(TierEU.RECIPE_LuV)
-            .addTo(GTPPRecipeMaps.mixerNonCellRecipes);
+            .addTo(RecipeMaps.mixerNonCellRecipes);
     }
 
     // -------------------------------------------------------------------------

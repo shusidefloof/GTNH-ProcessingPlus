@@ -24,8 +24,11 @@ public class PrPMaterials implements Runnable {
     // =========================
     // GENERATION PROFILES
     // =========================
+    // onlyDust() is required: BartWorks' default is DUSTS | ORES, and any Werkstoff with an ore form is
+    // auto-added to the Eye of Harmony Deep Dark recipe.
     private static Werkstoff.GenerationFeatures polymerFeatures() {
-        return new Werkstoff.GenerationFeatures().addCells();
+        return new Werkstoff.GenerationFeatures().onlyDust()
+            .addCells();
     }
 
     // Thermoplastic polymers used in molten-form blending — dust + cells + molten, no metalworking
@@ -203,6 +206,10 @@ public class PrPMaterials implements Runnable {
     public static Werkstoff SulfurDichloride;
     public static Werkstoff DiphenylsulfoniumSalt;
     public static Werkstoff EVPhotoresist;
+    public static Werkstoff BariumPeroxide;
+    public static Werkstoff ImpureHydrogenPeroxide;
+    public static Werkstoff BariumRichWasteWater;
+    public static Werkstoff BariumChloride;
 
     // IV
     public static Werkstoff Furfural;
@@ -381,7 +388,8 @@ public class PrPMaterials implements Runnable {
     public static Werkstoff PANAerogel; // supercritical-dried PAN aerogel
     public static Werkstoff CarbonAerogel; // pyrolyzed structural carbon aerogel
 
-    public static Werkstoff JiritsuAlloy; // aerogel lattice fused with a blend of pale blue-white alloys (Jiritsu precursor)
+    public static Werkstoff JiritsuAlloy; // aerogel lattice fused with a blend of pale blue-white alloys (Jiritsu
+                                          // precursor)
     public static Werkstoff Jiritsu; // self-supporting aerogel/Naquadah lattice alloy (UIV structural)
 
     public static List<Werkstoff> ALL = new ArrayList<>();
@@ -2462,6 +2470,50 @@ public class PrPMaterials implements Runnable {
                     .addDoubleAndDensePlates(),
                 id(),
                 TextureSet.SET_CRYSTALLINE));
+
+        BariumPeroxide = register(
+            new Werkstoff(
+                rgb(235, 235, 220),
+                "Barium Peroxide",
+                subscriptNumbers("BaO2"),
+                new Werkstoff.Stats(),
+                Werkstoff.Types.MIXTURE,
+                new Werkstoff.GenerationFeatures().onlyDust(),
+                id(),
+                TextureSet.SET_DULL));
+
+        ImpureHydrogenPeroxide = register(
+            new Werkstoff(
+                rgb(166, 201, 201),
+                "Impure Hydrogen Peroxide",
+                subscriptNumbers("??H2O2??"),
+                new Werkstoff.Stats(),
+                Werkstoff.Types.MIXTURE,
+                fluidFeatures(),
+                id(),
+                TextureSet.SET_DULL));
+
+        BariumRichWasteWater = register(
+            new Werkstoff(
+                rgb(150, 160, 140),
+                "Barium-Rich Waste Water",
+                subscriptNumbers("??BaCl2??"),
+                new Werkstoff.Stats(),
+                Werkstoff.Types.MIXTURE,
+                fluidFeatures(),
+                id(),
+                TextureSet.SET_FLUID));
+
+        BariumChloride = register(
+            new Werkstoff(
+                rgb(225, 225, 215),
+                "Barium Chloride",
+                subscriptNumbers("BaCl2"),
+                new Werkstoff.Stats(),
+                Werkstoff.Types.MIXTURE,
+                new Werkstoff.GenerationFeatures().onlyDust(),
+                id(),
+                TextureSet.SET_DULL));
     }
 
     // =========================

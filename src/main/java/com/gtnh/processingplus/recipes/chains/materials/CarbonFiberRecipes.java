@@ -10,7 +10,6 @@ import gregtech.api.enums.Materials;
 import gregtech.api.enums.TierEU;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.util.GTRecipeConstants;
-import gtPlusPlus.api.recipe.GTPPRecipeMaps;
 
 public class CarbonFiberRecipes {
 
@@ -65,7 +64,7 @@ public class CarbonFiberRecipes {
             .fluidOutputs(fluid(PrPMaterials.DilutedNMP, 1500))
             .duration(600)
             .eut(TierEU.RECIPE_EV)
-            .addTo(GTPPRecipeMaps.chemicalPlantRecipes);
+            .addTo(RecipeMaps.chemicalPlantRecipes);
     }
 
     // =========================================================

@@ -81,18 +81,22 @@ public class MTE_BOF extends MTEExtendedPowerMultiBlockBase<MTE_BOF> implements 
                      * B -> sBlockCasings3:14 — Steel Turbine Casing (inner liner / tuyere zone)
                      * C -> BOF Casing (hatch-capable outer shell)
                      */
-                    new String[][] {
-                        { "     ", "  C  ", " A~A ", " ACA " },
-                        { "  C  ", " C C ", "C   C", "CCBCC" },
-                        { " C C ", "C   C", "A   A", "ABBBA" },
-                        { "  C  ", " C C ", "C   C", "CCBCC" },
+                    new String[][] { { "     ", "  C  ", " A~A ", " ACA " }, { "  C  ", " C C ", "C   C", "CCBCC" },
+                        { " C C ", "C   C", "A   A", "ABBBA" }, { "  C  ", " C C ", "C   C", "CCBCC" },
                         { "     ", "  C  ", " CAC ", " CAC " }, })
                 .addElement('A', ofBlock(GregTechAPI.sBlockCasings3, 10))
                 .addElement('B', ofBlock(GregTechAPI.sBlockCasings3, 14))
                 .addElement(
                     'C',
                     buildHatchAdder(MTE_BOF.class)
-                        .atLeast(Energy.or(ExoticEnergy), InputBus, InputHatch, OutputBus, OutputHatch, Maintenance, Muffler)
+                        .atLeast(
+                            Energy.or(ExoticEnergy),
+                            InputBus,
+                            InputHatch,
+                            OutputBus,
+                            OutputHatch,
+                            Maintenance,
+                            Muffler)
                         .casingIndex(CASING_INDEX)
                         .hint(1)
                         .buildAndChain(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.BOF_CASING))
@@ -173,8 +177,9 @@ public class MTE_BOF extends MTEExtendedPowerMultiBlockBase<MTE_BOF> implements 
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType("Basic Oxygen Furnace, BOF")
             .addInfo(
-                TooltipHelper
-                    .coloredText(TooltipHelper.italicText("Refining metal with high purity oxygen blasts"), EnumChatFormatting.DARK_GRAY))
+                TooltipHelper.coloredText(
+                    TooltipHelper.italicText("Refining metal with high purity oxygen blasts"),
+                    EnumChatFormatting.DARK_GRAY))
             .addStaticParallelInfo(PARALLELS)
             .addSeparator()
             .addTecTechHatchInfo()

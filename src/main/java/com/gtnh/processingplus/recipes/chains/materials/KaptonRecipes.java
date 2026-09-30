@@ -10,7 +10,6 @@ import gregtech.api.enums.Materials;
 import gregtech.api.enums.TierEU;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.util.GTRecipeConstants;
-import gtPlusPlus.api.recipe.GTPPRecipeMaps;
 
 public class KaptonRecipes {
 
@@ -40,7 +39,7 @@ public class KaptonRecipes {
             .duration(600)
             .eut(TierEU.RECIPE_IV)
             .metadata(GTRecipeConstants.CHEMPLANT_CASING_TIER, 5)
-            .addTo(GTPPRecipeMaps.chemicalPlantRecipes);
+            .addTo(RecipeMaps.chemicalPlantRecipes);
     }
 
     // =========================================================
@@ -69,7 +68,7 @@ public class KaptonRecipes {
             .duration(600)
             .eut(TierEU.RECIPE_EV)
             .metadata(GTRecipeConstants.CHEMPLANT_CASING_TIER, 4)
-            .addTo(GTPPRecipeMaps.chemicalPlantRecipes);
+            .addTo(RecipeMaps.chemicalPlantRecipes);
     }
 
     // =========================================================

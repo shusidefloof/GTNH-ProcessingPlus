@@ -17,7 +17,6 @@ import gregtech.api.enums.TierEU;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.util.GTOreDictUnificator;
 import gregtech.api.util.GTRecipeConstants;
-import gtPlusPlus.api.recipe.GTPPRecipeMaps;
 
 public class HPSFRecipes {
 
@@ -91,7 +90,7 @@ public class HPSFRecipes {
             .itemOutputs(dust(PrPMaterials.RHEAPowderBlend, 4))
             .duration(200)
             .eut(TierEU.RECIPE_EV)
-            .addTo(GTPPRecipeMaps.mixerNonCellRecipes);
+            .addTo(RecipeMaps.mixerNonCellRecipes);
     }
 
     // Step 2 — Compressor: cold-press blend into a dense sintering compact
@@ -139,7 +138,7 @@ public class HPSFRecipes {
             .fluidOutputs(molten(PrPMaterials.RefractoryHighEntropyAlloy, 288))
             .duration(100 * 20)
             .eut(TierEU.RECIPE_LuV)
-            .addTo(GTPPRecipeMaps.alloyBlastSmelterRecipes);
+            .addTo(RecipeMaps.alloyBlastSmelterRecipes);
     }
 
 }

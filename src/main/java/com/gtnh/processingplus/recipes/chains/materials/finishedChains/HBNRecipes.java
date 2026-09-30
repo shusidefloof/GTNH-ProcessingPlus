@@ -94,9 +94,7 @@ public class HBNRecipes {
 
         GTValues.RA.stdBuilder()
             .itemInputs(dust(PrPMaterials.HBNPowderBlend, 4 * 8))
-            .fluidInputs(
-                fluid(Materials.Nitrogen, 16000 * 8),
-                fluid(Materials.Argon, 4000 * 8))
+            .fluidInputs(fluid(Materials.Nitrogen, 16000 * 8), fluid(Materials.Argon, 4000 * 8))
             .itemOutputs(dust(PrPMaterials.HexagonalBoronNitride, 2 * 8))
             .duration(10 * 20)
             .eut(TierEU.RECIPE_IV)

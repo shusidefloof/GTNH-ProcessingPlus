@@ -259,9 +259,10 @@ public class MTE_CSC extends MTEExtendedPowerMultiBlockBase<MTE_CSC> implements 
     private int getStoredAmount(String fluidName) {
         int total = 0;
         for (FluidStack fs : getStoredFluids()) {
-            if (fs != null && fs.getFluid() != null && fs.getFluid()
-                .getName()
-                .equals(fluidName)) {
+            if (fs != null && fs.getFluid() != null
+                && fs.getFluid()
+                    .getName()
+                    .equals(fluidName)) {
                 total += fs.amount;
             }
         }

@@ -5,7 +5,7 @@
  * via QuestLoader.registry() -> config/betterquesting/DefaultQuests/).
  *
  * Source for day-to-day editing is still in the live save:
- *   run/client/saves/I hate this so much/betterquesting/QuestDatabase.json
+ *   run/client/saves/Fuck me in the butt/betterquesting/QuestDatabase.json
  * Edit quests there (in-game GUI, or scripted edits), then re-run this script to regenerate
  * the resource files that actually get shipped:
  *   src/main/resources/assets/gtnhpp/quest/DefaultQuests/{QuestLines,Quests}/ProcessingPlus/
@@ -18,7 +18,7 @@ const fs = require("fs");
 const path = require("path");
 
 const REPO_ROOT = path.join(__dirname, "..");
-const SRC = path.join(REPO_ROOT, "run/client/saves/I hate this so much/betterquesting/QuestDatabase.json");
+const SRC = path.join(REPO_ROOT, "run/client/saves/Fuck me in the butt/betterquesting/QuestDatabase.json");
 const OUT_ROOT = path.join(REPO_ROOT, "src/main/resources/assets/gtnhpp/quest/DefaultQuests");
 const LINE_DIR_NAME = "ProcessingPlus";
 

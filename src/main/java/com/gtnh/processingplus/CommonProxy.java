@@ -1,5 +1,8 @@
 package com.gtnh.processingplus;
 
+import net.minecraft.block.Block;
+import net.minecraftforge.common.MinecraftForge;
+
 import com.gtnh.processingplus.blocks.GTNHPPBlocks;
 import com.gtnh.processingplus.event.TooltipHandler;
 import com.gtnh.processingplus.items.GTNHPPItems;
@@ -17,12 +20,10 @@ import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import gregtech.api.enums.Mods;
 import gregtech.api.enums.Textures;
+import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.render.TextureFactory;
 import gregtech.api.util.GTRecipe;
 import gregtech.api.util.GTUtility;
-import gtPlusPlus.api.recipe.GTPPRecipeMaps;
-import net.minecraft.block.Block;
-import net.minecraftforge.common.MinecraftForge;
 
 public class CommonProxy {
 
@@ -56,7 +57,8 @@ public class CommonProxy {
     private static void registerExternalCasingTextures() {
         Block wall = GameRegistry.findBlock("GoodGenerator", "pressureResistantWalls");
         if (wall == null) {
-            GTNHProcessingPlus.LOG.warn("GoodGenerator:pressureResistantWalls not found — HPR casing texture will not match its wall");
+            GTNHProcessingPlus.LOG
+                .warn("GoodGenerator:pressureResistantWalls not found — HPR casing texture will not match its wall");
             return;
         }
         GTUtility.addTexturePage((byte) 100);
@@ -93,7 +95,7 @@ public class CommonProxy {
 
     /** Copies all ABS recipes into the CRV recipe map at 80% EU cost. */
     private static void copyRecipesToCRV() {
-        for (GTRecipe recipe : GTPPRecipeMaps.alloyBlastSmelterRecipes.getAllRecipes()) {
+        for (GTRecipe recipe : RecipeMaps.alloyBlastSmelterRecipes.getAllRecipes()) {
             GTRecipe copy = recipe.copy();
             copy.mEUt = Math.max(1, (int) (copy.mEUt * 0.8));
             GTNHPPRecipeMaps.sCRVRecipes.addRecipe(copy);

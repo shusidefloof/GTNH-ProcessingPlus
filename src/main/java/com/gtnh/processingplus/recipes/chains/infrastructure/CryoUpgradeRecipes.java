@@ -29,7 +29,7 @@ public class CryoUpgradeRecipes {
         GTValues.RA.stdBuilder()
             .itemInputs(dust(PrPMaterials.CrudeHBN, 4), dust(Materials.Yttrium, 16), circuit(11))
             .fluidInputs(fluid(Materials.Nitrogen, 2000), fluid(PrPMaterials.LiquidArgon, 1000))
-            .itemOutputs(dust(PrPMaterials.HBNPowderBlend, 4*4))
+            .itemOutputs(dust(PrPMaterials.HBNPowderBlend, 4 * 4))
             .fluidOutputs(fluid(Materials.NitricOxide, 3000), fluid(Materials.Oxygen, 1500))
             .duration(480)
             .eut(TierEU.RECIPE_UHV)

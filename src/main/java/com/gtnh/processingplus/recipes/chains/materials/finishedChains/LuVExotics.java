@@ -12,7 +12,6 @@ import gregtech.api.enums.Materials;
 import gregtech.api.enums.TierEU;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.util.GTRecipeConstants;
-import gtPlusPlus.api.recipe.GTPPRecipeMaps;
 
 /**
  * LuV-era exotic metals. Tiers are mixed on purpose — these are LuV-gated chains that reach into
@@ -103,7 +102,7 @@ public class LuVExotics {
                 .fluidOutputs(fluid(PrPMaterials.VibraniumDye, 720))
                 .duration(5 * 20)
                 .eut(TierEU.RECIPE_IV)
-                .addTo(GTPPRecipeMaps.mixerNonCellRecipes));
+                .addTo(RecipeMaps.mixerNonCellRecipes));
     }
 
     // 3. Chem Bath — bathe Red Hot Adamantium in Vibranium Dye
@@ -154,7 +153,7 @@ public class LuVExotics {
                 .itemOutputs(dust(PrPMaterials.JiritsuAlloy, 6))
                 .duration(15 * 20)
                 .eut(TierEU.RECIPE_UHV)
-                .addTo(GTPPRecipeMaps.mixerNonCellRecipes));
+                .addTo(RecipeMaps.mixerNonCellRecipes));
     }
 
     // 2. Multiblock Chemical Reactor — stabilize Jiritsu Alloy under an inert Helium blanket so the

@@ -1,5 +1,7 @@
 package com.gtnh.processingplus.materials;
 
+import com.gtnh.processingplus.GTNHProcessingPlus;
+
 import bartworks.system.material.Werkstoff;
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.Materials;
@@ -50,7 +52,7 @@ public final class WerkstoffCableLoader {
         long recipeEU, int recipeDuration, boolean canShock) {
         Materials m = w.getBridgeMaterial();
         if (m == null) {
-            System.err.println("[GTNHPP] WerkstoffCableLoader: no bridge material for " + w.getDefaultName());
+            GTNHProcessingPlus.LOG.warn("WerkstoffCableLoader: no bridge material for {}", w.getDefaultName());
             return;
         }
         String nw = "wire." + m.mName.toLowerCase();

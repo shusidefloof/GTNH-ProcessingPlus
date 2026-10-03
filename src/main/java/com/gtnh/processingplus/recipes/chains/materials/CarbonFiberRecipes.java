@@ -65,6 +65,7 @@ public class CarbonFiberRecipes {
             .fluidOutputs(fluid(PrPMaterials.DilutedNMP, 1500))
             .duration(30 * SECONDS)
             .eut(TierEU.RECIPE_EV)
+            .metadata(GTRecipeConstants.CHEMPLANT_CASING_TIER, 4)
             .addTo(RecipeMaps.chemicalPlantRecipes);
     }
 
@@ -88,7 +89,7 @@ public class CarbonFiberRecipes {
 
         GTValues.RA.stdBuilder()
             .itemInputs(dust(PrPMaterials.Polyacrylonitrile, 4))
-            .fluidInputs(fluid(Materials.Oxygen, 4)) // 4 mB/t continuous; ~2400 mB total over 600t
+            .fluidInputs(fluid(Materials.Oxygen, 4)) // 4 mB/t continuous; 6000 mB total over 1500t
             .itemOutputs(dust(PrPMaterials.StabilizedPolyacrylonitrile, 4))
             .duration(75 * SECONDS)
             .eut(TierEU.RECIPE_UV)
@@ -102,7 +103,7 @@ public class CarbonFiberRecipes {
 
         GTValues.RA.stdBuilder()
             .itemInputs(dust(PrPMaterials.StabilizedPolyacrylonitrile, 4))
-            .fluidInputs(fluid(Materials.Nitrogen, 3)) // 3 mB/t continuous purge; ~2400 mB total over 800t
+            .fluidInputs(fluid(Materials.Nitrogen, 3)) // 3 mB/t continuous purge; 6000 mB total over 2000t
             .itemOutputs(dust(PrPMaterials.CarbonFiberTow, 3))
             .fluidOutputs(fluid(Materials.CarbonMonoxide, 500), fluid("hydrogencyanide", 250))
             .duration(100 * SECONDS)
@@ -158,12 +159,13 @@ public class CarbonFiberRecipes {
 
     // =========================================================
     // ALT: Mesophase Pitch oxidative stabilization (DAF, UV)
-    // Skips PAN synthesis; lower yield — 3 tows vs 3 tows from 4 PAN
+    // Skips PAN synthesis; lower yield — 3 stabilized PAN vs 4 from the PAN route
     // =========================================================
     private static void stepAlt_PitchStabilization() {
 
         GTValues.RA.stdBuilder()
-            // Both fluids are continuous per-tick inputs; ~6000 mB Pitch + ~12000 * 5 mB O₂ total over 1200t
+            // Both fluids are continuous per-tick inputs; 15000 mB Pitch (5 mB/t) + 6000 mB O₂ (2 mB/t) total over
+            // 3000t
             .fluidInputs(fluid(PrPMaterials.MesophasePitch, 5), fluid(Materials.Oxygen, 2))
             .itemOutputs(dust(PrPMaterials.StabilizedPolyacrylonitrile, 3))
             .duration(150 * SECONDS)

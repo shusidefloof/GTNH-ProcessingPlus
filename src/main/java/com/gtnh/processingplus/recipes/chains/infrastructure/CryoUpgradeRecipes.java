@@ -30,8 +30,7 @@ public class CryoUpgradeRecipes {
         GTValues.RA.stdBuilder()
             .itemInputs(dust(PrPMaterials.CrudeHBN, 4), dust(Materials.Yttrium, 16), circuit(11))
             .fluidInputs(fluid(Materials.Nitrogen, 2000), fluid(PrPMaterials.LiquidArgon, 1000))
-            .itemOutputs(dust(PrPMaterials.HBNPowderBlend, 4 * 4))
-            .fluidOutputs(fluid(Materials.NitricOxide, 3000), fluid(Materials.Oxygen, 1500))
+            .itemOutputs(dust(PrPMaterials.HBNPowderBlend, 10))
             .duration(24 * SECONDS)
             .eut(TierEU.RECIPE_UHV)
             .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
@@ -42,7 +41,7 @@ public class CryoUpgradeRecipes {
         GTValues.RA.stdBuilder()
             .itemInputs(dust(PrPMaterials.CarbonFiberTow, 4), circuit(11))
             .fluidInputs(fluid(PrPMaterials.LiquidArgon, 2000))
-            .itemOutputs(dust(PrPMaterials.GraphitizedCarbonFiber, 4))
+            .itemOutputs(dust(PrPMaterials.GraphitizedCarbonFiber, 5))
             .duration(50 * SECONDS)
             .eut(TierEU.RECIPE_ZPM)
             .metadata(GTRecipeConstants.COIL_HEAT, 7100)

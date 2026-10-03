@@ -30,11 +30,8 @@ public class PLARecipes {
 
         GTValues.RA.stdBuilder()
             .itemInputs(circuit(2))
-            .fluidInputs(
-                fluid(Materials.Propene, 1000),
-                fluid("fluid.hydrogenperoxide", 1000),
-                fluid(Materials.Water, 500))
-            .fluidOutputs(fluid(PrPMaterials.PropyleneGlycol, 1000), fluid(Materials.Water, 1500))
+            .fluidInputs(fluid(Materials.Propene, 1000), fluid("fluid.hydrogenperoxide", 1000))
+            .fluidOutputs(fluid(PrPMaterials.PropyleneGlycol, 1000))
             .duration(15 * SECONDS)
             .eut(TierEU.RECIPE_HV)
             .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
@@ -81,7 +78,7 @@ public class PLARecipes {
                 fluid("hydrogencyanide", 1000),
                 fluid(Materials.Ammonia, 1000),
                 fluid(Materials.Water, 2000))
-            .fluidOutputs(fluid(PrPMaterials.LacticAcid, 6000), fluid("ammonium chloride", 500))
+            .fluidOutputs(fluid(PrPMaterials.LacticAcid, 6000))
             .duration(30 * SECONDS)
             .eut(TierEU.RECIPE_IV)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);

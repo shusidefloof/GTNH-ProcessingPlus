@@ -14,7 +14,7 @@ import gregtech.api.recipe.maps.LargeNEIFrontend;
 public class SPCRecipeMapFrontend extends LargeNEIFrontend {
 
     // Station row layout (px): 2 pad + 1 sep + 2 gap + 9 numbers + 16 icons + 4 pad = 34
-    static final int EXTRA_HEIGHT = 34;
+    static final int EXTRA_HEIGHT = 40;
 
     public SPCRecipeMapFrontend(BasicUIPropertiesBuilder uiProps, NEIRecipePropertiesBuilder neiProps) {
         super(uiProps, neiProps);

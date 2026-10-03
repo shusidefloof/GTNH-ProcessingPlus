@@ -1,6 +1,7 @@
 package com.gtnh.processingplus.recipes.chains.materials;
 
 import static com.gtnh.processingplus.recipes.PPRecipeHelper.*;
+import static gregtech.api.util.GTRecipeBuilder.SECONDS;
 
 import com.gtnh.processingplus.materials.PrPMaterials;
 import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
@@ -36,7 +37,7 @@ public class KaptonRecipes {
             .fluidInputs(fluid("fluid.naphthalene", 2000), fluid(Materials.Oxygen, 9000))
             .fluidOutputs(fluid(Materials.CarbonDioxide, 4000), fluid(Materials.Water, 2000))
             .itemOutputs(dust(PrPMaterials.PMDA, 2))
-            .duration(600)
+            .duration(30 * SECONDS)
             .eut(TierEU.RECIPE_IV)
             .metadata(GTRecipeConstants.CHEMPLANT_CASING_TIER, 5)
             .addTo(RecipeMaps.chemicalPlantRecipes);
@@ -53,7 +54,7 @@ public class KaptonRecipes {
             .itemInputs(circuit(5))
             .fluidInputs(fluid(Materials.Phenol, 2000), fluid(Materials.SulfuricAcid, 200))
             .fluidOutputs(fluid(PrPMaterials.DiphenylEther, 1000), fluid(Materials.Water, 1000))
-            .duration(400)
+            .duration(20 * SECONDS)
             .eut(TierEU.RECIPE_HV)
             .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
 
@@ -65,7 +66,7 @@ public class KaptonRecipes {
                 fluid(Materials.Water, 3000))
             .itemOutputs(dust(PrPMaterials.Polyacrylonitrile, 10))
             .fluidOutputs(fluid(PrPMaterials.DilutedNMP, 1500), fluid(PrPMaterials.DiphenylEther, 400))
-            .duration(600)
+            .duration(30 * SECONDS)
             .eut(TierEU.RECIPE_EV)
             .metadata(GTRecipeConstants.CHEMPLANT_CASING_TIER, 4)
             .addTo(RecipeMaps.chemicalPlantRecipes);
@@ -86,7 +87,7 @@ public class KaptonRecipes {
                 fluid(Materials.Hydrogen, 4000))
             .fluidOutputs(fluid(Materials.Water, 4000))
             .itemOutputs(dust(PrPMaterials.ODA, 1))
-            .duration(400)
+            .duration(20 * SECONDS)
             .eut(TierEU.RECIPE_EV)
             .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
     }
@@ -101,7 +102,7 @@ public class KaptonRecipes {
             .itemInputs(dust(PrPMaterials.PMDA, 2), dust(PrPMaterials.ODA, 2))
             .fluidInputs(fluid(Materials.NMethylIIPyrrolidone, 1000), fluid(Materials.Nitrogen, 1000))
             .fluidOutputs(fluid(PrPMaterials.PAASolution, 2000))
-            .duration(400)
+            .duration(20 * SECONDS)
             .eut(TierEU.RECIPE_LuV)
             .addTo(GTNHPPRecipeMaps.sPCVRecipes);
     }
@@ -116,7 +117,7 @@ public class KaptonRecipes {
             .fluidInputs(fluid(PrPMaterials.PAASolution, 2000))
             .itemOutputs(dust(PrPMaterials.ConcentratedPAA, 2))
             .fluidOutputs(fluid(Materials.NMethylIIPyrrolidone, 800))
-            .duration(600)
+            .duration(30 * SECONDS)
             .eut(TierEU.RECIPE_LuV)
             .addTo(RecipeMaps.distillationTowerRecipes);
     }
@@ -131,7 +132,7 @@ public class KaptonRecipes {
             .itemInputs(dust(PrPMaterials.ConcentratedPAA, 2))
             .fluidInputs(fluid(Materials.Nitrogen, 500))
             .itemOutputs(dust(PrPMaterials.PolyamicAcidFilm, 4))
-            .duration(400)
+            .duration(20 * SECONDS)
             .eut(TierEU.RECIPE_LuV)
             .addTo(GTNHPPRecipeMaps.sPFCCastingRecipes);
     }
@@ -147,7 +148,7 @@ public class KaptonRecipes {
             .fluidInputs(fluid("molten.aceticanhydride", 500), fluid(PrPMaterials.Triethylamine, 200))
             .fluidOutputs(fluid(Materials.Water, 1000), fluid(Materials.AceticAcid, 500))
             .itemOutputs(plate(PrPMaterials.Kapton, 4))
-            .duration(600)
+            .duration(30 * SECONDS)
             .eut(TierEU.RECIPE_ZPM)
             .addTo(GTNHPPRecipeMaps.sPFCImidizationRecipes);
     }
@@ -162,7 +163,7 @@ public class KaptonRecipes {
             .itemInputs(circuit(1))
             .fluidInputs(fluid(Materials.Ethanol, 3000), fluid(Materials.Ammonia, 1000))
             .fluidOutputs(fluid(PrPMaterials.Triethylamine, 1000), fluid(Materials.Water, 3000))
-            .duration(600)
+            .duration(30 * SECONDS)
             .eut(TierEU.RECIPE_HV)
             .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
     }
@@ -178,7 +179,7 @@ public class KaptonRecipes {
             .fluidInputs(fluid("molten.aceticanhydride", 500), fluid(PrPMaterials.Triethylamine, 200))
             .fluidOutputs(fluid(Materials.AceticAcid, 500))
             .itemOutputs(plate(PrPMaterials.Kapton, 2))
-            .duration(800)
+            .duration(40 * SECONDS)
             .eut(TierEU.RECIPE_UV)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
 

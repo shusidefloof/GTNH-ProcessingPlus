@@ -1,6 +1,7 @@
 package com.gtnh.processingplus.recipes.chains.materials;
 
 import static com.gtnh.processingplus.recipes.PPRecipeHelper.*;
+import static gregtech.api.util.GTRecipeBuilder.SECONDS;
 
 import com.gtnh.processingplus.materials.PrPMaterials;
 import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
@@ -33,7 +34,7 @@ public class MaterialUsesRecipes {
             .itemInputs(dust(PrPMaterials.ConcentratedPAA, 1), circuit(3))
             .fluidInputs(fluid(Materials.Water, 500))
             .fluidOutputs(fluid(PrPMaterials.PAAAdhesive, 1000))
-            .duration(300)
+            .duration(15 * SECONDS)
             .eut(TierEU.RECIPE_UV)
             .addTo(RecipeMaps.mixerNonCellRecipes);
     }
@@ -50,7 +51,7 @@ public class MaterialUsesRecipes {
             .itemInputs(dust(PrPMaterials.HexagonalBoronNitride, 2), circuit(4))
             .fluidInputs(fluid(Materials.Ethanol, 1000))
             .fluidOutputs(fluid(PrPMaterials.HBNLubricant, 6000))
-            .duration(200)
+            .duration(10 * SECONDS)
             .eut(TierEU.RECIPE_LuV)
             .addTo(RecipeMaps.mixerNonCellRecipes);
     }
@@ -67,7 +68,7 @@ public class MaterialUsesRecipes {
             .itemInputs(plate(PrPMaterials.SilicaAerogel, 4), plate(PrPMaterials.CarbonFiberComposite, 2), circuit(5))
             .fluidInputs(fluid("molten.epoxid", 288))
             .itemOutputs(plate(PrPMaterials.AerogelInsulationPanel, 4))
-            .duration(400)
+            .duration(20 * SECONDS)
             .eut(TierEU.RECIPE_UV)
             .addTo(RecipeMaps.assemblerRecipes);
     }
@@ -89,7 +90,7 @@ public class MaterialUsesRecipes {
             .itemInputs(ItemList.Shape_Mold_Plate.get(0))
             .fluidInputs(molten(PrPMaterials.Nylon66, 144))
             .itemOutputs(plate(PrPMaterials.Nylon66, 1))
-            .duration(80)
+            .duration(4 * SECONDS)
             .eut(TierEU.RECIPE_LV)
             .addTo(RecipeMaps.fluidSolidifierRecipes);
 
@@ -97,7 +98,7 @@ public class MaterialUsesRecipes {
             .itemInputs(ItemList.Shape_Mold_Plate.get(0))
             .fluidInputs(molten(PrPMaterials.PolylacticAcid, 144))
             .itemOutputs(plate(PrPMaterials.PolylacticAcid, 1))
-            .duration(80)
+            .duration(4 * SECONDS)
             .eut(TierEU.RECIPE_LV)
             .addTo(RecipeMaps.fluidSolidifierRecipes);
 
@@ -105,7 +106,7 @@ public class MaterialUsesRecipes {
             .itemInputs(ItemList.Shape_Mold_Plate.get(0))
             .fluidInputs(molten(PrPMaterials.PHSResin, 144))
             .itemOutputs(plate(PrPMaterials.PHSResin, 1))
-            .duration(80)
+            .duration(4 * SECONDS)
             .eut(TierEU.RECIPE_LV)
             .addTo(RecipeMaps.fluidSolidifierRecipes);
     }
@@ -120,7 +121,7 @@ public class MaterialUsesRecipes {
             .fluidInputs(fluid(Materials.HydrochloricAcid, 500))
             .fluidOutputs(fluid(Materials.Water, 500))
             .itemOutputs(dust(PrPMaterials.LoadedAerogelCatalystSupport, 2))
-            .duration(600)
+            .duration(30 * SECONDS)
             .eut(TierEU.RECIPE_ZPM)
             .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
     }

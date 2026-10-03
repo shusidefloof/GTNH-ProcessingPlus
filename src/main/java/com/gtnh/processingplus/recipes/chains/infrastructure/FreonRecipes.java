@@ -1,6 +1,7 @@
 package com.gtnh.processingplus.recipes.chains.infrastructure;
 
 import static com.gtnh.processingplus.recipes.PPRecipeHelper.*;
+import static gregtech.api.util.GTRecipeBuilder.SECONDS;
 
 import com.gtnh.processingplus.materials.PrPMaterials;
 import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
@@ -25,7 +26,7 @@ public class FreonRecipes {
             .fluidInputs(fluid(Materials.Chloroform, 1000))
             .itemOutputs(Materials.HydrochloricAcid.getCells(1))
             .fluidOutputs(fluid(PrPMaterials.CarbonTetrachloride, 1000))
-            .duration(200)
+            .duration(10 * SECONDS)
             .eut(TierEU.RECIPE_MV)
             .addTo(GTRecipeConstants.UniversalChemical);
     }
@@ -35,7 +36,7 @@ public class FreonRecipes {
             .itemInputs(circuit(2))
             .fluidInputs(fluid(PrPMaterials.CarbonTetrachloride, 1000), fluid(Materials.HydrofluoricAcid, 2000))
             .fluidOutputs(fluid(PrPMaterials.FreonR12, 1000), fluid(Materials.HydrochloricAcid, 2000))
-            .duration(400)
+            .duration(20 * SECONDS)
             .eut(TierEU.RECIPE_HV)
             .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
     }

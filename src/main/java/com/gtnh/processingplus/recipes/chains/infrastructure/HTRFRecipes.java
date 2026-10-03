@@ -1,6 +1,8 @@
 package com.gtnh.processingplus.recipes.chains.infrastructure;
 
 import static com.gtnh.processingplus.recipes.PPRecipeHelper.*;
+import static gregtech.api.util.GTRecipeBuilder.SECONDS;
+import static gregtech.api.util.GTRecipeBuilder.TICKS;
 
 import net.minecraft.item.ItemStack;
 
@@ -37,7 +39,7 @@ public class HTRFRecipes {
                 ItemList.Casing_Coil_Cupronickel.get(2))
             .fluidInputs(molten(Materials.SolderingAlloy, 1152))
             .itemOutputs(GTNHPPBlocks.HTRF.getStackForm(1))
-            .duration(1000)
+            .duration(50 * SECONDS)
             .eut(TierEU.RECIPE_EV)
             .addTo(RecipeMaps.assemblerRecipes);
         GTValues.RA.stdBuilder()
@@ -50,7 +52,7 @@ public class HTRFRecipes {
                     com.gtnh.processingplus.blocks.GTNHPPBlocks.CASINGS,
                     1,
                     BlockGTNHPPCasings.HTRF_REINFORCED_CASING))
-            .duration(50)
+            .duration(50 * TICKS)
             .eut(TierEU.RECIPE_LV)
             .addTo(RecipeMaps.assemblerRecipes);
         GTValues.RA.stdBuilder()
@@ -64,7 +66,7 @@ public class HTRFRecipes {
                     com.gtnh.processingplus.blocks.GTNHPPBlocks.CASINGS,
                     1,
                     com.gtnh.processingplus.blocks.BlockGTNHPPCasings.HTRF_CASING))
-            .duration(50)
+            .duration(50 * TICKS)
             .eut(TierEU.RECIPE_LV)
             .addTo(RecipeMaps.assemblerRecipes);
     }

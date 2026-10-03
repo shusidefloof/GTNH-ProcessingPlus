@@ -1,6 +1,7 @@
 package com.gtnh.processingplus.recipes.chains.materials;
 
 import static com.gtnh.processingplus.recipes.PPRecipeHelper.*;
+import static gregtech.api.util.GTRecipeBuilder.SECONDS;
 
 import com.gtnh.processingplus.materials.PrPMaterials;
 import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
@@ -34,7 +35,7 @@ public class PLARecipes {
                 fluid("fluid.hydrogenperoxide", 1000),
                 fluid(Materials.Water, 500))
             .fluidOutputs(fluid(PrPMaterials.PropyleneGlycol, 1000), fluid(Materials.Water, 1500))
-            .duration(300)
+            .duration(15 * SECONDS)
             .eut(TierEU.RECIPE_HV)
             .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
     }
@@ -48,7 +49,7 @@ public class PLARecipes {
             .itemInputs(new net.minecraft.item.ItemStack(net.minecraft.init.Items.reeds, 32))
             .fluidInputs(fluid(Materials.Water, 1000))
             .fluidOutputs(fluid(PrPMaterials.LacticAcid, 1000))
-            .duration(600)
+            .duration(30 * SECONDS)
             .eut(TierEU.RECIPE_MV)
             .addTo(RecipeMaps.fermentingRecipes);
     }
@@ -62,7 +63,7 @@ public class PLARecipes {
             .itemInputs(circuit(3))
             .fluidInputs(fluid(PrPMaterials.PropyleneGlycol, 1000), fluid(Materials.Oxygen, 500))
             .fluidOutputs(fluid(PrPMaterials.LacticAcid, 3000))
-            .duration(400)
+            .duration(20 * SECONDS)
             .eut(TierEU.RECIPE_IV)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
@@ -81,7 +82,7 @@ public class PLARecipes {
                 fluid(Materials.Ammonia, 1000),
                 fluid(Materials.Water, 2000))
             .fluidOutputs(fluid(PrPMaterials.LacticAcid, 6000), fluid("ammonium chloride", 500))
-            .duration(600)
+            .duration(30 * SECONDS)
             .eut(TierEU.RECIPE_IV)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
@@ -95,7 +96,7 @@ public class PLARecipes {
             .fluidInputs(fluid(PrPMaterials.LacticAcid, 2000))
             .itemOutputs(dust(PrPMaterials.Lactide, 2))
             .fluidOutputs(fluid(Materials.Water, 500))
-            .duration(400)
+            .duration(20 * SECONDS)
             .eut(TierEU.RECIPE_IV)
             .addTo(GTNHPPRecipeMaps.sPCVRecipes);
     }
@@ -109,7 +110,7 @@ public class PLARecipes {
         GTValues.RA.stdBuilder()
             .itemInputs(dust(PrPMaterials.Lactide, 4), dust(Materials.Tin, 1))
             .fluidOutputs(molten(PrPMaterials.PolylacticAcid, 576))
-            .duration(600)
+            .duration(30 * SECONDS)
             .eut(TierEU.RECIPE_LuV)
             .addTo(GTNHPPRecipeMaps.sPCVRecipes);
     }

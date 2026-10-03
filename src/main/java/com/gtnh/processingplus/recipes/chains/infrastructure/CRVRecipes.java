@@ -43,7 +43,7 @@ public class CRVRecipes {
                 fluid(PrPMaterials.HBNLubricant, 1000),
                 fluid(Materials.Argon, 4000))
             .itemOutputs(ingot(PrPMaterials.PrometheanNaquadria, 8))
-            .duration(1200)
+            .duration(60 * SECONDS)
             .eut(TierEU.RECIPE_ZPM)
             .addTo(GTNHPPRecipeMaps.sCRVRecipes);
     }
@@ -118,7 +118,7 @@ public class CRVRecipes {
             .itemInputs(ingot(Materials.Tritanium, 4), dust(Materials.Americium, 2), circuit(8))
             .fluidInputs(fluid(PrPMaterials.HBNLubricant, 500), fluid(Materials.Argon, 2000))
             .itemOutputs(ingot(PrPMaterials.AmorphousTritaniumAlloy, 4))
-            .duration(800)
+            .duration(40 * SECONDS)
             .eut(TierEU.RECIPE_LuV)
             .addTo(GTNHPPRecipeMaps.sCRVRecipes);
     }
@@ -139,7 +139,7 @@ public class CRVRecipes {
             .itemInputs(dust(Materials.Naquadria, 4), ingot(Materials.NaquadahEnriched, 2), circuit(9))
             .fluidInputs(fluid(PrPMaterials.HBNLubricant, 1000), fluid(Materials.Argon, 4000))
             .itemOutputs(ingot(PrPMaterials.AmorphousNaquadria, 2))
-            .duration(1200)
+            .duration(60 * SECONDS)
             .eut(TierEU.RECIPE_ZPM)
             .addTo(GTNHPPRecipeMaps.sCRVRecipes);
     }

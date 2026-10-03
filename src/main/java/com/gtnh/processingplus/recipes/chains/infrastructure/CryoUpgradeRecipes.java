@@ -1,6 +1,7 @@
 package com.gtnh.processingplus.recipes.chains.infrastructure;
 
 import static com.gtnh.processingplus.recipes.PPRecipeHelper.*;
+import static gregtech.api.util.GTRecipeBuilder.SECONDS;
 
 import com.gtnh.processingplus.materials.PrPMaterials;
 import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
@@ -31,7 +32,7 @@ public class CryoUpgradeRecipes {
             .fluidInputs(fluid(Materials.Nitrogen, 2000), fluid(PrPMaterials.LiquidArgon, 1000))
             .itemOutputs(dust(PrPMaterials.HBNPowderBlend, 4 * 4))
             .fluidOutputs(fluid(Materials.NitricOxide, 3000), fluid(Materials.Oxygen, 1500))
-            .duration(480)
+            .duration(24 * SECONDS)
             .eut(TierEU.RECIPE_UHV)
             .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
     }
@@ -42,7 +43,7 @@ public class CryoUpgradeRecipes {
             .itemInputs(dust(PrPMaterials.CarbonFiberTow, 4), circuit(11))
             .fluidInputs(fluid(PrPMaterials.LiquidArgon, 2000))
             .itemOutputs(dust(PrPMaterials.GraphitizedCarbonFiber, 4))
-            .duration(1000)
+            .duration(50 * SECONDS)
             .eut(TierEU.RECIPE_ZPM)
             .metadata(GTRecipeConstants.COIL_HEAT, 7100)
             .addTo(GTNHPPRecipeMaps.sHTRFRecipes);
@@ -54,7 +55,7 @@ public class CryoUpgradeRecipes {
             .itemInputs(ingot(Materials.Tritanium, 4), dust(Materials.Americium, 2), circuit(12))
             .fluidInputs(fluid(PrPMaterials.HBNLubricant, 500), fluid(PrPMaterials.LiquidArgon, 500))
             .itemOutputs(ingot(PrPMaterials.AmorphousTritaniumAlloy, 4))
-            .duration(640)
+            .duration(32 * SECONDS)
             .eut(TierEU.RECIPE_LuV)
             .addTo(GTNHPPRecipeMaps.sCRVRecipes);
     }
@@ -65,7 +66,7 @@ public class CryoUpgradeRecipes {
             .itemInputs(dust(Materials.Naquadria, 4), ingot(Materials.NaquadahEnriched, 2), circuit(13))
             .fluidInputs(fluid(PrPMaterials.HBNLubricant, 1000), fluid(PrPMaterials.LiquidArgon, 1000))
             .itemOutputs(ingot(PrPMaterials.AmorphousNaquadria, 2))
-            .duration(960)
+            .duration(48 * SECONDS)
             .eut(TierEU.RECIPE_ZPM)
             .addTo(GTNHPPRecipeMaps.sCRVRecipes);
     }

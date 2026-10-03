@@ -83,7 +83,7 @@ public class CommonProxy {
         try {
             com.gtnh.processingplus.recipes.RecipeSwaps.run();
         } catch (Throwable t) {
-            GTNHProcessingPlus.LOG.error("IV-hull RHEA swap failed", t);
+            GTNHProcessingPlus.LOG.error("Recipe swaps failed", t);
         }
         try {
             com.gtnh.processingplus.recipes.chains.infrastructure.CACRecipes.migrateSuperconductors();

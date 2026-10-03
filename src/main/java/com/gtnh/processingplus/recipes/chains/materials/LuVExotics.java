@@ -2,6 +2,7 @@ package com.gtnh.processingplus.recipes.chains.materials;
 
 import static com.gtnh.processingplus.items.Intermediate.*;
 import static com.gtnh.processingplus.recipes.PPRecipeHelper.*;
+import static gregtech.api.util.GTRecipeBuilder.SECONDS;
 
 import com.gtnh.processingplus.materials.PrPMaterials;
 import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
@@ -84,7 +85,7 @@ public class LuVExotics {
                 .fluidInputs(molten(Materials.FierySteel, 144))
                 .itemOutputs(intermediate(RED_HOT_ADAMANTIUM, 1))
                 .fluidOutputs(molten(Materials.Iron, 144))
-                .duration(5 * 20)
+                .duration(5 * SECONDS)
                 .eut(TierEU.RECIPE_EV)
                 .addTo(RecipeMaps.chemicalBathRecipes));
     }
@@ -100,7 +101,7 @@ public class LuVExotics {
                     molten(Materials.Oriharukon, 72),
                     molten(Materials.Quantium, 72))
                 .fluidOutputs(fluid(PrPMaterials.VibraniumDye, 720))
-                .duration(5 * 20)
+                .duration(5 * SECONDS)
                 .eut(TierEU.RECIPE_IV)
                 .addTo(RecipeMaps.mixerNonCellRecipes));
     }
@@ -113,7 +114,7 @@ public class LuVExotics {
                 .itemInputs(intermediate(RED_HOT_ADAMANTIUM, 1))
                 .fluidInputs(fluid(PrPMaterials.VibraniumDye, 144))
                 .itemOutputs(intermediate(RED_HOT_VIBRANT_ADAMANTIUM, 1))
-                .duration(10 * 20)
+                .duration(10 * SECONDS)
                 .eut(TierEU.RECIPE_EV)
                 .addTo(RecipeMaps.chemicalBathRecipes));
     }
@@ -127,7 +128,7 @@ public class LuVExotics {
                 .itemInputs(intermediate(RED_HOT_VIBRANT_ADAMANTIUM, 1))
                 .fluidInputs(fluid(Materials.LifeEssence, 10000), molten(Materials.BloodInfusedIron, 144))
                 .itemOutputs(ingotHot(PrPMaterials.Vibranium, 1))
-                .duration(20)
+                .duration(1 * SECONDS)
                 .eut(TierEU.RECIPE_ZPM)
                 .addTo(RecipeMaps.multiblockChemicalReactorRecipes));
     }
@@ -151,7 +152,7 @@ public class LuVExotics {
                     dust(Materials.CrystallineAlloy, 2))
                 .fluidInputs(molten(Materials.Naquadah, 72))
                 .itemOutputs(dust(PrPMaterials.JiritsuAlloy, 6))
-                .duration(15 * 20)
+                .duration(15 * SECONDS)
                 .eut(TierEU.RECIPE_UHV)
                 .addTo(RecipeMaps.mixerNonCellRecipes));
     }
@@ -165,7 +166,7 @@ public class LuVExotics {
                 .itemInputs(dust(PrPMaterials.JiritsuAlloy, 6))
                 .fluidInputs(fluid(Materials.Helium, 1000))
                 .itemOutputs(ingotHot(PrPMaterials.Jiritsu, 1))
-                .duration(15 * 20)
+                .duration(15 * SECONDS)
                 .metadata(GTRecipeConstants.COIL_HEAT, 8800)
                 .eut(TierEU.RECIPE_UIV)
                 .addTo(RecipeMaps.blastFurnaceRecipes));
@@ -183,7 +184,7 @@ public class LuVExotics {
                 .itemInputs(circuit(1))
                 .fluidInputs(fluid(Materials.HydrofluoricAcid, 1000), fluid(Materials.SulfurTrioxide, 1000))
                 .fluidOutputs(fluid(PrPMaterials.FluorosulfuricAcid, 1000))
-                .duration(10 * 20)
+                .duration(10 * SECONDS)
                 .eut(TierEU.RECIPE_EV)
                 .metadata(GTRecipeConstants.COIL_HEAT, 7300)
                 .addTo(GTNHPPRecipeMaps.sHTRFRecipes));
@@ -197,7 +198,7 @@ public class LuVExotics {
                 .itemInputs(circuit(1))
                 .fluidInputs(fluid(PrPMaterials.FluorosulfuricAcid, 1000), fluid("antimony pentafluoride", 1000))
                 .fluidOutputs(fluid(PrPMaterials.MagicAcid, 1000))
-                .duration(5 * 20)
+                .duration(5 * SECONDS)
                 .eut(TierEU.RECIPE_IV)
                 .addTo(GTNHPPRecipeMaps.sCSTRRecipes));
     }
@@ -212,7 +213,7 @@ public class LuVExotics {
                 .fluidInputs(fluid(PrPMaterials.MagicAcid, 500), fluid("ic2superheatedsteam", 8000))
                 .itemOutputs(dust(Materials.Endstone, 1))
                 .fluidOutputs(fluid(PrPMaterials.DirtyUnobtaniumSlurry, 900))
-                .duration(2 * 20)
+                .duration(2 * SECONDS)
                 .eut(TierEU.RECIPE_LuV)
                 .metadata(GTRecipeConstants.COIL_HEAT, 7200)
                 .addTo(GTNHPPRecipeMaps.sHTRFRecipes));
@@ -227,7 +228,7 @@ public class LuVExotics {
                 .fluidInputs(fluid(PrPMaterials.DirtyUnobtaniumSlurry, 1000), fluid("ic2distilledwater", 1000))
                 .itemOutputs(dust(Materials.Endstone, 1))
                 .fluidOutputs(fluid(PrPMaterials.WashedUnobtaniumSlurry, 1000))
-                .duration(15 * 20)
+                .duration(15 * SECONDS)
                 .eut(TierEU.RECIPE_EV)
                 .addTo(RecipeMaps.chemicalBathRecipes));
     }
@@ -241,7 +242,7 @@ public class LuVExotics {
                 .fluidInputs(fluid(PrPMaterials.WashedUnobtaniumSlurry, 500))
                 .itemOutputs(intermediate(UNOBTANIUM_CRYSTAL_FRAGMENT, 2))
                 .fluidOutputs(fluid("ic2distilledwater", 50))
-                .duration(5 * 20)
+                .duration(5 * SECONDS)
                 .eut(TierEU.RECIPE_LuV)
                 .addTo(RecipeMaps.autoclaveRecipes));
     }
@@ -255,7 +256,7 @@ public class LuVExotics {
                 .fluidInputs(fluid(PrPMaterials.EuropiumChloride, 500))
                 .itemOutputs(intermediate(PURIFIED_UNOBTANIUM_CRYSTAL, 2))
                 .fluidOutputs(fluid(PrPMaterials.EuropiumChlorideSolution, 500))
-                .duration(7 * 20)
+                .duration(7 * SECONDS)
                 .eut(TierEU.RECIPE_LuV)
                 .addTo(RecipeMaps.laserEngraverRecipes));
     }
@@ -268,7 +269,7 @@ public class LuVExotics {
                 .itemInputs(circuit(1))
                 .fluidInputs(fluid(PrPMaterials.EuropiumChlorideSolution, 1000))
                 .fluidOutputs(fluid(PrPMaterials.EuropiumChloride, 1000), fluid(Materials.Water, 500))
-                .duration(2 * 20)
+                .duration(2 * SECONDS)
                 .eut(TierEU.RECIPE_LuV)
                 .addTo(RecipeMaps.distillationTowerRecipes));
 
@@ -278,7 +279,7 @@ public class LuVExotics {
                 .itemInputs(circuit(1))
                 .fluidInputs(fluid(Materials.Chlorine, 1000), molten(Materials.Europium, 144))
                 .fluidOutputs(fluid(PrPMaterials.EuropiumChloride, 1000))
-                .duration(6 * 20)
+                .duration(6 * SECONDS)
                 .eut(TierEU.RECIPE_IV)
                 .addTo(GTNHPPRecipeMaps.sCSTRRecipes));
     }
@@ -290,7 +291,7 @@ public class LuVExotics {
             () -> GTValues.RA.stdBuilder()
                 .itemInputs(intermediate(PURIFIED_UNOBTANIUM_CRYSTAL, 2))
                 .itemOutputs(intermediate(PURIFIED_UNOBTANIUM_SHARD, 4))
-                .duration(5 * 20)
+                .duration(5 * SECONDS)
                 .eut(TierEU.RECIPE_HV)
                 .addTo(RecipeMaps.thermalCentrifugeRecipes));
     }
@@ -303,7 +304,7 @@ public class LuVExotics {
                 .itemInputs(intermediate(PURIFIED_UNOBTANIUM_SHARD, 4))
                 .fluidInputs(molten(Materials.FierySteel, 144))
                 .itemOutputs(intermediate(UNOBTANIUM_CLUMP, 1), intermediate(IRON_SLAG, 1))
-                .duration(5 * 20)
+                .duration(5 * SECONDS)
                 .eut(TierEU.RECIPE_EV)
                 .addTo(GTNHPPRecipeMaps.sCSTRRecipes));
     }
@@ -315,7 +316,7 @@ public class LuVExotics {
             () -> GTValues.RA.stdBuilder()
                 .itemInputs(intermediate(UNOBTANIUM_CLUMP, 1))
                 .itemOutputs(dust(PrPMaterials.Unobtanium, 1))
-                .duration(15 * 20)
+                .duration(15 * SECONDS)
                 .eut(TierEU.RECIPE_EV)
                 .addTo(RecipeMaps.centrifugeRecipes));
     }
@@ -337,7 +338,7 @@ public class LuVExotics {
                     item("sand", 48))
                 .outputChances(750, 3750, 2500, 9000)
                 .fluidOutputs(fluid(Materials.Helium, 5760))
-                .duration(60 * 20)
+                .duration(60 * SECONDS)
                 .eut(TierEU.RECIPE_HV)
                 .addTo(RecipeMaps.sifterRecipes));
     }

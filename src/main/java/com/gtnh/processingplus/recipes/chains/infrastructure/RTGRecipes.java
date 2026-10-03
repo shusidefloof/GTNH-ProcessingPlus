@@ -44,7 +44,7 @@ public class RTGRecipes {
                 fluid(PrPMaterials.HBNLubricant, 1000),
                 fluid(Materials.Argon, 4000))
             .itemOutputs(ingot(PrPMaterials.PromethiumBetavoltaicAlloy, 8))
-            .duration(1200)
+            .duration(60 * SECONDS)
             .eut(TierEU.RECIPE_ZPM)
             .addTo(GTNHPPRecipeMaps.sCRVRecipes);
     }
@@ -57,7 +57,7 @@ public class RTGRecipes {
         GTValues.RA.stdBuilder()
             .itemInputs(plate(PrPMaterials.PromethiumBetavoltaicAlloy, 1), foil(Materials.Aluminium, 2), circuit(1))
             .itemOutputs(GTNHPPItems.betavoltaicCell(1))
-            .duration(200)
+            .duration(10 * SECONDS)
             .eut(TierEU.RECIPE_EV)
             .addTo(RecipeMaps.assemblerRecipes);
     }

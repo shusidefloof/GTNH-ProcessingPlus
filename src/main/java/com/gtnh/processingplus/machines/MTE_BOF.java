@@ -42,8 +42,8 @@ import gregtech.api.util.tooltip.TooltipHelper;
 
 /**
  * Basic Oxygen Furnace (BOF) — a 5×4×5 steelmaking converter that refines iron into steel
- * using a high-purity liquid oxygen blast. Accepts flux additives (calcium, calcite, dolomite)
- * to increase yield and produce recoverable BOF slag.
+ * using a high-purity oxygen blast. Accepts flux additives (calcium, calcite, dolomite)
+ * to increase yield and produce recoverable BOF slag (lime flux can be fully recycled).
  */
 public class MTE_BOF extends MTEExtendedPowerMultiBlockBase<MTE_BOF> implements ISurvivalConstructable {
 

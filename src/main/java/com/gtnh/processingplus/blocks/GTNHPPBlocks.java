@@ -30,6 +30,7 @@ public class GTNHPPBlocks {
     public static BlockGTNHPPCasings CASINGS;
 
     /** SPC controller instance — kept so its craft recipe can reference the controller stack. */
+    public static MTE_BOF BOF;
     public static MTE_SPC SPC;
 
     /** HPSF controller instance — kept so its craft recipe can reference the controller stack. */
@@ -110,7 +111,8 @@ public class GTNHPPBlocks {
         SPC = new MTE_SPC(31508, "gtnhpp.spc", "Spectral Photolithography Chamber");
         SPC.getStackForm(1);
         new MTE_CSC(31509, "gtnhpp.csc", "Cryogenic Separation Column").getStackForm(1);
-        new MTE_BOF(31510, "gtnhpp.bof", "Basic Oxygen Furnace").getStackForm(1);
+        BOF = new MTE_BOF(31510, "gtnhpp.bof", "Basic Oxygen Furnace");
+        BOF.getStackForm(1);
         HPSF = new MTE_HPSF(31511, "gtnhpp.hpsf", "High Pressure Sintering Furnace");
         HPSF.getStackForm(1);
         new MTE_SPCBioModule(31512, "gtnhpp.spc_bio_module", "Bio-Lithography Module").getStackForm(1);

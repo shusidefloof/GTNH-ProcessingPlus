@@ -2126,7 +2126,7 @@ public class PrPMaterials implements Runnable {
             new Werkstoff(
                 rgb(80, 75, 70),
                 "BOF Slag",
-                subscriptNumbers("CaO/FeO/SiO2/MgO/MnO"),
+                subscriptNumbers("CaO/FeO/SiO2/MgO"),
                 new Werkstoff.Stats(),
                 Werkstoff.Types.MIXTURE,
                 new Werkstoff.GenerationFeatures().onlyDust(),

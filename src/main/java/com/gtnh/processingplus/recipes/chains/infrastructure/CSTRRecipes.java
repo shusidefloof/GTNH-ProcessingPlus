@@ -38,7 +38,7 @@ public class CSTRRecipes {
                 ItemList.Electric_Motor_EV.get(1),
                 circuit(8))
             .itemOutputs(new ItemStack(GTNHPPBlocks.CASINGS, 1, BlockGTNHPPCasings.CSTR_CASING))
-            .duration(14 * 10)
+            .duration(7 * SECONDS)
             .eut(TierEU.RECIPE_LV)
             .addTo(RecipeMaps.assemblerRecipes);
     }

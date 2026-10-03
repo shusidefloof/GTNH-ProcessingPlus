@@ -1,6 +1,7 @@
 package com.gtnh.processingplus.recipes.chains.infrastructure;
 
 import static com.gtnh.processingplus.recipes.PPRecipeHelper.*;
+import static gregtech.api.util.GTRecipeBuilder.SECONDS;
 
 import net.minecraft.item.ItemStack;
 
@@ -42,7 +43,7 @@ public class CSCRecipes {
                 plate(Materials.Copper, 1),
                 circuit(10))
             .itemOutputs(new ItemStack(GTNHPPBlocks.CASINGS, 1, BlockGTNHPPCasings.CSC_CASING))
-            .duration(400)
+            .duration(20 * SECONDS)
             .eut(TierEU.RECIPE_HV)
             .addTo(RecipeMaps.assemblerRecipes);
     }
@@ -57,7 +58,7 @@ public class CSCRecipes {
                 fluid(Materials.Oxygen, 10000),
                 fluid(PrPMaterials.LiquidArgon, 5000),
                 fluid(PrPMaterials.FreonR12, 4500))
-            .duration(4000)
+            .duration(200 * SECONDS)
             .eut(TierEU.RECIPE_HV)
             .addTo(GTNHPPRecipeMaps.sCSCRecipes);
     }
@@ -68,7 +69,7 @@ public class CSCRecipes {
             .itemInputs(circuit(2))
             .fluidInputs(fluid(Materials.CarbonDioxide, 10000), fluid(PrPMaterials.FreonR12, 1000))
             .fluidOutputs(fluid(PrPMaterials.LiquidCO2, 10000), fluid(PrPMaterials.FreonR12, 850))
-            .duration(100 * 20)
+            .duration(100 * SECONDS)
             .eut(TierEU.RECIPE_HV)
             .addTo(GTNHPPRecipeMaps.sCSCRecipes);
 
@@ -76,7 +77,7 @@ public class CSCRecipes {
             .itemInputs(circuit(2))
             .fluidInputs(fluid(Materials.Argon, 10000), fluid(PrPMaterials.FreonR12, 1000))
             .fluidOutputs(fluid(PrPMaterials.LiquidArgon, 10000), fluid(PrPMaterials.FreonR12, 850))
-            .duration(100 * 20)
+            .duration(100 * SECONDS)
             .eut(TierEU.RECIPE_HV)
             .addTo(GTNHPPRecipeMaps.sCSCRecipes);
     }
@@ -93,7 +94,7 @@ public class CSCRecipes {
                 fluid(Materials.Ethane, 2000),
                 fluid(Materials.Propane, 1000),
                 fluid(PrPMaterials.FreonR12, 1700))
-            .duration(1200)
+            .duration(60 * SECONDS)
             .eut(TierEU.RECIPE_HV)
             .addTo(GTNHPPRecipeMaps.sCSCRecipes);
     }
@@ -108,7 +109,7 @@ public class CSCRecipes {
                 fluid(Materials.Propane, 6000),
                 fluid(Materials.Butane, 4000),
                 fluid(PrPMaterials.FreonR12, 1300))
-            .duration(900)
+            .duration(45 * SECONDS)
             .eut(TierEU.RECIPE_HV)
             .addTo(GTNHPPRecipeMaps.sCSCRecipes);
     }
@@ -119,7 +120,7 @@ public class CSCRecipes {
             .itemInputs(circuit(2))
             .fluidInputs(fluid(Materials.Air, 125000), fluid(PrPMaterials.FreonR12, 5000))
             .fluidOutputs(fluid(Materials.Argon, 2800), fluid(PrPMaterials.FreonR12, 4500))
-            .duration(2000)
+            .duration(100 * SECONDS)
             .eut(TierEU.RECIPE_HV)
             .addTo(GTNHPPRecipeMaps.sCSCRecipes);
 
@@ -127,7 +128,7 @@ public class CSCRecipes {
             .itemInputs(circuit(3))
             .fluidInputs(fluid(Materials.Air, 250000), fluid(PrPMaterials.FreonR12, 5000))
             .fluidOutputs(fluid("neon", 1400), fluid(PrPMaterials.FreonR12, 4500))
-            .duration(8000)
+            .duration(400 * SECONDS)
             .eut(TierEU.RECIPE_HV)
             .addTo(GTNHPPRecipeMaps.sCSCRecipes);
 
@@ -135,7 +136,7 @@ public class CSCRecipes {
             .itemInputs(circuit(4))
             .fluidInputs(fluid(Materials.Air, 500000), fluid(PrPMaterials.FreonR12, 5000))
             .fluidOutputs(fluid(Materials.Helium, 700), fluid(PrPMaterials.FreonR12, 4500))
-            .duration(8000)
+            .duration(400 * SECONDS)
             .eut(TierEU.RECIPE_HV)
             .addTo(GTNHPPRecipeMaps.sCSCRecipes);
 
@@ -143,7 +144,7 @@ public class CSCRecipes {
             .itemInputs(circuit(5))
             .fluidInputs(fluid(Materials.Air, 2000000), fluid(PrPMaterials.FreonR12, 10000))
             .fluidOutputs(fluid("krypton", 425), fluid(PrPMaterials.FreonR12, 9500))
-            .duration(20000)
+            .duration(1000 * SECONDS)
             .eut(TierEU.RECIPE_HV)
             .addTo(GTNHPPRecipeMaps.sCSCRecipes);
 
@@ -151,7 +152,7 @@ public class CSCRecipes {
             .itemInputs(circuit(6))
             .fluidInputs(fluid(Materials.Air, 10000000), fluid(PrPMaterials.FreonR12, 40000))
             .fluidOutputs(fluid("xenon", 250), fluid(PrPMaterials.FreonR12, 38000))
-            .duration(80000)
+            .duration(4000 * SECONDS)
             .eut(TierEU.RECIPE_HV)
             .addTo(GTNHPPRecipeMaps.sCSCRecipes);
     }
@@ -161,14 +162,14 @@ public class CSCRecipes {
         GTValues.RA.stdBuilder()
             .fluidInputs(fluid(PrPMaterials.LiquidArgon, 1000))
             .fluidOutputs(fluid(Materials.Argon, 1000))
-            .duration(40)
+            .duration(2 * SECONDS)
             .eut(TierEU.RECIPE_LV)
             .addTo(RecipeMaps.fluidHeaterRecipes);
 
         GTValues.RA.stdBuilder()
             .fluidInputs(fluid(PrPMaterials.LiquidCO2, 1000))
             .fluidOutputs(fluid(Materials.CarbonDioxide, 1000))
-            .duration(40)
+            .duration(2 * SECONDS)
             .eut(TierEU.RECIPE_LV)
             .addTo(RecipeMaps.fluidHeaterRecipes);
     }

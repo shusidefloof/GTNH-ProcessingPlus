@@ -7,6 +7,8 @@ import static com.gtnh.processingplus.recipes.PPRecipeHelper.densePlate;
 import static com.gtnh.processingplus.recipes.PPRecipeHelper.matchesAny;
 import static com.gtnh.processingplus.recipes.PPRecipeHelper.plate;
 import static com.gtnh.processingplus.recipes.PPRecipeHelper.stripItems;
+import static gregtech.api.util.GTRecipeBuilder.SECONDS;
+import static gregtech.api.util.GTRecipeBuilder.TICKS;
 import static gregtech.api.util.GTRecipeConstants.COAL_CASING_TIER;
 
 import java.util.ArrayList;
@@ -45,25 +47,25 @@ public final class RecipeSwaps {
     private RecipeSwaps() {}
 
     public static void run() {
-        removeBoardRecipes();
-        swapIVHull();
-        gateLubricantBehindHBN();
-        gateUVMotorMagnet();
-        swapNaquadahCablesToUnobtanium();
-        gateZPMComponentsWithVibranium();
-        gateZPMHullWithUnobtanium();
-        gateZPMSuperconductorWithUnobtanium();
-        gateUVComponentsWithAmorphousNaquadria();
-        gateConveyorsWithNylon();
-        gateRobotArmsWithNylon();
-        gateFieldGensWithPrometheanNaquadria();
-        gateCOALLubricantBehindHBN();
-        gateCOALNylonFluid();
-        gateCOALZPMVibraniumFluid();
-        gateCOALUVMotor();
-        gateUVCasingWithCarbonFiber();
-        gateVoidMinerWithUnobtanium();
-        normalizeCoALCircuits();
+        RecipeGuard.run("removeBoardRecipes", RecipeSwaps::removeBoardRecipes);
+        RecipeGuard.run("swapIVHull", RecipeSwaps::swapIVHull);
+        RecipeGuard.run("gateLubricantBehindHBN", RecipeSwaps::gateLubricantBehindHBN);
+        RecipeGuard.run("gateUVMotorMagnet", RecipeSwaps::gateUVMotorMagnet);
+        RecipeGuard.run("swapNaquadahCablesToUnobtanium", RecipeSwaps::swapNaquadahCablesToUnobtanium);
+        RecipeGuard.run("gateZPMComponentsWithVibranium", RecipeSwaps::gateZPMComponentsWithVibranium);
+        RecipeGuard.run("gateZPMHullWithUnobtanium", RecipeSwaps::gateZPMHullWithUnobtanium);
+        RecipeGuard.run("gateZPMSuperconductorWithUnobtanium", RecipeSwaps::gateZPMSuperconductorWithUnobtanium);
+        RecipeGuard.run("gateUVComponentsWithAmorphousNaquadria", RecipeSwaps::gateUVComponentsWithAmorphousNaquadria);
+        RecipeGuard.run("gateConveyorsWithNylon", RecipeSwaps::gateConveyorsWithNylon);
+        RecipeGuard.run("gateRobotArmsWithNylon", RecipeSwaps::gateRobotArmsWithNylon);
+        RecipeGuard.run("gateFieldGensWithPrometheanNaquadria", RecipeSwaps::gateFieldGensWithPrometheanNaquadria);
+        RecipeGuard.run("gateCOALLubricantBehindHBN", RecipeSwaps::gateCOALLubricantBehindHBN);
+        RecipeGuard.run("gateCOALNylonFluid", RecipeSwaps::gateCOALNylonFluid);
+        RecipeGuard.run("gateCOALZPMVibraniumFluid", RecipeSwaps::gateCOALZPMVibraniumFluid);
+        RecipeGuard.run("gateCOALUVMotor", RecipeSwaps::gateCOALUVMotor);
+        RecipeGuard.run("gateUVCasingWithCarbonFiber", RecipeSwaps::gateUVCasingWithCarbonFiber);
+        RecipeGuard.run("gateVoidMinerWithUnobtanium", RecipeSwaps::gateVoidMinerWithUnobtanium);
+        RecipeGuard.run("normalizeCoALCircuits", RecipeSwaps::normalizeCoALCircuits);
     }
 
     // -------------------------------------------------------------------------
@@ -88,7 +90,7 @@ public final class RecipeSwaps {
             .itemInputs(osmium4, carbon4)
             .circuit(8)
             .itemOutputs(casingUV)
-            .duration(50)
+            .duration(50 * TICKS)
             .eut(TierEU.RECIPE_LV / 2)
             .addTo(RecipeMaps.assemblerRecipes);
 
@@ -631,7 +633,7 @@ public final class RecipeSwaps {
             .itemInputs(unobtaniumCable, ItemList.Casing_ZPM.get(1)) // new structural superconductor component
             .itemOutputs(hullZPM)
             .fluidInputs(Materials.Polybenzimidazole.getMolten(288))
-            .duration(50)
+            .duration(50 * TICKS)
             .eut(TierEU.RECIPE_LV / 2)
             .addTo(RecipeMaps.assemblerRecipes);
 
@@ -790,7 +792,7 @@ public final class RecipeSwaps {
             .itemInputs(ItemList.Casing_IV.get(1), GTOreDictUnificator.get(OrePrefixes.cableGt01, rhea, 2L))
             .fluidInputs(Materials.Polytetrafluoroethylene.getMolten(288))
             .itemOutputs(hullIV)
-            .duration(5 * 20)
+            .duration(5 * SECONDS)
             .eut(TierEU.RECIPE_LV)
             .addTo(RecipeMaps.assemblerRecipes);
 

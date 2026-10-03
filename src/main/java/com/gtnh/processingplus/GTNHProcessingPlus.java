@@ -16,7 +16,11 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
     name = "GT:NH Processing+",
     acceptedMinecraftVersions = "",
     // Force this mod to load AFTER GregTech's and Bartwork's internal material init
-    dependencies = "required-after:gregtech;" + "required-after:bartworks;" + "after:sciencenotleisure;")
+    dependencies = "required-after:gregtech;" + "required-after:bartworks;"
+        + "after:GoodGenerator;"
+        + "after:miscutils;"
+        + "after:tectech;"
+        + "after:sciencenotleisure;")
 public class GTNHProcessingPlus {
 
     public static final String MODID = "gtnhprp";

@@ -1,6 +1,7 @@
 package com.gtnh.processingplus.recipes.chains.materials;
 
 import static com.gtnh.processingplus.recipes.PPRecipeHelper.*;
+import static gregtech.api.util.GTRecipeBuilder.SECONDS;
 
 import com.gtnh.processingplus.machines.MTE_SCD;
 import com.gtnh.processingplus.materials.PrPMaterials;
@@ -41,7 +42,7 @@ public class AerogelRecipes {
                 fluid(Materials.Methane, 3000),
                 fluid(Materials.Hydrogen, 1000))
             .fluidOutputs(fluid(PrPMaterials.Trimethylsilane, 1000), fluid(Materials.HydrochloricAcid, 4000))
-            .duration(600)
+            .duration(30 * SECONDS)
             .eut(TierEU.RECIPE_UV)
             .metadata(GTRecipeConstants.COIL_HEAT, 9900)
             .addTo(GTNHPPRecipeMaps.sHTRFRecipes);
@@ -59,7 +60,7 @@ public class AerogelRecipes {
                 fluid(Materials.Methane, 3000),
                 fluid(Materials.Hydrogen, 1000))
             .fluidOutputs(fluid(PrPMaterials.Trimethylsilane, 1500), fluid(Materials.HydrochloricAcid, 4000))
-            .duration(300)
+            .duration(15 * SECONDS)
             .eut(TierEU.RECIPE_UV)
             .metadata(GTRecipeConstants.COIL_HEAT, 9900)
             .addTo(GTNHPPRecipeMaps.sHTRFRecipes);
@@ -74,7 +75,7 @@ public class AerogelRecipes {
             .itemInputs(circuit(5))
             .fluidInputs(fluid(PrPMaterials.Trimethylsilane, 1000), fluid(Materials.Chlorine, 1000))
             .fluidOutputs(fluid(PrPMaterials.Trimethylchlorosilane, 1000), fluid(Materials.HydrochloricAcid, 1000))
-            .duration(400)
+            .duration(20 * SECONDS)
             .eut(TierEU.RECIPE_EV)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
@@ -88,7 +89,7 @@ public class AerogelRecipes {
             .itemInputs(circuit(6))
             .fluidInputs(fluid(Materials.SiliconTetrachloride, 1000), fluid(Materials.Ethanol, 4000))
             .fluidOutputs(fluid(PrPMaterials.TEOS, 1000), fluid(Materials.HydrochloricAcid, 4000))
-            .duration(400)
+            .duration(20 * SECONDS)
             .eut(TierEU.RECIPE_EV)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
@@ -105,7 +106,7 @@ public class AerogelRecipes {
                 fluid(Materials.Water, 5000),
                 fluid(Materials.HydrofluoricAcid, 100))
             .fluidOutputs(fluid(PrPMaterials.SilicaSol, 1000), fluid(Materials.Ethanol, 4000))
-            .duration(600)
+            .duration(30 * SECONDS)
             .eut(TierEU.RECIPE_LuV)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
@@ -120,7 +121,7 @@ public class AerogelRecipes {
             .fluidInputs(fluid(PrPMaterials.SilicaSol, 1000), fluid(Materials.Ammonia, 500))
             .itemOutputs(dust(PrPMaterials.WetSilicaGel, 2))
             .fluidOutputs(fluid(Materials.Water, 1000))
-            .duration(800)
+            .duration(40 * SECONDS)
             .eut(TierEU.RECIPE_LuV)
             .addTo(GTNHPPRecipeMaps.sPCVRecipes);
     }
@@ -135,7 +136,7 @@ public class AerogelRecipes {
             .itemInputs(dust(PrPMaterials.WetSilicaGel, 4))
             .fluidInputs(fluid(Materials.Water, 1000))
             .itemOutputs(dust(PrPMaterials.AgedSilicaGel, 4))
-            .duration(3200)
+            .duration(160 * SECONDS)
             .eut(TierEU.RECIPE_EV)
             .addTo(RecipeMaps.chemicalBathRecipes);
     }
@@ -150,7 +151,7 @@ public class AerogelRecipes {
             .fluidInputs(fluid(Materials.Ethanol, 4000))
             .fluidOutputs(fluid(Materials.Water, 3000))
             .itemOutputs(dust(PrPMaterials.EthanolSaturatedGel, 4))
-            .duration(800)
+            .duration(40 * SECONDS)
             .eut(TierEU.RECIPE_EV)
             .addTo(RecipeMaps.chemicalBathRecipes);
     }
@@ -166,7 +167,7 @@ public class AerogelRecipes {
             .fluidInputs(fluid(Materials.Acetone, 4000), fluid(PrPMaterials.LiquidCO2, 1000))
             .fluidOutputs(fluid(Materials.Ethanol, 4000), fluid(Materials.CarbonDioxide, 1000))
             .itemOutputs(dust(PrPMaterials.AcetoneSaturatedGel, 4))
-            .duration(800)
+            .duration(40 * SECONDS)
             .eut(TierEU.RECIPE_EV)
             .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
     }
@@ -199,7 +200,7 @@ public class AerogelRecipes {
             .fluidOutputs(
                 fluid(Materials.CarbonDioxide, 8000), // CO₂ recovery loop
                 fluid(Materials.Acetone, 3500)) // acetone recovery
-            .duration(1000)
+            .duration(50 * SECONDS)
             .eut(TierEU.RECIPE_HV)
             .metadata(GTRecipeConstants.COIL_HEAT, MTE_SCD.encodeStageData(MTE_SCD.STAGE1_ACETONE, 10, 24))
             .addTo(GTNHPPRecipeMaps.sSCDRecipes);
@@ -215,7 +216,7 @@ public class AerogelRecipes {
             .fluidInputs(fluid(PrPMaterials.Trimethylchlorosilane, 2000))
             .fluidOutputs(fluid(Materials.HydrochloricAcid, 2000))
             .itemOutputs(plate(PrPMaterials.HydrophobicSilicaAerogel, 2))
-            .duration(600)
+            .duration(30 * SECONDS)
             .eut(TierEU.RECIPE_UV)
             .addTo(RecipeMaps.chemicalBathRecipes);
     }

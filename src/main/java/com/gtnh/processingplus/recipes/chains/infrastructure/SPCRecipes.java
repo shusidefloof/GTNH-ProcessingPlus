@@ -1,6 +1,8 @@
 package com.gtnh.processingplus.recipes.chains.infrastructure;
 
 import static com.gtnh.processingplus.recipes.PPRecipeHelper.*;
+import static gregtech.api.util.GTRecipeBuilder.SECONDS;
+import static gregtech.api.util.GTRecipeBuilder.TICKS;
 
 import java.util.Collection;
 
@@ -61,7 +63,7 @@ public class SPCRecipes {
                 GTOreDictUnificator.get(OrePrefixes.circuit, Materials.EV, 4))
             .fluidInputs(molten(Materials.Epoxid, 1152))
             .itemOutputs(GTNHPPBlocks.SPC.getStackForm(1))
-            .duration(600)
+            .duration(30 * SECONDS)
             .eut(TierEU.RECIPE_EV)
             .addTo(RecipeMaps.assemblerRecipes);
     }
@@ -71,7 +73,7 @@ public class SPCRecipes {
         GTValues.RA.stdBuilder()
             .itemInputs(GTNHPPItems.scorchedBoard(1))
             .itemOutputs(dust(Materials.Ash, 1))
-            .duration(160)
+            .duration(8 * SECONDS)
             .eut(TierEU.RECIPE_LV)
             .addTo(RecipeMaps.maceratorRecipes);
     }
@@ -86,7 +88,7 @@ public class SPCRecipes {
                 plate(Materials.Polytetrafluoroethylene, 2),
                 circuit(10))
             .itemOutputs(new ItemStack(GTNHPPBlocks.CASINGS, 1, BlockGTNHPPCasings.SPC_CASING))
-            .duration(50)
+            .duration(50 * TICKS)
             .eut(TierEU.RECIPE_LV)
             .addTo(RecipeMaps.assemblerRecipes);
 
@@ -98,7 +100,7 @@ public class SPCRecipes {
                 foil(Materials.Silver, 4),
                 circuit(10))
             .itemOutputs(new ItemStack(GTNHPPBlocks.CASINGS, 1, BlockGTNHPPCasings.SPC_BEAM_CASING))
-            .duration(50)
+            .duration(50 * TICKS)
             .eut(TierEU.RECIPE_LV)
             .addTo(RecipeMaps.assemblerRecipes);
 
@@ -109,7 +111,7 @@ public class SPCRecipes {
                 plate(Materials.StainlessSteel, 6),
                 circuit(10))
             .itemOutputs(new ItemStack(GTNHPPBlocks.CASINGS, 1, BlockGTNHPPCasings.SPC_FRAME_CASING))
-            .duration(50)
+            .duration(50 * TICKS)
             .eut(TierEU.RECIPE_LV)
             .addTo(RecipeMaps.assemblerRecipes);
     }
@@ -125,7 +127,7 @@ public class SPCRecipes {
                 plate(Materials.Kevlar, 2),
                 circuit(12))
             .itemOutputs(new ItemStack(GTNHPPBlocks.CASINGS, 1, BlockGTNHPPCasings.BIO_ADAPTER))
-            .duration(600)
+            .duration(30 * SECONDS)
             .eut(TierEU.RECIPE_EV)
             .addTo(RecipeMaps.assemblerRecipes);
 
@@ -137,7 +139,7 @@ public class SPCRecipes {
                 foil(Materials.NiobiumTitanium, 4),
                 circuit(12))
             .itemOutputs(new ItemStack(GTNHPPBlocks.CASINGS, 1, BlockGTNHPPCasings.CRYO_ADAPTER))
-            .duration(600)
+            .duration(30 * SECONDS)
             .eut(TierEU.RECIPE_IV)
             .addTo(RecipeMaps.assemblerRecipes);
 
@@ -150,7 +152,7 @@ public class SPCRecipes {
                 plate(PrPMaterials.Nylon66, 2),
                 circuit(13))
             .itemOutputs(new ItemStack(GTNHPPBlocks.CASINGS, 1, BlockGTNHPPCasings.QUANTUM_ADAPTER))
-            .duration(800)
+            .duration(40 * SECONDS)
             .eut(TierEU.RECIPE_ZPM)
             .addTo(RecipeMaps.assemblerRecipes);
 
@@ -158,14 +160,14 @@ public class SPCRecipes {
         GTValues.RA.stdBuilder()
             .itemInputs(plate(Materials.StainlessSteel, 6), ItemList.Circuit_Parts_PetriDish.get(1), circuit(10))
             .itemOutputs(new ItemStack(GTNHPPBlocks.CASINGS, 1, BlockGTNHPPCasings.BIO_MODULE_CASING))
-            .duration(400)
+            .duration(20 * SECONDS)
             .eut(TierEU.RECIPE_EV)
             .addTo(RecipeMaps.assemblerRecipes);
 
         GTValues.RA.stdBuilder()
             .itemInputs(plate(Materials.Aluminium, 6), foil(Materials.NiobiumTitanium, 2), circuit(10))
             .itemOutputs(new ItemStack(GTNHPPBlocks.CASINGS, 1, BlockGTNHPPCasings.CRYO_MODULE_CASING))
-            .duration(400)
+            .duration(20 * SECONDS)
             .eut(TierEU.RECIPE_IV)
             .addTo(RecipeMaps.assemblerRecipes);
 
@@ -176,7 +178,7 @@ public class SPCRecipes {
                 plate(PrPMaterials.Nylon66, 2),
                 circuit(13))
             .itemOutputs(new ItemStack(GTNHPPBlocks.CASINGS, 1, BlockGTNHPPCasings.QUANTUM_MODULE_CASING))
-            .duration(600)
+            .duration(30 * SECONDS)
             .eut(TierEU.RECIPE_ZPM)
             .addTo(RecipeMaps.assemblerRecipes);
     }
@@ -187,7 +189,7 @@ public class SPCRecipes {
             .itemInputs(plate(Materials.Epoxid, 1), foil(Materials.Gold, 8))
             .fluidInputs(fluid(Materials.SulfuricAcid, 500))
             .itemOutputs(ItemList.Circuit_Board_Epoxy.get(1))
-            .duration(4 * 20)
+            .duration(4 * SECONDS)
             .eut(TierEU.RECIPE_HV)
             .addTo(GTNHPPRecipeMaps.sSPCRecipes);
         SPCRecipeData.register(
@@ -202,7 +204,7 @@ public class SPCRecipes {
             .itemInputs(ItemList.Circuit_Board_Epoxy.get(1), foil(Materials.Electrum, 8))
             .fluidInputs(fluid(PrPMaterials.EVPhotoresist, 500))
             .itemOutputs(ItemList.Circuit_Board_Epoxy_Advanced.get(1))
-            .duration(4 * 20)
+            .duration(4 * SECONDS)
             .eut(TierEU.RECIPE_HV)
             .addTo(GTNHPPRecipeMaps.sSPCRecipes);
         SPCRecipeData.register(
@@ -218,7 +220,7 @@ public class SPCRecipes {
             .itemInputs(plate(Materials.EpoxidFiberReinforced, 1), foil(Materials.Aluminium, 12))
             .fluidInputs(fluid(Materials.SulfuricAcid, 500))
             .itemOutputs(ItemList.Circuit_Board_Fiberglass.get(1))
-            .duration(4 * 20)
+            .duration(4 * SECONDS)
             .eut(TierEU.RECIPE_HV)
             .addTo(GTNHPPRecipeMaps.sSPCRecipes);
         SPCRecipeData.register(
@@ -236,7 +238,7 @@ public class SPCRecipes {
                 foil(Materials.Palladium, 4))
             .fluidInputs(fluid(PrPMaterials.IVPhotoresist, 1000))
             .itemOutputs(ItemList.Circuit_Board_Fiberglass_Advanced.get(1))
-            .duration(4 * 20)
+            .duration(4 * SECONDS)
             .eut(TierEU.RECIPE_HV)
             .addTo(GTNHPPRecipeMaps.sSPCRecipes);
         SPCRecipeData.register(
@@ -252,7 +254,7 @@ public class SPCRecipes {
             .itemInputs(ItemList.Circuit_Board_Fiberglass.get(2), foil(Materials.Iridium, 16))
             .fluidInputs(fluid(Materials.SulfuricAcid, 1000), fluid(PrPMaterials.LuVPhotoresist, 500))
             .itemOutputs(ItemList.Circuit_Board_Multifiberglass.get(1))
-            .duration(4 * 20)
+            .duration(4 * SECONDS)
             .eut(TierEU.RECIPE_EV)
             .addTo(GTNHPPRecipeMaps.sSPCRecipes);
         SPCRecipeData.register(
@@ -267,7 +269,7 @@ public class SPCRecipes {
             .itemInputs(ItemList.Circuit_Board_Multifiberglass.get(1), foil(Materials.Platinum, 8))
             .fluidInputs(fluid(PrPMaterials.LuVPhotoresist, 2000))
             .itemOutputs(ItemList.Circuit_Board_Multifiberglass_Elite.get(1))
-            .duration(5 * 20)
+            .duration(5 * SECONDS)
             .eut(TierEU.RECIPE_EV)
             .addTo(GTNHPPRecipeMaps.sSPCRecipes);
         SPCRecipeData.register(
@@ -287,7 +289,7 @@ public class SPCRecipes {
                 ItemList.Circuit_Parts_PetriDish.get(1))
             .fluidInputs(fluid(Materials.GrowthMediumSterilized, 500), fluid(PrPMaterials.ZPMPhotoresist, 1000))
             .itemOutputs(ItemList.Circuit_Board_Wetware.get(1))
-            .duration(5 * 20)
+            .duration(5 * SECONDS)
             .eut(TierEU.RECIPE_EV)
             .addTo(GTNHPPRecipeMaps.sSPCRecipes);
         SPCRecipeData.register(
@@ -295,7 +297,7 @@ public class SPCRecipes {
             new MachineType[] { MachineType.CHEMICAL_BATH, MachineType.MIXER, MachineType.LASER_ENGRAVER,
                 MachineType.CHEMICAL_BATH },
             new int[] { HV, UV, UV, HV }
-            //,SPCModuleType.BIO
+        // ,SPCModuleType.BIO
         );
     }
 
@@ -308,7 +310,7 @@ public class SPCRecipes {
                 foil(Materials.Naquadah, 16))
             .fluidInputs(fluid(PrPMaterials.UVPhotoresist, 5000))
             .itemOutputs(ItemList.Circuit_Board_Wetware_Extreme.get(1))
-            .duration(5 * 20)
+            .duration(5 * SECONDS)
             .eut(TierEU.RECIPE_LuV)
             .addTo(GTNHPPRecipeMaps.sSPCRecipes);
         SPCRecipeData.register(
@@ -316,7 +318,7 @@ public class SPCRecipes {
             new MachineType[] { MachineType.CHEMICAL_BATH, MachineType.ELECTROLYZER, MachineType.LASER_ENGRAVER,
                 MachineType.CHEMICAL_BATH },
             new int[] { HV, UV, UV, UV }
-            //, SPCModuleType.BIO
+        // , SPCModuleType.BIO
         );
     }
 
@@ -330,7 +332,7 @@ public class SPCRecipes {
                 ItemList.Circuit_Parts_PetriDish.get(4))
             .fluidInputs(fluid(Materials.BioMediumSterilized, 1000), fluid(PrPMaterials.UVPhotoresist, 500))
             .itemOutputs(ItemList.Circuit_Board_Bio.get(1))
-            .duration(15 * 20)
+            .duration(15 * SECONDS)
             .eut(TierEU.RECIPE_UV)
             .addTo(GTNHPPRecipeMaps.sSPCRecipes);
         SPCRecipeData.register(
@@ -338,7 +340,7 @@ public class SPCRecipes {
             new MachineType[] { MachineType.CHEMICAL_BATH, MachineType.MIXER, MachineType.LASER_ENGRAVER,
                 MachineType.CHEMICAL_BATH },
             new int[] { UV, UHV, UHV, UV }
-            //, SPCModuleType.BIO
+        // , SPCModuleType.BIO
         );
     }
 
@@ -352,7 +354,7 @@ public class SPCRecipes {
                 ItemList.Circuit_Parts_PetriDish.get(1))
             .fluidInputs(fluid(PrPMaterials.UHVPhotoresist, 1000))
             .itemOutputs(ItemList.Circuit_Board_Bio_Ultra.get(1))
-            .duration(10 * 20)
+            .duration(10 * SECONDS)
             .eut(TierEU.RECIPE_EV)
             .addTo(GTNHPPRecipeMaps.sSPCRecipes);
         SPCRecipeData.register(
@@ -360,7 +362,7 @@ public class SPCRecipes {
             new MachineType[] { MachineType.CHEMICAL_BATH, MachineType.MIXER, MachineType.LASER_ENGRAVER,
                 MachineType.CHEMICAL_BATH },
             new int[] { UV, UHV, UHV, UHV }
-            //, SPCModuleType.BIO
+        // , SPCModuleType.BIO
         );
     }
 
@@ -370,7 +372,7 @@ public class SPCRecipes {
             .itemInputs(plate(Materials.Kevlar, 2), item("foilTairitsu", 16), foil(Materials.Osmium, 8))
             .fluidInputs(fluid(Materials.Grade7PurifiedWater, 500))
             .itemOutputs(GTNHPPItems.opticalBoardRaw(1))
-            .duration(5 * 20)
+            .duration(5 * SECONDS)
             .eut(TierEU.RECIPE_ZPM)
             .addTo(GTNHPPRecipeMaps.sSPCRecipes);
         SPCRecipeData.register(
@@ -378,8 +380,8 @@ public class SPCRecipes {
             new MachineType[] { MachineType.CHEMICAL_BATH, MachineType.MIXER, MachineType.LASER_ENGRAVER,
                 MachineType.CHEMICAL_BATH },
             new int[] { UHV, UEV, UEV, UHV }
-            //, SPCModuleType.CRYO
-            );
+        // , SPCModuleType.CRYO
+        );
     }
 
     // Optical Board → Circuit_Board_Optical — [Laser UEV] → [Electrolyzer UEV] → [Chem Bath UHV] → [Laser UEV]
@@ -391,7 +393,7 @@ public class SPCRecipes {
                 plate(Materials.MysteriousCrystal, 4))
             .fluidInputs(fluid(PrPMaterials.UEVPhotoresist, 1000))
             .itemOutputs(ItemList.Circuit_Board_Optical.get(2))
-            .duration(10 * 20)
+            .duration(10 * SECONDS)
             .eut(TierEU.RECIPE_ZPM)
             .addTo(GTNHPPRecipeMaps.sSPCRecipes);
         SPCRecipeData.register(
@@ -399,7 +401,7 @@ public class SPCRecipes {
             new MachineType[] { MachineType.LASER_ENGRAVER, MachineType.ELECTROLYZER, MachineType.CHEMICAL_BATH,
                 MachineType.LASER_ENGRAVER },
             new int[] { UEV, UEV, UHV, UEV }
-            //, SPCModuleType.CRYO
+        // , SPCModuleType.CRYO
         );
     }
 
@@ -467,9 +469,9 @@ public class SPCRecipes {
             4 * 20,
             TierEU.RECIPE_EV,
             new MachineType[] { CB, MX, LE, CB },
-            new int[] { HV, UV, UV, HV }
-            , null
-            //, SPCModuleType.BIO
+            new int[] { HV, UV, UV, HV },
+            null
+        // , SPCModuleType.BIO
         );
 
         // Wetware Extreme — UHV photoresist (was UV)
@@ -481,9 +483,9 @@ public class SPCRecipes {
             7 * 20,
             TierEU.RECIPE_LuV,
             new MachineType[] { CB, EL, LE, CB },
-            new int[] { HV, UV, UV, UV }
-            , null
-            //, SPCModuleType.BIO
+            new int[] { HV, UV, UV, UV },
+            null
+        // , SPCModuleType.BIO
         );
 
         // Bio — UHV photoresist (was UV)
@@ -495,9 +497,9 @@ public class SPCRecipes {
             7 * 20,
             TierEU.RECIPE_UV,
             new MachineType[] { CB, MX, LE, CB },
-            new int[] { UV, UHV, UHV, UV }
-            , null
-            //, SPCModuleType.BIO
+            new int[] { UV, UHV, UHV, UV },
+            null
+        // , SPCModuleType.BIO
         );
 
         // Bio Ultra — UEV photoresist (was UHV)
@@ -509,9 +511,9 @@ public class SPCRecipes {
             7 * 20,
             TierEU.RECIPE_EV,
             new MachineType[] { CB, MX, LE, CB },
-            new int[] { UV, UHV, UHV, UHV }
-            , null
-            //, SPCModuleType.BIO
+            new int[] { UV, UHV, UHV, UHV },
+            null
+        // , SPCModuleType.BIO
         );
 
         // Optical — UIV photoresist (was UEV); base outputs 2, premium outputs 4. Gives UIV a use.
@@ -523,9 +525,9 @@ public class SPCRecipes {
             7 * 20,
             TierEU.RECIPE_ZPM,
             new MachineType[] { LE, EL, CB, LE },
-            new int[] { UEV, UEV, UHV, UEV }
-            , null
-            //, SPCModuleType.CRYO
+            new int[] { UEV, UEV, UHV, UEV },
+            null
+        // , SPCModuleType.CRYO
         );
     }
 

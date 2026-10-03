@@ -1,6 +1,7 @@
 package com.gtnh.processingplus.recipes.chains.materials;
 
 import static com.gtnh.processingplus.recipes.PPRecipeHelper.*;
+import static gregtech.api.util.GTRecipeBuilder.SECONDS;
 
 import com.gtnh.processingplus.materials.PrPMaterials;
 import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
@@ -31,7 +32,7 @@ public class SiCRecipes {
             .fluidInputs(fluid(Materials.Argon, 1000))
             .fluidOutputs(fluid(Materials.CarbonMonoxide, 2000))
             .itemOutputs(dust(PrPMaterials.CrudeSiCPowder, 2))
-            .duration(400)
+            .duration(20 * SECONDS)
             .eut(TierEU.RECIPE_EV)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
@@ -47,7 +48,7 @@ public class SiCRecipes {
             .fluidInputs(fluid(Materials.SiliconTetrachloride, 1000), fluid(Materials.Methane, 1000))
             .fluidOutputs(fluid(Materials.HydrochloricAcid, 4000))
             .itemOutputs(dust(PrPMaterials.PurifiedSiCPowder, 2))
-            .duration(800)
+            .duration(40 * SECONDS)
             .eut(TierEU.RECIPE_IV)
             .addTo(GTNHPPRecipeMaps.sHTRFRecipes);
     }
@@ -62,7 +63,7 @@ public class SiCRecipes {
             .fluidInputs(fluid(Materials.HydrofluoricAcid, 500), fluid(Materials.SulfuricAcid, 500))
             .fluidOutputs(fluid(Materials.DilutedSulfuricAcid, 500), fluid(Materials.Water, 500))
             .itemOutputs(dust(PrPMaterials.PurifiedSiCPowder, 4))
-            .duration(600)
+            .duration(30 * SECONDS)
             .eut(TierEU.RECIPE_HV)
             .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
     }
@@ -76,7 +77,7 @@ public class SiCRecipes {
             .itemInputs(dust(PrPMaterials.PurifiedSiCPowder, 4), dust(Materials.Boron, 1))
             .fluidInputs(fluid(Materials.Argon, 500))
             .itemOutputs(dust(PrPMaterials.DenseSiCCompact, 2))
-            .duration(600)
+            .duration(30 * SECONDS)
             .eut(TierEU.RECIPE_EV)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
@@ -89,7 +90,7 @@ public class SiCRecipes {
         GTValues.RA.stdBuilder()
             .itemInputs(dust(PrPMaterials.DenseSiCCompact, 1), ItemList.Shape_Mold_Plate.get(0))
             .itemOutputs(plate(PrPMaterials.SinteredSiliconCarbide, 4))
-            .duration(200)
+            .duration(10 * SECONDS)
             .eut(TierEU.RECIPE_EV)
             .addTo(RecipeMaps.formingPressRecipes);
     }

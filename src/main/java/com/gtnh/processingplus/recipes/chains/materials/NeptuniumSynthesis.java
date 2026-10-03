@@ -1,6 +1,8 @@
 package com.gtnh.processingplus.recipes.chains.materials;
 
 import static com.gtnh.processingplus.recipes.PPRecipeHelper.*;
+import static gregtech.api.util.GTRecipeBuilder.SECONDS;
+import static gregtech.api.util.GTRecipeBuilder.TICKS;
 
 import com.gtnh.processingplus.materials.PrPMaterials;
 import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
@@ -45,7 +47,7 @@ public class NeptuniumSynthesis {
                 dust(PrPMaterials.NeptuniumExtractionResidue, 1),
                 ItemList.IC2_Fuel_Rod_Empty.get(1))
             .fluidOutputs(fluid(PrPMaterials.DilutedNitricAcid, 2000))
-            .duration(600)
+            .duration(30 * SECONDS)
             .eut(TierEU.RECIPE_EV)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
 
@@ -58,7 +60,7 @@ public class NeptuniumSynthesis {
                 dust(PrPMaterials.NeptuniumExtractionResidue, 2),
                 ItemList.IC2_Fuel_Rod_Empty.get(2))
             .fluidOutputs(fluid(PrPMaterials.DilutedNitricAcid, 4000))
-            .duration(1000)
+            .duration(50 * SECONDS)
             .eut(TierEU.RECIPE_EV)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
 
@@ -71,7 +73,7 @@ public class NeptuniumSynthesis {
                 dust(PrPMaterials.NeptuniumExtractionResidue, 4),
                 ItemList.IC2_Fuel_Rod_Empty.get(4))
             .fluidOutputs(fluid(PrPMaterials.DilutedNitricAcid, 8000))
-            .duration(1800)
+            .duration(90 * SECONDS)
             .eut(TierEU.RECIPE_EV)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
@@ -87,7 +89,7 @@ public class NeptuniumSynthesis {
             .itemInputs(dust(PrPMaterials.NeptuniumExtractionResidue, 4))
             .fluidInputs(fluid(Materials.NitricAcid, 1000))
             .fluidOutputs(fluid(PrPMaterials.NeptuniumNitrateSolution, 2000))
-            .duration(400)
+            .duration(20 * SECONDS)
             .eut(TierEU.RECIPE_EV)
             .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
     }
@@ -106,7 +108,7 @@ public class NeptuniumSynthesis {
                 fluid(Materials.Water, 500))
             .itemOutputs(dust(PrPMaterials.NeptuniumOxide, 2))
             .fluidOutputs(fluid(PrPMaterials.AmmoniumNitrateSolution, 2000))
-            .duration(400)
+            .duration(20 * SECONDS)
             .eut(TierEU.RECIPE_EV)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
@@ -120,7 +122,7 @@ public class NeptuniumSynthesis {
         GTValues.RA.stdBuilder()
             .fluidInputs(fluid(PrPMaterials.DilutedNitricAcid, 4000))
             .fluidOutputs(fluid(Materials.NitricAcid, 1000), fluid(Materials.Water, 3000))
-            .duration(600)
+            .duration(30 * SECONDS)
             .eut(TierEU.RECIPE_LV)
             .addTo(RecipeMaps.distillationTowerRecipes);
     }
@@ -135,7 +137,7 @@ public class NeptuniumSynthesis {
         GTValues.RA.stdBuilder()
             .fluidInputs(fluid(PrPMaterials.AmmoniumNitrateSolution, 2000))
             .fluidOutputs(fluid(Materials.Ammonia, 1000), fluid(Materials.NitricAcid, 2000))
-            .duration(800)
+            .duration(40 * SECONDS)
             .eut(TierEU.RECIPE_LV)
             .addTo(RecipeMaps.distillationTowerRecipes);
     }
@@ -148,7 +150,7 @@ public class NeptuniumSynthesis {
         GTValues.RA.stdBuilder()
             .itemInputs(dust(PrPMaterials.NeptuniumOxide, 1), dust(Materials.Calcium, 2))
             .itemOutputs(item("ingotNeptunium", 1), dust(Materials.Quicklime, 2))
-            .duration(600)
+            .duration(30 * SECONDS)
             .eut(TierEU.RECIPE_HV)
             .metadata(GTRecipeConstants.COIL_HEAT, 1500)
             .addTo(RecipeMaps.blastFurnaceRecipes);
@@ -162,7 +164,7 @@ public class NeptuniumSynthesis {
         GTValues.RA.stdBuilder()
             .itemInputs(dust(PrPMaterials.NeptuniumOxide, 1), dust(Materials.Barium, 2))
             .itemOutputs(item("ingotNeptunium", 1), dust(PrPMaterials.BariumOxide, 2))
-            .duration(600)
+            .duration(30 * SECONDS)
             .eut(TierEU.RECIPE_HV)
             .metadata(GTRecipeConstants.COIL_HEAT, 1500)
             .addTo(RecipeMaps.blastFurnaceRecipes);
@@ -173,7 +175,7 @@ public class NeptuniumSynthesis {
             .itemInputs(dust(Materials.Neodymium, 1), circuit(10))
             .itemOutputs(dust(PrPMaterials.Neodymium146, 1))
             .outputChances(10_00)
-            .duration(15 * 20)
+            .duration(15 * SECONDS)
             .eut(TierEU.RECIPE_LuV)
             .addTo(RecipeMaps.centrifugeRecipes);
 
@@ -181,7 +183,7 @@ public class NeptuniumSynthesis {
             .itemInputs(dust(Materials.Neodymium, 1), circuit(10))
             .fluidInputs(fluid("xenon", 2000))
             .itemOutputs(dust(PrPMaterials.Neodymium146, 1))
-            .duration(15 * 10)
+            .duration(150 * TICKS)
             .eut(TierEU.RECIPE_ZPM)
             .addTo(RecipeMaps.centrifugeRecipes);
 
@@ -199,7 +201,7 @@ public class NeptuniumSynthesis {
                     .amount_A(250)
                     .amount_B(250)
                     .build())
-            .duration(10 * 20)
+            .duration(10 * SECONDS)
             .eut(TierEU.RECIPE_ZPM)
             .addTo(RecipeMaps.beamcrafterRecipes);
 
@@ -213,7 +215,7 @@ public class NeptuniumSynthesis {
         GTValues.RA.stdBuilder()
             .itemInputs(dust(PrPMaterials.Neodymium147, 1))
             .fluidOutputs(molten(PrPMaterials.Neodymium147, 144))
-            .duration(8 * 20)
+            .duration(8 * SECONDS)
             .eut(TierEU.RECIPE_IV)
             .addTo(RecipeMaps.fluidExtractionRecipes);
 
@@ -222,7 +224,7 @@ public class NeptuniumSynthesis {
         GTValues.RA.stdBuilder()
             .fluidInputs(molten(PrPMaterials.Neodymium147, 144), Materials.Hydrogen.getPlasma(1000))
             .fluidOutputs(Materials.Promethium.getPlasma(144))
-            .duration(8 * 20)
+            .duration(8 * SECONDS)
             .eut(TierEU.RECIPE_ZPM)
             .metadata(GTRecipeConstants.FUSION_THRESHOLD, 400_000_000L)
             .addTo(RecipeMaps.fusionRecipes);
@@ -233,7 +235,7 @@ public class NeptuniumSynthesis {
         GTValues.RA.stdBuilder()
             .fluidInputs(Materials.Promethium.getPlasma(144), fluid(PrPMaterials.HeavyWater, 1000))
             .fluidOutputs(PrPMaterials.RawPromethium.getFluidOrGas(144))
-            .duration(10 * 20)
+            .duration(10 * SECONDS)
             .eut(TierEU.RECIPE_ZPM)
             .addTo(RecipeMaps.vacuumFreezerRecipes);
 
@@ -243,7 +245,7 @@ public class NeptuniumSynthesis {
             .itemInputs(circuit(4))
             .fluidInputs(fluid(Materials.PhosphoricAcid, 1000), molten(Materials.Polytetrafluoroethylene, 1000))
             .fluidOutputs(PrPMaterials.PromethiumResin.getFluidOrGas(1000))
-            .duration(12 * 20)
+            .duration(12 * SECONDS)
             .eut(TierEU.RECIPE_LuV)
             .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
 
@@ -254,7 +256,7 @@ public class NeptuniumSynthesis {
                 PrPMaterials.PromethiumResin.getFluidOrGas(1000))
             .itemOutputs(dust(Materials.Samarium, 1))
             .fluidOutputs(PrPMaterials.LoadedPromethiumResin.getFluidOrGas(1000))
-            .duration(10 * 20)
+            .duration(10 * SECONDS)
             .eut(TierEU.RECIPE_ZPM)
             .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
 
@@ -264,7 +266,7 @@ public class NeptuniumSynthesis {
                 PrPMaterials.LoadedPromethiumResin.getFluidOrGas(1000),
                 fluid(Materials.HydrochloricAcid, 1000))
             .fluidOutputs(Materials.Promethium.getMolten(144), PrPMaterials.PromethiumResin.getFluidOrGas(1000))
-            .duration(10 * 20)
+            .duration(10 * SECONDS)
             .eut(TierEU.RECIPE_ZPM)
             .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
     }
@@ -283,7 +285,7 @@ public class NeptuniumSynthesis {
             .itemInputs(circuit(1))
             .fluidInputs(fluid(Materials.Water, 2000))
             .fluidOutputs(PrPMaterials.HeavyWater.getFluidOrGas(100))
-            .duration(20 * 20)
+            .duration(20 * SECONDS)
             .eut(TierEU.RECIPE_HV)
             .addTo(RecipeMaps.distilleryRecipes);
 
@@ -291,14 +293,14 @@ public class NeptuniumSynthesis {
         GTValues.RA.stdBuilder()
             .fluidInputs(PrPMaterials.HeavyWater.getFluidOrGas(1000))
             .fluidOutputs(Materials.Deuterium.getGas(2000), Materials.Oxygen.getGas(1000))
-            .duration(10 * 20)
+            .duration(10 * SECONDS)
             .eut(TierEU.RECIPE_EV)
             .addTo(RecipeMaps.electrolyzerRecipes);
 
         GTValues.RA.stdBuilder()
             .fluidInputs(fluid(Materials.Deuterium, 2000), fluid(Materials.Oxygen, 1000))
             .fluidOutputs(fluid(PrPMaterials.HeavyWater, 1000))
-            .duration(5 * 20)
+            .duration(5 * SECONDS)
             .eut(TierEU.RECIPE_HV)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
 
@@ -306,7 +308,7 @@ public class NeptuniumSynthesis {
         GTValues.RA.stdBuilder()
             .fluidInputs(Materials.Helium.getPlasma(1000), PrPMaterials.HeavyWater.getFluidOrGas(1000))
             .fluidOutputs(Materials.Helium.getGas(1000))
-            .duration(10 * 20)
+            .duration(10 * SECONDS)
             .eut(TierEU.RECIPE_ZPM)
             .addTo(RecipeMaps.vacuumFreezerRecipes);
     }

@@ -1,6 +1,8 @@
 package com.gtnh.processingplus.recipes.chains.materials;
 
 import static com.gtnh.processingplus.recipes.PPRecipeHelper.*;
+import static gregtech.api.util.GTRecipeBuilder.SECONDS;
+import static gregtech.api.util.GTRecipeBuilder.TICKS;
 
 import com.gtnh.processingplus.blocks.GTNHPPBlocks;
 import com.gtnh.processingplus.materials.PrPMaterials;
@@ -38,7 +40,7 @@ public class Nylon66Recipes {
             .itemInputs(circuit(1), item("catalystCobaltTitanium", 1))
             .fluidInputs(fluid(Materials.Phenol, 1000), fluid(Materials.Hydrogen, 3000))
             .fluidOutputs(fluid(PrPMaterials.Cyclohexanol, 1000))
-            .duration(10 * 20)
+            .duration(10 * SECONDS)
             .eut(TierEU.RECIPE_HV)
             .metadata(GTRecipeConstants.CHEMPLANT_CASING_TIER, 3)
             .addTo(RecipeMaps.chemicalPlantRecipes);
@@ -53,7 +55,7 @@ public class Nylon66Recipes {
             .itemInputs(circuit(2))
             .fluidInputs(fluid(PrPMaterials.Cyclohexanol, 1000), fluid(Materials.Oxygen, 500))
             .fluidOutputs(fluid("cyclohexanone", 1000), fluid(Materials.Water, 500))
-            .duration(10 * 20)
+            .duration(10 * SECONDS)
             .eut(TierEU.RECIPE_HV)
             .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
     }
@@ -70,7 +72,7 @@ public class Nylon66Recipes {
                 fluid(PrPMaterials.AdipicAcid, 2000),
                 fluid(Materials.NitrousOxide, 2000),
                 fluid(Materials.Water, 2000))
-            .duration(400)
+            .duration(20 * SECONDS)
             .eut(TierEU.RECIPE_EV)
             .metadata(GTRecipeConstants.CHEMPLANT_CASING_TIER, 6)
             .addTo(RecipeMaps.chemicalPlantRecipes);
@@ -84,7 +86,7 @@ public class Nylon66Recipes {
             .itemInputs(circuit(4))
             .fluidInputs(fluid(PrPMaterials.Cyclohexanol, 1000), fluid(Materials.PhosphoricAcid, 100))
             .fluidOutputs(fluid(PrPMaterials.Cyclohexene, 1000), fluid(Materials.Water, 1000))
-            .duration(300)
+            .duration(15 * SECONDS)
             .eut(TierEU.RECIPE_LV)
             .metadata(GTRecipeConstants.COIL_HEAT, 1200)
             .addTo(GTNHPPRecipeMaps.sHTRFRecipes);
@@ -93,7 +95,7 @@ public class Nylon66Recipes {
             .fluidInputs(fluid(PrPMaterials.Cyclohexene, 1000), fluid("fluid.hydrogenperoxide", 3000))
             // Green H2O2 route: clean — no nitrous oxide byproduct (that's the dirty HNO3 route only).
             .fluidOutputs(fluid(PrPMaterials.AdipicAcid, 3000), fluid(Materials.Water, 3000))
-            .duration(20 * 20)
+            .duration(20 * SECONDS)
             .eut(TierEU.RECIPE_EV)
             .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
     }
@@ -111,7 +113,7 @@ public class Nylon66Recipes {
                 fluid(Materials.Water, 2000))
             // Butadiene carbonylation route: clean — no nitrous oxide byproduct.
             .fluidOutputs(fluid(PrPMaterials.AdipicAcid, 1000), fluid(Materials.Water, 1000))
-            .duration(500)
+            .duration(25 * SECONDS)
             .eut(TierEU.RECIPE_LuV)
             .metadata(GTRecipeConstants.CHEMPLANT_CASING_TIER, 7)
             .addTo(RecipeMaps.chemicalPlantRecipes);
@@ -127,7 +129,7 @@ public class Nylon66Recipes {
             .itemInputs(circuit(6))
             .fluidInputs(fluid(PrPMaterials.AdipicAcid, 2000), fluid(Materials.Ammonia, 2000))
             .fluidOutputs(fluid(PrPMaterials.Adiponitrile, 1000), fluid(Materials.Water, 2000))
-            .duration(350)
+            .duration(350 * TICKS)
             .eut(TierEU.RECIPE_LuV)
             .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
 
@@ -136,7 +138,7 @@ public class Nylon66Recipes {
             .itemInputs(circuit(7))
             .fluidInputs(fluid(PrPMaterials.Adiponitrile, 1000), fluid(Materials.Hydrogen, 4000))
             .fluidOutputs(fluid(PrPMaterials.HMD, 1000))
-            .duration(300)
+            .duration(15 * SECONDS)
             .eut(TierEU.RECIPE_IV)
             .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
 
@@ -146,7 +148,7 @@ public class Nylon66Recipes {
             .itemInputs(circuit(8))
             .fluidInputs(fluid(PrPMaterials.HMD, 4000), fluid(PrPMaterials.AdipicAcid, 4000))
             .fluidOutputs(molten(PrPMaterials.Nylon66, 1152), fluid(Materials.Water, 4000))
-            .duration(600)
+            .duration(30 * SECONDS)
             .eut(TierEU.RECIPE_LuV)
             .addTo(GTNHPPRecipeMaps.sPCVRecipes);
     }
@@ -165,7 +167,7 @@ public class Nylon66Recipes {
                 fluid(Materials.SulfuricAcid, 1000))
             .itemOutputs(dust(PrPMaterials.HydroxylammoniumSulfate, 1))
             .fluidOutputs(fluid(Materials.Water, 2000))
-            .duration(400)
+            .duration(20 * SECONDS)
             .eut(TierEU.RECIPE_HV)
             .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
     }
@@ -181,7 +183,7 @@ public class Nylon66Recipes {
             .fluidInputs(fluid("cyclohexanone", 2000))
             .fluidOutputs(fluid(Materials.SulfuricAcid, 1000))
             .itemOutputs(dust(PrPMaterials.CyclohexanoneOxime, 2))
-            .duration(300)
+            .duration(15 * SECONDS)
             .eut(TierEU.RECIPE_LuV)
             .metadata(GTRecipeConstants.CHEMPLANT_CASING_TIER, 5)
             .addTo(RecipeMaps.chemicalPlantRecipes);
@@ -191,7 +193,7 @@ public class Nylon66Recipes {
             .itemInputs(circuit(8), dust(PrPMaterials.CyclohexanoneOxime, 1))
             .fluidInputs(fluid(Materials.SulfuricAcid, 500))
             .fluidOutputs(fluid(PrPMaterials.Caprolactam, 1000))
-            .duration(400)
+            .duration(20 * SECONDS)
             .eut(TierEU.RECIPE_EV)
             .metadata(GTRecipeConstants.CHEMPLANT_CASING_TIER, 5)
             .addTo(RecipeMaps.chemicalPlantRecipes);
@@ -202,7 +204,7 @@ public class Nylon66Recipes {
             .itemInputs(circuit(9))
             .fluidInputs(fluid(PrPMaterials.Caprolactam, 4000), fluid(Materials.Water, 500))
             .fluidOutputs(molten(Materials.Polycaprolactam, 1152))
-            .duration(600)
+            .duration(30 * SECONDS)
             .eut(TierEU.RECIPE_LuV)
             .metadata(GTRecipeConstants.CHEMPLANT_CASING_TIER, 5)
             .addTo(RecipeMaps.chemicalPlantRecipes);
@@ -223,7 +225,7 @@ public class Nylon66Recipes {
                 plate(Materials.StainlessSteel, 8))
             .fluidInputs(molten(Materials.Polytetrafluoroethylene, 1152))
             .itemOutputs(GTNHPPBlocks.PCV.getStackForm(1))
-            .duration(600)
+            .duration(30 * SECONDS)
             .eut(TierEU.RECIPE_LuV)
             .addTo(RecipeMaps.assemblerRecipes);
     }

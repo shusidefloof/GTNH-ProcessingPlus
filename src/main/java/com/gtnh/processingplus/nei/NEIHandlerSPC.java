@@ -34,7 +34,7 @@ public class NEIHandlerSPC extends GTNEIDefaultHandler {
      * Y of the separator line, relative to the top of the station area.
      * Decrease to move everything up; must stay >= 0.
      */
-    private static final int SEP_OFFSET = 1;
+    private static final int SEP_OFFSET = 0;
 
     /**
      * Y of the icon row, relative to the top of the station area.

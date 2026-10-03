@@ -1,6 +1,7 @@
 package com.gtnh.processingplus.recipes.chains.materials;
 
 import static com.gtnh.processingplus.recipes.PPRecipeHelper.*;
+import static gregtech.api.util.GTRecipeBuilder.SECONDS;
 
 import com.gtnh.processingplus.materials.PrPMaterials;
 import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
@@ -31,7 +32,7 @@ public class HBNRecipes {
             .itemInputs(GTOreDictUnificator.get("dustBoronTrioxide", 4), dust(Materials.Carbon, 9))
             .fluidOutputs(fluid(Materials.CarbonMonoxide, 2000), fluid(Materials.CarbonDioxide, 3000))
             .itemOutputs(dust(PrPMaterials.BoronCarbide, 4))
-            .duration(5 * 20)
+            .duration(5 * SECONDS)
             .eut((int) (TierEU.RECIPE_EV * 0.75))
             .metadata(GTRecipeConstants.COIL_HEAT, 1800)
             .addTo(GTNHPPRecipeMaps.sHTRFRecipes);
@@ -47,7 +48,7 @@ public class HBNRecipes {
             .fluidInputs(fluid(Materials.Ammonia, 3000))
             .fluidOutputs(fluid(Materials.Methane, 1000), fluid(Materials.CarbonMonoxide, 500))
             .itemOutputs(dust(PrPMaterials.CrudeHBN, 2), dust(PrPMaterials.BNitrideWaste, 4))
-            .duration(3 * 20)
+            .duration(3 * SECONDS)
             .eut(TierEU.RECIPE_EV)
             .addTo(GTNHPPRecipeMaps.sAARRecipes);
     }
@@ -67,7 +68,7 @@ public class HBNRecipes {
                 fluid(Materials.Ammonia, 2000))
             .fluidOutputs(fluid(Materials.HydrochloricAcid, 3000), fluid(Materials.Water, 1000))
             .itemOutputs(dust(PrPMaterials.CrudeHBN, 1))
-            .duration(15 * 20)
+            .duration(15 * SECONDS)
             .eut(TierEU.RECIPE_ZPM)
             .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
     }
@@ -82,7 +83,7 @@ public class HBNRecipes {
             .fluidInputs(fluid(Materials.Nitrogen, 16000), fluid(Materials.Argon, 8000))
             .itemOutputs(dust(PrPMaterials.HBNPowderBlend, 8))
             .fluidOutputs(fluid(Materials.NitricOxide, 3000), fluid(Materials.Oxygen, 1500))
-            .duration(7 * 20)
+            .duration(7 * SECONDS)
             .eut(TierEU.RECIPE_LuV)
             .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
     }
@@ -96,7 +97,7 @@ public class HBNRecipes {
             .itemInputs(dust(PrPMaterials.HBNPowderBlend, 4 * 8))
             .fluidInputs(fluid(Materials.Nitrogen, 16000 * 8), fluid(Materials.Argon, 4000 * 8))
             .itemOutputs(dust(PrPMaterials.HexagonalBoronNitride, 2 * 8))
-            .duration(10 * 20)
+            .duration(10 * SECONDS)
             .eut(TierEU.RECIPE_IV)
             .metadata(GTRecipeConstants.COIL_HEAT, 2400)
             .addTo(GTNHPPRecipeMaps.sHPSFRecipes);
@@ -112,7 +113,7 @@ public class HBNRecipes {
             .itemInputs(dust(PrPMaterials.BNitrideWaste, 4), circuit(1))
             .fluidInputs(fluid(Materials.Nitrogen, 2000))
             .itemOutputs(dust(PrPMaterials.CrudeHBN, 1))
-            .duration(10 * 20)
+            .duration(10 * SECONDS)
             .eut(TierEU.RECIPE_ZPM)
             .metadata(GTRecipeConstants.COIL_HEAT, 6400)
             .addTo(GTNHPPRecipeMaps.sHTRFRecipes);

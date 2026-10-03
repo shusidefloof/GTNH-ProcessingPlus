@@ -3,6 +3,8 @@ package com.gtnh.processingplus.recipes.chains.materials;
 import static com.gtnh.processingplus.recipes.PPRecipeHelper.*;
 import static com.gtnh.processingplus.recipes.PPRecipeHelper.dust;
 import static com.gtnh.processingplus.recipes.PPRecipeHelper.fluid;
+import static gregtech.api.util.GTRecipeBuilder.SECONDS;
+import static gregtech.api.util.GTRecipeBuilder.TICKS;
 
 import com.gtnh.processingplus.materials.PrPMaterials;
 import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
@@ -34,7 +36,7 @@ public class PassiveableMaterials {
                 fluid(PrPMaterials.Ketene, 300))
             .itemOutputs(dust(Materials.Carbon, 25), dust(Materials.Ash, 5))
             .eut(TierEU.RECIPE_HV)
-            .duration(28 * 20)
+            .duration(28 * SECONDS)
             .metadata(GTRecipeConstants.COIL_HEAT, 975)
             .addTo(GTNHPPRecipeMaps.sHTRFRecipes);
 
@@ -48,7 +50,7 @@ public class PassiveableMaterials {
                 fluid(Materials.MethylAcetate, 250))
             .itemOutputs(dust(Materials.Carbon, 35), dust(Materials.Ash, 8))
             .eut(TierEU.RECIPE_HV)
-            .duration(40 * 20)
+            .duration(40 * SECONDS)
             .metadata(GTRecipeConstants.COIL_HEAT, 975)
             .addTo(GTNHPPRecipeMaps.sHTRFRecipes);
     }
@@ -65,9 +67,9 @@ public class PassiveableMaterials {
             .fluidInputs(fluid(Materials.Oxygen, 4000))
             .itemOutputs(dust(PrPMaterials.CoalFlyash, 4))
             .fluidOutputs(fluid(Materials.CarbonDioxide, 4000))
-            .duration(200)
+            .duration(10 * SECONDS)
             .eut(TierEU.RECIPE_HV)
-            .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+            .addTo(GTRecipeConstants.UniversalChemical);
 
         // =========================================================
         // 2. Sulfuric acid leach — dissolves Ga and Ge, silica stays
@@ -79,7 +81,7 @@ public class PassiveableMaterials {
             .fluidInputs(fluid(Materials.SulfuricAcid, 2000), fluid(Materials.Water, 1000))
             .itemOutputs(dust(Materials.SiliconDioxide, 2))
             .fluidOutputs(fluid(PrPMaterials.MetalLeachate, 4000))
-            .duration(300)
+            .duration(15 * SECONDS)
             .eut(TierEU.RECIPE_HV)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
 
@@ -95,7 +97,7 @@ public class PassiveableMaterials {
             .fluidInputs(fluid(PrPMaterials.MetalLeachate, 4000), fluid(Materials.Ammonia, 500))
             .itemOutputs(dust(PrPMaterials.GalliumHydroxide, 2), dust(PrPMaterials.GermaniumHydroxide, 2))
             .fluidOutputs(fluid(Materials.Water, 1000), fluid(Materials.Ammonia, 200))
-            .duration(200)
+            .duration(10 * SECONDS)
             .eut(TierEU.RECIPE_HV)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
 
@@ -107,7 +109,7 @@ public class PassiveableMaterials {
             .itemInputs(dust(PrPMaterials.GalliumHydroxide, 2), circuit(4))
             .fluidInputs(fluid(Materials.HydrochloricAcid, 3000))
             .fluidOutputs(fluid(PrPMaterials.GalliumTrichlorideSolution, 2000), fluid(Materials.Water, 1000))
-            .duration(160)
+            .duration(8 * SECONDS)
             .eut(TierEU.RECIPE_HV)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
 
@@ -119,7 +121,7 @@ public class PassiveableMaterials {
             .itemInputs(dust(PrPMaterials.GermaniumHydroxide, 2), circuit(5))
             .fluidInputs(fluid(Materials.HydrochloricAcid, 4000))
             .fluidOutputs(fluid(PrPMaterials.GermaniumTetrachlorideSolution, 2000), fluid(Materials.Water, 2000))
-            .duration(160)
+            .duration(8 * SECONDS)
             .eut(TierEU.RECIPE_HV)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
 
@@ -132,7 +134,7 @@ public class PassiveableMaterials {
             .fluidInputs(fluid(PrPMaterials.GalliumTrichlorideSolution, 2000))
             .itemOutputs(dust(Materials.Gallium, 3))
             .fluidOutputs(fluid(Materials.HydrochloricAcid, 3000))
-            .duration(300)
+            .duration(15 * SECONDS)
             .eut(TierEU.RECIPE_HV)
             .addTo(RecipeMaps.electrolyzerRecipes);
 
@@ -146,7 +148,7 @@ public class PassiveableMaterials {
             .fluidInputs(fluid(PrPMaterials.GermaniumTetrachlorideSolution, 2000), fluid(Materials.Hydrogen, 4000))
             .itemOutputs(GTOreDictUnificator.get(OrePrefixes.dust, "Germanium", 3))
             .fluidOutputs(fluid(Materials.HydrochloricAcid, 4000))
-            .duration(280)
+            .duration(14 * SECONDS)
             .eut(TierEU.RECIPE_HV)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
@@ -164,7 +166,7 @@ public class PassiveableMaterials {
             .itemInputs(item("dustPyrochlore", 4), circuit(1))
             .fluidInputs(fluid(Materials.HydrofluoricAcid, 2000))
             .fluidOutputs(fluid(PrPMaterials.NiobiumFluorideSolution, 2000))
-            .duration(10 * 14)
+            .duration(7 * SECONDS)
             .eut(TierEU.RECIPE_LV)
             .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
 
@@ -174,7 +176,7 @@ public class PassiveableMaterials {
             .fluidInputs(fluid(PrPMaterials.NiobiumFluorideSolution, 2000), fluid(Materials.Ammonia, 1000))
             .itemOutputs(dust(PrPMaterials.NiobiumPentoxide, 2))
             .fluidOutputs(fluid(Materials.HydrofluoricAcid, 1000))
-            .duration(20 * 5)
+            .duration(5 * SECONDS)
             .eut(TierEU.RECIPE_HV)
             .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
 
@@ -182,7 +184,7 @@ public class PassiveableMaterials {
         GTValues.RA.stdBuilder()
             .itemInputs(dust(PrPMaterials.NiobiumPentoxide, 3), dust(Materials.Aluminium, 4))
             .itemOutputs(ingot(Materials.Niobium, 6), item("dustAlumina", 10))
-            .duration(33 * 10)
+            .duration(330 * TICKS)
             .eut(TierEU.RECIPE_HV)
             .metadata(GTRecipeConstants.COIL_HEAT, 2750)
             .addTo(RecipeMaps.blastFurnaceRecipes);
@@ -199,7 +201,7 @@ public class PassiveableMaterials {
             .itemInputs(item("dustTantalite", 4), item("dustPyrochlore", 4), circuit(2))
             .fluidInputs(fluid(Materials.HydrofluoricAcid, 2000))
             .fluidOutputs(fluid(PrPMaterials.MixedTaNbFluorideSolution, 2000))
-            .duration(10 * 28)
+            .duration(14 * SECONDS)
             .eut(TierEU.RECIPE_EV)
             .addTo(RecipeMaps.mixerNonCellRecipes);
 
@@ -208,7 +210,7 @@ public class PassiveableMaterials {
         GTValues.RA.stdBuilder()
             .fluidInputs(fluid(PrPMaterials.MixedTaNbFluorideSolution, 2000), fluid(PrPMaterials.MIBK, 1000))
             .fluidOutputs(fluid(PrPMaterials.TaLoadedMIBK, 1000), fluid(PrPMaterials.NiobiumFluorideSolution, 1000))
-            .duration(20 * 10)
+            .duration(10 * SECONDS)
             .eut(TierEU.RECIPE_LV)
             .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
 
@@ -217,7 +219,7 @@ public class PassiveableMaterials {
             .fluidInputs(fluid(PrPMaterials.TaLoadedMIBK, 1000), fluid(Materials.Water, 500))
             .itemOutputs(dust(PrPMaterials.TantalumPentoxide, 4))
             .fluidOutputs(fluid(PrPMaterials.MIBK, 1000))
-            .duration(20 * 5)
+            .duration(5 * SECONDS)
             .eut(TierEU.RECIPE_LV)
             .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
 
@@ -225,7 +227,7 @@ public class PassiveableMaterials {
         GTValues.RA.stdBuilder()
             .itemInputs(dust(PrPMaterials.TantalumPentoxide, 3), dust(Materials.Aluminium, 4))
             .itemOutputs(ingot(Materials.Tantalum, 6), item("dustAlumina", 10))
-            .duration(224)
+            .duration(224 * TICKS)
             .eut(TierEU.RECIPE_HV)
             .metadata(GTRecipeConstants.COIL_HEAT, 2400)
             .addTo(RecipeMaps.blastFurnaceRecipes);
@@ -239,7 +241,7 @@ public class PassiveableMaterials {
             .itemInputs(circuit(3))
             .fluidInputs(fluid(Materials.Acetone, 2000), fluid(Materials.Hydrogen, 1000))
             .fluidOutputs(fluid(PrPMaterials.MIBK, 1000), fluid(Materials.Water, 1000))
-            .duration(300)
+            .duration(15 * SECONDS)
             .eut(TierEU.RECIPE_EV)
             .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
     }

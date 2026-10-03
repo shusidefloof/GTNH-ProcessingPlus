@@ -1,5 +1,6 @@
 package com.gtnh.processingplus.recipes;
 
+import com.gtnh.processingplus.GTNHProcessingPlus;
 import com.gtnh.processingplus.recipes.chains.infrastructure.AARRecipes;
 import com.gtnh.processingplus.recipes.chains.infrastructure.BOFRecipes;
 import com.gtnh.processingplus.recipes.chains.infrastructure.CACRecipes;
@@ -33,37 +34,37 @@ import com.gtnh.processingplus.recipes.chains.photoresist.PhotoresistRecipes;
 public class PrPlusRecipes {
 
     public static void init() {
-        System.out.println("PrPlusRecipes init");
+        GTNHProcessingPlus.LOG.info("Registering Processing+ recipe chains");
         // All photoresist tiers (MV → UMV) now live in PhotoresistRecipes; its own init()
         // handles the per-tier fault isolation for the UHV+ exotic-fluid tiers internally.
-        PhotoresistRecipes.init();
-        SPCRecipes.init();
-        Nylon66Recipes.init();
-        PLARecipes.init();
-        KaptonRecipes.init();
-        SiCRecipes.init();
-        HBNRecipes.init();
-        CarbonFiberRecipes.init();
-        AerogelRecipes.init();
-        MaterialUsesRecipes.init();
-        CRVRecipes.init();
-        CACRecipes.init();
-        RTGRecipes.init();
-        CIDCRecipes.init();
-        HPRRecipes.init();
-        SPURecipes.init();
-        FreonRecipes.init();
-        CSCRecipes.init();
-        BOFRecipes.init();
-        CSTRRecipes.init();
-        SCDRecipes.init();
-        CryoUpgradeRecipes.init();
-        NeptuniumSynthesis.init();
-        HPSFRecipes.init();
-        LuVExotics.init();
-        HTRFRecipes.init();
-        PassiveableMaterials.init();
-        AARRecipes.init();
-        DAFRecipes.init();
+        RecipeGuard.run("PhotoresistRecipes", PhotoresistRecipes::init);
+        RecipeGuard.run("SPCRecipes", SPCRecipes::init);
+        RecipeGuard.run("Nylon66Recipes", Nylon66Recipes::init);
+        RecipeGuard.run("PLARecipes", PLARecipes::init);
+        RecipeGuard.run("KaptonRecipes", KaptonRecipes::init);
+        RecipeGuard.run("SiCRecipes", SiCRecipes::init);
+        RecipeGuard.run("HBNRecipes", HBNRecipes::init);
+        RecipeGuard.run("CarbonFiberRecipes", CarbonFiberRecipes::init);
+        RecipeGuard.run("AerogelRecipes", AerogelRecipes::init);
+        RecipeGuard.run("MaterialUsesRecipes", MaterialUsesRecipes::init);
+        RecipeGuard.run("CRVRecipes", CRVRecipes::init);
+        RecipeGuard.run("CACRecipes", CACRecipes::init);
+        RecipeGuard.run("RTGRecipes", RTGRecipes::init);
+        RecipeGuard.run("CIDCRecipes", CIDCRecipes::init);
+        RecipeGuard.run("HPRRecipes", HPRRecipes::init);
+        RecipeGuard.run("SPURecipes", SPURecipes::init);
+        RecipeGuard.run("FreonRecipes", FreonRecipes::init);
+        RecipeGuard.run("CSCRecipes", CSCRecipes::init);
+        RecipeGuard.run("BOFRecipes", BOFRecipes::init);
+        RecipeGuard.run("CSTRRecipes", CSTRRecipes::init);
+        RecipeGuard.run("SCDRecipes", SCDRecipes::init);
+        RecipeGuard.run("CryoUpgradeRecipes", CryoUpgradeRecipes::init);
+        RecipeGuard.run("NeptuniumSynthesis", NeptuniumSynthesis::init);
+        RecipeGuard.run("HPSFRecipes", HPSFRecipes::init);
+        RecipeGuard.run("LuVExotics", LuVExotics::init);
+        RecipeGuard.run("HTRFRecipes", HTRFRecipes::init);
+        RecipeGuard.run("PassiveableMaterials", PassiveableMaterials::init);
+        RecipeGuard.run("AARRecipes", AARRecipes::init);
+        RecipeGuard.run("DAFRecipes", DAFRecipes::init);
     }
 }

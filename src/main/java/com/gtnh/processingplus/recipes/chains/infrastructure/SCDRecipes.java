@@ -113,7 +113,7 @@ public class SCDRecipes {
             .fluidInputs(fluid(PrPMaterials.PolyacrylonitrileSolution, 4000), fluid(Materials.Water, 1000))
             .itemOutputs(dust(PrPMaterials.WetPANGel, 4))
             .fluidOutputs(fluid(PrPMaterials.DilutedNMP, 3000))
-            .duration(1200)
+            .duration(60 * SECONDS)
             .eut(TierEU.RECIPE_EV)
             .addTo(GTNHPPRecipeMaps.sPCVRecipes);
 
@@ -128,7 +128,7 @@ public class SCDRecipes {
                 dust(PrPMaterials.PANAerogel, 4), // [0] perfect: aerogel network intact
                 dust(PrPMaterials.WetPANGel, 2)) // [1] degraded: gel collapsed, half returned
             .fluidOutputs(fluid(Materials.CarbonDioxide, 8000))
-            .duration(1000)
+            .duration(50 * SECONDS)
             .eut(TierEU.RECIPE_EV)
             .metadata(GTRecipeConstants.COIL_HEAT, MTE_SCD.encodeStageData(MTE_SCD.STAGE1_ETHANOL, 10, 24))
             .addTo(GTNHPPRecipeMaps.sSCDRecipes);
@@ -138,7 +138,7 @@ public class SCDRecipes {
             .itemInputs(dust(PrPMaterials.PANAerogel, 2), circuit(1))
             .itemOutputs(plate(PrPMaterials.CarbonAerogel, 2))
             .fluidOutputs(fluid(Materials.CarbonDioxide, 1000), fluid(Materials.Ammonia, 500))
-            .duration(600)
+            .duration(30 * SECONDS)
             .eut(TierEU.RECIPE_ZPM)
             .metadata(GTRecipeConstants.COIL_HEAT, 3600)
             .addTo(GTNHPPRecipeMaps.sHTRFRecipes);

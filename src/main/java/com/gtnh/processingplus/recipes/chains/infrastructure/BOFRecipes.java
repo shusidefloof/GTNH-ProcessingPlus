@@ -1,6 +1,7 @@
 package com.gtnh.processingplus.recipes.chains.infrastructure;
 
 import static com.gtnh.processingplus.recipes.PPRecipeHelper.*;
+import static gregtech.api.util.GTRecipeBuilder.SECONDS;
 
 import net.minecraft.item.ItemStack;
 
@@ -39,7 +40,7 @@ public class BOFRecipes {
                 plate(Materials.Copper, 1),
                 circuit(11))
             .itemOutputs(new ItemStack(GTNHPPBlocks.CASINGS, 1, BlockGTNHPPCasings.BOF_CASING))
-            .duration(300)
+            .duration(15 * SECONDS)
             .eut(TierEU.RECIPE_LV)
             .addTo(RecipeMaps.assemblerRecipes);
 
@@ -52,7 +53,7 @@ public class BOFRecipes {
                 ItemList.Hull_MV.get(1),
                 ItemList.Electric_Pump_MV.get(1))
             .itemOutputs(controller)
-            .duration(10 * 20)
+            .duration(10 * SECONDS)
             .eut(TierEU.RECIPE_MV)
             .addTo(RecipeMaps.assemblerRecipes);
 
@@ -79,7 +80,7 @@ public class BOFRecipes {
             .fluidInputs(fluid(Materials.Oxygen, 800))
             .itemOutputs(ingot(Materials.Steel, 16), dust(PrPMaterials.BOFSlag, 1))
             .fluidOutputs(fluid(Materials.CarbonDioxide, 800))
-            .duration(5 * 8 * 20)
+            .duration(40 * SECONDS)
             .eut(TierEU.RECIPE_MV)
             .addTo(GTNHPPRecipeMaps.sBOFRecipes);
     }
@@ -90,7 +91,7 @@ public class BOFRecipes {
             .fluidInputs(fluid(Materials.Oxygen, 1600))
             .itemOutputs(ingot(Materials.Steel, 20), dust(PrPMaterials.BOFSlag, 2))
             .fluidOutputs(fluid(Materials.CarbonDioxide, 1600))
-            .duration(4 * 8 * 20)
+            .duration(32 * SECONDS)
             .eut(TierEU.RECIPE_MV)
             .addTo(GTNHPPRecipeMaps.sBOFRecipes);
     }
@@ -101,7 +102,7 @@ public class BOFRecipes {
             .fluidInputs(fluid(Materials.Oxygen, 1800))
             .itemOutputs(ingot(Materials.Steel, 24), dust(PrPMaterials.BOFSlag, 4))
             .fluidOutputs(fluid(Materials.CarbonDioxide, 1600), fluid(Materials.CarbonMonoxide, 400))
-            .duration(3 * 8 * 20)
+            .duration(24 * SECONDS)
             .eut(TierEU.RECIPE_MV)
             .addTo(GTNHPPRecipeMaps.sBOFRecipes);
     }
@@ -110,7 +111,7 @@ public class BOFRecipes {
         GTValues.RA.stdBuilder()
             .itemInputs(dust(PrPMaterials.BOFSlag, 5))
             .itemOutputs(dust(PrPMaterials.SlagResidue, 2), dust(Materials.Iron, 2), dust(Materials.Manganese, 1))
-            .duration(3 * 20)
+            .duration(3 * SECONDS)
             .eut(TierEU.RECIPE_LV)
             .addTo(RecipeMaps.centrifugeRecipes);
     }
@@ -124,7 +125,7 @@ public class BOFRecipes {
                 dust(Materials.Magnesia, 1),
                 dust(Materials.Aluminiumoxide, 1))
             .outputChances(10000, 6000, 4000, 1000)
-            .duration(3 * 20)
+            .duration(3 * SECONDS)
             .eut(TierEU.RECIPE_LV)
             .addTo(RecipeMaps.sifterRecipes);
     }

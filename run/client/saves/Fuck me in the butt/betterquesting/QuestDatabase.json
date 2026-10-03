@@ -7206,86 +7206,6 @@
 					"groupDetect:1": 0,
 					"requiredItems:9": {
 						"0:10": {
-							"Damage:2": 26021,
-							"Count:3": 1,
-							"id:8": "bartworks:gt.bwMetaGeneratedplate",
-							"OreDict:8": ""
-						}
-					},
-					"partialMatch:1": 1,
-					"consume:1": 0,
-					"autoConsume:1": 0,
-					"requireOnlyOneItem:1": 0,
-					"taskID:8": "bq_standard:retrieval",
-					"ignoreNBT:1": 1
-				}
-			},
-			"properties:10": {
-				"betterquesting:10": {
-					"notification_pos_y:3": -2147483648,
-					"notification_subtitle_scale:5": -1.0,
-					"visibility:8": "NORMAL",
-					"notification_style:8": "default",
-					"notification_duration:5": -1.0,
-					"completion_particle:8": "default",
-					"isMain:1": 1,
-					"lockedProgress:1": 0,
-					"repeat_relative:1": 1,
-					"notification_fade_out:5": -1.0,
-					"repeatTime:3": -1,
-					"snd_complete:8": "random.levelup",
-					"notification_pos_x:3": -2147483648,
-					"particle_count:3": -1,
-					"countAsQuest:1": 1,
-					"autoClaim:1": 0,
-					"globalShare:1": 0,
-					"desc:8": "Some new recipes require heats the LCR cant produce, so you invent the High temperature reaction furnace! But it needs one key material: Sintered Silicon Carbide.\n\n[note]Hint: Look at the forming press recipe for the plate.[/note]\n\n§1§b§9I wont be guiding you through this one this time, buuuut you have ae2 and know all about NEI now. You got this :3 - _Shusi_§r§r§r",
-					"notification_icon_scale:5": -1.0,
-					"notification_show_icon:8": "default",
-					"notification_fade_in:5": -1.0,
-					"icon:10": {
-						"id:8": "bartworks:gt.bwMetaGeneratedplate",
-						"Count:3": 1,
-						"Damage:2": 26021,
-						"OreDict:8": ""
-					},
-					"isSilent:1": 0,
-					"notification_subtitle:8": "",
-					"snd_update:8": "random.levelup",
-					"questLogic:8": "AND",
-					"name:8": "Sintered Silicon Carbide",
-					"simultaneous:1": 0,
-					"taskLogic:8": "AND",
-					"notification_title_scale:5": -1.0,
-					"notification_title:8": "",
-					"completion_animation:8": "default",
-					"notification_icon_offset_y:3": -2147483648,
-					"confetti_icon:10": {
-						"id:8": "minecraft:stick",
-						"Count:3": 0,
-						"Damage:2": 0,
-						"OreDict:8": ""
-					},
-					"notification_effect:3": -1
-				}
-			},
-			"questIDLow:4": -5668457176060846583,
-			"questIDHigh:4": 5010570215718274062,
-			"preRequisites:9": {
-				"0:10": {
-					"questIDLow:4": -7519587440605316000,
-					"questIDHigh:4": 1995950255882456300
-				}
-			},
-			"rewards:9": {}
-		},
-		"76:10": {
-			"tasks:9": {
-				"0:10": {
-					"index:3": 0,
-					"groupDetect:1": 0,
-					"requiredItems:9": {
-						"0:10": {
 							"Damage:2": 2059,
 							"Count:3": 1,
 							"id:8": "gregtech:gt.metaitem.01",
@@ -7384,7 +7304,7 @@
 			},
 			"rewards:9": {}
 		},
-		"77:10": {
+		"76:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -7492,7 +7412,7 @@
 			},
 			"rewards:9": {}
 		},
-		"78:10": {
+		"77:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -7590,7 +7510,7 @@
 			},
 			"rewards:9": {}
 		},
-		"79:10": {
+		"78:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -7699,7 +7619,7 @@
 			},
 			"rewards:9": {}
 		},
-		"80:10": {
+		"79:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -7797,7 +7717,7 @@
 			},
 			"rewards:9": {}
 		},
-		"81:10": {
+		"80:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -7915,7 +7835,7 @@
 			},
 			"rewards:9": {}
 		},
-		"82:10": {
+		"81:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -8025,7 +7945,7 @@
 			},
 			"rewards:9": {}
 		},
-		"83:10": {
+		"82:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -8135,7 +8055,7 @@
 			},
 			"rewards:9": {}
 		},
-		"84:10": {
+		"83:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -8233,7 +8153,7 @@
 			},
 			"rewards:9": {}
 		},
-		"85:10": {
+		"84:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -8331,7 +8251,7 @@
 			},
 			"rewards:9": {}
 		},
-		"86:10": {
+		"85:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -8441,7 +8361,7 @@
 			},
 			"rewards:9": {}
 		},
-		"87:10": {
+		"86:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -8565,7 +8485,7 @@
 			},
 			"rewards:9": {}
 		},
-		"88:10": {
+		"87:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -8640,7 +8560,7 @@
 			},
 			"rewards:9": {}
 		},
-		"89:10": {
+		"88:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 1,
@@ -8721,7 +8641,7 @@
 			},
 			"rewards:9": {}
 		},
-		"90:10": {
+		"89:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -8825,7 +8745,7 @@
 			},
 			"rewards:9": {}
 		},
-		"91:10": {
+		"90:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -8900,7 +8820,7 @@
 			},
 			"rewards:9": {}
 		},
-		"92:10": {
+		"91:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -9004,7 +8924,7 @@
 			},
 			"rewards:9": {}
 		},
-		"93:10": {
+		"92:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -9114,7 +9034,7 @@
 			},
 			"rewards:9": {}
 		},
-		"94:10": {
+		"93:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -9219,7 +9139,7 @@
 			},
 			"rewards:9": {}
 		},
-		"95:10": {
+		"94:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -9293,7 +9213,7 @@
 			},
 			"rewards:9": {}
 		},
-		"96:10": {
+		"95:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -9397,7 +9317,7 @@
 			},
 			"rewards:9": {}
 		},
-		"97:10": {
+		"96:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -9505,7 +9425,7 @@
 			},
 			"rewards:9": {}
 		},
-		"98:10": {
+		"97:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -9585,7 +9505,7 @@
 			},
 			"rewards:9": {}
 		},
-		"99:10": {
+		"98:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -9689,7 +9609,7 @@
 			},
 			"rewards:9": {}
 		},
-		"100:10": {
+		"99:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -9787,7 +9707,7 @@
 			},
 			"rewards:9": {}
 		},
-		"101:10": {
+		"100:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -9867,7 +9787,7 @@
 			},
 			"rewards:9": {}
 		},
-		"102:10": {
+		"101:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -9975,7 +9895,7 @@
 			},
 			"rewards:9": {}
 		},
-		"103:10": {
+		"102:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -10085,7 +10005,7 @@
 			},
 			"rewards:9": {}
 		},
-		"104:10": {
+		"103:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -10206,7 +10126,7 @@
 			},
 			"rewards:9": {}
 		},
-		"105:10": {
+		"104:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -10351,7 +10271,7 @@
 			},
 			"rewards:9": {}
 		},
-		"106:10": {
+		"105:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -10459,7 +10379,7 @@
 			},
 			"rewards:9": {}
 		},
-		"107:10": {
+		"106:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -10569,7 +10489,7 @@
 			},
 			"rewards:9": {}
 		},
-		"108:10": {
+		"107:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -10671,7 +10591,7 @@
 			},
 			"rewards:9": {}
 		},
-		"109:10": {
+		"108:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 1,
@@ -10752,7 +10672,7 @@
 			},
 			"rewards:9": {}
 		},
-		"110:10": {
+		"109:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -10873,7 +10793,7 @@
 			},
 			"rewards:9": {}
 		},
-		"111:10": {
+		"110:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -10940,7 +10860,7 @@
 			},
 			"rewards:9": {}
 		},
-		"112:10": {
+		"111:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -11058,7 +10978,7 @@
 			},
 			"rewards:9": {}
 		},
-		"113:10": {
+		"112:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -11156,7 +11076,7 @@
 			},
 			"rewards:9": {}
 		},
-		"114:10": {
+		"113:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -11265,7 +11185,7 @@
 			},
 			"rewards:9": {}
 		},
-		"115:10": {
+		"114:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -11331,7 +11251,7 @@
 			},
 			"rewards:9": {}
 		},
-		"116:10": {
+		"115:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -11442,7 +11362,7 @@
 			},
 			"rewards:9": {}
 		},
-		"117:10": {
+		"116:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -11570,7 +11490,7 @@
 			},
 			"rewards:9": {}
 		},
-		"118:10": {
+		"117:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -11668,7 +11588,7 @@
 			},
 			"rewards:9": {}
 		},
-		"119:10": {
+		"118:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -11778,7 +11698,7 @@
 			},
 			"rewards:9": {}
 		},
-		"120:10": {
+		"119:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -11883,7 +11803,7 @@
 			},
 			"rewards:9": {}
 		},
-		"121:10": {
+		"120:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -11994,7 +11914,7 @@
 			},
 			"rewards:9": {}
 		},
-		"122:10": {
+		"121:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -12093,7 +12013,7 @@
 			},
 			"rewards:9": {}
 		},
-		"123:10": {
+		"122:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -12206,7 +12126,7 @@
 			},
 			"rewards:9": {}
 		},
-		"124:10": {
+		"123:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -12311,7 +12231,7 @@
 			},
 			"rewards:9": {}
 		},
-		"125:10": {
+		"124:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -12419,7 +12339,7 @@
 			},
 			"rewards:9": {}
 		},
-		"126:10": {
+		"125:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -12531,7 +12451,7 @@
 			},
 			"rewards:9": {}
 		},
-		"127:10": {
+		"126:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -12639,7 +12559,7 @@
 			},
 			"rewards:9": {}
 		},
-		"128:10": {
+		"127:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -12709,7 +12629,7 @@
 			},
 			"rewards:9": {}
 		},
-		"129:10": {
+		"128:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -12775,7 +12695,7 @@
 			},
 			"rewards:9": {}
 		},
-		"130:10": {
+		"129:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -12886,7 +12806,7 @@
 			},
 			"rewards:9": {}
 		},
-		"131:10": {
+		"130:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -12985,7 +12905,7 @@
 			},
 			"rewards:9": {}
 		},
-		"132:10": {
+		"131:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -13089,7 +13009,7 @@
 			},
 			"rewards:9": {}
 		},
-		"133:10": {
+		"132:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -13193,7 +13113,7 @@
 			},
 			"rewards:9": {}
 		},
-		"134:10": {
+		"133:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -13291,7 +13211,7 @@
 			},
 			"rewards:9": {}
 		},
-		"135:10": {
+		"134:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -13389,7 +13309,7 @@
 			},
 			"rewards:9": {}
 		},
-		"136:10": {
+		"135:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -13469,7 +13389,7 @@
 			},
 			"rewards:9": {}
 		},
-		"137:10": {
+		"136:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -13567,7 +13487,7 @@
 			},
 			"rewards:9": {}
 		},
-		"138:10": {
+		"137:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -13665,7 +13585,7 @@
 			},
 			"rewards:9": {}
 		},
-		"139:10": {
+		"138:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -13770,7 +13690,7 @@
 			},
 			"rewards:9": {}
 		},
-		"140:10": {
+		"139:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -13869,7 +13789,7 @@
 			},
 			"rewards:9": {}
 		},
-		"141:10": {
+		"140:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -13984,7 +13904,7 @@
 			},
 			"rewards:9": {}
 		},
-		"142:10": {
+		"141:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -14088,7 +14008,7 @@
 			},
 			"rewards:9": {}
 		},
-		"143:10": {
+		"142:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -14205,7 +14125,7 @@
 			},
 			"rewards:9": {}
 		},
-		"144:10": {
+		"143:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -14309,7 +14229,7 @@
 			},
 			"rewards:9": {}
 		},
-		"145:10": {
+		"144:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -14414,7 +14334,7 @@
 			},
 			"rewards:9": {}
 		},
-		"146:10": {
+		"145:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -14524,7 +14444,7 @@
 			},
 			"rewards:9": {}
 		},
-		"147:10": {
+		"146:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 1,
@@ -14605,7 +14525,7 @@
 			},
 			"rewards:9": {}
 		},
-		"148:10": {
+		"147:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -14709,7 +14629,7 @@
 			},
 			"rewards:9": {}
 		},
-		"149:10": {
+		"148:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -14825,7 +14745,7 @@
 			},
 			"rewards:9": {}
 		},
-		"150:10": {
+		"149:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -14929,7 +14849,7 @@
 			},
 			"rewards:9": {}
 		},
-		"151:10": {
+		"150:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -15019,7 +14939,7 @@
 			},
 			"rewards:9": {}
 		},
-		"152:10": {
+		"151:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -15099,7 +15019,7 @@
 			},
 			"rewards:9": {}
 		},
-		"153:10": {
+		"152:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -15204,7 +15124,7 @@
 			},
 			"rewards:9": {}
 		},
-		"154:10": {
+		"153:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -15308,7 +15228,7 @@
 			},
 			"rewards:9": {}
 		},
-		"155:10": {
+		"154:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -15388,7 +15308,7 @@
 			},
 			"rewards:9": {}
 		},
-		"156:10": {
+		"155:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -15492,7 +15412,7 @@
 			},
 			"rewards:9": {}
 		},
-		"157:10": {
+		"156:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -15600,7 +15520,7 @@
 			},
 			"rewards:9": {}
 		},
-		"158:10": {
+		"157:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -15698,7 +15618,7 @@
 			},
 			"rewards:9": {}
 		},
-		"159:10": {
+		"158:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -15802,7 +15722,7 @@
 			},
 			"rewards:9": {}
 		},
-		"160:10": {
+		"159:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -15910,7 +15830,7 @@
 			},
 			"rewards:9": {}
 		},
-		"161:10": {
+		"160:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -16015,7 +15935,7 @@
 			},
 			"rewards:9": {}
 		},
-		"162:10": {
+		"161:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -16081,7 +16001,7 @@
 			},
 			"rewards:9": {}
 		},
-		"163:10": {
+		"162:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -16191,7 +16111,7 @@
 			},
 			"rewards:9": {}
 		},
-		"164:10": {
+		"163:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -16295,7 +16215,7 @@
 			},
 			"rewards:9": {}
 		},
-		"165:10": {
+		"164:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -16381,7 +16301,7 @@
 			},
 			"rewards:9": {}
 		},
-		"166:10": {
+		"165:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -16501,7 +16421,7 @@
 			},
 			"rewards:9": {}
 		},
-		"167:10": {
+		"166:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 1,
@@ -16582,7 +16502,7 @@
 			},
 			"rewards:9": {}
 		},
-		"168:10": {
+		"167:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -16691,7 +16611,7 @@
 			},
 			"rewards:9": {}
 		},
-		"169:10": {
+		"168:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -16811,7 +16731,7 @@
 			},
 			"rewards:9": {}
 		},
-		"170:10": {
+		"169:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -16921,7 +16841,7 @@
 			},
 			"rewards:9": {}
 		},
-		"171:10": {
+		"170:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -17041,7 +16961,7 @@
 			},
 			"rewards:9": {}
 		},
-		"172:10": {
+		"171:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -17145,7 +17065,7 @@
 			},
 			"rewards:9": {}
 		},
-		"173:10": {
+		"172:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -17256,7 +17176,7 @@
 			},
 			"rewards:9": {}
 		},
-		"174:10": {
+		"173:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -17354,7 +17274,7 @@
 			},
 			"rewards:9": {}
 		},
-		"175:10": {
+		"174:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -17424,7 +17344,7 @@
 			},
 			"rewards:9": {}
 		},
-		"176:10": {
+		"175:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -17529,7 +17449,7 @@
 			},
 			"rewards:9": {}
 		},
-		"177:10": {
+		"176:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -17595,7 +17515,7 @@
 			},
 			"rewards:9": {}
 		},
-		"178:10": {
+		"177:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -17675,7 +17595,7 @@
 			},
 			"rewards:9": {}
 		},
-		"179:10": {
+		"178:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 1,
@@ -17755,7 +17675,7 @@
 			},
 			"rewards:9": {}
 		},
-		"180:10": {
+		"179:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -17859,7 +17779,7 @@
 			},
 			"rewards:9": {}
 		},
-		"181:10": {
+		"180:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -17973,7 +17893,7 @@
 			},
 			"rewards:9": {}
 		},
-		"182:10": {
+		"181:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -18053,7 +17973,7 @@
 			},
 			"rewards:9": {}
 		},
-		"183:10": {
+		"182:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -18167,6 +18087,86 @@
 				"2:10": {
 					"questIDLow:4": -6443156250770151000,
 					"questIDHigh:4": 5069795611463469000
+				}
+			},
+			"rewards:9": {}
+		},
+		"183:10": {
+			"tasks:9": {
+				"0:10": {
+					"index:3": 0,
+					"groupDetect:1": 0,
+					"requiredItems:9": {
+						"0:10": {
+							"Damage:2": 26021,
+							"Count:3": 1,
+							"id:8": "bartworks:gt.bwMetaGeneratedplate",
+							"OreDict:8": ""
+						}
+					},
+					"partialMatch:1": 1,
+					"consume:1": 0,
+					"autoConsume:1": 0,
+					"requireOnlyOneItem:1": 0,
+					"taskID:8": "bq_standard:retrieval",
+					"ignoreNBT:1": 1
+				}
+			},
+			"properties:10": {
+				"betterquesting:10": {
+					"notification_pos_y:3": -2147483648,
+					"notification_subtitle_scale:5": -1.0,
+					"visibility:8": "NORMAL",
+					"notification_style:8": "default",
+					"notification_duration:5": -1.0,
+					"completion_particle:8": "default",
+					"isMain:1": 1,
+					"lockedProgress:1": 0,
+					"repeat_relative:1": 1,
+					"notification_fade_out:5": -1.0,
+					"repeatTime:3": -1,
+					"snd_complete:8": "random.levelup",
+					"notification_pos_x:3": -2147483648,
+					"particle_count:3": -1,
+					"countAsQuest:1": 1,
+					"autoClaim:1": 0,
+					"globalShare:1": 0,
+					"desc:8": "Some new recipes require heats the LCR cant produce, so you invent the High temperature reaction furnace! But it needs one key material: Sintered Silicon Carbide.\r\n\r\n[note]Hint: Look at the forming press recipe for the plate.[/note]\r\n\r\n§1§b§9I wont be guiding you through this one this time, buuuut you have ae2 and know all about NEI now. You got this :3 - _Shusi_§r§r§r\n",
+					"notification_icon_scale:5": -1.0,
+					"notification_show_icon:8": "default",
+					"notification_fade_in:5": -1.0,
+					"icon:10": {
+						"id:8": "bartworks:gt.bwMetaGeneratedplate",
+						"Count:3": 1,
+						"Damage:2": 26021,
+						"OreDict:8": ""
+					},
+					"isSilent:1": 0,
+					"notification_subtitle:8": "",
+					"snd_update:8": "random.levelup",
+					"questLogic:8": "AND",
+					"name:8": "Sintered Silicon Carbide",
+					"simultaneous:1": 0,
+					"taskLogic:8": "AND",
+					"notification_title_scale:5": -1.0,
+					"notification_title:8": "",
+					"completion_animation:8": "default",
+					"notification_icon_offset_y:3": -2147483648,
+					"confetti_icon:10": {
+						"id:8": "minecraft:stick",
+						"Count:3": 0,
+						"Damage:2": 0,
+						"OreDict:8": ""
+					},
+					"notification_effect:3": -1
+				}
+			},
+			"questIDLow:4": -5959544802892301403,
+			"questIDHigh:4": -3834224068378081890,
+			"preRequisites:9": {
+				"0:10": {
+					"questIDLow:4": -7519587440605316000,
+					"questIDHigh:4": 1995950255882456300
 				}
 			},
 			"rewards:9": {}
@@ -18516,14 +18516,14 @@
 					"name:8": "Processing Plus",
 					"desc:8": "No Description",
 					"visibility:8": "NORMAL",
-					"bg_size:3": 256,
+					"bg_image:8": "",
 					"icon:10": {
 						"id:8": "minecraft:book",
 						"Count:3": 1,
 						"Damage:2": 0,
 						"OreDict:8": ""
 					},
-					"bg_image:8": ""
+					"bg_size:3": 256
 				}
 			},
 			"questLineIDLow:4": -6223215535381161000,
@@ -19131,8 +19131,8 @@
 				},
 				"75:10": {
 					"sizeY:3": 24,
-					"questIDLow:4": -5668457176060846583,
-					"questIDHigh:4": 5010570215718274062,
+					"questIDLow:4": -5668457176060846000,
+					"questIDHigh:4": 5010570215718274000,
 					"y:3": -84,
 					"x:3": -1284,
 					"sizeX:3": 24
@@ -20003,13 +20003,21 @@
 				},
 				"184:10": {
 					"sizeY:3": 24,
+					"questIDLow:4": -5959544802892301403,
+					"questIDHigh:4": -3834224068378081890,
+					"y:3": -84,
+					"x:3": -1284,
+					"sizeX:3": 24
+				},
+				"185:10": {
+					"sizeY:3": 24,
 					"questIDLow:4": -8972983882663780000,
 					"questIDHigh:4": -3597140004563304000,
 					"y:3": 276,
 					"x:3": -672,
 					"sizeX:3": 24
 				},
-				"185:10": {
+				"186:10": {
 					"sizeY:3": 48,
 					"questIDLow:4": -6205679258259921000,
 					"questIDHigh:4": -3566378047443745000,
@@ -20017,7 +20025,7 @@
 					"x:3": -1704,
 					"sizeX:3": 48
 				},
-				"186:10": {
+				"187:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -6751955226285180000,
 					"questIDHigh:4": -3563828547740087300,
@@ -20035,13 +20043,13 @@
 			"home_offset_x:3": -128,
 			"home_image:8": "betterquesting:textures/gui/default_title.png",
 			"livesDef:3": 3,
-			"party_enable:1": 1,
-			"hardcore:1": 0,
-			"editMode:1": 1,
-			"pack_version:3": 0,
 			"pack_name:8": "",
-			"home_anchor_y:5": 0.0,
-			"home_offset_y:3": 0
+			"pack_version:3": 0,
+			"editMode:1": 1,
+			"hardcore:1": 0,
+			"party_enable:1": 1,
+			"home_offset_y:3": 0,
+			"home_anchor_y:5": 0.0
 		}
 	},
 	"format:8": "3.1.0",

@@ -36,6 +36,7 @@ import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.gtnh.processingplus.blocks.BlockGTNHPPCasings;
 import com.gtnh.processingplus.blocks.GTNHPPBlocks;
 import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
+import com.gtnh.processingplus.recipes.PPRecipeHelper;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
@@ -51,7 +52,6 @@ import gregtech.api.recipe.RecipeMap;
 import gregtech.api.recipe.check.CheckRecipeResult;
 import gregtech.api.render.TextureFactory;
 import gregtech.api.structure.error.StructureError;
-import gregtech.api.structure.error.StructureErrorRegistry;
 import gregtech.api.util.GTRecipe;
 import gregtech.api.util.MultiblockTooltipBuilder;
 
@@ -273,8 +273,14 @@ public class MTE_SCD extends MTEExtendedPowerMultiBlockBase<MTE_SCD> implements 
 
     @Override
     public void checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack, List<StructureError> errors) {
-        checkPiece(STRUCTURE_PIECE_MAIN, OFFSET_X, OFFSET_Y, OFFSET_Z, errors);
-        if (mMaintenanceHatches.size() != 1) errors.add(StructureErrorRegistry.UNKNOWN_STRUCTURE_ERROR);
+        if (!checkPiece(STRUCTURE_PIECE_MAIN, OFFSET_X, OFFSET_Y, OFFSET_Z, errors)) return;
+        checkOneMaintenanceHatch(errors);
+        checkHasEnergyHatch(errors);
+        checkHasMufflerHatch(errors);
+        checkHasInputBus(errors);
+        checkHasOutputBus(errors);
+        if (PPRecipeHelper.recipeMapHasFluidInputs(getRecipeMap())) checkHasInputHatch(errors);
+        if (PPRecipeHelper.recipeMapHasFluidOutputs(getRecipeMap())) checkHasOutputHatch(errors);
         // Stage fluids are not declared as recipe inputs (they're consumed per-tick).
         // Disable the hatch filter so the player can insert any fluid during a recipe run.
         for (MTEHatchInput hatch : mInputHatches) {
@@ -698,14 +704,14 @@ public class MTE_SCD extends MTEExtendedPowerMultiBlockBase<MTE_SCD> implements 
                     + " to read current stage and status.")
             .beginStructureBlock(12, 10, 9, true)
             .addController("Front face, center (row 5, col 7)")
-            .addCasingInfoMin("High-Pressure Containment Casing", 1, false)
-            .addInputBus("Any High-Pressure Containment Casing (I)", 1)
-            .addInputHatch("Any High-Pressure Containment Casing (I)", 1)
-            .addOutputBus("Any High-Pressure Containment Casing (I)", 1)
-            .addOutputHatch("Any High-Pressure Containment Casing (I)", 1)
-            .addEnergyHatch("Any High-Pressure Containment Casing (I)", 1)
-            .addMufflerHatch("Any High-Pressure Containment Casing (I)", 1)
-            .addMaintenanceHatch("Any High-Pressure Containment Casing (I)", 1)
+            .addCasing("1+", "High-Pressure Containment Casing", false)
+            .addEnergyHatch("1+", "Any High-Pressure Containment Casing (I)", 1)
+            .addMaintenanceHatch("1", "Any High-Pressure Containment Casing (I)", 1)
+            .addMufflerHatch("1", "Any High-Pressure Containment Casing (I)", 1)
+            .addInputBus("1+", "Any High-Pressure Containment Casing (I)", 1)
+            .addInputHatch("1+", "Any High-Pressure Containment Casing (I)", 1)
+            .addOutputBus("1+", "Any High-Pressure Containment Casing (I)", 1)
+            .addOutputHatch("1+", "Any High-Pressure Containment Casing (I)", 1)
             .toolTipFinisher("_Shusi_");
         return tt;
     }

@@ -33,8 +33,8 @@ public class HTRFRecipes {
             .itemInputs(
                 new ItemStack(GTNHPPBlocks.CASINGS, 4, BlockGTNHPPCasings.HTRF_CASING),
                 GTOreDictUnificator.get(OrePrefixes.circuit, Materials.EV, 4),
-                ItemList.Field_Generator_EV.get(1),
-                plate(PrPMaterials.SinteredSiliconCarbide, 4))
+                plate(PrPMaterials.SinteredSiliconCarbide, 4),
+                ItemList.Casing_Coil_Cupronickel.get(2))
             .fluidInputs(molten(Materials.SolderingAlloy, 1152))
             .itemOutputs(GTNHPPBlocks.HTRF.getStackForm(1))
             .duration(1000)

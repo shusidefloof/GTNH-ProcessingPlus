@@ -31,6 +31,7 @@ import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.gtnh.processingplus.blocks.BlockGTNHPPCasings;
 import com.gtnh.processingplus.blocks.GTNHPPBlocks;
 import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
+import com.gtnh.processingplus.recipes.PPRecipeHelper;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
@@ -48,7 +49,7 @@ import gregtech.api.recipe.check.CheckRecipeResult;
 import gregtech.api.recipe.check.CheckRecipeResultRegistry;
 import gregtech.api.render.TextureFactory;
 import gregtech.api.structure.error.StructureError;
-import gregtech.api.structure.error.StructureErrorRegistry;
+import gregtech.api.structure.error.StructureErrors;
 import gregtech.api.util.GTRecipe;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.MultiblockTooltipBuilder;
@@ -227,14 +228,22 @@ public class MTE_HPSF extends MTEExtendedPowerMultiBlockBase<MTE_HPSF> implement
         if (!checkPiece(STRUCTURE_PIECE_MAIN, OFFSET_X, OFFSET_Y, OFFSET_Z, errors)) return;
 
         if (mGlassTier <= 0) {
-            errors.add(StructureErrorRegistry.UNKNOWN_STRUCTURE_ERROR);
+            errors.add(StructureErrors.of("GT5U.gui.text.structure_error.hpsf_missing_glass"));
         }
 
-        if (getCoilLevel() == HeatingCoilLevel.None) errors.add(StructureErrorRegistry.UNKNOWN_STRUCTURE_ERROR);
+        if (getCoilLevel() == HeatingCoilLevel.None)
+            errors.add(StructureErrors.of("GT5U.gui.text.structure_error.hpsf_missing_coil"));
 
-        if (mPipeCasingTier == -1) errors.add(StructureErrorRegistry.UNKNOWN_STRUCTURE_ERROR);
+        if (mPipeCasingTier == -1)
+            errors.add(StructureErrors.of("GT5U.gui.text.structure_error.hpsf_missing_pipe_casing"));
 
-        if (mMaintenanceHatches.size() != 1) errors.add(StructureErrorRegistry.UNKNOWN_STRUCTURE_ERROR);
+        checkOneMaintenanceHatch(errors);
+        checkHasEnergyHatch(errors);
+        checkHasMufflerHatch(errors);
+        checkHasInputBus(errors);
+        checkHasOutputBus(errors);
+        if (PPRecipeHelper.recipeMapHasFluidInputs(getRecipeMap())) checkHasInputHatch(errors);
+        if (PPRecipeHelper.recipeMapHasFluidOutputs(getRecipeMap())) checkHasOutputHatch(errors);
 
         if (!errors.isEmpty()) return;
 
@@ -372,20 +381,20 @@ public class MTE_HPSF extends MTEExtendedPowerMultiBlockBase<MTE_HPSF> implement
                     + " — consumed as a recipe fluid each cycle.")
             .beginStructureBlock(11, 8, 13, true)
             .addController("Center of the 3×3 face on the control chamber")
-            .addCasingInfoMin("Hardened Pressure Vessel Casing", 1, false)
-            .addCasingInfoMin("Pressure Vessel Ring Casing", 1, false)
-            .addCasingInfoMin("Dual-Sealed Atmosphere Pipe Casing", 1, false)
+            .addCasing("1+", "Hardened Pressure Vessel Casing", false)
+            .addCasing("1+", "Pressure Vessel Ring Casing", false)
+            .addCasing("1+", "Dual-Sealed Atmosphere Pipe Casing", false)
             .addOtherStructurePart("Heating Coils", "Inner sintering chamber lining")
             .addOtherStructurePart("TungstenSteel Frames", "Structural ring support")
             .addOtherStructurePart("BW Glass Blocks (any tier)", "Viewport end caps")
             .addOtherStructurePart("IC2 Reinforced Stone", "Base layer")
-            .addInputBus("Any casing position", 1)
-            .addInputHatch("Any casing position", 1)
-            .addOutputBus("Any casing position", 1)
-            .addOutputHatch("Any casing position", 1)
-            .addEnergyHatch("Any casing position", 1)
-            .addMufflerHatch("Any casing position", 1)
-            .addMaintenanceHatch("Any casing position", 1)
+            .addEnergyHatch("1+", "Any casing position", 1)
+            .addMaintenanceHatch("1", "Any casing position", 1)
+            .addMufflerHatch("1", "Any casing position", 1)
+            .addInputBus("1+", "Any casing position", 1)
+            .addInputHatch("1+", "Any casing position", 1)
+            .addOutputBus("1+", "Any casing position", 1)
+            .addOutputHatch("1+", "Any casing position", 1)
             .toolTipFinisher("_Shusi_");
         return tt;
     }

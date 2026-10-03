@@ -1,4 +1,4 @@
-package com.gtnh.processingplus.recipes.chains.materials.finishedChains;
+package com.gtnh.processingplus.recipes.chains.materials;
 
 import static com.gtnh.processingplus.recipes.PPRecipeHelper.*;
 import static com.gtnh.processingplus.recipes.PPRecipeHelper.dust;
@@ -164,8 +164,8 @@ public class PassiveableMaterials {
             .itemInputs(item("dustPyrochlore", 4), circuit(1))
             .fluidInputs(fluid(Materials.HydrofluoricAcid, 2000))
             .fluidOutputs(fluid(PrPMaterials.NiobiumFluorideSolution, 2000))
-            .duration(400)
-            .eut(TierEU.RECIPE_EV)
+            .duration(10 * 14)
+            .eut(TierEU.RECIPE_LV)
             .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
 
         // NH₃ precipitates Nb(OH)₅; calcination collapses it to Nb₂O₅.
@@ -174,15 +174,15 @@ public class PassiveableMaterials {
             .fluidInputs(fluid(PrPMaterials.NiobiumFluorideSolution, 2000), fluid(Materials.Ammonia, 1000))
             .itemOutputs(dust(PrPMaterials.NiobiumPentoxide, 2))
             .fluidOutputs(fluid(Materials.HydrofluoricAcid, 1000))
-            .duration(400)
-            .eut(TierEU.RECIPE_EV)
+            .duration(20 * 5)
+            .eut(TierEU.RECIPE_HV)
             .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
 
         // Aluminothermic: Nb₂O₅ + (10/3)Al → 2Nb + (5/3)Al₂O₃
         GTValues.RA.stdBuilder()
             .itemInputs(dust(PrPMaterials.NiobiumPentoxide, 3), dust(Materials.Aluminium, 4))
             .itemOutputs(ingot(Materials.Niobium, 6), item("dustAlumina", 10))
-            .duration(90 * 20)
+            .duration(33 * 10)
             .eut(TierEU.RECIPE_HV)
             .metadata(GTRecipeConstants.COIL_HEAT, 2750)
             .addTo(RecipeMaps.blastFurnaceRecipes);
@@ -199,17 +199,17 @@ public class PassiveableMaterials {
             .itemInputs(item("dustTantalite", 4), item("dustPyrochlore", 4), circuit(2))
             .fluidInputs(fluid(Materials.HydrofluoricAcid, 2000))
             .fluidOutputs(fluid(PrPMaterials.MixedTaNbFluorideSolution, 2000))
-            .duration(400)
+            .duration(10 * 28)
             .eut(TierEU.RECIPE_EV)
-            .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
+            .addTo(RecipeMaps.mixerNonCellRecipes);
 
         // MIBK preferentially extracts Ta into the organic phase;
         // Nb stays in the aqueous raffinate as NiobiumFluorideSolution.
         GTValues.RA.stdBuilder()
             .fluidInputs(fluid(PrPMaterials.MixedTaNbFluorideSolution, 2000), fluid(PrPMaterials.MIBK, 1000))
             .fluidOutputs(fluid(PrPMaterials.TaLoadedMIBK, 1000), fluid(PrPMaterials.NiobiumFluorideSolution, 1000))
-            .duration(400)
-            .eut(TierEU.RECIPE_EV)
+            .duration(20 * 10)
+            .eut(TierEU.RECIPE_LV)
             .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
 
         // Water back-extraction strips Ta from organic; MIBK is fully recovered.
@@ -217,15 +217,15 @@ public class PassiveableMaterials {
             .fluidInputs(fluid(PrPMaterials.TaLoadedMIBK, 1000), fluid(Materials.Water, 500))
             .itemOutputs(dust(PrPMaterials.TantalumPentoxide, 4))
             .fluidOutputs(fluid(PrPMaterials.MIBK, 1000))
-            .duration(300)
-            .eut(TierEU.RECIPE_EV)
+            .duration(20 * 5)
+            .eut(TierEU.RECIPE_LV)
             .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
 
         // Aluminothermic: Ta₂O₅ + (10/3)Al → 2Ta + (5/3)Al₂O₃
         GTValues.RA.stdBuilder()
             .itemInputs(dust(PrPMaterials.TantalumPentoxide, 3), dust(Materials.Aluminium, 4))
             .itemOutputs(ingot(Materials.Tantalum, 6), item("dustAlumina", 10))
-            .duration(90 * 20)
+            .duration(224)
             .eut(TierEU.RECIPE_HV)
             .metadata(GTRecipeConstants.COIL_HEAT, 2400)
             .addTo(RecipeMaps.blastFurnaceRecipes);

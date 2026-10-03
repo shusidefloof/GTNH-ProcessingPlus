@@ -35,11 +35,11 @@ public class CSTRRecipes {
                 plate(Materials.Titanium, 4),
                 plate(Materials.StainlessSteel, 4),
                 plate(Materials.Polytetrafluoroethylene, 2),
-                ItemList.Electric_Motor_IV.get(1),
+                ItemList.Electric_Motor_EV.get(1),
                 circuit(8))
             .itemOutputs(new ItemStack(GTNHPPBlocks.CASINGS, 1, BlockGTNHPPCasings.CSTR_CASING))
-            .duration(20 * SECONDS)
-            .eut(TierEU.RECIPE_EV)
+            .duration(14 * 10)
+            .eut(TierEU.RECIPE_LV)
             .addTo(RecipeMaps.assemblerRecipes);
     }
 
@@ -51,11 +51,11 @@ public class CSTRRecipes {
 
         GTValues.RA.stdBuilder()
             .itemInputs(
-                ItemList.Hull_IV.get(1),
-                plate(Materials.Titanium, 4),
-                plate(Materials.StainlessSteel, 2),
-                ItemList.Electric_Pump_IV.get(2),
-                ItemList.Electric_Motor_IV.get(2),
+                ItemList.Hull_EV.get(1),
+                GTOreDictUnificator.get(OrePrefixes.plateDense, Materials.Titanium, 4),
+                ItemList.Electric_Motor_EV.get(2),
+                ItemList.Electric_Pump_EV.get(1),
+                GTOreDictUnificator.get(OrePrefixes.plateDouble, Materials.Silver, 1),
                 circuit(8))
             .itemOutputs(controller)
             .duration(30 * SECONDS)
@@ -68,13 +68,13 @@ public class CSTRRecipes {
             "MHM",
             "SPS",
             'S',
-            plate(Materials.Titanium, 1),
+            GTOreDictUnificator.get(OrePrefixes.plateDense, Materials.Titanium, 1),
             'H',
-            ItemList.Hull_IV.get(1),
+            ItemList.Hull_EV.get(1),
             'M',
-            ItemList.Electric_Motor_IV.get(1),
+            ItemList.Electric_Motor_EV.get(1),
             'P',
-            ItemList.Electric_Pump_IV.get(1),
+            ItemList.Electric_Pump_EV.get(1),
             'D',
             GTOreDictUnificator.get(OrePrefixes.plateDouble, Materials.Silver, 1));
     }

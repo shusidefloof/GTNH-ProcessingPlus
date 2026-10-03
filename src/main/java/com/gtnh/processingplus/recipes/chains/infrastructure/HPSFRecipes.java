@@ -133,7 +133,7 @@ public class HPSFRecipes {
     // =========================================================
     private static void meltingPath() {
         GTValues.RA.stdBuilder()
-            .itemInputs(item("ingotNeptunium", 1), dust(Materials.Tantalum, 1), dust(Materials.Titanium, 1))
+            .itemInputs(item("dustNeptunium", 1), dust(Materials.Tantalum, 1), dust(Materials.Titanium, 1))
             .fluidInputs(molten(Materials.Tungsten, 144))
             .fluidOutputs(molten(PrPMaterials.RefractoryHighEntropyAlloy, 288))
             .duration(100 * 20)

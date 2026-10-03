@@ -39,6 +39,7 @@ import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.gtnh.processingplus.materials.PrPMaterials;
 import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
+import com.gtnh.processingplus.recipes.PPRecipeHelper;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -59,7 +60,6 @@ import gregtech.api.recipe.check.CheckRecipeResult;
 import gregtech.api.recipe.check.SimpleCheckRecipeResult;
 import gregtech.api.render.TextureFactory;
 import gregtech.api.structure.error.StructureError;
-import gregtech.api.structure.error.StructureErrorRegistry;
 import gregtech.api.util.GTRecipe;
 import gregtech.api.util.IGTHatchAdder;
 import gregtech.api.util.MultiblockTooltipBuilder;
@@ -194,8 +194,15 @@ public class MTE_CSC extends MTEExtendedPowerMultiBlockBase<MTE_CSC> implements 
     @Override
     public void checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack, List<StructureError> errors) {
         mRotorAssemblies.clear();
-        checkPiece(STRUCTURE_PIECE_MAIN, OFFSET_X, OFFSET_Y, OFFSET_Z, errors);
-        if (mMaintenanceHatches.size() != 1) errors.add(StructureErrorRegistry.UNKNOWN_STRUCTURE_ERROR);
+        if (!checkPiece(STRUCTURE_PIECE_MAIN, OFFSET_X, OFFSET_Y, OFFSET_Z, errors)) return;
+        checkOneMaintenanceHatch(errors);
+        checkHasEnergyHatch(errors);
+        // 2 Air Intake mufflers (one per rotor) + 1 regular muffler, per the tooltip below.
+        checkHatchMin(errors, Muffler, 3);
+        checkHasInputBus(errors);
+        checkHasOutputBus(errors);
+        if (PPRecipeHelper.recipeMapHasFluidInputs(getRecipeMap())) checkHasInputHatch(errors);
+        if (PPRecipeHelper.recipeMapHasFluidOutputs(getRecipeMap())) checkHasOutputHatch(errors);
     }
 
     public boolean addRotorAssembly(final IGregTechTileEntity aTileEntity, final int aBaseCasingIndex) {
@@ -473,18 +480,18 @@ public class MTE_CSC extends MTEExtendedPowerMultiBlockBase<MTE_CSC> implements 
                     + "×= max(0.001, 1 / (1 + ΣOptimalGasFlow / 500))")
             .beginStructureBlock(15, 6, 7, true)
             .addController("See NEI structure preview")
-            .addCasingInfoMin("Frost Proof Machine Casing", 100, false)
+            .addCasing("100+", "Frost Proof Machine Casing", false)
             .addOtherStructurePart("Extreme Engine Intake Casing", "Top/bottom cap accent")
             .addOtherStructurePart("Energetic Silver Frame Box", "Structural framing")
             .addOtherStructurePart("Rotor Assembly", "Center slice, front-facing (2 required)")
-            .addMufflerHatch("Air Intake (Extreme Engine Intake Casing only)", 2)
-            .addInputBus("Any Frost Proof Machine Casing", 1)
-            .addInputHatch("Any Frost Proof Machine Casing", 1)
-            .addOutputBus("Any Frost Proof Machine Casing", 1)
-            .addOutputHatch("Any Frost Proof Machine Casing", 1)
-            .addEnergyHatch("Any Frost Proof Machine Casing", 1)
-            .addMufflerHatch("Any Frost Proof Machine Casing", 1)
-            .addMaintenanceHatch("Any Frost Proof Machine Casing", 1)
+            .addEnergyHatch("1+", "Any Frost Proof Machine Casing", 1)
+            .addMaintenanceHatch("1", "Any Frost Proof Machine Casing", 1)
+            .addMufflerHatch("2", "Air Intake (Extreme Engine Intake Casing only)", 2)
+            .addMufflerHatch("1", "Any Frost Proof Machine Casing", 1)
+            .addInputBus("1+", "Any Frost Proof Machine Casing", 1)
+            .addInputHatch("1+", "Any Frost Proof Machine Casing", 1)
+            .addOutputBus("1+", "Any Frost Proof Machine Casing", 1)
+            .addOutputHatch("1+", "Any Frost Proof Machine Casing", 1)
             .toolTipFinisher(
                 "_Shusi_",
                 EnumChatFormatting.GREEN + ""

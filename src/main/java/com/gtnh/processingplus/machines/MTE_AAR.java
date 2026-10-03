@@ -49,7 +49,7 @@ import gregtech.api.recipe.check.CheckRecipeResult;
 import gregtech.api.recipe.check.CheckRecipeResultRegistry;
 import gregtech.api.render.TextureFactory;
 import gregtech.api.structure.error.StructureError;
-import gregtech.api.structure.error.StructureErrorRegistry;
+import gregtech.api.structure.error.StructureErrors;
 import gregtech.api.util.GTRecipe;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.MultiblockTooltipBuilder;
@@ -167,8 +167,13 @@ public class MTE_AAR extends MTEExtendedPowerMultiBlockBase<MTE_AAR> implements 
         mHeatingCapacity = 0;
         setCoilLevel(HeatingCoilLevel.None);
         if (!checkPiece(STRUCTURE_PIECE_MAIN, OFFSET_X, OFFSET_Y, OFFSET_Z, errors)) return;
-        if (getCoilLevel() == HeatingCoilLevel.None) errors.add(StructureErrorRegistry.UNKNOWN_STRUCTURE_ERROR);
-        if (mMaintenanceHatches.size() != 1) errors.add(StructureErrorRegistry.UNKNOWN_STRUCTURE_ERROR);
+        if (getCoilLevel() == HeatingCoilLevel.None)
+            errors.add(StructureErrors.of("GT5U.gui.text.structure_error.aar_missing_coil"));
+        checkOneMaintenanceHatch(errors);
+        checkHasEnergyHatch(errors);
+        checkHasMufflerHatch(errors);
+        checkHasAnyInput(errors);
+        checkHasAnyOutput(errors);
         if (!errors.isEmpty()) return;
         mHeatingCapacity = (int) getCoilLevel().getHeat() + 100 * (GTUtility.getTier(getMaxInputVoltage()) - 2);
     }
@@ -263,18 +268,18 @@ public class MTE_AAR extends MTEExtendedPowerMultiBlockBase<MTE_AAR> implements 
                     + ".")
             .beginStructureBlock(5, 5, 5, true)
             .addController("Front face, center")
-            .addCasingInfoMin("Chemically Inert Machine Casing", 55, false)
+            .addCasing("55+", "Chemically Inert Machine Casing", false)
             .addOtherStructurePart("Iodine Frame Box", "Outer corner posts")
             .addOtherStructurePart("PBI Pipe Casing", "Inner cross-section piping")
             .addOtherStructurePart("Coil (Blast Smelter) Casing", "Outer shell edges")
             .addOtherStructurePart("Heating Coils (any tier)", "4 blocks, top/bottom center + middle layer flanks")
-            .addInputBus("Any Chemically Inert Machine Casing", 1)
-            .addInputHatch("Any Chemically Inert Machine Casing", 1)
-            .addOutputBus("Any Chemically Inert Machine Casing", 1)
-            .addOutputHatch("Any Chemically Inert Machine Casing", 1)
-            .addEnergyHatch("Any Chemically Inert Machine Casing", 1)
-            .addMufflerHatch("Any Chemically Inert Machine Casing", 1)
-            .addMaintenanceHatch("Any Chemically Inert Machine Casing", 1)
+            .addEnergyHatch("1+", "Any Chemically Inert Machine Casing", 1)
+            .addMaintenanceHatch("1", "Any Chemically Inert Machine Casing", 1)
+            .addMufflerHatch("1", "Any Chemically Inert Machine Casing", 1)
+            .addInputBus("1+", "Any Chemically Inert Machine Casing", 1)
+            .addInputHatch("1+", "Any Chemically Inert Machine Casing", 1)
+            .addOutputBus("1+", "Any Chemically Inert Machine Casing", 1)
+            .addOutputHatch("1+", "Any Chemically Inert Machine Casing", 1)
             .toolTipFinisher("_Shusi_");
         return tt;
     }

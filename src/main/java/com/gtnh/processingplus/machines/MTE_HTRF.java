@@ -27,6 +27,7 @@ import com.gtnewhorizon.structurelib.structure.StructureUtility;
 import com.gtnh.processingplus.blocks.BlockGTNHPPCasings;
 import com.gtnh.processingplus.blocks.GTNHPPBlocks;
 import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
+import com.gtnh.processingplus.recipes.PPRecipeHelper;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -43,6 +44,7 @@ import gregtech.api.recipe.check.CheckRecipeResult;
 import gregtech.api.recipe.check.CheckRecipeResultRegistry;
 import gregtech.api.render.TextureFactory;
 import gregtech.api.structure.error.StructureError;
+import gregtech.api.structure.error.StructureErrors;
 import gregtech.api.util.GTRecipe;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.MultiblockTooltipBuilder;
@@ -147,10 +149,19 @@ public class MTE_HTRF extends MTEExtendedPowerMultiBlockBase<MTE_HTRF> implement
         mGlassTier = -1;
         setCoilLevel(HeatingCoilLevel.None);
         if (!checkPiece(STRUCTURE_PIECE_MAIN, OFFSET_X, OFFSET_Y, OFFSET_Z, errors)) return;
-        if (getCoilLevel() == HeatingCoilLevel.None) return;
-        if (mMaintenanceHatches.size() != 1) return;
+        if (getCoilLevel() == HeatingCoilLevel.None) {
+            errors.add(StructureErrors.of("GT5U.gui.text.structure_error.htrf_missing_coil"));
+            return;
+        }
+        checkOneMaintenanceHatch(errors);
+        checkHasEnergyHatch(errors);
+        checkHasMufflerHatch(errors);
+        checkHasInputBus(errors);
+        checkHasOutputBus(errors);
+        if (PPRecipeHelper.recipeMapHasFluidInputs(getRecipeMap())) checkHasInputHatch(errors);
+        if (PPRecipeHelper.recipeMapHasFluidOutputs(getRecipeMap())) checkHasOutputHatch(errors);
+        if (!errors.isEmpty()) return;
         mHeatingCapacity = (int) getCoilLevel().getHeat() + 100 * (GTUtility.getTier(getMaxInputVoltage()) - 2);
-        return;
     }
 
     @Override
@@ -273,18 +284,18 @@ public class MTE_HTRF extends MTEExtendedPowerMultiBlockBase<MTE_HTRF> implement
                     + "BW Glass tier limits maximum energy hatch voltage.")
             .beginStructureBlock(9, 9, 7, true)
             .addController("Center of the front face")
-            .addCasingInfoMin("Silicon Carbide Ceramic Casing", 10, false)
-            .addCasingInfoMin("Rebolted Silicon Carbide Casing", 1, false)
+            .addCasing("10+", "Silicon Carbide Ceramic Casing", false)
+            .addCasing("1+", "Rebolted Silicon Carbide Casing", false)
             .addOtherStructurePart("Heating Coils", "Inner ring across all layers")
             .addOtherStructurePart("BW Glass (any tier)", "Viewport windows")
             .addOtherStructurePart("GT Frames", "Structural support")
-            .addInputBus("Any Silicon Carbide Ceramic Casing", 1)
-            .addInputHatch("Any Silicon Carbide Ceramic Casing", 1)
-            .addOutputBus("Any Silicon Carbide Ceramic Casing", 1)
-            .addOutputHatch("Any Silicon Carbide Ceramic Casing", 1)
-            .addEnergyHatch("Any Silicon Carbide Ceramic Casing", 1)
-            .addMufflerHatch("Any Silicon Carbide Ceramic Casing", 1)
-            .addMaintenanceHatch("Any Silicon Carbide Ceramic Casing", 1)
+            .addEnergyHatch("1+", "Any Silicon Carbide Ceramic Casing", 1)
+            .addMaintenanceHatch("1", "Any Silicon Carbide Ceramic Casing", 1)
+            .addMufflerHatch("1", "Any Silicon Carbide Ceramic Casing", 1)
+            .addInputBus("1+", "Any Silicon Carbide Ceramic Casing", 1)
+            .addInputHatch("1+", "Any Silicon Carbide Ceramic Casing", 1)
+            .addOutputBus("1+", "Any Silicon Carbide Ceramic Casing", 1)
+            .addOutputHatch("1+", "Any Silicon Carbide Ceramic Casing", 1)
             .toolTipFinisher("_Shusi_");
         return tt;
     }

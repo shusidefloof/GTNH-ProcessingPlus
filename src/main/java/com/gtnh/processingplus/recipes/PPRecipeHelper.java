@@ -327,4 +327,26 @@ public class PPRecipeHelper {
         }
     }
 
+    /**
+     * Whether any recipe on this map actually has a fluid input — used to skip requiring an Input
+     * Hatch in checkMachine() on multiblocks whose recipe map is item-only.
+     */
+    public static boolean recipeMapHasFluidInputs(RecipeMap<?> map) {
+        for (GTRecipe recipe : map.getAllRecipes()) {
+            if (recipe.mFluidInputs.length > 0) return true;
+        }
+        return false;
+    }
+
+    /**
+     * Whether any recipe on this map actually has a fluid output — used to skip requiring an
+     * Output Hatch in checkMachine() on multiblocks whose recipe map is item-only.
+     */
+    public static boolean recipeMapHasFluidOutputs(RecipeMap<?> map) {
+        for (GTRecipe recipe : map.getAllRecipes()) {
+            if (recipe.mFluidOutputs.length > 0) return true;
+        }
+        return false;
+    }
+
 }

@@ -39,7 +39,7 @@ import gregtech.api.recipe.check.CheckRecipeResult;
 import gregtech.api.recipe.check.CheckRecipeResultRegistry;
 import gregtech.api.render.TextureFactory;
 import gregtech.api.structure.error.StructureError;
-import gregtech.api.structure.error.StructureErrorRegistry;
+import gregtech.api.structure.error.StructureErrors;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.MultiblockTooltipBuilder;
 
@@ -124,11 +124,12 @@ public class MTE_RTG extends MTEExtendedPowerMultiBlockBase<MTE_RTG> implements 
 
     @Override
     public void checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack, List<StructureError> errors) {
-        checkPiece(STRUCTURE_PIECE_MAIN, OFFSET_X, OFFSET_Y, OFFSET_Z, errors);
-        if (mMaintenanceHatches.size() != 1) errors.add(StructureErrorRegistry.UNKNOWN_STRUCTURE_ERROR);
+        if (!checkPiece(STRUCTURE_PIECE_MAIN, OFFSET_X, OFFSET_Y, OFFSET_Z, errors)) return;
+        checkOneMaintenanceHatch(errors);
+        // Accepts either a regular or an exotic dynamo hatch — no single built-in helper covers both.
         if (mDynamoHatches.isEmpty() && mExoticDynamoHatches.isEmpty())
-            errors.add(StructureErrorRegistry.UNKNOWN_STRUCTURE_ERROR);
-        if (mInputBusses.isEmpty()) errors.add(StructureErrorRegistry.UNKNOWN_STRUCTURE_ERROR);
+            errors.add(StructureErrors.of("GT5U.gui.text.structure_error.rtg_missing_dynamo_hatch"));
+        checkHasInputBus(errors);
     }
 
     /**
@@ -263,10 +264,10 @@ public class MTE_RTG extends MTEExtendedPowerMultiBlockBase<MTE_RTG> implements 
                     + ".")
             .beginStructureBlock(5, 5, 5, false)
             .addController("Front face, center")
-            .addCasingInfoMin("Radioisotope Thermoelectric Casing", 90, false)
-            .addInputBus("Any casing — load betavoltaic cells", 1)
-            .addDynamoHatch("Any casing", 1)
-            .addMaintenanceHatch("Any casing", 1)
+            .addCasing("90+", "Radioisotope Thermoelectric Casing", false)
+            .addMaintenanceHatch("1", "Any casing", 1)
+            .addDynamoHatch("1+", "Any casing", 1)
+            .addInputBus("1+", "Any casing — load betavoltaic cells", 1)
             .toolTipFinisher("_Shusi_");
         return tt;
     }

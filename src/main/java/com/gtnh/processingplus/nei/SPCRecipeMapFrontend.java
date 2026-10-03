@@ -6,9 +6,12 @@ import com.gtnewhorizons.modularui.api.math.Size;
 
 import gregtech.api.recipe.BasicUIPropertiesBuilder;
 import gregtech.api.recipe.NEIRecipePropertiesBuilder;
-import gregtech.api.recipe.RecipeMapFrontend;
+import gregtech.api.recipe.maps.LargeNEIFrontend;
 
-public class SPCRecipeMapFrontend extends RecipeMapFrontend {
+// SPC has 6 item inputs — LargeNEIFrontend (3-wide grid) instead of plain RecipeMapFrontend's single
+// row, which would overflow/overlap past 4 slots. Its own modifyNEIProperties still layers the
+// station-row height on top of whatever size LargeNEIFrontend computes first.
+public class SPCRecipeMapFrontend extends LargeNEIFrontend {
 
     // Station row layout (px): 2 pad + 1 sep + 2 gap + 9 numbers + 16 icons + 4 pad = 34
     static final int EXTRA_HEIGHT = 34;

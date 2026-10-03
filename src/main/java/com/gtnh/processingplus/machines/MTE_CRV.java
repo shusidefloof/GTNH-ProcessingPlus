@@ -24,6 +24,8 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import org.jetbrains.annotations.NotNull;
+
 import com.gtnewhorizon.structurelib.alignment.constructable.ISurvivalConstructable;
 import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
@@ -31,6 +33,7 @@ import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.gtnh.processingplus.blocks.BlockGTNHPPCasings;
 import com.gtnh.processingplus.blocks.GTNHPPBlocks;
 import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
+import com.gtnh.processingplus.recipes.PPRecipeHelper;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -41,13 +44,14 @@ import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.logic.ProcessingLogic;
 import gregtech.api.metatileentity.implementations.MTEExtendedPowerMultiBlockBase;
+import gregtech.api.modularui2.GTGuiTextures;
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.render.TextureFactory;
 import gregtech.api.structure.error.StructureError;
-import gregtech.api.structure.error.StructureErrorRegistry;
 import gregtech.api.util.MultiblockTooltipBuilder;
 import gregtech.api.util.tooltip.TooltipHelper;
+import gregtech.common.gui.modularui.multiblock.base.MTEMultiBlockBaseGui;
 
 /**
  * Ceramic Reaction Vessel — 5×5×5 structure with hBN ceramic inner lining.
@@ -136,8 +140,14 @@ public class MTE_CRV extends MTEExtendedPowerMultiBlockBase<MTE_CRV> implements 
 
     @Override
     public void checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack, List<StructureError> errors) {
-        checkPiece(STRUCTURE_PIECE_MAIN, OFFSET_X, OFFSET_Y, OFFSET_Z, errors);
-        if (mMaintenanceHatches.size() != 1) errors.add(StructureErrorRegistry.UNKNOWN_STRUCTURE_ERROR);
+        if (!checkPiece(STRUCTURE_PIECE_MAIN, OFFSET_X, OFFSET_Y, OFFSET_Z, errors)) return;
+        checkOneMaintenanceHatch(errors);
+        checkHasEnergyHatch(errors);
+        checkHasMufflerHatch(errors);
+        checkHasInputBus(errors);
+        checkHasOutputBus(errors);
+        if (PPRecipeHelper.recipeMapHasFluidInputs(getRecipeMap())) checkHasInputHatch(errors);
+        if (PPRecipeHelper.recipeMapHasFluidOutputs(getRecipeMap())) checkHasOutputHatch(errors);
     }
 
     @Override
@@ -176,10 +186,30 @@ public class MTE_CRV extends MTEExtendedPowerMultiBlockBase<MTE_CRV> implements 
         return true;
     }
 
+    // Default getMachineModeKey() just returns "GT5U.MULTI_MACHINE_MODE.unknown" ("Unknown Mode") —
+    // same MTEOreWashingPlant pattern as the GUI button fix above.
+    @Override
+    public String getMachineModeKey() {
+        return "GT5U.GTNHPP_CRV.mode." + machineMode;
+    }
+
     @Override
     public void setMachineModeIcons() {
         machineModeIcons.add(GTUITextures.OVERLAY_BUTTON_MACHINEMODE_DEFAULT);
         machineModeIcons.add(GTUITextures.OVERLAY_BUTTON_MACHINEMODE_COMPRESSING);
+    }
+
+    // setMachineModeIcons() alone no longer surfaces a GUI button — MTEMultiBlockBaseGui (the actual
+    // rendered GUI since the ModularUI2 migration) only adds the mode-switch widget when its OWN,
+    // separate machineModeIcons list (populated here) is non-empty. See MTEOreWashingPlant for the
+    // upstream reference implementation of this exact pattern. Note this needs the ModularUI2
+    // GTGuiTextures icons specifically (withMachineModeIcons takes com.cleanroommc's UITexture, not
+    // GTUITextures' ModularUI1 one used by setMachineModeIcons() above).
+    @Override
+    protected @NotNull MTEMultiBlockBaseGui<?> getGui() {
+        return new MTEMultiBlockBaseGui<>(this).withMachineModeIcons(
+            GTGuiTextures.OVERLAY_BUTTON_MACHINEMODE_DEFAULT,
+            GTGuiTextures.OVERLAY_BUTTON_MACHINEMODE_COMPRESSING);
     }
 
     @Override
@@ -249,15 +279,15 @@ public class MTE_CRV extends MTEExtendedPowerMultiBlockBase<MTE_CRV> implements 
                     + " parallels.")
             .beginStructureBlock(5, 5, 5, true)
             .addController("Front face, center")
-            .addCasingInfoMin("Iridium-Reinforced Reactor Casing", 74, false)
-            .addCasingInfoExactly("Hexagonal Boron Nitride Ceramic Block", 24, true)
-            .addInputBus("Any outer casing", 1)
-            .addInputHatch("Any outer casing, up to 6 fluid hatches", 1)
-            .addOutputBus("Any outer casing", 1)
-            .addOutputHatch("Any outer casing", 1)
-            .addEnergyHatch("Any outer casing", 1)
-            .addMufflerHatch("Any outer casing", 1)
-            .addMaintenanceHatch("Any outer casing", 1)
+            .addCasing("74+", "Iridium-Reinforced Reactor Casing", false)
+            .addCasing("24", "Hexagonal Boron Nitride Ceramic Block", true)
+            .addEnergyHatch("1+", "Any outer casing", 1)
+            .addMaintenanceHatch("1", "Any outer casing", 1)
+            .addMufflerHatch("1", "Any outer casing", 1)
+            .addInputBus("1+", "Any outer casing", 1)
+            .addInputHatch("1+", "Any outer casing, up to 6 fluid hatches", 1)
+            .addOutputBus("1+", "Any outer casing", 1)
+            .addOutputHatch("1+", "Any outer casing", 1)
             .toolTipFinisher("_Shusi_");
         return tt;
     }

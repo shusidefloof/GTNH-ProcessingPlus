@@ -5,12 +5,12 @@
     "home_offset_x:3": -128,
     "home_image:8": "betterquesting:textures/gui/default_title.png",
     "livesDef:3": 3,
-    "party_enable:1": 1,
-    "hardcore:1": 0,
-    "editMode:1": 0,
-    "pack_version:3": 0,
     "pack_name:8": "",
-    "home_anchor_y:5": 0,
-    "home_offset_y:3": 0
+    "pack_version:3": 0,
+    "editMode:1": 0,
+    "hardcore:1": 0,
+    "party_enable:1": 1,
+    "home_offset_y:3": 0,
+    "home_anchor_y:5": 0
   }
 }

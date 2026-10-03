@@ -53,15 +53,15 @@ public class BOFRecipes {
                 ItemList.Electric_Pump_MV });
     }
 
-    // Fe + Ca + O₂ → steel + BOF slag + CO₂ (lime flux)
-    private static void limedConversion() {
+    // Fe + CaMg(CO₃)₂ + O₂ → steel + BOF slag + CO₂ + CO (dolomite flux, partial combustion)
+    private static void dolomiteConversion() {
         GTValues.RA.stdBuilder()
-            .itemInputs(ingot(Materials.Iron, 16), dust(Materials.Calcium, 2))
+            .itemInputs(ingot(Materials.Iron, 32), dust(Materials.Dolomite, 11))
             .circuit(2)
-            .fluidInputs(fluid(Materials.Oxygen, 1000))
-            .itemOutputs(ingot(Materials.Steel, 16), dust(PrPMaterials.BOFSlag, 5))
-            .fluidOutputs(fluid(Materials.CarbonDioxide, 1000))
-            .duration(40 * SECONDS)
+            .fluidInputs(fluid(Materials.Oxygen, 3000))
+            .itemOutputs(ingot(Materials.Steel, 32), dust(PrPMaterials.BOFSlag, 20))
+            .fluidOutputs(fluid(Materials.CarbonDioxide, 2000), fluid(Materials.CarbonMonoxide, 1000))
+            .duration(32 * SECONDS)
             .eut(TierEU.RECIPE_MV)
             .addTo(GTNHPPRecipeMaps.sBOFRecipes);
     }
@@ -79,15 +79,15 @@ public class BOFRecipes {
             .addTo(GTNHPPRecipeMaps.sBOFRecipes);
     }
 
-    // Fe + CaMg(CO₃)₂ + O₂ → steel + BOF slag + CO₂ + CO (dolomite flux, partial combustion)
-    private static void dolomiteConversion() {
+    // Fe + Ca + O₂ → steel + BOF slag + CO₂ (lime flux)
+    private static void limedConversion() {
         GTValues.RA.stdBuilder()
-            .itemInputs(ingot(Materials.Iron, 32), dust(Materials.Dolomite, 11))
+            .itemInputs(ingot(Materials.Iron, 16), dust(Materials.Calcium, 2))
             .circuit(2)
-            .fluidInputs(fluid(Materials.Oxygen, 3000))
-            .itemOutputs(ingot(Materials.Steel, 32), dust(PrPMaterials.BOFSlag, 20))
-            .fluidOutputs(fluid(Materials.CarbonDioxide, 2000), fluid(Materials.CarbonMonoxide, 1000))
-            .duration(32 * SECONDS)
+            .fluidInputs(fluid(Materials.Oxygen, 1000))
+            .itemOutputs(ingot(Materials.Steel, 16), dust(PrPMaterials.BOFSlag, 5))
+            .fluidOutputs(fluid(Materials.CarbonDioxide, 1000))
+            .duration(40 * SECONDS)
             .eut(TierEU.RECIPE_MV)
             .addTo(GTNHPPRecipeMaps.sBOFRecipes);
     }
@@ -103,6 +103,9 @@ public class BOFRecipes {
             .addTo(RecipeMaps.centrifugeRecipes);
     }
 
+    // Sifter recipes in GT list a material in repeated slots with stepping chances (gravel → flint 100/90/80/60/33/25%)
+    // and run 30 s at LV/2. Same idiom here: Quicklime always comes back twice (closing the lime-flux loop), and the
+    // phosphate steelmaking slag is known for is a rare drop (50/20%).
     private static void slagResidueSift() {
         GTValues.RA.stdBuilder()
             .itemInputs(dust(PrPMaterials.SlagResidue, 4))
@@ -110,10 +113,11 @@ public class BOFRecipes {
                 dust(Materials.Quicklime, 2),
                 dust(Materials.SiliconDioxide, 1),
                 dust(Materials.Magnesia, 1),
-                dust(Materials.Aluminiumoxide, 1))
-            .outputChances(10000, 6000, 4000, 1000)
-            .duration(3 * SECONDS)
-            .eut(TierEU.RECIPE_LV)
+                dust(Materials.Aluminiumoxide, 1),
+                dust(Materials.Phosphorus, 1))
+            .outputChances(10000, 9000, 7000, 6000, 4000)
+            .duration(30 * SECONDS)
+            .eut(TierEU.RECIPE_LV / 2)
             .addTo(RecipeMaps.sifterRecipes);
     }
 }

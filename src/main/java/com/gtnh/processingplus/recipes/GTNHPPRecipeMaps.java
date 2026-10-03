@@ -131,7 +131,7 @@ public class GTNHPPRecipeMaps {
         .frontend(LargeNEIFrontend::new)
         .build();
 
-    /** Basic Oxygen Furnace — LOX-driven iron→steel converter, three circuit modes. */
+    /** Basic Oxygen Furnace — oxygen-blast iron→steel converter. */
     public static final RecipeMap<RecipeMapBackend> sBOFRecipes = RecipeMapBuilder
         .of("gtnhpp.recipe.bof")
         .maxIO(3, 2, 2, 2)

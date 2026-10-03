@@ -7,7 +7,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.oredict.OreDictionary;
 
 import com.gtnh.processingplus.items.Intermediate;
 
@@ -143,14 +142,14 @@ public class PPRecipeHelper {
     // ITEMS — OreDict
     // =========================
 
-    /** OreDict lookup — for materials not accessible at compile time (e.g. GoodGenerator Werkstoffe). */
+    /**
+     * OreDict lookup through GT's unifier (prefers the unification target, skips blacklisted entries) — for
+     * materials not accessible at compile time (e.g. GoodGenerator Werkstoffe).
+     */
     public static ItemStack item(String oreDictEntry, int amount) {
-        List<ItemStack> ores = OreDictionary.getOres(oreDictEntry);
-        if (ores.isEmpty()) throw new IllegalStateException("No OreDict entry: '" + oreDictEntry + "'");
-        ItemStack copy = ores.get(0)
-            .copy();
-        copy.stackSize = amount;
-        return copy;
+        ItemStack stack = GTOreDictUnificator.getFirstOre(oreDictEntry, amount);
+        if (stack == null) throw new IllegalStateException("No OreDict entry: '" + oreDictEntry + "'");
+        return stack;
     }
 
     // =========================

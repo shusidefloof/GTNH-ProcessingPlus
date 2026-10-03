@@ -59,16 +59,13 @@ public class AerogelRecipes {
                 fluid(Materials.SiliconTetrachloride, 1000),
                 fluid(Materials.Methane, 3000),
                 fluid(Materials.Hydrogen, 1000))
-            .fluidOutputs(fluid(PrPMaterials.Trimethylsilane, 1500), fluid(Materials.HydrochloricAcid, 4000))
+            .fluidOutputs(fluid(PrPMaterials.Trimethylsilane, 1250), fluid(Materials.HydrochloricAcid, 4000))
             .duration(15 * SECONDS)
             .eut(TierEU.RECIPE_UV)
             .metadata(GTRecipeConstants.COIL_HEAT, 9900)
             .addTo(GTNHPPRecipeMaps.sHTRFRecipes);
     }
 
-    // =========================================================
-    // ALT: Trimethylchlorosilane synthesis — (CH3)3SiH + Cl2 → TMCS + HCl (LCR)
-    // =========================================================
     private static void stepAlt_TrimethylchlorosilaneSynthesis() {
 
         GTValues.RA.stdBuilder()

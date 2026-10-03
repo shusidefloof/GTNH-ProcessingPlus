@@ -138,15 +138,16 @@ public class KaptonRecipes {
     }
 
     // =========================================================
-    // 7. Thermal imidization → Kapton plate (UV, PFC imidize)
-    // Water released as the imide rings close at 300°C+
+    // 7. Thermal imidization → Kapton plate (PFC imidize)
+    // Water released as the imide rings close at 300°C+ under a nitrogen blanket — no reagents,
+    // unlike the chemical alt below.
     // =========================================================
     private static void step7_ImidizationToKapton() {
 
         GTValues.RA.stdBuilder()
             .itemInputs(dust(PrPMaterials.PolyamicAcidFilm, 2))
-            .fluidInputs(fluid("molten.aceticanhydride", 500), fluid(PrPMaterials.Triethylamine, 200))
-            .fluidOutputs(fluid(Materials.Water, 1000), fluid(Materials.AceticAcid, 500))
+            .fluidInputs(fluid(Materials.Nitrogen, 500))
+            .fluidOutputs(fluid(Materials.Water, 1000))
             .itemOutputs(plate(PrPMaterials.Kapton, 4))
             .duration(30 * SECONDS)
             .eut(TierEU.RECIPE_ZPM)

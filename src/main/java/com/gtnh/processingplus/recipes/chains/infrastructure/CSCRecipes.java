@@ -5,6 +5,7 @@ import static gregtech.api.util.GTRecipeBuilder.SECONDS;
 
 import net.minecraft.item.ItemStack;
 
+import com.gtnh.processingplus.GTNHProcessingPlus;
 import com.gtnh.processingplus.blocks.BlockGTNHPPCasings;
 import com.gtnh.processingplus.blocks.GTNHPPBlocks;
 import com.gtnh.processingplus.materials.PrPMaterials;
@@ -29,7 +30,7 @@ public class CSCRecipes {
         try {
             nobleGasVaporization();
         } catch (IllegalStateException e) {
-            System.err.println("[GTNHPP] Skipping CSC noble gas recipes — missing fluid: " + e.getMessage());
+            GTNHProcessingPlus.LOG.warn("Skipping CSC noble gas recipes — missing fluid: {}", e.getMessage());
         }
     }
 

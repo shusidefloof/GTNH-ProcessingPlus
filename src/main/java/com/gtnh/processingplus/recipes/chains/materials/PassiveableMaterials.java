@@ -1,8 +1,6 @@
 package com.gtnh.processingplus.recipes.chains.materials;
 
 import static com.gtnh.processingplus.recipes.PPRecipeHelper.*;
-import static com.gtnh.processingplus.recipes.PPRecipeHelper.dust;
-import static com.gtnh.processingplus.recipes.PPRecipeHelper.fluid;
 import static gregtech.api.util.GTRecipeBuilder.SECONDS;
 import static gregtech.api.util.GTRecipeBuilder.TICKS;
 
@@ -182,8 +180,8 @@ public class PassiveableMaterials {
 
         // Aluminothermic: Nb₂O₅ + (10/3)Al → 2Nb + (5/3)Al₂O₃
         GTValues.RA.stdBuilder()
-            .itemInputs(dust(PrPMaterials.NiobiumPentoxide, 3), dust(Materials.Aluminium, 4))
-            .itemOutputs(ingot(Materials.Niobium, 6), item("dustAlumina", 10))
+            .itemInputs(dust(PrPMaterials.NiobiumPentoxide, 3), dust(Materials.Aluminium, 10))
+            .itemOutputs(ingot(Materials.Niobium, 6), item("dustAlumina", 5))
             .duration(330 * TICKS)
             .eut(TierEU.RECIPE_HV)
             .metadata(GTRecipeConstants.COIL_HEAT, 2750)
@@ -225,8 +223,8 @@ public class PassiveableMaterials {
 
         // Aluminothermic: Ta₂O₅ + (10/3)Al → 2Ta + (5/3)Al₂O₃
         GTValues.RA.stdBuilder()
-            .itemInputs(dust(PrPMaterials.TantalumPentoxide, 3), dust(Materials.Aluminium, 4))
-            .itemOutputs(ingot(Materials.Tantalum, 6), item("dustAlumina", 10))
+            .itemInputs(dust(PrPMaterials.TantalumPentoxide, 3), dust(Materials.Aluminium, 10))
+            .itemOutputs(ingot(Materials.Tantalum, 6), item("dustAlumina", 5))
             .duration(224 * TICKS)
             .eut(TierEU.RECIPE_HV)
             .metadata(GTRecipeConstants.COIL_HEAT, 2400)
@@ -246,7 +244,4 @@ public class PassiveableMaterials {
             .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
     }
 
-    private static void netherStar() {
-
-    }
 }

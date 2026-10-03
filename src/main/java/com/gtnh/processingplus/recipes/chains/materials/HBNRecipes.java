@@ -24,13 +24,13 @@ public class HBNRecipes {
     }
 
     // =========================================================
-    // 2. B2O3 → Boron Carbide (HTRF)
+    // 2. 2 B2O3 + 7 C → B4C + 6 CO (HTRF). Gas volume scaled GT-style, not molar.
     // =========================================================
     private static void step2_CarbothermalReduction() {
 
         GTValues.RA.stdBuilder()
-            .itemInputs(GTOreDictUnificator.get("dustBoronTrioxide", 4), dust(Materials.Carbon, 9))
-            .fluidOutputs(fluid(Materials.CarbonMonoxide, 2000), fluid(Materials.CarbonDioxide, 3000))
+            .itemInputs(GTOreDictUnificator.get("dustBoronTrioxide", 8), dust(Materials.Carbon, 28))
+            .fluidOutputs(fluid(Materials.CarbonMonoxide, 8000))
             .itemOutputs(dust(PrPMaterials.BoronCarbide, 4))
             .duration(5 * SECONDS)
             .eut((int) (TierEU.RECIPE_EV * 0.75))
@@ -39,14 +39,14 @@ public class HBNRecipes {
     }
 
     // =========================================================
-    // 3. Boron Carbide → Crude hBN (nitriding)
+    // 3. B4C + 4 NH3 → 4 BN + CH4 + 4 H2 (nitriding; the BN comes out as crude hBN + nitride waste)
     // =========================================================
     private static void step3_Nitriding() {
 
         GTValues.RA.stdBuilder()
             .itemInputs(dust(PrPMaterials.BoronCarbide, 4))
-            .fluidInputs(fluid(Materials.Ammonia, 3000))
-            .fluidOutputs(fluid(Materials.Methane, 1000), fluid(Materials.CarbonMonoxide, 500))
+            .fluidInputs(fluid(Materials.Ammonia, 8000))
+            .fluidOutputs(fluid(Materials.Methane, 2000), fluid(Materials.Hydrogen, 8000))
             .itemOutputs(dust(PrPMaterials.CrudeHBN, 2), dust(PrPMaterials.BNitrideWaste, 4))
             .duration(3 * SECONDS)
             .eut(TierEU.RECIPE_EV)
@@ -82,7 +82,6 @@ public class HBNRecipes {
             .itemInputs(dust(PrPMaterials.CrudeHBN, 4), dust(Materials.Yttrium, 16))
             .fluidInputs(fluid(Materials.Nitrogen, 16000), fluid(Materials.Argon, 8000))
             .itemOutputs(dust(PrPMaterials.HBNPowderBlend, 8))
-            .fluidOutputs(fluid(Materials.NitricOxide, 3000), fluid(Materials.Oxygen, 1500))
             .duration(7 * SECONDS)
             .eut(TierEU.RECIPE_LuV)
             .addTo(GTNHPPRecipeMaps.sCSTRRecipes);

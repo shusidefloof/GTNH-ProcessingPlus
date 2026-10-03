@@ -4,6 +4,7 @@ import static com.gtnh.processingplus.items.Intermediate.*;
 import static com.gtnh.processingplus.recipes.PPRecipeHelper.*;
 import static gregtech.api.util.GTRecipeBuilder.SECONDS;
 
+import com.gtnh.processingplus.GTNHProcessingPlus;
 import com.gtnh.processingplus.materials.PrPMaterials;
 import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
 
@@ -68,7 +69,7 @@ public class LuVExotics {
         try {
             r.run();
         } catch (Throwable t) {
-            System.err.println("[GTNHPP] LuVExotics skipped '" + label + "': " + t);
+            GTNHProcessingPlus.LOG.error("LuVExotics skipped '" + label + "'", t);
         }
     }
 
@@ -322,7 +323,7 @@ public class LuVExotics {
     }
 
     // -------------------------------------------------------------------------
-    // Late-LuV entry: Sifting Endstone for Ore Concentrate — 5% concentrate chance, ~5120 blocks
+    // Late-LuV entry: Sifting Endstone for Ore Concentrate — 7.5% concentrate chance, ~5120 blocks
     // per 2 ingots. Byproducts (tungstate, platinum powder, sand, helium) ensure every run is
     // rewarding even on a miss. Void Miner is the efficient ZPM bulk source.
     // -------------------------------------------------------------------------

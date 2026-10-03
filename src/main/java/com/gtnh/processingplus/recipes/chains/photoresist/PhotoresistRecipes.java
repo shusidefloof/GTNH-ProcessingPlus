@@ -9,6 +9,7 @@ import java.util.Collection;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
+import com.gtnh.processingplus.GTNHProcessingPlus;
 import com.gtnh.processingplus.machines.spc.MachineType;
 import com.gtnh.processingplus.machines.spc.SPCModuleType;
 import com.gtnh.processingplus.machines.spc.SPCRecipeData;
@@ -43,7 +44,7 @@ public class PhotoresistRecipes {
         try {
             r.run();
         } catch (IllegalStateException e) {
-            System.err.println("[GTNHPP] Skipping " + name + " recipes: " + e.getMessage());
+            GTNHProcessingPlus.LOG.warn("Skipping {} recipes: {}", name, e.getMessage());
         }
     }
 

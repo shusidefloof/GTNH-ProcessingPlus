@@ -35,6 +35,7 @@ import com.gtnh.processingplus.blocks.BlockGTNHPPCasings;
 import com.gtnh.processingplus.blocks.GTNHPPBlocks;
 import com.gtnh.processingplus.items.GTNHPPItems;
 import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
+import com.gtnh.processingplus.recipes.PPRecipeHelper;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
@@ -50,7 +51,7 @@ import gregtech.api.recipe.check.CheckRecipeResult;
 import gregtech.api.recipe.check.SimpleCheckRecipeResult;
 import gregtech.api.render.TextureFactory;
 import gregtech.api.structure.error.StructureError;
-import gregtech.api.structure.error.StructureErrorRegistry;
+import gregtech.api.structure.error.StructureErrors;
 import gregtech.api.util.GTRecipe;
 import gregtech.api.util.MultiblockTooltipBuilder;
 import gregtech.api.util.shutdown.ShutDownReasonRegistry;
@@ -290,9 +291,14 @@ public class MTE_HPR extends MTEExtendedPowerMultiBlockBase<MTE_HPR> implements 
     @Override
     public void checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack, List<StructureError> errors) {
         mCoilTier = -1;
-        checkPiece(STRUCTURE_PIECE_MAIN, OFFSET_X, OFFSET_Y, OFFSET_Z, errors);
-        if (mCoilTier < 0) errors.add(StructureErrorRegistry.UNKNOWN_STRUCTURE_ERROR);
-        if (mMaintenanceHatches.size() != 1) errors.add(StructureErrorRegistry.UNKNOWN_STRUCTURE_ERROR);
+        if (!checkPiece(STRUCTURE_PIECE_MAIN, OFFSET_X, OFFSET_Y, OFFSET_Z, errors)) return;
+        if (mCoilTier < 0) errors.add(StructureErrors.of("GT5U.gui.text.structure_error.hpr_missing_coil"));
+        checkOneMaintenanceHatch(errors);
+        checkHasEnergyHatch(errors);
+        checkHasInputBus(errors);
+        checkHasOutputBus(errors);
+        if (PPRecipeHelper.recipeMapHasFluidInputs(getRecipeMap())) checkHasInputHatch(errors);
+        if (PPRecipeHelper.recipeMapHasFluidOutputs(getRecipeMap())) checkHasOutputHatch(errors);
     }
 
     private class HPRProcessingLogic extends ProcessingLogic {
@@ -538,13 +544,13 @@ public class MTE_HPR extends MTEExtendedPowerMultiBlockBase<MTE_HPR> implements 
             .beginStructureBlock(29, 29, 7, true)
             .addController("Second layer from front, center vessel center")
             .addOtherStructurePart("FRF Coil (any tier)", "Core reaction rings (A)", 1)
-            .addCasingInfoMin("Pressure Resistant Wall", 1, false)
-            .addInputBus("Any Pressure Resistant Wall (D)", 1)
-            .addInputHatch("Any Pressure Resistant Wall (D)", 1)
-            .addOutputBus("Any Pressure Resistant Wall (D)", 1)
-            .addOutputHatch("Any Pressure Resistant Wall (D)", 1)
-            .addEnergyHatch("Any Pressure Resistant Wall (D)", 1)
-            .addMaintenanceHatch("Any Pressure Resistant Wall (D)", 1)
+            .addCasing("1+", "Pressure Resistant Wall", false)
+            .addEnergyHatch("1+", "Any Pressure Resistant Wall (D)", 1)
+            .addMaintenanceHatch("1", "Any Pressure Resistant Wall (D)", 1)
+            .addInputBus("1+", "Any Pressure Resistant Wall (D)", 1)
+            .addInputHatch("1+", "Any Pressure Resistant Wall (D)", 1)
+            .addOutputBus("1+", "Any Pressure Resistant Wall (D)", 1)
+            .addOutputHatch("1+", "Any Pressure Resistant Wall (D)", 1)
             .toolTipFinisher("_Shusi_");
         return tt;
     }

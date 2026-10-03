@@ -29,6 +29,7 @@ import com.gtnh.processingplus.blocks.BlockGTNHPPCasings;
 import com.gtnh.processingplus.blocks.GTNHPPBlocks;
 import com.gtnh.processingplus.materials.PrPMaterials;
 import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
+import com.gtnh.processingplus.recipes.PPRecipeHelper;
 
 import bartworks.system.material.WerkstoffLoader;
 import cpw.mods.fml.relauncher.Side;
@@ -43,7 +44,6 @@ import gregtech.api.metatileentity.implementations.MTEExtendedPowerMultiBlockBas
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.render.TextureFactory;
 import gregtech.api.structure.error.StructureError;
-import gregtech.api.structure.error.StructureErrorRegistry;
 import gregtech.api.util.MultiblockTooltipBuilder;
 import tectech.thing.block.BlockQuantumGlass;
 import tectech.thing.casing.TTCasingsContainer;
@@ -203,8 +203,13 @@ public class MTE_SPU extends MTEExtendedPowerMultiBlockBase<MTE_SPU> implements 
 
     @Override
     public void checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack, List<StructureError> errors) {
-        checkPiece(STRUCTURE_PIECE_MAIN, OFFSET_X, OFFSET_Y, OFFSET_Z, errors);
-        if (mMaintenanceHatches.size() != 1) errors.add(StructureErrorRegistry.UNKNOWN_STRUCTURE_ERROR);
+        if (!checkPiece(STRUCTURE_PIECE_MAIN, OFFSET_X, OFFSET_Y, OFFSET_Z, errors)) return;
+        checkOneMaintenanceHatch(errors);
+        checkHasEnergyHatch(errors);
+        checkHasInputBus(errors);
+        checkHasOutputBus(errors);
+        if (PPRecipeHelper.recipeMapHasFluidInputs(getRecipeMap())) checkHasInputHatch(errors);
+        if (PPRecipeHelper.recipeMapHasFluidOutputs(getRecipeMap())) checkHasOutputHatch(errors);
     }
 
     @Override
@@ -256,7 +261,7 @@ public class MTE_SPU extends MTEExtendedPowerMultiBlockBase<MTE_SPU> implements 
             .addSeparator()
             .beginStructureBlock(15, 16, 15, true)
             .addController("See NEI structure preview")
-            .addCasingInfoMin("Clean Stainless Steel Machine Casing", 90, false)
+            .addCasing("90+", "Clean Stainless Steel Machine Casing", false)
             .addOtherStructurePart("Jiritsu Sheet Metal", "Diagonal support ribs")
             .addOtherStructurePart("Space Elevator Support Structure", "Equatorial ring")
             .addOtherStructurePart("Ultimate Molecular Casing", "Inner core (TecTech)")
@@ -265,12 +270,12 @@ public class MTE_SPU extends MTEExtendedPowerMultiBlockBase<MTE_SPU> implements 
             .addOtherStructurePart("Quantum Glass", "Core viewport")
             .addOtherStructurePart("Aerogel Insulation Panel Casing (bolted + plain)", "Equatorial paneling")
             .addOtherStructurePart("Subatomic Patterning Casing", "Single legacy block, local (0,0,0)")
-            .addInputBus("Any Clean Stainless Steel Machine Casing", 1)
-            .addInputHatch("Any Clean Stainless Steel Machine Casing", 1)
-            .addOutputBus("Any Clean Stainless Steel Machine Casing", 1)
-            .addOutputHatch("Any Clean Stainless Steel Machine Casing", 1)
-            .addEnergyHatch("Any Clean Stainless Steel Machine Casing", 1)
-            .addMaintenanceHatch("Any Clean Stainless Steel Machine Casing", 1)
+            .addEnergyHatch("1+", "Any Clean Stainless Steel Machine Casing", 1)
+            .addMaintenanceHatch("1", "Any Clean Stainless Steel Machine Casing", 1)
+            .addInputBus("1+", "Any Clean Stainless Steel Machine Casing", 1)
+            .addInputHatch("1+", "Any Clean Stainless Steel Machine Casing", 1)
+            .addOutputBus("1+", "Any Clean Stainless Steel Machine Casing", 1)
+            .addOutputHatch("1+", "Any Clean Stainless Steel Machine Casing", 1)
             .toolTipFinisher("_Shusi_");
         return tt;
     }

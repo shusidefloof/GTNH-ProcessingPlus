@@ -1,4 +1,4 @@
-package com.gtnh.processingplus.recipes.chains.materials.finishedChains;
+package com.gtnh.processingplus.recipes.chains.materials;
 
 import static com.gtnh.processingplus.recipes.PPRecipeHelper.*;
 

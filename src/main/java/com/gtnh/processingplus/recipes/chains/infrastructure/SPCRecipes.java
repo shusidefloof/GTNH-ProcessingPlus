@@ -294,8 +294,9 @@ public class SPCRecipes {
             recipes,
             new MachineType[] { MachineType.CHEMICAL_BATH, MachineType.MIXER, MachineType.LASER_ENGRAVER,
                 MachineType.CHEMICAL_BATH },
-            new int[] { HV, UV, UV, HV },
-            SPCModuleType.BIO);
+            new int[] { HV, UV, UV, HV }
+            //,SPCModuleType.BIO
+        );
     }
 
     // Wetware Board → Extreme — [Chem Bath HV] → [Electrolyzer UV] → [Laser UV] → [Chem Bath UV]
@@ -314,8 +315,9 @@ public class SPCRecipes {
             recipes,
             new MachineType[] { MachineType.CHEMICAL_BATH, MachineType.ELECTROLYZER, MachineType.LASER_ENGRAVER,
                 MachineType.CHEMICAL_BATH },
-            new int[] { HV, UV, UV, UV },
-            SPCModuleType.BIO);
+            new int[] { HV, UV, UV, UV }
+            //, SPCModuleType.BIO
+        );
     }
 
     // Bio Board — [Chem Bath UV] → [Mixer UHV] → [Laser UHV] → [Chem Bath UV]
@@ -335,8 +337,9 @@ public class SPCRecipes {
             recipes,
             new MachineType[] { MachineType.CHEMICAL_BATH, MachineType.MIXER, MachineType.LASER_ENGRAVER,
                 MachineType.CHEMICAL_BATH },
-            new int[] { UV, UHV, UHV, UV },
-            SPCModuleType.BIO);
+            new int[] { UV, UHV, UHV, UV }
+            //, SPCModuleType.BIO
+        );
     }
 
     // Bio Board → Ultra — [Chem Bath UV] → [Mixer UHV] → [Laser UHV] → [Chem Bath UHV]
@@ -356,8 +359,9 @@ public class SPCRecipes {
             recipes,
             new MachineType[] { MachineType.CHEMICAL_BATH, MachineType.MIXER, MachineType.LASER_ENGRAVER,
                 MachineType.CHEMICAL_BATH },
-            new int[] { UV, UHV, UHV, UHV },
-            SPCModuleType.BIO);
+            new int[] { UV, UHV, UHV, UHV }
+            //, SPCModuleType.BIO
+        );
     }
 
     // Optical Board (raw) — [Chem Bath UHV] → [Mixer UEV] → [Laser UEV] → [Chem Bath UHV]
@@ -373,8 +377,9 @@ public class SPCRecipes {
             recipes,
             new MachineType[] { MachineType.CHEMICAL_BATH, MachineType.MIXER, MachineType.LASER_ENGRAVER,
                 MachineType.CHEMICAL_BATH },
-            new int[] { UHV, UEV, UEV, UHV },
-            SPCModuleType.CRYO);
+            new int[] { UHV, UEV, UEV, UHV }
+            //, SPCModuleType.CRYO
+            );
     }
 
     // Optical Board → Circuit_Board_Optical — [Laser UEV] → [Electrolyzer UEV] → [Chem Bath UHV] → [Laser UEV]
@@ -393,8 +398,9 @@ public class SPCRecipes {
             recipes,
             new MachineType[] { MachineType.LASER_ENGRAVER, MachineType.ELECTROLYZER, MachineType.CHEMICAL_BATH,
                 MachineType.LASER_ENGRAVER },
-            new int[] { UEV, UEV, UHV, UEV },
-            SPCModuleType.CRYO);
+            new int[] { UEV, UEV, UHV, UEV }
+            //, SPCModuleType.CRYO
+        );
     }
 
     // -------------------------------------------------------------------------
@@ -461,8 +467,10 @@ public class SPCRecipes {
             4 * 20,
             TierEU.RECIPE_EV,
             new MachineType[] { CB, MX, LE, CB },
-            new int[] { HV, UV, UV, HV },
-            SPCModuleType.BIO);
+            new int[] { HV, UV, UV, HV }
+            , null
+            //, SPCModuleType.BIO
+        );
 
         // Wetware Extreme — UHV photoresist (was UV)
         premium(
@@ -473,8 +481,10 @@ public class SPCRecipes {
             7 * 20,
             TierEU.RECIPE_LuV,
             new MachineType[] { CB, EL, LE, CB },
-            new int[] { HV, UV, UV, UV },
-            SPCModuleType.BIO);
+            new int[] { HV, UV, UV, UV }
+            , null
+            //, SPCModuleType.BIO
+        );
 
         // Bio — UHV photoresist (was UV)
         premium(
@@ -485,8 +495,10 @@ public class SPCRecipes {
             7 * 20,
             TierEU.RECIPE_UV,
             new MachineType[] { CB, MX, LE, CB },
-            new int[] { UV, UHV, UHV, UV },
-            SPCModuleType.BIO);
+            new int[] { UV, UHV, UHV, UV }
+            , null
+            //, SPCModuleType.BIO
+        );
 
         // Bio Ultra — UEV photoresist (was UHV)
         premium(
@@ -497,8 +509,10 @@ public class SPCRecipes {
             7 * 20,
             TierEU.RECIPE_EV,
             new MachineType[] { CB, MX, LE, CB },
-            new int[] { UV, UHV, UHV, UHV },
-            SPCModuleType.BIO);
+            new int[] { UV, UHV, UHV, UHV }
+            , null
+            //, SPCModuleType.BIO
+        );
 
         // Optical — UIV photoresist (was UEV); base outputs 2, premium outputs 4. Gives UIV a use.
         premium(
@@ -509,8 +523,10 @@ public class SPCRecipes {
             7 * 20,
             TierEU.RECIPE_ZPM,
             new MachineType[] { LE, EL, CB, LE },
-            new int[] { UEV, UEV, UHV, UEV },
-            SPCModuleType.CRYO);
+            new int[] { UEV, UEV, UHV, UEV }
+            , null
+            //, SPCModuleType.CRYO
+        );
     }
 
     /** Registers one premium board recipe + its station-sequence data (module optional). */

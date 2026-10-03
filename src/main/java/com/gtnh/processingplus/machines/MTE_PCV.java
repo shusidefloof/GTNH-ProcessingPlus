@@ -34,6 +34,7 @@ import com.gtnh.processingplus.blocks.BlockGTNHPPCasings;
 import com.gtnh.processingplus.blocks.GTNHPPBlocks;
 import com.gtnh.processingplus.materials.PrPMaterials;
 import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
+import com.gtnh.processingplus.recipes.PPRecipeHelper;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
@@ -48,7 +49,6 @@ import gregtech.api.metatileentity.implementations.MTEExtendedPowerMultiBlockBas
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.render.TextureFactory;
 import gregtech.api.structure.error.StructureError;
-import gregtech.api.structure.error.StructureErrorRegistry;
 import gregtech.api.util.MultiblockTooltipBuilder;
 import gtPlusPlus.core.material.MaterialsAlloy;
 
@@ -215,8 +215,14 @@ public class MTE_PCV extends MTEExtendedPowerMultiBlockBase<MTE_PCV> implements 
 
     @Override
     public void checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack, List<StructureError> errors) {
-        checkPiece(STRUCTURE_PIECE_MAIN, OFFSET_X, OFFSET_Y, OFFSET_Z, errors);
-        if (mMaintenanceHatches.size() != 1) errors.add(StructureErrorRegistry.UNKNOWN_STRUCTURE_ERROR);
+        if (!checkPiece(STRUCTURE_PIECE_MAIN, OFFSET_X, OFFSET_Y, OFFSET_Z, errors)) return;
+        checkOneMaintenanceHatch(errors);
+        checkHasEnergyHatch(errors);
+        checkHasMufflerHatch(errors);
+        checkHasInputBus(errors);
+        checkHasOutputBus(errors);
+        if (PPRecipeHelper.recipeMapHasFluidInputs(getRecipeMap())) checkHasInputHatch(errors);
+        if (PPRecipeHelper.recipeMapHasFluidOutputs(getRecipeMap())) checkHasOutputHatch(errors);
     }
 
     @Override
@@ -267,17 +273,17 @@ public class MTE_PCV extends MTEExtendedPowerMultiBlockBase<MTE_PCV> implements 
                     + " reactions.")
             .beginStructureBlock(16, 13, 9, true)
             .addController("Front face, main column")
-            .addCasingInfoMin("Chemically Inert Reaction Vessel (PCV casing)", 20, false)
+            .addCasing("20+", "Chemically Inert Reaction Vessel (PCV casing)", false)
             .addOtherStructurePart(
                 "Borosilicate Glass blocks, Promethium Betavoltaic Alloy rebolted casing, Inconel-792 frames, GT casings & frames",
                 "Per structure hologram")
-            .addInputBus("Any Carbon Fiber Composite casing", 1)
-            .addInputHatch("Any Carbon Fiber Composite casing", 1)
-            .addOutputBus("Any Carbon Fiber Composite casing", 1)
-            .addOutputHatch("Any Carbon Fiber Composite casing", 1)
-            .addEnergyHatch("Any Carbon Fiber Composite casing", 1)
-            .addMufflerHatch("Any Carbon Fiber Composite casing", 1)
-            .addMaintenanceHatch("Any Carbon Fiber Composite casing", 1)
+            .addEnergyHatch("1+", "Any Carbon Fiber Composite casing", 1)
+            .addMaintenanceHatch("1", "Any Carbon Fiber Composite casing", 1)
+            .addMufflerHatch("1", "Any Carbon Fiber Composite casing", 1)
+            .addInputBus("1+", "Any Carbon Fiber Composite casing", 1)
+            .addInputHatch("1+", "Any Carbon Fiber Composite casing", 1)
+            .addOutputBus("1+", "Any Carbon Fiber Composite casing", 1)
+            .addOutputHatch("1+", "Any Carbon Fiber Composite casing", 1)
             .toolTipFinisher("_Shusi_");
         return tt;
     }

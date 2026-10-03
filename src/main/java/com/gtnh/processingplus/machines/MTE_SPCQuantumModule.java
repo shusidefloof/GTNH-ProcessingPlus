@@ -143,7 +143,7 @@ public class MTE_SPCQuantumModule extends MTE_SPCModuleBase<MTE_SPCQuantumModule
             .addInfo("Route it into the SPC with a Quantum Alignment Adapter in a support bay.")
             .beginStructureBlock(3, 3, 3, false)
             .addController("Front center")
-            .addCasingInfoMin("Quantum Alignment Module Casing", 26, false)
+            .addCasing("26+", "Quantum Alignment Module Casing", false)
             .toolTipFinisher("_Shusi_");
         return tt;
     }

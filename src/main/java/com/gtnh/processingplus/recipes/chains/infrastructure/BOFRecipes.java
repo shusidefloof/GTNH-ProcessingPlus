@@ -38,7 +38,7 @@ public class BOFRecipes {
                 plate(Materials.BorosilicateGlass, 2),
                 plate(Materials.Copper, 1),
                 circuit(11))
-            .itemOutputs(new ItemStack(GTNHPPBlocks.CASINGS, 4, BlockGTNHPPCasings.BOF_CASING))
+            .itemOutputs(new ItemStack(GTNHPPBlocks.CASINGS, 1, BlockGTNHPPCasings.BOF_CASING))
             .duration(300)
             .eut(TierEU.RECIPE_LV)
             .addTo(RecipeMaps.assemblerRecipes);
@@ -75,7 +75,7 @@ public class BOFRecipes {
 
     private static void limedConversion() {
         GTValues.RA.stdBuilder()
-            .itemInputs(ingot(Materials.Iron, 8), dust(Materials.Calcium, 2), circuit(2))
+            .itemInputs(ingot(Materials.Iron, 16), dust(Materials.Calcium, 2), circuit(2))
             .fluidInputs(fluid(Materials.Oxygen, 800))
             .itemOutputs(ingot(Materials.Steel, 16), dust(PrPMaterials.BOFSlag, 1))
             .fluidOutputs(fluid(Materials.CarbonDioxide, 800))
@@ -86,7 +86,7 @@ public class BOFRecipes {
 
     private static void limestoneConversion() {
         GTValues.RA.stdBuilder()
-            .itemInputs(ingot(Materials.Iron, 8), dust(Materials.Calcite, 4), circuit(2))
+            .itemInputs(ingot(Materials.Iron, 20), dust(Materials.Calcite, 4), circuit(2))
             .fluidInputs(fluid(Materials.Oxygen, 1600))
             .itemOutputs(ingot(Materials.Steel, 20), dust(PrPMaterials.BOFSlag, 2))
             .fluidOutputs(fluid(Materials.CarbonDioxide, 1600))
@@ -97,7 +97,7 @@ public class BOFRecipes {
 
     private static void dolomiteConversion() {
         GTValues.RA.stdBuilder()
-            .itemInputs(ingot(Materials.Iron, 8), dust(Materials.Dolomite, 8), circuit(2))
+            .itemInputs(ingot(Materials.Iron, 24), dust(Materials.Dolomite, 8), circuit(2))
             .fluidInputs(fluid(Materials.Oxygen, 1800))
             .itemOutputs(ingot(Materials.Steel, 24), dust(PrPMaterials.BOFSlag, 4))
             .fluidOutputs(fluid(Materials.CarbonDioxide, 1600), fluid(Materials.CarbonMonoxide, 400))

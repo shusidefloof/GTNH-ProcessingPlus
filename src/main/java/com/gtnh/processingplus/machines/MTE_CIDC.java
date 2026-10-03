@@ -32,6 +32,7 @@ import com.gtnh.processingplus.blocks.BlockGTNHPPCasings;
 import com.gtnh.processingplus.blocks.GTNHPPBlocks;
 import com.gtnh.processingplus.materials.PrPMaterials;
 import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
+import com.gtnh.processingplus.recipes.PPRecipeHelper;
 
 import bartworks.system.material.WerkstoffLoader;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -47,7 +48,6 @@ import gregtech.api.metatileentity.implementations.MTEExtendedPowerMultiBlockBas
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.render.TextureFactory;
 import gregtech.api.structure.error.StructureError;
-import gregtech.api.structure.error.StructureErrorRegistry;
 import gregtech.api.util.MultiblockTooltipBuilder;
 import gtnhlanth.common.register.LanthItemList;
 
@@ -254,18 +254,12 @@ public class MTE_CIDC extends MTEExtendedPowerMultiBlockBase<MTE_CIDC> implement
     public void checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack, List<StructureError> errors) {
         if (!checkPiece(STRUCTURE_PIECE_MAIN, OFFSET_X, OFFSET_Y, OFFSET_Z, errors)) return;
 
-        if (mMaintenanceHatches.size() != 1) {
-            errors.add(StructureErrorRegistry.UNKNOWN_STRUCTURE_ERROR);
-        }
-        if (mEnergyHatches.isEmpty()) {
-            errors.add(StructureErrorRegistry.UNKNOWN_STRUCTURE_ERROR);
-        }
-        if (mInputHatches.isEmpty()) {
-            errors.add(StructureErrorRegistry.UNKNOWN_STRUCTURE_ERROR);
-        }
-        if (mOutputHatches.isEmpty()) {
-            errors.add(StructureErrorRegistry.UNKNOWN_STRUCTURE_ERROR);
-        }
+        checkOneMaintenanceHatch(errors);
+        checkHasEnergyHatch(errors);
+        checkHasInputBus(errors);
+        checkHasOutputBus(errors);
+        if (PPRecipeHelper.recipeMapHasFluidInputs(getRecipeMap())) checkHasInputHatch(errors);
+        if (PPRecipeHelper.recipeMapHasFluidOutputs(getRecipeMap())) checkHasOutputHatch(errors);
     }
 
     @Override
@@ -317,12 +311,12 @@ public class MTE_CIDC extends MTEExtendedPowerMultiBlockBase<MTE_CIDC> implement
             .addSeparator()
             .beginStructureBlock(15, 16, 15, true)
             .addController("Front face, center")
-            .addCasingInfoMin("Isotopic Doping Casing", 90, false)
-            .addInputBus("Any shell casing", 1)
-            .addInputHatch("Any shell casing", 1)
-            .addOutputBus("Any shell casing", 1)
-            .addEnergyHatch("Any shell casing", 1)
-            .addMaintenanceHatch("Any shell casing", 1)
+            .addCasing("90+", "Isotopic Doping Casing", false)
+            .addEnergyHatch("1+", "Any shell casing", 1)
+            .addMaintenanceHatch("1", "Any shell casing", 1)
+            .addInputBus("1+", "Any shell casing", 1)
+            .addInputHatch("1+", "Any shell casing", 1)
+            .addOutputBus("1+", "Any shell casing", 1)
             .toolTipFinisher("_Shusi_");
         return tt;
     }

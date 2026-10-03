@@ -2,11 +2,11 @@ package com.gtnh.processingplus.machines;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlock;
 import static gregtech.api.enums.HatchElement.*;
+import static gregtech.api.enums.Textures.BlockIcons.MACHINE_CASING_SOLID_STEEL;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_HEARTH;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_HEARTH_ACTIVE;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_HEARTH_ACTIVE_GLOW;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_HEARTH_GLOW;
-import static gregtech.api.enums.Textures.BlockIcons.casingTexturePages;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
 
 import java.util.ArrayList;
@@ -37,7 +37,6 @@ import gregtech.api.metatileentity.implementations.MTEExtendedPowerMultiBlockBas
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.render.TextureFactory;
 import gregtech.api.structure.error.StructureError;
-import gregtech.api.structure.error.StructureErrorRegistry;
 import gregtech.api.util.MultiblockTooltipBuilder;
 import gregtech.api.util.tooltip.TooltipHelper;
 
@@ -48,7 +47,12 @@ import gregtech.api.util.tooltip.TooltipHelper;
  */
 public class MTE_BOF extends MTEExtendedPowerMultiBlockBase<MTE_BOF> implements ISurvivalConstructable {
 
-    private static final int CASING_INDEX = 1;
+    // Page 100 slot 1 — page 100 itself is allocated once by CommonProxy.registerExternalCasingTextures(),
+    // which also registers this exact index to MACHINE_CASING_SOLID_STEEL so hatches match the controller
+    // face and the BOF_CASING structure block (see that method for why: no existing GT5 casingTexturePages
+    // slot renders as Solid Steel, so it has to be registered by hand into an otherwise-unused page).
+    public static final int SOLID_STEEL_MACHINE_CASING_INDEX = 12801;
+    private static final int CASING_INDEX = SOLID_STEEL_MACHINE_CASING_INDEX;
     private static final String STRUCTURE_PIECE_MAIN = "main";
     private static final int OFFSET_X = 2, OFFSET_Y = 2, OFFSET_Z = 0;
 
@@ -127,8 +131,12 @@ public class MTE_BOF extends MTEExtendedPowerMultiBlockBase<MTE_BOF> implements 
 
     @Override
     public void checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack, List<StructureError> errors) {
-        checkPiece(STRUCTURE_PIECE_MAIN, OFFSET_X, OFFSET_Y, OFFSET_Z, errors);
-        if (mMaintenanceHatches.size() != 1) errors.add(StructureErrorRegistry.UNKNOWN_STRUCTURE_ERROR);
+        if (!checkPiece(STRUCTURE_PIECE_MAIN, OFFSET_X, OFFSET_Y, OFFSET_Z, errors)) return;
+        checkOneMaintenanceHatch(errors);
+        checkHasEnergyHatch(errors);
+        checkHasMufflerHatch(errors);
+        checkHasAnyInput(errors);
+        checkHasAnyOutput(errors);
     }
 
     @Override
@@ -150,7 +158,7 @@ public class MTE_BOF extends MTEExtendedPowerMultiBlockBase<MTE_BOF> implements 
     public ITexture[] getTexture(IGregTechTileEntity aBaseMetaTileEntity, ForgeDirection side, ForgeDirection aFacing,
         int colorIndex, boolean aActive, boolean redstoneLevel) {
         if (side == aFacing) {
-            if (aActive) return new ITexture[] { casingTexturePages[0][CASING_INDEX], TextureFactory.builder()
+            if (aActive) return new ITexture[] { TextureFactory.of(MACHINE_CASING_SOLID_STEEL), TextureFactory.builder()
                 .addIcon(OVERLAY_FRONT_HEARTH_ACTIVE)
                 .extFacing()
                 .build(),
@@ -159,7 +167,7 @@ public class MTE_BOF extends MTEExtendedPowerMultiBlockBase<MTE_BOF> implements 
                     .extFacing()
                     .glow()
                     .build() };
-            return new ITexture[] { casingTexturePages[0][CASING_INDEX], TextureFactory.builder()
+            return new ITexture[] { TextureFactory.of(MACHINE_CASING_SOLID_STEEL), TextureFactory.builder()
                 .addIcon(OVERLAY_FRONT_HEARTH)
                 .extFacing()
                 .build(),
@@ -169,7 +177,7 @@ public class MTE_BOF extends MTEExtendedPowerMultiBlockBase<MTE_BOF> implements 
                     .glow()
                     .build() };
         }
-        return new ITexture[] { casingTexturePages[0][CASING_INDEX] };
+        return new ITexture[] { TextureFactory.of(MACHINE_CASING_SOLID_STEEL) };
     }
 
     @Override
@@ -185,14 +193,14 @@ public class MTE_BOF extends MTEExtendedPowerMultiBlockBase<MTE_BOF> implements 
             .addTecTechHatchInfo()
             .beginStructureBlock(5, 4, 5, true)
             .addController("Front face, center")
-            .addCasingInfoMin("Basic Oxygen Furnace Casing", 44, false)
-            .addInputBus("Any casing", 1)
-            .addInputHatch("Any casing", 1)
-            .addOutputBus("Any casing", 1)
-            .addOutputHatch("Any casing", 1)
-            .addEnergyHatch("Any casing", 1)
-            .addMufflerHatch("Any casing", 1)
-            .addMaintenanceHatch("Any casing", 1)
+            .addCasing("44+", "Basic Oxygen Furnace Casing", false)
+            .addEnergyHatch("1+", "Any casing", 1)
+            .addMaintenanceHatch("1", "Any casing", 1)
+            .addMufflerHatch("1", "Any casing", 1)
+            .addInputBus("1+", "Any casing", 1)
+            .addInputHatch("1+", "Any casing", 1)
+            .addOutputBus("1+", "Any casing", 1)
+            .addOutputHatch("1+", "Any casing", 1)
             .toolTipFinisher("_Shusi_");
         return tt;
     }

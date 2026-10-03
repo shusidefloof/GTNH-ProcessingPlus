@@ -41,7 +41,6 @@ import gregtech.api.metatileentity.implementations.MTEExtendedPowerMultiBlockBas
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.render.TextureFactory;
 import gregtech.api.structure.error.StructureError;
-import gregtech.api.structure.error.StructureErrorRegistry;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.MultiblockTooltipBuilder;
 import gregtech.api.util.tooltip.TooltipHelper;
@@ -173,8 +172,11 @@ public class MTE_CAC extends MTEExtendedPowerMultiBlockBase<MTE_CAC> implements 
     @Override
     public void checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack, List<StructureError> errors) {
         mSolenoidTier = null;
-        checkPiece(STRUCTURE_PIECE_MAIN, OFFSET_X, OFFSET_Y, OFFSET_Z, errors);
-        if (mMaintenanceHatches.size() != 1) errors.add(StructureErrorRegistry.UNKNOWN_STRUCTURE_ERROR);
+        if (!checkPiece(STRUCTURE_PIECE_MAIN, OFFSET_X, OFFSET_Y, OFFSET_Z, errors)) return;
+        checkOneMaintenanceHatch(errors);
+        checkHasEnergyHatch(errors);
+        checkHasAnyInput(errors);
+        checkHasOutputBus(errors);
     }
 
     @Override
@@ -260,19 +262,19 @@ public class MTE_CAC extends MTEExtendedPowerMultiBlockBase<MTE_CAC> implements 
                     + ").")
             .beginStructureBlock(15, 13, 7, true)
             .addController("See NEI structure preview")
-            .addCasingInfoMin("Custom Machine Casing 4 (GT++)", 145, false)
+            .addCasing("145+", "Custom Machine Casing 4 (GT++)", false)
             .addOtherStructurePart("BartWorks Glass (any tier)", "Hollow vacuum core")
             .addOtherStructurePart("Solenoid Superconductor Coil (any tier)", "Central column")
             .addOtherStructurePart("Solidifier Radiator / Quantium Item Pipe Casing", "Corner + edge accents")
             .addOtherStructurePart("Ultimately Static Machine Casing", "Side accents")
             .addOtherStructurePart("Orichalcum Frame Box", "Structural corner posts")
             .addOtherStructurePart("Bedrock Miner Casing (GT++)", "Ring accents")
-            .addInputBus("Any Custom Machine Casing 4", 1)
-            .addInputHatch("Any Custom Machine Casing 4", 1)
-            .addOutputBus("Any Custom Machine Casing 4", 1)
-            .addOutputHatch("Any Custom Machine Casing 4", 1)
-            .addEnergyHatch("Any Custom Machine Casing 4", 1)
-            .addMaintenanceHatch("Any Custom Machine Casing 4", 1)
+            .addEnergyHatch("1+", "Any Custom Machine Casing 4", 1)
+            .addMaintenanceHatch("1", "Any Custom Machine Casing 4", 1)
+            .addInputBus("1+", "Any Custom Machine Casing 4", 1)
+            .addInputHatch("1+", "Any Custom Machine Casing 4", 1)
+            .addOutputBus("1+", "Any Custom Machine Casing 4", 1)
+            .addOutputHatch("1+", "Any Custom Machine Casing 4", 1)
             .addSubChannelUsage(GTStructureChannels.SOLENOID)
             .toolTipFinisher(
                 "_Shusi_",

@@ -25,7 +25,6 @@ import java.util.List;
 
 import javax.annotation.Nonnull;
 
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
@@ -34,6 +33,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidStack;
 
 import org.apache.commons.lang3.tuple.Pair;
+import org.jetbrains.annotations.NotNull;
 
 import com.gtnewhorizon.structurelib.alignment.constructable.ISurvivalConstructable;
 import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
@@ -43,6 +43,7 @@ import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.gtnh.processingplus.blocks.BlockGTNHPPCasings;
 import com.gtnh.processingplus.blocks.GTNHPPBlocks;
 import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
+import com.gtnh.processingplus.recipes.PPRecipeHelper;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
@@ -50,25 +51,27 @@ import cpw.mods.fml.relauncher.SideOnly;
 import gregtech.api.GregTechAPI;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.SoundResource;
+import gregtech.api.gui.modularui.GTUITextures;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.logic.ProcessingLogic;
 import gregtech.api.metatileentity.implementations.MTEExtendedPowerMultiBlockBase;
+import gregtech.api.modularui2.GTGuiTextures;
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.recipe.check.CheckRecipeResult;
 import gregtech.api.recipe.check.CheckRecipeResultRegistry;
 import gregtech.api.render.TextureFactory;
 import gregtech.api.structure.error.StructureError;
-import gregtech.api.structure.error.StructureErrorRegistry;
+import gregtech.api.structure.error.StructureErrors;
 import gregtech.api.util.GTRecipe;
-import gregtech.api.util.GTUtility;
 import gregtech.api.util.MultiblockTooltipBuilder;
 import gregtech.api.util.shutdown.ShutDownReasonRegistry;
+import gregtech.common.gui.modularui.multiblock.base.MTEMultiBlockBaseGui;
 
 /**
  * Dual Atmosphere Furnace — a sealed multi-chamber reactor switchable between
- * oxidizing (O₂) and inert (N₂/Ar) atmospheres. Use a screwdriver to toggle mode.
+ * oxidizing (O₂) and inert (N₂/Ar) atmospheres. Use the mode-switch GUI button to toggle.
  *
  * The machine tier is determined by the atmosphere casing (G), glass (A), and item
  * pipe casing (C) used in the structure:
@@ -110,7 +113,9 @@ public class MTE_DAF extends MTEExtendedPowerMultiBlockBase<MTE_DAF> implements 
         { " E   E       E   E ", " F   FBBBBBBBF   F ", " FD DF B   B FD DF ", " FD DF       FD DF ",
             " FD DF B   B FD DF ", " F   FBBBBBBBF   F ", " E   E       E   E " } };
 
-    private boolean mIsOxidizing = true;
+    private static final int MACHINEMODE_OXIDIZING = 0;
+    private static final int MACHINEMODE_INERT = 1;
+
     private int mGlassTier = 0;
     private int mPipeCasingTier = -1;
     private byte mAtmoCasingTier = -1;
@@ -233,25 +238,31 @@ public class MTE_DAF extends MTEExtendedPowerMultiBlockBase<MTE_DAF> implements 
 
         // Atmosphere casing must be one of the 4 DAF tiers
         if (mAtmoCasingTier < 1 || mAtmoCasingTier > 4) {
-            errors.add(StructureErrorRegistry.UNKNOWN_STRUCTURE_ERROR);
+            errors.add(StructureErrors.of("GT5U.gui.text.structure_error.daf_bad_atmo_casing"));
             return;
         }
 
         // Glass must be present (any BW glass tier accepted)
         if (mGlassTier <= 0) {
-            errors.add(StructureErrorRegistry.UNKNOWN_STRUCTURE_ERROR);
+            errors.add(StructureErrors.of("GT5U.gui.text.structure_error.daf_missing_glass"));
             return;
         }
 
         // Item pipe casing must be present
         if (mPipeCasingTier <= 0) {
-            errors.add(StructureErrorRegistry.UNKNOWN_STRUCTURE_ERROR);
+            errors.add(StructureErrors.of("GT5U.gui.text.structure_error.daf_missing_pipe_casing"));
             return;
         }
 
         mSpecialTier = mAtmoCasingTier;
 
-        if (mMaintenanceHatches.size() != 1) errors.add(StructureErrorRegistry.UNKNOWN_STRUCTURE_ERROR);
+        checkOneMaintenanceHatch(errors);
+        checkHasEnergyHatch(errors);
+        checkHasMufflerHatch(errors);
+        checkHasInputBus(errors);
+        checkHasOutputBus(errors);
+        if (PPRecipeHelper.recipeMapHasFluidInputs(getRecipeMap())) checkHasInputHatch(errors);
+        if (PPRecipeHelper.recipeMapHasFluidOutputs(getRecipeMap())) checkHasOutputHatch(errors);
     }
 
     // ── Recipe logic ─────────────────────────────────────────────────────────────
@@ -273,7 +284,8 @@ public class MTE_DAF extends MTEExtendedPowerMultiBlockBase<MTE_DAF> implements 
 
     @Override
     public RecipeMap<?> getRecipeMap() {
-        return mIsOxidizing ? GTNHPPRecipeMaps.sDAFOxidizingRecipes : GTNHPPRecipeMaps.sDAFInertRecipes;
+        return machineMode == MACHINEMODE_INERT ? GTNHPPRecipeMaps.sDAFInertRecipes
+            : GTNHPPRecipeMaps.sDAFOxidizingRecipes;
     }
 
     // getRecipeMap() only reflects whichever atmosphere is currently toggled, so NEI's default
@@ -297,7 +309,8 @@ public class MTE_DAF extends MTEExtendedPowerMultiBlockBase<MTE_DAF> implements 
         if (!super.onRunningTick(aStack)) return false;
 
         // Drain 1 mB/t of the active atmosphere gas
-        FluidStack atmo = mIsOxidizing ? Materials.Oxygen.getFluid(1) : Materials.Nitrogen.getFluid(1);
+        FluidStack atmo = machineMode == MACHINEMODE_INERT ? Materials.Nitrogen.getFluid(1)
+            : Materials.Oxygen.getFluid(1);
         if (!depleteInput(atmo)) {
             stopMachine(ShutDownReasonRegistry.POWER_LOSS);
             return false;
@@ -319,20 +332,41 @@ public class MTE_DAF extends MTEExtendedPowerMultiBlockBase<MTE_DAF> implements 
     }
 
     // ── Mode toggle ──────────────────────────────────────────────────────────────
+    // GUI button (MTEMultiBlockBaseGui), same pattern as MTE_CRV / MTEOreWashingPlant — a bare
+    // setMachineModeIcons() override isn't read by the actual ModularUI2 GUI class, it needs the
+    // matching getGui().withMachineModeIcons(...) override too. No stock icon means "atmosphere",
+    // so DEFAULT/CHEMBATH are just the closest-available stand-ins.
 
     @Override
-    public void onScrewdriverRightClick(ForgeDirection side, EntityPlayer aPlayer, float aX, float aY, float aZ,
-        ItemStack aStack) {
-        mIsOxidizing = !mIsOxidizing;
-        GTUtility.sendChatToPlayer(aPlayer, "DAF atmosphere: " + (mIsOxidizing ? "Oxidizing (O₂)" : "Inert (N₂/Ar)"));
+    public boolean supportsMachineModeSwitch() {
+        return true;
+    }
+
+    // Default getMachineModeKey() just returns "GT5U.MULTI_MACHINE_MODE.unknown" ("Unknown Mode").
+    @Override
+    public String getMachineModeKey() {
+        return "GT5U.GTNHPP_DAF.mode." + machineMode;
+    }
+
+    @Override
+    public void setMachineModeIcons() {
+        machineModeIcons.add(GTUITextures.OVERLAY_BUTTON_MACHINEMODE_DEFAULT);
+        machineModeIcons.add(GTUITextures.OVERLAY_BUTTON_MACHINEMODE_CHEMBATH);
+    }
+
+    @Override
+    protected @NotNull MTEMultiBlockBaseGui<?> getGui() {
+        return new MTEMultiBlockBaseGui<>(this).withMachineModeIcons(
+            GTGuiTextures.OVERLAY_BUTTON_MACHINEMODE_DEFAULT,
+            GTGuiTextures.OVERLAY_BUTTON_MACHINEMODE_CHEMBATH);
     }
 
     // ── NBT persistence ──────────────────────────────────────────────────────────
+    // machineMode itself is auto-persisted by the base class under its own "machineMode" key.
 
     @Override
     public void saveNBTData(NBTTagCompound aNBT) {
         super.saveNBTData(aNBT);
-        aNBT.setBoolean("IsOxidizing", mIsOxidizing);
         aNBT.setByte("mSpecialTier", mSpecialTier);
         aNBT.setByte("mAtmoCasingTier", mAtmoCasingTier);
         aNBT.setInteger("mGlassTier", mGlassTier);
@@ -342,7 +376,6 @@ public class MTE_DAF extends MTEExtendedPowerMultiBlockBase<MTE_DAF> implements 
     @Override
     public void loadNBTData(NBTTagCompound aNBT) {
         super.loadNBTData(aNBT);
-        mIsOxidizing = aNBT.getBoolean("IsOxidizing");
         mSpecialTier = aNBT.getByte("mSpecialTier");
         mAtmoCasingTier = aNBT.getByte("mAtmoCasingTier");
         mGlassTier = aNBT.getInteger("mGlassTier");
@@ -385,7 +418,7 @@ public class MTE_DAF extends MTEExtendedPowerMultiBlockBase<MTE_DAF> implements 
         tt.addMachineType("Dual Atmosphere Furnace, DAF")
             .addInfo(EnumChatFormatting.GRAY + "Sealed reaction chamber with switchable atmosphere.")
             .addInfo(
-                EnumChatFormatting.AQUA + "Screwdriver"
+                EnumChatFormatting.AQUA + "Mode-switch button"
                     + EnumChatFormatting.GRAY
                     + " toggles "
                     + EnumChatFormatting.RED
@@ -418,20 +451,20 @@ public class MTE_DAF extends MTEExtendedPowerMultiBlockBase<MTE_DAF> implements 
                     + "— Absolute Atmosphere Casing, UEV glass, Quantium pipe")
             .beginStructureBlock(18, 7, 7, false)
             .addController("Front face center, layer 2 of 7")
-            .addCasingInfoMin("GT Clean Machine Casing (B) — hatch positions", 1, false)
-            .addCasingInfoMin("Atmosphere Casing (G) — determines tier", 1, false)
+            .addCasing("1+", "GT Clean Machine Casing (B) — hatch positions", false)
+            .addCasing("1+", "Atmosphere Casing (G) — determines tier", false)
             .addOtherStructurePart("BW Glass (A) — tiered glass panels", "Inner chamber face")
             .addOtherStructurePart("Item Pipe Casing (C) — tiered", "Inner column connectors")
             .addOtherStructurePart("NHCM Casing (D)", "Column filler")
             .addOtherStructurePart("GT Frame (meta 312) (E)", "Corner pillars")
             .addOtherStructurePart("GT Sheet Metal (meta 306) (F)", "Side panels")
-            .addInputBus("Any B casing position", 1)
-            .addInputHatch("Any B casing position", 1)
-            .addOutputBus("Any B casing position", 1)
-            .addOutputHatch("Any B casing position", 1)
-            .addEnergyHatch("Any B casing position", 1)
-            .addMufflerHatch("Any B casing position", 1)
-            .addMaintenanceHatch("Any B casing position", 1)
+            .addEnergyHatch("1+", "Any B casing position", 1)
+            .addMaintenanceHatch("1", "Any B casing position", 1)
+            .addMufflerHatch("1", "Any B casing position", 1)
+            .addInputBus("1+", "Any B casing position", 1)
+            .addInputHatch("1+", "Any B casing position", 1)
+            .addOutputBus("1+", "Any B casing position", 1)
+            .addOutputHatch("1+", "Any B casing position", 1)
             .toolTipFinisher("_Shusi_");
         return tt;
     }
@@ -451,8 +484,8 @@ public class MTE_DAF extends MTEExtendedPowerMultiBlockBase<MTE_DAF> implements 
                 + mMaxProgresstime / 20
                 + EnumChatFormatting.RESET
                 + " s",
-            "Atmosphere: " + (mIsOxidizing ? EnumChatFormatting.RED + "Oxidizing (O₂)"
-                : EnumChatFormatting.AQUA + "Inert (N₂/Ar)"),
+            "Atmosphere: " + (machineMode == MACHINEMODE_INERT ? EnumChatFormatting.AQUA + "Inert (N₂/Ar)"
+                : EnumChatFormatting.RED + "Oxidizing (O₂)"),
             "DAF Tier: " + EnumChatFormatting.YELLOW + tierName + EnumChatFormatting.RESET,
             "Glass tier: " + EnumChatFormatting.AQUA
                 + mGlassTier

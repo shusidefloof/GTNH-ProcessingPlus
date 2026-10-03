@@ -143,7 +143,7 @@ public class MTE_SPCCryoModule extends MTE_SPCModuleBase<MTE_SPCCryoModule> impl
             .addInfo("Route it into the SPC with a Cryo-Stabilization Adapter in a support bay.")
             .beginStructureBlock(3, 3, 3, false)
             .addController("Front center")
-            .addCasingInfoMin("Cryo Stabilization Module Casing", 26, false)
+            .addCasing("26+", "Cryo Stabilization Module Casing", false)
             .toolTipFinisher("_Shusi_");
         return tt;
     }

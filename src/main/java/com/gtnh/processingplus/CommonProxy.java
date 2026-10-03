@@ -9,7 +9,6 @@ import com.gtnh.processingplus.items.GTNHPPItems;
 import com.gtnh.processingplus.loader.MaterialLoader;
 import com.gtnh.processingplus.loader.QuestLoader;
 import com.gtnh.processingplus.materials.PrPMaterials;
-import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
 import com.gtnh.processingplus.recipes.PrPlusRecipes;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -20,9 +19,7 @@ import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import gregtech.api.enums.Mods;
 import gregtech.api.enums.Textures;
-import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.render.TextureFactory;
-import gregtech.api.util.GTRecipe;
 import gregtech.api.util.GTUtility;
 
 public class CommonProxy {
@@ -53,26 +50,30 @@ public class CommonProxy {
      * and was never plugged into GT5U's shared {@code casingTexturePages} registry, so no existing composite
      * casing index can reproduce it for hatches/controllers. We register it ourselves into an unused page so
      * {@code MTE_HPR}'s hatches and controller faces can actually match the wall they sit in.
+     *
+     * Page 100 is shared with {@code MTE_BOF}'s Solid Steel registration below (different slot), since no
+     * existing GT5U casingTexturePages slot renders as MACHINE_CASING_SOLID_STEEL either — every vanilla
+     * BlockCasingsN class only falls back to it as an unreachable default, never a real placeable meta.
      */
     private static void registerExternalCasingTextures() {
+        GTUtility.addTexturePage((byte) 100);
+
         Block wall = GameRegistry.findBlock("GoodGenerator", "pressureResistantWalls");
         if (wall == null) {
             GTNHProcessingPlus.LOG
                 .warn("GoodGenerator:pressureResistantWalls not found — HPR casing texture will not match its wall");
-            return;
+        } else {
+            Textures.BlockIcons.setCasingTextureForId(
+                com.gtnh.processingplus.machines.MTE_HPR.PRESSURE_RESISTANT_WALLS_CASING_INDEX,
+                TextureFactory.of(wall, 0));
         }
-        GTUtility.addTexturePage((byte) 100);
+
         Textures.BlockIcons.setCasingTextureForId(
-            com.gtnh.processingplus.machines.MTE_HPR.PRESSURE_RESISTANT_WALLS_CASING_INDEX,
-            TextureFactory.of(wall, 0));
+            com.gtnh.processingplus.machines.MTE_BOF.SOLID_STEEL_MACHINE_CASING_INDEX,
+            TextureFactory.of(Textures.BlockIcons.MACHINE_CASING_SOLID_STEEL));
     }
 
     public void loadComplete(FMLLoadCompleteEvent event) {
-        try {
-            copyRecipesToCRV();
-        } catch (Throwable t) {
-            GTNHProcessingPlus.LOG.error("ABS→CRV recipe copy failed (GT++ present?)", t);
-        }
         try {
             PrPMaterials.resolveDeferredExternalMaterials();
             PrPlusRecipes.init();
@@ -92,13 +93,4 @@ public class CommonProxy {
     }
 
     public void serverStarting(FMLServerStartingEvent event) {}
-
-    /** Copies all ABS recipes into the CRV recipe map at 80% EU cost. */
-    private static void copyRecipesToCRV() {
-        for (GTRecipe recipe : RecipeMaps.alloyBlastSmelterRecipes.getAllRecipes()) {
-            GTRecipe copy = recipe.copy();
-            copy.mEUt = Math.max(1, (int) (copy.mEUt * 0.8));
-            GTNHPPRecipeMaps.sCRVRecipes.addRecipe(copy);
-        }
-    }
 }

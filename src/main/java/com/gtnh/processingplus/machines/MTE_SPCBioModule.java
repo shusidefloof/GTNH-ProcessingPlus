@@ -144,7 +144,7 @@ public class MTE_SPCBioModule extends MTE_SPCModuleBase<MTE_SPCBioModule> implem
             .addInfo("Route it into the SPC with a Bio-Lithography Adapter in a support bay.")
             .beginStructureBlock(3, 3, 3, false)
             .addController("Front center")
-            .addCasingInfoMin("Bio Lithography Module Casing", 26, false)
+            .addCasing("26+", "Bio Lithography Module Casing", false)
             .toolTipFinisher("_Shusi_");
         return tt;
     }

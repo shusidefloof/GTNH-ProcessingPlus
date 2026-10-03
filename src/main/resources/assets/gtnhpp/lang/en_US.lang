@@ -49,3 +49,43 @@ gtnhpp.recipe.cac=Cryogenic Annealing Cryostat
 gtnhpp.recipe.rtg=Radioisotope Thermoelectric Generator
 
 gtnhpp.recipe.hpr.coil_tier=FRF Coil Tier: %s
+
+# Structure error messages (GT5U.* namespace is shared/flattened across all mods' lang files,
+# not exclusive to GT5-Unofficial — this follows the same convention its own multiblocks use)
+GT5U.gui.text.structure_error.daf_bad_atmo_casing=Invalid or missing Dual Atmosphere Furnace casing tier (G)
+GT5U.gui.text.structure_error.daf_missing_glass=Missing structural glass (A)
+GT5U.gui.text.structure_error.daf_missing_pipe_casing=Missing item pipe casing (C)
+GT5U.gui.text.structure_error.daf_bad_maintenance_hatch=Requires exactly one Maintenance Hatch
+GT5U.gui.text.structure_error.aar_missing_coil=Missing or invalid heating coil
+GT5U.gui.text.structure_error.bof_bad_maintenance_hatch=Requires exactly one Maintenance Hatch
+GT5U.gui.text.structure_error.cac_bad_maintenance_hatch=Requires exactly one Maintenance Hatch
+GT5U.gui.text.structure_error.cidc_bad_maintenance_hatch=Requires exactly one Maintenance Hatch
+GT5U.gui.text.structure_error.cidc_missing_energy_hatch=Requires at least one Energy Hatch
+GT5U.gui.text.structure_error.cidc_missing_input_hatch=Requires at least one Input Hatch
+GT5U.gui.text.structure_error.cidc_missing_output_hatch=Requires at least one Output Hatch
+GT5U.gui.text.structure_error.crv_bad_maintenance_hatch=Requires exactly one Maintenance Hatch
+GT5U.gui.text.structure_error.csc_bad_maintenance_hatch=Requires exactly one Maintenance Hatch
+GT5U.gui.text.structure_error.cstr_bad_maintenance_hatch=Requires exactly one Maintenance Hatch
+GT5U.gui.text.structure_error.hpr_missing_coil=Missing or invalid FRF coil
+GT5U.gui.text.structure_error.hpr_bad_maintenance_hatch=Requires exactly one Maintenance Hatch
+GT5U.gui.text.structure_error.hpsf_missing_glass=Missing structural glass
+GT5U.gui.text.structure_error.hpsf_missing_coil=Missing or invalid heating coil
+GT5U.gui.text.structure_error.hpsf_missing_pipe_casing=Missing Dual-Sealed Atmosphere Pipe Casing
+GT5U.gui.text.structure_error.hpsf_bad_maintenance_hatch=Requires exactly one Maintenance Hatch
+GT5U.gui.text.structure_error.htrf_missing_coil=Missing or invalid heating coil
+GT5U.gui.text.structure_error.htrf_bad_maintenance_hatch=Requires exactly one Maintenance Hatch
+GT5U.gui.text.structure_error.pcv_bad_maintenance_hatch=Requires exactly one Maintenance Hatch
+GT5U.gui.text.structure_error.rtg_bad_maintenance_hatch=Requires exactly one Maintenance Hatch
+GT5U.gui.text.structure_error.rtg_missing_dynamo_hatch=Requires at least one Dynamo Hatch
+GT5U.gui.text.structure_error.rtg_missing_input_bus=Requires at least one Input Bus
+GT5U.gui.text.structure_error.scd_bad_maintenance_hatch=Requires exactly one Maintenance Hatch
+GT5U.gui.text.structure_error.spc_bad_maintenance_hatch=Requires exactly one Maintenance Hatch
+GT5U.gui.text.structure_error.spc_missing_energy_hatch=Requires at least one Energy Hatch
+GT5U.gui.text.structure_error.spu_bad_maintenance_hatch=Requires exactly one Maintenance Hatch
+
+# Machine mode names (same GT5U.* shared namespace, same convention as MTEOreWashingPlant's
+# GT5U.GTPP_MULTI_WASH_PLANT.mode.<n> keys)
+GT5U.GTNHPP_CRV.mode.0=Ceramic Reaction Vessel
+GT5U.GTNHPP_CRV.mode.1=Alloy Blast Smelter
+GT5U.GTNHPP_DAF.mode.0=Oxidizing (O2)
+GT5U.GTNHPP_DAF.mode.1=Inert (N2/Ar)

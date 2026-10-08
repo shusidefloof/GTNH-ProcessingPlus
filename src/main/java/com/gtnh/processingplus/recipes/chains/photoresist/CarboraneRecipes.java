@@ -33,6 +33,7 @@ public class CarboraneRecipes {
 
     public static void init() {
         step1_Diborane();
+        step1Alt_BoronTrioxideRoute();
         step2_AmmoniaBorane();
         step3_DecaboraneMelt();
         step4_CryoFractionation();
@@ -45,15 +46,31 @@ public class CarboraneRecipes {
         slag_Hydrolysis();
     }
 
-    // 1. LCR: 2 NaBH4 + H2SO4 → B2H6 + Na2SO4 + 2 H2 (diborane is pyrophoric, hence the inert-gas steps later)
+    // 1. LCR: NaBH4 + H2SO4 → B2H6 (diborane is pyrophoric, hence the inert-gas steps later). Deliberately generous:
+    // 6 dust of borohydride make 2000 mB of diborane, half of what the stoichiometry would need.
     private static void step1_Diborane() {
         GTValues.RA.stdBuilder()
-            .itemInputs(Materials.SodiumBorohydride.getDust(12), circuit(1))
+            .itemInputs(Materials.SodiumBorohydride.getDust(6), circuit(1))
             .fluidInputs(fluid(Materials.SulfuricAcid, 1000))
             .fluidOutputs(fluid(PrPMaterials.Diborane, 2000), fluid(Materials.Hydrogen, 2000))
             .duration(10 * SECONDS)
             .eut(TierEU.RECIPE_EV)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
+    }
+
+    // 1 (alt). HPSF: B2O3 + 2 Al + 3 H2 → B2H6 + Al2O3 under high-pressure hydrogen. Skips the sodium borohydride
+    // line and uses the Boron Trioxide the hBN chain already makes, but is far less efficient (10 B2O3 dust and
+    // 4 Al for the same 2000 mB of diborane) and needs real heat.
+    private static void step1Alt_BoronTrioxideRoute() {
+        GTValues.RA.stdBuilder()
+            .itemInputs(item("dustBoronTrioxide", 10), dust(Materials.Aluminium, 4), circuit(2))
+            .fluidInputs(fluid(Materials.Hydrogen, 6000))
+            .itemOutputs(item("dustAlumina", 10))
+            .fluidOutputs(fluid(PrPMaterials.Diborane, 2000))
+            .duration(20 * SECONDS)
+            .eut(TierEU.RECIPE_IV)
+            .metadata(GTRecipeConstants.COIL_HEAT, 2400)
+            .addTo(GTNHPPRecipeMaps.sHPSFRecipes);
     }
 
     // 2. AAR: B2H6 + NH3 in an ammonia atmosphere → ammonia-borane adduct

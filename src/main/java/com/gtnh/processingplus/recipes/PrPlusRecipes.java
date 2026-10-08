@@ -29,6 +29,7 @@ import com.gtnh.processingplus.recipes.chains.materials.Nylon66Recipes;
 import com.gtnh.processingplus.recipes.chains.materials.PLARecipes;
 import com.gtnh.processingplus.recipes.chains.materials.PassiveableMaterials;
 import com.gtnh.processingplus.recipes.chains.materials.SiCRecipes;
+import com.gtnh.processingplus.recipes.chains.photoresist.CarboraneRecipes;
 import com.gtnh.processingplus.recipes.chains.photoresist.PhotoresistRecipes;
 
 public class PrPlusRecipes {
@@ -38,6 +39,7 @@ public class PrPlusRecipes {
         // All photoresist tiers (MV → UMV) now live in PhotoresistRecipes; its own init()
         // handles the per-tier fault isolation for the UHV+ exotic-fluid tiers internally.
         RecipeGuard.run("PhotoresistRecipes", PhotoresistRecipes::init);
+        RecipeGuard.run("CarboraneRecipes", CarboraneRecipes::init);
         RecipeGuard.run("SPCRecipes", SPCRecipes::init);
         RecipeGuard.run("Nylon66Recipes", Nylon66Recipes::init);
         RecipeGuard.run("PLARecipes", PLARecipes::init);

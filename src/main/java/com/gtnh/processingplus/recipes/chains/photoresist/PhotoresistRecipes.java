@@ -641,10 +641,11 @@ public class PhotoresistRecipes {
     // LuV stage: LuV Photoresist blend: IV + Alicyclic Resin + PAG + PGMEA (Mixer)
     private static void luvLuVBlend() {
         GTValues.RA.stdBuilder()
-            .itemInputs(dust(PrPMaterials.TriphenylsulfoniumTriflate, 1), circuit(13))
+            .itemInputs(dust(PrPMaterials.TriphenylsulfoniumTriflate, 4), dust(PrPMaterials.MagicCage, 6), circuit(13))
             .fluidInputs(
-                molten(PrPMaterials.AlicyclicResin, 576),
-                fluid(PrPMaterials.IVPhotoresist, 4250),
+                molten(PrPMaterials.AlicyclicResin, 1728),
+                fluid(PrPMaterials.IVPhotoresist, 8000),
+                fluid(PrPMaterials.TriflicAcid, 2000),
                 fluid(PrPMaterials.PGMEA, 1050))
             .fluidOutputs(fluid(PrPMaterials.LuVPhotoresist, 8000))
             .duration(3 * SECONDS)

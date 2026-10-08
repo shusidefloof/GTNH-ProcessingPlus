@@ -211,6 +211,19 @@ public class PrPMaterials implements Runnable {
     public static Werkstoff BariumRichWasteWater;
     public static Werkstoff BariumChloride;
 
+    // Carborane photoacid chain (LuV): appended last to keep earlier material IDs stable
+    public static Werkstoff Diborane;
+    public static Werkstoff AmmoniaBorane;
+    public static Werkstoff CrudeDecaboraneMelt;
+    public static Werkstoff CryoFractionatedDecaborane;
+    public static Werkstoff OrthoCarborane;
+    public static Werkstoff NidoCarboranideSalt;
+    public static Werkstoff FranciumCarboranideCrystal;
+    public static Werkstoff CarboraneAcidSolution;
+    public static Werkstoff CarboraneChlorideSlag;
+    public static Werkstoff AnhydrousCarboraneSuperacid;
+    public static Werkstoff MagicCage;
+
     // IV
     public static Werkstoff Furfural;
     public static Werkstoff Dihydropyran;
@@ -2514,6 +2527,129 @@ public class PrPMaterials implements Runnable {
                 new Werkstoff.GenerationFeatures().onlyDust(),
                 id(),
                 TextureSet.SET_DULL));
+
+        // ── Carborane photoacid chain (LuV): appended last to keep earlier material IDs stable ──
+
+        Diborane = register(
+            new Werkstoff(
+                rgb(200, 230, 200),
+                "Diborane Feed Gas",
+                subscriptNumbers("B2H6"),
+                new Werkstoff.Stats(),
+                Werkstoff.Types.MIXTURE,
+                fluidFeatures(),
+                id(),
+                TextureSet.SET_FLUID));
+
+        AmmoniaBorane = register(
+            new Werkstoff(
+                rgb(235, 238, 255),
+                "Ammonia-Borane Hydrogen-Storage Adduct",
+                subscriptNumbers("NH3BH3"),
+                new Werkstoff.Stats(),
+                Werkstoff.Types.MIXTURE,
+                new Werkstoff.GenerationFeatures().onlyDust(),
+                id(),
+                TextureSet.SET_DULL));
+
+        CrudeDecaboraneMelt = register(
+            new Werkstoff(
+                rgb(230, 222, 190),
+                "Crude Decaborane Melt",
+                subscriptNumbers("??B10H14??"),
+                new Werkstoff.Stats(),
+                Werkstoff.Types.MIXTURE,
+                fluidFeatures(),
+                id(),
+                TextureSet.SET_FLUID));
+
+        CryoFractionatedDecaborane = register(
+            new Werkstoff(
+                rgb(245, 245, 232),
+                "Cryo-Fractionated Decaborane",
+                subscriptNumbers("B10H14"),
+                new Werkstoff.Stats(),
+                Werkstoff.Types.MIXTURE,
+                fluidFeatures(),
+                id(),
+                TextureSet.SET_FLUID));
+
+        OrthoCarborane = register(
+            new Werkstoff(
+                rgb(250, 250, 252),
+                "ortho-Carborane Icosahedral Cage",
+                subscriptNumbers("C2B10H12"),
+                new Werkstoff.Stats(),
+                Werkstoff.Types.MIXTURE,
+                new Werkstoff.GenerationFeatures().onlyDust(),
+                id(),
+                TextureSet.SET_CRYSTALLINE));
+
+        NidoCarboranideSalt = register(
+            new Werkstoff(
+                rgb(196, 214, 240),
+                "nido-Carboranide Open-Cage Salt",
+                subscriptNumbers("NaC2B9H12"),
+                new Werkstoff.Stats(),
+                Werkstoff.Types.MIXTURE,
+                new Werkstoff.GenerationFeatures().onlyDust(),
+                id(),
+                TextureSet.SET_DULL));
+
+        FranciumCarboranideCrystal = register(
+            new Werkstoff(
+                rgb(255, 196, 110),
+                "Francium closo-Carboranide Crystal",
+                subscriptNumbers("FrCB11H12"),
+                new Werkstoff.Stats(),
+                Werkstoff.Types.MIXTURE,
+                new Werkstoff.GenerationFeatures().onlyDust(),
+                id(),
+                TextureSet.SET_CRYSTALLINE));
+
+        CarboraneAcidSolution = register(
+            new Werkstoff(
+                rgb(150, 60, 170),
+                "Undecachloro-closo-monocarbadodecaborate Acid Solution",
+                subscriptNumbers("H(CB11Cl11)"),
+                new Werkstoff.Stats(),
+                Werkstoff.Types.MIXTURE,
+                fluidFeatures(),
+                id(),
+                TextureSet.SET_FLUID));
+
+        CarboraneChlorideSlag = register(
+            new Werkstoff(
+                rgb(92, 82, 72),
+                "Carborane Chloride Slag",
+                subscriptNumbers("FrCl/NaCl/BCl3"),
+                new Werkstoff.Stats(),
+                Werkstoff.Types.MIXTURE,
+                new Werkstoff.GenerationFeatures().onlyDust(),
+                id(),
+                TextureSet.SET_DULL));
+
+        AnhydrousCarboraneSuperacid = register(
+            new Werkstoff(
+                rgb(210, 40, 120),
+                "Anhydrous Carborane Superacid",
+                subscriptNumbers("H(CB11Cl11)"),
+                new Werkstoff.Stats(),
+                Werkstoff.Types.MIXTURE,
+                fluidFeatures(),
+                id(),
+                TextureSet.SET_FLUID));
+
+        MagicCage = register(
+            new Werkstoff(
+                rgb(255, 90, 200),
+                "Triphenylsulfonium Undecachlorocarboranide",
+                subscriptNumbers("(C6H5)3S(CB11Cl11)"),
+                new Werkstoff.Stats(),
+                Werkstoff.Types.MIXTURE,
+                new Werkstoff.GenerationFeatures().onlyDust(),
+                id(),
+                TextureSet.SET_CRYSTALLINE));
     }
 
     // =========================

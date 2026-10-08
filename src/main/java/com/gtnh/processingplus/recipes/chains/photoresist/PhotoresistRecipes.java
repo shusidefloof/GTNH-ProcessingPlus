@@ -646,7 +646,7 @@ public class PhotoresistRecipes {
                 molten(PrPMaterials.AlicyclicResin, 1728),
                 fluid(PrPMaterials.IVPhotoresist, 8000),
                 fluid(PrPMaterials.TriflicAcid, 2000),
-                fluid(PrPMaterials.PGMEA, 1050))
+                fluid(PrPMaterials.PGMEA, 1000))
             .fluidOutputs(fluid(PrPMaterials.LuVPhotoresist, 8000))
             .duration(3 * SECONDS)
             .eut(TierEU.RECIPE_LuV)
@@ -785,12 +785,12 @@ public class PhotoresistRecipes {
     // =========================================================
     private static void zpmZPMBlend() {
         GTValues.RA.stdBuilder()
-            .itemInputs(dust(PrPMaterials.TriphenylsulfoniumTriflate, 2), circuit(14))
+            .itemInputs(dust(PrPMaterials.TriphenylsulfoniumTriflate, 4), circuit(14))
             .fluidInputs(
-                fluid(PrPMaterials.LuVPhotoresist, 1200),
-                molten(PrPMaterials.ArFCopolymerResin, 720),
-                fluid(PrPMaterials.PGMEA, 1200))
-            .fluidOutputs(fluid(PrPMaterials.ZPMPhotoresist, 3000))
+                fluid(PrPMaterials.LuVPhotoresist, 3000),
+                molten(PrPMaterials.ArFCopolymerResin, 1008),
+                fluid(PrPMaterials.PGMEA, 2000))
+            .fluidOutputs(fluid(PrPMaterials.ZPMPhotoresist, 4000))
             .duration(3 * SECONDS)
             .eut(TierEU.RECIPE_ZPM)
             .addTo(RecipeMaps.mixerNonCellRecipes);
@@ -930,7 +930,7 @@ public class PhotoresistRecipes {
     private static void uvUVBlend() {
         GTValues.RA.stdBuilder()
             .itemInputs(dust(PrPMaterials.REDopedPhotoresistMatrix, 4), circuit(15))
-            .fluidInputs(fluid(PrPMaterials.ZPMPhotoresist, 1000), fluid(PrPMaterials.PGMEA, 1000))
+            .fluidInputs(fluid(PrPMaterials.ZPMPhotoresist, 3000), fluid(PrPMaterials.PGMEA, 1000))
             .fluidOutputs(fluid(PrPMaterials.UVPhotoresist, 2000))
             .duration(3 * SECONDS)
             .eut(TierEU.RECIPE_UV)

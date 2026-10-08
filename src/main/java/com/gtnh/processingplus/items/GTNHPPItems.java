@@ -11,13 +11,13 @@ public class GTNHPPItems {
     /** Waste output produced when the SPC station sequence or tier requirement is not met. */
     public static Item SCORCHED_CIRCUIT_BOARD;
 
-    /** Raw UEV-tier optical circuit board substrate — precursor to Circuit_Board_Optical. */
+    /** Raw UEV-tier optical circuit board substrate, precursor to Circuit_Board_Optical. */
     public static Item OPTICAL_CIRCUIT_BOARD_RAW;
 
     // LuV exotics (Vibranium + Unobtanium intermediates) now live on the shared
-    // INTERMEDIATES MetaItem — see the Intermediate enum.
+    // INTERMEDIATES MetaItem: see the Intermediate enum.
 
-    /** Promethium Betavoltaic Cell — fuel for the RTG generator multiblock. */
+    /** Promethium Betavoltaic Cell: fuel for the RTG generator multiblock. */
     public static Item PROMETHIUM_BETAVOLTAIC_CELL;
 
     /** Shared MetaItem holding every single-use chain intermediate ({@link Intermediate}). */

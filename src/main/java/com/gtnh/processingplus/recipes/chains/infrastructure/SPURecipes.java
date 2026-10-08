@@ -28,7 +28,7 @@ public class SPURecipes {
     }
 
     // -------------------------------------------------------------------------
-    // Subatomic Patterning Casing — UIV-grade lattice-imprinting shell.
+    // Subatomic Patterning Casing: UIV-grade lattice-imprinting shell.
     // -------------------------------------------------------------------------
     private static void casingRecipe() {
         GTValues.RA.stdBuilder()
@@ -46,7 +46,7 @@ public class SPURecipes {
     }
 
     // -------------------------------------------------------------------------
-    // Controller — assembly-line recipe (UIV), scanned from a UV hull.
+    // Controller: assembly-line recipe (UIV), scanned from a UV hull.
     // -------------------------------------------------------------------------
     private static void controllerRecipe() {
         GTValues.RA.stdBuilder()

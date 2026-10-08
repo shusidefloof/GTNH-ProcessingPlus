@@ -16,19 +16,19 @@ import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.util.GTRecipeConstants;
 
 /**
- * LuV-era exotic metals. Tiers are mixed on purpose — these are LuV-gated chains that reach into
+ * LuV-era exotic metals. Tiers are mixed on purpose, these are LuV-gated chains that reach into
  * ZPM-tier reagents (Fiery Steel, Life Essence, the Magic Acid superacid line).
  *
  * <p>
- * <b>Vibranium</b> — Adamantium ore is too tough to digest into a mud, so it is melted with Fiery
+ * <b>Vibranium</b>: Adamantium ore is too tough to digest into a mud, so it is melted with Fiery
  * Steel, then infused with specific metals and the essence of life itself.
  *
  * <p>
- * <b>Unobtanium</b> — a Void-Miner-only material. The ore yields an Ore Concentrate that ordinary
+ * <b>Unobtanium</b>: a Void-Miner-only material. The ore yields an Ore Concentrate that ordinary
  * acids can't touch, so it is dissolved with Magic Acid (fluoroantimonic superacid).
  *
  * <p>
- * <b>Jiritsu</b> — this mod's own pale blue-white UIV structural alloy, a third entry alongside
+ * <b>Jiritsu</b>: this mod's own pale blue-white UIV structural alloy, a third entry alongside
  * GT5's Churitsu (neutral) and GoodGenerator's Tairitsu (opposition). A multiblock Mixer fuses the
  * aerogel lattice with a blend of pale blue-white alloys (Trinium, Ultimet, Energetic Silver,
  * Crystalline Alloy) and a molten Naquadah backbone into Jiritsu Alloy, then stabilized under an
@@ -47,7 +47,7 @@ public class LuVExotics {
         jirJiritsuAlloy();
         jirHotJiritsu();
 
-        // Unobtanium (9 steps) — SbF5 comes from GoodGenerator (fluid "antimony pentafluoride")
+        // Unobtanium (9 steps): SbF5 comes from GoodGenerator (fluid "antimony pentafluoride")
         unoFluorosulfuricAcid();
         unoMagicAcid();
         unoDissolution();
@@ -77,7 +77,7 @@ public class LuVExotics {
     // VIBRANIUM
     // =========================================================
 
-    // 1. Chem Bath — Adamantium ingot melted by molten Fiery Steel
+    // 1. Chem Bath: Adamantium ingot melted by molten Fiery Steel
     private static void vibRedHotAdamantium() {
         safe(
             "red hot adamantium",
@@ -91,7 +91,7 @@ public class LuVExotics {
                 .addTo(RecipeMaps.chemicalBathRecipes));
     }
 
-    // 2. Mixer — chemical green dye + molten Oriharukon + molten Quantium → Vibranium Dye
+    // 2. Mixer: chemical green dye + molten Oriharukon + molten Quantium → Vibranium Dye
     private static void vibDye() {
         safe(
             "vibranium dye",
@@ -107,7 +107,7 @@ public class LuVExotics {
                 .addTo(RecipeMaps.mixerNonCellRecipes));
     }
 
-    // 3. Chem Bath — bathe Red Hot Adamantium in Vibranium Dye
+    // 3. Chem Bath: bathe Red Hot Adamantium in Vibranium Dye
     private static void vibVibrantAdamantium() {
         safe(
             "red hot vibrant adamantium",
@@ -121,7 +121,7 @@ public class LuVExotics {
     }
 
     // 4. Infuse with Life Essence + molten Blood Infused Iron → bartworks-generated Vibranium hot ingot.
-    // (Chem Reactor — it's a chemical infusion, not a freeze; the freeze is step 5.)
+    // (Chem Reactor: it's a chemical infusion, not a freeze; the freeze is step 5.)
     private static void vibHotVibranium() {
         safe(
             "hot vibranium",
@@ -138,7 +138,7 @@ public class LuVExotics {
     // JIRITSU
     // =========================================================
 
-    // 1. Multiblock Mixer — fuse both aerogel dusts with a blend of pale blue-white alloys (Trinium,
+    // 1. Multiblock Mixer: fuse both aerogel dusts with a blend of pale blue-white alloys (Trinium,
     // Ultimet, Energetic Silver, Crystalline Alloy) and a molten Naquadah backbone into Jiritsu Alloy.
     private static void jirJiritsuAlloy() {
         safe(
@@ -158,7 +158,7 @@ public class LuVExotics {
                 .addTo(RecipeMaps.mixerNonCellRecipes));
     }
 
-    // 2. Multiblock Chemical Reactor — stabilize Jiritsu Alloy under an inert Helium blanket so the
+    // 2. Multiblock Chemical Reactor: stabilize Jiritsu Alloy under an inert Helium blanket so the
     // lattice can stand on its own (self-reliance) rather than needing a reactive support medium.
     private static void jirHotJiritsu() {
         safe(
@@ -177,7 +177,7 @@ public class LuVExotics {
     // UNOBTANIUM
     // =========================================================
 
-    // 1. Chem Reactor — HF + SO3 → Fluorosulfuric Acid
+    // 1. Chem Reactor: HF + SO3 → Fluorosulfuric Acid
     private static void unoFluorosulfuricAcid() {
         safe(
             "fluorosulfuric acid",
@@ -191,7 +191,7 @@ public class LuVExotics {
                 .addTo(GTNHPPRecipeMaps.sHTRFRecipes));
     }
 
-    // 2. CSTR — Fluorosulfuric Acid + Antimony Pentafluoride → Magic Acid (fluoroantimonic)
+    // 2. CSTR: Fluorosulfuric Acid + Antimony Pentafluoride → Magic Acid (fluoroantimonic)
     private static void unoMagicAcid() {
         safe(
             "magic acid",
@@ -204,7 +204,7 @@ public class LuVExotics {
                 .addTo(GTNHPPRecipeMaps.sCSTRRecipes));
     }
 
-    // 3. Dissolution (GT++ Dissolution Tank map isn't exposed here — using the LCR as a substitute):
+    // 3. Dissolution (GT++ Dissolution Tank map isn't exposed here, using the LCR as a substitute):
     // 2 Ore Concentrate + Magic Acid + Superheated Steam → Dirty Slurry + Endstone dust
     private static void unoDissolution() {
         safe(
@@ -220,7 +220,7 @@ public class LuVExotics {
                 .addTo(GTNHPPRecipeMaps.sHTRFRecipes));
     }
 
-    // 4. Chem Bath — wash the slurry with distilled water
+    // 4. Chem Bath: wash the slurry with distilled water
     private static void unoWash() {
         safe(
             "unobtanium wash",
@@ -234,7 +234,7 @@ public class LuVExotics {
                 .addTo(RecipeMaps.chemicalBathRecipes));
     }
 
-    // 5. Autoclave — crystallise the washed slurry
+    // 5. Autoclave: crystallise the washed slurry
     private static void unoCrystallize() {
         safe(
             "unobtanium crystallize",
@@ -248,7 +248,7 @@ public class LuVExotics {
                 .addTo(RecipeMaps.autoclaveRecipes));
     }
 
-    // 6. Laser Engraver — purify crystals with Europium Chloride
+    // 6. Laser Engraver: purify crystals with Europium Chloride
     private static void unoLaserPurify() {
         safe(
             "unobtanium laser purify",
@@ -262,7 +262,7 @@ public class LuVExotics {
                 .addTo(RecipeMaps.laserEngraverRecipes));
     }
 
-    // 6b. DT Tower — recover Europium Chloride from the spent solution
+    // 6b. DT Tower: recover Europium Chloride from the spent solution
     private static void unoEuropiumChlorideRecovery() {
         safe(
             "europium chloride recovery",
@@ -285,7 +285,7 @@ public class LuVExotics {
                 .addTo(GTNHPPRecipeMaps.sCSTRRecipes));
     }
 
-    // 7. Thermal Centrifuge — shatter purified crystals into shards
+    // 7. Thermal Centrifuge: shatter purified crystals into shards
     private static void unoThermalCentrifuge() {
         safe(
             "unobtanium centrifuge",
@@ -297,7 +297,7 @@ public class LuVExotics {
                 .addTo(RecipeMaps.thermalCentrifugeRecipes));
     }
 
-    // 8. CSTR — reduce shards with Fiery Steel into clumps
+    // 8. CSTR: reduce shards with Fiery Steel into clumps
     private static void unoClumps() {
         safe(
             "unobtanium clumps",
@@ -310,7 +310,7 @@ public class LuVExotics {
                 .addTo(GTNHPPRecipeMaps.sCSTRRecipes));
     }
 
-    // 9. Centrifuge — break a clump into Unobtanium dust
+    // 9. Centrifuge: break a clump into Unobtanium dust
     private static void unoCentrifuge() {
         safe(
             "unobtanium Centrifuge",
@@ -323,7 +323,7 @@ public class LuVExotics {
     }
 
     // -------------------------------------------------------------------------
-    // Late-LuV entry: Sifting Endstone for Ore Concentrate — 7.5% concentrate chance, ~5120 blocks
+    // Late-LuV entry: Sifting Endstone for Ore Concentrate, 7.5% concentrate chance, ~5120 blocks
     // per 2 ingots. Byproducts (tungstate, platinum powder, sand, helium) ensure every run is
     // rewarding even on a miss. Void Miner is the efficient ZPM bulk source.
     // -------------------------------------------------------------------------
@@ -344,7 +344,7 @@ public class LuVExotics {
                 .addTo(RecipeMaps.sifterRecipes));
     }
 
-    // Registers the Ore Concentrate as a Void Miner drop in the vanilla End ("The End", dim 1) —
+    // Registers the Ore Concentrate as a Void Miner drop in the vanilla End ("The End", dim 1)
     // the efficient ZPM bulk source. The map is built once during bartworks init, so adding here
     // (loadComplete) persists. Wrapped in safe() in case GalacticGreg/the End map isn't present.
     private static void registerEndVoidMinerDrop() {

@@ -27,7 +27,7 @@ public class KaptonRecipes {
     }
 
     // =========================================================
-    // 1. PMDA synthesis — naphthalene catalytic oxidation (LuV Chemical Plant)
+    // 1. PMDA synthesis: naphthalene catalytic oxidation (LuV Chemical Plant)
     // 2 C10H8 + 9 O2 → C10H2O6 + 4 CO2 + 2 H2O
     // =========================================================
     private static void step1_PMDASynthesis() {
@@ -44,7 +44,7 @@ public class KaptonRecipes {
     }
 
     // =========================================================
-    // 2. Diphenyl Ether synthesis — phenol dehydration (LuV)
+    // 2. Diphenyl Ether synthesis: phenol dehydration (LuV)
     // 2 Phenol → Diphenyl Ether + H2O
     // Gives the aryl ether backbone needed for ODA
     // =========================================================
@@ -73,7 +73,7 @@ public class KaptonRecipes {
     }
 
     // =========================================================
-    // 3. ODA synthesis — nitration + reduction (UV)
+    // 3. ODA synthesis: nitration + reduction (UV)
     // DiphenylEther + 2 HNO3 + 4 H2 → ODA + 4 H2O
     // Nitration of the ether, then H2 reduction of both nitro groups to amines
     // =========================================================
@@ -93,7 +93,7 @@ public class KaptonRecipes {
     }
 
     // =========================================================
-    // 4. Polyamic Acid solution — PMDA + ODA in NMP (UV)
+    // 4. Polyamic Acid solution: PMDA + ODA in NMP (UV)
     // Nitrogen blanket prevents oxidation during polycondensation
     // =========================================================
     private static void step4_PolyamicAcidSolution() {
@@ -108,7 +108,7 @@ public class KaptonRecipes {
     }
 
     // =========================================================
-    // 5. Solvent recovery — distillation strips NMP from PAA (UV)
+    // 5. Solvent recovery: distillation strips NMP from PAA (UV)
     // Recovered NMP loops back to step 4
     // =========================================================
     private static void step5_PAAConcentration() {
@@ -123,7 +123,7 @@ public class KaptonRecipes {
     }
 
     // =========================================================
-    // 6. Film casting — PAA cast under nitrogen blanket (UV, PFC)
+    // 6. Film casting: PAA cast under nitrogen blanket (UV, PFC)
     // Produces the uncured polyamic acid film before imidization
     // =========================================================
     private static void step6_FilmCasting() {
@@ -139,7 +139,7 @@ public class KaptonRecipes {
 
     // =========================================================
     // 7. Thermal imidization → Kapton plate (PFC imidize)
-    // Water released as the imide rings close at 300°C+ under a nitrogen blanket — no reagents,
+    // Water released as the imide rings close at 300°C+ under a nitrogen blanket, no reagents,
     // unlike the chemical alt below.
     // =========================================================
     private static void step7_ImidizationToKapton() {
@@ -155,7 +155,7 @@ public class KaptonRecipes {
     }
 
     // =========================================================
-    // PREREQ: Triethylamine synthesis — Leuckart ethylation (UV LCR)
+    // PREREQ: Triethylamine synthesis: Leuckart ethylation (UV LCR)
     // 3 Ethanol + NH3 → N(C2H5)3 + 3 H2O
     // =========================================================
     private static void stepPrereq_TriethylamineSynthesis() {

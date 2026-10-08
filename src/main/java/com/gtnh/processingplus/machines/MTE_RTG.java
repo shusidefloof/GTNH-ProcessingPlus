@@ -44,7 +44,7 @@ import gregtech.api.util.GTUtility;
 import gregtech.api.util.MultiblockTooltipBuilder;
 
 /**
- * Radioisotope Thermoelectric Generator (RTG) — a UV-tier multiblock power source.
+ * Radioisotope Thermoelectric Generator (RTG): a UV-tier multiblock power source.
  * Burns Promethium Betavoltaic Cells: each cell's beta decay drives a steady EU output through the
  * dynamo hatches, and the more cells loaded into the input bus, the higher the sustained output
  * (up to {@link #MAX_CELLS} burned per cycle). The cells deplete over time, so it's a real Promethium
@@ -52,7 +52,7 @@ import gregtech.api.util.MultiblockTooltipBuilder;
  */
 public class MTE_RTG extends MTEExtendedPowerMultiBlockBase<MTE_RTG> implements ISurvivalConstructable {
 
-    // RadiationProofMachineCasing (sBlockCasings3 meta11) — matches RADIOISOTOPE_CASING's borrowed texture.
+    // RadiationProofMachineCasing (sBlockCasings3 meta11): matches RADIOISOTOPE_CASING's borrowed texture.
     private static final int CASING_INDEX = 43;
     private static final String STRUCTURE_PIECE_MAIN = "main";
     private static final int OFFSET_X = 2;
@@ -85,7 +85,7 @@ public class MTE_RTG extends MTEExtendedPowerMultiBlockBase<MTE_RTG> implements 
             STRUCTURE_DEFINITION = StructureDefinition.<MTE_RTG>builder()
                 .addShape(
                     STRUCTURE_PIECE_MAIN,
-                    // shape[z][y][x] — 5×5×5, 'C' = Radioisotope casing or hatch, ' ' = shielded core void
+                    // shape[z][y][x]: 5×5×5, 'C' = Radioisotope casing or hatch, ' ' = shielded core void
                     new String[][] { { "CCCCC", "CCCCC", "CC~CC", "CCCCC", "CCCCC" },
                         { "CCCCC", "C   C", "C   C", "C   C", "CCCCC" },
                         { "CCCCC", "C   C", "C   C", "C   C", "CCCCC" },
@@ -126,7 +126,7 @@ public class MTE_RTG extends MTEExtendedPowerMultiBlockBase<MTE_RTG> implements 
     public void checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack, List<StructureError> errors) {
         if (!checkPiece(STRUCTURE_PIECE_MAIN, OFFSET_X, OFFSET_Y, OFFSET_Z, errors)) return;
         checkOneMaintenanceHatch(errors);
-        // Accepts either a regular or an exotic dynamo hatch — no single built-in helper covers both.
+        // Accepts either a regular or an exotic dynamo hatch, no single built-in helper covers both.
         if (mDynamoHatches.isEmpty() && mExoticDynamoHatches.isEmpty())
             errors.add(StructureErrors.of("GT5U.gui.text.structure_error.rtg_missing_dynamo_hatch"));
         checkHasInputBus(errors);
@@ -134,7 +134,7 @@ public class MTE_RTG extends MTEExtendedPowerMultiBlockBase<MTE_RTG> implements 
 
     /**
      * Generator loop. Each cell is worth EU_PER_CELL, but the output is clamped to what the installed
-     * dynamo hatches can actually emit — generating more than that makes GT explode the multiblock. So
+     * dynamo hatches can actually emit: generating more than that makes GT explode the multiblock. So
      * it only burns as many cells as the dynamos can carry (the rest wait in the bus); you scale the
      * machine up by adding more / higher-tier dynamo hatches.
      */
@@ -233,7 +233,7 @@ public class MTE_RTG extends MTEExtendedPowerMultiBlockBase<MTE_RTG> implements 
     public ITexture[] getTexture(IGregTechTileEntity aBaseMetaTileEntity, ForgeDirection side, ForgeDirection aFacing,
         int colorIndex, boolean aActive, boolean redstoneLevel) {
         if (side == aFacing) {
-            // OVERLAY_FRONT_MASSFAB has no _GLOW/_ACTIVE_GLOW variant — base icon only, no glow layer.
+            // OVERLAY_FRONT_MASSFAB has no _GLOW/_ACTIVE_GLOW variant: base icon only, no glow layer.
             if (aActive) return new ITexture[] { casingTexturePages[0][CASING_INDEX], TextureFactory.builder()
                 .addIcon(OVERLAY_FRONT_MASSFAB_ACTIVE)
                 .extFacing()
@@ -249,25 +249,20 @@ public class MTE_RTG extends MTEExtendedPowerMultiBlockBase<MTE_RTG> implements 
     @Override
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType("Radioisotope Thermoelectric Generator, RTG")
+        tt.addMachineType("Thermoelectric Generator, RTG")
+            .addInfo("Generates power from " + EnumChatFormatting.YELLOW + "betavoltaic fuel cells")
+            .addInfo("Fuel cells are loaded through the Input Bus, output scales with how fast they are fed in")
             .addInfo(
-                EnumChatFormatting.GRAY + "Generates power by burning "
-                    + EnumChatFormatting.YELLOW
-                    + "fuel cells"
+                "Output is capped by the " + EnumChatFormatting.YELLOW
+                    + "Dynamo Hatch"
                     + EnumChatFormatting.GRAY
-                    + ", scaling with how fast you feed them.")
-            .addInfo(
-                EnumChatFormatting.GRAY + "Output is capped by your "
-                    + EnumChatFormatting.YELLOW
-                    + "Dynamo hatch capacity"
-                    + EnumChatFormatting.GRAY
-                    + ".")
+                    + " capacity")
             .beginStructureBlock(5, 5, 5, false)
-            .addController("Front face, center")
+            .addController("Front center, 3rd layer")
             .addCasing("90+", "Radioisotope Thermoelectric Casing", false)
-            .addMaintenanceHatch("1", "Any casing", 1)
-            .addDynamoHatch("1+", "Any casing", 1)
-            .addInputBus("1+", "Any casing — load betavoltaic cells", 1)
+            .addMaintenanceHatch("1", "Any radioisotope thermoelectric casing", 1)
+            .addDynamoHatch("1+", "Any radioisotope thermoelectric casing", 1)
+            .addInputBus("1+", "Any radioisotope thermoelectric casing", 1)
             .toolTipFinisher("_Shusi_");
         return tt;
     }

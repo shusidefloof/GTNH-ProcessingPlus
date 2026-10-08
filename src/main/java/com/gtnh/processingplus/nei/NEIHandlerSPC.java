@@ -201,7 +201,7 @@ public class NEIHandlerSPC extends GTNEIDefaultHandler {
         int innerRight = WINDOW_OFFSET.x + modularWindow.getSize().width - INNER_PAD;
         int startX = rowStartX(data);
 
-        // Separator line — inset from window border
+        // Separator line: inset from window border
         Gui.drawRect(innerLeft, sepY, innerRight, sepY + 1, LINE_COLOR);
 
         // Station sequence

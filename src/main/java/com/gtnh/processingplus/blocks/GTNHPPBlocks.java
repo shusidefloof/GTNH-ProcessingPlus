@@ -29,49 +29,50 @@ public class GTNHPPBlocks {
 
     public static BlockGTNHPPCasings CASINGS;
 
-    /** SPC controller instance — kept so its craft recipe can reference the controller stack. */
+    /** SPC controller instance: kept so its craft recipe can reference the controller stack. */
     public static MTE_BOF BOF;
+    public static MTE_CSC CSC;
     public static MTE_SPC SPC;
 
-    /** HPSF controller instance — kept so its craft recipe can reference the controller stack. */
+    /** HPSF controller instance: kept so its craft recipe can reference the controller stack. */
     public static MTE_HPSF HPSF;
 
-    /** HTRF controller instance — kept so its craft recipe can reference the controller stack. */
+    /** HTRF controller instance: kept so its craft recipe can reference the controller stack. */
     public static MTE_HTRF HTRF;
 
-    /** CRV controller instance — kept so its assembly-line recipe can reference the controller stack. */
+    /** CRV controller instance: kept so its assembly-line recipe can reference the controller stack. */
     public static MTE_CRV CRV;
 
-    /** PCV controller instance — kept so its assembler controller recipe can reference the controller stack. */
+    /** PCV controller instance: kept so its assembler controller recipe can reference the controller stack. */
     public static MTE_PCV PCV;
 
-    /** CAC controller instance — kept so its assembly-line recipe can reference the controller stack. */
+    /** CAC controller instance: kept so its assembly-line recipe can reference the controller stack. */
     public static MTE_CAC CAC;
 
-    /** RTG controller instance — kept so its assembly-line recipe can reference the controller stack. */
+    /** RTG controller instance: kept so its assembly-line recipe can reference the controller stack. */
     public static MTE_RTG RTG;
 
-    /** CIDC controller instance — kept so its assembly-line recipe can reference the controller stack. */
+    /** CIDC controller instance: kept so its assembly-line recipe can reference the controller stack. */
     public static MTE_CIDC CIDC;
 
-    /** HPR controller instance — kept so its assembly-line recipe can reference the controller stack. */
+    /** HPR controller instance: kept so its assembly-line recipe can reference the controller stack. */
     public static MTE_HPR HPR;
 
-    /** SCD controller instance — kept so its craft recipe can reference the controller stack. */
+    /** SCD controller instance: kept so its craft recipe can reference the controller stack. */
     public static MTE_SCD SCD;
 
-    /** SPU controller instance — kept so its assembly-line recipe can reference the controller stack. */
+    /** SPU controller instance: kept so its assembly-line recipe can reference the controller stack. */
     public static MTE_SPU SPU;
 
-    /** DAF controller instance — kept so its assembler recipe can reference the controller stack. */
+    /** DAF controller instance: kept so its assembler recipe can reference the controller stack. */
     public static MTE_DAF DAF;
 
-    /** CSTR controller instance — kept so its assembler recipe can reference the controller stack. */
+    /** CSTR controller instance: kept so its assembler recipe can reference the controller stack. */
     public static MTE_CSTR CSTR;
 
     // Reserved MTE IDs for the four not-yet-built multiblocks. The design doc's values
     // (CIDC 31511, HPR 31512, SPU 31513, CRC 31514) are ALREADY taken by HPSF and the three SPC
-    // modules — use these instead. They sit in the unused 31500-31504 gap, below every live machine
+    // modules: use these instead. They sit in the unused 31500-31504 gap, below every live machine
     // and clear of the cable loader (id() starts at 31529). Do NOT use 31511-31514.
     public static final int CIDC_ID = 31500;
     public static final int HPR_ID = 31501;
@@ -80,7 +81,7 @@ public class GTNHPPBlocks {
 
     // SCD sits in the gap between CAC (31516) and the first cable-loader ID (31529).
     // WerkstoffCableLoader.register() uses startId+0..startId+11, and id() returns 31529 on its
-    // first call — so 31517 is free. Verified by reading WerkstoffCableLoader.java.
+    // first call: so 31517 is free. Verified by reading WerkstoffCableLoader.java.
     public static final int SCD_ID = 31517;
 
     // DAF sits right after SCD, still within the 31518-31528 gap before cable loaders.
@@ -92,15 +93,15 @@ public class GTNHPPBlocks {
     private static final int OFFSET = 31_517;
     private static int nextId = OFFSET;
 
-    /** Call from CommonProxy.preInit — registers block before item/machine init. */
+    /** Call from CommonProxy.preInit: registers block before item/machine init. */
     public static void registerBlocks() {
         CASINGS = new BlockGTNHPPCasings();
         GameRegistry.registerBlock(CASINGS, ItemBlockGTNHPPCasings.class, "gtnhpp_casings");
     }
 
     /**
-     * Call from CommonProxy.init — GT5U machine registration MUST happen in the FML init phase, not preInit.
-     * IDs 31500–31507 are chosen to avoid conflicts with the merged GT5U MetaTileEntityIDs enum.
+     * Call from CommonProxy.init: GT5U machine registration MUST happen in the FML init phase, not preInit.
+     * IDs 31500 to 31507 are chosen to avoid conflicts with the merged GT5U MetaTileEntityIDs enum.
      */
     public static void registerMachines() {
         new MTE_AAR(31505, "gtnhpp.aar", "Ammonia Atmosphere Reactor").getStackForm(1);
@@ -110,7 +111,8 @@ public class GTNHPPBlocks {
         PCV.getStackForm(1);
         SPC = new MTE_SPC(31508, "gtnhpp.spc", "Spectral Photolithography Chamber");
         SPC.getStackForm(1);
-        new MTE_CSC(31509, "gtnhpp.csc", "Cryogenic Separation Column").getStackForm(1);
+        CSC = new MTE_CSC(31509, "gtnhpp.csc", "Cryogenic Separation Column");
+        CSC.getStackForm(1);
         BOF = new MTE_BOF(31510, "gtnhpp.bof", "Basic Oxygen Furnace");
         BOF.getStackForm(1);
         HPSF = new MTE_HPSF(31511, "gtnhpp.hpsf", "High Pressure Sintering Furnace");
@@ -137,7 +139,7 @@ public class GTNHPPBlocks {
         CSTR = new MTE_CSTR(CSTR_ID, "gtnhpp.cstr", "Continuous Stirred Tank Reactor");
         CSTR.getStackForm(1);
 
-        // Unobtanium superconductor — lossless placeable wires + cables (ZPM); recipes auto-generated.
+        // Unobtanium superconductor: lossless placeable wires + cables (ZPM); recipes auto-generated.
         // Uses MTE IDs 31517-31528 (6 wires + 6 cables).
         // Unobtanium: superconductor wires + cables insulated with Polyphenylene Sulfide (no rubber recipe).
         WerkstoffCableLoader

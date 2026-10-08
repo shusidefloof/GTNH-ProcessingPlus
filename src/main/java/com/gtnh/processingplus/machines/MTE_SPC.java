@@ -87,7 +87,7 @@ public class MTE_SPC extends MTEExtendedPowerMultiBlockBase<MTE_SPC> implements 
     // Constants
     // -------------------------------------------------------------------------
 
-    // StableTitaniumMachineCasing (sBlockCasings4 meta2) — matches SPC_CASING's borrowed texture.
+    // StableTitaniumMachineCasing (sBlockCasings4 meta2): matches SPC_CASING's borrowed texture.
     private static final int CASING_INDEX = 50;
     public static final int MIN_STATIONS = 2;
     public static final int MAX_STATIONS = 6;
@@ -103,7 +103,7 @@ public class MTE_SPC extends MTEExtendedPowerMultiBlockBase<MTE_SPC> implements 
     }
 
     // -------------------------------------------------------------------------
-    // Custom ProcessingLogic — exposes lastRecipe so checkProcessing can read it
+    // Custom ProcessingLogic: exposes lastRecipe so checkProcessing can read it
     // -------------------------------------------------------------------------
 
     private static class SPCProcessingLogic extends ProcessingLogic {
@@ -114,7 +114,7 @@ public class MTE_SPC extends MTEExtendedPowerMultiBlockBase<MTE_SPC> implements 
     }
 
     // -------------------------------------------------------------------------
-    // Structure definition (shape only — change freely)
+    // Structure definition (shape only: change freely)
     // -------------------------------------------------------------------------
 
     private static IStructureDefinition<MTE_SPC> STRUCTURE_DEFINITION = null;
@@ -132,13 +132,13 @@ public class MTE_SPC extends MTEExtendedPowerMultiBlockBase<MTE_SPC> implements 
     // perfect overclocking or another large bonus (e.g. Neodymium glass → +OC).
     private int mGlassTier = 0;
 
-    // Rebuilt on every checkMachine — ordered list of what's in each main station bay.
+    // Rebuilt on every checkMachine: ordered list of what's in each main station bay.
     final List<StationEntry> mDetectedStations = new ArrayList<>();
 
-    // Rebuilt on every checkMachine — which upgrade adapters are routed into the support bays.
+    // Rebuilt on every checkMachine: which upgrade adapters are routed into the support bays.
     final EnumSet<SPCModuleType> mInstalledAdapters = EnumSet.noneOf(SPCModuleType.class);
 
-    // Transient — external upgrade modules currently data-stick linked to this SPC, by type.
+    // Transient: external upgrade modules currently data-stick linked to this SPC, by type.
     // Modules re-register themselves periodically; entries are validated in hasModule().
     private final Map<SPCModuleType, MTE_SPCModuleBase<?>> mLinkedModules = new EnumMap<>(SPCModuleType.class);
 
@@ -160,7 +160,7 @@ public class MTE_SPC extends MTEExtendedPowerMultiBlockBase<MTE_SPC> implements 
     }
 
     // -------------------------------------------------------------------------
-    // Structure definition — fixed 5×5×8 sealed process line
+    // Structure definition: fixed 5×5×8 sealed process line
     //
     // Station-layer cross-section (z=1..6):
     // I G D G I outer pillars (frame casing) + SPC casing (hatches) + D
@@ -196,7 +196,7 @@ public class MTE_SPC extends MTEExtendedPowerMultiBlockBase<MTE_SPC> implements 
                         { "IGDGI", "BAAAB", "MFHFG", "EAAAE", "IGDGI" },
                         { "IGDGI", "BAAAB", "MFHFN", "EAAAE", "IGDGI" },
                         { "IGDGI", "CAAAC", "CFIFC", "CAAAC", "IGDGI" }, })
-                // G = Spectral Isolation Casing — hatch positions (energy / maintenance / I-O)
+                // G = Spectral Isolation Casing: hatch positions (energy / maintenance / I-O)
                 .addElement(
                     'G',
                     buildHatchAdder(MTE_SPC.class)
@@ -204,7 +204,7 @@ public class MTE_SPC extends MTEExtendedPowerMultiBlockBase<MTE_SPC> implements 
                         .casingIndex(CASING_INDEX)
                         .hint(1)
                         .buildAndChain(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.SPC_CASING))
-                // A = any tiered glass — tier tracked for the energy cap + bonus cap
+                // A = any tiered glass: tier tracked for the energy cap + bonus cap
                 .addElement('A', chainAllGlasses(-1, (t, tier) -> t.mGlassTier = tier, t -> t.mGlassTier))
                 // B = Reinforced Glass Machine Casing (gt.blockcasings:3)
                 .addElement('B', ofBlock(GameRegistry.findBlock("gregtech", "gt.blockcasings"), 3))
@@ -216,13 +216,13 @@ public class MTE_SPC extends MTEExtendedPowerMultiBlockBase<MTE_SPC> implements 
                 .addElement('E', ofBlock(GameRegistry.findBlock("gregtech", "gt.blockframes"), 306))
                 // F = TungstenSteel Frame Box (gt.blockframes:334)
                 .addElement('F', ofBlock(GameRegistry.findBlock("gregtech", "gt.blockframes"), 334))
-                // H = Photonic Alignment Casing — central beam column
+                // H = Photonic Alignment Casing: central beam column
                 .addElement('H', ofBlock(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.SPC_BEAM_CASING))
-                // I = Spectral Frame Casing — outer corner pillars + back-cap core
+                // I = Spectral Frame Casing: outer corner pillars + back-cap core
                 .addElement('I', ofBlock(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.SPC_FRAME_CASING))
-                // M = main station bay — left wall, z=1-6, populates mDetectedStations
+                // M = main station bay: left wall, z=1-6, populates mDetectedStations
                 .addElement('M', stationBayElement())
-                // N = support adapter bay — right wall ends, routes upgrade modules into the SPC
+                // N = support adapter bay: right wall ends, routes upgrade modules into the SPC
                 .addElement('N', adapterBayElement())
                 .build();
         }
@@ -394,7 +394,7 @@ public class MTE_SPC extends MTEExtendedPowerMultiBlockBase<MTE_SPC> implements 
     }
 
     // -------------------------------------------------------------------------
-    // Upgrade-module linking (data-stick) — see MTE_SPCModuleBase
+    // Upgrade-module linking (data-stick): see MTE_SPCModuleBase
     // -------------------------------------------------------------------------
 
     /** Called by a module when it (re)links to this SPC. */
@@ -433,7 +433,7 @@ public class MTE_SPC extends MTEExtendedPowerMultiBlockBase<MTE_SPC> implements 
     }
 
     // -------------------------------------------------------------------------
-    // NBT — persist station count across chunk load / world restart
+    // NBT: persist station count across chunk load / world restart
     // -------------------------------------------------------------------------
 
     @Override
@@ -485,7 +485,7 @@ public class MTE_SPC extends MTEExtendedPowerMultiBlockBase<MTE_SPC> implements 
         SPCRecipeData data = SPCRecipeData.get(recipe);
         if (data == null) return result;
 
-        // Upgrade-module gate — scorched board if the required module isn't routed in + linked + running.
+        // Upgrade-module gate: scorched board if the required module isn't routed in + linked + running.
         if (!isModuleSatisfied(data.requiredModule)) {
             mOutputItems = new ItemStack[] { getScorchedBoard() };
             mOutputFluids = new net.minecraftforge.fluids.FluidStack[0];
@@ -502,7 +502,7 @@ public class MTE_SPC extends MTEExtendedPowerMultiBlockBase<MTE_SPC> implements 
         }
 
         // Glass tier cap: re-compute excess treating each machine tier as min(actual, mGlassTier).
-        // If any glass-capped tier falls below the recipe minimum, produce a scorched board —
+        // If any glass-capped tier falls below the recipe minimum, produce a scorched board
         // the glass is too low-tier for this recipe regardless of the machines installed.
         if (mGlassTier > 0) {
             int glassCappedExcess = Integer.MAX_VALUE;
@@ -523,7 +523,7 @@ public class MTE_SPC extends MTEExtendedPowerMultiBlockBase<MTE_SPC> implements 
 
         if (minExcess == 0) return result; // exactly at minimum, no bonus
 
-        // Apply parallel scaling — 2^minExcess, capped at 64
+        // Apply parallel scaling: 2^minExcess, capped at 64
         int parallels = Math.min(1 << minExcess, 64);
 
         if (mOutputItems != null) {
@@ -579,90 +579,44 @@ public class MTE_SPC extends MTEExtendedPowerMultiBlockBase<MTE_SPC> implements 
     @Override
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType("Spectral Photolithography Chamber, SPC")
+        tt.addMachineType("Photolithography Chamber, SPC")
             .addInfo(
-                EnumChatFormatting.GRAY + "Runs "
-                    + EnumChatFormatting.LIGHT_PURPLE
-                    + "light-isolated photochemical"
-                    + EnumChatFormatting.GRAY
-                    + " processing.")
-            .addInfo(
-                TooltipHelper.coloredText("6", EnumChatFormatting.YELLOW) + EnumChatFormatting.GRAY
-                    + " main station bays (left wall) + "
+                TooltipHelper.coloredText("6", EnumChatFormatting.YELLOW) + " main station bays (left wall) and "
                     + TooltipHelper.coloredText("2", EnumChatFormatting.YELLOW)
-                    + EnumChatFormatting.GRAY
-                    + " support bays (right wall).")
-            .addSeparator()
+                    + " support bays (right wall)")
             .addInfo(
-                EnumChatFormatting.GOLD + "Station sequence: "
-                    + EnumChatFormatting.GRAY
-                    + "place GT singleblock machines in the left-wall bays.")
-            .addInfo("Machine type and minimum tier are read front-to-back and matched to the recipe.")
+                "Place GT singleblock machines in the main bays, their types and minimum tiers are matched to the recipe front to back")
             .addInfo(
-                EnumChatFormatting.GREEN + "Tier bonus: "
-                    + EnumChatFormatting.GRAY
-                    + "machines "
-                    + TooltipHelper.coloredText("n", EnumChatFormatting.YELLOW)
-                    + EnumChatFormatting.GRAY
-                    + " tiers above the minimum grant "
-                    + TooltipHelper.coloredText("2^n", EnumChatFormatting.YELLOW)
-                    + EnumChatFormatting.GRAY
-                    + " parallels (cap: "
-                    + TooltipHelper.coloredText("64", EnumChatFormatting.YELLOW)
-                    + EnumChatFormatting.GRAY
-                    + ").")
+                "Each machine " + TooltipHelper.coloredText("n", EnumChatFormatting.YELLOW)
+                    + " tiers above the minimum grants "
+                    + TooltipHelper.parallelText("2^n")
+                    + " Parallels (max "
+                    + TooltipHelper.parallelText(64)
+                    + ")")
             .addInfo(
-                EnumChatFormatting.RED + "Wrong sequence"
-                    + EnumChatFormatting.GRAY
-                    + " — produces "
+                "A wrong sequence produces "
                     + TooltipHelper.coloredText("Scorched Circuit Boards", EnumChatFormatting.DARK_RED)
-                    + EnumChatFormatting.GRAY
-                    + " instead of the recipe output.")
+                    + " instead of the recipe output")
             .addInfo(
-                EnumChatFormatting.GOLD + "Upgrade modules: "
-                    + EnumChatFormatting.GRAY
-                    + "high-tier boards need an external module (data-stick linked)")
-            .addInfo(
-                "  routed in via its " + TooltipHelper.coloredText("Adapter", EnumChatFormatting.AQUA)
-                    + EnumChatFormatting.GRAY
-                    + " in one of the 2 support bays.")
-            .addSeparator()
-            .addInfo(
-                EnumChatFormatting.GOLD + "Glass tier limits: "
-                    + EnumChatFormatting.GRAY
-                    + "BW Glass meta = voltage tier index.")
-            .addInfo(
-                "  " + EnumChatFormatting.RED
-                    + "Energy cap: "
-                    + EnumChatFormatting.GRAY
-                    + "hatches above glass tier contribute no extra voltage.")
-            .addInfo(
-                "  " + EnumChatFormatting.RED
-                    + "Bonus cap: "
-                    + EnumChatFormatting.GRAY
-                    + "tier-excess parallel bonus capped at glass tier.")
-            .addInfo(
-                "  " + EnumChatFormatting.DARK_RED
-                    + "Glass too low: "
-                    + EnumChatFormatting.GRAY
-                    + "machines above glass tier produce Scorched Boards.")
+                "High-tier boards need an upgrade module, linked with a data stick and routed in through its Adapter in a support bay")
+            .addGlassEnergyLimitInfo()
+            .addInfo("The parallel bonus is also capped by the glass tier")
+            .addInfo(EnumChatFormatting.DARK_RED + "Machines above the glass tier produce Scorched Circuit Boards")
             .beginStructureBlock(5, 5, 8, true)
-            .addController("Front face, center")
+            .addController("Front center, 3rd layer")
             .addCasing("26+", "Spectral Isolation Casing", false)
             .addCasing("33+", "Spectral Frame Casing", false)
             .addCasing("6", "Photonic Alignment Casing", false)
-            .addOtherStructurePart("BW Glass (any tier)", "Viewport bands, both levels")
-            .addOtherStructurePart("Reinforced/Tungstensteel Casings", "Upper/lower bands and pillars")
-            .addOtherStructurePart("Americium & TungstenSteel Frames", "Process-level uprights")
-            .addOtherStructurePart("GT Machines (main)", "Left-wall bays × 6 (process sequence)")
-            .addOtherStructurePart("Upgrade Adapters", "Right-wall bays × 2 (route in linked modules)")
-            .addEnergyHatch("1+", "Any Spectral Isolation Casing", 1)
-            .addMaintenanceHatch("1", "Any Spectral Isolation Casing", 1)
-            .addMufflerHatch("1", "Any Spectral Isolation Casing", 1)
-            .addInputBus("1+", "Any Spectral Isolation Casing", 1)
-            .addInputHatch("1+", "Any Spectral Isolation Casing", 1)
-            .addOutputBus("1+", "Any Spectral Isolation Casing", 1)
-            .addOutputHatch("1+", "Any Spectral Isolation Casing", 1)
+            .addOtherStructurePart("BartWorks Glass (any tier)", "Viewport bands, both levels")
+            .addOtherStructurePart("Reinforced / Tungstensteel Casing", "Upper and lower bands and pillars")
+            .addOtherStructurePart("Americium / Tungstensteel Frame Box", "Process-level uprights")
+            .addOtherStructurePart("GT Singleblock Machines", "Left-wall bays x 6 (process sequence)")
+            .addOtherStructurePart("Upgrade Adapters", "Right-wall bays x 2 (route in linked modules)")
+            .addEnergyHatch("1+", "Any spectral isolation casing", 1)
+            .addMaintenanceHatch("1", "Any spectral isolation casing", 1)
+            .addMufflerHatch("1", "Any spectral isolation casing", 1)
+            .addInputAny("1+", "Any spectral isolation casing", 1)
+            .addOutputAny("1+", "Any spectral isolation casing", 1)
             .toolTipFinisher("_Shusi_");
         return tt;
     }

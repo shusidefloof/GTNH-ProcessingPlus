@@ -49,13 +49,13 @@ import tectech.thing.block.BlockQuantumGlass;
 import tectech.thing.casing.TTCasingsContainer;
 
 /**
- * Subatomic Patterning Unit (SPU) — UIV-tier multiblock that imprints a quantum lattice onto the
+ * Subatomic Patterning Unit (SPU): UIV-tier multiblock that imprints a quantum lattice onto the
  * photoresist substrate. Runs the three UIV photoresist steps (stabilized QGP matrix → transcendent
  * lattice → quantum-field imprint), so it gates UIV circuit boards.
  */
 public class MTE_SPU extends MTEExtendedPowerMultiBlockBase<MTE_SPU> implements ISurvivalConstructable {
 
-    // CleanStainlessSteelMachineCasing (sBlockCasings4 meta1) — matches SPU's actual wall (sBlockCasings4, meta1).
+    // CleanStainlessSteelMachineCasing (sBlockCasings4 meta1): matches SPU's actual wall (sBlockCasings4, meta1).
     private static final int CASING_INDEX = 49;
     private static final String STRUCTURE_PIECE_MAIN = "main";
     // Controller marker '~' sits at slice z=2, row y=14, char x=7 in the exported shape.
@@ -86,15 +86,15 @@ public class MTE_SPU extends MTEExtendedPowerMultiBlockBase<MTE_SPU> implements 
                     STRUCTURE_PIECE_MAIN,
                     /*
                      * Block legend (from the in-game structure export):
-                     * A -> bw.sheetmetal — Jiritsu sheet metal (PrPMaterials, pale blue-white UIV alloy)
-                     * B -> gt.blockcasings4:1 — Clean Stainless Steel Machine Casing (hatch-capable shell)
-                     * C -> gt.blockcasingsSE:1 — Space Elevator Support Structure
-                     * D -> gt.blockcasingsTT:12 — Ultimate Molecular Casing (TecTech)
-                     * E -> gt.blockcasingsTT:13 — Ultimate Advanced Molecular Casing (TecTech)
-                     * F -> gt.blockframes:405 — Stellar Alloy Frame Box
-                     * G -> tile.quantumGlass:0 — Quantum Glass (TecTech)
-                     * H -> BWBlockCasingsAdvanced (bolted) — Aerogel Insulation Panel (PrPMaterials)
-                     * I -> BWBlockCasings (plain) — Aerogel Insulation Panel (PrPMaterials)
+                     * A -> bw.sheetmetal: Jiritsu sheet metal (PrPMaterials, pale blue-white UIV alloy)
+                     * B -> gt.blockcasings4:1: Clean Stainless Steel Machine Casing (hatch-capable shell)
+                     * C -> gt.blockcasingsSE:1: Space Elevator Support Structure
+                     * D -> gt.blockcasingsTT:12: Ultimate Molecular Casing (TecTech)
+                     * E -> gt.blockcasingsTT:13: Ultimate Advanced Molecular Casing (TecTech)
+                     * F -> gt.blockframes:405: Stellar Alloy Frame Box
+                     * G -> tile.quantumGlass:0: Quantum Glass (TecTech)
+                     * H -> BWBlockCasingsAdvanced (bolted): Aerogel Insulation Panel (PrPMaterials)
+                     * I -> BWBlockCasings (plain): Aerogel Insulation Panel (PrPMaterials)
                      * K -> single legacy Subatomic Patterning Casing block, kept at local (0,0,0)
                      */
                     new String[][] {
@@ -251,16 +251,10 @@ public class MTE_SPU extends MTEExtendedPowerMultiBlockBase<MTE_SPU> implements 
     @Override
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType("Subatomic Patterning Unit, SPU")
-            .addInfo(
-                EnumChatFormatting.GRAY + "Patterns matter at the "
-                    + EnumChatFormatting.LIGHT_PURPLE
-                    + "subatomic scale"
-                    + EnumChatFormatting.GRAY
-                    + ".")
-            .addSeparator()
+        tt.addMachineType("Patterning Unit, SPU")
+            .addInfo("Imprints quantum lattices into matter")
             .beginStructureBlock(15, 16, 15, true)
-            .addController("See NEI structure preview")
+            .addController("Center, 2nd layer, 3rd slice from the front")
             .addCasing("90+", "Clean Stainless Steel Machine Casing", false)
             .addOtherStructurePart("Jiritsu Sheet Metal", "Diagonal support ribs")
             .addOtherStructurePart("Space Elevator Support Structure", "Equatorial ring")
@@ -268,14 +262,12 @@ public class MTE_SPU extends MTEExtendedPowerMultiBlockBase<MTE_SPU> implements 
             .addOtherStructurePart("Ultimate Advanced Molecular Casing", "Inner core (TecTech)")
             .addOtherStructurePart("Stellar Alloy Frame Box", "Structural framing")
             .addOtherStructurePart("Quantum Glass", "Core viewport")
-            .addOtherStructurePart("Aerogel Insulation Panel Casing (bolted + plain)", "Equatorial paneling")
-            .addOtherStructurePart("Subatomic Patterning Casing", "Single legacy block, local (0,0,0)")
-            .addEnergyHatch("1+", "Any Clean Stainless Steel Machine Casing", 1)
-            .addMaintenanceHatch("1", "Any Clean Stainless Steel Machine Casing", 1)
-            .addInputBus("1+", "Any Clean Stainless Steel Machine Casing", 1)
-            .addInputHatch("1+", "Any Clean Stainless Steel Machine Casing", 1)
-            .addOutputBus("1+", "Any Clean Stainless Steel Machine Casing", 1)
-            .addOutputHatch("1+", "Any Clean Stainless Steel Machine Casing", 1)
+            .addOtherStructurePart("Aerogel Insulation Panel Casing (bolted and plain)", "Equatorial paneling")
+            .addOtherStructurePart("Subatomic Patterning Casing", "Single block at the structure origin")
+            .addEnergyHatch("1+", "Any clean stainless steel machine casing", 1)
+            .addMaintenanceHatch("1", "Any clean stainless steel machine casing", 1)
+            .addInputAny("1+", "Any clean stainless steel machine casing", 1)
+            .addOutputAny("1+", "Any clean stainless steel machine casing", 1)
             .toolTipFinisher("_Shusi_");
         return tt;
     }

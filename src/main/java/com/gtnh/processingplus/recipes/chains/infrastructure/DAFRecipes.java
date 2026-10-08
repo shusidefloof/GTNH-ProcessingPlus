@@ -26,7 +26,7 @@ public class DAFRecipes {
         controllerRecipe();
     }
 
-    // Dual-Sealed Atmosphere Casing — sealed pressure vessel, mid-tier inputs
+    // Dual-Sealed Atmosphere Casing: sealed pressure vessel, mid-tier inputs
     private static void casingRecipe() {
         GTValues.RA.stdBuilder()
             .itemInputs(
@@ -40,7 +40,7 @@ public class DAFRecipes {
             .addTo(RecipeMaps.assemblerRecipes);
     }
 
-    // Advanced Atmosphere Casing — LuV chamber shell, titanium-sealed
+    // Advanced Atmosphere Casing: LuV chamber shell, titanium-sealed
     private static void casingRecipeLuV() {
         GTValues.RA.stdBuilder()
             .itemInputs(
@@ -55,7 +55,7 @@ public class DAFRecipes {
             .addTo(RecipeMaps.assemblerRecipes);
     }
 
-    // Pristine Atmosphere Casing — UV chamber shell, neutronium-lined
+    // Pristine Atmosphere Casing: UV chamber shell, neutronium-lined
     private static void casingRecipeUV() {
         GTValues.RA.stdBuilder()
             .itemInputs(
@@ -69,7 +69,7 @@ public class DAFRecipes {
             .addTo(RecipeMaps.assemblerRecipes);
     }
 
-    // Absolute Atmosphere Casing — UEV chamber shell, transcendent alloy
+    // Absolute Atmosphere Casing: UEV chamber shell, transcendent alloy
     private static void casingRecipeUEV() {
         GTValues.RA.stdBuilder()
             .itemInputs(
@@ -83,7 +83,7 @@ public class DAFRecipes {
             .addTo(RecipeMaps.assemblerRecipes);
     }
 
-    // DAF controller — assembled at ZPM from LuV hull + UV-tier internals
+    // DAF controller: assembled at ZPM from LuV hull + UV-tier internals
     private static void controllerRecipe() {
         GTValues.RA.stdBuilder()
             .itemInputs(

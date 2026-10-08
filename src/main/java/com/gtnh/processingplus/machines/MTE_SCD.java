@@ -54,18 +54,19 @@ import gregtech.api.render.TextureFactory;
 import gregtech.api.structure.error.StructureError;
 import gregtech.api.util.GTRecipe;
 import gregtech.api.util.MultiblockTooltipBuilder;
+import gregtech.api.util.tooltip.TooltipHelper;
 
 /**
- * Supercritical Dryer — high-pressure autoclave for scCO₂ gel drying and extraction.
+ * Supercritical Dryer: high-pressure autoclave for scCO₂ gel drying and extraction.
  *
  * <p>
  * Runs a 3-stage process that the player must actively manage via fluid inputs:
  * <ul>
- * <li><b>Stage 1 — Solvent Purge</b>: drain a recipe-specific solvent per tick,
+ * <li><b>Stage 1: Solvent Purge</b>: drain a recipe-specific solvent per tick,
  * or keep the hatch empty (recipe-dependent). Stalls if the wrong fluid is present.</li>
- * <li><b>Stage 2 — Supercritical Infusion</b>: inject a registered supercritical fluid.
+ * <li><b>Stage 2: Supercritical Infusion</b>: inject a registered supercritical fluid.
  * Higher-tier fluids (Freon R-12) advance the stage faster. Stalls if no valid fluid.</li>
- * <li><b>Stage 3 — Depressurization</b>: hatch must be empty. Any fluid present at
+ * <li><b>Stage 3: Depressurization</b>: hatch must be empty. Any fluid present at
  * any point during stage 3 marks the batch as contaminated → degraded output.</li>
  * </ul>
  * Energy is consumed every tick regardless of stall state.
@@ -73,7 +74,7 @@ import gregtech.api.util.MultiblockTooltipBuilder;
 public class MTE_SCD extends MTEExtendedPowerMultiBlockBase<MTE_SCD> implements ISurvivalConstructable {
 
     // -------------------------------------------------------------------------
-    // Stage mechanic — static registries
+    // Stage mechanic: static registries
     // -------------------------------------------------------------------------
 
     /**
@@ -160,7 +161,7 @@ public class MTE_SCD extends MTEExtendedPowerMultiBlockBase<MTE_SCD> implements 
     // Structure constants
     // -------------------------------------------------------------------------
 
-    // StableTitaniumMachineCasing (sBlockCasings4 meta2) — matches SCD_CASING's borrowed texture.
+    // StableTitaniumMachineCasing (sBlockCasings4 meta2): matches SCD_CASING's borrowed texture.
     private static final int CASING_INDEX = 50;
     private static final String STRUCTURE_PIECE_MAIN = "main";
     private static final int OFFSET_X = 7;
@@ -204,7 +205,7 @@ public class MTE_SCD extends MTEExtendedPowerMultiBlockBase<MTE_SCD> implements 
             STRUCTURE_DEFINITION = StructureDefinition.<MTE_SCD>builder()
                 .addShape(
                     STRUCTURE_PIECE_MAIN,
-                    new String[][] { { // z=0 — front face; controller (~) at row 5 col 7
+                    new String[][] { { // z=0: front face; controller (~) at row 5 col 7
                         "            ", "            ", "       C    ", "      ECE   ", "HFHFFEBDBE  ", "HGH CCD~DCC ",
                         "HAH  EBDBE  ", "HAH   ECE   ", "HGH    C    ", "H H         " },
                         { // z=1
@@ -228,7 +229,7 @@ public class MTE_SCD extends MTEExtendedPowerMultiBlockBase<MTE_SCD> implements 
                         { // z=7
                             "            ", "            ", "      ICI   ", " FFFFIB BI  ", "FBBBBB   BI ",
                             "GBGFB     C ", "A A IB   BI ", "A A HIB BIH ", "GGG HHICIHH ", "    H     H " },
-                        { // z=8 — back face
+                        { // z=8: back face
                             "            ", "            ", "       C    ", "      ECE   ", "HFHFFEBDBE  ",
                             "HGH CCDCDCC ", "HAH  EBDBE  ", "HAH   ECE   ", "HGH    C    ", "H H         " } })
                 .addElement('A', ofBlock(bwBlock("BW_GlasBlocks"), 0))
@@ -289,7 +290,7 @@ public class MTE_SCD extends MTEExtendedPowerMultiBlockBase<MTE_SCD> implements 
     }
 
     // -------------------------------------------------------------------------
-    // Processing — stage machine
+    // Processing: stage machine
     // -------------------------------------------------------------------------
 
     private class SCDProcessingLogic extends ProcessingLogic {
@@ -312,7 +313,7 @@ public class MTE_SCD extends MTEExtendedPowerMultiBlockBase<MTE_SCD> implements 
     /**
      * Finds the recipe via the standard GT path (consumes item inputs), then hijacks the timing:
      * the GT auto-completion sentinel is set to Integer.MAX_VALUE/2 so the machine never completes
-     * by itself — stage logic drives termination instead.
+     * by itself: stage logic drives termination instead.
      */
     @Override
     public CheckRecipeResult checkProcessing() {
@@ -376,7 +377,7 @@ public class MTE_SCD extends MTEExtendedPowerMultiBlockBase<MTE_SCD> implements 
                 break;
         }
 
-        // Energy drains every tick — maintaining pressure costs power even while stalled.
+        // Energy drains every tick: maintaining pressure costs power even while stalled.
         if (!super.onRunningTick(aStack)) return false;
         return true;
     }
@@ -424,7 +425,7 @@ public class MTE_SCD extends MTEExtendedPowerMultiBlockBase<MTE_SCD> implements 
         }
     }
 
-    // 1-second grace window at the start of stage 3 — gives the player time to drain any remaining
+    // 1-second grace window at the start of stage 3, gives the player time to drain any remaining
     // stage-2 fluid before contamination tracking begins.
     private static final int STAGE3_GRACE_TICKS = 20;
 
@@ -505,35 +506,35 @@ public class MTE_SCD extends MTEExtendedPowerMultiBlockBase<MTE_SCD> implements 
                 info.add(EnumChatFormatting.GRAY + "Stage: " + EnumChatFormatting.WHITE + "Idle");
                 break;
             case 1: {
-                info.add(EnumChatFormatting.GRAY + "Stage: " + EnumChatFormatting.WHITE + "1 — Solvent Purge");
+                info.add(EnumChatFormatting.GRAY + "Stage: " + EnumChatFormatting.WHITE + "1: Solvent Purge");
                 info.add(EnumChatFormatting.GRAY + "Progress: " + mStageTicks + " / " + mStage1MaxTicks + " t");
                 if (mStalling) {
                     Fluid f = STAGE1_FLUIDS.get(mStage1FluidId);
                     String what = (f == null) ? "empty hatch" : f.getLocalizedName(null);
-                    info.add(EnumChatFormatting.RED + "STALLED — waiting for " + what);
+                    info.add(EnumChatFormatting.RED + "STALLED: waiting for " + what);
                 } else {
                     info.add(EnumChatFormatting.YELLOW + "Running");
                 }
                 break;
             }
             case 2: {
-                info.add(EnumChatFormatting.GRAY + "Stage: " + EnumChatFormatting.WHITE + "2 — Supercritical Infusion");
+                info.add(EnumChatFormatting.GRAY + "Stage: " + EnumChatFormatting.WHITE + "2: Supercritical Infusion");
                 info.add(
                     EnumChatFormatting.GRAY + "Progress: " + mStageTicks + " / " + mStage2MaxTicks + " t (effective)");
                 if (mStalling) {
-                    info.add(EnumChatFormatting.RED + "STALLED — waiting for valid supercritical fluid");
+                    info.add(EnumChatFormatting.RED + "STALLED: waiting for valid supercritical fluid");
                 } else {
                     info.add(EnumChatFormatting.AQUA + "Pressurizing");
                 }
                 break;
             }
             case 3: {
-                info.add(EnumChatFormatting.GRAY + "Stage: " + EnumChatFormatting.WHITE + "3 — Depressurization");
+                info.add(EnumChatFormatting.GRAY + "Stage: " + EnumChatFormatting.WHITE + "3: Depressurization");
                 info.add(EnumChatFormatting.GRAY + "Progress: " + mStageTicks + " / " + mStage3MaxTicks + " t");
                 if (mStage3HasFluid) {
-                    info.add(EnumChatFormatting.RED + "CONTAMINATED — degraded output");
+                    info.add(EnumChatFormatting.RED + "CONTAMINATED: degraded output");
                 } else {
-                    info.add(EnumChatFormatting.GREEN + "Clean — perfect output");
+                    info.add(EnumChatFormatting.GREEN + "Clean: perfect output");
                 }
                 break;
             }
@@ -654,64 +655,50 @@ public class MTE_SCD extends MTEExtendedPowerMultiBlockBase<MTE_SCD> implements 
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType("Supercritical Dryer, SCD")
             .addInfo(
-                EnumChatFormatting.GRAY + "Pressurizes gel samples through "
-                    + EnumChatFormatting.AQUA
-                    + "three active drying stages"
+                "Dries gel samples in " + EnumChatFormatting.AQUA
+                    + "three stages"
                     + EnumChatFormatting.GRAY
-                    + " that you must manage via the input hatch.")
-            .addSeparator()
+                    + " that are managed through the Input Hatch")
             .addInfo(
-                EnumChatFormatting.AQUA + "Stage 1 — Solvent Purge"
+                EnumChatFormatting.AQUA + "Stage 1, Solvent Purge"
                     + EnumChatFormatting.GRAY
-                    + ": fill the hatch with the recipe's required solvent, or keep it empty.")
+                    + ": fill the hatch with the recipe's solvent, or keep it empty")
             .addInfo(
-                EnumChatFormatting.AQUA + "Stage 2 — Supercritical Infusion"
+                EnumChatFormatting.AQUA + "Stage 2, Supercritical Infusion"
                     + EnumChatFormatting.GRAY
-                    + ": inject a supercritical fluid (Liquid CO₂, Freon R-12, …).")
+                    + ": supply a supercritical fluid (Liquid CO₂, Freon R-12...)")
             .addInfo(
-                EnumChatFormatting.GRAY + "  "
-                    + EnumChatFormatting.WHITE
-                    + "Better fluids"
+                "Better fluids shorten stage 2: " + EnumChatFormatting.WHITE
+                    + "Freon R-12"
                     + EnumChatFormatting.GRAY
-                    + " reduce stage‑2 time: Freon R-12 is "
-                    + EnumChatFormatting.WHITE
-                    + "2× faster"
-                    + EnumChatFormatting.GRAY
-                    + " than Liquid CO₂.")
+                    + " is "
+                    + TooltipHelper.speedText(2f)
+                    + " faster than Liquid CO₂")
             .addInfo(
-                EnumChatFormatting.AQUA + "Stage 3 — Depressurization"
+                EnumChatFormatting.AQUA + "Stage 3, Depressurization"
                     + EnumChatFormatting.GRAY
-                    + ": hatch must be "
+                    + ": the hatch must be "
                     + EnumChatFormatting.WHITE
                     + "empty"
                     + EnumChatFormatting.GRAY
-                    + ". Any fluid present collapses the gel → "
+                    + ", any fluid collapses the gel into "
                     + EnumChatFormatting.RED
-                    + "degraded output"
-                    + EnumChatFormatting.GRAY
-                    + ".")
-            .addSeparator()
+                    + "degraded output")
+            .addInfo("Stalls without progress while waiting for the correct fluid condition")
+            .addInfo(EnumChatFormatting.YELLOW + "Still consumes energy while stalled")
             .addInfo(
-                EnumChatFormatting.YELLOW + "Machine stalls"
+                "Right-click the controller with a " + EnumChatFormatting.WHITE
+                    + "Scanner"
                     + EnumChatFormatting.GRAY
-                    + " (no progress) when waiting for the correct fluid condition.")
-            .addInfo(EnumChatFormatting.YELLOW + "Energy is consumed even while stalled.")
-            .addInfo(
-                EnumChatFormatting.GRAY + "Right-click the controller face with a "
-                    + EnumChatFormatting.WHITE
-                    + "scanner"
-                    + EnumChatFormatting.GRAY
-                    + " to read current stage and status.")
+                    + " to read the current stage")
             .beginStructureBlock(12, 10, 9, true)
-            .addController("Front face, center (row 5, col 7)")
+            .addController("Front, 8th from the left, 5th layer")
             .addCasing("1+", "High-Pressure Containment Casing", false)
-            .addEnergyHatch("1+", "Any High-Pressure Containment Casing (I)", 1)
-            .addMaintenanceHatch("1", "Any High-Pressure Containment Casing (I)", 1)
-            .addMufflerHatch("1", "Any High-Pressure Containment Casing (I)", 1)
-            .addInputBus("1+", "Any High-Pressure Containment Casing (I)", 1)
-            .addInputHatch("1+", "Any High-Pressure Containment Casing (I)", 1)
-            .addOutputBus("1+", "Any High-Pressure Containment Casing (I)", 1)
-            .addOutputHatch("1+", "Any High-Pressure Containment Casing (I)", 1)
+            .addEnergyHatch("1+", "Any high-pressure containment casing", 1)
+            .addMaintenanceHatch("1", "Any high-pressure containment casing", 1)
+            .addMufflerHatch("1", "Any high-pressure containment casing", 1)
+            .addInputAny("1+", "Any high-pressure containment casing", 1)
+            .addOutputAny("1+", "Any high-pressure containment casing", 1)
             .toolTipFinisher("_Shusi_");
         return tt;
     }

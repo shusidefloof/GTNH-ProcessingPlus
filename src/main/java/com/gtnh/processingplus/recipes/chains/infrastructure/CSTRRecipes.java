@@ -26,7 +26,7 @@ public class CSTRRecipes {
     }
 
     // =========================================================
-    // CSTR casing — titanium/stainless tank with PTFE liner, agitator seal
+    // CSTR casing: titanium/stainless tank with PTFE liner, agitator seal
     // =========================================================
     private static void casingRecipe() {
         GTValues.RA.stdBuilder()
@@ -44,7 +44,7 @@ public class CSTRRecipes {
     }
 
     // =========================================================
-    // CSTR controller — assembler + shaped recipe (IV tier, accessible)
+    // CSTR controller: assembler + shaped recipe (IV tier, accessible)
     // =========================================================
     private static void controllerRecipe() {
         ItemStack controller = new ItemStack(GregTechAPI.sBlockMachines, 1, GTNHPPBlocks.CSTR_ID);

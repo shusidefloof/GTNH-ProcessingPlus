@@ -69,7 +69,7 @@ public final class RecipeSwaps {
     }
 
     // -------------------------------------------------------------------------
-    // Carbon Fiber UV-casing gate — the endgame ZPM carbon-fiber chain's structural sink. The UV
+    // Carbon Fiber UV-casing gate: the endgame ZPM carbon-fiber chain's structural sink. The UV
     // machine casing (8 Osmium plates) now takes 4 Osmium + 4 Carbon Fiber Composite plates, so the
     // whole PAN → graphitization → composite line becomes the structural cost of building UV machines.
     // Both the assembler recipe and the hand-craft bypass (PPP/PwP/PPP) are gated so neither path skips
@@ -81,7 +81,7 @@ public final class RecipeSwaps {
         ItemStack carbon4 = plate(PrPMaterials.CarbonFiberComposite, 4);
         ItemStack casingUV = ItemList.Casing_UV.get(1);
         if (carbonPlate1 == null || osmium4 == null || carbon4 == null) {
-            GTNHProcessingPlus.LOG.warn("UV casing carbon-fiber gate: Carbon Fiber Composite plate missing — skipped.");
+            GTNHProcessingPlus.LOG.warn("UV casing carbon-fiber gate: Carbon Fiber Composite plate missing, skipped.");
             return;
         }
 
@@ -120,11 +120,11 @@ public final class RecipeSwaps {
     }
 
     // -------------------------------------------------------------------------
-    // Nylon-6,6 motion-parts gate — high-tier (ZPM+) conveyors and robot arms now need molten
+    // Nylon-6,6 motion-parts gate: high-tier (ZPM+) conveyors and robot arms now need molten
     // Nylon-6,6 (reinforced belt / self-lubricating joints). Both are consumed by nearly every
     // ZPM+ machine, so this makes the PCV nylon line recurring infrastructure. In-place fluid
     // append on assline recipes (real list + NEI copies), capped at 4 fluids. Note: ZPM/UV
-    // conveyors & arms are already exotic-taxed (Vibranium/Naquadria) — nylon is one more fluid.
+    // conveyors & arms are already exotic-taxed (Vibranium/Naquadria), nylon is one more fluid.
     // -------------------------------------------------------------------------
     private static void gateConveyorsWithNylon() {
         ItemStack[] conveyors = { ItemList.Conveyor_Module_ZPM.get(1), ItemList.Conveyor_Module_UV.get(1),
@@ -140,7 +140,7 @@ public final class RecipeSwaps {
     }
 
     // -------------------------------------------------------------------------
-    // Promethean Naquadria field-generator gate — the alloy's first real use. Every UHV+ field
+    // Promethean Naquadria field-generator gate: the alloy's first real use. Every UHV+ field
     // generator now also needs molten Promethean Naquadria (glowing exotic energy alloy), so the
     // whole Promethium → CRV-alloy chain becomes required for top-tier field/energy components.
     // -------------------------------------------------------------------------
@@ -158,7 +158,7 @@ public final class RecipeSwaps {
         FluidStack conveyorNylon = PrPMaterials.Nylon66.getMolten(27648);
         FluidStack armNylon = PrPMaterials.Nylon66.getMolten(13824);
         if (conveyorNylon == null) {
-            GTNHProcessingPlus.LOG.warn("CoAL Nylon gate: Nylon66 molten unavailable — skipped.");
+            GTNHProcessingPlus.LOG.warn("CoAL Nylon gate: Nylon66 molten unavailable, skipped.");
             return;
         }
         ItemStack[] conveyors = { ItemList.Conveyor_Module_ZPM.get(1), ItemList.Conveyor_Module_UV.get(1),
@@ -176,7 +176,7 @@ public final class RecipeSwaps {
         // 1296 mB/item × 64 items × 0.75 = 62208
         FluidStack vibranium = PrPMaterials.Vibranium.getMolten(62208);
         if (vibranium == null) {
-            GTNHProcessingPlus.LOG.warn("CoAL Vibranium gate: Vibranium molten unavailable — skipped.");
+            GTNHProcessingPlus.LOG.warn("CoAL Vibranium gate: Vibranium molten unavailable, skipped.");
             return;
         }
         ItemStack[] zpmComponents = { ItemList.Electric_Motor_ZPM.get(1), ItemList.Electric_Pump_ZPM.get(1),
@@ -190,8 +190,7 @@ public final class RecipeSwaps {
         FluidStack samariumProbe = Materials.Samarium.getMolten(1);
         FluidStack amorphousProbe = PrPMaterials.AmorphousTritaniumAlloy.getMolten(1);
         if (samariumProbe == null || amorphousProbe == null) {
-            GTNHProcessingPlus.LOG
-                .warn("CoAL UV motor gate: Samarium or Amorphous Tritanium molten missing — skipped.");
+            GTNHProcessingPlus.LOG.warn("CoAL UV motor gate: Samarium or Amorphous Tritanium molten missing, skipped.");
             return;
         }
         Fluid samarium = samariumProbe.getFluid();
@@ -257,7 +256,7 @@ public final class RecipeSwaps {
     /** Append a molten fluid in-place to every assembly-line recipe (real + NEI copy) whose output matches. */
     private static void taxAsslineWithFluid(ItemStack[] targets, FluidStack add, String label) {
         if (add == null) {
-            GTNHProcessingPlus.LOG.warn("{}: fluid unavailable — skipped.", label);
+            GTNHProcessingPlus.LOG.warn("{}: fluid unavailable: skipped.", label);
             return;
         }
         int taxed = 0;
@@ -277,17 +276,17 @@ public final class RecipeSwaps {
     }
 
     // -------------------------------------------------------------------------
-    // hBN Lubricant gate — every assembly-line recipe that used plain Lubricant now
+    // hBN Lubricant gate: every assembly-line recipe that used plain Lubricant now
     // requires Hexagonal Boron Nitride Lubricant (the LuV hBN chain). In-place fluid
     // swap so it catches GT + every addon's assline recipes regardless of who added them.
     // The real recipe list (sAssemblylineRecipes) is what the machine checks; the visual
-    // map is the NEI copy — both are swapped so NEI stays in sync.
+    // map is the NEI copy: both are swapped so NEI stays in sync.
     // -------------------------------------------------------------------------
     private static void gateLubricantBehindHBN() {
         FluidStack lubeProbe = Materials.Lubricant.getFluid(1);
         FluidStack hbnProbe = PrPMaterials.HBNLubricant.getFluidOrGas(1);
         if (lubeProbe == null || hbnProbe == null) {
-            GTNHProcessingPlus.LOG.warn("hBN lubricant gate: Lubricant or hBN Lubricant fluid missing — skipped.");
+            GTNHProcessingPlus.LOG.warn("hBN lubricant gate: Lubricant or hBN Lubricant fluid missing, skipped.");
             return;
         }
         Fluid lube = lubeProbe.getFluid();
@@ -312,7 +311,7 @@ public final class RecipeSwaps {
         FluidStack lubeProbe = Materials.Lubricant.getFluid(1);
         FluidStack hbnProbe = PrPMaterials.HBNLubricant.getFluidOrGas(1);
         if (lubeProbe == null || hbnProbe == null) {
-            GTNHProcessingPlus.LOG.warn("CoAL hBN lubricant gate: fluid missing — skipped.");
+            GTNHProcessingPlus.LOG.warn("CoAL hBN lubricant gate: fluid missing, skipped.");
             return;
         }
         Fluid lube = lubeProbe.getFluid();
@@ -340,7 +339,7 @@ public final class RecipeSwaps {
     }
 
     // -------------------------------------------------------------------------
-    // UV motor gate — the stock UV motor's magnet rod (Samarium Magnetic) is replaced
+    // UV motor gate: the stock UV motor's magnet rod (Samarium Magnetic) is replaced
     // in place with an Amorphous Tritanium Alloy rod (the CRV output). In-place input
     // swap preserves the recipe's research/scanner identity, so no data-stick breakage.
     // -------------------------------------------------------------------------
@@ -348,7 +347,7 @@ public final class RecipeSwaps {
         ItemStack samariumRod = GTOreDictUnificator.get(OrePrefixes.stickLong, Materials.SamariumMagnetic, 1);
         ItemStack amorphousRod = PPRecipeHelper.rodLong(PrPMaterials.AmorphousTritaniumAlloy, 1);
         if (samariumRod == null || amorphousRod == null) {
-            GTNHProcessingPlus.LOG.warn("UV-motor amorphous gate: rod item missing — skipped.");
+            GTNHProcessingPlus.LOG.warn("UV-motor amorphous gate: rod item missing, skipped.");
             return;
         }
         int gated = swapAssemblyLineInput(
@@ -359,14 +358,14 @@ public final class RecipeSwaps {
     }
 
     // -------------------------------------------------------------------------
-    // NaquadahAlloy cable → 4x cableGt02 Unobtanium swap — standardises every assembly-line recipe
+    // NaquadahAlloy cable → 4x cableGt02 Unobtanium swap, standardises every assembly-line recipe
     // that has any NaquadahAlloy cable to 4x 2x-cable Unobtanium. CoAL gets the batch-scaled amount:
     // 4 × 64 × 0.75 = 192.
     // -------------------------------------------------------------------------
     private static void swapNaquadahCablesToUnobtanium() {
         Materials unobtanium = PrPMaterials.Unobtanium.getBridgeMaterial();
         if (unobtanium == null) {
-            GTNHProcessingPlus.LOG.warn("NaquadahAlloy cable swap: no Unobtanium bridge material — skipped.");
+            GTNHProcessingPlus.LOG.warn("NaquadahAlloy cable swap: no Unobtanium bridge material, skipped.");
             return;
         }
 
@@ -378,11 +377,11 @@ public final class RecipeSwaps {
         // CoAL batch-scaled: 4 × 64 × 0.75 = 192 cableGt02, compacted to 192/8 = 24 cableGt16.
         ItemStack coalRep = GTOreDictUnificator.get(OrePrefixes.cableGt16, unobtanium, 24);
         if (asmRep == null || coalRep == null) {
-            GTNHProcessingPlus.LOG.warn("NaquadahAlloy cable swap: Unobtanium cable missing — skipped.");
+            GTNHProcessingPlus.LOG.warn("NaquadahAlloy cable swap: Unobtanium cable missing, skipped.");
             return;
         }
 
-        // Assembly line — in-place swap (real list + NEI copies).
+        // Assembly line: in-place swap (real list + NEI copies).
         int asmSwapped = 0;
         for (OrePrefixes prefix : naqPrefixes) {
             ItemStack naq1 = GTOreDictUnificator.get(prefix, Materials.NaquadahAlloy, 1);
@@ -405,7 +404,7 @@ public final class RecipeSwaps {
             }
         }
 
-        // CoAL — copy+remove+re-add; check all prefixes per recipe in one pass.
+        // CoAL: copy+remove+re-add; check all prefixes per recipe in one pass.
         int coalSwapped = modifyCoALRecipes(r -> {
             for (OrePrefixes prefix : naqPrefixes) {
                 ItemStack naq1 = GTOreDictUnificator.get(prefix, Materials.NaquadahAlloy, 1);
@@ -433,7 +432,7 @@ public final class RecipeSwaps {
     }
 
     // -------------------------------------------------------------------------
-    // AmorphousNaquadria UV-structural gate — the CRV's second amorphous output. Swaps the
+    // AmorphousNaquadria UV-structural gate: the CRV's second amorphous output. Swaps the
     // Neutronium structural plate in the UV components for an Amorphous Naquadria plate (count kept),
     // so both CRV outputs gate the UV tier (Tritanium -> motor magnet, Naquadria -> structural plate).
     // Neutronium keeps every other role (rings, rounds, gears, frames, and all non-UV uses).
@@ -444,7 +443,7 @@ public final class RecipeSwaps {
         ItemStack naquadriaPlate1 = plate(PrPMaterials.AmorphousNaquadria, 1);
         if (neutroniumPlate1 == null || naquadriaPlate1 == null
             || densePlate(PrPMaterials.AmorphousNaquadria, 1) == null) {
-            GTNHProcessingPlus.LOG.warn("UV-component amorphous gate: plate item missing — skipped.");
+            GTNHProcessingPlus.LOG.warn("UV-component amorphous gate: plate item missing, skipped.");
             return;
         }
         ItemStack[] uvComponents = { ItemList.Electric_Motor_UV.get(1), ItemList.Electric_Pump_UV.get(1),
@@ -515,7 +514,7 @@ public final class RecipeSwaps {
     }
 
     // -------------------------------------------------------------------------
-    // Vibranium ZPM-component tax — every ZPM machine component now also costs molten
+    // Vibranium ZPM-component tax: every ZPM machine component now also costs molten
     // Vibranium (the LuV exotic chain). In-place fluid append on the assembly-line recipes
     // whose output is one of the 8 ZPM components, so Vibranium becomes the LuV foundation
     // the whole ZPM tier rests on. Both the real list and the NEI visual copies are updated.
@@ -524,7 +523,7 @@ public final class RecipeSwaps {
         FluidStack vibranium = PrPMaterials.Vibranium.getMolten(1296);
         ItemStack naquadahAlloyPlate = GTOreDictUnificator.get(OrePrefixes.plate, Materials.NaquadahAlloy, 1);
         if (vibranium == null) {
-            GTNHProcessingPlus.LOG.warn("Vibranium ZPM gate: no molten Vibranium — skipped.");
+            GTNHProcessingPlus.LOG.warn("Vibranium ZPM gate: no molten Vibranium, skipped.");
             return;
         }
         ItemStack[] zpmComponents = { ItemList.Electric_Motor_ZPM.get(1), ItemList.Electric_Pump_ZPM.get(1),
@@ -551,7 +550,7 @@ public final class RecipeSwaps {
         GTNHProcessingPlus.LOG
             .info("Vibranium gate: swapped {} ZPM component recipe(s) with 1 Vibranium Plate", swapped);
 
-        // Field generator, pump, piston, and conveyor also carry dense NaquadahAlloy plates —
+        // Field generator, pump, piston, and conveyor also carry dense NaquadahAlloy plates
         // replace those with 10 dense Vibranium plates (count changes, so keepCount = false).
         ItemStack naquadahAlloyDensePlate = GTOreDictUnificator.get(OrePrefixes.plateDense, Materials.NaquadahAlloy, 1);
         ItemStack vibraniumDense10 = densePlate(PrPMaterials.Vibranium, 10);
@@ -608,7 +607,7 @@ public final class RecipeSwaps {
     }
 
     // -------------------------------------------------------------------------
-    // Unobtanium ZPM-hull gate — every ZPM machine hull now needs an Unobtanium superconductor
+    // Unobtanium ZPM-hull gate: every ZPM machine hull now needs an Unobtanium superconductor
     // cable. The assembler recipe keeps its Naquadah cable and gains Unobtanium alongside; the
     // hand-craftable recipe (a bypass that never touches the assembler) has its Naquadah cables
     // replaced by Unobtanium so neither path skips the gate. No material composition touched.
@@ -617,13 +616,13 @@ public final class RecipeSwaps {
     private static void gateZPMHullWithUnobtanium() {
         Materials unobtanium = PrPMaterials.Unobtanium.getBridgeMaterial();
         if (unobtanium == null) {
-            GTNHProcessingPlus.LOG.warn("ZPM hull Unobtanium gate: no bridge material — skipped.");
+            GTNHProcessingPlus.LOG.warn("ZPM hull Unobtanium gate: no bridge material, skipped.");
             return;
         }
         ItemStack unobtaniumCable = GTOreDictUnificator.get(OrePrefixes.cableGt04, unobtanium, 2);
         ItemStack hullZPM = ItemList.Hull_ZPM.get(1);
         if (unobtaniumCable == null) {
-            GTNHProcessingPlus.LOG.warn("ZPM hull Unobtanium gate: no Unobtanium cable (cable loader ran?) — skipped.");
+            GTNHProcessingPlus.LOG.warn("ZPM hull Unobtanium gate: no Unobtanium cable (cable loader ran?), skipped.");
             return;
         }
 
@@ -667,7 +666,7 @@ public final class RecipeSwaps {
     }
 
     // -------------------------------------------------------------------------
-    // Unobtanium ZPM-superconductor gate — the finishing (anneal) step that turns
+    // Unobtanium ZPM-superconductor gate: the finishing (anneal) step that turns
     // SuperconductorZPMBase wire into finished SuperconductorZPM wire now also needs an Unobtanium
     // cable (like the Naquadah pipe). This is the anneal recipe, NOT the alloy composition, so the
     // base material is untouched. Output is nudged 18 -> 20 to compensate for the new cost. All
@@ -677,13 +676,13 @@ public final class RecipeSwaps {
     private static void gateZPMSuperconductorWithUnobtanium() {
         Materials unobtanium = PrPMaterials.Unobtanium.getBridgeMaterial();
         if (unobtanium == null) {
-            GTNHProcessingPlus.LOG.warn("ZPM superconductor gate: no Unobtanium bridge material — skipped.");
+            GTNHProcessingPlus.LOG.warn("ZPM superconductor gate: no Unobtanium bridge material, skipped.");
             return;
         }
         ItemStack unobtaniumCable = GTOreDictUnificator.get(OrePrefixes.cableGt04, unobtanium, 2);
         ItemStack superconductor = GTOreDictUnificator.get(OrePrefixes.wireGt01, Materials.SuperconductorZPM, 18);
         if (unobtaniumCable == null || superconductor == null) {
-            GTNHProcessingPlus.LOG.warn("ZPM superconductor gate: missing item — skipped.");
+            GTNHProcessingPlus.LOG.warn("ZPM superconductor gate: missing item: skipped.");
             return;
         }
 
@@ -808,19 +807,19 @@ public final class RecipeSwaps {
     }
 
     // -------------------------------------------------------------------------
-    // Void Miner Unobtanium gate — appends 4 Unobtanium gears to every assembly-line recipe
+    // Void Miner Unobtanium gate: appends 4 Unobtanium gears to every assembly-line recipe
     // whose output display name contains "Void Miner". The sifting-End-Stone bootstrap gives
     // enough Unobtanium to build the miner; the miner then provides bulk Unobtanium.
     // -------------------------------------------------------------------------
     private static void gateVoidMinerWithUnobtanium() {
         Materials unobtanium = PrPMaterials.Unobtanium.getBridgeMaterial();
         if (unobtanium == null) {
-            GTNHProcessingPlus.LOG.warn("Void miner Unobtanium gate: no bridge material — skipped.");
+            GTNHProcessingPlus.LOG.warn("Void miner Unobtanium gate: no bridge material, skipped.");
             return;
         }
         ItemStack unobtGear4 = GTOreDictUnificator.get(OrePrefixes.gearGt, unobtanium, 4);
         if (unobtGear4 == null) {
-            GTNHProcessingPlus.LOG.warn("Void miner Unobtanium gate: Unobtanium gear missing — skipped.");
+            GTNHProcessingPlus.LOG.warn("Void miner Unobtanium gate: Unobtanium gear missing, skipped.");
             return;
         }
 

@@ -103,14 +103,13 @@ public class BOFRecipes {
             .addTo(RecipeMaps.centrifugeRecipes);
     }
 
-    // Sifter recipes in GT list a material in repeated slots with stepping chances (gravel → flint 100/90/80/60/33/25%)
-    // and run 30 s at LV/2. Same idiom here: Quicklime always comes back twice (closing the lime-flux loop), and the
-    // phosphate steelmaking slag is known for is a rare drop (50/20%).
+    // 4 Quicklime dust electrolyze into 2 Calcium (GT counts compound dust per atom), exactly what the lime
+    // recipe consumes, so the lime-flux loop closes. The rest are byproducts.
     private static void slagResidueSift() {
         GTValues.RA.stdBuilder()
             .itemInputs(dust(PrPMaterials.SlagResidue, 4))
             .itemOutputs(
-                dust(Materials.Quicklime, 2),
+                dust(Materials.Quicklime, 4),
                 dust(Materials.SiliconDioxide, 1),
                 dust(Materials.Magnesia, 1),
                 dust(Materials.Aluminiumoxide, 1),

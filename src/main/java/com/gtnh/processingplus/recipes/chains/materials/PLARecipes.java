@@ -23,7 +23,7 @@ public class PLARecipes {
     }
 
     // =========================================================
-    // 0. Propylene Glycol synthesis — HPPO process (LuV LCR)
+    // 0. Propylene Glycol synthesis: HPPO process (LuV LCR)
     // Propene + H2O2 → PropyleneGlycol + Water
     // =========================================================
     private static void step0_PropyleneGlycolSynthesis() {
@@ -38,7 +38,7 @@ public class PLARecipes {
     }
 
     // =========================================================
-    // 1. Fermentation route — sugarcane + water → Lactic Acid (LuV Fermenter)
+    // 1. Fermentation route: sugarcane + water → Lactic Acid (LuV Fermenter)
     // =========================================================
     private static void step1_FermentationRoute() {
 
@@ -100,7 +100,7 @@ public class PLARecipes {
 
     // =========================================================
     // 3. Lactide + Sn catalyst → molten PLA (LuV PCV)
-    // LuV-tier so a LuV energy hatch runs it — consistent with the rest of the PCV.
+    // LuV-tier so a LuV energy hatch runs it, consistent with the rest of the PCV.
     // =========================================================
     private static void step3_Polymerization() {
 

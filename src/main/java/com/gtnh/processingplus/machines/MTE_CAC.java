@@ -44,11 +44,12 @@ import gregtech.api.structure.error.StructureError;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.MultiblockTooltipBuilder;
 import gregtech.api.util.tooltip.TooltipHelper;
+import gregtech.api.util.tooltip.TooltipTier;
 import gregtech.common.misc.GTStructureChannels;
 import gtPlusPlus.core.block.ModBlocks;
 
 /**
- * Cryogenic Annealing Cryostat (CAC) — a 15×13×7 vacuum cryostat tower, structure designed by
+ * Cryogenic Annealing Cryostat (CAC): a 15×13×7 vacuum cryostat tower, structure designed by
  * Lord of Turtle. The superconductor wire is cryo-annealed inside a hollow glass vacuum core, wrapped
  * in a Solenoid Superconductor Coil column (tier scales parallels and EU discount, MTELatex-style) and
  * a shell of GT/GT++ endgame casings. Takes over every UHV-tier-and-above superconductor anneal recipe.
@@ -95,15 +96,15 @@ public class MTE_CAC extends MTEExtendedPowerMultiBlockBase<MTE_CAC> implements 
                     STRUCTURE_PIECE_MAIN,
                     /*
                      * Block legend (from the in-game structure export, credit: Lord of Turtle):
-                     * A -> BW_GlasBlocks — any tiered BartWorks glass (hollow vacuum core)
-                     * B -> gt.blockcasings.cyclotron_coils — any tier Solenoid Superconductor Coil (core
+                     * A -> BW_GlasBlocks: any tiered BartWorks glass (hollow vacuum core)
+                     * B -> gt.blockcasings.cyclotron_coils: any tier Solenoid Superconductor Coil (core
                      * column; tier scales parallels and EU discount, see getMaxParallelRecipes)
-                     * C -> gt.blockcasings10:14 — Solidifier Radiator
-                     * D -> gt.blockcasings11:5 — Quantium Item Pipe Casing
-                     * E -> gt.blockcasings12:7 — Ultimately Static Machine Casing
-                     * F -> gt.blockframes:966 — Orichalcum Frame Box
-                     * G -> gtplusplus.blockcasings.3:3 — Bedrock Miner Casing (GT++)
-                     * H -> gtplusplus.blockspecialcasings.2:3 — Custom Machine Casing 4 (GT++, hatch-capable shell)
+                     * C -> gt.blockcasings10:14: Solidifier Radiator
+                     * D -> gt.blockcasings11:5: Quantium Item Pipe Casing
+                     * E -> gt.blockcasings12:7: Ultimately Static Machine Casing
+                     * F -> gt.blockframes:966: Orichalcum Frame Box
+                     * G -> gtplusplus.blockcasings.3:3: Bedrock Miner Casing (GT++)
+                     * H -> gtplusplus.blockspecialcasings.2:3: Custom Machine Casing 4 (GT++, hatch-capable shell)
                      */
                     new String[][] {
                         { "    HHHHHHH    ", "    F HHH F    ", "    F HHH F    ", "    F     F    ", "    F     F    ",
@@ -180,12 +181,17 @@ public class MTE_CAC extends MTEExtendedPowerMultiBlockBase<MTE_CAC> implements 
     }
 
     @Override
+    public boolean supportsBatchMode() {
+        return true;
+    }
+
+    @Override
     protected ProcessingLogic createProcessingLogic() {
         return new ProcessingLogic().setMaxParallelSupplier(this::getTrueParallel)
             .setEuModifier(1.0F - getSolenoidDiscount());
     }
 
-    // Parallels scale with both the solenoid coil's voltage tier and the machine's input voltage tier —
+    // Parallels scale with both the solenoid coil's voltage tier and the machine's input voltage tier
     // same shape as MTEIndustrialForgeHammer's solenoid-scaled parallel count.
     @Override
     public int getMaxParallelRecipes() {
@@ -193,7 +199,7 @@ public class MTE_CAC extends MTEExtendedPowerMultiBlockBase<MTE_CAC> implements 
             * GTUtility.getTier(this.getMaxInputVoltage());
     }
 
-    // EU discount per solenoid tier — same 0.0625-per-tier formula MTELatex uses for its item-pipe-tier
+    // EU discount per solenoid tier: same 0.0625-per-tier formula MTELatex uses for its item-pipe-tier
     // fluid discount, just applied to EU cost instead of a fluid input amount.
     private float getSolenoidDiscount() {
         return EU_DISCOUNT_PER_TIER * (mSolenoidTier == null ? 0 : mSolenoidTier);
@@ -242,40 +248,22 @@ public class MTE_CAC extends MTEExtendedPowerMultiBlockBase<MTE_CAC> implements 
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType("Cryogenic Annealing Cryostat, CAC")
-            .addInfo(
-                EnumChatFormatting.GRAY + "Anneals materials at "
-                    + EnumChatFormatting.AQUA
-                    + "cryogenic temperatures"
-                    + EnumChatFormatting.GRAY
-                    + " in a vacuum core.")
-            .addSeparator()
-            .addInfo(
-                EnumChatFormatting.GOLD + "Core column: "
-                    + EnumChatFormatting.GRAY
-                    + "a Solenoid Superconductor Coil (any tier) down the centre, wrapped in glass.")
-            .addInfo(
-                EnumChatFormatting.GOLD + "Higher solenoid tiers"
-                    + EnumChatFormatting.GRAY
-                    + " grant more parallels and a bigger EU discount ("
-                    + TooltipHelper.coloredText("6.25% per tier", EnumChatFormatting.YELLOW)
-                    + EnumChatFormatting.GRAY
-                    + ").")
+            .addInfo(TooltipHelper.parallelText("Voltage Tier * Solenoid Tier * " + BASE_PARALLEL) + " Parallels")
+            .addDynamicEuEffInfo(EU_DISCOUNT_PER_TIER, TooltipTier.SOLENOID)
             .beginStructureBlock(15, 13, 7, true)
-            .addController("See NEI structure preview")
+            .addController("Front center, 2nd layer")
             .addCasing("145+", "Custom Machine Casing 4 (GT++)", false)
+            .addCasing("1+", "Solenoid Superconductor Coil", true)
             .addOtherStructurePart("BartWorks Glass (any tier)", "Hollow vacuum core")
-            .addOtherStructurePart("Solenoid Superconductor Coil (any tier)", "Central column")
-            .addOtherStructurePart("Solidifier Radiator / Quantium Item Pipe Casing", "Corner + edge accents")
+            .addOtherStructurePart("Solidifier Radiator / Quantium Item Pipe Casing", "Corner and edge accents")
             .addOtherStructurePart("Ultimately Static Machine Casing", "Side accents")
             .addOtherStructurePart("Orichalcum Frame Box", "Structural corner posts")
             .addOtherStructurePart("Bedrock Miner Casing (GT++)", "Ring accents")
-            .addEnergyHatch("1+", "Any Custom Machine Casing 4", 1)
-            .addMaintenanceHatch("1", "Any Custom Machine Casing 4", 1)
-            .addInputBus("1+", "Any Custom Machine Casing 4", 1)
-            .addInputHatch("1+", "Any Custom Machine Casing 4", 1)
-            .addOutputBus("1+", "Any Custom Machine Casing 4", 1)
-            .addOutputHatch("1+", "Any Custom Machine Casing 4", 1)
-            .addSubChannelUsage(GTStructureChannels.SOLENOID)
+            .addEnergyHatch("1+", "Any custom machine casing", 1)
+            .addMaintenanceHatch("1", "Any custom machine casing", 1)
+            .addInputAny("1+", "Any custom machine casing", 1)
+            .addOutputAny("1+", "Any custom machine casing", 1)
+            .addSubChannel(GTStructureChannels.SOLENOID)
             .toolTipFinisher(
                 "_Shusi_",
                 EnumChatFormatting.GREEN + ""

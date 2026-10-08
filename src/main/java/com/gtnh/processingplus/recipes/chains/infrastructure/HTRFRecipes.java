@@ -19,7 +19,7 @@ import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.util.GTOreDictUnificator;
 
 /**
- * High Temperature Reaction Furnace — controller craft recipe. The 2000K+ ceramic-synthesis
+ * High Temperature Reaction Furnace: controller craft recipe. The 2000K+ ceramic-synthesis
  * reactions are added separately; recipes go on {@code GTNHPPRecipeMaps.sHTRFRecipes} with a
  * {@code GTRecipeConstants.COIL_HEAT} metadata above 2000.
  */
@@ -29,7 +29,7 @@ public class HTRFRecipes {
         controllerRecipe();
     }
 
-    // Controller — EV assembler recipe (project pattern, SiC + EV-tier components).
+    // Controller: EV assembler recipe (project pattern, SiC + EV-tier components).
     private static void controllerRecipe() {
         GTValues.RA.stdBuilder()
             .itemInputs(

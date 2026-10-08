@@ -13,7 +13,7 @@ import gregtech.api.enums.ItemList;
 @SideOnly(Side.CLIENT)
 public class SPCMachineIcons {
 
-    private static final int MAX_LOW_TIER = 5; // LV–IV use Machine_{TIER}_{Name}
+    private static final int MAX_LOW_TIER = 5; // LV to IV use Machine_{TIER}_{Name}
 
     public static @Nullable ItemStack getStack(MachineType type, int tier) {
         String name = itemListName(type, tier);

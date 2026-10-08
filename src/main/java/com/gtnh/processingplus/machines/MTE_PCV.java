@@ -63,7 +63,7 @@ public class MTE_PCV extends MTEExtendedPowerMultiBlockBase<MTE_PCV> implements 
 
     private static IStructureDefinition<MTE_PCV> STRUCTURE_DEFINITION = null;
 
-    // Promethium Betavoltaic Alloy rebolted casing (OrePrefixes.blockCasingAdvanced) — resolved from the
+    // Promethium Betavoltaic Alloy rebolted casing (OrePrefixes.blockCasingAdvanced), resolved from the
     // actual ItemStack the Werkstoff produces rather than hardcoding a magic damage value.
     private static final Block PROMETHIUM_BETAVOLTAIC_BLOCK;
     private static final int PROMETHIUM_BETAVOLTAIC_BLOCK_META;
@@ -93,10 +93,10 @@ public class MTE_PCV extends MTEExtendedPowerMultiBlockBase<MTE_PCV> implements 
             STRUCTURE_DEFINITION = StructureDefinition.<MTE_PCV>builder()
                 .addShape(
                     STRUCTURE_PIECE_MAIN,
-                    // shape[z][y][x] — 9 depth slices, each 13 rows (top→bottom) × 16 cols.
+                    // shape[z][y][x]: 9 depth slices, each 13 rows (top→bottom) × 16 cols.
                     // Controller (~) at slice 0, row 9, col 4.
                     new String[][] {
-                        // z=0 — front face (controller column)
+                        // z=0: front face (controller column)
                         { "                ", "                ", "                ", "                ",
                             "                ", "                ", "                ", "  DJ JD         ",
                             "  DEEED         ", "  DE~ED         ", "  DEEED         ", "  DJ JD         ",
@@ -116,7 +116,7 @@ public class MTE_PCV extends MTEExtendedPowerMultiBlockBase<MTE_PCV> implements 
                             " GKS SKG        ", " GIBMBIG        ", " JRRLRRJ    QQQ ", "JR     RJ  QQJQQ",
                             "JR     RJ  IB BI", "JR     RJNNIH HI", "JR     RJ  IH HI", "JR     RJ  QB BQ",
                             " JPPPPPJ   QQJQQ" },
-                        // z=4 — centre slice
+                        // z=4: centre slice
                         { "   NNN          ", "  NOOON         ", " N  F  N        ", " N  F  N        ",
                             "  Q F Q         ", "  BMFMB         ", "  QLLLQ     QQQ ", " Q     Q   QJJJQ",
                             " R     RBNNQ   A", " R     RBOOO   A", " R     R NNQ   A", " Q     Q   Q   Q",
@@ -136,7 +136,7 @@ public class MTE_PCV extends MTEExtendedPowerMultiBlockBase<MTE_PCV> implements 
                             "   G G          ", "   G G          ", "  DJ JD         ", " Q RQR Q        ",
                             " Q RRR Q        ", " Q RRR Q        ", " Q RRR Q        ", " Q RQR Q        ",
                             "  QJ JQ         " },
-                        // z=8 — back face
+                        // z=8: back face
                         { "                ", "                ", "                ", "                ",
                             "                ", "                ", "                ", "  DJ JD         ",
                             "  DJ JD         ", "  DJ JD         ", "  DJ JD         ", "  DJ JD         ",
@@ -187,7 +187,7 @@ public class MTE_PCV extends MTEExtendedPowerMultiBlockBase<MTE_PCV> implements 
         Block b = GameRegistry.findBlock(modid, name);
         if (b == null) {
             GTNHProcessingPlus.LOG
-                .warn("PCV structure: block {}:{} not found — using PCV casing placeholder.", modid, name);
+                .warn("PCV structure: block {}:{} not found, using PCV casing placeholder.", modid, name);
             return ofBlock(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.PCV_CASING);
         }
         return ofBlock(b, meta);
@@ -223,6 +223,11 @@ public class MTE_PCV extends MTEExtendedPowerMultiBlockBase<MTE_PCV> implements 
         checkHasOutputBus(errors);
         if (PPRecipeHelper.recipeMapHasFluidInputs(getRecipeMap())) checkHasInputHatch(errors);
         if (PPRecipeHelper.recipeMapHasFluidOutputs(getRecipeMap())) checkHasOutputHatch(errors);
+    }
+
+    @Override
+    public boolean supportsBatchMode() {
+        return true;
     }
 
     @Override
@@ -265,25 +270,18 @@ public class MTE_PCV extends MTEExtendedPowerMultiBlockBase<MTE_PCV> implements 
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType("Polycondensation Vessel, PCV")
-            .addInfo(
-                EnumChatFormatting.GRAY + "Runs "
-                    + EnumChatFormatting.AQUA
-                    + "vacuum-assisted polymerization"
-                    + EnumChatFormatting.GRAY
-                    + " reactions.")
+            .addInfo("Runs vacuum-assisted condensation and ring-opening polymerization")
             .beginStructureBlock(16, 13, 9, true)
-            .addController("Front face, main column")
-            .addCasing("20+", "Chemically Inert Reaction Vessel (PCV casing)", false)
+            .addController("Front, 5th from the left, 4th layer")
+            .addCasing("20+", "Chemically Inert Reaction Vessel", false)
             .addOtherStructurePart(
-                "Borosilicate Glass blocks, Promethium Betavoltaic Alloy rebolted casing, Inconel-792 frames, GT casings & frames",
-                "Per structure hologram")
-            .addEnergyHatch("1+", "Any Carbon Fiber Composite casing", 1)
-            .addMaintenanceHatch("1", "Any Carbon Fiber Composite casing", 1)
-            .addMufflerHatch("1", "Any Carbon Fiber Composite casing", 1)
-            .addInputBus("1+", "Any Carbon Fiber Composite casing", 1)
-            .addInputHatch("1+", "Any Carbon Fiber Composite casing", 1)
-            .addOutputBus("1+", "Any Carbon Fiber Composite casing", 1)
-            .addOutputHatch("1+", "Any Carbon Fiber Composite casing", 1)
+                "Borosilicate Glass, Promethium Betavoltaic Alloy Rebolted Casing, Inconel-792 Frame Box, GT Casings and Frames",
+                "See the structure hologram")
+            .addEnergyHatch("1+", "Any chemically inert reaction vessel", 1)
+            .addMaintenanceHatch("1", "Any chemically inert reaction vessel", 1)
+            .addMufflerHatch("1", "Any chemically inert reaction vessel", 1)
+            .addInputAny("1+", "Any chemically inert reaction vessel", 1)
+            .addOutputAny("1+", "Any chemically inert reaction vessel", 1)
             .toolTipFinisher("_Shusi_");
         return tt;
     }

@@ -6,10 +6,10 @@ package com.gtnh.processingplus.machines.spc;
  */
 public enum SPCModuleType {
 
-    /** Bio-Lithography Module — gates wetware + bio boards. */
+    /** Bio-Lithography Module: gates wetware + bio boards. */
     BIO,
-    /** Cryo-Stabilization Module — gates optical boards / efficiency. */
+    /** Cryo-Stabilization Module: gates optical boards / efficiency. */
     CRYO,
-    /** Quantum Alignment Module — gates UEV+ / optical-quantum tiers. */
+    /** Quantum Alignment Module: gates UEV+ / optical-quantum tiers. */
     QUANTUM
 }

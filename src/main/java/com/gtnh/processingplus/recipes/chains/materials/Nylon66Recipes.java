@@ -93,7 +93,7 @@ public class Nylon66Recipes {
         GTValues.RA.stdBuilder()
             .itemInputs(circuit(4))
             .fluidInputs(fluid(PrPMaterials.Cyclohexene, 1000), fluid("fluid.hydrogenperoxide", 3000))
-            // Green H2O2 route: clean — no nitrous oxide byproduct (that's the dirty HNO3 route only).
+            // Green H2O2 route: clean: no nitrous oxide byproduct (that's the dirty HNO3 route only).
             .fluidOutputs(fluid(PrPMaterials.AdipicAcid, 3000), fluid(Materials.Water, 3000))
             .duration(20 * SECONDS)
             .eut(TierEU.RECIPE_EV)
@@ -111,7 +111,7 @@ public class Nylon66Recipes {
                 fluid(Materials.Butadiene, 2000),
                 fluid(Materials.CarbonMonoxide, 2000),
                 fluid(Materials.Water, 2000))
-            // Butadiene carbonylation route: clean — no nitrous oxide byproduct.
+            // Butadiene carbonylation route: clean: no nitrous oxide byproduct.
             .fluidOutputs(fluid(PrPMaterials.AdipicAcid, 1000), fluid(Materials.Water, 1000))
             .duration(25 * SECONDS)
             .eut(TierEU.RECIPE_LuV)
@@ -143,7 +143,7 @@ public class Nylon66Recipes {
             .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
 
         // HMD + Adipic Acid → molten Nylon-6,6 + Water (LuV PCV, 1:1 molar)
-        // LuV-tier so a LuV energy hatch runs it — no ZPM energy hatch required before ZPM components.
+        // LuV-tier so a LuV energy hatch runs it, no ZPM energy hatch required before ZPM components.
         GTValues.RA.stdBuilder()
             .itemInputs(circuit(8))
             .fluidInputs(fluid(PrPMaterials.HMD, 4000), fluid(PrPMaterials.AdipicAcid, 4000))
@@ -173,7 +173,7 @@ public class Nylon66Recipes {
     }
 
     // =========================================================
-    // 7. Caprolactam route — third path branching from cyclohexanone
+    // 7. Caprolactam route: third path branching from cyclohexanone
     // =========================================================
     private static void step7_CaprolactamRoute() {
 
@@ -211,14 +211,14 @@ public class Nylon66Recipes {
     }
 
     // =========================================================
-    // PCV controller — assembler recipe gated on the ZPM Hull, but otherwise built from LuV-tier
-    // parts so it's craftable the moment you can make a ZPM hull (no ZPM components / energy hatch).
+    // PCV controller: assembler recipe gated on the LuV Hull and built from LuV-tier parts, so it's
+    // craftable as soon as LuV is reached.
     // =========================================================
     private static void pcvControllerRecipe() {
 
         GTValues.RA.stdBuilder()
             .itemInputs(
-                ItemList.Hull_ZPM.get(1),
+                ItemList.Hull_LuV.get(1),
                 GTOreDictUnificator.get(OrePrefixes.circuit, Materials.LuV, 4),
                 GTOreDictUnificator.get(OrePrefixes.pipeLarge, Materials.StainlessSteel, 4),
                 GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.StainlessSteel, 2),

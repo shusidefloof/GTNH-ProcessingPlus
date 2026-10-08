@@ -32,7 +32,7 @@ import gtPlusPlus.core.material.Material;
 public class PPRecipeHelper {
 
     // =========================
-    // ITEMS — GT Materials
+    // ITEMS: GT Materials
     // =========================
 
     public static ItemStack dust(Materials m, int amount) {
@@ -60,7 +60,7 @@ public class PPRecipeHelper {
     }
 
     // =========================
-    // ITEMS — Werkstoff
+    // ITEMS: Werkstoff
     // =========================
 
     public static ItemStack dust(Werkstoff w, int amount) {
@@ -128,7 +128,7 @@ public class PPRecipeHelper {
     }
 
     // =========================
-    // ITEMS — GT++ Material
+    // ITEMS: GT++ Material
     // =========================
 
     /** GT++ Material objects (e.g. ELEMENT.getInstance().FERMIUM). */
@@ -139,11 +139,11 @@ public class PPRecipeHelper {
     }
 
     // =========================
-    // ITEMS — OreDict
+    // ITEMS: OreDict
     // =========================
 
     /**
-     * OreDict lookup through GT's unifier (prefers the unification target, skips blacklisted entries) — for
+     * OreDict lookup through GT's unifier (prefers the unification target, skips blacklisted entries), for
      * materials not accessible at compile time (e.g. GoodGenerator Werkstoffe).
      */
     public static ItemStack item(String oreDictEntry, int amount) {
@@ -153,7 +153,7 @@ public class PPRecipeHelper {
     }
 
     // =========================
-    // ITEMS — Chain intermediates (shared MetaItem)
+    // ITEMS: Chain intermediates (shared MetaItem)
     // =========================
 
     /** Single-use chain intermediate from the shared {@link Intermediate} MetaItem. */
@@ -170,7 +170,7 @@ public class PPRecipeHelper {
     }
 
     // =========================
-    // FLUIDS — GT Materials
+    // FLUIDS: GT Materials
     // =========================
 
     public static FluidStack fluid(Materials m, int amount) {
@@ -185,14 +185,14 @@ public class PPRecipeHelper {
         throw new IllegalArgumentException("Invalid GT material fluid/gas: " + m.name());
     }
 
-    /** For molten metals — calls getMolten() rather than getFluid(). */
+    /** For molten metals: calls getMolten() rather than getFluid(). */
     public static FluidStack molten(Materials m, int amount) {
         FluidStack fs = m.getMolten(amount);
         if (fs == null) throw new IllegalArgumentException("No molten form for material: " + m.name());
         return fs;
     }
 
-    /** For fusion-produced plasmas — calls getPlasma(). */
+    /** For fusion-produced plasmas: calls getPlasma(). */
     public static FluidStack plasma(Materials m, int amount) {
         FluidStack fs = m.getPlasma(amount);
         if (fs == null) throw new IllegalArgumentException("No plasma form for material: " + m.name());
@@ -200,7 +200,7 @@ public class PPRecipeHelper {
     }
 
     // =========================
-    // FLUIDS — Werkstoff
+    // FLUIDS: Werkstoff
     // =========================
 
     /** For fluid/gas Werkstoffe registered with addCells(). */
@@ -214,7 +214,7 @@ public class PPRecipeHelper {
     }
 
     // =========================
-    // FLUIDS — String registry
+    // FLUIDS: String registry
     // =========================
 
     /** GT++ Material objects (handles SOLID/LIQUID/GAS forms via getFluidStack). */
@@ -327,7 +327,7 @@ public class PPRecipeHelper {
     }
 
     /**
-     * Whether any recipe on this map actually has a fluid input — used to skip requiring an Input
+     * Whether any recipe on this map actually has a fluid input, used to skip requiring an Input
      * Hatch in checkMachine() on multiblocks whose recipe map is item-only.
      */
     public static boolean recipeMapHasFluidInputs(RecipeMap<?> map) {
@@ -338,7 +338,7 @@ public class PPRecipeHelper {
     }
 
     /**
-     * Whether any recipe on this map actually has a fluid output — used to skip requiring an
+     * Whether any recipe on this map actually has a fluid output, used to skip requiring an
      * Output Hatch in checkMachine() on multiblocks whose recipe map is item-only.
      */
     public static boolean recipeMapHasFluidOutputs(RecipeMap<?> map) {

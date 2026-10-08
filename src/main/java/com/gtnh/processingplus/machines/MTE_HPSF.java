@@ -59,7 +59,7 @@ import gregtech.common.misc.GTStructureChannels;
 
 public class MTE_HPSF extends MTEExtendedPowerMultiBlockBase<MTE_HPSF> implements ISurvivalConstructable {
 
-    // RobustTungstenSteelMachineCasing (sBlockCasings4 meta0) — matches HPSF_CASING/
+    // RobustTungstenSteelMachineCasing (sBlockCasings4 meta0): matches HPSF_CASING/
     // PRESSURE_VESSEL_RING_CASING's borrowed texture.
     private static final int CASING_INDEX = 48;
     private static final String STRUCTURE_PIECE_MAIN = "main";
@@ -96,39 +96,39 @@ public class MTE_HPSF extends MTEExtendedPowerMultiBlockBase<MTE_HPSF> implement
                 .addShape(
                     STRUCTURE_PIECE_MAIN,
                     new String[][] {
-                        // Layer 0 — front end cap
+                        // Layer 0: front end cap
                         { "                   ", "    CCC            ", "   CAAAC           ", "   CAAAC           ",
                             "   CAAAC           ", "    CCC            ", "                   ",
                             " BBBBBBBBB         " },
-                        // Layer 1 — main vessel ring + TungstenSteel frame
+                        // Layer 1: main vessel ring + TungstenSteel frame
                         { "    III            ", "   I   I           ", "  I     I          ", " GI     IG         ",
                             " GI     IG         ", " GGI   IGG         ", " G  III  G         ",
                             "BBBBBBBBBBB        " },
-                        // Layer 2 — transition (HPSF casing ring)
+                        // Layer 2: transition (HPSF casing ring)
                         { "    JIJ            ", "   H   H           ", "  J     J          ", "  I     I          ",
                             "  J     J          ", "   H   H           ", "    JIJ            ",
                             "BBBBBBBBBBB        " },
-                        // Layer 3 — inner lining begins, control stub starts
+                        // Layer 3: inner lining begins, control stub starts
                         { "    JIJ            ", "   HE EH           ", "  JE   EJ          ", "  I     I          ",
                             "  JE   EJ          ", "   HE EH           ", "    JIJ            ",
                             "BBBBBBBBBBB   BBB  " },
-                        // Layer 4 — full inner lining, control chamber base
+                        // Layer 4: full inner lining, control chamber base
                         { "     I             ", "   IEEEI           ", "   E   E           ", "  IE   EI     FFF  ",
                             "  GE   EG     CCC  ", "  GIEEEIG     C~C  ", "  G  I  G     CCC  ",
                             "BBBBBBBBBBB  BBBBB " },
-                        // Layer 5 — inner lining + control chamber mid
+                        // Layer 5: inner lining + control chamber mid
                         { "     I             ", "    EGE            ", "   E   E      FFF  ", "  IG   GI    F   F ",
                             "   E   E     A   A ", "    EGE      A   A ", "     I       C   C ",
                             "BBBBBBBBBBB BBBBBBB" },
-                        // Layer 6 — control chamber core (pipe casings)
+                        // Layer 6: control chamber core (pipe casings)
                         { "        DDDDDDD    ", "    IIIDDD   DDD   ", "   I   ID     FDF  ", "   I   I     F D F ",
                             "   I   I     C D C ", "    III      C D C ", "             C D C ",
                             "BBBBBBBBBBB BBBBBBB" },
-                        // Layer 7 — mirror of layer 5
+                        // Layer 7: mirror of layer 5
                         { "     I             ", "    EGE            ", "   E   E      FFF  ", "  IG   GI    F   F ",
                             "   E   E     A   A ", "    EGE      A   A ", "     I       C   C ",
                             "BBBBBBBBBBB BBBBBBB" },
-                        // Layer 8 — mirror of layer 4
+                        // Layer 8: mirror of layer 4
                         { "     I             ", "   IEEEI           ", "   E   E           ", "  IE   EI     FFF  ",
                             "  GE   EG     CCC  ", "  GIEEEIG     CCC  ", "  G  IH G     CCC  ",
                             "BBBBBBBBBBB  BBBBB " },
@@ -144,12 +144,12 @@ public class MTE_HPSF extends MTEExtendedPowerMultiBlockBase<MTE_HPSF> implement
                         { "                   ", "    CCC            ", "   CAAAC           ", "   CAAAC           ",
                             "   CAAAC           ", "    CCC            ", "                   ",
                             " BBBBBBBBB         " }, })
-                // BW glass — tiered viewport (any meta accepted)
+                // BW glass: tiered viewport (any meta accepted)
                 .addElement('A', chainAllGlasses(-1, (t, tier) -> t.mGlassTier = tier, t -> t.mGlassTier))
                 // .addElement('A', chainAllGlasses())
-                // IC2 reinforced stone — base
+                // IC2 reinforced stone: base
                 .addElement('B', ofBlock(GameRegistry.findBlock("IC2", "blockAlloy"), 0))
-                // HPSF casing — end caps + control chamber outer + hatch positions
+                // HPSF casing: end caps + control chamber outer + hatch positions
                 .addElement(
                     'C',
                     buildHatchAdder(MTE_HPSF.class)
@@ -157,7 +157,7 @@ public class MTE_HPSF extends MTEExtendedPowerMultiBlockBase<MTE_HPSF> implement
                         .casingIndex(CASING_INDEX)
                         .hint(1)
                         .buildAndChain(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.HPSF_CASING))
-                // Item pipe casings — tier (1-8) sets parallel count as 2^(tier-1)
+                // Item pipe casings: tier (1-8) sets parallel count as 2^(tier-1)
                 // All D positions must be the same tier.
                 .addElement(
                     'D',
@@ -165,12 +165,12 @@ public class MTE_HPSF extends MTEExtendedPowerMultiBlockBase<MTE_HPSF> implement
                         -1,
                         (machine, tier) -> machine.mPipeCasingTier = tier,
                         machine -> machine.mPipeCasingTier))
-                // Heating coils — tier sets heat capacity
+                // Heating coils: tier sets heat capacity
                 .addElement(
                     'E',
                     GTStructureChannels.HEATING_COIL
                         .use(activeCoils(ofCoil(MTE_HPSF::setCoilLevel, MTE_HPSF::getCoilLevel))))
-                // HPSF casing — control chamber outer shell + hatch positions
+                // HPSF casing: control chamber outer shell + hatch positions
                 .addElement(
                     'F',
                     buildHatchAdder(MTE_HPSF.class)
@@ -178,11 +178,11 @@ public class MTE_HPSF extends MTEExtendedPowerMultiBlockBase<MTE_HPSF> implement
                         .casingIndex(CASING_INDEX)
                         .hint(1)
                         .buildAndChain(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.HPSF_CASING))
-                // TungstenSteel frames — structural ring support
+                // TungstenSteel frames: structural ring support
                 .addElement('G', ofBlock(GameRegistry.findBlock("gregtech", "gt.blockframes"), 334))
-                // HPSF casing — transition zones (structural only)
+                // HPSF casing: transition zones (structural only)
                 .addElement('H', ofBlock(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.HPSF_CASING))
-                // Pressure Vessel Ring Casing — main pressure vessel ring + hatch positions
+                // Pressure Vessel Ring Casing: main pressure vessel ring + hatch positions
                 .addElement(
                     'I',
                     buildHatchAdder(MTE_HPSF.class)
@@ -263,6 +263,11 @@ public class MTE_HPSF extends MTEExtendedPowerMultiBlockBase<MTE_HPSF> implement
     }
 
     @Override
+    public boolean supportsBatchMode() {
+        return true;
+    }
+
+    @Override
     protected ProcessingLogic createProcessingLogic() {
         return new ProcessingLogic() {
 
@@ -340,61 +345,28 @@ public class MTE_HPSF extends MTEExtendedPowerMultiBlockBase<MTE_HPSF> implement
     @Override
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType("High Pressure Sintering Furnace, HPSF")
+        tt.addMachineType("Sintering Furnace, HPSF")
+            .addInfo(TooltipHelper.parallelText("2^(Pipe Casing Tier - 1)") + " Parallels")
+            .addInfo("The pipe casing tier is set by the Item Pipe Casing in the control chamber")
+            .pipe(PPTooltips::addHeatInfo)
             .addInfo(
-                EnumChatFormatting.GRAY + "Sinters powders under "
-                    + EnumChatFormatting.GOLD
-                    + "high pressure and heat"
+                EnumChatFormatting.RED + "Some recipes consume Nitrogen every cycle"
                     + EnumChatFormatting.GRAY
-                    + ".")
-            .addSeparator()
-            .addInfo(
-                "Heat capacity: " + TooltipHelper.coloredText("coil tier heat", EnumChatFormatting.RED)
-                    + EnumChatFormatting.GRAY
-                    + " + "
-                    + TooltipHelper.coloredText("100 K", EnumChatFormatting.YELLOW)
-                    + EnumChatFormatting.GRAY
-                    + " per "
-                    + TooltipHelper.tierText("Voltage")
-                    + EnumChatFormatting.GRAY
-                    + " tier above LV.")
-            .addInfo(
-                TooltipHelper.effText("-5% EU") + EnumChatFormatting.GRAY
-                    + " per "
-                    + TooltipHelper.coloredText("900 K", EnumChatFormatting.RED)
-                    + EnumChatFormatting.GRAY
-                    + " above the recipe requirement.")
-            .addInfo(
-                "Every " + TooltipHelper.coloredText("1800 K", EnumChatFormatting.RED)
-                    + EnumChatFormatting.GRAY
-                    + " above the recipe requirement grants 1 "
-                    + TooltipHelper.coloredText("perfect overclock", EnumChatFormatting.LIGHT_PURPLE)
-                    + EnumChatFormatting.GRAY
-                    + ".")
-            .addInfo(
-                "Parallels: " + TooltipHelper.coloredText("2^(pipe tier − 1)", EnumChatFormatting.YELLOW)
-                    + EnumChatFormatting.GRAY
-                    + " — set by the item pipe casing tier in the control chamber.")
-            .addInfo(
-                EnumChatFormatting.RED + "Requires continuous N₂ supply"
-                    + EnumChatFormatting.GRAY
-                    + " — consumed as a recipe fluid each cycle.")
+                    + ", keep a continuous supply connected")
             .beginStructureBlock(11, 8, 13, true)
-            .addController("Center of the 3×3 face on the control chamber")
+            .addController("Center of the 3x3 face on the control chamber")
             .addCasing("1+", "Hardened Pressure Vessel Casing", false)
             .addCasing("1+", "Pressure Vessel Ring Casing", false)
             .addCasing("1+", "Dual-Sealed Atmosphere Pipe Casing", false)
-            .addOtherStructurePart("Heating Coils", "Inner sintering chamber lining")
-            .addOtherStructurePart("TungstenSteel Frames", "Structural ring support")
-            .addOtherStructurePart("BW Glass Blocks (any tier)", "Viewport end caps")
+            .addOtherStructurePart("Heating Coil", "Inner sintering chamber lining")
+            .addOtherStructurePart("Tungstensteel Frame Box", "Structural ring support")
+            .addOtherStructurePart("BartWorks Glass (any tier)", "Viewport end caps")
             .addOtherStructurePart("IC2 Reinforced Stone", "Base layer")
-            .addEnergyHatch("1+", "Any casing position", 1)
-            .addMaintenanceHatch("1", "Any casing position", 1)
-            .addMufflerHatch("1", "Any casing position", 1)
-            .addInputBus("1+", "Any casing position", 1)
-            .addInputHatch("1+", "Any casing position", 1)
-            .addOutputBus("1+", "Any casing position", 1)
-            .addOutputHatch("1+", "Any casing position", 1)
+            .addEnergyHatch("1+", "Any hardened pressure vessel casing", 1)
+            .addMaintenanceHatch("1", "Any hardened pressure vessel casing", 1)
+            .addMufflerHatch("1", "Any hardened pressure vessel casing", 1)
+            .addInputAny("1+", "Any hardened pressure vessel casing", 1)
+            .addOutputAny("1+", "Any hardened pressure vessel casing", 1)
             .toolTipFinisher("_Shusi_");
         return tt;
     }

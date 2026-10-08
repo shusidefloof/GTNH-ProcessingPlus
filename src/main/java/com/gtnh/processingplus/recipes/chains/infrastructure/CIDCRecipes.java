@@ -29,7 +29,7 @@ public class CIDCRecipes {
     }
 
     // -------------------------------------------------------------------------
-    // Isotopic Doping Casing — clean precision shell.
+    // Isotopic Doping Casing: clean precision shell.
     // -------------------------------------------------------------------------
     private static void casingRecipe() {
         GTValues.RA.stdBuilder()
@@ -47,7 +47,7 @@ public class CIDCRecipes {
     }
 
     // -------------------------------------------------------------------------
-    // Controller — assembly-line recipe (UV), scanned from a UV hull.
+    // Controller: assembly-line recipe (UV), scanned from a UV hull.
     // -------------------------------------------------------------------------
     private static void controllerRecipe() {
         GTValues.RA.stdBuilder()

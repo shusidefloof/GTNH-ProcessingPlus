@@ -32,7 +32,7 @@ public class CRVRecipes {
     }
 
     // -------------------------------------------------------------------------
-    // Promethean Naquadria — exotic alloy of Naquadria + molten Promethium, forged in the CRV under
+    // Promethean Naquadria: exotic alloy of Naquadria + molten Promethium, forged in the CRV under
     // an hBN-protected lining and argon blanket. Consumes the molten Promethium from the Pm chain.
     // -------------------------------------------------------------------------
     private static void prometheanNaquadria() {
@@ -49,7 +49,7 @@ public class CRVRecipes {
     }
 
     // -------------------------------------------------------------------------
-    // CRV controller — assembly-line recipe (EV).
+    // CRV controller: assembly-line recipe (EV).
     //
     // The vessel is an EV hull lined with sintered silicon-carbide ceramic plates
     // (the crucible wall) and braced with a tungstensteel frame. Stainless pipes
@@ -103,7 +103,7 @@ public class CRVRecipes {
     }
 
     // -------------------------------------------------------------------------
-    // Amorphous Tritanium Alloy — plasma-quench metallic glass (LuV CRV)
+    // Amorphous Tritanium Alloy: plasma-quench metallic glass (LuV CRV)
     //
     // Tritanium and Americium are alloyed above their liquidus in the hBN crucible,
     // then shock-cooled with a liquid Argon pulse before the alloy can nucleate
@@ -124,7 +124,7 @@ public class CRVRecipes {
     }
 
     // -------------------------------------------------------------------------
-    // Amorphous Naquadria — plasma-quench of activated Naquadria (ZPM CRV)
+    // Amorphous Naquadria: plasma-quench of activated Naquadria (ZPM CRV)
     //
     // Enriched Naquadah enhances the radiative coupling during melting, letting
     // the Naquadria reach full liquid phase without a separate plasma stage.

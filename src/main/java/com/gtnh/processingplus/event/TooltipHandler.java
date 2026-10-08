@@ -29,7 +29,7 @@ public class TooltipHandler {
         + EnumChatFormatting.GOLD
         + "Processing Plus";
 
-    // MTE IDs this mod registers via GTNHPPBlocks.registerMachines() — keep in sync with that method.
+    // MTE IDs this mod registers via GTNHPPBlocks.registerMachines(), keep in sync with that method.
     private static final Set<Integer> MULTIBLOCK_IDS = new HashSet<>(
         Arrays.asList(
             GTNHPPBlocks.CIDC_ID, // Controlled Isotopic Doping Chamber
@@ -38,19 +38,19 @@ public class TooltipHandler {
             GTNHPPBlocks.SCD_ID, // Supercritical Dryer
             GTNHPPBlocks.DAF_ID, // Dual Atmosphere Furnace
             GTNHPPBlocks.CSTR_ID, // Continuous Stirred Tank Reactor
-            31504, // RTG — Radioisotope Thermoelectric Generator
-            31505, // AAR — Ammonia Atmosphere Reactor
-            31506, // PCV — Polycondensation Vessel
-            31507, // CRV — Ceramic Reaction Vessel
-            31508, // SPC — Spectral Photolithography Chamber
-            31509, // CSC — Cryogenic Separation Column
-            31510, // BOF — Basic Oxygen Furnace
-            31511, // HPSF — High Pressure Sintering Furnace
+            31504, // RTG: Radioisotope Thermoelectric Generator
+            31505, // AAR: Ammonia Atmosphere Reactor
+            31506, // PCV: Polycondensation Vessel
+            31507, // CRV: Ceramic Reaction Vessel
+            31508, // SPC: Spectral Photolithography Chamber
+            31509, // CSC: Cryogenic Separation Column
+            31510, // BOF: Basic Oxygen Furnace
+            31511, // HPSF: High Pressure Sintering Furnace
             31512, // SPC Bio-Lithography Module
             31513, // SPC Cryo-Stabilization Module
             31514, // SPC Quantum Alignment Module
-            31515, // HTRF — High Temperature Reaction Furnace
-            31516 // CAC — Cryogenic Annealing Cryostat
+            31515, // HTRF: High Temperature Reaction Furnace
+            31516 // CAC: Cryogenic Annealing Cryostat
         ));
 
     @SubscribeEvent

@@ -47,7 +47,7 @@ public class QuestLoader {
     private static final File CONFIG_QUESTS_DIR = new File("config/" + Mods.BetterQuesting.ID + "/DefaultQuests");
     private static final String RESOURCE_QUESTS_PREFIX = "assets/" + MOD_RESOURCE_ID + "/quest/DefaultQuests/";
     // Bundled alongside the quest files themselves (tools/export-quests.js writes it in the same
-    // run as QuestLine.json, from the exact same questLineIDHigh/Low values) — never hardcode
+    // run as QuestLine.json, from the exact same questLineIDHigh/Low values), never hardcode
     // this key separately, it must always match what's actually in QuestLine.json or
     // BetterQuesting stores a null IQuestLine entry, which crashes the quest-book GUI.
     private static final String RESOURCE_ORDER_FILE = "QuestLinesOrder.txt";
@@ -69,7 +69,7 @@ public class QuestLoader {
      * Merges our bundled QuestLinesOrder.txt line(s) into the player's (shared, possibly
      * multi-mod) config file, replacing any stale line left behind by an older/broken version of
      * this mod. Matched by the ": <name>" suffix, since that's stable across rebuilds even when
-     * the encoded UUID key on the left isn't (see encodeQuestLineKey in tools/export-quests.js —
+     * the encoded UUID key on the left isn't (see encodeQuestLineKey in tools/export-quests.js
      * a rebuilt jar can legitimately produce a different key for the same questline).
      *
      * @param injectKeys true → ensure our key(s) are present, removing outdated ones (files are
@@ -141,13 +141,13 @@ public class QuestLoader {
      * Copies quest resource files from the mod jar into the BetterQuesting DefaultQuests directory.
      *
      * @return true if the jar was found and files were managed (even if all were already up-to-date);
-     *         false if not running from a jar (e.g. dev environment) — caller should not inject the
+     *         false if not running from a jar (e.g. dev environment), caller should not inject the
      *         order key in this case.
      */
     public static boolean copyDefaultQuestsFromJar() throws IOException {
         File jarFile = resolveJarFile();
         if (jarFile == null) {
-            GTNHProcessingPlus.LOG.info("[QuestLoader] Not running from a jar file — skipping quest copy.");
+            GTNHProcessingPlus.LOG.info("[QuestLoader] Not running from a jar file, skipping quest copy.");
             return false;
         }
 
@@ -161,7 +161,7 @@ public class QuestLoader {
                 if (!name.startsWith(RESOURCE_QUESTS_PREFIX)) continue;
 
                 String relativePath = name.substring(RESOURCE_QUESTS_PREFIX.length());
-                // Handled separately by syncQuestLinesOrder() — this file is shared with other
+                // Handled separately by syncQuestLinesOrder(): this file is shared with other
                 // mods' own default quest lines, so it must be merged, never blindly overwritten.
                 if (relativePath.equals(RESOURCE_ORDER_FILE)) continue;
                 File targetFile = new File(CONFIG_QUESTS_DIR, relativePath);
@@ -192,8 +192,8 @@ public class QuestLoader {
     /**
      * Resolves the jar file containing this class using two independent methods.
      * <ol>
-     * <li>ProtectionDomain / CodeSource — direct, works in most Forge production setups.</li>
-     * <li>Class resource URL — reliable fallback that also handles percent-encoded paths
+     * <li>ProtectionDomain / CodeSource: direct, works in most Forge production setups.</li>
+     * <li>Class resource URL: reliable fallback that also handles percent-encoded paths
      * (e.g. spaces in the mods folder path).</li>
      * </ol>
      *

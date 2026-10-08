@@ -446,86 +446,6 @@
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
-					"groupDetect:1": 0,
-					"requiredItems:9": {
-						"0:10": {
-							"Damage:2": 26178,
-							"Count:3": 1,
-							"id:8": "bartworks:gt.bwMetaGenerateddust",
-							"OreDict:8": ""
-						}
-					},
-					"partialMatch:1": 1,
-					"consume:1": 0,
-					"autoConsume:1": 0,
-					"requireOnlyOneItem:1": 0,
-					"taskID:8": "bq_standard:retrieval",
-					"ignoreNBT:1": 1
-				}
-			},
-			"properties:10": {
-				"betterquesting:10": {
-					"notification_pos_y:3": -2147483648,
-					"notification_subtitle_scale:5": -1.0,
-					"visibility:8": "NORMAL",
-					"notification_style:8": "default",
-					"notification_duration:5": -1.0,
-					"completion_particle:8": "default",
-					"isMain:1": 0,
-					"lockedProgress:1": 0,
-					"repeat_relative:1": 1,
-					"notification_pos_x:3": -2147483648,
-					"snd_complete:8": "random.levelup",
-					"repeatTime:3": -1,
-					"notification_fade_out:5": -1.0,
-					"particle_count:3": -1,
-					"countAsQuest:1": 1,
-					"autoClaim:1": 0,
-					"globalShare:1": 0,
-					"desc:8": "Diborane plus Ammonia in the Ammonia Atmosphere Reactor at a modest 900K. The ammonia atmosphere is needed, without it the diborane burns.",
-					"notification_icon_scale:5": -1.0,
-					"notification_show_icon:8": "default",
-					"notification_fade_in:5": -1.0,
-					"icon:10": {
-						"id:8": "bartworks:gt.bwMetaGenerateddust",
-						"Count:3": 1,
-						"Damage:2": 26178,
-						"OreDict:8": ""
-					},
-					"isSilent:1": 0,
-					"notification_subtitle:8": "",
-					"questLogic:8": "AND",
-					"snd_update:8": "random.levelup",
-					"name:8": "Ammonia-Borane Hydrogen-Storage Adduct",
-					"notification_title_scale:5": -1.0,
-					"taskLogic:8": "AND",
-					"simultaneous:1": 0,
-					"confetti_icon:10": {
-						"id:8": "minecraft:stick",
-						"Count:3": 0,
-						"Damage:2": 0,
-						"OreDict:8": ""
-					},
-					"notification_icon_offset_y:3": -2147483648,
-					"completion_animation:8": "default",
-					"notification_title:8": "",
-					"notification_effect:3": -1
-				}
-			},
-			"questIDLow:4": -6171767838353125000,
-			"questIDHigh:4": -3187399760458601500,
-			"preRequisites:9": {
-				"0:10": {
-					"questIDLow:4": -5417621763660008000,
-					"questIDHigh:4": 2331228823104878600
-				}
-			},
-			"rewards:9": {}
-		},
-		"6:10": {
-			"tasks:9": {
-				"0:10": {
-					"index:3": 0,
 					"taskID:8": "bq_standard:checkbox"
 				}
 			},
@@ -583,7 +503,7 @@
 			"preRequisites:9": {},
 			"rewards:9": {}
 		},
-		"7:10": {
+		"6:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -686,7 +606,7 @@
 			},
 			"rewards:9": {}
 		},
-		"8:10": {
+		"7:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -766,7 +686,7 @@
 			},
 			"rewards:9": {}
 		},
-		"9:10": {
+		"8:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -870,7 +790,7 @@
 			},
 			"rewards:9": {}
 		},
-		"10:10": {
+		"9:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -981,7 +901,7 @@
 			},
 			"rewards:9": {}
 		},
-		"11:10": {
+		"10:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -1097,7 +1017,7 @@
 			},
 			"rewards:9": {}
 		},
-		"12:10": {
+		"11:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -1177,7 +1097,7 @@
 			},
 			"rewards:9": {}
 		},
-		"13:10": {
+		"12:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -1295,7 +1215,7 @@
 			},
 			"rewards:9": {}
 		},
-		"14:10": {
+		"13:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -1366,7 +1286,7 @@
 			},
 			"rewards:9": {}
 		},
-		"15:10": {
+		"14:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -1470,7 +1390,7 @@
 			},
 			"rewards:9": {}
 		},
-		"16:10": {
+		"15:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -1550,7 +1470,7 @@
 			},
 			"rewards:9": {}
 		},
-		"17:10": {
+		"16:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -1654,7 +1574,7 @@
 			},
 			"rewards:9": {}
 		},
-		"18:10": {
+		"17:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -1752,7 +1672,7 @@
 			},
 			"rewards:9": {}
 		},
-		"19:10": {
+		"18:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -1856,7 +1776,7 @@
 			},
 			"rewards:9": {}
 		},
-		"20:10": {
+		"19:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -1927,87 +1847,7 @@
 			},
 			"rewards:9": {}
 		},
-		"21:10": {
-			"tasks:9": {
-				"0:10": {
-					"index:3": 0,
-					"groupDetect:1": 0,
-					"requiredItems:9": {
-						"0:10": {
-							"Damage:2": 26180,
-							"Count:3": 1,
-							"id:8": "bartworks:gt.bwMetaGeneratedcell",
-							"OreDict:8": ""
-						}
-					},
-					"partialMatch:1": 1,
-					"consume:1": 0,
-					"autoConsume:1": 0,
-					"requireOnlyOneItem:1": 0,
-					"taskID:8": "bq_standard:retrieval",
-					"ignoreNBT:1": 1
-				}
-			},
-			"properties:10": {
-				"betterquesting:10": {
-					"notification_pos_y:3": -2147483648,
-					"notification_subtitle_scale:5": -1.0,
-					"visibility:8": "NORMAL",
-					"notification_style:8": "default",
-					"notification_duration:5": -1.0,
-					"completion_particle:8": "default",
-					"isMain:1": 0,
-					"lockedProgress:1": 0,
-					"repeat_relative:1": 1,
-					"notification_pos_x:3": -2147483648,
-					"snd_complete:8": "random.levelup",
-					"repeatTime:3": -1,
-					"notification_fade_out:5": -1.0,
-					"particle_count:3": -1,
-					"countAsQuest:1": 1,
-					"autoClaim:1": 0,
-					"globalShare:1": 0,
-					"desc:8": "Crude Decaborane Melt plus Freon R-12, Cryogenic Separation Column. Strips the volatile junk out of the melt. ",
-					"notification_icon_scale:5": -1.0,
-					"notification_show_icon:8": "default",
-					"notification_fade_in:5": -1.0,
-					"icon:10": {
-						"id:8": "bartworks:gt.bwMetaGeneratedcell",
-						"Count:3": 1,
-						"Damage:2": 26180,
-						"OreDict:8": ""
-					},
-					"isSilent:1": 0,
-					"notification_subtitle:8": "",
-					"questLogic:8": "AND",
-					"snd_update:8": "random.levelup",
-					"name:8": "Cryo-Fractionated Decaborane",
-					"notification_title_scale:5": -1.0,
-					"taskLogic:8": "AND",
-					"simultaneous:1": 0,
-					"confetti_icon:10": {
-						"id:8": "minecraft:stick",
-						"Count:3": 0,
-						"Damage:2": 0,
-						"OreDict:8": ""
-					},
-					"notification_icon_offset_y:3": -2147483648,
-					"completion_animation:8": "default",
-					"notification_title:8": "",
-					"notification_effect:3": -1
-				}
-			},
-			"questIDLow:4": 7274951386930053000,
-			"questIDHigh:4": -894192732373718800,
-			"preRequisites:9": {
-				"0:10": {
-					"questIDLow:4": 3602736200313262000,
-					"questIDHigh:4": -1098302154973940600
-				}
-			},
-			"rewards:9": {}
-		},
-		"22:10": {
+		"20:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -2105,7 +1945,7 @@
 			},
 			"rewards:9": {}
 		},
-		"23:10": {
+		"21:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -2215,87 +2055,7 @@
 			},
 			"rewards:9": {}
 		},
-		"24:10": {
-			"tasks:9": {
-				"0:10": {
-					"index:3": 0,
-					"groupDetect:1": 0,
-					"requiredItems:9": {
-						"0:10": {
-							"Damage:2": 26179,
-							"Count:3": 1,
-							"id:8": "bartworks:gt.bwMetaGeneratedcell",
-							"OreDict:8": ""
-						}
-					},
-					"partialMatch:1": 1,
-					"consume:1": 0,
-					"autoConsume:1": 0,
-					"requireOnlyOneItem:1": 0,
-					"taskID:8": "bq_standard:retrieval",
-					"ignoreNBT:1": 1
-				}
-			},
-			"properties:10": {
-				"betterquesting:10": {
-					"notification_pos_y:3": -2147483648,
-					"notification_subtitle_scale:5": -1.0,
-					"visibility:8": "NORMAL",
-					"notification_style:8": "default",
-					"notification_duration:5": -1.0,
-					"completion_particle:8": "default",
-					"isMain:1": 0,
-					"lockedProgress:1": 0,
-					"repeat_relative:1": 1,
-					"notification_pos_x:3": -2147483648,
-					"snd_complete:8": "random.levelup",
-					"repeatTime:3": -1,
-					"notification_fade_out:5": -1.0,
-					"particle_count:3": -1,
-					"countAsQuest:1": 1,
-					"autoClaim:1": 0,
-					"globalShare:1": 0,
-					"desc:8": "Ammonia-Borane cooked in the HTRF at 2700K. It gives up its hydrogen and ammonia and leaves a decaborane melt. Youll need that ammonia later so keep it.",
-					"notification_icon_scale:5": -1.0,
-					"notification_show_icon:8": "default",
-					"notification_fade_in:5": -1.0,
-					"icon:10": {
-						"id:8": "bartworks:gt.bwMetaGeneratedcell",
-						"Count:3": 1,
-						"Damage:2": 26179,
-						"OreDict:8": ""
-					},
-					"isSilent:1": 0,
-					"notification_subtitle:8": "",
-					"questLogic:8": "AND",
-					"snd_update:8": "random.levelup",
-					"name:8": "Crude Decaborane Melt",
-					"notification_title_scale:5": -1.0,
-					"taskLogic:8": "AND",
-					"simultaneous:1": 0,
-					"confetti_icon:10": {
-						"id:8": "minecraft:stick",
-						"Count:3": 0,
-						"Damage:2": 0,
-						"OreDict:8": ""
-					},
-					"notification_icon_offset_y:3": -2147483648,
-					"completion_animation:8": "default",
-					"notification_title:8": "",
-					"notification_effect:3": -1
-				}
-			},
-			"questIDLow:4": 3602736200313262000,
-			"questIDHigh:4": -1098302154973940600,
-			"preRequisites:9": {
-				"0:10": {
-					"questIDLow:4": -6171767838353125000,
-					"questIDHigh:4": -3187399760458601500
-				}
-			},
-			"rewards:9": {}
-		},
-		"25:10": {
+		"22:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -2393,7 +2153,7 @@
 			},
 			"rewards:9": {}
 		},
-		"26:10": {
+		"23:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -2459,7 +2219,7 @@
 			},
 			"rewards:9": {}
 		},
-		"27:10": {
+		"24:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 1,
@@ -2540,7 +2300,7 @@
 			},
 			"rewards:9": {}
 		},
-		"28:10": {
+		"25:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -2643,7 +2403,7 @@
 			},
 			"rewards:9": {}
 		},
-		"29:10": {
+		"26:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -2747,7 +2507,7 @@
 			},
 			"rewards:9": {}
 		},
-		"30:10": {
+		"27:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -2857,87 +2617,7 @@
 			},
 			"rewards:9": {}
 		},
-		"31:10": {
-			"tasks:9": {
-				"0:10": {
-					"index:3": 0,
-					"groupDetect:1": 0,
-					"requiredItems:9": {
-						"0:10": {
-							"Damage:2": 26186,
-							"Count:3": 1,
-							"id:8": "bartworks:gt.bwMetaGeneratedcell",
-							"OreDict:8": ""
-						}
-					},
-					"partialMatch:1": 1,
-					"consume:1": 0,
-					"autoConsume:1": 0,
-					"requireOnlyOneItem:1": 0,
-					"taskID:8": "bq_standard:retrieval",
-					"ignoreNBT:1": 1
-				}
-			},
-			"properties:10": {
-				"betterquesting:10": {
-					"notification_pos_y:3": -2147483648,
-					"notification_subtitle_scale:5": -1.0,
-					"visibility:8": "NORMAL",
-					"notification_style:8": "default",
-					"notification_duration:5": -1.0,
-					"completion_particle:8": "default",
-					"isMain:1": 0,
-					"lockedProgress:1": 0,
-					"repeat_relative:1": 1,
-					"notification_pos_x:3": -2147483648,
-					"snd_complete:8": "random.levelup",
-					"repeatTime:3": -1,
-					"notification_fade_out:5": -1.0,
-					"particle_count:3": -1,
-					"countAsQuest:1": 1,
-					"autoClaim:1": 0,
-					"globalShare:1": 0,
-					"desc:8": "The acid solution, vacuum stripped in the Polycondensation Vessel. Water and HCl leave, concentrated superacid stays.",
-					"notification_icon_scale:5": -1.0,
-					"notification_show_icon:8": "default",
-					"notification_fade_in:5": -1.0,
-					"icon:10": {
-						"id:8": "bartworks:gt.bwMetaGeneratedcell",
-						"Count:3": 1,
-						"Damage:2": 26186,
-						"OreDict:8": ""
-					},
-					"isSilent:1": 0,
-					"notification_subtitle:8": "",
-					"questLogic:8": "AND",
-					"snd_update:8": "random.levelup",
-					"name:8": "Anhydrous Carborane Superacid",
-					"notification_title_scale:5": -1.0,
-					"taskLogic:8": "AND",
-					"simultaneous:1": 0,
-					"confetti_icon:10": {
-						"id:8": "minecraft:stick",
-						"Count:3": 0,
-						"Damage:2": 0,
-						"OreDict:8": ""
-					},
-					"notification_icon_offset_y:3": -2147483648,
-					"completion_animation:8": "default",
-					"notification_title:8": "",
-					"notification_effect:3": -1
-				}
-			},
-			"questIDLow:4": -6965693868387602000,
-			"questIDHigh:4": -644376425373461000,
-			"preRequisites:9": {
-				"0:10": {
-					"questIDLow:4": 476558688486311700,
-					"questIDHigh:4": 781301080446885400
-				}
-			},
-			"rewards:9": {}
-		},
-		"32:10": {
+		"28:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -3051,7 +2731,7 @@
 			},
 			"rewards:9": {}
 		},
-		"33:10": {
+		"29:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -3172,7 +2852,7 @@
 			},
 			"rewards:9": {}
 		},
-		"34:10": {
+		"30:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -3277,7 +2957,7 @@
 			},
 			"rewards:9": {}
 		},
-		"35:10": {
+		"31:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -3393,7 +3073,7 @@
 			},
 			"rewards:9": {}
 		},
-		"36:10": {
+		"32:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -3491,87 +3171,7 @@
 			},
 			"rewards:9": {}
 		},
-		"37:10": {
-			"tasks:9": {
-				"0:10": {
-					"index:3": 0,
-					"groupDetect:1": 0,
-					"requiredItems:9": {
-						"0:10": {
-							"Damage:2": 26183,
-							"Count:3": 1,
-							"id:8": "bartworks:gt.bwMetaGenerateddust",
-							"OreDict:8": ""
-						}
-					},
-					"partialMatch:1": 1,
-					"consume:1": 0,
-					"autoConsume:1": 0,
-					"requireOnlyOneItem:1": 0,
-					"taskID:8": "bq_standard:retrieval",
-					"ignoreNBT:1": 1
-				}
-			},
-			"properties:10": {
-				"betterquesting:10": {
-					"notification_pos_y:3": -2147483648,
-					"notification_subtitle_scale:5": -1.0,
-					"visibility:8": "NORMAL",
-					"notification_style:8": "default",
-					"notification_duration:5": -1.0,
-					"completion_particle:8": "default",
-					"isMain:1": 0,
-					"lockedProgress:1": 0,
-					"repeat_relative:1": 1,
-					"notification_pos_x:3": -2147483648,
-					"snd_complete:8": "random.levelup",
-					"repeatTime:3": -1,
-					"notification_fade_out:5": -1.0,
-					"particle_count:3": -1,
-					"countAsQuest:1": 1,
-					"autoClaim:1": 0,
-					"globalShare:1": 0,
-					"desc:8": "nido-Carboranide Salt plus a single tiny dust of Francium, HPSF. The Francium templates the crystal as the cage squeezes shut again. It's rare, so don't waste any.",
-					"notification_icon_scale:5": -1.0,
-					"notification_show_icon:8": "default",
-					"notification_fade_in:5": -1.0,
-					"icon:10": {
-						"id:8": "bartworks:gt.bwMetaGenerateddust",
-						"Count:3": 1,
-						"Damage:2": 26183,
-						"OreDict:8": ""
-					},
-					"isSilent:1": 0,
-					"notification_subtitle:8": "",
-					"questLogic:8": "AND",
-					"snd_update:8": "random.levelup",
-					"name:8": "Francium closo-Carboranide Crystal",
-					"notification_title_scale:5": -1.0,
-					"taskLogic:8": "AND",
-					"simultaneous:1": 0,
-					"confetti_icon:10": {
-						"id:8": "minecraft:stick",
-						"Count:3": 0,
-						"Damage:2": 0,
-						"OreDict:8": ""
-					},
-					"notification_icon_offset_y:3": -2147483648,
-					"completion_animation:8": "default",
-					"notification_title:8": "",
-					"notification_effect:3": -1
-				}
-			},
-			"questIDLow:4": 5577759919162480000,
-			"questIDHigh:4": 143660619750726430,
-			"preRequisites:9": {
-				"0:10": {
-					"questIDLow:4": 6196771391101614000,
-					"questIDHigh:4": 3326898352920319000
-				}
-			},
-			"rewards:9": {}
-		},
-		"38:10": {
+		"33:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -3637,7 +3237,7 @@
 			},
 			"rewards:9": {}
 		},
-		"39:10": {
+		"34:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -3741,87 +3341,7 @@
 			},
 			"rewards:9": {}
 		},
-		"40:10": {
-			"tasks:9": {
-				"0:10": {
-					"index:3": 0,
-					"groupDetect:1": 0,
-					"requiredItems:9": {
-						"0:10": {
-							"Damage:2": 26184,
-							"Count:3": 1,
-							"id:8": "bartworks:gt.bwMetaGeneratedcell",
-							"OreDict:8": ""
-						}
-					},
-					"partialMatch:1": 1,
-					"consume:1": 0,
-					"autoConsume:1": 0,
-					"requireOnlyOneItem:1": 0,
-					"taskID:8": "bq_standard:retrieval",
-					"ignoreNBT:1": 1
-				}
-			},
-			"properties:10": {
-				"betterquesting:10": {
-					"notification_pos_y:3": -2147483648,
-					"notification_subtitle_scale:5": -1.0,
-					"visibility:8": "NORMAL",
-					"notification_style:8": "default",
-					"notification_duration:5": -1.0,
-					"completion_particle:8": "default",
-					"isMain:1": 0,
-					"lockedProgress:1": 0,
-					"repeat_relative:1": 1,
-					"notification_pos_x:3": -2147483648,
-					"snd_complete:8": "random.levelup",
-					"repeatTime:3": -1,
-					"notification_fade_out:5": -1.0,
-					"particle_count:3": -1,
-					"countAsQuest:1": 1,
-					"autoClaim:1": 0,
-					"globalShare:1": 0,
-					"desc:8": "The Francium crystal plus 11 buckets of Chlorine, Basic Oxygen Furnace. The cage takes eleven chlorines and everything else is thrown off as Carborane Chloride Slag. ",
-					"notification_icon_scale:5": -1.0,
-					"notification_show_icon:8": "default",
-					"notification_fade_in:5": -1.0,
-					"icon:10": {
-						"id:8": "bartworks:gt.bwMetaGeneratedcell",
-						"Count:3": 1,
-						"Damage:2": 26184,
-						"OreDict:8": ""
-					},
-					"isSilent:1": 0,
-					"notification_subtitle:8": "",
-					"questLogic:8": "AND",
-					"snd_update:8": "random.levelup",
-					"name:8": "Undecachloro-closo-monocarbadodecaborate Acid Solution",
-					"notification_title_scale:5": -1.0,
-					"taskLogic:8": "AND",
-					"simultaneous:1": 0,
-					"confetti_icon:10": {
-						"id:8": "minecraft:stick",
-						"Count:3": 0,
-						"Damage:2": 0,
-						"OreDict:8": ""
-					},
-					"notification_icon_offset_y:3": -2147483648,
-					"completion_animation:8": "default",
-					"notification_title:8": "",
-					"notification_effect:3": -1
-				}
-			},
-			"questIDLow:4": 476558688486311700,
-			"questIDHigh:4": 781301080446885400,
-			"preRequisites:9": {
-				"0:10": {
-					"questIDLow:4": 5577759919162480000,
-					"questIDHigh:4": 143660619750726430
-				}
-			},
-			"rewards:9": {}
-		},
-		"41:10": {
+		"35:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -3941,7 +3461,7 @@
 			},
 			"rewards:9": {}
 		},
-		"42:10": {
+		"36:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -4007,7 +3527,7 @@
 			},
 			"rewards:9": {}
 		},
-		"43:10": {
+		"37:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -4121,7 +3641,7 @@
 			},
 			"rewards:9": {}
 		},
-		"44:10": {
+		"38:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -4219,7 +3739,7 @@
 			},
 			"rewards:9": {}
 		},
-		"45:10": {
+		"39:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -4299,7 +3819,7 @@
 			},
 			"rewards:9": {}
 		},
-		"46:10": {
+		"40:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -4404,7 +3924,7 @@
 			},
 			"rewards:9": {}
 		},
-		"47:10": {
+		"41:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -4484,7 +4004,7 @@
 			},
 			"rewards:9": {}
 		},
-		"48:10": {
+		"42:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -4565,7 +4085,7 @@
 			},
 			"rewards:9": {}
 		},
-		"49:10": {
+		"43:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -4673,7 +4193,7 @@
 			},
 			"rewards:9": {}
 		},
-		"50:10": {
+		"44:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -4739,7 +4259,7 @@
 			},
 			"rewards:9": {}
 		},
-		"51:10": {
+		"45:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -4863,7 +4383,7 @@
 			},
 			"rewards:9": {}
 		},
-		"52:10": {
+		"46:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -4967,7 +4487,7 @@
 			},
 			"rewards:9": {}
 		},
-		"53:10": {
+		"47:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -5078,7 +4598,7 @@
 			},
 			"rewards:9": {}
 		},
-		"54:10": {
+		"48:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -5183,7 +4703,7 @@
 			},
 			"rewards:9": {}
 		},
-		"55:10": {
+		"49:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -5287,88 +4807,7 @@
 			},
 			"rewards:9": {}
 		},
-		"56:10": {
-			"tasks:9": {
-				"0:10": {
-					"index:3": 0,
-					"groupDetect:1": 0,
-					"requiredItems:9": {
-						"0:10": {
-							"Damage:2": 26177,
-							"Count:3": 1,
-							"id:8": "bartworks:gt.bwMetaGeneratedcell",
-							"OreDict:8": ""
-						}
-					},
-					"partialMatch:1": 1,
-					"consume:1": 0,
-					"autoConsume:1": 0,
-					"requireOnlyOneItem:1": 0,
-					"taskID:8": "bq_standard:retrieval",
-					"ignoreNBT:1": 1
-				}
-			},
-			"properties:10": {
-				"betterquesting:10": {
-					"notification_pos_y:3": -2147483648,
-					"notification_subtitle_scale:5": -1.0,
-					"visibility:8": "NORMAL",
-					"notification_style:8": "default",
-					"notification_duration:5": -1.0,
-					"completion_particle:8": "default",
-					"isMain:1": 0,
-					"lockedProgress:1": 0,
-					"repeat_relative:1": 1,
-					"notification_pos_x:3": -2147483648,
-					"snd_complete:8": "random.levelup",
-					"repeatTime:3": -1,
-					"notification_fade_out:5": -1.0,
-					"particle_count:3": -1,
-					"countAsQuest:1": 1,
-					"autoClaim:1": 0,
-					"globalShare:1": 0,
-					"desc:8": "Borohydride plus Sulfuric Acid in the LCR, and Diborane comes out. It is pyrophoric, so keep it away from air. No borohydride? Theres an alternative in the HPSF that burns Boron Trioxide and Aluminium in high pressure hydrogen instead.",
-					"notification_icon_scale:5": -1.0,
-					"notification_show_icon:8": "default",
-					"notification_fade_in:5": -1.0,
-					"icon:10": {
-						"id:8": "bartworks:gt.bwMetaGeneratedcell",
-						"Count:3": 1,
-						"Damage:2": 26177,
-						"OreDict:8": ""
-					},
-					"isSilent:1": 0,
-					"notification_subtitle:8": "",
-					"questLogic:8": "AND",
-					"snd_update:8": "random.levelup",
-					"name:8": "Diborane Feed Gas",
-					"notification_title_scale:5": -1.0,
-					"taskLogic:8": "AND",
-					"simultaneous:1": 0,
-					"confetti_icon:10": {
-						"id:8": "minecraft:stick",
-						"Count:3": 0,
-						"Damage:2": 0,
-						"OreDict:8": ""
-					},
-					"notification_icon_offset_y:3": -2147483648,
-					"completion_animation:8": "default",
-					"notification_title:8": "",
-					"notification_effect:3": -1
-				}
-			},
-			"questIDLow:4": -5417621763660008000,
-			"questIDHigh:4": 2331228823104878600,
-			"preRequisites:9": {
-				"0:10": {
-					"type:1": 1,
-					"questIDLow:4": -8160452282364293000,
-					"questIDHigh:4": -1126279030281779700
-				}
-			},
-			"rewards:9": {}
-		},
-		"57:10": {
+		"50:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -5478,7 +4917,7 @@
 			},
 			"rewards:9": {}
 		},
-		"58:10": {
+		"51:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -5592,7 +5031,7 @@
 			},
 			"rewards:9": {}
 		},
-		"59:10": {
+		"52:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -5696,7 +5135,7 @@
 			},
 			"rewards:9": {}
 		},
-		"60:10": {
+		"53:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -5800,7 +5239,7 @@
 			},
 			"rewards:9": {}
 		},
-		"61:10": {
+		"54:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -5904,7 +5343,7 @@
 			},
 			"rewards:9": {}
 		},
-		"62:10": {
+		"55:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -6009,7 +5448,7 @@
 			},
 			"rewards:9": {}
 		},
-		"63:10": {
+		"56:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -6079,7 +5518,7 @@
 			},
 			"rewards:9": {}
 		},
-		"64:10": {
+		"57:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -6149,7 +5588,7 @@
 			},
 			"rewards:9": {}
 		},
-		"65:10": {
+		"58:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -6259,191 +5698,7 @@
 			},
 			"rewards:9": {}
 		},
-		"66:10": {
-			"tasks:9": {
-				"0:10": {
-					"index:3": 0,
-					"groupDetect:1": 0,
-					"requiredItems:9": {
-						"0:10": {
-							"Damage:2": 26186,
-							"Count:3": 1,
-							"id:8": "bartworks:gt.bwMetaGeneratedcell",
-							"OreDict:8": ""
-						},
-						"1:10": {
-							"Damage:2": 26058,
-							"Count:3": 1,
-							"id:8": "bartworks:gt.bwMetaGenerateddust",
-							"OreDict:8": ""
-						}
-					},
-					"partialMatch:1": 1,
-					"consume:1": 0,
-					"autoConsume:1": 0,
-					"requireOnlyOneItem:1": 0,
-					"taskID:8": "bq_standard:optional_retrieval",
-					"ignoreNBT:1": 1
-				},
-				"1:10": {
-					"index:3": 1,
-					"groupDetect:1": 0,
-					"requiredItems:9": {
-						"0:10": {
-							"Damage:2": 26187,
-							"Count:3": 1,
-							"id:8": "bartworks:gt.bwMetaGenerateddust",
-							"OreDict:8": ""
-						}
-					},
-					"partialMatch:1": 1,
-					"consume:1": 0,
-					"autoConsume:1": 0,
-					"requireOnlyOneItem:1": 0,
-					"taskID:8": "bq_standard:retrieval",
-					"ignoreNBT:1": 1
-				}
-			},
-			"properties:10": {
-				"betterquesting:10": {
-					"notification_pos_y:3": -2147483648,
-					"notification_subtitle_scale:5": -1.0,
-					"visibility:8": "NORMAL",
-					"notification_style:8": "default",
-					"notification_duration:5": -1.0,
-					"completion_particle:8": "default",
-					"isMain:1": 0,
-					"lockedProgress:1": 0,
-					"repeat_relative:1": 1,
-					"notification_fade_out:5": -1.0,
-					"repeatTime:3": -1,
-					"snd_complete:8": "random.levelup",
-					"notification_pos_x:3": -2147483648,
-					"particle_count:3": -1,
-					"countAsQuest:1": 1,
-					"autoClaim:1": 0,
-					"globalShare:1": 0,
-					"desc:8": "Anhydrous Carborane Superacid plus Diphenylsulfonium Salt plus Benzene, through the SPC. Triphenylsulfonium Undecachlorocarboranide is a superacid, which acts as a photoacid generator for your LuV Photoresist. \n\n§9Really easy chain trust me ;D - _Shusi_§r",
-					"notification_icon_scale:5": -1.0,
-					"notification_show_icon:8": "default",
-					"notification_fade_in:5": -1.0,
-					"icon:10": {
-						"id:8": "bartworks:gt.bwMetaGenerateddust",
-						"Count:3": 1,
-						"Damage:2": 26187,
-						"OreDict:8": ""
-					},
-					"isSilent:1": 0,
-					"notification_subtitle:8": "",
-					"snd_update:8": "random.levelup",
-					"questLogic:8": "AND",
-					"name:8": "Triphenylsulfonium Undecachlorocarboranide",
-					"simultaneous:1": 0,
-					"taskLogic:8": "AND",
-					"notification_title_scale:5": -1.0,
-					"notification_title:8": "",
-					"completion_animation:8": "default",
-					"notification_icon_offset_y:3": -2147483648,
-					"confetti_icon:10": {
-						"id:8": "minecraft:stick",
-						"Count:3": 0,
-						"Damage:2": 0,
-						"OreDict:8": ""
-					},
-					"notification_effect:3": -1
-				}
-			},
-			"questIDLow:4": -4690944655858654000,
-			"questIDHigh:4": 3326148169070497000,
-			"preRequisites:9": {
-				"0:10": {
-					"questIDLow:4": -6965693868387602000,
-					"questIDHigh:4": -644376425373461000
-				}
-			},
-			"rewards:9": {}
-		},
-		"67:10": {
-			"tasks:9": {
-				"0:10": {
-					"index:3": 0,
-					"groupDetect:1": 0,
-					"requiredItems:9": {
-						"0:10": {
-							"Damage:2": 26182,
-							"Count:3": 1,
-							"id:8": "bartworks:gt.bwMetaGenerateddust",
-							"OreDict:8": ""
-						}
-					},
-					"partialMatch:1": 1,
-					"consume:1": 0,
-					"autoConsume:1": 0,
-					"requireOnlyOneItem:1": 0,
-					"taskID:8": "bq_standard:retrieval",
-					"ignoreNBT:1": 1
-				}
-			},
-			"properties:10": {
-				"betterquesting:10": {
-					"notification_pos_y:3": -2147483648,
-					"notification_subtitle_scale:5": -1.0,
-					"visibility:8": "NORMAL",
-					"notification_style:8": "default",
-					"notification_duration:5": -1.0,
-					"completion_particle:8": "default",
-					"isMain:1": 0,
-					"lockedProgress:1": 0,
-					"repeat_relative:1": 1,
-					"notification_pos_x:3": -2147483648,
-					"snd_complete:8": "random.levelup",
-					"repeatTime:3": -1,
-					"notification_fade_out:5": -1.0,
-					"particle_count:3": -1,
-					"countAsQuest:1": 1,
-					"autoClaim:1": 0,
-					"globalShare:1": 0,
-					"desc:8": "ortho-Carborane plus Sodium Hydroxide and Ethanol, CSTR. One boron gets knocked out of the cage and leaves as boric acid, which you can send straight back into the trimethyl borate line.",
-					"notification_icon_scale:5": -1.0,
-					"notification_show_icon:8": "default",
-					"notification_fade_in:5": -1.0,
-					"icon:10": {
-						"id:8": "bartworks:gt.bwMetaGenerateddust",
-						"Count:3": 1,
-						"Damage:2": 26182,
-						"OreDict:8": ""
-					},
-					"isSilent:1": 0,
-					"notification_subtitle:8": "",
-					"questLogic:8": "AND",
-					"snd_update:8": "random.levelup",
-					"name:8": "nido-Carboranide Open-Cage Salt",
-					"notification_title_scale:5": -1.0,
-					"taskLogic:8": "AND",
-					"simultaneous:1": 0,
-					"confetti_icon:10": {
-						"id:8": "minecraft:stick",
-						"Count:3": 0,
-						"Damage:2": 0,
-						"OreDict:8": ""
-					},
-					"notification_icon_offset_y:3": -2147483648,
-					"completion_animation:8": "default",
-					"notification_title:8": "",
-					"notification_effect:3": -1
-				}
-			},
-			"questIDLow:4": 6196771391101614000,
-			"questIDHigh:4": 3326898352920319000,
-			"preRequisites:9": {
-				"0:10": {
-					"questIDLow:4": -3297886788424829400,
-					"questIDHigh:4": -4589903524299409000
-				}
-			},
-			"rewards:9": {}
-		},
-		"68:10": {
+		"59:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -6509,7 +5764,7 @@
 			},
 			"rewards:9": {}
 		},
-		"69:10": {
+		"60:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -6607,7 +5862,7 @@
 			},
 			"rewards:9": {}
 		},
-		"70:10": {
+		"61:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -6721,7 +5976,7 @@
 			},
 			"rewards:9": {}
 		},
-		"71:10": {
+		"62:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -6801,7 +6056,7 @@
 			},
 			"rewards:9": {}
 		},
-		"72:10": {
+		"63:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -6881,7 +6136,7 @@
 			},
 			"rewards:9": {}
 		},
-		"73:10": {
+		"64:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -6951,7 +6206,7 @@
 			},
 			"rewards:9": {}
 		},
-		"74:10": {
+		"65:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -7055,7 +6310,7 @@
 			},
 			"rewards:9": {}
 		},
-		"75:10": {
+		"66:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -7163,7 +6418,7 @@
 			},
 			"rewards:9": {}
 		},
-		"76:10": {
+		"67:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -7243,7 +6498,7 @@
 			},
 			"rewards:9": {}
 		},
-		"77:10": {
+		"68:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -7347,7 +6602,7 @@
 			},
 			"rewards:9": {}
 		},
-		"78:10": {
+		"69:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -7451,7 +6706,7 @@
 			},
 			"rewards:9": {}
 		},
-		"79:10": {
+		"70:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -7521,7 +6776,7 @@
 			},
 			"rewards:9": {}
 		},
-		"80:10": {
+		"71:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -7631,7 +6886,7 @@
 			},
 			"rewards:9": {}
 		},
-		"81:10": {
+		"72:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -7736,7 +6991,7 @@
 			},
 			"rewards:9": {}
 		},
-		"82:10": {
+		"73:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -7840,7 +7095,7 @@
 			},
 			"rewards:9": {}
 		},
-		"83:10": {
+		"74:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -7944,7 +7199,7 @@
 			},
 			"rewards:9": {}
 		},
-		"84:10": {
+		"75:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -8049,7 +7304,7 @@
 			},
 			"rewards:9": {}
 		},
-		"85:10": {
+		"76:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -8157,7 +7412,7 @@
 			},
 			"rewards:9": {}
 		},
-		"86:10": {
+		"77:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -8255,7 +7510,7 @@
 			},
 			"rewards:9": {}
 		},
-		"87:10": {
+		"78:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -8364,7 +7619,7 @@
 			},
 			"rewards:9": {}
 		},
-		"88:10": {
+		"79:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -8462,7 +7717,7 @@
 			},
 			"rewards:9": {}
 		},
-		"89:10": {
+		"80:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -8580,7 +7835,7 @@
 			},
 			"rewards:9": {}
 		},
-		"90:10": {
+		"81:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -8690,7 +7945,7 @@
 			},
 			"rewards:9": {}
 		},
-		"91:10": {
+		"82:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -8800,7 +8055,7 @@
 			},
 			"rewards:9": {}
 		},
-		"92:10": {
+		"83:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -8898,7 +8153,7 @@
 			},
 			"rewards:9": {}
 		},
-		"93:10": {
+		"84:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -8996,7 +8251,7 @@
 			},
 			"rewards:9": {}
 		},
-		"94:10": {
+		"85:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -9106,7 +8361,7 @@
 			},
 			"rewards:9": {}
 		},
-		"95:10": {
+		"86:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -9230,7 +8485,7 @@
 			},
 			"rewards:9": {}
 		},
-		"96:10": {
+		"87:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -9305,7 +8560,7 @@
 			},
 			"rewards:9": {}
 		},
-		"97:10": {
+		"88:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 1,
@@ -9386,7 +8641,7 @@
 			},
 			"rewards:9": {}
 		},
-		"98:10": {
+		"89:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -9490,7 +8745,7 @@
 			},
 			"rewards:9": {}
 		},
-		"99:10": {
+		"90:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -9565,7 +8820,7 @@
 			},
 			"rewards:9": {}
 		},
-		"100:10": {
+		"91:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -9669,7 +8924,7 @@
 			},
 			"rewards:9": {}
 		},
-		"101:10": {
+		"92:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -9779,7 +9034,7 @@
 			},
 			"rewards:9": {}
 		},
-		"102:10": {
+		"93:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -9884,7 +9139,7 @@
 			},
 			"rewards:9": {}
 		},
-		"103:10": {
+		"94:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -9958,7 +9213,7 @@
 			},
 			"rewards:9": {}
 		},
-		"104:10": {
+		"95:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -10062,7 +9317,7 @@
 			},
 			"rewards:9": {}
 		},
-		"105:10": {
+		"96:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -10170,7 +9425,7 @@
 			},
 			"rewards:9": {}
 		},
-		"106:10": {
+		"97:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -10250,7 +9505,7 @@
 			},
 			"rewards:9": {}
 		},
-		"107:10": {
+		"98:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -10354,7 +9609,7 @@
 			},
 			"rewards:9": {}
 		},
-		"108:10": {
+		"99:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -10452,7 +9707,7 @@
 			},
 			"rewards:9": {}
 		},
-		"109:10": {
+		"100:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -10532,7 +9787,7 @@
 			},
 			"rewards:9": {}
 		},
-		"110:10": {
+		"101:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -10640,7 +9895,7 @@
 			},
 			"rewards:9": {}
 		},
-		"111:10": {
+		"102:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -10750,7 +10005,7 @@
 			},
 			"rewards:9": {}
 		},
-		"112:10": {
+		"103:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -10871,7 +10126,7 @@
 			},
 			"rewards:9": {}
 		},
-		"113:10": {
+		"104:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -11016,7 +10271,7 @@
 			},
 			"rewards:9": {}
 		},
-		"114:10": {
+		"105:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -11124,7 +10379,7 @@
 			},
 			"rewards:9": {}
 		},
-		"115:10": {
+		"106:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -11234,7 +10489,7 @@
 			},
 			"rewards:9": {}
 		},
-		"116:10": {
+		"107:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -11336,7 +10591,7 @@
 			},
 			"rewards:9": {}
 		},
-		"117:10": {
+		"108:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 1,
@@ -11417,7 +10672,7 @@
 			},
 			"rewards:9": {}
 		},
-		"118:10": {
+		"109:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -11538,7 +10793,7 @@
 			},
 			"rewards:9": {}
 		},
-		"119:10": {
+		"110:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -11605,7 +10860,7 @@
 			},
 			"rewards:9": {}
 		},
-		"120:10": {
+		"111:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -11723,7 +10978,7 @@
 			},
 			"rewards:9": {}
 		},
-		"121:10": {
+		"112:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -11821,7 +11076,7 @@
 			},
 			"rewards:9": {}
 		},
-		"122:10": {
+		"113:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -11930,7 +11185,7 @@
 			},
 			"rewards:9": {}
 		},
-		"123:10": {
+		"114:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -11996,7 +11251,7 @@
 			},
 			"rewards:9": {}
 		},
-		"124:10": {
+		"115:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -12107,7 +11362,7 @@
 			},
 			"rewards:9": {}
 		},
-		"125:10": {
+		"116:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -12183,7 +11438,7 @@
 					"countAsQuest:1": 1,
 					"autoClaim:1": 0,
 					"globalShare:1": 0,
-					"desc:8": "Triphenylsulfonium Triflate, molten Alicyclic Resin, IV Photoresist, and PGMEA, blended together aswell as that thing with the long name. Lots to keep you busy and keep that IV momentum going! You go gurl!\n\n§9Have fun with this one >:D - _Shusi_",
+					"desc:8": "Triphenylsulfonium Triflate, molten Alicyclic Resin, IV Photoresist, and PGMEA, blended together. Lots to keep you busy and keep that IV momentum going! You go gurl!",
 					"notification_icon_scale:5": -1.0,
 					"notification_show_icon:8": "default",
 					"notification_fade_in:5": -1.0,
@@ -12217,29 +11472,25 @@
 			"questIDHigh:4": -8734105307969536000,
 			"preRequisites:9": {
 				"0:10": {
-					"questIDLow:4": -4690944655858654000,
-					"questIDHigh:4": 3326148169070497000
-				},
-				"1:10": {
 					"questIDLow:4": -8140690843695489000,
 					"questIDHigh:4": 1804110212523638800
 				},
-				"2:10": {
+				"1:10": {
 					"questIDLow:4": -9159564751371776000,
 					"questIDHigh:4": -5136039198244189000
 				},
-				"3:10": {
+				"2:10": {
 					"questIDLow:4": -8160452282364293000,
 					"questIDHigh:4": -1126279030281779700
 				},
-				"4:10": {
+				"3:10": {
 					"questIDLow:4": -4791419922164892000,
 					"questIDHigh:4": -5327737778734284000
 				}
 			},
 			"rewards:9": {}
 		},
-		"126:10": {
+		"117:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -12337,7 +11588,7 @@
 			},
 			"rewards:9": {}
 		},
-		"127:10": {
+		"118:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -12447,7 +11698,7 @@
 			},
 			"rewards:9": {}
 		},
-		"128:10": {
+		"119:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -12552,7 +11803,7 @@
 			},
 			"rewards:9": {}
 		},
-		"129:10": {
+		"120:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -12663,7 +11914,7 @@
 			},
 			"rewards:9": {}
 		},
-		"130:10": {
+		"121:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -12762,7 +12013,7 @@
 			},
 			"rewards:9": {}
 		},
-		"131:10": {
+		"122:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -12875,7 +12126,7 @@
 			},
 			"rewards:9": {}
 		},
-		"132:10": {
+		"123:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -12980,7 +12231,7 @@
 			},
 			"rewards:9": {}
 		},
-		"133:10": {
+		"124:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -13088,7 +12339,7 @@
 			},
 			"rewards:9": {}
 		},
-		"134:10": {
+		"125:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -13200,7 +12451,7 @@
 			},
 			"rewards:9": {}
 		},
-		"135:10": {
+		"126:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -13308,7 +12559,7 @@
 			},
 			"rewards:9": {}
 		},
-		"136:10": {
+		"127:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -13378,7 +12629,7 @@
 			},
 			"rewards:9": {}
 		},
-		"137:10": {
+		"128:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -13444,87 +12695,7 @@
 			},
 			"rewards:9": {}
 		},
-		"138:10": {
-			"tasks:9": {
-				"0:10": {
-					"index:3": 0,
-					"groupDetect:1": 0,
-					"requiredItems:9": {
-						"0:10": {
-							"Damage:2": 26185,
-							"Count:3": 1,
-							"id:8": "bartworks:gt.bwMetaGenerateddust",
-							"OreDict:8": ""
-						}
-					},
-					"partialMatch:1": 1,
-					"consume:1": 0,
-					"autoConsume:1": 0,
-					"requireOnlyOneItem:1": 0,
-					"taskID:8": "bq_standard:retrieval",
-					"ignoreNBT:1": 1
-				}
-			},
-			"properties:10": {
-				"betterquesting:10": {
-					"notification_pos_y:3": -2147483648,
-					"notification_subtitle_scale:5": -1.0,
-					"visibility:8": "NORMAL",
-					"notification_style:8": "default",
-					"notification_duration:5": -1.0,
-					"completion_particle:8": "default",
-					"isMain:1": 0,
-					"lockedProgress:1": 0,
-					"repeat_relative:1": 1,
-					"notification_pos_x:3": -2147483648,
-					"snd_complete:8": "random.levelup",
-					"repeatTime:3": -1,
-					"notification_fade_out:5": -1.0,
-					"particle_count:3": -1,
-					"countAsQuest:1": 1,
-					"autoClaim:1": 0,
-					"globalShare:1": 0,
-					"desc:8": "15 slag plus Water, CSTR. Gives back boric acid, salt for your chlorine loop, and two tiny Francium for every three you spent.",
-					"notification_icon_scale:5": -1.0,
-					"notification_show_icon:8": "default",
-					"notification_fade_in:5": -1.0,
-					"icon:10": {
-						"id:8": "bartworks:gt.bwMetaGenerateddust",
-						"Count:3": 1,
-						"Damage:2": 26185,
-						"OreDict:8": ""
-					},
-					"isSilent:1": 0,
-					"notification_subtitle:8": "",
-					"questLogic:8": "AND",
-					"snd_update:8": "random.levelup",
-					"name:8": "Carborane Chloride Slag",
-					"notification_title_scale:5": -1.0,
-					"taskLogic:8": "AND",
-					"simultaneous:1": 0,
-					"confetti_icon:10": {
-						"id:8": "minecraft:stick",
-						"Count:3": 0,
-						"Damage:2": 0,
-						"OreDict:8": ""
-					},
-					"notification_icon_offset_y:3": -2147483648,
-					"completion_animation:8": "default",
-					"notification_title:8": "",
-					"notification_effect:3": -1
-				}
-			},
-			"questIDLow:4": 4896116422666856000,
-			"questIDHigh:4": -7327504550109422000,
-			"preRequisites:9": {
-				"0:10": {
-					"questIDLow:4": 476558688486311700,
-					"questIDHigh:4": 781301080446885400
-				}
-			},
-			"rewards:9": {}
-		},
-		"139:10": {
+		"129:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -13635,7 +12806,7 @@
 			},
 			"rewards:9": {}
 		},
-		"140:10": {
+		"130:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -13734,7 +12905,7 @@
 			},
 			"rewards:9": {}
 		},
-		"141:10": {
+		"131:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -13838,7 +13009,7 @@
 			},
 			"rewards:9": {}
 		},
-		"142:10": {
+		"132:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -13942,7 +13113,7 @@
 			},
 			"rewards:9": {}
 		},
-		"143:10": {
+		"133:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -14040,7 +13211,7 @@
 			},
 			"rewards:9": {}
 		},
-		"144:10": {
+		"134:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -14138,7 +13309,7 @@
 			},
 			"rewards:9": {}
 		},
-		"145:10": {
+		"135:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -14218,7 +13389,7 @@
 			},
 			"rewards:9": {}
 		},
-		"146:10": {
+		"136:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -14316,7 +13487,7 @@
 			},
 			"rewards:9": {}
 		},
-		"147:10": {
+		"137:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -14414,7 +13585,7 @@
 			},
 			"rewards:9": {}
 		},
-		"148:10": {
+		"138:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -14519,7 +13690,7 @@
 			},
 			"rewards:9": {}
 		},
-		"149:10": {
+		"139:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -14618,7 +13789,7 @@
 			},
 			"rewards:9": {}
 		},
-		"150:10": {
+		"140:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -14733,7 +13904,7 @@
 			},
 			"rewards:9": {}
 		},
-		"151:10": {
+		"141:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -14837,7 +14008,7 @@
 			},
 			"rewards:9": {}
 		},
-		"152:10": {
+		"142:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -14954,7 +14125,7 @@
 			},
 			"rewards:9": {}
 		},
-		"153:10": {
+		"143:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -15058,7 +14229,7 @@
 			},
 			"rewards:9": {}
 		},
-		"154:10": {
+		"144:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -15163,7 +14334,7 @@
 			},
 			"rewards:9": {}
 		},
-		"155:10": {
+		"145:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -15273,7 +14444,7 @@
 			},
 			"rewards:9": {}
 		},
-		"156:10": {
+		"146:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 1,
@@ -15354,7 +14525,7 @@
 			},
 			"rewards:9": {}
 		},
-		"157:10": {
+		"147:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -15458,7 +14629,7 @@
 			},
 			"rewards:9": {}
 		},
-		"158:10": {
+		"148:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -15574,7 +14745,7 @@
 			},
 			"rewards:9": {}
 		},
-		"159:10": {
+		"149:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -15678,7 +14849,7 @@
 			},
 			"rewards:9": {}
 		},
-		"160:10": {
+		"150:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -15768,7 +14939,7 @@
 			},
 			"rewards:9": {}
 		},
-		"161:10": {
+		"151:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -15848,7 +15019,7 @@
 			},
 			"rewards:9": {}
 		},
-		"162:10": {
+		"152:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -15953,7 +15124,7 @@
 			},
 			"rewards:9": {}
 		},
-		"163:10": {
+		"153:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -16057,7 +15228,7 @@
 			},
 			"rewards:9": {}
 		},
-		"164:10": {
+		"154:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -16137,7 +15308,7 @@
 			},
 			"rewards:9": {}
 		},
-		"165:10": {
+		"155:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -16241,7 +15412,7 @@
 			},
 			"rewards:9": {}
 		},
-		"166:10": {
+		"156:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -16349,7 +15520,7 @@
 			},
 			"rewards:9": {}
 		},
-		"167:10": {
+		"157:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -16447,7 +15618,7 @@
 			},
 			"rewards:9": {}
 		},
-		"168:10": {
+		"158:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -16551,7 +15722,7 @@
 			},
 			"rewards:9": {}
 		},
-		"169:10": {
+		"159:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -16659,7 +15830,7 @@
 			},
 			"rewards:9": {}
 		},
-		"170:10": {
+		"160:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -16764,7 +15935,7 @@
 			},
 			"rewards:9": {}
 		},
-		"171:10": {
+		"161:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -16830,7 +16001,7 @@
 			},
 			"rewards:9": {}
 		},
-		"172:10": {
+		"162:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -16940,7 +16111,7 @@
 			},
 			"rewards:9": {}
 		},
-		"173:10": {
+		"163:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -17044,7 +16215,7 @@
 			},
 			"rewards:9": {}
 		},
-		"174:10": {
+		"164:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -17130,7 +16301,7 @@
 			},
 			"rewards:9": {}
 		},
-		"175:10": {
+		"165:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -17250,7 +16421,7 @@
 			},
 			"rewards:9": {}
 		},
-		"176:10": {
+		"166:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 1,
@@ -17331,7 +16502,7 @@
 			},
 			"rewards:9": {}
 		},
-		"177:10": {
+		"167:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -17440,87 +16611,7 @@
 			},
 			"rewards:9": {}
 		},
-		"178:10": {
-			"tasks:9": {
-				"0:10": {
-					"index:3": 0,
-					"groupDetect:1": 0,
-					"requiredItems:9": {
-						"0:10": {
-							"Damage:2": 26181,
-							"Count:3": 1,
-							"id:8": "bartworks:gt.bwMetaGenerateddust",
-							"OreDict:8": ""
-						}
-					},
-					"partialMatch:1": 1,
-					"consume:1": 0,
-					"autoConsume:1": 0,
-					"requireOnlyOneItem:1": 0,
-					"taskID:8": "bq_standard:retrieval",
-					"ignoreNBT:1": 1
-				}
-			},
-			"properties:10": {
-				"betterquesting:10": {
-					"notification_pos_y:3": -2147483648,
-					"notification_subtitle_scale:5": -1.0,
-					"visibility:8": "NORMAL",
-					"notification_style:8": "default",
-					"notification_duration:5": -1.0,
-					"completion_particle:8": "default",
-					"isMain:1": 0,
-					"lockedProgress:1": 0,
-					"repeat_relative:1": 1,
-					"notification_pos_x:3": -2147483648,
-					"snd_complete:8": "random.levelup",
-					"repeatTime:3": -1,
-					"notification_fade_out:5": -1.0,
-					"particle_count:3": -1,
-					"countAsQuest:1": 1,
-					"autoClaim:1": 0,
-					"globalShare:1": 0,
-					"desc:8": "Cryo-Fractionated Decaborane plus Acetylene, Argon and a splash of hBN Lubricant, Ceramic Reaction Vessel. The carbon snaps into the boron cage and you get a perfect icosahedron. \n\n§9heh funny d20 shape - _Shusi_§r",
-					"notification_icon_scale:5": -1.0,
-					"notification_show_icon:8": "default",
-					"notification_fade_in:5": -1.0,
-					"icon:10": {
-						"id:8": "bartworks:gt.bwMetaGenerateddust",
-						"Count:3": 1,
-						"Damage:2": 26181,
-						"OreDict:8": ""
-					},
-					"isSilent:1": 0,
-					"notification_subtitle:8": "",
-					"questLogic:8": "AND",
-					"snd_update:8": "random.levelup",
-					"name:8": "ortho-Carborane Icosahedral Cage",
-					"notification_title_scale:5": -1.0,
-					"taskLogic:8": "AND",
-					"simultaneous:1": 0,
-					"confetti_icon:10": {
-						"id:8": "minecraft:stick",
-						"Count:3": 0,
-						"Damage:2": 0,
-						"OreDict:8": ""
-					},
-					"notification_icon_offset_y:3": -2147483648,
-					"completion_animation:8": "default",
-					"notification_title:8": "",
-					"notification_effect:3": -1
-				}
-			},
-			"questIDLow:4": -3297886788424829400,
-			"questIDHigh:4": -4589903524299409000,
-			"preRequisites:9": {
-				"0:10": {
-					"questIDLow:4": 7274951386930053000,
-					"questIDHigh:4": -894192732373718800
-				}
-			},
-			"rewards:9": {}
-		},
-		"179:10": {
+		"168:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -17596,7 +16687,7 @@
 					"countAsQuest:1": 1,
 					"autoClaim:1": 0,
 					"globalShare:1": 0,
-					"desc:8": "Triphenylsulfonium Triflate, LuV Photoresist, molten ArF Copolymer Resin, and PGMEA. Easier than LuV becaause ZPM has Prismarine line which in my opinion is good but not enough! Also im proud of ya for getting this far, nice job. ",
+					"desc:8": "Triphenylsulfonium Triflate, LuV Photoresist, molten ArF Copolymer Resin, and PGMEA. Easier than LuV beacause ZPM has Prismarine line which in my opinion is good but not enough! Also im proud of ya for getting this far, nice job. ",
 					"notification_icon_scale:5": -1.0,
 					"notification_show_icon:8": "default",
 					"notification_fade_in:5": -1.0,
@@ -17640,7 +16731,7 @@
 			},
 			"rewards:9": {}
 		},
-		"180:10": {
+		"169:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -17750,7 +16841,7 @@
 			},
 			"rewards:9": {}
 		},
-		"181:10": {
+		"170:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -17870,7 +16961,7 @@
 			},
 			"rewards:9": {}
 		},
-		"182:10": {
+		"171:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -17974,7 +17065,7 @@
 			},
 			"rewards:9": {}
 		},
-		"183:10": {
+		"172:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -18085,7 +17176,7 @@
 			},
 			"rewards:9": {}
 		},
-		"184:10": {
+		"173:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -18183,7 +17274,7 @@
 			},
 			"rewards:9": {}
 		},
-		"185:10": {
+		"174:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -18253,7 +17344,7 @@
 			},
 			"rewards:9": {}
 		},
-		"186:10": {
+		"175:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -18358,7 +17449,7 @@
 			},
 			"rewards:9": {}
 		},
-		"187:10": {
+		"176:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -18424,7 +17515,7 @@
 			},
 			"rewards:9": {}
 		},
-		"188:10": {
+		"177:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -18504,7 +17595,7 @@
 			},
 			"rewards:9": {}
 		},
-		"189:10": {
+		"178:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 1,
@@ -18584,7 +17675,7 @@
 			},
 			"rewards:9": {}
 		},
-		"190:10": {
+		"179:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -18688,7 +17779,7 @@
 			},
 			"rewards:9": {}
 		},
-		"191:10": {
+		"180:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -18802,7 +17893,7 @@
 			},
 			"rewards:9": {}
 		},
-		"192:10": {
+		"181:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -18882,7 +17973,7 @@
 			},
 			"rewards:9": {}
 		},
-		"193:10": {
+		"182:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -19000,7 +18091,7 @@
 			},
 			"rewards:9": {}
 		},
-		"194:10": {
+		"183:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -19080,7 +18171,7 @@
 			},
 			"rewards:9": {}
 		},
-		"195:10": {
+		"184:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -19204,7 +18295,7 @@
 			},
 			"rewards:9": {}
 		},
-		"196:10": {
+		"185:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -19318,7 +18409,7 @@
 			},
 			"rewards:9": {}
 		},
-		"197:10": {
+		"186:10": {
 			"tasks:9": {
 				"0:10": {
 					"index:3": 0,
@@ -19479,14 +18570,6 @@
 					"sizeX:3": 24
 				},
 				"5:10": {
-					"sizeY:3": 24,
-					"questIDLow:4": -6171767838353125000,
-					"questIDHigh:4": -3187399760458601500,
-					"y:3": 456,
-					"x:3": -768,
-					"sizeX:3": 24
-				},
-				"6:10": {
 					"sizeY:3": 48,
 					"questIDLow:4": -7684896427581144000,
 					"questIDHigh:4": -3441857943312449000,
@@ -19494,7 +18577,7 @@
 					"x:3": -1704,
 					"sizeX:3": 48
 				},
-				"7:10": {
+				"6:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -5398137136442429000,
 					"questIDHigh:4": -3364831658579308500,
@@ -19502,7 +18585,7 @@
 					"x:3": -96,
 					"sizeX:3": 24
 				},
-				"8:10": {
+				"7:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -5399344425061675000,
 					"questIDHigh:4": -3127906351744859000,
@@ -19510,7 +18593,7 @@
 					"x:3": -300,
 					"sizeX:3": 24
 				},
-				"9:10": {
+				"8:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -8272114875282989000,
 					"questIDHigh:4": -2619054468894014000,
@@ -19518,7 +18601,7 @@
 					"x:3": -672,
 					"sizeX:3": 24
 				},
-				"10:10": {
+				"9:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -7079934401786855000,
 					"questIDHigh:4": -2695869517010744000,
@@ -19526,7 +18609,7 @@
 					"x:3": -708,
 					"sizeX:3": 24
 				},
-				"11:10": {
+				"10:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -8504557400176942000,
 					"questIDHigh:4": -2695428992856145000,
@@ -19534,7 +18617,7 @@
 					"x:3": -912,
 					"sizeX:3": 24
 				},
-				"12:10": {
+				"11:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -8913651908206619000,
 					"questIDHigh:4": -2142729394613630700,
@@ -19542,15 +18625,15 @@
 					"x:3": -228,
 					"sizeX:3": 24
 				},
-				"13:10": {
+				"12:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -7471643837834754000,
 					"questIDHigh:4": -1983970876951543600,
 					"y:3": 312,
-					"x:3": -984,
+					"x:3": -948,
 					"sizeX:3": 24
 				},
-				"14:10": {
+				"13:10": {
 					"sizeY:3": 48,
 					"questIDLow:4": -8717867812653430000,
 					"questIDHigh:4": -1944211803757064400,
@@ -19558,7 +18641,7 @@
 					"x:3": -792,
 					"sizeX:3": 48
 				},
-				"15:10": {
+				"14:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -8147100724603947000,
 					"questIDHigh:4": -1689585007419896600,
@@ -19566,7 +18649,7 @@
 					"x:3": -60,
 					"sizeX:3": 24
 				},
-				"16:10": {
+				"15:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -4986433709362214000,
 					"questIDHigh:4": -1438817221569001000,
@@ -19574,15 +18657,15 @@
 					"x:3": -1284,
 					"sizeX:3": 25
 				},
-				"17:10": {
+				"16:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -5193654976437860000,
 					"questIDHigh:4": -1411735550186666500,
 					"y:3": 312,
-					"x:3": -840,
+					"x:3": -804,
 					"sizeX:3": 24
 				},
-				"18:10": {
+				"17:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -4688446096133169000,
 					"questIDHigh:4": -1336616624911399200,
@@ -19590,7 +18673,7 @@
 					"x:3": -876,
 					"sizeX:3": 24
 				},
-				"19:10": {
+				"18:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -5303733527870941000,
 					"questIDHigh:4": -1320518312409742300,
@@ -19598,7 +18681,7 @@
 					"x:3": -636,
 					"sizeX:3": 24
 				},
-				"20:10": {
+				"19:10": {
 					"sizeY:3": 48,
 					"questIDLow:4": -8161129063101592000,
 					"questIDHigh:4": -1294709292204014600,
@@ -19606,15 +18689,7 @@
 					"x:3": -480,
 					"sizeX:3": 48
 				},
-				"21:10": {
-					"sizeY:3": 24,
-					"questIDLow:4": 7274951386930053000,
-					"questIDHigh:4": -894192732373718800,
-					"y:3": 420,
-					"x:3": -768,
-					"sizeX:3": 24
-				},
-				"22:10": {
+				"20:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -8674135548254474000,
 					"questIDHigh:4": -875348579007970200,
@@ -19622,23 +18697,15 @@
 					"x:3": -468,
 					"sizeX:3": 24
 				},
-				"23:10": {
+				"21:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -8160452282364293000,
 					"questIDHigh:4": -1126279030281779700,
 					"y:3": 276,
-					"x:3": -840,
-					"sizeX:3": 24
-				},
-				"24:10": {
-					"sizeY:3": 24,
-					"questIDLow:4": 3602736200313262000,
-					"questIDHigh:4": -1098302154973940600,
-					"y:3": 420,
 					"x:3": -804,
 					"sizeX:3": 24
 				},
-				"25:10": {
+				"22:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -7707960502194286000,
 					"questIDHigh:4": -986618982499988600,
@@ -19646,7 +18713,7 @@
 					"x:3": -744,
 					"sizeX:3": 24
 				},
-				"26:10": {
+				"23:10": {
 					"sizeY:3": 48,
 					"questIDLow:4": -7545759046519984000,
 					"questIDHigh:4": -861342344135818600,
@@ -19654,7 +18721,7 @@
 					"x:3": -276,
 					"sizeX:3": 48
 				},
-				"27:10": {
+				"24:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -8162441477247226000,
 					"questIDHigh:4": -850170665167141200,
@@ -19662,7 +18729,7 @@
 					"x:3": -564,
 					"sizeX:3": 24
 				},
-				"28:10": {
+				"25:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -7128729474412916000,
 					"questIDHigh:4": -757265746784140400,
@@ -19670,7 +18737,7 @@
 					"x:3": -1320,
 					"sizeX:3": 24
 				},
-				"29:10": {
+				"26:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -9130170447185801000,
 					"questIDHigh:4": -731527729786895600,
@@ -19678,7 +18745,7 @@
 					"x:3": -636,
 					"sizeX:3": 24
 				},
-				"30:10": {
+				"27:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -4826801381422533000,
 					"questIDHigh:4": -696257389146910800,
@@ -19686,15 +18753,7 @@
 					"x:3": -468,
 					"sizeX:3": 24
 				},
-				"31:10": {
-					"sizeY:3": 24,
-					"questIDLow:4": -6965693868387602000,
-					"questIDHigh:4": -644376425373461000,
-					"y:3": 312,
-					"x:3": -804,
-					"sizeX:3": 24
-				},
-				"32:10": {
+				"28:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -5923369566219461000,
 					"questIDHigh:4": -647502506391482500,
@@ -19702,7 +18761,7 @@
 					"x:3": -468,
 					"sizeX:3": 24
 				},
-				"33:10": {
+				"29:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -4634305375041724000,
 					"questIDHigh:4": -643121841338105600,
@@ -19710,7 +18769,7 @@
 					"x:3": -1356,
 					"sizeX:3": 24
 				},
-				"34:10": {
+				"30:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -6429305768771089000,
 					"questIDHigh:4": 239135446542535170,
@@ -19718,7 +18777,7 @@
 					"x:3": -96,
 					"sizeX:3": 24
 				},
-				"35:10": {
+				"31:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -6148587872206321000,
 					"questIDHigh:4": 263317070857193400,
@@ -19726,7 +18785,7 @@
 					"x:3": -768,
 					"sizeX:3": 24
 				},
-				"36:10": {
+				"32:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -5220701520421167000,
 					"questIDHigh:4": 284441183008212060,
@@ -19734,15 +18793,7 @@
 					"x:3": -1524,
 					"sizeX:3": 24
 				},
-				"37:10": {
-					"sizeY:3": 24,
-					"questIDLow:4": 5577759919162480000,
-					"questIDHigh:4": 143660619750726430,
-					"y:3": 348,
-					"x:3": -804,
-					"sizeX:3": 24
-				},
-				"38:10": {
+				"33:10": {
 					"sizeY:3": 48,
 					"questIDLow:4": -8351054874374658000,
 					"questIDHigh:4": 201198373264707230,
@@ -19750,7 +18801,7 @@
 					"x:3": -684,
 					"sizeX:3": 48
 				},
-				"39:10": {
+				"34:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -7562951630602490000,
 					"questIDHigh:4": 706185613118032500,
@@ -19758,15 +18809,7 @@
 					"x:3": -1284,
 					"sizeX:3": 24
 				},
-				"40:10": {
-					"sizeY:3": 24,
-					"questIDLow:4": 476558688486311700,
-					"questIDHigh:4": 781301080446885400,
-					"y:3": 312,
-					"x:3": -768,
-					"sizeX:3": 24
-				},
-				"41:10": {
+				"35:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -5402060339139348000,
 					"questIDHigh:4": 807624291383919100,
@@ -19774,7 +18817,7 @@
 					"x:3": -912,
 					"sizeX:3": 24
 				},
-				"42:10": {
+				"36:10": {
 					"sizeY:3": 48,
 					"questIDLow:4": -6374237684748798000,
 					"questIDHigh:4": 1133432982310700400,
@@ -19782,7 +18825,7 @@
 					"x:3": -684,
 					"sizeX:3": 48
 				},
-				"43:10": {
+				"37:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -5333647637902695000,
 					"questIDHigh:4": 1175050043103790000,
@@ -19790,7 +18833,7 @@
 					"x:3": 144,
 					"sizeX:3": 24
 				},
-				"44:10": {
+				"38:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -8961201143550568000,
 					"questIDHigh:4": 1289794991928263200,
@@ -19798,7 +18841,7 @@
 					"x:3": -468,
 					"sizeX:3": 24
 				},
-				"45:10": {
+				"39:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -7629314588771001000,
 					"questIDHigh:4": 1292899735807740200,
@@ -19806,7 +18849,7 @@
 					"x:3": -852,
 					"sizeX:3": 24
 				},
-				"46:10": {
+				"40:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -5719589662313930000,
 					"questIDHigh:4": 1357620450079753700,
@@ -19814,7 +18857,7 @@
 					"x:3": -288,
 					"sizeX:3": 24
 				},
-				"47:10": {
+				"41:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -7314547169741561000,
 					"questIDHigh:4": 1361606598472516000,
@@ -19822,7 +18865,7 @@
 					"x:3": -1319,
 					"sizeX:3": 25
 				},
-				"48:10": {
+				"42:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -6632280197893159000,
 					"questIDHigh:4": 1370547234591490800,
@@ -19830,7 +18873,7 @@
 					"x:3": -240,
 					"sizeX:3": 24
 				},
-				"49:10": {
+				"43:10": {
 					"sizeY:3": 48,
 					"questIDLow:4": -8667593447799954000,
 					"questIDHigh:4": 1672667505701177000,
@@ -19838,7 +18881,7 @@
 					"x:3": -1500,
 					"sizeX:3": 48
 				},
-				"50:10": {
+				"44:10": {
 					"sizeY:3": 48,
 					"questIDLow:4": -7519587440605316000,
 					"questIDHigh:4": 1995950255882456300,
@@ -19846,15 +18889,15 @@
 					"x:3": -1296,
 					"sizeX:3": 48
 				},
-				"51:10": {
+				"45:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -8140690843695489000,
 					"questIDHigh:4": 1804110212523638800,
 					"y:3": 276,
-					"x:3": -948,
+					"x:3": -912,
 					"sizeX:3": 24
 				},
-				"52:10": {
+				"46:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -7968870099277580000,
 					"questIDHigh:4": 2257889557558150000,
@@ -19862,7 +18905,7 @@
 					"x:3": -804,
 					"sizeX:3": 24
 				},
-				"53:10": {
+				"47:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -5341216672928295000,
 					"questIDHigh:4": 2041574209930808600,
@@ -19870,15 +18913,15 @@
 					"x:3": -636,
 					"sizeX:3": 24
 				},
-				"54:10": {
+				"48:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -5839652884193764000,
 					"questIDHigh:4": 2174036127939186000,
 					"y:3": 348,
-					"x:3": -984,
+					"x:3": -948,
 					"sizeX:3": 24
 				},
-				"55:10": {
+				"49:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -6492845524437663000,
 					"questIDHigh:4": 2318565849899288600,
@@ -19886,15 +18929,7 @@
 					"x:3": -876,
 					"sizeX:3": 24
 				},
-				"56:10": {
-					"sizeY:3": 24,
-					"questIDLow:4": -5417621763660008000,
-					"questIDHigh:4": 2331228823104878600,
-					"y:3": 456,
-					"x:3": -804,
-					"sizeX:3": 24
-				},
-				"57:10": {
+				"50:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -7579487446019941000,
 					"questIDHigh:4": 2442666696536510500,
@@ -19902,7 +18937,7 @@
 					"x:3": -912,
 					"sizeX:3": 24
 				},
-				"58:10": {
+				"51:10": {
 					"sizeY:3": 48,
 					"questIDLow:4": -9079833970383322000,
 					"questIDHigh:4": 2852628775925992000,
@@ -19910,7 +18945,7 @@
 					"x:3": -480,
 					"sizeX:3": 48
 				},
-				"59:10": {
+				"52:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -7461008377163641000,
 					"questIDHigh:4": 2597495257538513400,
@@ -19918,7 +18953,7 @@
 					"x:3": -636,
 					"sizeX:3": 24
 				},
-				"60:10": {
+				"53:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -5731348024142944000,
 					"questIDHigh:4": 2651645013632041000,
@@ -19926,7 +18961,7 @@
 					"x:3": -1452,
 					"sizeX:3": 24
 				},
-				"61:10": {
+				"54:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -8975254193041763000,
 					"questIDHigh:4": 2757476556757683700,
@@ -19934,7 +18969,7 @@
 					"x:3": -744,
 					"sizeX:3": 24
 				},
-				"62:10": {
+				"55:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -5092827217134648000,
 					"questIDHigh:4": 3037466447623309000,
@@ -19942,7 +18977,7 @@
 					"x:3": -720,
 					"sizeX:3": 24
 				},
-				"63:10": {
+				"56:10": {
 					"sizeY:3": 48,
 					"questIDLow:4": -8002611438916993000,
 					"questIDHigh:4": 3063473485518818000,
@@ -19950,7 +18985,7 @@
 					"x:3": -72,
 					"sizeX:3": 48
 				},
-				"64:10": {
+				"57:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -7170244364488806000,
 					"questIDHigh:4": 3211275774477748700,
@@ -19958,7 +18993,7 @@
 					"x:3": -708,
 					"sizeX:3": 24
 				},
-				"65:10": {
+				"58:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -7630166187498077000,
 					"questIDHigh:4": 3275032589721159700,
@@ -19966,23 +19001,7 @@
 					"x:3": -1488,
 					"sizeX:3": 24
 				},
-				"66:10": {
-					"sizeY:3": 24,
-					"questIDLow:4": -4690944655858654000,
-					"questIDHigh:4": 3326148169070497000,
-					"y:3": 276,
-					"x:3": -804,
-					"sizeX:3": 24
-				},
-				"67:10": {
-					"sizeY:3": 24,
-					"questIDLow:4": 6196771391101614000,
-					"questIDHigh:4": 3326898352920319000,
-					"y:3": 384,
-					"x:3": -768,
-					"sizeX:3": 24
-				},
-				"68:10": {
+				"59:10": {
 					"sizeY:3": 48,
 					"questIDLow:4": -8383734295283669000,
 					"questIDHigh:4": 3390039166254991000,
@@ -19990,7 +19009,7 @@
 					"x:3": -888,
 					"sizeX:3": 48
 				},
-				"69:10": {
+				"60:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -6294738314966830000,
 					"questIDHigh:4": 3640193510336841700,
@@ -19998,7 +19017,7 @@
 					"x:3": -1356,
 					"sizeX:3": 24
 				},
-				"70:10": {
+				"61:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -5973499721898524000,
 					"questIDHigh:4": 3984979441898114600,
@@ -20006,7 +19025,7 @@
 					"x:3": -1716,
 					"sizeX:3": 24
 				},
-				"71:10": {
+				"62:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -5774256930535597000,
 					"questIDHigh:4": 3902134339510354400,
@@ -20014,7 +19033,7 @@
 					"x:3": -264,
 					"sizeX:3": 24
 				},
-				"72:10": {
+				"63:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -7122537072879533000,
 					"questIDHigh:4": 3977162987087086000,
@@ -20022,7 +19041,7 @@
 					"x:3": -648,
 					"sizeX:3": 24
 				},
-				"73:10": {
+				"64:10": {
 					"sizeY:3": 48,
 					"questIDLow:4": -6302452623115576000,
 					"questIDHigh:4": 4146550846559110700,
@@ -20030,7 +19049,7 @@
 					"x:3": 132,
 					"sizeX:3": 48
 				},
-				"74:10": {
+				"65:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -4769339430885974000,
 					"questIDHigh:4": 4165645562505153000,
@@ -20038,7 +19057,7 @@
 					"x:3": -564,
 					"sizeX:3": 24
 				},
-				"75:10": {
+				"66:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -8168439259157240000,
 					"questIDHigh:4": 4205346237150743600,
@@ -20046,7 +19065,7 @@
 					"x:3": -24,
 					"sizeX:3": 24
 				},
-				"76:10": {
+				"67:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -9084716147280100000,
 					"questIDHigh:4": 4216443328740609000,
@@ -20054,7 +19073,7 @@
 					"x:3": -444,
 					"sizeX:3": 24
 				},
-				"77:10": {
+				"68:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -6185311369128163000,
 					"questIDHigh:4": 4220987684707062000,
@@ -20062,7 +19081,7 @@
 					"x:3": -840,
 					"sizeX:3": 24
 				},
-				"78:10": {
+				"69:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -6820426536152099000,
 					"questIDHigh:4": 4419645832187890700,
@@ -20070,7 +19089,7 @@
 					"x:3": -1248,
 					"sizeX:3": 24
 				},
-				"79:10": {
+				"70:10": {
 					"sizeY:3": 48,
 					"questIDLow:4": -7448916040981343000,
 					"questIDHigh:4": 4435047657243232000,
@@ -20078,7 +19097,7 @@
 					"x:3": -888,
 					"sizeX:3": 48
 				},
-				"80:10": {
+				"71:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -4844863607463660000,
 					"questIDHigh:4": 4452664937236221000,
@@ -20086,15 +19105,15 @@
 					"x:3": -1080,
 					"sizeX:3": 24
 				},
-				"81:10": {
+				"72:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -7226251877342748000,
 					"questIDHigh:4": 4539107352047733000,
 					"y:3": 348,
-					"x:3": -876,
+					"x:3": -840,
 					"sizeX:3": 24
 				},
-				"82:10": {
+				"73:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -8162338519048819000,
 					"questIDHigh:4": 4675531702961982000,
@@ -20102,7 +19121,7 @@
 					"x:3": -636,
 					"sizeX:3": 24
 				},
-				"83:10": {
+				"74:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -5308400130574234000,
 					"questIDHigh:4": 4784211783624247000,
@@ -20110,7 +19129,7 @@
 					"x:3": -708,
 					"sizeX:3": 24
 				},
-				"84:10": {
+				"75:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -5668457176060846000,
 					"questIDHigh:4": 5010570215718274000,
@@ -20118,7 +19137,7 @@
 					"x:3": -1284,
 					"sizeX:3": 24
 				},
-				"85:10": {
+				"76:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -5193320718931808000,
 					"questIDHigh:4": 5184692731962282000,
@@ -20126,7 +19145,7 @@
 					"x:3": -696,
 					"sizeX:3": 24
 				},
-				"86:10": {
+				"77:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -6443156250770151000,
 					"questIDHigh:4": 5069795611463469000,
@@ -20134,7 +19153,7 @@
 					"x:3": -672,
 					"sizeX:3": 24
 				},
-				"87:10": {
+				"78:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -9204001917271763000,
 					"questIDHigh:4": 5116703016752138000,
@@ -20142,7 +19161,7 @@
 					"x:3": -840,
 					"sizeX:3": 24
 				},
-				"88:10": {
+				"79:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -6687551860881977000,
 					"questIDHigh:4": 5438694219356524000,
@@ -20150,7 +19169,7 @@
 					"x:3": -1320,
 					"sizeX:3": 24
 				},
-				"89:10": {
+				"80:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -5478710562158818000,
 					"questIDHigh:4": 5356404462225802000,
@@ -20158,7 +19177,7 @@
 					"x:3": -876,
 					"sizeX:3": 24
 				},
-				"90:10": {
+				"81:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -6660967992355942000,
 					"questIDHigh:4": 5407208150019556000,
@@ -20166,7 +19185,7 @@
 					"x:3": -1488,
 					"sizeX:3": 24
 				},
-				"91:10": {
+				"82:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -5880001191755859000,
 					"questIDHigh:4": 5724799790855766000,
@@ -20174,7 +19193,7 @@
 					"x:3": -840,
 					"sizeX:3": 24
 				},
-				"92:10": {
+				"83:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -6345612984577294000,
 					"questIDHigh:4": 5576082016236947000,
@@ -20182,7 +19201,7 @@
 					"x:3": -600,
 					"sizeX:3": 24
 				},
-				"93:10": {
+				"84:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -5943493264816562000,
 					"questIDHigh:4": 5898135040193810000,
@@ -20190,7 +19209,7 @@
 					"x:3": -1212,
 					"sizeX:3": 24
 				},
-				"94:10": {
+				"85:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -5938852041548174000,
 					"questIDHigh:4": 5913976766433284000,
@@ -20198,7 +19217,7 @@
 					"x:3": -876,
 					"sizeX:3": 24
 				},
-				"95:10": {
+				"86:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -5943791212228972000,
 					"questIDHigh:4": 6287976496632055000,
@@ -20206,7 +19225,7 @@
 					"x:3": -240,
 					"sizeX:3": 24
 				},
-				"96:10": {
+				"87:10": {
 					"sizeY:3": 48,
 					"questIDLow:4": -8987085172983795000,
 					"questIDHigh:4": 6296957762923417000,
@@ -20214,7 +19233,7 @@
 					"x:3": 132,
 					"sizeX:3": 48
 				},
-				"97:10": {
+				"88:10": {
 					"sizeY:3": 48,
 					"questIDLow:4": -5837690559106915000,
 					"questIDHigh:4": 6277893914473481000,
@@ -20222,7 +19241,7 @@
 					"x:3": -480,
 					"sizeX:3": 48
 				},
-				"98:10": {
+				"89:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -7319102919324302000,
 					"questIDHigh:4": 6356664591779186000,
@@ -20230,7 +19249,7 @@
 					"x:3": -1704,
 					"sizeX:3": 24
 				},
-				"99:10": {
+				"90:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -8650011573262622000,
 					"questIDHigh:4": 6507416327623036000,
@@ -20238,7 +19257,7 @@
 					"x:3": -840,
 					"sizeX:3": 24
 				},
-				"100:10": {
+				"91:10": {
 					"sizeY:3": 48,
 					"questIDLow:4": -8034629352655071000,
 					"questIDHigh:4": 6567665852674885000,
@@ -20246,7 +19265,7 @@
 					"x:3": -1092,
 					"sizeX:3": 48
 				},
-				"101:10": {
+				"92:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -6695406628428403000,
 					"questIDHigh:4": 7164322201285250000,
@@ -20254,7 +19273,7 @@
 					"x:3": -1488,
 					"sizeX:3": 24
 				},
-				"102:10": {
+				"93:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -7783563460947134000,
 					"questIDHigh:4": 6928787266945830000,
@@ -20262,7 +19281,7 @@
 					"x:3": 144,
 					"sizeX:3": 24
 				},
-				"103:10": {
+				"94:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -5963050292510056000,
 					"questIDHigh:4": 7028537794803746000,
@@ -20270,7 +19289,7 @@
 					"x:3": -432,
 					"sizeX:3": 24
 				},
-				"104:10": {
+				"95:10": {
 					"sizeY:3": 48,
 					"questIDLow:4": -7967721255305002000,
 					"questIDHigh:4": 7476280663579313000,
@@ -20278,7 +19297,7 @@
 					"x:3": -276,
 					"sizeX:3": 48
 				},
-				"105:10": {
+				"96:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -7921314191093379000,
 					"questIDHigh:4": 7225744462396474000,
@@ -20286,7 +19305,7 @@
 					"x:3": -1524,
 					"sizeX:3": 24
 				},
-				"106:10": {
+				"97:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -4622224842359529000,
 					"questIDHigh:4": 7600129783672619000,
@@ -20294,7 +19313,7 @@
 					"x:3": -60,
 					"sizeX:3": 24
 				},
-				"107:10": {
+				"98:10": {
 					"sizeY:3": 48,
 					"questIDLow:4": -8284894864418291000,
 					"questIDHigh:4": 7786533941109804000,
@@ -20302,15 +19321,15 @@
 					"x:3": -684,
 					"sizeX:3": 48
 				},
-				"108:10": {
+				"99:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -8419883729743099000,
 					"questIDHigh:4": 7889313905351346000,
 					"y:3": 312,
-					"x:3": -876,
+					"x:3": -840,
 					"sizeX:3": 24
 				},
-				"109:10": {
+				"100:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -5882284018215293000,
 					"questIDHigh:4": 7913344516991239000,
@@ -20318,7 +19337,7 @@
 					"x:3": -1080,
 					"sizeX:3": 24
 				},
-				"110:10": {
+				"101:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -6457891520947010000,
 					"questIDHigh:4": 8156788951570271000,
@@ -20326,7 +19345,7 @@
 					"x:3": -900,
 					"sizeX:3": 24
 				},
-				"111:10": {
+				"102:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -7297032125211734000,
 					"questIDHigh:4": 8272344326705925000,
@@ -20334,7 +19353,7 @@
 					"x:3": -840,
 					"sizeX:3": 24
 				},
-				"112:10": {
+				"103:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -7597449730049785000,
 					"questIDHigh:4": 8606967147491574000,
@@ -20342,7 +19361,7 @@
 					"x:3": -1668,
 					"sizeX:3": 24
 				},
-				"113:10": {
+				"104:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -9078685645383246000,
 					"questIDHigh:4": 8616068207692698000,
@@ -20350,7 +19369,7 @@
 					"x:3": -600,
 					"sizeX:3": 24
 				},
-				"114:10": {
+				"105:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -7608626769070316000,
 					"questIDHigh:4": 8531273611906599000,
@@ -20358,7 +19377,7 @@
 					"x:3": -468,
 					"sizeX:3": 24
 				},
-				"115:10": {
+				"106:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -7137390654130701000,
 					"questIDHigh:4": 8590541316849551000,
@@ -20366,15 +19385,15 @@
 					"x:3": -636,
 					"sizeX:3": 24
 				},
-				"116:10": {
+				"107:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -5465652901596133000,
 					"questIDHigh:4": 8932636283752304000,
 					"y:3": 312,
-					"x:3": -948,
+					"x:3": -912,
 					"sizeX:3": 24
 				},
-				"117:10": {
+				"108:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -6618580370153592000,
 					"questIDHigh:4": 9012726213577624000,
@@ -20382,7 +19401,7 @@
 					"x:3": -744,
 					"sizeX:3": 24
 				},
-				"118:10": {
+				"109:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -5154346786486729000,
 					"questIDHigh:4": 9068669345072368000,
@@ -20390,7 +19409,7 @@
 					"x:3": -1524,
 					"sizeX:3": 24
 				},
-				"119:10": {
+				"110:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -6983112891813940000,
 					"questIDHigh:4": 9167180070739397000,
@@ -20398,15 +19417,15 @@
 					"x:3": -600,
 					"sizeX:3": 24
 				},
-				"120:10": {
+				"111:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -6390880399993564000,
 					"questIDHigh:4": -9212401901077510000,
 					"y:3": 348,
-					"x:3": -948,
+					"x:3": -912,
 					"sizeX:3": 24
 				},
-				"121:10": {
+				"112:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -5550006192471689000,
 					"questIDHigh:4": -9105236789049082000,
@@ -20414,7 +19433,7 @@
 					"x:3": -60,
 					"sizeX:3": 24
 				},
-				"122:10": {
+				"113:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -4921422195965792000,
 					"questIDHigh:4": -9084508827460088000,
@@ -20422,7 +19441,7 @@
 					"x:3": -468,
 					"sizeX:3": 24
 				},
-				"123:10": {
+				"114:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -8016471039874264000,
 					"questIDHigh:4": -8998819400985460000,
@@ -20430,7 +19449,7 @@
 					"x:3": -1356,
 					"sizeX:3": 24
 				},
-				"124:10": {
+				"115:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -6478190317548964000,
 					"questIDHigh:4": -8668100299424904000,
@@ -20438,7 +19457,7 @@
 					"x:3": -708,
 					"sizeX:3": 24
 				},
-				"125:10": {
+				"116:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -9068247940518847000,
 					"questIDHigh:4": -8885868255112903000,
@@ -20446,7 +19465,7 @@
 					"x:3": -504,
 					"sizeX:3": 24
 				},
-				"126:10": {
+				"117:10": {
 					"sizeY:3": 48,
 					"questIDLow:4": -5823387689838496000,
 					"questIDHigh:4": -8734105307969536000,
@@ -20454,7 +19473,7 @@
 					"x:3": -888,
 					"sizeX:3": 48
 				},
-				"127:10": {
+				"118:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -5789812843779340000,
 					"questIDHigh:4": -8444710923817105000,
@@ -20462,7 +19481,7 @@
 					"x:3": -744,
 					"sizeX:3": 24
 				},
-				"128:10": {
+				"119:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -6569305477984952000,
 					"questIDHigh:4": -8333228328275064000,
@@ -20470,7 +19489,7 @@
 					"x:3": -1308,
 					"sizeX:3": 24
 				},
-				"129:10": {
+				"120:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -5894555440655203000,
 					"questIDHigh:4": -8184693488993351000,
@@ -20478,7 +19497,7 @@
 					"x:3": 144,
 					"sizeX:3": 24
 				},
-				"130:10": {
+				"121:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -5670127370653840000,
 					"questIDHigh:4": -8160690397172183000,
@@ -20486,7 +19505,7 @@
 					"x:3": -24,
 					"sizeX:3": 24
 				},
-				"131:10": {
+				"122:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -5932319452515416000,
 					"questIDHigh:4": -7812778340586404000,
@@ -20494,7 +19513,7 @@
 					"x:3": -780,
 					"sizeX:3": 24
 				},
-				"132:10": {
+				"123:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -5576651593991611000,
 					"questIDHigh:4": -7939712701804755000,
@@ -20502,7 +19521,7 @@
 					"x:3": -672,
 					"sizeX:3": 24
 				},
-				"133:10": {
+				"124:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -7323447604941382000,
 					"questIDHigh:4": -7642132511672549000,
@@ -20510,7 +19529,7 @@
 					"x:3": -1728,
 					"sizeX:3": 24
 				},
-				"134:10": {
+				"125:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -7043948132015657000,
 					"questIDHigh:4": -7630312812162826000,
@@ -20518,7 +19537,7 @@
 					"x:3": -1212,
 					"sizeX:3": 24
 				},
-				"135:10": {
+				"126:10": {
 					"sizeY:3": 48,
 					"questIDLow:4": -5652689830297560000,
 					"questIDHigh:4": -7239157557786032000,
@@ -20526,7 +19545,7 @@
 					"x:3": -1296,
 					"sizeX:3": 48
 				},
-				"136:10": {
+				"127:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -7723760977024482000,
 					"questIDHigh:4": -7455405447420883000,
@@ -20534,7 +19553,7 @@
 					"x:3": -600,
 					"sizeX:3": 24
 				},
-				"137:10": {
+				"128:10": {
 					"sizeY:3": 48,
 					"questIDLow:4": -7861308720763030000,
 					"questIDHigh:4": -7452291314413058000,
@@ -20542,7 +19561,7 @@
 					"x:3": -552,
 					"sizeX:3": 48
 				},
-				"138:10": {
+				"129:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -8502373148282441000,
 					"questIDHigh:4": -7362291918280244000,
@@ -20550,23 +19569,15 @@
 					"x:3": -708,
 					"sizeX:3": 24
 				},
-				"139:10": {
-					"sizeY:3": 24,
-					"questIDLow:4": 4896116422666856000,
-					"questIDHigh:4": -7327504550109422000,
-					"y:3": 348,
-					"x:3": -768,
-					"sizeX:3": 24
-				},
-				"140:10": {
+				"130:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -4945095402173524000,
 					"questIDHigh:4": -7286215850563715000,
 					"y:3": 348,
-					"x:3": -912,
+					"x:3": -876,
 					"sizeX:3": 24
 				},
-				"141:10": {
+				"131:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -4958280780786364000,
 					"questIDHigh:4": -7169057694551095000,
@@ -20574,7 +19585,7 @@
 					"x:3": -1308,
 					"sizeX:3": 24
 				},
-				"142:10": {
+				"132:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -5935871211212963000,
 					"questIDHigh:4": -7122507946507811000,
@@ -20582,7 +19593,7 @@
 					"x:3": -600,
 					"sizeX:3": 24
 				},
-				"143:10": {
+				"133:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -5089142648876593000,
 					"questIDHigh:4": -7058839897411927000,
@@ -20590,7 +19601,7 @@
 					"x:3": -600,
 					"sizeX:3": 24
 				},
-				"144:10": {
+				"134:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -7533555384473922000,
 					"questIDHigh:4": -7047017478529663000,
@@ -20598,7 +19609,7 @@
 					"x:3": -600,
 					"sizeX:3": 24
 				},
-				"145:10": {
+				"135:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -5243860530926237000,
 					"questIDHigh:4": -7038845928514371000,
@@ -20606,7 +19617,7 @@
 					"x:3": -60,
 					"sizeX:3": 24
 				},
-				"146:10": {
+				"136:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -8436110669388895000,
 					"questIDHigh:4": -6980303414455811000,
@@ -20614,7 +19625,7 @@
 					"x:3": -1692,
 					"sizeX:3": 24
 				},
-				"147:10": {
+				"137:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -7582049320627643000,
 					"questIDHigh:4": -6890804529853742000,
@@ -20622,7 +19633,7 @@
 					"x:3": -1212,
 					"sizeX:3": 24
 				},
-				"148:10": {
+				"138:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -8399901244018883000,
 					"questIDHigh:4": -6887507993475003000,
@@ -20630,7 +19641,7 @@
 					"x:3": -1452,
 					"sizeX:3": 24
 				},
-				"149:10": {
+				"139:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -5334554350575644000,
 					"questIDHigh:4": -6863485562828012000,
@@ -20638,7 +19649,7 @@
 					"x:3": -1668,
 					"sizeX:3": 24
 				},
-				"150:10": {
+				"140:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -4677088626554502000,
 					"questIDHigh:4": -6852200735317407000,
@@ -20646,7 +19657,7 @@
 					"x:3": -1260,
 					"sizeX:3": 24
 				},
-				"151:10": {
+				"141:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -8884951279111622000,
 					"questIDHigh:4": -6834263839024330000,
@@ -20654,7 +19665,7 @@
 					"x:3": -1284,
 					"sizeX:3": 24
 				},
-				"152:10": {
+				"142:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -8169301048826032000,
 					"questIDHigh:4": -6814346544538171000,
@@ -20662,7 +19673,7 @@
 					"x:3": -876,
 					"sizeX:3": 24
 				},
-				"153:10": {
+				"143:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -7797294129120805000,
 					"questIDHigh:4": -6713209646664103000,
@@ -20670,7 +19681,7 @@
 					"x:3": -432,
 					"sizeX:3": 24
 				},
-				"154:10": {
+				"144:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -8278169168963290000,
 					"questIDHigh:4": -6387208015459562000,
@@ -20678,7 +19689,7 @@
 					"x:3": -1248,
 					"sizeX:3": 24
 				},
-				"155:10": {
+				"145:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -8759635542859868000,
 					"questIDHigh:4": -6363905955709957000,
@@ -20686,7 +19697,7 @@
 					"x:3": -468,
 					"sizeX:3": 24
 				},
-				"156:10": {
+				"146:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -7585949091909992000,
 					"questIDHigh:4": -6581680276619637000,
@@ -20694,7 +19705,7 @@
 					"x:3": -504,
 					"sizeX:3": 24
 				},
-				"157:10": {
+				"147:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -5986003671000656000,
 					"questIDHigh:4": -6581678539387093000,
@@ -20702,7 +19713,7 @@
 					"x:3": -1452,
 					"sizeX:3": 24
 				},
-				"158:10": {
+				"148:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -5167320377760289000,
 					"questIDHigh:4": -6543670694516145000,
@@ -20710,7 +19721,7 @@
 					"x:3": -912,
 					"sizeX:3": 24
 				},
-				"159:10": {
+				"149:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -8182123944848583000,
 					"questIDHigh:4": -6513752860207724000,
@@ -20718,7 +19729,7 @@
 					"x:3": -720,
 					"sizeX:3": 24
 				},
-				"160:10": {
+				"150:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -8499137037056785000,
 					"questIDHigh:4": -6335962959536372000,
@@ -20726,7 +19737,7 @@
 					"x:3": -504,
 					"sizeX:3": 24
 				},
-				"161:10": {
+				"151:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -5426769175248712000,
 					"questIDHigh:4": -6167783559435764000,
@@ -20734,7 +19745,7 @@
 					"x:3": -696,
 					"sizeX:3": 24
 				},
-				"162:10": {
+				"152:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -7646784641513358000,
 					"questIDHigh:4": -6021041296190389000,
@@ -20742,7 +19753,7 @@
 					"x:3": 144,
 					"sizeX:3": 25
 				},
-				"163:10": {
+				"153:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -8876995582715845000,
 					"questIDHigh:4": -5511379386379517000,
@@ -20750,7 +19761,7 @@
 					"x:3": -672,
 					"sizeX:3": 24
 				},
-				"164:10": {
+				"154:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -7044575457181443000,
 					"questIDHigh:4": -5753640187490647000,
@@ -20758,7 +19769,7 @@
 					"x:3": -468,
 					"sizeX:3": 24
 				},
-				"165:10": {
+				"155:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -5544243303934805000,
 					"questIDHigh:4": -5695167495715599000,
@@ -20766,7 +19777,7 @@
 					"x:3": -1248,
 					"sizeX:3": 25
 				},
-				"166:10": {
+				"156:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -6497563513465375000,
 					"questIDHigh:4": -5237483784284059000,
@@ -20774,15 +19785,15 @@
 					"x:3": -948,
 					"sizeX:3": 24
 				},
-				"167:10": {
+				"157:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -7895716306200207000,
 					"questIDHigh:4": -5380948796969631000,
 					"y:3": 312,
-					"x:3": -912,
+					"x:3": -876,
 					"sizeX:3": 24
 				},
-				"168:10": {
+				"158:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -4828120638943990000,
 					"questIDHigh:4": -5358436229815055000,
@@ -20790,15 +19801,15 @@
 					"x:3": -1248,
 					"sizeX:3": 24
 				},
-				"169:10": {
+				"159:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -4791419922164892000,
 					"questIDHigh:4": -5327737778734284000,
 					"y:3": 276,
-					"x:3": -876,
+					"x:3": -840,
 					"sizeX:3": 24
 				},
-				"170:10": {
+				"160:10": {
 					"sizeY:3": 48,
 					"questIDLow:4": -9159564751371776000,
 					"questIDHigh:4": -5136039198244189000,
@@ -20806,7 +19817,7 @@
 					"x:3": -1092,
 					"sizeX:3": 48
 				},
-				"171:10": {
+				"161:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -8473369083030941000,
 					"questIDHigh:4": -5083065715818414000,
@@ -20814,7 +19825,7 @@
 					"x:3": -1080,
 					"sizeX:3": 24
 				},
-				"172:10": {
+				"162:10": {
 					"sizeY:3": 48,
 					"questIDLow:4": -5875700348237775000,
 					"questIDHigh:4": -5069235688623814000,
@@ -20822,7 +19833,7 @@
 					"x:3": -1092,
 					"sizeX:3": 48
 				},
-				"173:10": {
+				"163:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -5645524352597011000,
 					"questIDHigh:4": -4994404238232369000,
@@ -20830,7 +19841,7 @@
 					"x:3": -672,
 					"sizeX:3": 24
 				},
-				"174:10": {
+				"164:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -8503849227924390000,
 					"questIDHigh:4": -4976251056784587000,
@@ -20838,7 +19849,7 @@
 					"x:3": -876,
 					"sizeX:3": 24
 				},
-				"175:10": {
+				"165:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -6296225687632421000,
 					"questIDHigh:4": -4616514530822044000,
@@ -20846,7 +19857,7 @@
 					"x:3": -1320,
 					"sizeX:3": 24
 				},
-				"176:10": {
+				"166:10": {
 					"sizeY:3": 48,
 					"questIDLow:4": -6826609508165396000,
 					"questIDHigh:4": -4645295183341859000,
@@ -20854,7 +19865,7 @@
 					"x:3": -72,
 					"sizeX:3": 48
 				},
-				"177:10": {
+				"167:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -6077919620178118000,
 					"questIDHigh:4": -4731256073459908000,
@@ -20862,7 +19873,7 @@
 					"x:3": -1488,
 					"sizeX:3": 24
 				},
-				"178:10": {
+				"168:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -8363568033474150000,
 					"questIDHigh:4": -4705226915083828000,
@@ -20870,15 +19881,7 @@
 					"x:3": -948,
 					"sizeX:3": 24
 				},
-				"179:10": {
-					"sizeY:3": 24,
-					"questIDLow:4": -3297886788424829400,
-					"questIDHigh:4": -4589903524299409000,
-					"y:3": 384,
-					"x:3": -804,
-					"sizeX:3": 24
-				},
-				"180:10": {
+				"169:10": {
 					"sizeY:3": 48,
 					"questIDLow:4": -7428290638441918000,
 					"questIDHigh:4": -4587077457703449000,
@@ -20886,7 +19889,7 @@
 					"x:3": -684,
 					"sizeX:3": 48
 				},
-				"181:10": {
+				"170:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -5838810464136772000,
 					"questIDHigh:4": -4517747076422873000,
@@ -20894,7 +19897,7 @@
 					"x:3": -600,
 					"sizeX:3": 24
 				},
-				"182:10": {
+				"171:10": {
 					"sizeY:3": 48,
 					"questIDLow:4": -8356672578237821000,
 					"questIDHigh:4": -4515978382007645700,
@@ -20902,7 +19905,7 @@
 					"x:3": -276,
 					"sizeX:3": 48
 				},
-				"183:10": {
+				"172:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -7544957067665739000,
 					"questIDHigh:4": -4443889721545897500,
@@ -20910,7 +19913,7 @@
 					"x:3": -1488,
 					"sizeX:3": 24
 				},
-				"184:10": {
+				"173:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -6636245940807355000,
 					"questIDHigh:4": -4042501088425524000,
@@ -20918,7 +19921,7 @@
 					"x:3": 180,
 					"sizeX:3": 24
 				},
-				"185:10": {
+				"174:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -7627084010849307000,
 					"questIDHigh:4": -4062473109127084000,
@@ -20926,7 +19929,7 @@
 					"x:3": -600,
 					"sizeX:3": 24
 				},
-				"186:10": {
+				"175:10": {
 					"sizeY:3": 48,
 					"questIDLow:4": -4989000399310527000,
 					"questIDHigh:4": -4313326413041680000,
@@ -20934,15 +19937,15 @@
 					"x:3": -1296,
 					"sizeX:3": 48
 				},
-				"187:10": {
+				"176:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -4933494119675184000,
 					"questIDHigh:4": -4300358963517044000,
 					"y:3": 348,
-					"x:3": -840,
+					"x:3": -804,
 					"sizeX:3": 24
 				},
-				"188:10": {
+				"177:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -8753753897285682000,
 					"questIDHigh:4": -4247378605486750000,
@@ -20950,7 +19953,7 @@
 					"x:3": -708,
 					"sizeX:3": 24
 				},
-				"189:10": {
+				"178:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -8377646544477285000,
 					"questIDHigh:4": -4207243906327756000,
@@ -20958,7 +19961,7 @@
 					"x:3": -492,
 					"sizeX:3": 24
 				},
-				"190:10": {
+				"179:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -6207045090218140000,
 					"questIDHigh:4": -4107615662398093300,
@@ -20966,7 +19969,7 @@
 					"x:3": -744,
 					"sizeX:3": 24
 				},
-				"191:10": {
+				"180:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -6571844755679767000,
 					"questIDHigh:4": -3999936241475893000,
@@ -20974,7 +19977,7 @@
 					"x:3": -912,
 					"sizeX:3": 24
 				},
-				"192:10": {
+				"181:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -8097493229712237000,
 					"questIDHigh:4": -3992593818830419500,
@@ -20982,7 +19985,7 @@
 					"x:3": -264,
 					"sizeX:3": 24
 				},
-				"193:10": {
+				"182:10": {
 					"sizeY:3": 48,
 					"questIDLow:4": -7493520171758932000,
 					"questIDHigh:4": -3844217968250240000,
@@ -20990,7 +19993,7 @@
 					"x:3": -1296,
 					"sizeX:3": 48
 				},
-				"194:10": {
+				"183:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -7200390477351114000,
 					"questIDHigh:4": -3832919810639903000,
@@ -20998,7 +20001,7 @@
 					"x:3": -672,
 					"sizeX:3": 24
 				},
-				"195:10": {
+				"184:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -5959544802892301000,
 					"questIDHigh:4": -3834224068378082000,
@@ -21006,7 +20009,7 @@
 					"x:3": -1284,
 					"sizeX:3": 24
 				},
-				"196:10": {
+				"185:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -8972983882663780000,
 					"questIDHigh:4": -3597140004563304000,
@@ -21014,7 +20017,7 @@
 					"x:3": -672,
 					"sizeX:3": 24
 				},
-				"197:10": {
+				"186:10": {
 					"sizeY:3": 48,
 					"questIDLow:4": -6205679258259921000,
 					"questIDHigh:4": -3566378047443745000,
@@ -21022,7 +20025,7 @@
 					"x:3": -1704,
 					"sizeX:3": 48
 				},
-				"198:10": {
+				"187:10": {
 					"sizeY:3": 24,
 					"questIDLow:4": -6751955226285180000,
 					"questIDHigh:4": -3563828547740087300,

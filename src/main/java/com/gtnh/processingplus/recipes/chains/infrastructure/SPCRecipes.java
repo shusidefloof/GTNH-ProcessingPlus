@@ -52,7 +52,7 @@ public class SPCRecipes {
         premiumBoardRecipes();
     }
 
-    // SPC controller — IV assembler recipe.
+    // SPC controller: IV assembler recipe.
     private static void controllerRecipe() {
         GTValues.RA.stdBuilder()
             .itemInputs(
@@ -68,7 +68,7 @@ public class SPCRecipes {
             .addTo(RecipeMaps.assemblerRecipes);
     }
 
-    // Scorched Circuit Board (SPC failure output) — macerate the burnt board back into ash.
+    // Scorched Circuit Board (SPC failure output), macerate the burnt board back into ash.
     private static void scorchedRecycling() {
         GTValues.RA.stdBuilder()
             .itemInputs(GTNHPPItems.scorchedBoard(1))
@@ -78,7 +78,7 @@ public class SPCRecipes {
             .addTo(RecipeMaps.maceratorRecipes);
     }
 
-    // Spectral Isolation Casing — HV assembler recipe (hatch-capable shell)
+    // Spectral Isolation Casing: HV assembler recipe (hatch-capable shell)
     private static void casingRecipe() {
         GTValues.RA.stdBuilder()
             .itemInputs(
@@ -92,7 +92,7 @@ public class SPCRecipes {
             .eut(TierEU.RECIPE_LV)
             .addTo(RecipeMaps.assemblerRecipes);
 
-        // Photonic Alignment Casing — central beam column
+        // Photonic Alignment Casing: central beam column
         GTValues.RA.stdBuilder()
             .itemInputs(
                 new ItemStack(GTNHPPBlocks.CASINGS, 1, BlockGTNHPPCasings.SPC_CASING),
@@ -104,7 +104,7 @@ public class SPCRecipes {
             .eut(TierEU.RECIPE_LV)
             .addTo(RecipeMaps.assemblerRecipes);
 
-        // Spectral Frame Casing — structural frame
+        // Spectral Frame Casing: structural frame
         GTValues.RA.stdBuilder()
             .itemInputs(
                 GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.StainlessSteel, 1),
@@ -116,10 +116,10 @@ public class SPCRecipes {
             .addTo(RecipeMaps.assemblerRecipes);
     }
 
-    // SPC upgrade adapters + external module casings — assembler recipes.
+    // SPC upgrade adapters + external module casings, assembler recipes.
     private static void moduleBlockRecipes() {
         // --- Support-bay adapters (the physical "port" routed into the SPC) ---
-        // Bio-Lithography Adapter — gates wetware / bio boards
+        // Bio-Lithography Adapter: gates wetware / bio boards
         GTValues.RA.stdBuilder()
             .itemInputs(
                 new ItemStack(GTNHPPBlocks.CASINGS, 1, BlockGTNHPPCasings.SPC_CASING),
@@ -131,7 +131,7 @@ public class SPCRecipes {
             .eut(TierEU.RECIPE_EV)
             .addTo(RecipeMaps.assemblerRecipes);
 
-        // Cryo-Stabilization Adapter — gates optical boards / efficiency
+        // Cryo-Stabilization Adapter: gates optical boards / efficiency
         GTValues.RA.stdBuilder()
             .itemInputs(
                 new ItemStack(GTNHPPBlocks.CASINGS, 1, BlockGTNHPPCasings.SPC_CASING),
@@ -143,7 +143,7 @@ public class SPCRecipes {
             .eut(TierEU.RECIPE_IV)
             .addTo(RecipeMaps.assemblerRecipes);
 
-        // Quantum Alignment Adapter — gates UEV+ / optical-quantum tiers
+        // Quantum Alignment Adapter: gates UEV+ / optical-quantum tiers
         GTValues.RA.stdBuilder()
             .itemInputs(
                 new ItemStack(GTNHPPBlocks.CASINGS, 1, BlockGTNHPPCasings.SPC_BEAM_CASING),
@@ -183,7 +183,7 @@ public class SPCRecipes {
             .addTo(RecipeMaps.assemblerRecipes);
     }
 
-    // Epoxy Board — [Chem Bath MV] → [Laser HV] → [Chem Bath MV]
+    // Epoxy Board: [Chem Bath MV] → [Laser HV] → [Chem Bath MV]
     private static void epoxyBoard() {
         Collection<GTRecipe> recipes = GTValues.RA.stdBuilder()
             .itemInputs(plate(Materials.Epoxid, 1), foil(Materials.Gold, 8))
@@ -198,7 +198,7 @@ public class SPCRecipes {
             new int[] { MV, HV, MV });
     }
 
-    // Epoxy Board → Advanced — [Chem Bath HV] → [Mixer EV] → [Laser HV] → [Chem Bath HV]
+    // Epoxy Board → Advanced: [Chem Bath HV] → [Mixer EV] → [Laser HV] → [Chem Bath HV]
     private static void epoxyBoardEngrave() {
         Collection<GTRecipe> recipes = GTValues.RA.stdBuilder()
             .itemInputs(ItemList.Circuit_Board_Epoxy.get(1), foil(Materials.Electrum, 8))
@@ -214,7 +214,7 @@ public class SPCRecipes {
             new int[] { HV, EV, HV, HV });
     }
 
-    // Fiberglass Board — [Chem Bath MV] → [Laser HV] → [Chem Bath MV]
+    // Fiberglass Board: [Chem Bath MV] → [Laser HV] → [Chem Bath MV]
     private static void fiberglassBoard() {
         Collection<GTRecipe> recipes = GTValues.RA.stdBuilder()
             .itemInputs(plate(Materials.EpoxidFiberReinforced, 1), foil(Materials.Aluminium, 12))
@@ -229,7 +229,7 @@ public class SPCRecipes {
             new int[] { MV, HV, MV });
     }
 
-    // Fiberglass Board → Advanced — [Chem Bath MV] → [Laser HV] → [Assembler EV] → [Chem Bath HV]
+    // Fiberglass Board → Advanced: [Chem Bath MV] → [Laser HV] → [Assembler EV] → [Chem Bath HV]
     private static void fiberglassBoardEngrave() {
         Collection<GTRecipe> recipes = GTValues.RA.stdBuilder()
             .itemInputs(
@@ -248,7 +248,7 @@ public class SPCRecipes {
             new int[] { MV, HV, EV, HV });
     }
 
-    // Multifiberglass Board — [Chem Bath HV] → [Laser LuV] → [Chem Bath HV]
+    // Multifiberglass Board: [Chem Bath HV] → [Laser LuV] → [Chem Bath HV]
     private static void multifiberglassBoard() {
         Collection<GTRecipe> recipes = GTValues.RA.stdBuilder()
             .itemInputs(ItemList.Circuit_Board_Fiberglass.get(2), foil(Materials.Iridium, 16))
@@ -263,7 +263,7 @@ public class SPCRecipes {
             new int[] { HV, IV, HV });
     }
 
-    // Multifiberglass Board → Elite — [Chem Bath HV] → [Laser LuV] → [Electrolyzer LuV] → [Chem Bath HV]
+    // Multifiberglass Board → Elite: [Chem Bath HV] → [Laser LuV] → [Electrolyzer LuV] → [Chem Bath HV]
     private static void multifiberglassBoardEngrave() {
         Collection<GTRecipe> recipes = GTValues.RA.stdBuilder()
             .itemInputs(ItemList.Circuit_Board_Multifiberglass.get(1), foil(Materials.Platinum, 8))
@@ -279,7 +279,7 @@ public class SPCRecipes {
             new int[] { HV, LuV, LuV, HV });
     }
 
-    // Wetware Board — [Chem Bath HV] → [Mixer UV] → [Laser UV] → [Chem Bath HV]
+    // Wetware Board: [Chem Bath HV] → [Mixer UV] → [Laser UV] → [Chem Bath HV]
     private static void wetwareBoard() {
         Collection<GTRecipe> recipes = GTValues.RA.stdBuilder()
             .itemInputs(
@@ -301,7 +301,7 @@ public class SPCRecipes {
         );
     }
 
-    // Wetware Board → Extreme — [Chem Bath HV] → [Electrolyzer UV] → [Laser UV] → [Chem Bath UV]
+    // Wetware Board → Extreme: [Chem Bath HV] → [Electrolyzer UV] → [Laser UV] → [Chem Bath UV]
     private static void wetwareBoardEngrave() {
         Collection<GTRecipe> recipes = GTValues.RA.stdBuilder()
             .itemInputs(
@@ -322,7 +322,7 @@ public class SPCRecipes {
         );
     }
 
-    // Bio Board — [Chem Bath UV] → [Mixer UHV] → [Laser UHV] → [Chem Bath UV]
+    // Bio Board: [Chem Bath UV] → [Mixer UHV] → [Laser UHV] → [Chem Bath UV]
     private static void bioBoard() {
         Collection<GTRecipe> recipes = GTValues.RA.stdBuilder()
             .itemInputs(
@@ -344,7 +344,7 @@ public class SPCRecipes {
         );
     }
 
-    // Bio Board → Ultra — [Chem Bath UV] → [Mixer UHV] → [Laser UHV] → [Chem Bath UHV]
+    // Bio Board → Ultra: [Chem Bath UV] → [Mixer UHV] → [Laser UHV] → [Chem Bath UHV]
     private static void bioBoardEngrave() {
         Collection<GTRecipe> recipes = GTValues.RA.stdBuilder()
             .itemInputs(
@@ -366,7 +366,7 @@ public class SPCRecipes {
         );
     }
 
-    // Optical Board (raw) — [Chem Bath UHV] → [Mixer UEV] → [Laser UEV] → [Chem Bath UHV]
+    // Optical Board (raw): [Chem Bath UHV] → [Mixer UEV] → [Laser UEV] → [Chem Bath UHV]
     private static void opticalBoard() {
         Collection<GTRecipe> recipes = GTValues.RA.stdBuilder()
             .itemInputs(plate(Materials.Kevlar, 2), item("foilTairitsu", 16), foil(Materials.Osmium, 8))
@@ -384,7 +384,7 @@ public class SPCRecipes {
         );
     }
 
-    // Optical Board → Circuit_Board_Optical — [Laser UEV] → [Electrolyzer UEV] → [Chem Bath UHV] → [Laser UEV]
+    // Optical Board → Circuit_Board_Optical: [Laser UEV] → [Electrolyzer UEV] → [Chem Bath UHV] → [Laser UEV]
     private static void opticalBoardEngrave() {
         Collection<GTRecipe> recipes = GTValues.RA.stdBuilder()
             .itemInputs(
@@ -406,7 +406,7 @@ public class SPCRecipes {
     }
 
     // -------------------------------------------------------------------------
-    // Premium board variants — feed the NEXT photoresist tier up for DOUBLE output, same station
+    // Premium board variants: feed the NEXT photoresist tier up for DOUBLE output, same station
     // sequence / module gate / other inputs. The costlier photoresist is the trade. This is the
     // "higher-tier photoresist = better yield" mechanic, and it gives every higher photoresist
     // (including UIV, via the optical board) an extra use.
@@ -415,7 +415,7 @@ public class SPCRecipes {
         final MachineType CB = MachineType.CHEMICAL_BATH, LE = MachineType.LASER_ENGRAVER, MX = MachineType.MIXER,
             AS = MachineType.ASSEMBLER, EL = MachineType.ELECTROLYZER;
 
-        // Epoxy Advanced — IV photoresist (was EV)
+        // Epoxy Advanced: IV photoresist (was EV)
         premium(
             new ItemStack[] { ItemList.Circuit_Board_Epoxy.get(1), foil(Materials.Electrum, 8) },
             new FluidStack[] { fluid(PrPMaterials.IVPhotoresist, 500) },
@@ -426,7 +426,7 @@ public class SPCRecipes {
             new int[] { HV, EV, HV, HV },
             null);
 
-        // Fiberglass Advanced — LuV photoresist (was IV)
+        // Fiberglass Advanced: LuV photoresist (was IV)
         premium(
             new ItemStack[] { ItemList.Circuit_Board_Fiberglass.get(1), foil(Materials.EnergeticAlloy, 12),
                 foil(Materials.Palladium, 4) },
@@ -438,7 +438,7 @@ public class SPCRecipes {
             new int[] { MV, HV, EV, HV },
             null);
 
-        // Multifiberglass — ZPM photoresist (was LuV)
+        // Multifiberglass: ZPM photoresist (was LuV)
         premium(
             new ItemStack[] { ItemList.Circuit_Board_Fiberglass.get(2), foil(Materials.Iridium, 16) },
             new FluidStack[] { fluid(Materials.SulfuricAcid, 1000), fluid(PrPMaterials.ZPMPhotoresist, 500) },
@@ -449,7 +449,7 @@ public class SPCRecipes {
             new int[] { HV, IV, HV },
             null);
 
-        // Multifiberglass Elite — ZPM photoresist (was LuV)
+        // Multifiberglass Elite: ZPM photoresist (was LuV)
         premium(
             new ItemStack[] { ItemList.Circuit_Board_Multifiberglass.get(1), foil(Materials.Platinum, 8) },
             new FluidStack[] { fluid(PrPMaterials.ZPMPhotoresist, 2000) },
@@ -460,7 +460,7 @@ public class SPCRecipes {
             new int[] { HV, LuV, LuV, HV },
             null);
 
-        // Wetware — UV photoresist (was ZPM)
+        // Wetware: UV photoresist (was ZPM)
         premium(
             new ItemStack[] { ItemList.Circuit_Board_Multifiberglass.get(2), foil(Materials.NiobiumTitanium, 16),
                 foil(Materials.NaquadahEnriched, 8), ItemList.Circuit_Parts_PetriDish.get(1) },
@@ -474,7 +474,7 @@ public class SPCRecipes {
         // , SPCModuleType.BIO
         );
 
-        // Wetware Extreme — UHV photoresist (was UV)
+        // Wetware Extreme: UHV photoresist (was UV)
         premium(
             new ItemStack[] { ItemList.Circuit_Board_Wetware.get(1), foil(Materials.NiobiumTitanium, 64),
                 foil(Materials.Naquadah, 16) },
@@ -488,7 +488,7 @@ public class SPCRecipes {
         // , SPCModuleType.BIO
         );
 
-        // Bio — UHV photoresist (was UV)
+        // Bio: UHV photoresist (was UV)
         premium(
             new ItemStack[] { ItemList.Circuit_Board_Wetware.get(2), foil(Materials.Neutronium, 16),
                 foil(Materials.SuperconductorUVBase, 8), ItemList.Circuit_Parts_PetriDish.get(4) },
@@ -502,7 +502,7 @@ public class SPCRecipes {
         // , SPCModuleType.BIO
         );
 
-        // Bio Ultra — UEV photoresist (was UHV)
+        // Bio Ultra: UEV photoresist (was UHV)
         premium(
             new ItemStack[] { ItemList.Circuit_Board_Bio.get(2), foil(Materials.Neutronium, 24),
                 foil(Materials.Osmium, 8), ItemList.Circuit_Parts_PetriDish.get(1) },
@@ -516,7 +516,7 @@ public class SPCRecipes {
         // , SPCModuleType.BIO
         );
 
-        // Optical — UIV photoresist (was UEV); base outputs 2, premium outputs 4. Gives UIV a use.
+        // Optical: UIV photoresist (was UEV); base outputs 2, premium outputs 4. Gives UIV a use.
         premium(
             new ItemStack[] { GTNHPPItems.opticalBoardRaw(1), item("foilChromaticGlass", 16),
                 plate(Materials.MysteriousCrystal, 4) },

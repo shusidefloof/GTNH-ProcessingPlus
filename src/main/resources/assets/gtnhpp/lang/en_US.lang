@@ -25,7 +25,7 @@ gt.blockmachines.gtnhpp.spc.name=Spectral Photolithography Chamber
 gt.blockmachines.gtnhpp.csc.name=Cryogenic Separation Column
 gt.blockmachines.gtnhpp.bof.name=Basic Oxygen Furnace
 
-# Recipe map names (NEI category titles) — RecipeMapBuilder.of(key) uses `key` directly as a
+# Recipe map names (NEI category titles), RecipeMapBuilder.of(key) uses `key` directly as a
 # StatCollector.translateToLocal lookup, so without an entry here NEI shows the raw key string.
 gtnhpp.recipe.htrf=High Temperature Reaction Furnace
 gtnhpp.recipe.hpsf=High Pressure Sintering Furnace
@@ -51,7 +51,7 @@ gtnhpp.recipe.rtg=Radioisotope Thermoelectric Generator
 gtnhpp.recipe.hpr.coil_tier=FRF Coil Tier: %s
 
 # Structure error messages (GT5U.* namespace is shared/flattened across all mods' lang files,
-# not exclusive to GT5-Unofficial — this follows the same convention its own multiblocks use)
+# not exclusive to GT5-Unofficial: this follows the same convention its own multiblocks use)
 GT5U.gui.text.structure_error.daf_bad_atmo_casing=Invalid or missing Dual Atmosphere Furnace casing tier (G)
 GT5U.gui.text.structure_error.daf_missing_glass=Missing structural glass (A)
 GT5U.gui.text.structure_error.daf_missing_pipe_casing=Missing item pipe casing (C)

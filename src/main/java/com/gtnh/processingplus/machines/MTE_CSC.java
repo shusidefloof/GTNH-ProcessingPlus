@@ -39,7 +39,6 @@ import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.gtnh.processingplus.materials.PrPMaterials;
 import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
-import com.gtnh.processingplus.recipes.PPRecipeHelper;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -61,6 +60,7 @@ import gregtech.api.recipe.check.SimpleCheckRecipeResult;
 import gregtech.api.render.TextureFactory;
 import gregtech.api.structure.error.StructureError;
 import gregtech.api.util.GTRecipe;
+import gregtech.api.util.GTUtility;
 import gregtech.api.util.IGTHatchAdder;
 import gregtech.api.util.MultiblockTooltipBuilder;
 import gregtech.api.util.TurbineStatCalculator;
@@ -69,12 +69,12 @@ import gregtech.api.util.tooltip.TooltipHelper;
 import gtPlusPlus.xmod.gregtech.api.metatileentity.implementations.MTEHatchTurbine;
 
 /**
- * Cryogenic Separation Column (CSC) — a 15×6×7 fractional-distillation tower, structure designed by
+ * Cryogenic Separation Column (CSC): a 15×6×7 fractional-distillation tower, structure designed by
  * Lord of Turtle.
  */
 public class MTE_CSC extends MTEExtendedPowerMultiBlockBase<MTE_CSC> implements ISurvivalConstructable {
 
-    // FrostProofMachineCasing (sBlockCasings2 meta1) — matches CSC's actual wall (sBlockCasings2, meta1).
+    // FrostProofMachineCasing (sBlockCasings2 meta1): matches CSC's actual wall (sBlockCasings2, meta1).
     private static final int CASING_INDEX = 17;
     private static final String STRUCTURE_PIECE_MAIN = "main";
     // "Transposed Scan" export: outer/row axes are swapped vs. a normal scan, so the true shape is
@@ -90,7 +90,7 @@ public class MTE_CSC extends MTEExtendedPowerMultiBlockBase<MTE_CSC> implements 
     // Transient: primary fluid captured before inputs are consumed each run
     private String mCurrentPrimaryFluid = "";
 
-    // Rotor Assembly hatches (MTEHatchTurbine) — each holds a real turbine rotor item (right-click to
+    // Rotor Assembly hatches (MTEHatchTurbine): each holds a real turbine rotor item (right-click to
     // insert, same as GT5's Large Turbines/Spinmatron). Summed rotor optimal flow gives a speed bonus.
     public ArrayList<MTEHatchTurbine> mRotorAssemblies = new ArrayList<>();
 
@@ -120,13 +120,13 @@ public class MTE_CSC extends MTEExtendedPowerMultiBlockBase<MTE_CSC> implements 
                     STRUCTURE_PIECE_MAIN,
                     /*
                      * Block legend (from the in-game structure export, credit: Lord of Turtle):
-                     * A -> gt.blockcasings2:1 — Frost Proof Machine Casing (hatch-capable shell)
-                     * B -> gt.blockcasings8:4 — Extreme Engine Intake Casing (top/bottom cap accent)
-                     * C -> gt.blockframes:407 — Energetic Silver Frame Box
-                     * F -> Rotor Assembly (MTEHatchTurbine, "hatch.turbine" — the real placeable GT++
+                     * A -> gt.blockcasings2:1: Frost Proof Machine Casing (hatch-capable shell)
+                     * B -> gt.blockcasings8:4: Extreme Engine Intake Casing (top/bottom cap accent)
+                     * C -> gt.blockframes:407: Energetic Silver Frame Box
+                     * F -> Rotor Assembly (MTEHatchTurbine, "hatch.turbine": the real placeable GT++
                      * rotor-assembly block/hatch, same class GT5's MTESpinmatron uses; insert a turbine
                      * rotor tool and its optimal gas flow stat speeds up recipes, see getRotorSpeedBonus)
-                     * G -> gt.blockcasings8:4 — Air Intake (hatch-capable, Muffler only)
+                     * G -> gt.blockcasings8:4: Air Intake (hatch-capable, Muffler only)
                      */
                     new String[][] {
                         { "               ", "     CAAAC     ", "     AAAAA     ", "    CAA~AAC    ", "     AAAAA     ",
@@ -199,10 +199,8 @@ public class MTE_CSC extends MTEExtendedPowerMultiBlockBase<MTE_CSC> implements 
         checkHasEnergyHatch(errors);
         // 2 Air Intake mufflers (one per rotor) + 1 regular muffler, per the tooltip below.
         checkHatchMin(errors, Muffler, 3);
-        checkHasInputBus(errors);
-        checkHasOutputBus(errors);
-        if (PPRecipeHelper.recipeMapHasFluidInputs(getRecipeMap())) checkHasInputHatch(errors);
-        if (PPRecipeHelper.recipeMapHasFluidOutputs(getRecipeMap())) checkHasOutputHatch(errors);
+        checkHasAnyInput(errors);
+        checkHasOutputHatch(errors);
     }
 
     public boolean addRotorAssembly(final IGregTechTileEntity aTileEntity, final int aBaseCasingIndex) {
@@ -246,7 +244,7 @@ public class MTE_CSC extends MTEExtendedPowerMultiBlockBase<MTE_CSC> implements 
         }
     }
 
-    // Called before inputs are consumed — capture primary (non-Freon) fluid for deficit tracking
+    // Called before inputs are consumed
     @Override
     protected void setupProcessingLogic(ProcessingLogic logic) {
         super.setupProcessingLogic(logic);
@@ -276,13 +274,13 @@ public class MTE_CSC extends MTEExtendedPowerMultiBlockBase<MTE_CSC> implements 
         return total;
     }
 
-    // Called after recipe succeeds and inputs are consumed — enforce deficit, randomize Freon
+    // Called after recipe succeeds and inputs are consumed, enforce deficit, randomize Freon
     @Override
     protected CheckRecipeResult postCheckRecipe(CheckRecipeResult result, ProcessingLogic logic) {
         result = super.postCheckRecipe(result, logic);
         if (!result.wasSuccessful()) return result;
 
-        // Enforce deficit from previous run. Repayment must land within ±2% of the exact deficit —
+        // Enforce deficit from previous run. Repayment must land within ±2% of the exact deficit
         // too little (can't cover the debt) OR too much (overpressuring the loop) both explode.
         if (mFreonDeficit > 0 && !mDeficitFluidName.isEmpty()) {
             int stored = getStoredAmount(mDeficitFluidName);
@@ -302,7 +300,7 @@ public class MTE_CSC extends MTEExtendedPowerMultiBlockBase<MTE_CSC> implements 
             mDeficitFluidName = "";
         }
 
-        // Randomize Freon output: 0–10% extra loss beyond what the recipe planned to return
+        // Randomize Freon output: 0 to 10% extra loss beyond what the recipe planned to return
         Fluid freon = PrPMaterials.FreonR12.getFluidOrGas(1)
             .getFluid();
         FluidStack[] outputs = logic.getOutputFluids();
@@ -352,7 +350,13 @@ public class MTE_CSC extends MTEExtendedPowerMultiBlockBase<MTE_CSC> implements 
                 setTurbineActive();
                 return super.onRecipeStart(recipe);
             }
-        }.setSpeedBonusSupplier(this::getRotorSpeedBonus);
+        }.setSpeedBonusSupplier(this::getRotorSpeedBonus)
+            .enablePerfectOverclock();
+    }
+
+    @Override
+    public int getMaxParallelRecipes() {
+        return 4 * GTUtility.getTier(this.getMaxInputVoltage());
     }
 
     @Override
@@ -390,7 +394,7 @@ public class MTE_CSC extends MTEExtendedPowerMultiBlockBase<MTE_CSC> implements 
     // the base/steam/plasma variants) since the CSC's whole job is cryogenic gas separation (air, CO2).
     // Mirrors how real GT5 turbines derive optimal flow from the rotor's speed multiplier, material tool
     // speed, and material gas multiplier, without the flow-matching/loose-efficiency curve those use for
-    // EU generation — CSC recipes are fixed-amount, not a tunable fluid stream, so only the raw rotor
+    // EU generation: CSC recipes are fixed-amount, not a tunable fluid stream, so only the raw rotor
     // stat carries over.
     private double getRotorSpeedBonus() {
         double totalFlow = 0;
@@ -446,52 +450,33 @@ public class MTE_CSC extends MTEExtendedPowerMultiBlockBase<MTE_CSC> implements 
     @Override
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType("Cryogenic Separation Column, CSC")
+        tt.addMachineType("Cryogenic Distillation Column, CSC")
+            .addVoltageParallelInfo(4)
+            .addPerfectOCInfo()
             .addInfo(
-                EnumChatFormatting.GRAY + "Separates fluids by "
-                    + EnumChatFormatting.AQUA
-                    + "cryogenic distillation"
+                "Requires continuous " + EnumChatFormatting.RED
+                    + "Freon R-12"
                     + EnumChatFormatting.GRAY
-                    + ".")
-            .addSeparator()
-            .addStaticParallelInfo(8)
+                    + " input, partially recovered each cycle")
+            .addInfo("Random Freon losses create a debt that must be repaid on the next run")
+            .addInfo(EnumChatFormatting.DARK_RED + "Unpaid Freon debt causes an explosion on the next run!")
             .addInfo(
-                EnumChatFormatting.RED + "Requires continuous Freon R-12 input."
-                    + EnumChatFormatting.GRAY
-                    + " Freon partially recovers each cycle.")
-            .addInfo(
-                EnumChatFormatting.GOLD + "Freon debt: "
-                    + EnumChatFormatting.GRAY
-                    + "random loss each cycle creates a deficit repaid on the next run.")
-            .addInfo(EnumChatFormatting.DARK_RED + "Unpaid debt causes an explosion on the next run!")
-            .addSeparator()
-            .addInfo(
-                EnumChatFormatting.GRAY + "Each rotor's "
-                    + TooltipHelper.coloredText("Optimal Gas Flow", EnumChatFormatting.YELLOW)
-                    + EnumChatFormatting.GRAY
-                    + " stat is added together across both slots.")
-            .addInfo(
-                "" + EnumChatFormatting.DARK_GRAY
-                    + EnumChatFormatting.ITALIC
-                    + "Purely a speed buff rotors don't consume fluid or take damage here.")
-            .addInfo(
-                EnumChatFormatting.WHITE + "Duration: "
-                    + EnumChatFormatting.GRAY
-                    + "×= max(0.001, 1 / (1 + ΣOptimalGasFlow / 500))")
+                "Each rotor's " + TooltipHelper.coloredText("Optimal Gas Flow", EnumChatFormatting.YELLOW)
+                    + " is summed across both Rotor Assemblies to speed up recipes")
+            .addInfo("Rotors are not consumed and take no damage")
+            .addInfo("Duration " + EnumChatFormatting.WHITE + "× max(0.001, 1 / (1 + ΣOptimalGasFlow / 500))")
             .beginStructureBlock(15, 6, 7, true)
-            .addController("See NEI structure preview")
+            .addController("Front center, 3rd layer")
             .addCasing("100+", "Frost Proof Machine Casing", false)
-            .addOtherStructurePart("Extreme Engine Intake Casing", "Top/bottom cap accent")
+            .addOtherStructurePart("Extreme Engine Intake Casing", "Top and bottom cap accents")
             .addOtherStructurePart("Energetic Silver Frame Box", "Structural framing")
             .addOtherStructurePart("Rotor Assembly", "Center slice, front-facing (2 required)")
-            .addEnergyHatch("1+", "Any Frost Proof Machine Casing", 1)
-            .addMaintenanceHatch("1", "Any Frost Proof Machine Casing", 1)
-            .addMufflerHatch("2", "Air Intake (Extreme Engine Intake Casing only)", 2)
-            .addMufflerHatch("1", "Any Frost Proof Machine Casing", 1)
-            .addInputBus("1+", "Any Frost Proof Machine Casing", 1)
-            .addInputHatch("1+", "Any Frost Proof Machine Casing", 1)
-            .addOutputBus("1+", "Any Frost Proof Machine Casing", 1)
-            .addOutputHatch("1+", "Any Frost Proof Machine Casing", 1)
+            .addEnergyHatch("1+", "Any frost proof machine casing", 1)
+            .addMaintenanceHatch("1", "Any frost proof machine casing", 1)
+            .addMufflerHatch("2", "Extreme Engine Intake Casing only", 2)
+            .addMufflerHatch("1", "Any frost proof machine casing", 1)
+            .addInputAny("1+", "Any frost proof machine casing", 1)
+            .addOutputAny("1+", "Any frost proof machine casing", 1)
             .toolTipFinisher(
                 "_Shusi_",
                 EnumChatFormatting.GREEN + ""
@@ -531,7 +516,7 @@ public class MTE_CSC extends MTEExtendedPowerMultiBlockBase<MTE_CSC> implements 
         return lines.toArray(new String[0]);
     }
 
-    // Diagnostic breakdown of the Rotor Assembly speed bonus — shows exactly what each hatch sees so we
+    // Diagnostic breakdown of the Rotor Assembly speed bonus, shows exactly what each hatch sees so we
     // can tell "no item in slot" from "item rejected by isValidRotor" from "item accepted, flow computed".
     private List<String> getRotorDebugLines() {
         List<String> lines = new ArrayList<>();
@@ -554,7 +539,7 @@ public class MTE_CSC extends MTEExtendedPowerMultiBlockBase<MTE_CSC> implements 
                         + i
                         + ": "
                         + EnumChatFormatting.RED
-                        + "rejected — "
+                        + "rejected: "
                         + rotor.getDisplayName());
                 continue;
             }
@@ -566,7 +551,7 @@ public class MTE_CSC extends MTEExtendedPowerMultiBlockBase<MTE_CSC> implements 
                     + EnumChatFormatting.GREEN
                     + rotor.getDisplayName()
                     + EnumChatFormatting.GRAY
-                    + " — OptimalGasFlow="
+                    + ": OptimalGasFlow="
                     + String.format("%.1f", flow));
         }
         lines.add(

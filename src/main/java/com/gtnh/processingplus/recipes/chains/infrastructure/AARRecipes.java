@@ -38,7 +38,7 @@ public class AARRecipes {
         FluidStack ammoniaProbe = Materials.Ammonia.getGas(1);
         if (ammoniaProbe == null) ammoniaProbe = Materials.Ammonia.getFluid(1); // fallback if registered as fluid
         if (ammoniaProbe == null) {
-            GTNHProcessingPlus.LOG.warn("AAR ammonia migration: Materials.Ammonia fluid/gas unavailable — skipped.");
+            GTNHProcessingPlus.LOG.warn("AAR ammonia migration: Materials.Ammonia fluid/gas unavailable, skipped.");
             return;
         }
 

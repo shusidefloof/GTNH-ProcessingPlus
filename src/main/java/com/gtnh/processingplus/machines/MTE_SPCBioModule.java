@@ -29,13 +29,13 @@ import gregtech.api.structure.error.StructureError;
 import gregtech.api.util.MultiblockTooltipBuilder;
 
 /**
- * Bio-Lithography Module — external SPC upgrade. Link to an SPC with a data stick (left-click the
+ * Bio-Lithography Module: external SPC upgrade. Link to an SPC with a data stick (left-click the
  * SPC, right-click this), then route it in via a Bio-Lithography Adapter in an SPC support bay to
  * unlock wetware + bio board recipes.
  */
 public class MTE_SPCBioModule extends MTE_SPCModuleBase<MTE_SPCBioModule> implements ISurvivalConstructable {
 
-    // CleanStainlessSteelMachineCasing (sBlockCasings4 meta1) — matches BIO_MODULE_CASING's borrowed texture.
+    // CleanStainlessSteelMachineCasing (sBlockCasings4 meta1): matches BIO_MODULE_CASING's borrowed texture.
     private static final int CASING_INDEX = 49;
     private static final String STRUCTURE_PIECE_MAIN = "main";
     private static final int OFFSET_X = 1, OFFSET_Y = 1, OFFSET_Z = 0;
@@ -129,21 +129,16 @@ public class MTE_SPCBioModule extends MTE_SPCModuleBase<MTE_SPCBioModule> implem
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType("SPC Upgrade Module")
             .addInfo(
-                EnumChatFormatting.GRAY + "Adds a "
-                    + EnumChatFormatting.GREEN
-                    + "bio-processing"
-                    + EnumChatFormatting.GRAY
-                    + " stage to the SPC.")
+                "Adds a " + EnumChatFormatting.GREEN + "bio-processing" + EnumChatFormatting.GRAY + " stage to the SPC")
             .addInfo(
-                EnumChatFormatting.GRAY + "Place within "
-                    + EnumChatFormatting.RED
+                "Must be placed within " + EnumChatFormatting.RED
                     + LINK_RANGE
                     + EnumChatFormatting.GRAY
-                    + " blocks of the SPC.")
-            .addInfo("Left-click the SPC controller with a data stick, then right-click this to link.")
-            .addInfo("Route it into the SPC with a Bio-Lithography Adapter in a support bay.")
+                    + " blocks of the SPC")
+            .addInfo("Left-click the SPC controller with a data stick, then right-click this module to link them")
+            .addInfo("Route it into the SPC with a Bio-Lithography Adapter in a support bay")
             .beginStructureBlock(3, 3, 3, false)
-            .addController("Front center")
+            .addController("Front center, 2nd layer")
             .addCasing("26+", "Bio Lithography Module Casing", false)
             .toolTipFinisher("_Shusi_");
         return tt;

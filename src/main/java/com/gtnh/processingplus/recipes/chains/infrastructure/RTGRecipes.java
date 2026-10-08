@@ -33,7 +33,7 @@ public class RTGRecipes {
     }
 
     // -------------------------------------------------------------------------
-    // Promethium Betavoltaic Alloy — Pm-147 dispersed into a gallium-arsenide matrix, forged in the
+    // Promethium Betavoltaic Alloy: Pm-147 dispersed into a gallium-arsenide matrix, forged in the
     // CRV from molten Promethium. The alloy's beta decay is what later drives the RTG.
     // -------------------------------------------------------------------------
     private static void alloy() {
@@ -50,7 +50,7 @@ public class RTGRecipes {
     }
 
     // -------------------------------------------------------------------------
-    // Promethium Betavoltaic Cell — the RTG's fuel. Alloy plate sealed in an aluminium can with a
+    // Promethium Betavoltaic Cell: the RTG's fuel. Alloy plate sealed in an aluminium can with a
     // semiconductor junction. Each cell adds a fixed slice of EU/t to the RTG while it burns.
     // -------------------------------------------------------------------------
     private static void betavoltaicCell() {
@@ -63,7 +63,7 @@ public class RTGRecipes {
     }
 
     // -------------------------------------------------------------------------
-    // Radioisotope Thermoelectric Casing — lead-shielded, alloy-faced.
+    // Radioisotope Thermoelectric Casing: lead-shielded, alloy-faced.
     // -------------------------------------------------------------------------
     private static void casingRecipe() {
         GTValues.RA.stdBuilder()
@@ -81,7 +81,7 @@ public class RTGRecipes {
     }
 
     // -------------------------------------------------------------------------
-    // Controller — assembly-line recipe (UV), scanned from a UV hull.
+    // Controller: assembly-line recipe (UV), scanned from a UV hull.
     // -------------------------------------------------------------------------
     private static void controllerRecipe() {
         GTValues.RA.stdBuilder()

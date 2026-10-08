@@ -112,9 +112,9 @@ public class CarbonFiberRecipes {
     }
 
     // =========================================================
-    // 7. Graphitization — 2500°C+ in Argon (HTRF, ZPM)
+    // 7. Graphitization: 2500°C+ in Argon (HTRF, ZPM)
     // Aligns graphite crystal planes; produces aerospace-grade fiber.
-    // Continuous Argon supply required — if it drops, process fails.
+    // Continuous Argon supply required: if it drops, process fails.
     // =========================================================
     private static void step7_Graphitization() {
 
@@ -143,7 +143,7 @@ public class CarbonFiberRecipes {
     }
 
     // =========================================================
-    // ALT: Coal Tar → Mesophase Pitch (CSTR — thermal treatment of liquid coal tar)
+    // ALT: Coal Tar → Mesophase Pitch (CSTR, thermal treatment of liquid coal tar)
     // Pyrolyse Oven coal tar heat-treated to mesophase
     // =========================================================
     private static void stepAlt_CoalTarToMesophasePitch() {
@@ -159,7 +159,7 @@ public class CarbonFiberRecipes {
 
     // =========================================================
     // ALT: Mesophase Pitch oxidative stabilization (DAF, UV)
-    // Skips PAN synthesis; lower yield — 3 stabilized PAN vs 4 from the PAN route
+    // Skips PAN synthesis; lower yield: 3 stabilized PAN vs 4 from the PAN route
     // =========================================================
     private static void stepAlt_PitchStabilization() {
 

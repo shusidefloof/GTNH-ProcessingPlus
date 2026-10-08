@@ -33,7 +33,7 @@ public class CACRecipes {
 
     /**
      * The superconductors the CAC takes over. NOTE the deliberate omission of SuperconductorUV: GT's
-     * naming is offset by one, so SuperconductorUV is the UHV-tier conductor — but it's also what UV
+     * naming is offset by one, so SuperconductorUV is the UHV-tier conductor, but it's also what UV
      * energy hatches are built from, and you need those to REACH UHV (and thus aerogel and the CAC).
      * Gating it here would soft-lock progression, so it stays on its stock assembler recipe. The CAC
      * only takes the genuinely post-UHV conductors (SuperconductorUHV and up).
@@ -50,7 +50,7 @@ public class CACRecipes {
     // Casing crafts.
     // -------------------------------------------------------------------------
     private static void casingRecipes() {
-        // Cryostat Vacuum Casing — the double-walled vacuum shell, aerogel-backed.
+        // Cryostat Vacuum Casing: the double-walled vacuum shell, aerogel-backed.
         GTValues.RA.stdBuilder()
             .itemInputs(
                 GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.TungstenSteel, 1),
@@ -64,7 +64,7 @@ public class CACRecipes {
             .duration(10 * SECONDS)
             .addTo(RecipeMaps.assemblerRecipes);
 
-        // Aerogel Insulation Block — the load-bearing inner lining. Consumes BOTH aerogel products,
+        // Aerogel Insulation Block: the load-bearing inner lining. Consumes BOTH aerogel products,
         // so even building the cryostat routes through the whole aerogel chain.
         GTValues.RA.stdBuilder()
             .itemInputs(
@@ -80,7 +80,7 @@ public class CACRecipes {
     }
 
     // -------------------------------------------------------------------------
-    // Controller — assembly-line recipe (UHV), scanned from a UHV hull.
+    // Controller: assembly-line recipe (UHV), scanned from a UHV hull.
     // -------------------------------------------------------------------------
     private static void controllerRecipe() {
         GTValues.RA.stdBuilder()
@@ -107,7 +107,7 @@ public class CACRecipes {
     }
 
     // -------------------------------------------------------------------------
-    // Superconductor migration — copies every UHV+ superconductor anneal recipe out of the assembler
+    // Superconductor migration: copies every UHV+ superconductor anneal recipe out of the assembler
     // into the CAC, injecting an aerogel multilayer-insulation tax, then deletes the originals so the
     // CAC is the ONLY path to UHV-and-up superconductors. Run from loadComplete (after GT's recipes).
     // -------------------------------------------------------------------------

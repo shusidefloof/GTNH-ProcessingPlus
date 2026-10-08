@@ -32,7 +32,6 @@ import com.gtnh.processingplus.blocks.BlockGTNHPPCasings;
 import com.gtnh.processingplus.blocks.GTNHPPBlocks;
 import com.gtnh.processingplus.materials.PrPMaterials;
 import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
-import com.gtnh.processingplus.recipes.PPRecipeHelper;
 
 import bartworks.system.material.WerkstoffLoader;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -52,14 +51,14 @@ import gregtech.api.util.MultiblockTooltipBuilder;
 import gtnhlanth.common.register.LanthItemList;
 
 /**
- * Controlled Isotopic Doping Chamber (CIDC) — UV-tier multiblock that assembles the RE-Doped
+ * Controlled Isotopic Doping Chamber (CIDC): UV-tier multiblock that assembles the RE-Doped
  * Photoresist Matrix (four rare-earth dopants + tin-oxo cluster, doped under a light-isolated beam
  * column). That matrix is required for UV Photoresist → UV/Elite circuit boards, so the CIDC is the
  * gate that makes the entire UV+ tier reachable.
  */
 public class MTE_CIDC extends MTEExtendedPowerMultiBlockBase<MTE_CIDC> implements ISurvivalConstructable {
 
-    // StableTitaniumMachineCasing (sBlockCasings4 meta2) — matches SPC_CASING's borrowed texture.
+    // StableTitaniumMachineCasing (sBlockCasings4 meta2): matches SPC_CASING's borrowed texture.
     private static final int CASING_INDEX = 50;
     private static final String STRUCTURE_PIECE_MAIN = "main";
     // Controller marker '~' sits at slice z=2, row y=14, char x=7 in the exported shape.
@@ -115,7 +114,7 @@ public class MTE_CIDC extends MTEExtendedPowerMultiBlockBase<MTE_CIDC> implement
                      * -1 -1 -1
                      */
 
-                    // shape[z][y][x] — 15 slices (z) × 16 rows (y) × 15 chars (x).
+                    // shape[z][y][x]: 15 slices (z) × 16 rows (y) × 15 chars (x).
                     // See the block legend below for what each letter maps to; ' ' = empty.
                     new String[][] {
                         { "               ", "LLL         LLL", "L K         K L", "L K         K L", "L K         K L",
@@ -181,22 +180,22 @@ public class MTE_CIDC extends MTEExtendedPowerMultiBlockBase<MTE_CIDC> implement
 
                 /*
                  * Block legend (from the in-game structure export):
-                 * A -> any tiered glass (BW glass etc.) — chainAllGlasses()
-                 * B -> Sintered Silicon Carbide bolted casing — BWBlockCasingsAdvanced (meta = Werkstoff id)
-                 * C -> gtnhlanth electrode casing — LanthItemList.ELECTRODE_CASING
-                 * D -> gt.blockcasings:15 — sBlockCasings1
-                 * E -> gt.blockcasings11:3 — sBlockCasings11
-                 * F -> gt.blockcasings13:1 — sBlockCasings13
-                 * G -> gt.blockcasings4:1 — sBlockCasings4
-                 * H -> gt.blockcasings9:0 — sBlockCasings9
-                 * I -> gt.blockcasings9:1 — sBlockCasings9
-                 * J -> gt.blockframes:129 — sBlockFrames
+                 * A -> any tiered glass (BW glass etc.), chainAllGlasses()
+                 * B -> Sintered Silicon Carbide bolted casing, BWBlockCasingsAdvanced (meta = Werkstoff id)
+                 * C -> gtnhlanth electrode casing: LanthItemList.ELECTRODE_CASING
+                 * D -> gt.blockcasings:15: sBlockCasings1
+                 * E -> gt.blockcasings11:3: sBlockCasings11
+                 * F -> gt.blockcasings13:1: sBlockCasings13
+                 * G -> gt.blockcasings4:1: sBlockCasings4
+                 * H -> gt.blockcasings9:0: sBlockCasings9
+                 * I -> gt.blockcasings9:1: sBlockCasings9
+                 * J -> gt.blockframes:129: sBlockFrames
                  * K -> gtplusplus.blockcasings.2:11 (miscutils)
                  * L -> tile.gtnhpp.casings:0 (Silicon Carbide Ceramic Casing)
-                 * M -> tile.gtnhpp.casings:9 (Spectral Isolation Casing — plain, lower dome cells)
-                 * N -> tile.gtnhpp.casings:25 (Isotopic Doping Casing — chamber shell, no hatches)
-                 * O -> Sintered Silicon Carbide plain casing — BWBlockCasings (meta = Werkstoff id)
-                 * P -> top-dome M cells (Spectral Isolation Casing) — ONLY hatch-capable cells
+                 * M -> tile.gtnhpp.casings:9 (Spectral Isolation Casing, plain, lower dome cells)
+                 * N -> tile.gtnhpp.casings:25 (Isotopic Doping Casing, chamber shell, no hatches)
+                 * O -> Sintered Silicon Carbide plain casing, BWBlockCasings (meta = Werkstoff id)
+                 * P -> top-dome M cells (Spectral Isolation Casing), ONLY hatch-capable cells
                  */
                 .addElement('A', chainAllGlasses())
                 .addElement(
@@ -212,12 +211,12 @@ public class MTE_CIDC extends MTEExtendedPowerMultiBlockBase<MTE_CIDC> implement
                 .addElement('J', StructureUtility.ofBlock(GregTechAPI.sBlockFrames, 129))
                 .addElement('K', ofBlock(GameRegistry.findBlock("miscutils", "gtplusplus.blockcasings.2"), 11))
                 .addElement('L', ofBlock(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.HTRF_CASING))
-                // M = Spectral Isolation Casing — plain casing (the lower/deeper dome cells).
+                // M = Spectral Isolation Casing: plain casing (the lower/deeper dome cells).
                 .addElement('M', ofBlock(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.SPC_CASING))
                 .addElement('O', ofBlock(WerkstoffLoader.BWBlockCasings, PrPMaterials.SinteredSiliconCarbide.getId()))
-                // N = Isotopic Doping Casing — the chamber shell (no hatches).
+                // N = Isotopic Doping Casing: the chamber shell (no hatches).
                 .addElement('N', ofBlock(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.ISOTOPIC_DOPING_CASING))
-                // P = the top dome M cells (Spectral Isolation Casing) — the ONLY hatch-capable spots.
+                // P = the top dome M cells (Spectral Isolation Casing), the ONLY hatch-capable spots.
                 .addElement(
                     'P',
                     buildHatchAdder(MTE_CIDC.class)
@@ -256,10 +255,13 @@ public class MTE_CIDC extends MTEExtendedPowerMultiBlockBase<MTE_CIDC> implement
 
         checkOneMaintenanceHatch(errors);
         checkHasEnergyHatch(errors);
-        checkHasInputBus(errors);
-        checkHasOutputBus(errors);
-        if (PPRecipeHelper.recipeMapHasFluidInputs(getRecipeMap())) checkHasInputHatch(errors);
-        if (PPRecipeHelper.recipeMapHasFluidOutputs(getRecipeMap())) checkHasOutputHatch(errors);
+        checkHasAnyInput(errors);
+        checkHasAnyOutput(errors);
+    }
+
+    @Override
+    public boolean supportsBatchMode() {
+        return true;
     }
 
     @Override
@@ -301,22 +303,16 @@ public class MTE_CIDC extends MTEExtendedPowerMultiBlockBase<MTE_CIDC> implement
     @Override
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType("Controlled Isotopic Doping Chamber, CIDC")
-            .addInfo(
-                EnumChatFormatting.GRAY + "Performs "
-                    + EnumChatFormatting.LIGHT_PURPLE
-                    + "precision doping"
-                    + EnumChatFormatting.GRAY
-                    + " under controlled isolation.")
-            .addSeparator()
+        tt.addMachineType("Doping Chamber, CIDC")
+            .addInfo("Assembles rare-earth dopant matrices for UV photoresist")
             .beginStructureBlock(15, 16, 15, true)
-            .addController("Front face, center")
+            .addController("Center, 2nd layer, 3rd slice from the front")
             .addCasing("90+", "Isotopic Doping Casing", false)
-            .addEnergyHatch("1+", "Any shell casing", 1)
-            .addMaintenanceHatch("1", "Any shell casing", 1)
-            .addInputBus("1+", "Any shell casing", 1)
-            .addInputHatch("1+", "Any shell casing", 1)
-            .addOutputBus("1+", "Any shell casing", 1)
+            .addEnergyHatch("1+", "Any isotopic doping casing", 1)
+            .addMaintenanceHatch("1", "Any isotopic doping casing", 1)
+            .addInputBus("1+", "Any isotopic doping casing", 1)
+            .addInputHatch("1+", "Any isotopic doping casing", 1)
+            .addOutputBus("1+", "Any isotopic doping casing", 1)
             .toolTipFinisher("_Shusi_");
         return tt;
     }

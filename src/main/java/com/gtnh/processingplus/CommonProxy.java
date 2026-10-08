@@ -52,7 +52,7 @@ public class CommonProxy {
      * {@code MTE_HPR}'s hatches and controller faces can actually match the wall they sit in.
      *
      * Page 100 is shared with {@code MTE_BOF}'s Solid Steel registration below (different slot), since no
-     * existing GT5U casingTexturePages slot renders as MACHINE_CASING_SOLID_STEEL either — every vanilla
+     * existing GT5U casingTexturePages slot renders as MACHINE_CASING_SOLID_STEEL either, every vanilla
      * BlockCasingsN class only falls back to it as an unreachable default, never a real placeable meta.
      */
     private static void registerExternalCasingTextures() {
@@ -61,7 +61,7 @@ public class CommonProxy {
         Block wall = GameRegistry.findBlock("GoodGenerator", "pressureResistantWalls");
         if (wall == null) {
             GTNHProcessingPlus.LOG
-                .warn("GoodGenerator:pressureResistantWalls not found — HPR casing texture will not match its wall");
+                .warn("GoodGenerator:pressureResistantWalls not found: HPR casing texture will not match its wall");
         } else {
             Textures.BlockIcons.setCasingTextureForId(
                 com.gtnh.processingplus.machines.MTE_HPR.PRESSURE_RESISTANT_WALLS_CASING_INDEX,

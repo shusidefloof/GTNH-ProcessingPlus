@@ -6,7 +6,7 @@ plugins {
     id("com.gtnewhorizons.gtnhconvention")
 }
 
-// EndlessIDs replaces NotEnoughIDs — prevent NEID from landing on the classpath via any transitive dep
+// EndlessIDs replaces NotEnoughIDs: prevent NEID from landing on the classpath via any transitive dep
 configurations.all {
     exclude(group = "com.github.GTNewHorizons", module = "NotEnoughIds")
 }
@@ -49,6 +49,6 @@ tasks.register("stripGT5ForNEI") {
         dstZip.close()
         srcZip.close()
 
-        println("[stripGT5ForNEI] Done — kept $kept, stripped $stripped Java-17 entries. ${outFile.length() / 1024 / 1024} MB")
+        println("[stripGT5ForNEI] Done: kept $kept, stripped $stripped Java-17 entries. ${outFile.length() / 1024 / 1024} MB")
     }
 }

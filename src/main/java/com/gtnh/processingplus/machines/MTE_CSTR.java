@@ -46,13 +46,13 @@ import gregtech.api.structure.error.StructureError;
 import gregtech.api.util.MultiblockTooltipBuilder;
 
 /**
- * Continuous Stirred Tank Reactor (CSTR) — an IV-tier multiblock for continuous-flow liquid-phase chemistry.
+ * Continuous Stirred Tank Reactor (CSTR): an IV-tier multiblock for continuous-flow liquid-phase chemistry.
  * Handles solvent exchange, aging, washing, and other fluid-through-solid reactions that don't belong in a
  * batch Large Chemical Reactor. 3×3×3 stainless vessel; compact and accessible from IV onward.
  */
 public class MTE_CSTR extends MTEExtendedPowerMultiBlockBase<MTE_CSTR> implements ISurvivalConstructable {
 
-    // CleanStainlessSteelMachineCasing (sBlockCasings4 meta1) — matches CSTR_CASING's borrowed texture.
+    // CleanStainlessSteelMachineCasing (sBlockCasings4 meta1): matches CSTR_CASING's borrowed texture.
     private static final int CASING_INDEX = 49;
     private static final String STRUCTURE_PIECE_MAIN = "main";
     // Controller (~) at z=0, y=1, x=1
@@ -81,14 +81,14 @@ public class MTE_CSTR extends MTEExtendedPowerMultiBlockBase<MTE_CSTR> implement
             STRUCTURE_DEFINITION = StructureDefinition.<MTE_CSTR>builder()
                 .addShape(
                     STRUCTURE_PIECE_MAIN,
-                    // shape[z][y][x] — 3 depth slices, 3 rows each, 3 chars wide.
+                    // shape[z][y][x]: 3 depth slices, 3 rows each, 3 chars wide.
                     // 'C' = CSTR casing or any hatch; ' ' = hollow interior (agitation chamber).
                     new String[][] {
-                        // z=0 — front face, controller at center
+                        // z=0: front face, controller at center
                         { "CCC", "C~C", "CCC" },
-                        // z=1 — reactor interior (hollow agitation chamber)
+                        // z=1: reactor interior (hollow agitation chamber)
                         { "CCC", "CEC", "CDC" },
-                        // z=2 — back face
+                        // z=2: back face
                         { "CCC", "CCC", "CCC" }, })
                 .addElement(
                     'C',
@@ -142,6 +142,11 @@ public class MTE_CSTR extends MTEExtendedPowerMultiBlockBase<MTE_CSTR> implement
     }
 
     @Override
+    public boolean supportsBatchMode() {
+        return true;
+    }
+
+    @Override
     protected ProcessingLogic createProcessingLogic() {
         return new ProcessingLogic();
     }
@@ -181,24 +186,16 @@ public class MTE_CSTR extends MTEExtendedPowerMultiBlockBase<MTE_CSTR> implement
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType("Continuous Stirred Tank Reactor, CSTR")
-            .addInfo(
-                EnumChatFormatting.GRAY + "Runs "
-                    + EnumChatFormatting.AQUA
-                    + "continuous-flow liquid-phase chemistry"
-                    + EnumChatFormatting.GRAY
-                    + " — solvent exchange, aging, washing.")
-            .addSeparator()
+            .addInfo("Runs continuous-flow liquid-phase chemistry")
             .addStaticParallelInfo(4)
             .beginStructureBlock(3, 3, 3, true)
-            .addController("Front face, center")
+            .addController("Front center, 2nd layer")
             .addCasing("25+", "Agitated Reaction Vessel Casing", false)
-            .addEnergyHatch("1+", "Any casing", 1)
-            .addMaintenanceHatch("1", "Any casing", 1)
-            .addMufflerHatch("1", "Any casing", 1)
-            .addInputBus("1+", "Any casing", 1)
-            .addInputHatch("1+", "Any casing", 1)
-            .addOutputBus("1+", "Any casing", 1)
-            .addOutputHatch("1+", "Any casing", 1)
+            .addEnergyHatch("1+", "Any agitated reaction vessel casing", 1)
+            .addMaintenanceHatch("1", "Any agitated reaction vessel casing", 1)
+            .addMufflerHatch("1", "Any agitated reaction vessel casing", 1)
+            .addInputAny("1+", "Any agitated reaction vessel casing", 1)
+            .addOutputAny("1+", "Any agitated reaction vessel casing", 1)
             .toolTipFinisher("_Shusi_");
         return tt;
     }

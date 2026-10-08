@@ -54,20 +54,20 @@ import gregtech.api.util.tooltip.TooltipHelper;
 import gregtech.common.gui.modularui.multiblock.base.MTEMultiBlockBaseGui;
 
 /**
- * Ceramic Reaction Vessel — 5×5×5 structure with hBN ceramic inner lining.
+ * Ceramic Reaction Vessel: 5×5×5 structure with hBN ceramic inner lining.
  * The 24 hBN blocks are structurally load-bearing: checkMachine fails without them.
  * Only multiblock that can safely contain exotic molten alloy mixtures at LuV/ZPM.
  */
 public class MTE_CRV extends MTEExtendedPowerMultiBlockBase<MTE_CRV> implements ISurvivalConstructable {
 
-    // RobustTungstenSteelMachineCasing (sBlockCasings4 meta0) — matches CRV_CASING's borrowed texture.
+    // RobustTungstenSteelMachineCasing (sBlockCasings4 meta0): matches CRV_CASING's borrowed texture.
     private static final int CASING_INDEX = 48;
     private static final String STRUCTURE_PIECE_MAIN = "main";
     private static final int OFFSET_X = 2;
     private static final int OFFSET_Y = 2;
     private static final int OFFSET_Z = 0;
 
-    // Machine modes — native CRV recipes, or the shared GT++ Alloy Blast Smelter recipe pool.
+    // Machine modes: native CRV recipes, or the shared GT++ Alloy Blast Smelter recipe pool.
     private static final int MACHINEMODE_CRV = 0;
     private static final int MACHINEMODE_ABS = 1;
 
@@ -92,10 +92,10 @@ public class MTE_CRV extends MTEExtendedPowerMultiBlockBase<MTE_CRV> implements 
             STRUCTURE_DEFINITION = StructureDefinition.<MTE_CRV>builder()
                 .addShape(
                     STRUCTURE_PIECE_MAIN,
-                    // shape[z][y][x] — 5 z-layers, 5 y-rows each, 5 x-chars
+                    // shape[z][y][x]: 5 z-layers, 5 y-rows each, 5 x-chars
                     // 'C' = CRV casing or hatch, 'B' = hBN ceramic block (no hatches allowed), ' ' = air
                     new String[][] {
-                        // z=0: front face — all casing, controller center
+                        // z=0: front face: all casing, controller center
                         { "CCCCC", "CCCCC", "CC~CC", "CCCCC", "CCCCC" },
                         // z=1: outer casing ring + hBN inner lining
                         { "CCCCC", "CBBBC", "CB BC", "CBBBC", "CCCCC" },
@@ -103,7 +103,7 @@ public class MTE_CRV extends MTEExtendedPowerMultiBlockBase<MTE_CRV> implements 
                         { "CCCCC", "CBBBC", "CB BC", "CBBBC", "CCCCC" },
                         // z=3: inner layer (identical to z=1)
                         { "CCCCC", "CBBBC", "CB BC", "CBBBC", "CCCCC" },
-                        // z=4: back face — all casing
+                        // z=4: back face: all casing
                         { "CCCCC", "CCCCC", "CCCCC", "CCCCC", "CCCCC" }, })
                 .addElement(
                     'C',
@@ -186,7 +186,7 @@ public class MTE_CRV extends MTEExtendedPowerMultiBlockBase<MTE_CRV> implements 
         return true;
     }
 
-    // Default getMachineModeKey() just returns "GT5U.MULTI_MACHINE_MODE.unknown" ("Unknown Mode") —
+    // Default getMachineModeKey() just returns "GT5U.MULTI_MACHINE_MODE.unknown" ("Unknown Mode")
     // same MTEOreWashingPlant pattern as the GUI button fix above.
     @Override
     public String getMachineModeKey() {
@@ -199,7 +199,7 @@ public class MTE_CRV extends MTEExtendedPowerMultiBlockBase<MTE_CRV> implements 
         machineModeIcons.add(GTUITextures.OVERLAY_BUTTON_MACHINEMODE_COMPRESSING);
     }
 
-    // setMachineModeIcons() alone no longer surfaces a GUI button — MTEMultiBlockBaseGui (the actual
+    // setMachineModeIcons() alone no longer surfaces a GUI button, MTEMultiBlockBaseGui (the actual
     // rendered GUI since the ModularUI2 migration) only adds the mode-switch widget when its OWN,
     // separate machineModeIcons list (populated here) is non-empty. See MTEOreWashingPlant for the
     // upstream reference implementation of this exact pattern. Note this needs the ModularUI2
@@ -241,53 +241,36 @@ public class MTE_CRV extends MTEExtendedPowerMultiBlockBase<MTE_CRV> implements 
     @Override
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType("Ceramic Reaction Vessel, CRV")
-            .addInfo(
-                EnumChatFormatting.GRAY + "Reacts and alloys "
-                    + EnumChatFormatting.RED
-                    + "exotic molten"
-                    + EnumChatFormatting.GRAY
-                    + " mixtures in an inert lining.")
+        tt.addMachineType("Reaction Vessel, Alloy Blast Smelter, CRV")
             .addInfo(
                 "Accepts up to " + TooltipHelper.coloredText("6", EnumChatFormatting.YELLOW)
-                    + EnumChatFormatting.GRAY
-                    + " molten metal fluid inputs simultaneously.")
-            .addSeparator()
+                    + " molten metal fluid inputs at once")
             .addInfo(
-                EnumChatFormatting.GOLD + "Inner lining: "
-                    + EnumChatFormatting.GRAY
-                    + "exactly "
-                    + TooltipHelper.coloredText("24", EnumChatFormatting.YELLOW)
-                    + EnumChatFormatting.GRAY
-                    + " Hexagonal Boron Nitride Ceramic Blocks required.")
-            .addInfo("hBN blocks are load-bearing; the machine will not form without the exact count.")
-            .addSeparator()
+                "Requires exactly " + TooltipHelper.coloredText("24", EnumChatFormatting.YELLOW)
+                    + " Hexagonal Boron Nitride Ceramic Blocks as the inner lining")
             .addInfo(
-                EnumChatFormatting.GOLD + "Mode switch: "
+                "Switch between " + EnumChatFormatting.GOLD
+                    + "CRV"
                     + EnumChatFormatting.GRAY
-                    + "GUI button toggles between native CRV recipes and the shared "
-                    + EnumChatFormatting.YELLOW
+                    + " and "
+                    + EnumChatFormatting.GOLD
                     + "Alloy Blast Smelter"
                     + EnumChatFormatting.GRAY
-                    + " recipe pool.")
+                    + " recipes with the mode button in the GUI")
             .addInfo(
-                "  ABS mode runs at " + TooltipHelper.coloredText("400%", EnumChatFormatting.GREEN)
-                    + EnumChatFormatting.GRAY
-                    + " speed with up to "
-                    + TooltipHelper.coloredText("8", EnumChatFormatting.YELLOW)
-                    + EnumChatFormatting.GRAY
-                    + " parallels.")
+                "Alloy Blast Smelter mode: " + TooltipHelper.speedText(4f)
+                    + " speed and "
+                    + TooltipHelper.parallelText(8)
+                    + " Parallels")
             .beginStructureBlock(5, 5, 5, true)
-            .addController("Front face, center")
+            .addController("Front center, 3rd layer")
             .addCasing("74+", "Iridium-Reinforced Reactor Casing", false)
             .addCasing("24", "Hexagonal Boron Nitride Ceramic Block", true)
-            .addEnergyHatch("1+", "Any outer casing", 1)
-            .addMaintenanceHatch("1", "Any outer casing", 1)
-            .addMufflerHatch("1", "Any outer casing", 1)
-            .addInputBus("1+", "Any outer casing", 1)
-            .addInputHatch("1+", "Any outer casing, up to 6 fluid hatches", 1)
-            .addOutputBus("1+", "Any outer casing", 1)
-            .addOutputHatch("1+", "Any outer casing", 1)
+            .addEnergyHatch("1+", "Any iridium-reinforced reactor casing", 1)
+            .addMaintenanceHatch("1", "Any iridium-reinforced reactor casing", 1)
+            .addMufflerHatch("1", "Any iridium-reinforced reactor casing", 1)
+            .addInputAny("1+", "Any iridium-reinforced reactor casing", 1)
+            .addOutputAny("1+", "Any iridium-reinforced reactor casing", 1)
             .toolTipFinisher("_Shusi_");
         return tt;
     }

@@ -31,14 +31,14 @@ public class PrPMaterials implements Runnable {
             .addCells();
     }
 
-    // Thermoplastic polymers used in molten-form blending — dust + cells + molten, no metalworking
+    // Thermoplastic polymers used in molten-form blending, dust + cells + molten, no metalworking
     private static Werkstoff.GenerationFeatures moltenPolymerFeatures() {
         return new Werkstoff.GenerationFeatures().onlyDust()
             .addCells()
             .addMolten();
     }
 
-    // Structural polymers — molten + cells + simple metalworking items (plates, rods, etc.)
+    // Structural polymers: molten + cells + simple metalworking items (plates, rods, etc.)
     private static Werkstoff.GenerationFeatures plasticFeatures() {
         return new Werkstoff.GenerationFeatures().onlyDust()
             .addMolten()
@@ -63,14 +63,14 @@ public class PrPMaterials implements Runnable {
             .addCells();
     }
 
-    // Dense sintered ceramics — dust + metal items + simple metalworking (plates, rods, etc.)
+    // Dense sintered ceramics: dust + metal items + simple metalworking (plates, rods, etc.)
     private static Werkstoff.GenerationFeatures metalCeramicFeatures() {
         return new Werkstoff.GenerationFeatures().onlyDust()
             .addMetalItems()
             .addSimpleMetalWorkingItems();
     }
 
-    // Plasma-quenched amorphous metals — same as metalCeramic but with a molten fluid form so
+    // Plasma-quenched amorphous metals: same as metalCeramic but with a molten fluid form so
     // CoAL recipes can consume them as a fluid instead of keeping them as rods/plates.
     private static Werkstoff.GenerationFeatures amorphousMetalFeatures() {
         return new Werkstoff.GenerationFeatures().onlyDust()
@@ -80,7 +80,7 @@ public class PrPMaterials implements Runnable {
             .addMolten();
     }
 
-    // Hard ceramics used in gear contexts — dust + gems + simple + crafting metalworking
+    // Hard ceramics used in gear contexts, dust + gems + simple + crafting metalworking
     private static Werkstoff.GenerationFeatures gearedCeramicFeatures() {
         return new Werkstoff.GenerationFeatures().onlyDust()
             .addGems()
@@ -138,19 +138,19 @@ public class PrPMaterials implements Runnable {
     public static Werkstoff BNitrideWaste;
 
     // =========================
-    // NYLON CHAIN — INTERMEDIATES
+    // NYLON CHAIN: INTERMEDIATES
     // =========================
     public static Werkstoff Adiponitrile;
     public static Werkstoff HMD;
 
     // =========================
-    // PLA CHAIN — INTERMEDIATES
+    // PLA CHAIN: INTERMEDIATES
     // =========================
     public static Werkstoff LacticAcid;
     public static Werkstoff Lactide;
 
     // =========================
-    // KAPTON CHAIN — INTERMEDIATES
+    // KAPTON CHAIN: INTERMEDIATES
     // =========================
     public static Werkstoff PMDA;
     public static Werkstoff ODA;
@@ -234,7 +234,7 @@ public class PrPMaterials implements Runnable {
     public static Werkstoff LuVPhotoresist;
 
     // =========================
-    // PHOTORESIST CHAIN — ZPM
+    // PHOTORESIST CHAIN: ZPM
     // =========================
     public static Werkstoff Hexafluoroacetone;
     public static Werkstoff HFIMAMonomer;
@@ -244,7 +244,7 @@ public class PrPMaterials implements Runnable {
     public static Werkstoff ZPMPhotoresist;
 
     // =========================
-    // PHOTORESIST CHAIN — UV
+    // PHOTORESIST CHAIN: UV
     // =========================
     public static Werkstoff TinOxoAcetateCluster;
     public static Werkstoff ErbiumTriflate;
@@ -256,7 +256,7 @@ public class PrPMaterials implements Runnable {
     public static Werkstoff UVPhotoresist;
 
     // =========================
-    // PHOTORESIST CHAIN — UHV
+    // PHOTORESIST CHAIN: UHV
     // =========================
     public static Werkstoff BioRefinedIntermediate;
     public static Werkstoff RadoxXenoxeneMatrix;
@@ -265,7 +265,7 @@ public class PrPMaterials implements Runnable {
     public static Werkstoff UHVPhotoresist;
 
     // =========================
-    // PHOTORESIST CHAIN — UEV
+    // PHOTORESIST CHAIN: UEV
     // =========================
     public static Werkstoff TengamTriflate;
     public static Werkstoff ActivatedNaquadriaFluid;
@@ -279,7 +279,7 @@ public class PrPMaterials implements Runnable {
     public static Werkstoff UEVPhotoresist;
 
     // =========================
-    // PHOTORESIST CHAIN — UIV
+    // PHOTORESIST CHAIN: UIV
     // =========================
     public static Werkstoff StabilizedQGPMatrix;
     public static Werkstoff TranscendentQGPLattice;
@@ -289,7 +289,7 @@ public class PrPMaterials implements Runnable {
     public static Werkstoff UIVPhotoresist;
 
     // =========================
-    // PHOTORESIST CHAIN — UMV
+    // PHOTORESIST CHAIN: UMV
     // =========================
     public static Werkstoff UMVPhotoresistMatrix;
     public static Werkstoff UMVPhotoresist;
@@ -318,7 +318,7 @@ public class PrPMaterials implements Runnable {
     public static Werkstoff RefractoryHighEntropyAlloy;
 
     // =========================
-    // LuV EXOTICS — Vibranium + Unobtanium
+    // LuV EXOTICS: Vibranium + Unobtanium
     // =========================
     public static Werkstoff Vibranium;
     public static Werkstoff Unobtanium;
@@ -369,7 +369,7 @@ public class PrPMaterials implements Runnable {
     public static Werkstoff LiquidCO2;
 
     // =========================
-    // USES — DERIVED MATERIALS
+    // USES: DERIVED MATERIALS
     // =========================
     public static Werkstoff HBNLubricant; // hBN-suspended lubricant fluid (UHV machine fluid)
     public static Werkstoff PAAAdhesive; // polyamic acid adhesive fluid (precision bonding)
@@ -459,7 +459,7 @@ public class PrPMaterials implements Runnable {
                 TextureSet.SET_DULL));
 
         // -------------------------
-        // PAN CHAIN — ORGANICS
+        // PAN CHAIN: ORGANICS
         // -------------------------
         Polyacrylonitrile = register(
             new Werkstoff(
@@ -583,7 +583,7 @@ public class PrPMaterials implements Runnable {
                 TextureSet.SET_DULL));
 
         // -------------------------
-        // FLUIDS — SILICA / POLYIMIDE
+        // FLUIDS: SILICA / POLYIMIDE
         // -------------------------
         TEOS = register(
             new Werkstoff(
@@ -608,7 +608,7 @@ public class PrPMaterials implements Runnable {
                 TextureSet.SET_FLUID));
 
         // -------------------------
-        // SiC CHAIN — CERAMICS
+        // SiC CHAIN: CERAMICS
         // -------------------------
         CrudeSiCPowder = register(
             new Werkstoff(
@@ -655,7 +655,7 @@ public class PrPMaterials implements Runnable {
                 TextureSet.SET_DULL));
 
         // -------------------------
-        // hBN CHAIN — CERAMICS
+        // hBN CHAIN: CERAMICS
         // -------------------------
         BoronCarbide = register(
             new Werkstoff(
@@ -980,7 +980,7 @@ public class PrPMaterials implements Runnable {
                 TextureSet.SET_FLUID));
 
         // -------------------------
-        // PHOTORESIST CHAIN — MV
+        // PHOTORESIST CHAIN: MV
         // -------------------------
         NovolacResin = register(
             new Werkstoff(
@@ -1027,7 +1027,7 @@ public class PrPMaterials implements Runnable {
                 TextureSet.SET_FLUID));
 
         // -------------------------
-        // PHOTORESIST CHAIN — HV
+        // PHOTORESIST CHAIN: HV
         // -------------------------
         HVPhotoresistSensitizer = register(
             new Werkstoff(
@@ -1052,7 +1052,7 @@ public class PrPMaterials implements Runnable {
                 TextureSet.SET_FLUID));
 
         // -------------------------
-        // PHOTORESIST CHAIN — EV
+        // PHOTORESIST CHAIN: EV
         // -------------------------
         Acetoxystyrene = register(
             new Werkstoff(
@@ -1110,7 +1110,7 @@ public class PrPMaterials implements Runnable {
                 TextureSet.SET_FLUID));
 
         // -------------------------
-        // PHOTORESIST CHAIN — IV
+        // PHOTORESIST CHAIN: IV
         // -------------------------
         Furfural = register(
             new Werkstoff(
@@ -1157,7 +1157,7 @@ public class PrPMaterials implements Runnable {
                 TextureSet.SET_FLUID));
 
         // -------------------------
-        // PHOTORESIST CHAIN — LuV
+        // PHOTORESIST CHAIN: LuV
         // -------------------------
         Trifluoromethane = register(
             new Werkstoff(
@@ -1318,7 +1318,7 @@ public class PrPMaterials implements Runnable {
                 TextureSet.SET_FLUID));
 
         // -------------------------
-        // PHOTORESIST CHAIN — ZPM
+        // PHOTORESIST CHAIN: ZPM
         // -------------------------
         Hexafluoroacetone = register(
             new Werkstoff(
@@ -1387,7 +1387,7 @@ public class PrPMaterials implements Runnable {
                 TextureSet.SET_FLUID));
 
         // -------------------------
-        // PHOTORESIST CHAIN — UV
+        // PHOTORESIST CHAIN: UV
         // -------------------------
         TinOxoAcetateCluster = register(
             new Werkstoff(
@@ -1478,7 +1478,7 @@ public class PrPMaterials implements Runnable {
                 TextureSet.SET_FLUID));
 
         // -------------------------
-        // PHOTORESIST CHAIN — UHV
+        // PHOTORESIST CHAIN: UHV
         // -------------------------
         BioRefinedIntermediate = register(
             new Werkstoff(
@@ -1536,7 +1536,7 @@ public class PrPMaterials implements Runnable {
                 TextureSet.SET_FLUID));
 
         // -------------------------
-        // PHOTORESIST CHAIN — UEV
+        // PHOTORESIST CHAIN: UEV
         // -------------------------
         TengamTriflate = register(
             new Werkstoff(
@@ -1649,7 +1649,7 @@ public class PrPMaterials implements Runnable {
                 TextureSet.SET_FLUID));
 
         // -------------------------
-        // PHOTORESIST CHAIN — UIV
+        // PHOTORESIST CHAIN: UIV
         // -------------------------
         StabilizedQGPMatrix = register(
             new Werkstoff(
@@ -1718,7 +1718,7 @@ public class PrPMaterials implements Runnable {
                 TextureSet.SET_FLUID));
 
         // -------------------------
-        // PHOTORESIST CHAIN — UMV
+        // PHOTORESIST CHAIN: UMV
         // -------------------------
 
         UMVPhotoresistMatrix = register(
@@ -2066,7 +2066,7 @@ public class PrPMaterials implements Runnable {
                 TextureSet.SET_FLUID));
 
         // -------------------------
-        // USES — DERIVED MATERIALS
+        // USES: DERIVED MATERIALS
         // -------------------------
         HBNLubricant = register(
             new Werkstoff(
@@ -2143,7 +2143,7 @@ public class PrPMaterials implements Runnable {
                 id(),
                 TextureSet.SET_DULL));
 
-        // ── LuV exotics — appended last to keep earlier material IDs stable ──
+        // ── LuV exotics: appended last to keep earlier material IDs stable ──
         Vibranium = register(
             new Werkstoff(
                 rgb(37, 150, 190),
@@ -2284,7 +2284,7 @@ public class PrPMaterials implements Runnable {
                 id(),
                 TextureSet.SET_METALLIC));
 
-        // Crude promethium straight off the freezer — carries the Sm-147 that Pm-147 decays into,
+        // Crude promethium straight off the freezer, carries the Sm-147 that Pm-147 decays into,
         // which is exactly what the resin purification removes.
         RawPromethium = register(
             new Werkstoff(
@@ -2322,7 +2322,7 @@ public class PrPMaterials implements Runnable {
                 id(),
                 TextureSet.SET_FLUID));
 
-        // Heavy water (D₂O) — a real fluid now, since neither IC2 nor GT5U ship one. Cells + fluid only.
+        // Heavy water (D₂O): a real fluid now, since neither IC2 nor GT5U ship one. Cells + fluid only.
         HeavyWater = register(
             new Werkstoff(
                 rgb(40, 80, 120),
@@ -2357,7 +2357,7 @@ public class PrPMaterials implements Runnable {
                 id(),
                 TextureSet.SET_FINE));
 
-        // Promethean Naquadria — a radioluminescent, radioactive exotic alloy forged in the CRV from
+        // Promethean Naquadria: a radioluminescent, radioactive exotic alloy forged in the CRV from
         // molten Promethium + Naquadria. Full tool/structural material (dust→ingot→plate/rod/gear/...).
         PrometheanNaquadria = register(
             new Werkstoff(
@@ -2380,7 +2380,7 @@ public class PrPMaterials implements Runnable {
                 id(),
                 TextureSet.SET_SHINY));
 
-        // Promethium Betavoltaic Alloy — Pm-147 dispersed in a gallium-arsenide semiconductor matrix.
+        // Promethium Betavoltaic Alloy: Pm-147 dispersed in a gallium-arsenide semiconductor matrix.
         // Its own beta decay drives charge across the GaAs junction (a nuclear battery). Forged in the
         // CRV from molten Promethium; cast into Betavoltaic Cells to fuel the RTG generator.
         PromethiumBetavoltaicAlloy = register(
@@ -2400,7 +2400,7 @@ public class PrPMaterials implements Runnable {
                 id(),
                 TextureSet.SET_SHINY));
 
-        // ── Carbon aerogel (PAN route) — appended last to keep earlier material IDs stable ──
+        // ── Carbon aerogel (PAN route): appended last to keep earlier material IDs stable ──
         WetPANGel = register(
             new Werkstoff(
                 rgb(190, 215, 230),
@@ -2434,12 +2434,12 @@ public class PrPMaterials implements Runnable {
                 id(),
                 TextureSet.SET_DULL));
 
-        // Jiritsu (自立, "self-reliance") — the mod's own pale blue-white UIV structural alloy, a
+        // Jiritsu (自立, "self-reliance"): the mod's own pale blue-white UIV structural alloy, a
         // third entry alongside GT5's Churitsu (neutral) and GoodGenerator's Tairitsu (opposition).
         // Mirrors how Churitsu/Tairitsu are themselves built: a multiblock-mixed blend of several
         // prestige alloys, here all pale blue-white ones (Trinium, Ultimet, Energetic Silver,
         // Crystalline Alloy) fused with the fragile aerogel lattice and a molten Naquadah backbone
-        // — Jiritsu Alloy — then stabilized under an inert Helium blanket into Hot Jiritsu.
+        // : Jiritsu Alloy, then stabilized under an inert Helium blanket into Hot Jiritsu.
         JiritsuAlloy = register(
             new Werkstoff(
                 rgb(195, 205, 225),

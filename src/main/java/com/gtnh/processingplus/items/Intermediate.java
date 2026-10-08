@@ -7,7 +7,7 @@ import net.minecraft.item.ItemStack;
  *
  * <p>
  * These are the non-chemical "physical state" steps of the Vibranium/Unobtanium chains (red-hot
- * ingots, crystal fragments/shards, clumps, slag, ore concentrate) — they aren't real compounds, so
+ * ingots, crystal fragments/shards, clumps, slag, ore concentrate), they aren't real compounds, so
  * they live as plain items rather than Werkstoffe. Each constant's {@code ordinal()} is its item
  * damage value, so only append, never reorder.
  *

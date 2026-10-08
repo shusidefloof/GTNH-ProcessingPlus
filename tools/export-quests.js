@@ -12,7 +12,7 @@
  *
  * Usage: node tools/export-quests.js
  * Every run re-reads the generated files fresh from disk and diffs them against the source
- * before reporting success — run it after every quest change you intend to ship.
+ * before reporting success: run it after every quest change you intend to ship.
  */
 const fs = require("fs");
 const path = require("path");
@@ -32,7 +32,7 @@ function sanitize(name) {
 // IMPORTANT: must convert via String(x) -> BigInt, not BigInt(x) directly. high/low are JS
 // numbers (IEEE754 doubles) that can't hold a 64-bit long exactly; JSON.stringify writes them
 // using the *shortest round-trip decimal string* (e.g. "-7161013413323522000"), which is what
-// Java's exact-integer long parser will actually read back from QuestLine.json — and that text
+// Java's exact-integer long parser will actually read back from QuestLine.json, and that text
 // is NOT always the same integer as BigInt(x), which instead recovers the double's own precise
 // binary value (e.g. -7161013413323522048, off by 48 here). Encoding from the wrong one silently
 // points QuestLinesOrder.txt at a UUID BetterQuesting can never find, which crashes the
@@ -82,7 +82,7 @@ function exportQuests() {
     "utf-8",
   );
 
-  // Key BetterQuesting uses to find the QuestLine.json above — computed here, from the exact
+  // Key BetterQuesting uses to find the QuestLine.json above, computed here, from the exact
   // same questLineIDHigh/Low values just written, so it can never drift out of sync with them.
   const questLineKey = encodeQuestLineKey(chapter["questLineIDHigh:4"], chapter["questLineIDLow:4"]);
   const questLineOrderLine = `${questLineKey}: ${chapter["properties:10"]["betterquesting:10"]["name:8"]}`;
@@ -92,7 +92,7 @@ function exportQuests() {
   // if DefaultQuests/QuestSettings.json is missing. Content is the live save's own
   // questSettings:10 object, unwrapped (the non-legacy loader reads it directly, no
   // "questSettings" wrapper key). loadWorldSettings=true means this is applied as-is to every
-  // fresh player world, so force editMode off here even though the dev save keeps it on —
+  // fresh player world, so force editMode off here even though the dev save keeps it on
   // players shouldn't start with the quest editor unlocked; devs can still toggle it manually
   // in their own save.
   const shippedQuestSettings = JSON.parse(JSON.stringify(questSettings));
@@ -232,7 +232,7 @@ if (
   result.questFileCount !== result.expectedCount ||
   result.lineFileCount !== result.expectedCount + 1
 ) {
-  console.error("Export verification FAILED — resource files do not match the live save.");
+  console.error("Export verification FAILED: resource files do not match the live save.");
   process.exit(1);
 }
 

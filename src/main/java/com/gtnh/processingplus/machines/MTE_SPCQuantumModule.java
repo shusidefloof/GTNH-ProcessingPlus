@@ -29,12 +29,12 @@ import gregtech.api.structure.error.StructureError;
 import gregtech.api.util.MultiblockTooltipBuilder;
 
 /**
- * Quantum Alignment Module — external SPC upgrade. Route it in via a Quantum Alignment Adapter in
+ * Quantum Alignment Module: external SPC upgrade. Route it in via a Quantum Alignment Adapter in
  * an SPC support bay to unlock UEV+ / optical-quantum board recipes.
  */
 public class MTE_SPCQuantumModule extends MTE_SPCModuleBase<MTE_SPCQuantumModule> implements ISurvivalConstructable {
 
-    // RadiationProofMachineCasing (sBlockCasings3 meta11) — matches QUANTUM_MODULE_CASING's borrowed texture.
+    // RadiationProofMachineCasing (sBlockCasings3 meta11): matches QUANTUM_MODULE_CASING's borrowed texture.
     private static final int CASING_INDEX = 43;
     private static final String STRUCTURE_PIECE_MAIN = "main";
     private static final int OFFSET_X = 1, OFFSET_Y = 1, OFFSET_Z = 0;
@@ -128,21 +128,19 @@ public class MTE_SPCQuantumModule extends MTE_SPCModuleBase<MTE_SPCQuantumModule
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType("SPC Upgrade Module")
             .addInfo(
-                EnumChatFormatting.GRAY + "Adds a "
-                    + EnumChatFormatting.LIGHT_PURPLE
+                "Adds a " + EnumChatFormatting.LIGHT_PURPLE
                     + "quantum-alignment"
                     + EnumChatFormatting.GRAY
-                    + " stage to the SPC.")
+                    + " stage to the SPC")
             .addInfo(
-                EnumChatFormatting.GRAY + "Place within "
-                    + EnumChatFormatting.RED
+                "Must be placed within " + EnumChatFormatting.RED
                     + LINK_RANGE
                     + EnumChatFormatting.GRAY
-                    + " blocks of the SPC.")
-            .addInfo("Left-click the SPC controller with a data stick, then right-click this to link.")
-            .addInfo("Route it into the SPC with a Quantum Alignment Adapter in a support bay.")
+                    + " blocks of the SPC")
+            .addInfo("Left-click the SPC controller with a data stick, then right-click this module to link them")
+            .addInfo("Route it into the SPC with a Quantum Alignment Adapter in a support bay")
             .beginStructureBlock(3, 3, 3, false)
-            .addController("Front center")
+            .addController("Front center, 2nd layer")
             .addCasing("26+", "Quantum Alignment Module Casing", false)
             .toolTipFinisher("_Shusi_");
         return tt;

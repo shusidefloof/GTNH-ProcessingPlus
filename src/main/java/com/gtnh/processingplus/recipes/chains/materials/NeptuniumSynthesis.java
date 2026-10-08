@@ -32,7 +32,7 @@ public class NeptuniumSynthesis {
     }
 
     // =========================================================
-    // 1. Dissolve depleted uranium rod in HNO3 — LCR
+    // 1. Dissolve depleted uranium rod in HNO3, LCR
     // Single / dual / quad rod variants, scaled 1× / 2× / 4×.
     // Outputs U dust + neptunium extraction residue + diluted HNO3 + empty rod casings.
     // =========================================================
@@ -51,7 +51,7 @@ public class NeptuniumSynthesis {
             .eut(TierEU.RECIPE_EV)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
 
-        // Dual rod — 2×
+        // Dual rod: 2×
         GTValues.RA.stdBuilder()
             .itemInputs(ItemList.DepletedRodUranium2.get(1), circuit(1))
             .fluidInputs(fluid(Materials.NitricAcid, 4000))
@@ -64,7 +64,7 @@ public class NeptuniumSynthesis {
             .eut(TierEU.RECIPE_EV)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
 
-        // Quad rod — 4×
+        // Quad rod: 4×
         GTValues.RA.stdBuilder()
             .itemInputs(ItemList.DepletedRodUranium4.get(1), circuit(1))
             .fluidInputs(fluid(Materials.NitricAcid, 8000))
@@ -79,7 +79,7 @@ public class NeptuniumSynthesis {
     }
 
     // =========================================================
-    // 2. Naphtha/nitric acid liquid-liquid extraction — LCR
+    // 2. Naphtha/nitric acid liquid-liquid extraction: LCR
     // 4× residue + HNO3 + naphtha → neptunium nitrate solution + recovered naphtha.
     // Naphtha acts as organic extractant (80% recovery).
     // =========================================================
@@ -95,7 +95,7 @@ public class NeptuniumSynthesis {
     }
 
     // =========================================================
-    // 3. Ammonia precipitation — LCR
+    // 3. Ammonia precipitation: LCR
     // Np nitrate solution + NH3 + water → neptunium oxide + ammonium nitrate solution.
     // All ammonia is retained in the ammonium nitrate solution; step 3r2 recovers it fully.
     // =========================================================
@@ -114,7 +114,7 @@ public class NeptuniumSynthesis {
     }
 
     // =========================================================
-    // Recycling 3r: Reconcentrate diluted HNO3 — Distillation Tower
+    // Recycling 3r: Reconcentrate diluted HNO3: Distillation Tower
     // 4000 mB diluted → 1000 mB HNO3 + 3000 mB water.
     // =========================================================
     private static void step3r_ReconcentrateNitricAcid() {
@@ -128,7 +128,7 @@ public class NeptuniumSynthesis {
     }
 
     // =========================================================
-    // Recycling 3r2: Decompose ammonium nitrate solution — Distillation Tower
+    // Recycling 3r2: Decompose ammonium nitrate solution, Distillation Tower
     // 2000 mB ammonium nitrate solution → 1000 mB NH3 + 2000 mB diluted HNO3.
     // Closes both the ammonia and nitric acid loops completely.
     // =========================================================
@@ -143,13 +143,13 @@ public class NeptuniumSynthesis {
     }
 
     // =========================================================
-    // 4a. NpO2 + 2 Ca → Np ingot + 2 CaO (quicklime) — EBF 1500 K
+    // 4a. NpO2 + 2 Ca → Np ingot + 2 CaO (quicklime), EBF 1500 K
     // =========================================================
     private static void step4a_CalciumThermite() {
 
         GTValues.RA.stdBuilder()
             .itemInputs(dust(PrPMaterials.NeptuniumOxide, 1), dust(Materials.Calcium, 2))
-            .itemOutputs(item("ingotNeptunium", 1), dust(Materials.Quicklime, 2))
+            .itemOutputs(item("ingotNeptunium", 1), dust(Materials.Quicklime, 4))
             .duration(30 * SECONDS)
             .eut(TierEU.RECIPE_HV)
             .metadata(GTRecipeConstants.COIL_HEAT, 1500)
@@ -157,13 +157,13 @@ public class NeptuniumSynthesis {
     }
 
     // =========================================================
-    // 4b. NpO2 + 2 Ba → Np ingot + 2 BaO — EBF 1500 K (alternate)
+    // 4b. NpO2 + 2 Ba → Np ingot + 2 BaO, EBF 1500 K (alternate)
     // =========================================================
     private static void step4b_BariumThermite() {
 
         GTValues.RA.stdBuilder()
             .itemInputs(dust(PrPMaterials.NeptuniumOxide, 1), dust(Materials.Barium, 2))
-            .itemOutputs(item("ingotNeptunium", 1), dust(PrPMaterials.BariumOxide, 2))
+            .itemOutputs(item("ingotNeptunium", 1), dust(PrPMaterials.BariumOxide, 4))
             .duration(30 * SECONDS)
             .eut(TierEU.RECIPE_HV)
             .metadata(GTRecipeConstants.COIL_HEAT, 1500)
@@ -188,7 +188,7 @@ public class NeptuniumSynthesis {
             .addTo(RecipeMaps.centrifugeRecipes);
 
         // Neutron activation: ¹⁴⁶Nd + neutron capture → ¹⁴⁷Nd. BeamCrafter collides two neutron
-        // beams into the target; no fluid needed — the "bombardment" IS the particle metadata below.
+        // beams into the target; no fluid needed, the "bombardment" IS the particle metadata below.
         GTValues.RA.stdBuilder()
             .itemInputs(dust(PrPMaterials.Neodymium146, 1))
             .fluidInputs(fluid(Materials.Deuterium, 700))
@@ -207,7 +207,7 @@ public class NeptuniumSynthesis {
 
         // =========================================================
         // Promethium chain (late ZPM): Nd-147 → fusion → Pm plasma → crude → resin purification → Pm.
-        // No stable Pm isotope exists, so the only way to get it is to breed it — fitting for ZPM.
+        // No stable Pm isotope exists, so the only way to get it is to breed it, fitting for ZPM.
         // =========================================================
 
         // --- Stage 2: melt the activated isotope, then fuse a proton onto it ---
@@ -240,7 +240,7 @@ public class NeptuniumSynthesis {
             .addTo(RecipeMaps.vacuumFreezerRecipes);
 
         // --- Stage 4: regenerable resin purification (all fluids) ---
-        // PRIME — make fresh resin from scratch (no loop needed, so the cycle is start-able).
+        // PRIME: make fresh resin from scratch (no loop needed, so the cycle is start-able).
         GTValues.RA.stdBuilder()
             .itemInputs(circuit(4))
             .fluidInputs(fluid(Materials.PhosphoricAcid, 1000), molten(Materials.Polytetrafluoroethylene, 1000))
@@ -249,7 +249,7 @@ public class NeptuniumSynthesis {
             .eut(TierEU.RECIPE_LuV)
             .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
 
-        // LOAD — resin grabs the promethium; samarium falls out as raffinate (the Pm-147 decay product).
+        // LOAD: resin grabs the promethium; samarium falls out as raffinate (the Pm-147 decay product).
         GTValues.RA.stdBuilder()
             .fluidInputs(
                 PrPMaterials.RawPromethium.getFluidOrGas(144),
@@ -260,7 +260,7 @@ public class NeptuniumSynthesis {
             .eut(TierEU.RECIPE_ZPM)
             .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
 
-        // STRIP + REGENERATE — acid elutes pure promethium as a molten fluid and hands the resin back.
+        // STRIP + REGENERATE: acid elutes pure promethium as a molten fluid and hands the resin back.
         GTValues.RA.stdBuilder()
             .fluidInputs(
                 PrPMaterials.LoadedPromethiumResin.getFluidOrGas(1000),
@@ -273,14 +273,14 @@ public class NeptuniumSynthesis {
 
     // =========================================================
     // Heavy-water → cold-helium branch. Heavy water electrolyses to deuterium (feeding GT's own
-    // D-T → helium-plasma fusion); that helium plasma is then cooled — using heavy water as coolant —
+    // D-T → helium-plasma fusion); that helium plasma is then cooled, using heavy water as coolant
     // in the Vacuum Freezer into cold helium, which freezes the promethium plasma in Stage 3.
     // GT cools helium plasma only via the (hardcoded) Extreme Heat Exchanger, so there's no recipe
-    // to remove — this IS the recipe-based cooling.
+    // to remove: this IS the recipe-based cooling.
     // =========================================================
     private static void heavyWaterHeliumBranch() {
 
-        // Enrich heavy water from ordinary water (distillation — D₂O is rare, hence the low yield).
+        // Enrich heavy water from ordinary water (distillation, D₂O is rare, hence the low yield).
         GTValues.RA.stdBuilder()
             .itemInputs(circuit(1))
             .fluidInputs(fluid(Materials.Water, 2000))

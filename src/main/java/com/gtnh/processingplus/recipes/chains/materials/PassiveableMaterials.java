@@ -56,7 +56,7 @@ public class PassiveableMaterials {
     private static void coalFlyash() {
 
         // =========================================================
-        // 1. Coal combustion — captures flyash before it escapes
+        // 1. Coal combustion: captures flyash before it escapes
         // Coal Dust × 8 + O₂ → Coal Flyash × 4 + CO₂
         // =========================================================
 
@@ -70,7 +70,7 @@ public class PassiveableMaterials {
             .addTo(GTRecipeConstants.UniversalChemical);
 
         // =========================================================
-        // 2. Sulfuric acid leach — dissolves Ga and Ge, silica stays
+        // 2. Sulfuric acid leach: dissolves Ga and Ge, silica stays
         // CoalFlyash × 8 + H₂SO₄ + H₂O → MetalLeachate + SiO₂
         // =========================================================
 
@@ -84,10 +84,10 @@ public class PassiveableMaterials {
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
 
         // =========================================================
-        // 3. pH adjustment — NH₃ raises pH, precipitates hydroxides
+        // 3. pH adjustment: NH₃ raises pH, precipitates hydroxides
         // MetalLeachate + NH₃ → Ga(OH)₃ + Ge(OH)₄ + H₂O + recovered NH₃
         // Ga precipitates first (pH 3-4); Ge follows (pH 6-7).
-        // ~200 mB NH₃ recovered from stripping the spent liquor — net 300 mB consumed.
+        // ~200 mB NH₃ recovered from stripping the spent liquor, net 300 mB consumed.
         // =========================================================
 
         GTValues.RA.stdBuilder()
@@ -125,7 +125,7 @@ public class PassiveableMaterials {
 
         // =========================================================
         // 5a. GaCl₃ solution → Ga dust + HCl (electroreduction)
-        // Improved yield — better recovery per mole of chloride
+        // Improved yield: better recovery per mole of chloride
         // =========================================================
 
         GTValues.RA.stdBuilder()
@@ -138,7 +138,7 @@ public class PassiveableMaterials {
 
         // =========================================================
         // 5b. GeCl₄ + 2 H₂ → Ge dust + 4 HCl (hydrogen reduction)
-        // Improved yield — better recovery per mole of chloride
+        // Improved yield: better recovery per mole of chloride
         // =========================================================
 
         GTValues.RA.stdBuilder()
@@ -169,7 +169,7 @@ public class PassiveableMaterials {
             .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
 
         // NH₃ precipitates Nb(OH)₅; calcination collapses it to Nb₂O₅.
-        // HF is recovered — feed back into leach steps.
+        // HF is recovered: feed back into leach steps.
         GTValues.RA.stdBuilder()
             .fluidInputs(fluid(PrPMaterials.NiobiumFluorideSolution, 2000), fluid(Materials.Ammonia, 1000))
             .itemOutputs(dust(PrPMaterials.NiobiumPentoxide, 2))
@@ -192,7 +192,7 @@ public class PassiveableMaterials {
         // =========================================================
         // 4 tantalite → 2 Ta ingots (vs 23 tantalite per 1 Ta in electrolyzer)
         // Nb raffinate (1000 mB NbF₅ solution) feeds directly into
-        // pyrochlore_Precipitate — same recipe, no extra machine.
+        // pyrochlore_Precipitate: same recipe, no extra machine.
         // =========================================================
 
         GTValues.RA.stdBuilder()
@@ -231,7 +231,7 @@ public class PassiveableMaterials {
             .addTo(RecipeMaps.blastFurnaceRecipes);
 
         // =========================================================
-        // MIBK SYNTHESIS — acetone aldol condensation (simplified)
+        // MIBK SYNTHESIS: acetone aldol condensation (simplified)
         // 2 acetone → MIBK + water
         // Net consumption is near-zero since MIBK is recovered in tantalite_Strip.
         // =========================================================

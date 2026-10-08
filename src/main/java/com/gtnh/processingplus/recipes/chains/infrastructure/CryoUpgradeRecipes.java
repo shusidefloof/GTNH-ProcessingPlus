@@ -25,7 +25,7 @@ public class CryoUpgradeRecipes {
         crvNaquadriaCryo();
     }
 
-    // hBN blending with cryo atmosphere — saves N₂ 16k + Ar 8k, gives 10 blend vs 8 base
+    // hBN blending with cryo atmosphere: saves N₂ 16k + Ar 8k, gives 10 blend vs 8 base
     private static void hbnBlendingCryo() {
         GTValues.RA.stdBuilder()
             .itemInputs(dust(PrPMaterials.CrudeHBN, 4), dust(Materials.Yttrium, 16), circuit(11))
@@ -48,7 +48,7 @@ public class CryoUpgradeRecipes {
             .addTo(GTNHPPRecipeMaps.sHTRFRecipes);
     }
 
-    // CRV Amorphous Tritanium — LAr cryo-quench, saves Ar 2k, gives 5 ingots vs 4 base
+    // CRV Amorphous Tritanium: LAr cryo-quench, saves Ar 2k, gives 5 ingots vs 4 base
     private static void crvTitaniumCryo() {
         GTValues.RA.stdBuilder()
             .itemInputs(ingot(Materials.Tritanium, 4), dust(Materials.Americium, 2), circuit(12))
@@ -59,7 +59,7 @@ public class CryoUpgradeRecipes {
             .addTo(GTNHPPRecipeMaps.sCRVRecipes);
     }
 
-    // CRV Amorphous Naquadria — LAr cryo-quench, saves Ar 4k, gives 3 ingots vs 2 base
+    // CRV Amorphous Naquadria: LAr cryo-quench, saves Ar 4k, gives 3 ingots vs 2 base
     private static void crvNaquadriaCryo() {
         GTValues.RA.stdBuilder()
             .itemInputs(dust(Materials.Naquadria, 4), ingot(Materials.NaquadahEnriched, 2), circuit(13))

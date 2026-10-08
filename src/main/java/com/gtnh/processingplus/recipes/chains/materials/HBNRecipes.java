@@ -54,9 +54,9 @@ public class HBNRecipes {
     }
 
     // =========================================================
-    // ALT: BCl3 shortcut — B2O3 + Cl2 + HF + NH3 → CrudeHBN + HCl (ZPM CSTR)
+    // ALT: BCl3 shortcut: B2O3 + Cl2 + HF + NH3 → CrudeHBN + HCl (ZPM CSTR)
     // Skips BoronCarbide intermediate; HF flux gates behind fluorine infrastructure.
-    // Lower B2O3 efficiency than main route (1:1 vs 2:4) — sidepath, not shortcut.
+    // Lower B2O3 efficiency than main route (1:1 vs 2:4), sidepath, not shortcut.
     // =========================================================
     private static void stepAlt_BCl3Shortcut() {
 

@@ -58,7 +58,7 @@ import gregtech.api.util.shutdown.ShutDownReasonRegistry;
 
 public class MTE_HPR extends MTEExtendedPowerMultiBlockBase<MTE_HPR> implements ISurvivalConstructable {
 
-    // GoodGenerator's pressureResistantWalls isn't in GT5U's shared casing texture registry — we register it
+    // GoodGenerator's pressureResistantWalls isn't in GT5U's shared casing texture registry, we register it
     // ourselves (CommonProxy.registerExternalCasingTextures()) into page 100, slot 0 = 100*128 = 12800.
     public static final int PRESSURE_RESISTANT_WALLS_CASING_INDEX = 12800;
     private static final int CASING_INDEX = PRESSURE_RESISTANT_WALLS_CASING_INDEX;
@@ -121,7 +121,7 @@ public class MTE_HPR extends MTEExtendedPowerMultiBlockBase<MTE_HPR> implements 
     @Override
     public IStructureDefinition<MTE_HPR> getStructureDefinition() {
         if (STRUCTURE_DEFINITION == null) {
-            // Build coil block list once (safe here — called after mod init)
+            // Build coil block list once (safe here, called after mod init)
             Block[] coilBlocks = new Block[COIL_NAMES.length];
             for (int i = 0; i < COIL_NAMES.length; i++) {
                 coilBlocks[i] = ggBlock(COIL_NAMES[i]);
@@ -134,7 +134,7 @@ public class MTE_HPR extends MTEExtendedPowerMultiBlockBase<MTE_HPR> implements 
             STRUCTURE_DEFINITION = StructureDefinition.<MTE_HPR>builder()
                 .addShape(
                     STRUCTURE_PIECE_MAIN,
-                    new String[][] { { // z=0 — outer frame ring (pressure walls only)
+                    new String[][] { { // z=0: outer frame ring (pressure walls only)
                         "                             ", "              D              ",
                         "             D D             ", "            D   D            ",
                         "             D D             ", "              D              ",
@@ -150,7 +150,7 @@ public class MTE_HPR extends MTEExtendedPowerMultiBlockBase<MTE_HPR> implements 
                         "             D D             ", "            D   D            ",
                         "             D D             ", "              D              ",
                         "                             " },
-                        { // z=1 — front vessel faces; controller (~) at row 14 col 14
+                        { // z=1: front vessel faces; controller (~) at row 14 col 14
                             "              D              ", "             BFB             ",
                             "            BFFFB            ", "           DFFFFFD           ",
                             "            BFFFB            ", "             BFB             ",
@@ -166,7 +166,7 @@ public class MTE_HPR extends MTEExtendedPowerMultiBlockBase<MTE_HPR> implements 
                             "            BFFFB            ", "           DFFFFFD           ",
                             "            BFFFB            ", "             BFB             ",
                             "              D              " },
-                        { // z=2 — glass conduit connections
+                        { // z=2: glass conduit connections
                             "             D D             ", "            BFFFB            ",
                             "           DF   FD           ", "        DCCCF   FCCCD        ",
                             "           DF   FD           ", "            BFFFB            ",
@@ -182,7 +182,7 @@ public class MTE_HPR extends MTEExtendedPowerMultiBlockBase<MTE_HPR> implements 
                             "           DF   FD           ", "        DCCCF   FCCCD        ",
                             "           DF   FD           ", "            BFFFB            ",
                             "             D D             " },
-                        { // z=3 — central reaction core with FRF coils and radiation frames
+                        { // z=3: central reaction core with FRF coils and radiation frames
                             "            D   D            ", "           DFFFFFD           ",
                             "        DCCCF   FCCCD        ", "      BBBAAAF   FAAABBB      ",
                             "     BB DCCCF   FCCCD BB     ", "    BB     DFFFFFD     BB    ",
@@ -198,7 +198,7 @@ public class MTE_HPR extends MTEExtendedPowerMultiBlockBase<MTE_HPR> implements 
                             "     BB DCCCF   FCCCD BB     ", "      BBBAAAF   FAAABBB      ",
                             "        DCCCF   FCCCD        ", "           DFFFFFD           ",
                             "            D   D            " },
-                        { // z=4 — mirror of z=2
+                        { // z=4: mirror of z=2
                             "             D D             ", "            BFFFB            ",
                             "           DF   FD           ", "        DCCCF   FCCCD        ",
                             "           DF   FD           ", "            BFFFB            ",
@@ -214,7 +214,7 @@ public class MTE_HPR extends MTEExtendedPowerMultiBlockBase<MTE_HPR> implements 
                             "           DF   FD           ", "        DCCCF   FCCCD        ",
                             "           DF   FD           ", "            BFFFB            ",
                             "             D D             " },
-                        { // z=5 — mirror of z=1 (back vessel faces, no controller)
+                        { // z=5: mirror of z=1 (back vessel faces, no controller)
                             "              D              ", "             BFB             ",
                             "            BFFFB            ", "           DFFFFFD           ",
                             "            BFFFB            ", "             BFB             ",
@@ -230,7 +230,7 @@ public class MTE_HPR extends MTEExtendedPowerMultiBlockBase<MTE_HPR> implements 
                             "            BFFFB            ", "           DFFFFFD           ",
                             "            BFFFB            ", "             BFB             ",
                             "              D              " },
-                        { // z=6 — back outer frame ring
+                        { // z=6: back outer frame ring
                             "                             ", "              D              ",
                             "             D D             ", "            D   D            ",
                             "             D D             ", "              D              ",
@@ -349,7 +349,7 @@ public class MTE_HPR extends MTEExtendedPowerMultiBlockBase<MTE_HPR> implements 
                 else {
                     num = 1;
                     den = 1000;
-                } // coil saturated — near-zero output
+                } // coil saturated: near-zero output
             }
             if (num == den) return;
 
@@ -462,7 +462,7 @@ public class MTE_HPR extends MTEExtendedPowerMultiBlockBase<MTE_HPR> implements 
         int colorIndex, boolean aActive, boolean redstoneLevel) {
         if (side == aFacing) {
             // OVERLAY_FUSION1 has no separate _ACTIVE variant (matches the real Fusion Reactor's own
-            // getTexture pattern) — same base icon either way, the glow layer is what shows it's running.
+            // getTexture pattern): same base icon either way, the glow layer is what shows it's running.
             if (aActive) return new ITexture[] { getCasingTextureForId(CASING_INDEX), TextureFactory.builder()
                 .addIcon(OVERLAY_FUSION1)
                 .extFacing()
@@ -483,74 +483,54 @@ public class MTE_HPR extends MTEExtendedPowerMultiBlockBase<MTE_HPR> implements 
     @Override
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType("Hybrid Phase Reactor, HPR")
+        tt.addMachineType("Phase Reactor, HPR")
+            .addInfo("Runs simultaneous liquid and plasma phase reactions")
+            .addInfo("Higher coil tiers unlock more recipes")
+            .addInfo(EnumChatFormatting.GOLD + "Resonance Field Frequency (0-4)")
+            .addInfo("Recipes require a minimum field frequency to start")
             .addInfo(
-                EnumChatFormatting.GRAY + "Runs simultaneous "
-                    + EnumChatFormatting.RED
-                    + "liquid and plasma phase"
-                    + EnumChatFormatting.GRAY
-                    + " reactions.")
-            .addInfo(
-                EnumChatFormatting.GRAY + "Three phase-separated reaction vessels connected by "
-                    + EnumChatFormatting.AQUA
-                    + "field-restricting conduits"
-                    + EnumChatFormatting.GRAY
-                    + ".")
-            .addInfo("Use higher tier coils to unlock more recipes.")
-            .addSeparator()
-            .addInfo(EnumChatFormatting.GOLD + "Resonance Field Frequency (0-4):")
-            .addInfo(EnumChatFormatting.GRAY + "  Recipes require a minimum field frequency to start.")
-            .addInfo(
-                EnumChatFormatting.GRAY + "  Each recipe tunes the field to its own frequency when run using a "
-                    + EnumChatFormatting.WHITE
+                "Running a recipe tunes the field to its frequency using a " + EnumChatFormatting.WHITE
                     + "Phase Synchronizer")
             .addInfo(
-                EnumChatFormatting.GRAY + "  Jumping frequency costs "
-                    + EnumChatFormatting.WHITE
-                    + "Phase Synchronizers"
+                "The frequency can only change by one level at a time, costing 1 " + EnumChatFormatting.WHITE
+                    + "Phase Synchronizer"
                     + EnumChatFormatting.GRAY
-                    + " (1 per step),"
-                    + "and can only jump one frequency level.")
-            .addInfo(EnumChatFormatting.RED + "  20 idle ticks (1s) with no recipe resets the field to 0.")
-            .addSeparator()
-            .addInfo(EnumChatFormatting.GOLD + "Resonance Fatigue:")
+                    + " per step")
+            .addInfo(EnumChatFormatting.RED + "20 idle ticks (1s) without a recipe resets the field to 0")
+            .addInfo(EnumChatFormatting.GOLD + "Resonance Fatigue")
+            .addInfo("Fatigue increases by 1 on every completed recipe and changes the output multiplier:")
             .addInfo(
-                EnumChatFormatting.GRAY
-                    + "  On recipe completion the Resonance fatigue is increased by 1, Fatigue affects the machine output multiplier:")
-            .addInfo(
-                EnumChatFormatting.GRAY + "  Fatigue 1-3: "
-                    + EnumChatFormatting.GREEN
+                "Fatigue 1-3: " + EnumChatFormatting.GREEN
                     + "+50%"
                     + EnumChatFormatting.GRAY
-                    + "  |  4-5: "
+                    + " | 4-5: "
                     + EnumChatFormatting.WHITE
                     + "100%"
                     + EnumChatFormatting.GRAY
-                    + "  |  6-11: "
+                    + " | 6-11: "
                     + EnumChatFormatting.YELLOW
                     + "-20%"
                     + EnumChatFormatting.GRAY
-                    + "  |  12-19: "
+                    + " | 12-19: "
                     + EnumChatFormatting.RED
                     + "-40%")
             .addInfo(
-                EnumChatFormatting.GRAY + "  20-99: "
-                    + EnumChatFormatting.DARK_RED
+                "20-99: " + EnumChatFormatting.DARK_RED
                     + "-50%"
                     + EnumChatFormatting.GRAY
-                    + "  |  100+: "
+                    + " | 100+: "
                     + EnumChatFormatting.DARK_RED
-                    + "~0% (coil saturated)")
+                    + "~0%"
+                    + EnumChatFormatting.GRAY
+                    + " (coil saturated)")
             .beginStructureBlock(29, 29, 7, true)
-            .addController("Second layer from front, center vessel center")
-            .addOtherStructurePart("FRF Coil (any tier)", "Core reaction rings (A)", 1)
+            .addController("Center, 15th layer, 2nd slice from the front")
             .addCasing("1+", "Pressure Resistant Wall", false)
-            .addEnergyHatch("1+", "Any Pressure Resistant Wall (D)", 1)
-            .addMaintenanceHatch("1", "Any Pressure Resistant Wall (D)", 1)
-            .addInputBus("1+", "Any Pressure Resistant Wall (D)", 1)
-            .addInputHatch("1+", "Any Pressure Resistant Wall (D)", 1)
-            .addOutputBus("1+", "Any Pressure Resistant Wall (D)", 1)
-            .addOutputHatch("1+", "Any Pressure Resistant Wall (D)", 1)
+            .addOtherStructurePart("FRF Coil (any tier)", "Core reaction rings", 1)
+            .addEnergyHatch("1+", "Any pressure resistant wall", 1)
+            .addMaintenanceHatch("1", "Any pressure resistant wall", 1)
+            .addInputAny("1+", "Any pressure resistant wall", 1)
+            .addOutputAny("1+", "Any pressure resistant wall", 1)
             .toolTipFinisher("_Shusi_");
         return tt;
     }

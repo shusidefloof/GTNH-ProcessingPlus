@@ -37,17 +37,17 @@ import gregtech.api.metatileentity.implementations.MTEExtendedPowerMultiBlockBas
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.render.TextureFactory;
 import gregtech.api.structure.error.StructureError;
+import gregtech.api.util.GTUtility;
 import gregtech.api.util.MultiblockTooltipBuilder;
-import gregtech.api.util.tooltip.TooltipHelper;
 
 /**
- * Basic Oxygen Furnace (BOF) — a 5×4×5 steelmaking converter that refines iron into steel
+ * Basic Oxygen Furnace (BOF): a 5×4×5 steelmaking converter that refines iron into steel
  * using a high-purity oxygen blast. Accepts flux additives (calcium, calcite, dolomite)
  * to increase yield and produce recoverable BOF slag (lime flux can be fully recycled).
  */
 public class MTE_BOF extends MTEExtendedPowerMultiBlockBase<MTE_BOF> implements ISurvivalConstructable {
 
-    // Page 100 slot 1 — page 100 itself is allocated once by CommonProxy.registerExternalCasingTextures(),
+    // Page 100 slot 1: page 100 itself is allocated once by CommonProxy.registerExternalCasingTextures(),
     // which also registers this exact index to MACHINE_CASING_SOLID_STEEL so hatches match the controller
     // face and the BOF_CASING structure block (see that method for why: no existing GT5 casingTexturePages
     // slot renders as Solid Steel, so it has to be registered by hand into an otherwise-unused page).
@@ -81,8 +81,8 @@ public class MTE_BOF extends MTEExtendedPowerMultiBlockBase<MTE_BOF> implements 
                     STRUCTURE_PIECE_MAIN,
                     /*
                      * Block legend:
-                     * A -> sBlockCasings3:10 — Solid Steel Machine Casing (structural shell)
-                     * B -> sBlockCasings3:14 — Steel Turbine Casing (inner liner / tuyere zone)
+                     * A -> sBlockCasings3:10: Solid Steel Machine Casing (structural shell)
+                     * B -> sBlockCasings3:14: Steel Turbine Casing (inner liner / tuyere zone)
                      * C -> BOF Casing (hatch-capable outer shell)
                      */
                     new String[][] { { "     ", "  C  ", " A~A ", " ACA " }, { "  C  ", " C C ", "C   C", "CCBCC" },
@@ -141,7 +141,12 @@ public class MTE_BOF extends MTEExtendedPowerMultiBlockBase<MTE_BOF> implements 
 
     @Override
     public int getMaxParallelRecipes() {
-        return PARALLELS;
+        return (PARALLELS * GTUtility.getTier(this.getMaxInputVoltage()));
+    }
+
+    @Override
+    public boolean supportsBatchMode() {
+        return true;
     }
 
     @Override
@@ -184,23 +189,16 @@ public class MTE_BOF extends MTEExtendedPowerMultiBlockBase<MTE_BOF> implements 
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType("Basic Oxygen Furnace, BOF")
-            .addInfo(
-                TooltipHelper.coloredText(
-                    TooltipHelper.italicText("Refining metal with high purity oxygen blasts"),
-                    EnumChatFormatting.DARK_GRAY))
-            .addStaticParallelInfo(PARALLELS)
-            .addSeparator()
-            .addTecTechHatchInfo()
+            .addVoltageParallelInfo(PARALLELS)
+            .addSupportAny()
             .beginStructureBlock(5, 4, 5, true)
-            .addController("Front face, center")
+            .addController("Front center, 2nd layer")
             .addCasing("44+", "Basic Oxygen Furnace Casing", false)
             .addEnergyHatch("1+", "Any casing", 1)
             .addMaintenanceHatch("1", "Any casing", 1)
             .addMufflerHatch("1", "Any casing", 1)
-            .addInputBus("1+", "Any casing", 1)
-            .addInputHatch("1+", "Any casing", 1)
-            .addOutputBus("1+", "Any casing", 1)
-            .addOutputHatch("1+", "Any casing", 1)
+            .addInputAny("1+", "Any casing", 1)
+            .addOutputAny("1+", "Any casing", 1)
             .toolTipFinisher("_Shusi_");
         return tt;
     }

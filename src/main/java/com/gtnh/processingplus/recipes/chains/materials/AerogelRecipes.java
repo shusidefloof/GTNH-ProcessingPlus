@@ -30,7 +30,7 @@ public class AerogelRecipes {
     }
 
     // =========================================================
-    // 0. Trimethylsilane synthesis — SiCl4 + 3 CH4 + H2 → (CH3)3SiH + 4 HCl (UV HTRF)
+    // 0. Trimethylsilane synthesis: SiCl4 + 3 CH4 + H2 → (CH3)3SiH + 4 HCl (UV HTRF)
     // High-temp hydrocarbon substitution on silicon tetrachloride
     // =========================================================
     private static void step0_TrimethylsilaneSynthesis() {
@@ -92,7 +92,7 @@ public class AerogelRecipes {
     }
 
     // =========================================================
-    // 2a. Acid hydrolysis — TEOS + water, HF-catalysed → hydrolysed Silica Sol (+ ethanol released).
+    // 2a. Acid hydrolysis: TEOS + water, HF-catalysed → hydrolysed Silica Sol (+ ethanol released).
     // =========================================================
     private static void step2a_AcidHydrolysis() {
 
@@ -109,7 +109,7 @@ public class AerogelRecipes {
     }
 
     // =========================================================
-    // 2b. Base condensation — Silica Sol + ammonia → Wet Silica Gel (+ water released).
+    // 2b. Base condensation: Silica Sol + ammonia → Wet Silica Gel (+ water released).
     // =========================================================
     private static void step2b_BaseCondensation() {
 
@@ -124,7 +124,7 @@ public class AerogelRecipes {
     }
 
     // =========================================================
-    // 3. Aging — WetSilicaGel is held in water to mature the silica network (CSTR).
+    // 3. Aging: WetSilicaGel is held in water to mature the silica network (CSTR).
     // Continuous fluid contact with the gel over time; no reaction, just structural consolidation.
     // =========================================================
     private static void step3_Aging() {
@@ -139,7 +139,7 @@ public class AerogelRecipes {
     }
 
     // =========================================================
-    // 4. Solvent Exchange — water displaced by ethanol (Chemical Bath).
+    // 4. Solvent Exchange: water displaced by ethanol (Chemical Bath).
     // =========================================================
     private static void step4_SolventExchange() {
 
@@ -154,7 +154,7 @@ public class AerogelRecipes {
     }
 
     // =========================================================
-    // 4b. Acetone exchange — ethanol displaced by acetone under continuous flow (CSTR).
+    // 4b. Acetone exchange: ethanol displaced by acetone under continuous flow (CSTR).
     // Acetone is fully miscible with scCO₂; a small LiquidCO₂ co-feed strips residual water.
     // =========================================================
     private static void step4b_AcetoneExchange() {
@@ -177,11 +177,11 @@ public class AerogelRecipes {
     // without any liquid-vapour interface. Both the recovered CO₂ (loops to CSC) and acetone are
     // vented during controlled depressurisation.
     //
-    // Stage 1 — Acetone flush (~10 mB/t): acetone is circulated through the gel to ensure full
+    // Stage 1: Acetone flush (~10 mB/t): acetone is circulated through the gel to ensure full
     // pore saturation and displace any remaining water before CO₂ is introduced.
-    // Stage 2 — scCO₂ infusion: Liquid CO₂ from the CSC is pumped in (~24 mB/t baseline).
+    // Stage 2: scCO₂ infusion: Liquid CO₂ from the CSC is pumped in (~24 mB/t baseline).
     // Freon R-12 lowers the critical temperature and completes stage 2 in half the time.
-    // Stage 3 — Controlled depressurisation (empty hatch): CO₂ vented slowly. Any fluid present
+    // Stage 3: Controlled depressurisation (empty hatch): CO₂ vented slowly. Any fluid present
     // at this point contaminates the pore structure → degraded (collapsed) output.
     //
     // Perfect output: SilicaAerogel plate × 2 + CO₂ gas 8 000 mB + Acetone 3 500 mB (recovered).
@@ -204,7 +204,7 @@ public class AerogelRecipes {
     }
 
     // =========================================================
-    // 6. Hydrophobic surface modification — TMCS caps surface silanol groups (Chemical Bath).
+    // 6. Hydrophobic surface modification: TMCS caps surface silanol groups (Chemical Bath).
     // =========================================================
     private static void step6_HydrophobicTreatment() {
 

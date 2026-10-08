@@ -26,7 +26,7 @@ import gregtech.api.recipe.check.CheckRecipeResultRegistry;
  * Linking mirrors the PCB Factory: left-click an SPC controller with a data stick to copy its
  * coordinates onto the stick, then right-click this module's controller to link. The link is
  * persisted as a coordinate set and re-established periodically (e.g. on world load). A module may
- * serve several SPCs. The module itself runs no recipes — it only advertises its presence.
+ * serve several SPCs. The module itself runs no recipes, it only advertises its presence.
  */
 public abstract class MTE_SPCModuleBase<T extends MTEEnhancedMultiBlockBase<T>> extends MTEEnhancedMultiBlockBase<T> {
 
@@ -44,7 +44,7 @@ public abstract class MTE_SPCModuleBase<T extends MTEEnhancedMultiBlockBase<T>> 
         super(aName);
     }
 
-    /** Which module category this is — used by the SPC to satisfy recipe gates. */
+    /** Which module category this is: used by the SPC to satisfy recipe gates. */
     public abstract SPCModuleType getModuleType();
 
     /** True when the module structure is formed and allowed to work. */

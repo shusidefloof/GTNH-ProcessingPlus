@@ -24,7 +24,7 @@ public class SiCRecipes {
     }
 
     // =========================================================
-    // 1. SiO2 + 3C → SiC + 2CO (Acheson process, ~2500 K — a heat recipe, not a chemical-reactor one)
+    // 1. SiO2 + 3C → SiC + 2CO (Acheson process, ~2500 K, a heat recipe, not a chemical-reactor one)
     // =========================================================
     private static void step1_CarbothermalReduction() {
 
@@ -41,7 +41,7 @@ public class SiCRecipes {
     }
 
     // =========================================================
-    // ALT: CVD route — SiCl4 + CH4 → PurifiedSiC + HCl (HTRF, UV)
+    // ALT: CVD route: SiCl4 + CH4 → PurifiedSiC + HCl (HTRF, UV)
     // Higher purity than Acheson; skips crushing and acid wash
     // =========================================================
     private static void stepAlt_CVDRoute() {

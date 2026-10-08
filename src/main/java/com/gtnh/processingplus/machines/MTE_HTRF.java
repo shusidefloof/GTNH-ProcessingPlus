@@ -27,7 +27,6 @@ import com.gtnewhorizon.structurelib.structure.StructureUtility;
 import com.gtnh.processingplus.blocks.BlockGTNHPPCasings;
 import com.gtnh.processingplus.blocks.GTNHPPBlocks;
 import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
-import com.gtnh.processingplus.recipes.PPRecipeHelper;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -49,12 +48,12 @@ import gregtech.api.util.GTRecipe;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.MultiblockTooltipBuilder;
 import gregtech.api.util.OverclockCalculator;
-import gregtech.api.util.tooltip.TooltipHelper;
+import gregtech.api.util.tooltip.TooltipTier;
 import gregtech.common.misc.GTStructureChannels;
 
 public class MTE_HTRF extends MTEExtendedPowerMultiBlockBase<MTE_HTRF> implements ISurvivalConstructable {
 
-    // HeatProofMachineCasing (sBlockCasings1 meta11) — matches HTRF_CASING's borrowed texture.
+    // HeatProofMachineCasing (sBlockCasings1 meta11): matches HTRF_CASING's borrowed texture.
     private static final int CASING_INDEX = 11;
     private static final String STRUCTURE_PIECE_MAIN = "main";
     private static final int OFFSET_X = 3;
@@ -156,17 +155,19 @@ public class MTE_HTRF extends MTEExtendedPowerMultiBlockBase<MTE_HTRF> implement
         checkOneMaintenanceHatch(errors);
         checkHasEnergyHatch(errors);
         checkHasMufflerHatch(errors);
-        checkHasInputBus(errors);
-        checkHasOutputBus(errors);
-        if (PPRecipeHelper.recipeMapHasFluidInputs(getRecipeMap())) checkHasInputHatch(errors);
-        if (PPRecipeHelper.recipeMapHasFluidOutputs(getRecipeMap())) checkHasOutputHatch(errors);
-        if (!errors.isEmpty()) return;
+        checkHasAnyInput(errors);
+        checkHasAnyOutput(errors);
         mHeatingCapacity = (int) getCoilLevel().getHeat() + 100 * (GTUtility.getTier(getMaxInputVoltage()) - 2);
     }
 
     @Override
     public RecipeMap<?> getRecipeMap() {
         return GTNHPPRecipeMaps.sHTRFRecipes;
+    }
+
+    @Override
+    public boolean supportsBatchMode() {
+        return true;
     }
 
     @Override
@@ -242,60 +243,23 @@ public class MTE_HTRF extends MTEExtendedPowerMultiBlockBase<MTE_HTRF> implement
     @Override
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType("High Temperature Reaction Furnace, HTRF")
-            .addInfo(
-                EnumChatFormatting.GRAY + "Drives "
-                    + EnumChatFormatting.RED
-                    + "high-temperature"
-                    + EnumChatFormatting.GRAY
-                    + " chemical reactions.")
-            .addSeparator()
-            .addInfo(
-                "Heat capacity: " + TooltipHelper.coloredText("coil tier heat", EnumChatFormatting.RED)
-                    + EnumChatFormatting.GRAY
-                    + " + "
-                    + TooltipHelper.coloredText("100K", EnumChatFormatting.YELLOW)
-                    + EnumChatFormatting.GRAY
-                    + " per voltage tier above LV.")
-            .addInfo(
-                "Every " + TooltipHelper.coloredText("1800K", EnumChatFormatting.RED)
-                    + EnumChatFormatting.GRAY
-                    + " above the recipe requirement grants 1 "
-                    + TooltipHelper.coloredText("perfect overclock", EnumChatFormatting.LIGHT_PURPLE)
-                    + EnumChatFormatting.GRAY
-                    + ".")
-            .addInfo(
-                TooltipHelper.effText("-5% EU") + EnumChatFormatting.GRAY
-                    + " per "
-                    + TooltipHelper.coloredText("900K", EnumChatFormatting.RED)
-                    + EnumChatFormatting.GRAY
-                    + " above the recipe requirement.")
-            .addInfo(
-                "Parallels: " + TooltipHelper.coloredText("4", EnumChatFormatting.YELLOW)
-                    + EnumChatFormatting.GRAY
-                    + " base + "
-                    + TooltipHelper.coloredText("2", EnumChatFormatting.YELLOW)
-                    + EnumChatFormatting.GRAY
-                    + " per heating coil tier.")
-            .addSeparator()
-            .addInfo(
-                EnumChatFormatting.GOLD + "Glass tier: "
-                    + EnumChatFormatting.GRAY
-                    + "BW Glass tier limits maximum energy hatch voltage.")
+        tt.addMachineType("Reaction Furnace, HTRF")
+            .addStaticParallelInfo(4)
+            .addDynamicParallelInfo(2, TooltipTier.COIL)
+            .pipe(PPTooltips::addHeatInfo)
+            .addGlassEnergyLimitInfo()
             .beginStructureBlock(9, 9, 7, true)
-            .addController("Center of the front face")
+            .addController("Front center, 5th layer")
             .addCasing("10+", "Silicon Carbide Ceramic Casing", false)
             .addCasing("1+", "Rebolted Silicon Carbide Casing", false)
-            .addOtherStructurePart("Heating Coils", "Inner ring across all layers")
-            .addOtherStructurePart("BW Glass (any tier)", "Viewport windows")
-            .addOtherStructurePart("GT Frames", "Structural support")
-            .addEnergyHatch("1+", "Any Silicon Carbide Ceramic Casing", 1)
-            .addMaintenanceHatch("1", "Any Silicon Carbide Ceramic Casing", 1)
-            .addMufflerHatch("1", "Any Silicon Carbide Ceramic Casing", 1)
-            .addInputBus("1+", "Any Silicon Carbide Ceramic Casing", 1)
-            .addInputHatch("1+", "Any Silicon Carbide Ceramic Casing", 1)
-            .addOutputBus("1+", "Any Silicon Carbide Ceramic Casing", 1)
-            .addOutputHatch("1+", "Any Silicon Carbide Ceramic Casing", 1)
+            .addCasing("1+", "Heating Coil", true)
+            .addOtherStructurePart("BartWorks Glass (any tier)", "Viewport windows")
+            .addOtherStructurePart("Frame Box", "Structural support")
+            .addEnergyHatch("1+", "Any silicon carbide ceramic casing", 1)
+            .addMaintenanceHatch("1", "Any silicon carbide ceramic casing", 1)
+            .addMufflerHatch("1", "Any silicon carbide ceramic casing", 1)
+            .addInputAny("1+", "Any silicon carbide ceramic casing", 1)
+            .addOutputAny("1+", "Any silicon carbide ceramic casing", 1)
             .toolTipFinisher("_Shusi_");
         return tt;
     }

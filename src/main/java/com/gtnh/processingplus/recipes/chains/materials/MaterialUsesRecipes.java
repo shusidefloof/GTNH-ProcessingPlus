@@ -23,7 +23,7 @@ public class MaterialUsesRecipes {
     }
 
     // -------------------------------------------------------------------------
-    // PAA Adhesive — moisture-cured polyamic acid bonding fluid
+    // PAA Adhesive: moisture-cured polyamic acid bonding fluid
     //
     // ConcentratedPAA absorbs water and partially imidizes at room temperature,
     // forming a tacky adhesive network. Used as a bonding layer in SPC boards
@@ -40,7 +40,7 @@ public class MaterialUsesRecipes {
     }
 
     // -------------------------------------------------------------------------
-    // hBN Lubricant — hexagonal boron nitride suspended in ethanol carrier
+    // hBN Lubricant: hexagonal boron nitride suspended in ethanol carrier
     //
     // hBN's layered crystal structure shears under load, giving dry lubrication
     // stable to 900 °C in air. Ethanol carrier evaporates on application.
@@ -57,11 +57,11 @@ public class MaterialUsesRecipes {
     }
 
     // -------------------------------------------------------------------------
-    // Aerogel Insulation Panel — silica aerogel bonded to carbon fiber backing
+    // Aerogel Insulation Panel: silica aerogel bonded to carbon fiber backing
     //
     // Aerogel provides extreme thermal resistance; CF backing prevents mechanical
     // fragility. Epoxid matrix locks the composite. Used as high-tier multiblock
-    // insulation lining — primarily the HTRF outer wall.
+    // insulation lining: primarily the HTRF outer wall.
     // -------------------------------------------------------------------------
     private static void aerogelInsulationPanel() {
         GTValues.RA.stdBuilder()
@@ -74,14 +74,14 @@ public class MaterialUsesRecipes {
     }
 
     // -------------------------------------------------------------------------
-    // Loaded Aerogel Catalyst Support — Pt/Pd nanoparticles in aerogel matrix
+    // Loaded Aerogel Catalyst Support: Pt/Pd nanoparticles in aerogel matrix
     //
     // HCl wets the aerogel surface, anchoring PGM particles into the pore walls.
     // The huge surface area of silica aerogel (>1000 m²/g) concentrates catalysis
     // far beyond conventional support materials. Consumed in CRV exotic reactions.
     // -------------------------------------------------------------------------
     // -------------------------------------------------------------------------
-    // Thermoplastic solidification — molten polymer → plates via fluid solidifier
+    // Thermoplastic solidification: molten polymer → plates via fluid solidifier
     // 144 mB = 1 plate (GT standard unit); mold is checked but not consumed.
     // PHSResin plates are the precursor for PHSResin foils (bender auto-recipe).
     // -------------------------------------------------------------------------

@@ -8,7 +8,7 @@ import gregtech.api.recipe.BasicUIPropertiesBuilder;
 import gregtech.api.recipe.NEIRecipePropertiesBuilder;
 import gregtech.api.recipe.maps.LargeNEIFrontend;
 
-// SPC has 6 item inputs — LargeNEIFrontend (3-wide grid) instead of plain RecipeMapFrontend's single
+// SPC has 6 item inputs: LargeNEIFrontend (3-wide grid) instead of plain RecipeMapFrontend's single
 // row, which would overflow/overlap past 4 slots. Its own modifyNEIProperties still layers the
 // station-row height on top of whatever size LargeNEIFrontend computes first.
 public class SPCRecipeMapFrontend extends LargeNEIFrontend {
@@ -21,7 +21,7 @@ public class SPCRecipeMapFrontend extends LargeNEIFrontend {
     }
 
     /**
-     * GT5U (2.9) makes {@code recipeBackgroundSize} final and bakes it at construction — and the NEI
+     * GT5U (2.9) makes {@code recipeBackgroundSize} final and bakes it at construction, and the NEI
      * window plus {@code getDescriptionYOffset()} both derive from it. So we extend the panel ONCE
      * here, via the intended {@code modifyNEIProperties} hook (called by the base constructor), and
      * the dark frame, the ModularUI window, and the description offset all follow automatically.

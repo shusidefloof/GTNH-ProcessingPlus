@@ -70,15 +70,15 @@ import gregtech.api.util.shutdown.ShutDownReasonRegistry;
 import gregtech.common.gui.modularui.multiblock.base.MTEMultiBlockBaseGui;
 
 /**
- * Dual Atmosphere Furnace — a sealed multi-chamber reactor switchable between
+ * Dual Atmosphere Furnace: a sealed multi-chamber reactor switchable between
  * oxidizing (O₂) and inert (N₂/Ar) atmospheres. Use the mode-switch GUI button to toggle.
  *
  * The machine tier is determined by the atmosphere casing (G), glass (A), and item
  * pipe casing (C) used in the structure:
- * Tier 1 (IV) — Dual-Sealed Atmosphere Casing + IV glass + Tin pipe
- * Tier 2 (LuV) — Advanced Atmosphere Casing + LuV glass + Electrum pipe
- * Tier 3 (UV) — Pristine Atmosphere Casing + UV glass + Osmium pipe
- * Tier 4 (UEV) — Absolute Atmosphere Casing + UEV glass + Quantium pipe
+ * Tier 1 (IV): Dual-Sealed Atmosphere Casing + IV glass + Tin pipe
+ * Tier 2 (LuV): Advanced Atmosphere Casing + LuV glass + Electrum pipe
+ * Tier 3 (UV): Pristine Atmosphere Casing + UV glass + Osmium pipe
+ * Tier 4 (UEV): Absolute Atmosphere Casing + UEV glass + Quantium pipe
  *
  * Consumes 1 mB/t of the active atmosphere gas while running.
  */
@@ -171,9 +171,9 @@ public class MTE_DAF extends MTEExtendedPowerMultiBlockBase<MTE_DAF> implements 
 
             STRUCTURE_DEFINITION = StructureDefinition.<MTE_DAF>builder()
                 .addShape(STRUCTURE_PIECE_MAIN, SHAPE_MAIN)
-                // A = BW glass — tiered; records the glass tier found
+                // A = BW glass: tiered; records the glass tier found
                 .addElement('A', chainAllGlasses(-1, (mte, tier) -> mte.mGlassTier = tier, mte -> mte.mGlassTier))
-                // B = GT clean machine casing (meta 11) — hatch-capable outer shell
+                // B = GT clean machine casing (meta 11), hatch-capable outer shell
                 .addElement(
                     'B',
                     buildHatchAdder(MTE_DAF.class)
@@ -181,7 +181,7 @@ public class MTE_DAF extends MTEExtendedPowerMultiBlockBase<MTE_DAF> implements 
                         .casingIndex(CASING_INDEX)
                         .hint(1)
                         .buildAndChain(GregTechAPI.sBlockCasings1, 11))
-                // C = item pipe casing — tiered; records which tier
+                // C = item pipe casing: tiered; records which tier
                 .addElement(
                     'C',
                     chainItemPipeCasings(-1, (mte, tier) -> mte.mPipeCasingTier = tier, mte -> mte.mPipeCasingTier))
@@ -191,7 +191,7 @@ public class MTE_DAF extends MTEExtendedPowerMultiBlockBase<MTE_DAF> implements 
                 .addElement('E', ofBlock(GregTechAPI.sBlockFrames, 312))
                 // F = GT sheet metal (meta 306)
                 .addElement('F', ofBlock(GameRegistry.findBlock("gregtech", "gt.sheetmetal"), 306))
-                // G = atmosphere casing — tiered DAF casing; records which tier was built
+                // G = atmosphere casing: tiered DAF casing; records which tier was built
                 .addElement(
                     'G',
                     ofBlocksTiered(
@@ -332,7 +332,7 @@ public class MTE_DAF extends MTEExtendedPowerMultiBlockBase<MTE_DAF> implements 
     }
 
     // ── Mode toggle ──────────────────────────────────────────────────────────────
-    // GUI button (MTEMultiBlockBaseGui), same pattern as MTE_CRV / MTEOreWashingPlant — a bare
+    // GUI button (MTEMultiBlockBaseGui), same pattern as MTE_CRV / MTEOreWashingPlant, a bare
     // setMachineModeIcons() override isn't read by the actual ModularUI2 GUI class, it needs the
     // matching getGui().withMachineModeIcons(...) override too. No stock icon means "atmosphere",
     // so DEFAULT/CHEMBATH are just the closest-available stand-ins.
@@ -415,56 +415,49 @@ public class MTE_DAF extends MTEExtendedPowerMultiBlockBase<MTE_DAF> implements 
     @Override
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType("Dual Atmosphere Furnace, DAF")
-            .addInfo(EnumChatFormatting.GRAY + "Sealed reaction chamber with switchable atmosphere.")
+        tt.addMachineType("Atmosphere Furnace, DAF")
             .addInfo(
-                EnumChatFormatting.AQUA + "Mode-switch button"
-                    + EnumChatFormatting.GRAY
-                    + " toggles "
-                    + EnumChatFormatting.RED
+                "Switch between " + EnumChatFormatting.RED
                     + "Oxidizing (O₂)"
                     + EnumChatFormatting.GRAY
-                    + " / "
+                    + " and "
                     + EnumChatFormatting.AQUA
                     + "Inert (N₂/Ar)"
                     + EnumChatFormatting.GRAY
-                    + " mode.")
-            .addInfo(EnumChatFormatting.YELLOW + "Consumes 1 mB/t atmosphere gas while running.")
-            .addInfo(EnumChatFormatting.YELLOW + "Recipe fluid inputs are consumed continuously (mB/t) while running.")
-            .addSeparator()
-            .addInfo("Tier is determined by the atmosphere casing (G), glass (A), and pipe casing (C):")
+                    + " mode with the mode button in the GUI")
+            .addInfo("Consumes 1 mB/t of atmosphere gas while running")
+            .addInfo("Recipe fluid inputs are consumed continuously (mB/t) while running")
+            .addInfo("Machine tier is set by the atmosphere casing, the glass and the item pipe casing:")
             .addInfo(
-                EnumChatFormatting.WHITE + "  IV  "
+                EnumChatFormatting.WHITE + "IV"
                     + EnumChatFormatting.GRAY
-                    + "— Dual-Sealed Atmosphere Casing, IV glass, Tin pipe")
+                    + ": Dual-Sealed Atmosphere Casing, IV glass, Tin pipe")
             .addInfo(
-                EnumChatFormatting.GREEN + "  LuV "
+                EnumChatFormatting.GREEN + "LuV"
                     + EnumChatFormatting.GRAY
-                    + "— Advanced Atmosphere Casing, LuV glass, Electrum pipe")
+                    + ": Advanced Atmosphere Casing, LuV glass, Electrum pipe")
             .addInfo(
-                EnumChatFormatting.AQUA + "  UV  "
+                EnumChatFormatting.AQUA + "UV"
                     + EnumChatFormatting.GRAY
-                    + "— Pristine Atmosphere Casing, UV glass, Osmium pipe")
+                    + ": Pristine Atmosphere Casing, UV glass, Osmium pipe")
             .addInfo(
-                EnumChatFormatting.LIGHT_PURPLE + "  UEV "
+                EnumChatFormatting.LIGHT_PURPLE + "UEV"
                     + EnumChatFormatting.GRAY
-                    + "— Absolute Atmosphere Casing, UEV glass, Quantium pipe")
+                    + ": Absolute Atmosphere Casing, UEV glass, Quantium pipe")
             .beginStructureBlock(18, 7, 7, false)
-            .addController("Front face center, layer 2 of 7")
-            .addCasing("1+", "GT Clean Machine Casing (B) — hatch positions", false)
-            .addCasing("1+", "Atmosphere Casing (G) — determines tier", false)
-            .addOtherStructurePart("BW Glass (A) — tiered glass panels", "Inner chamber face")
-            .addOtherStructurePart("Item Pipe Casing (C) — tiered", "Inner column connectors")
-            .addOtherStructurePart("NHCM Casing (D)", "Column filler")
-            .addOtherStructurePart("GT Frame (meta 312) (E)", "Corner pillars")
-            .addOtherStructurePart("GT Sheet Metal (meta 306) (F)", "Side panels")
-            .addEnergyHatch("1+", "Any B casing position", 1)
-            .addMaintenanceHatch("1", "Any B casing position", 1)
-            .addMufflerHatch("1", "Any B casing position", 1)
-            .addInputBus("1+", "Any B casing position", 1)
-            .addInputHatch("1+", "Any B casing position", 1)
-            .addOutputBus("1+", "Any B casing position", 1)
-            .addOutputHatch("1+", "Any B casing position", 1)
+            .addController("Center, 4th layer, 2nd slice from the front")
+            .addCasing("1+", "GT Clean Machine Casing", false)
+            .addCasing("1+", "Atmosphere Casing", true)
+            .addOtherStructurePart("BartWorks Glass", "Inner chamber face")
+            .addOtherStructurePart("Item Pipe Casing", "Inner column connectors")
+            .addOtherStructurePart("NHCM Casing", "Column filler")
+            .addOtherStructurePart("Frame Box", "Corner pillars")
+            .addOtherStructurePart("Sheet Metal Casing", "Side panels")
+            .addEnergyHatch("1+", "Any GT clean machine casing", 1)
+            .addMaintenanceHatch("1", "Any GT clean machine casing", 1)
+            .addMufflerHatch("1", "Any GT clean machine casing", 1)
+            .addInputAny("1+", "Any GT clean machine casing", 1)
+            .addOutputAny("1+", "Any GT clean machine casing", 1)
             .toolTipFinisher("_Shusi_");
         return tt;
     }

@@ -31,7 +31,7 @@ public class HPRRecipes {
     }
 
     // -------------------------------------------------------------------------
-    // Hybrid Phase Casing — energetic dual-phase reactor shell.
+    // Hybrid Phase Casing: energetic dual-phase reactor shell.
     // -------------------------------------------------------------------------
     private static void casingRecipe() {
         GTValues.RA.stdBuilder()
@@ -49,7 +49,7 @@ public class HPRRecipes {
     }
 
     // -------------------------------------------------------------------------
-    // Phase Synchronizer — consumed by the HPR to retune its resonance field.
+    // Phase Synchronizer: consumed by the HPR to retune its resonance field.
     // 1 consumed per frequency step jumped; large jumps also reduce output.
     // -------------------------------------------------------------------------
     private static void phaseSynchronizerRecipe() {
@@ -67,7 +67,7 @@ public class HPRRecipes {
     }
 
     // -------------------------------------------------------------------------
-    // Phase Desynchronizer — deliberately collapses the resonance field by 1 step.
+    // Phase Desynchronizer: deliberately collapses the resonance field by 1 step.
     // Cheaper than a Synchronizer; useful for downshifting without burning fatigue.
     // -------------------------------------------------------------------------
     private static void phaseDesynchronizerRecipe() {
@@ -85,7 +85,7 @@ public class HPRRecipes {
     }
 
     // -------------------------------------------------------------------------
-    // Controller — assembly-line recipe (UHV), scanned from a UV hull.
+    // Controller: assembly-line recipe (UHV), scanned from a UV hull.
     // -------------------------------------------------------------------------
     private static void controllerRecipe() {
         GTValues.RA.stdBuilder()

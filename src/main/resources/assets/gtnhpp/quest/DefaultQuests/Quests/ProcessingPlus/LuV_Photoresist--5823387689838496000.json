@@ -74,7 +74,7 @@
       "countAsQuest:1": 1,
       "autoClaim:1": 0,
       "globalShare:1": 0,
-      "desc:8": "Triphenylsulfonium Triflate, molten Alicyclic Resin, IV Photoresist, and PGMEA, blended together. Lots to keep you busy and keep that IV momentum going! You go gurl!",
+      "desc:8": "Triphenylsulfonium Triflate, molten Alicyclic Resin, IV Photoresist, and PGMEA, blended together aswell as that thing with the long name. Lots to keep you busy and keep that IV momentum going! You go gurl!\n\n§9Have fun with this one >:D - _Shusi_",
       "notification_icon_scale:5": -1,
       "notification_show_icon:8": "default",
       "notification_fade_in:5": -1,
@@ -108,18 +108,22 @@
   "questIDHigh:4": -8734105307969536000,
   "preRequisites:9": {
     "0:10": {
+      "questIDLow:4": -4690944655858654000,
+      "questIDHigh:4": 3326148169070497000
+    },
+    "1:10": {
       "questIDLow:4": -8140690843695489000,
       "questIDHigh:4": 1804110212523638800
     },
-    "1:10": {
+    "2:10": {
       "questIDLow:4": -9159564751371776000,
       "questIDHigh:4": -5136039198244189000
     },
-    "2:10": {
+    "3:10": {
       "questIDLow:4": -8160452282364293000,
       "questIDHigh:4": -1126279030281779700
     },
-    "3:10": {
+    "4:10": {
       "questIDLow:4": -4791419922164892000,
       "questIDHigh:4": -5327737778734284000
     }

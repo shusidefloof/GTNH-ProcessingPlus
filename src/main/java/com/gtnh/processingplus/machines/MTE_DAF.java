@@ -2,13 +2,7 @@ package com.gtnh.processingplus.machines;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlock;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlocksTiered;
-import static gregtech.api.enums.HatchElement.Energy;
-import static gregtech.api.enums.HatchElement.InputBus;
-import static gregtech.api.enums.HatchElement.InputHatch;
-import static gregtech.api.enums.HatchElement.Maintenance;
-import static gregtech.api.enums.HatchElement.Muffler;
-import static gregtech.api.enums.HatchElement.OutputBus;
-import static gregtech.api.enums.HatchElement.OutputHatch;
+import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_LARGE_CHEMICAL_REACTOR;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_LARGE_CHEMICAL_REACTOR_ACTIVE;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_LARGE_CHEMICAL_REACTOR_ACTIVE_GLOW;
@@ -177,7 +171,7 @@ public class MTE_DAF extends MTEExtendedPowerMultiBlockBase<MTE_DAF> implements 
                 .addElement(
                     'B',
                     buildHatchAdder(MTE_DAF.class)
-                        .atLeast(Energy, InputBus, InputHatch, OutputBus, OutputHatch, Maintenance, Muffler)
+                        .atLeast(Energy.or(ExoticEnergy), InputBus, InputHatch, OutputBus, OutputHatch, Maintenance, Muffler)
                         .casingIndex(CASING_INDEX)
                         .hint(1)
                         .buildAndChain(GregTechAPI.sBlockCasings1, 11))
@@ -427,7 +421,7 @@ public class MTE_DAF extends MTEExtendedPowerMultiBlockBase<MTE_DAF> implements 
                     + " mode with the mode button in the GUI")
             .addInfo("Consumes 1 mB/t of atmosphere gas while running")
             .addInfo("Recipe fluid inputs are consumed continuously (mB/t) while running")
-            .addInfo("Machine tier is set by the atmosphere casing, the glass and the item pipe casing:")
+            .addInfo("Machine tier is set by the atmosphere casing, the glass and the" + EnumChatFormatting.WHITE + "item pipe casing:")
             .addInfo(
                 EnumChatFormatting.WHITE + "IV"
                     + EnumChatFormatting.GRAY
@@ -444,6 +438,7 @@ public class MTE_DAF extends MTEExtendedPowerMultiBlockBase<MTE_DAF> implements 
                 EnumChatFormatting.LIGHT_PURPLE + "UEV"
                     + EnumChatFormatting.GRAY
                     + ": Absolute Atmosphere Casing, UEV glass, Quantium pipe")
+            .addSupportAny()
             .beginStructureBlock(18, 7, 7, false)
             .addController("Center, 4th layer, 2nd slice from the front")
             .addCasing("1+", "GT Clean Machine Casing", false)

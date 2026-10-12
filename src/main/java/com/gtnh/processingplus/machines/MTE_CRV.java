@@ -1,13 +1,7 @@
 package com.gtnh.processingplus.machines;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlock;
-import static gregtech.api.enums.HatchElement.Energy;
-import static gregtech.api.enums.HatchElement.InputBus;
-import static gregtech.api.enums.HatchElement.InputHatch;
-import static gregtech.api.enums.HatchElement.Maintenance;
-import static gregtech.api.enums.HatchElement.Muffler;
-import static gregtech.api.enums.HatchElement.OutputBus;
-import static gregtech.api.enums.HatchElement.OutputHatch;
+import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_MEGA_CHEMICAL_REACTOR;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_MEGA_CHEMICAL_REACTOR_ACTIVE;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_MEGA_CHEMICAL_REACTOR_ACTIVE_GLOW;
@@ -108,7 +102,7 @@ public class MTE_CRV extends MTEExtendedPowerMultiBlockBase<MTE_CRV> implements 
                 .addElement(
                     'C',
                     buildHatchAdder(MTE_CRV.class)
-                        .atLeast(Energy, InputBus, InputHatch, OutputBus, OutputHatch, Maintenance, Muffler)
+                        .atLeast(Energy.or(ExoticEnergy), InputBus, InputHatch, OutputBus, OutputHatch, Maintenance, Muffler)
                         .casingIndex(CASING_INDEX)
                         .hint(1)
                         .buildAndChain(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.CRV_CASING))
@@ -262,6 +256,7 @@ public class MTE_CRV extends MTEExtendedPowerMultiBlockBase<MTE_CRV> implements 
                     + " speed and "
                     + TooltipHelper.parallelText(8)
                     + " Parallels")
+            .addSupportAny()
             .beginStructureBlock(5, 5, 5, true)
             .addController("Front center, 3rd layer")
             .addCasing("74+", "Iridium-Reinforced Reactor Casing", false)

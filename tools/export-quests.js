@@ -5,12 +5,13 @@
  * via QuestLoader.registry() -> config/betterquesting/DefaultQuests/).
  *
  * Source for day-to-day editing is still in the live save:
- *   run/client/saves/Fuck me in the butt/betterquesting/QuestDatabase.json
+ *   run/client/saves/<DEV_WORLD>/betterquesting/QuestDatabase.json
  * Edit quests there (in-game GUI, or scripted edits), then re-run this script to regenerate
  * the resource files that actually get shipped:
  *   src/main/resources/assets/gtnhpp/quest/DefaultQuests/{QuestLines,Quests}/ProcessingPlus/
  *
- * Usage: node tools/export-quests.js
+ * Usage: node tools/export-quests.js [world folder name]
+ * With no argument it reads DEV_WORLD below. Change that constant when you switch dev worlds.
  * Every run re-reads the generated files fresh from disk and diffs them against the source
  * before reporting success: run it after every quest change you intend to ship.
  */
@@ -18,7 +19,8 @@ const fs = require("fs");
 const path = require("path");
 
 const REPO_ROOT = path.join(__dirname, "..");
-const SRC = path.join(REPO_ROOT, "run/client/saves/Fuck me in the butt/betterquesting/QuestDatabase.json");
+const DEV_WORLD = "Fuck me in my butt";
+const SRC = path.join(REPO_ROOT, "run/client/saves", process.argv[2] || DEV_WORLD, "betterquesting/QuestDatabase.json");
 const OUT_ROOT = path.join(REPO_ROOT, "src/main/resources/assets/gtnhpp/quest/DefaultQuests");
 const LINE_DIR_NAME = "ProcessingPlus";
 

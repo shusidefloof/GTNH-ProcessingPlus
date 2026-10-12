@@ -1,10 +1,8 @@
 package com.gtnh.processingplus;
 
 import net.minecraft.block.Block;
-import net.minecraftforge.common.MinecraftForge;
 
 import com.gtnh.processingplus.blocks.GTNHPPBlocks;
-import com.gtnh.processingplus.event.TooltipHandler;
 import com.gtnh.processingplus.items.GTNHPPItems;
 import com.gtnh.processingplus.loader.MaterialLoader;
 import com.gtnh.processingplus.loader.QuestLoader;
@@ -30,7 +28,6 @@ public class CommonProxy {
         GTNHProcessingPlus.LOG.info("GT:NH Processing+ v{} loading", Tags.VERSION);
 
         MaterialLoader.load();
-        MinecraftForge.EVENT_BUS.register(new TooltipHandler());
 
         if (Mods.BetterQuesting.isModLoaded()) {
             QuestLoader.registry();
@@ -50,12 +47,9 @@ public class CommonProxy {
      * and was never plugged into GT5U's shared {@code casingTexturePages} registry, so no existing composite
      * casing index can reproduce it for hatches/controllers. We register it ourselves into an unused page so
      * {@code MTE_HPR}'s hatches and controller faces can actually match the wall they sit in.
-     *
-     * Page 100 is shared with {@code MTE_BOF}'s Solid Steel registration below (different slot), since no
-     * existing GT5U casingTexturePages slot renders as MACHINE_CASING_SOLID_STEEL either, every vanilla
-     * BlockCasingsN class only falls back to it as an unreachable default, never a real placeable meta.
      */
     private static void registerExternalCasingTextures() {
+        // Add new empty texture page that we place the new pressure Resistant Casing texture inside of
         GTUtility.addTexturePage((byte) 100);
 
         Block wall = GameRegistry.findBlock("GoodGenerator", "pressureResistantWalls");
@@ -67,12 +61,9 @@ public class CommonProxy {
                 com.gtnh.processingplus.machines.MTE_HPR.PRESSURE_RESISTANT_WALLS_CASING_INDEX,
                 TextureFactory.of(wall, 0));
         }
-
-        Textures.BlockIcons.setCasingTextureForId(
-            com.gtnh.processingplus.machines.MTE_BOF.SOLID_STEEL_MACHINE_CASING_INDEX,
-            TextureFactory.of(Textures.BlockIcons.MACHINE_CASING_SOLID_STEEL));
     }
 
+    // Recipe swap init
     public void loadComplete(FMLLoadCompleteEvent event) {
         try {
             PrPMaterials.resolveDeferredExternalMaterials();

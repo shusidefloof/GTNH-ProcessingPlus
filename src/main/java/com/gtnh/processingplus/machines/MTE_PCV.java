@@ -1,13 +1,7 @@
 package com.gtnh.processingplus.machines;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlock;
-import static gregtech.api.enums.HatchElement.Energy;
-import static gregtech.api.enums.HatchElement.InputBus;
-import static gregtech.api.enums.HatchElement.InputHatch;
-import static gregtech.api.enums.HatchElement.Maintenance;
-import static gregtech.api.enums.HatchElement.Muffler;
-import static gregtech.api.enums.HatchElement.OutputBus;
-import static gregtech.api.enums.HatchElement.OutputHatch;
+import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_MULTI_LATEX;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_MULTI_LATEX_ACTIVE;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_MULTI_LATEX_ACTIVE_GLOW;
@@ -170,7 +164,7 @@ public class MTE_PCV extends MTEExtendedPowerMultiBlockBase<MTE_PCV> implements 
                 .addElement(
                     'Q',
                     buildHatchAdder(MTE_PCV.class)
-                        .atLeast(Energy, InputBus, InputHatch, OutputBus, OutputHatch, Maintenance, Muffler)
+                        .atLeast(Energy.or(ExoticEnergy), InputBus, InputHatch, OutputBus, OutputHatch, Maintenance, Muffler)
                         .casingIndex(CASING_INDEX)
                         .hint(1)
                         .buildAndChain(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.CF_COMPOSITE_CASING))
@@ -271,6 +265,7 @@ public class MTE_PCV extends MTEExtendedPowerMultiBlockBase<MTE_PCV> implements 
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType("Polycondensation Vessel, PCV")
             .addInfo("Runs vacuum-assisted condensation and ring-opening polymerization")
+            .addSupportAny()
             .beginStructureBlock(16, 13, 9, true)
             .addController("Front, 5th from the left, 4th layer")
             .addCasing("20+", "Chemically Inert Reaction Vessel", false)

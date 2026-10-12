@@ -110,7 +110,7 @@ public class MTE_HTRF extends MTEExtendedPowerMultiBlockBase<MTE_HTRF> implement
                 .addElement(
                     'E',
                     buildHatchAdder(MTE_HTRF.class)
-                        .atLeast(Energy, InputBus, InputHatch, OutputBus, OutputHatch, Maintenance, Muffler)
+                        .atLeast(Energy.or(ExoticEnergy), InputBus, InputHatch, OutputBus, OutputHatch, Maintenance, Muffler)
                         .casingIndex(CASING_INDEX)
                         .hint(1)
                         .buildAndChain(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.HTRF_CASING))
@@ -248,6 +248,7 @@ public class MTE_HTRF extends MTEExtendedPowerMultiBlockBase<MTE_HTRF> implement
             .addDynamicParallelInfo(2, TooltipTier.COIL)
             .pipe(PPTooltips::addHeatInfo)
             .addGlassEnergyLimitInfo()
+            .addSupportAny()
             .beginStructureBlock(9, 9, 7, true)
             .addController("Front center, 5th layer")
             .addCasing("10+", "Silicon Carbide Ceramic Casing", false)

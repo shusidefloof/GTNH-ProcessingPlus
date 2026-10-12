@@ -1,13 +1,7 @@
 package com.gtnh.processingplus.machines;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlock;
-import static gregtech.api.enums.HatchElement.Energy;
-import static gregtech.api.enums.HatchElement.InputBus;
-import static gregtech.api.enums.HatchElement.InputHatch;
-import static gregtech.api.enums.HatchElement.Maintenance;
-import static gregtech.api.enums.HatchElement.Muffler;
-import static gregtech.api.enums.HatchElement.OutputBus;
-import static gregtech.api.enums.HatchElement.OutputHatch;
+import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_LNE;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_LNE_ACTIVE;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_LNE_ACTIVE_GLOW;
@@ -54,6 +48,7 @@ import gregtech.api.util.GTRecipe;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.MultiblockTooltipBuilder;
 import gregtech.api.util.OverclockCalculator;
+import gregtech.api.util.tooltip.TooltipHelper;
 import gregtech.common.misc.GTStructureChannels;
 import gtPlusPlus.core.material.MaterialsElements;
 
@@ -67,6 +62,11 @@ public class MTE_AAR extends MTEExtendedPowerMultiBlockBase<MTE_AAR> implements 
     private static final int OFFSET_X = 2;
     private static final int OFFSET_Y = 2;
     private static final int OFFSET_Z = 0;
+
+    // Every HEAT_STEP K of heat above the recipe requirement gives the 5% EU discount (GT's own heat discount, which
+    // uses the same 900 K step) plus a SPEED_PER_STEP speed multiplier, compounding.
+    private static final int HEAT_STEP = 900;
+    private static final double SPEED_PER_STEP = 1.10;
 
     private static IStructureDefinition<MTE_AAR> STRUCTURE_DEFINITION = null;
 
@@ -130,7 +130,7 @@ public class MTE_AAR extends MTEExtendedPowerMultiBlockBase<MTE_AAR> implements 
                 .addElement(
                     'C',
                     buildHatchAdder(MTE_AAR.class)
-                        .atLeast(Energy, InputBus, InputHatch, OutputBus, OutputHatch, Maintenance, Muffler)
+                        .atLeast(Energy.or(ExoticEnergy), InputBus, InputHatch, OutputBus, OutputHatch, Maintenance, Muffler)
                         .casingIndex(CASING_INDEX)
                         .hint(1)
                         .buildAndChain(GregTechAPI.sBlockCasings8, 0))
@@ -189,10 +189,12 @@ public class MTE_AAR extends MTEExtendedPowerMultiBlockBase<MTE_AAR> implements 
             @Nonnull
             @Override
             protected OverclockCalculator createOverclockCalculator(@Nonnull GTRecipe recipe) {
+                int stepsAbove = Math.max(0, (mHeatingCapacity - recipe.mSpecialValue) / HEAT_STEP);
                 return super.createOverclockCalculator(recipe).setRecipeHeat(recipe.mSpecialValue)
                     .setMachineHeat(mHeatingCapacity)
-                    .setHeatOC(true)
-                    .setHeatDiscount(true);
+                    .enablePerfectOC()
+                    .setHeatDiscount(true)
+                    .setDurationModifier(Math.pow(1.0 / SPEED_PER_STEP, stepsAbove));
             }
 
             @Override
@@ -240,8 +242,42 @@ public class MTE_AAR extends MTEExtendedPowerMultiBlockBase<MTE_AAR> implements 
     @Override
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType("Ammonia Atmosphere Reactor, AAR")
-            .pipe(PPTooltips::addHeatInfo)
+        tt.addMachineType("Ammonia Atmosphere Reactor, AAR");
+        tt.addInfo("Regulates an Ammonia Atmosphere for more advanced chemical reactions")
+            .addInfo("Removes the ammonia use for all LCR recipes that utilize it")
+            .addInfo(
+            "Increases Heat by " + EnumChatFormatting.RED
+                + "100K"
+                + EnumChatFormatting.GRAY
+                + " for every "
+                + TooltipHelper.tierText("Voltage")
+                + " tier past "
+                + EnumChatFormatting.AQUA
+                + "MV")
+            .addInfo(
+                "Reduces " + TooltipHelper.effText("EU Usage")
+                    + " by "
+                    + EnumChatFormatting.WHITE
+                    + "5%"
+                    + EnumChatFormatting.GRAY
+                    + " every "
+                    + EnumChatFormatting.RED
+                    + "900K"
+                    + EnumChatFormatting.GRAY
+                    + " above the recipe requirement")
+            .addInfo(
+                "Increases " + TooltipHelper.speedText("Speed")
+                    + " by "
+                    + EnumChatFormatting.WHITE
+                    + "10%"
+                    + EnumChatFormatting.GRAY
+                    + " every "
+                    + EnumChatFormatting.RED
+                    + "900K"
+                    + EnumChatFormatting.GRAY
+                    + " above the recipe requirement")
+            .addPerfectOCInfo()
+            .addSupportAny()
             .beginStructureBlock(5, 5, 5, true)
             .addController("Front center, 3rd layer")
             .addCasing("55+", "Chemically Inert Machine Casing", false)

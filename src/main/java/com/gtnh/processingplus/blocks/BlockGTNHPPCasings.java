@@ -37,10 +37,10 @@ public class BlockGTNHPPCasings extends Block {
     public static final int CRYO_MODULE_CASING = 17;
     public static final int QUANTUM_MODULE_CASING = 18;
     public static final int HTRF_REINFORCED_CASING = 19; // after your existing ones
-    public static final int CF_COMPOSITE_CASING = 20; // Carbon Fiber Composite Casing (CRC structural shell)
+    public static final int CF_COMPOSITE_CASING = 20; // Carbon Fiber Composite Casing
     public static final int CRYOSTAT_VACUUM_CASING = 21; // CAC outer vacuum shell
-    public static final int AEROGEL_INSULATION_BLOCK = 22; // CAC inner aerogel lining (load-bearing)
-    public static final int RADIOISOTOPE_CASING = 23; // RTG generator shell (lead-shielded)
+    public static final int AEROGEL_INSULATION_BLOCK = 22; // CAC inner aerogel lining
+    public static final int RADIOISOTOPE_CASING = 23; // RTG generator shell
     public static final int ISOTOPIC_DOPING_CASING = 24; // CIDC chamber shell
     public static final int HYBRID_PHASE_CASING = 25; // HPR reactor shell
     public static final int SUBATOMIC_PATTERNING_CASING = 26; // SPU shell
@@ -66,9 +66,9 @@ public class BlockGTNHPPCasings extends Block {
         "Basic Oxygen Furnace Casing",           // BOF
         "Photonic Alignment Casing",             // SPC beam column
         "Spectral Frame Casing",                 // SPC structural frame
-        "Bio-Lithography Adapter",               // SPC support-bay port → Bio Module
-        "Cryo-Stabilization Adapter",            // SPC support-bay port → Cryo Module
-        "Quantum Alignment Adapter",             // SPC support-bay port → Quantum Module
+        "Bio-Lithography Adapter",               // SPC support-bay port -> Bio Module
+        "Cryo-Stabilization Adapter",            // SPC support-bay port -> Cryo Module
+        "Quantum Alignment Adapter",             // SPC support-bay port -> Quantum Module
         "Bio Lithography Module Casing",         // Bio Module multiblock
         "Cryo Stabilization Module Casing",      // Cryo Module multiblock
         "Quantum Alignment Module Casing",       // Quantum Module multiblock
@@ -90,38 +90,38 @@ public class BlockGTNHPPCasings extends Block {
     // Borrow GT5U's existing block textures as placeholders until custom art is made.
     // Each path references an existing texture in assets/gregtech/textures/blocks/iconsets/
     private static final String[] TEXTURE_NAMES = {
-        "gregtech:iconsets/MACHINE_HEATPROOFCASING",            // HTRF: SiC ceramic (dark, heat-proof)
-        "gregtech:iconsets/MACHINE_CASING_ROBUST_TUNGSTENSTEEL",// HPSF: pressure vessel (tungsten)
-        "gregtech:iconsets/MACHINE_CASING_SOLID_STEEL",         // DAF: industrial steel
-        "gregtech:iconsets/MACHINE_CASING_CLEAN_STAINLESSSTEEL",// PCV: chemical / clean steel
-        "gregtech:iconsets/MACHINE_CASING_STABLE_TITANIUM",     // PFC: precision titanium
-        "gregtech:iconsets/MACHINE_CASING_STABLE_TITANIUM",     // SCD: high-pressure titanium
-        "gregtech:iconsets/MACHINE_CASING_ROBUST_TUNGSTENSTEEL",// CRV outer: LuV-tier reactor shell
-        "gregtech:iconsets/MACHINE_CASING_CLEAN_STAINLESSSTEEL",// hBN ceramic: white/inert lining
-        "gregtech:iconsets/MACHINE_CASING_STABLE_TITANIUM",     // SPC: clean precision chamber
-        "gregtech:iconsets/MACHINE_CASING_CLEAN_STAINLESSSTEEL", // CSC: cryogenic stainless column
-        "gregtech:iconsets/MACHINE_CASING_SOLID_STEEL",          // BOF: industrial steel converter
-        "gregtech:iconsets/MACHINE_CASING_CLEAN_STAINLESSSTEEL", // SPC beam: photonic alignment column (dark)
-        "gregtech:iconsets/MACHINE_CASING_SOLID_STEEL",          // SPC frame: structural frame (grey)
-        "gregtech:iconsets/MACHINE_CASING_CLEAN_STAINLESSSTEEL", // Bio adapter (clean white)
-        "gregtech:iconsets/MACHINE_CASING_FROST_PROOF",          // Cryo adapter (icy)
-        "gregtech:iconsets/MACHINE_CASING_FUSION_GLASS",         // Quantum adapter (energetic)
+        "gregtech:iconsets/MACHINE_HEATPROOFCASING",            // HTRF
+        "gregtech:iconsets/MACHINE_CASING_ROBUST_TUNGSTENSTEEL",// HPSF
+        "gregtech:iconsets/MACHINE_CASING_SOLID_STEEL",         // DAF
+        "gregtech:iconsets/MACHINE_CASING_CLEAN_STAINLESSSTEEL",// PCV
+        "gregtech:iconsets/MACHINE_CASING_STABLE_TITANIUM",     // PFC
+        "gregtech:iconsets/MACHINE_CASING_STABLE_TITANIUM",     // SCD
+        "gregtech:iconsets/MACHINE_CASING_ROBUST_TUNGSTENSTEEL",// CRV
+        "gregtech:iconsets/MACHINE_CASING_CLEAN_STAINLESSSTEEL",// hBN
+        "gregtech:iconsets/MACHINE_CASING_STABLE_TITANIUM",     // SPC
+        "gregtech:iconsets/MACHINE_CASING_CLEAN_STAINLESSSTEEL", // CSC
+        "gregtech:iconsets/MACHINE_CASING_SOLID_STEEL",          // BOF
+        "gregtech:iconsets/MACHINE_CASING_CLEAN_STAINLESSSTEEL", // SPC beam
+        "gregtech:iconsets/MACHINE_CASING_SOLID_STEEL",          // SPC frame
+        "gregtech:iconsets/MACHINE_CASING_CLEAN_STAINLESSSTEEL", // Bio adapter
+        "gregtech:iconsets/MACHINE_CASING_FROST_PROOF",          // Cryo adapter
+        "gregtech:iconsets/MACHINE_CASING_FUSION_GLASS",         // Quantum adapter
         "gregtech:iconsets/MACHINE_CASING_CLEAN_STAINLESSSTEEL", // Bio module casing
         "gregtech:iconsets/MACHINE_CASING_FROST_PROOF",          // Cryo module casing
         "gregtech:iconsets/MACHINE_CASING_RADIATIONPROOF",       // Quantum module casing
         "gregtech:iconsets/MACHINE_CASING_CHEMICALLY_INERT", // SiC color, same as HTRF casing
         "gregtech:iconsets/MACHINE_HEATPROOFCASING", // CF composite: dark woven look (placeholder)
-        "gregtech:iconsets/MACHINE_CASING_FROST_PROOF",          // CAC vacuum shell (frost)
-        "gregtech:iconsets/MACHINE_CASING_CLEAN_STAINLESSSTEEL", // CAC aerogel lining (white)
-        "gregtech:iconsets/MACHINE_CASING_RADIATIONPROOF",       // RTG shell (lead-shielded)
-        "gregtech:iconsets/MACHINE_CASING_CLEAN_STAINLESSSTEEL", // CIDC shell (clean precision)
-        "gregtech:iconsets/MACHINE_CASING_FUSION_GLASS",         // HPR shell (energetic plasma/bio)
-        "gregtech:iconsets/MACHINE_CASING_RADIATIONPROOF",       // SPU shell (high-tech)
-        "gregtech:iconsets/MACHINE_CASING_STABLE_TITANIUM",      // DAF LuV: titanium-sealed
-        "gregtech:iconsets/MACHINE_CASING_RADIATIONPROOF",       // DAF UV: radiation-proof alloy
-        "gregtech:iconsets/MACHINE_CASING_FUSION_GLASS",         // DAF UEV: transcendent shell
-        "gregtech:iconsets/MACHINE_CASING_CLEAN_STAINLESSSTEEL", // CSTR: chemically inert stainless vessel
-        "gregtech:iconsets/MACHINE_CASING_ROBUST_TUNGSTENSTEEL", // HPSF ring: reinforced tungsten band
+        "gregtech:iconsets/MACHINE_CASING_FROST_PROOF",          // CAC vacuum shell
+        "gregtech:iconsets/MACHINE_CASING_CLEAN_STAINLESSSTEEL", // CAC aerogel lining
+        "gregtech:iconsets/MACHINE_CASING_RADIATIONPROOF",       // RTG shell
+        "gregtech:iconsets/MACHINE_CASING_CLEAN_STAINLESSSTEEL", // CIDC shell
+        "gregtech:iconsets/MACHINE_CASING_FUSION_GLASS",         // HPR shell
+        "gregtech:iconsets/MACHINE_CASING_RADIATIONPROOF",       // SPU shell
+        "gregtech:iconsets/MACHINE_CASING_STABLE_TITANIUM",      // DAF LuV
+        "gregtech:iconsets/MACHINE_CASING_RADIATIONPROOF",       // DAF UV
+        "gregtech:iconsets/MACHINE_CASING_FUSION_GLASS",         // DAF UEV
+        "gregtech:iconsets/MACHINE_CASING_CLEAN_STAINLESSSTEEL", // CSTR
+        "gregtech:iconsets/MACHINE_CASING_ROBUST_TUNGSTENSTEEL", // HPSF ring
     };
     // @formatter:on
 

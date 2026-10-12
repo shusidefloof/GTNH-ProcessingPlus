@@ -2,12 +2,7 @@ package com.gtnh.processingplus.machines;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlock;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlocksTiered;
-import static gregtech.api.enums.HatchElement.Energy;
-import static gregtech.api.enums.HatchElement.InputBus;
-import static gregtech.api.enums.HatchElement.InputHatch;
-import static gregtech.api.enums.HatchElement.Maintenance;
-import static gregtech.api.enums.HatchElement.OutputBus;
-import static gregtech.api.enums.HatchElement.OutputHatch;
+import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FUSION1;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FUSION1_GLOW;
 import static gregtech.api.enums.Textures.BlockIcons.getCasingTextureForId;
@@ -257,7 +252,7 @@ public class MTE_HPR extends MTEExtendedPowerMultiBlockBase<MTE_HPR> implements 
                 .addElement(
                     'D',
                     buildHatchAdder(MTE_HPR.class)
-                        .atLeast(Energy, InputBus, InputHatch, OutputBus, OutputHatch, Maintenance)
+                        .atLeast(Energy.or(ExoticEnergy), InputBus, InputHatch, OutputBus, OutputHatch, Maintenance)
                         .casingIndex(CASING_INDEX)
                         .hint(1)
                         .buildAndChain(ggBlock("pressureResistantWalls"), 0))
@@ -523,6 +518,7 @@ public class MTE_HPR extends MTEExtendedPowerMultiBlockBase<MTE_HPR> implements 
                     + "~0%"
                     + EnumChatFormatting.GRAY
                     + " (coil saturated)")
+            .addSupportAny()
             .beginStructureBlock(29, 29, 7, true)
             .addController("Center, 15th layer, 2nd slice from the front")
             .addCasing("1+", "Pressure Resistant Wall", false)

@@ -5,12 +5,12 @@ import net.minecraft.util.EnumChatFormatting;
 import gregtech.api.util.MultiblockTooltipBuilder;
 import gregtech.api.util.tooltip.TooltipHelper;
 
-/** Tooltip lines shared by several machines, worded exactly like GT's own Electric Blast Furnace. */
+/** Tooltip lines shared by several machines */
 final class PPTooltips {
 
     private PPTooltips() {}
 
-    /** Heat capacity / EU discount / perfect overclock lines for the coil-heated machines. */
+    /** Heat capacity / EU discount / perfect overclock lines for the coil machines. */
     static void addHeatInfo(MultiblockTooltipBuilder tt) {
         tt.addInfo(
             "Increases Heat by " + EnumChatFormatting.RED

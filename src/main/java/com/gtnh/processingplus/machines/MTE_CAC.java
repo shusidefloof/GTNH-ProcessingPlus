@@ -1,12 +1,7 @@
 package com.gtnh.processingplus.machines;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlock;
-import static gregtech.api.enums.HatchElement.Energy;
-import static gregtech.api.enums.HatchElement.InputBus;
-import static gregtech.api.enums.HatchElement.InputHatch;
-import static gregtech.api.enums.HatchElement.Maintenance;
-import static gregtech.api.enums.HatchElement.OutputBus;
-import static gregtech.api.enums.HatchElement.OutputHatch;
+import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_LARGE_CHEMICAL_REACTOR;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_LARGE_CHEMICAL_REACTOR_ACTIVE;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_LARGE_CHEMICAL_REACTOR_ACTIVE_GLOW;
@@ -141,7 +136,7 @@ public class MTE_CAC extends MTEExtendedPowerMultiBlockBase<MTE_CAC> implements 
                 .addElement(
                     'H',
                     buildHatchAdder(MTE_CAC.class)
-                        .atLeast(Energy, InputBus, InputHatch, OutputBus, OutputHatch, Maintenance)
+                        .atLeast(Energy.or(ExoticEnergy), InputBus, InputHatch, OutputBus, OutputHatch, Maintenance)
                         .casingIndex(CASING_INDEX)
                         .hint(1)
                         .buildAndChain(ModBlocks.blockCustomMachineCasings, 3))
@@ -250,6 +245,7 @@ public class MTE_CAC extends MTEExtendedPowerMultiBlockBase<MTE_CAC> implements 
         tt.addMachineType("Cryogenic Annealing Cryostat, CAC")
             .addInfo(TooltipHelper.parallelText("Voltage Tier * Solenoid Tier * " + BASE_PARALLEL) + " Parallels")
             .addDynamicEuEffInfo(EU_DISCOUNT_PER_TIER, TooltipTier.SOLENOID)
+            .addSupportAny()
             .beginStructureBlock(15, 13, 7, true)
             .addController("Front center, 2nd layer")
             .addCasing("145+", "Custom Machine Casing 4 (GT++)", false)

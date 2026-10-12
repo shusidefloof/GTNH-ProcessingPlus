@@ -1,12 +1,7 @@
 package com.gtnh.processingplus.machines;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlock;
-import static gregtech.api.enums.HatchElement.Energy;
-import static gregtech.api.enums.HatchElement.InputBus;
-import static gregtech.api.enums.HatchElement.InputHatch;
-import static gregtech.api.enums.HatchElement.Maintenance;
-import static gregtech.api.enums.HatchElement.OutputBus;
-import static gregtech.api.enums.HatchElement.OutputHatch;
+import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_LARGE_CHEMICAL_REACTOR;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_LARGE_CHEMICAL_REACTOR_ACTIVE;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_LARGE_CHEMICAL_REACTOR_ACTIVE_GLOW;
@@ -163,7 +158,7 @@ public class MTE_SPU extends MTEExtendedPowerMultiBlockBase<MTE_SPU> implements 
                 .addElement(
                     'B',
                     buildHatchAdder(MTE_SPU.class)
-                        .atLeast(Energy, InputBus, InputHatch, OutputBus, OutputHatch, Maintenance)
+                        .atLeast(Energy.or(ExoticEnergy), InputBus, InputHatch, OutputBus, OutputHatch, Maintenance)
                         .casingIndex(CASING_INDEX)
                         .hint(1)
                         .buildAndChain(GregTechAPI.sBlockCasings4, 1))
@@ -253,6 +248,7 @@ public class MTE_SPU extends MTEExtendedPowerMultiBlockBase<MTE_SPU> implements 
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType("Patterning Unit, SPU")
             .addInfo("Imprints quantum lattices into matter")
+            .addSupportAny()
             .beginStructureBlock(15, 16, 15, true)
             .addController("Center, 2nd layer, 3rd slice from the front")
             .addCasing("90+", "Clean Stainless Steel Machine Casing", false)

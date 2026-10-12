@@ -47,11 +47,9 @@ import gregtech.api.util.MultiblockTooltipBuilder;
  */
 public class MTE_BOF extends MTEExtendedPowerMultiBlockBase<MTE_BOF> implements ISurvivalConstructable {
 
-    // Page 100 slot 1: page 100 itself is allocated once by CommonProxy.registerExternalCasingTextures(),
-    // which also registers this exact index to MACHINE_CASING_SOLID_STEEL so hatches match the controller
-    // face and the BOF_CASING structure block (see that method for why: no existing GT5 casingTexturePages
-    // slot renders as Solid Steel, so it has to be registered by hand into an otherwise-unused page).
-    public static final int SOLID_STEEL_MACHINE_CASING_INDEX = 12801;
+    // casingTexturePages[0][16]: GT5U's own Solid Steel Machine Casing (BlockCasings2 meta 0), so the hatches and
+    // controller face match the BOF_CASING structure block without any custom texture registration.
+    public static final int SOLID_STEEL_MACHINE_CASING_INDEX = 16;
     private static final int CASING_INDEX = SOLID_STEEL_MACHINE_CASING_INDEX;
     private static final String STRUCTURE_PIECE_MAIN = "main";
     private static final int OFFSET_X = 2, OFFSET_Y = 2, OFFSET_Z = 0;

@@ -1,13 +1,7 @@
 package com.gtnh.processingplus.machines;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlock;
-import static gregtech.api.enums.HatchElement.Energy;
-import static gregtech.api.enums.HatchElement.InputBus;
-import static gregtech.api.enums.HatchElement.InputHatch;
-import static gregtech.api.enums.HatchElement.Maintenance;
-import static gregtech.api.enums.HatchElement.Muffler;
-import static gregtech.api.enums.HatchElement.OutputBus;
-import static gregtech.api.enums.HatchElement.OutputHatch;
+import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_MULTI_BREWERY;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_MULTI_BREWERY_ACTIVE;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_MULTI_BREWERY_ACTIVE_GLOW;
@@ -243,7 +237,7 @@ public class MTE_SCD extends MTEExtendedPowerMultiBlockBase<MTE_SCD> implements 
                 .addElement(
                     'I',
                     buildHatchAdder(MTE_SCD.class)
-                        .atLeast(Energy, InputBus, InputHatch, OutputBus, OutputHatch, Maintenance, Muffler)
+                        .atLeast(Energy.or(ExoticEnergy), InputBus, InputHatch, OutputBus, OutputHatch, Maintenance, Muffler)
                         .casingIndex(CASING_INDEX)
                         .hint(1)
                         .buildAndChain(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.SCD_CASING))
@@ -691,6 +685,7 @@ public class MTE_SCD extends MTEExtendedPowerMultiBlockBase<MTE_SCD> implements 
                     + "Scanner"
                     + EnumChatFormatting.GRAY
                     + " to read the current stage")
+            .addSupportAny()
             .beginStructureBlock(12, 10, 9, true)
             .addController("Front, 8th from the left, 5th layer")
             .addCasing("1+", "High-Pressure Containment Casing", false)

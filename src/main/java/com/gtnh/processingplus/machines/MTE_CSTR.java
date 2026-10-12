@@ -1,13 +1,7 @@
 package com.gtnh.processingplus.machines;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlock;
-import static gregtech.api.enums.HatchElement.Energy;
-import static gregtech.api.enums.HatchElement.InputBus;
-import static gregtech.api.enums.HatchElement.InputHatch;
-import static gregtech.api.enums.HatchElement.Maintenance;
-import static gregtech.api.enums.HatchElement.Muffler;
-import static gregtech.api.enums.HatchElement.OutputBus;
-import static gregtech.api.enums.HatchElement.OutputHatch;
+import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_LARGE_CHEMICAL_REACTOR;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_LARGE_CHEMICAL_REACTOR_ACTIVE;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_LARGE_CHEMICAL_REACTOR_ACTIVE_GLOW;
@@ -93,7 +87,7 @@ public class MTE_CSTR extends MTEExtendedPowerMultiBlockBase<MTE_CSTR> implement
                 .addElement(
                     'C',
                     buildHatchAdder(MTE_CSTR.class)
-                        .atLeast(Energy, InputBus, InputHatch, OutputBus, OutputHatch, Maintenance, Muffler)
+                        .atLeast(Energy.or(ExoticEnergy), InputBus, InputHatch, OutputBus, OutputHatch, Maintenance, Muffler)
                         .casingIndex(CASING_INDEX)
                         .hint(1)
                         .buildAndChain(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.CSTR_CASING))
@@ -188,6 +182,7 @@ public class MTE_CSTR extends MTEExtendedPowerMultiBlockBase<MTE_CSTR> implement
         tt.addMachineType("Continuous Stirred Tank Reactor, CSTR")
             .addInfo("Runs continuous-flow liquid-phase chemistry")
             .addStaticParallelInfo(4)
+            .addSupportAny()
             .beginStructureBlock(3, 3, 3, true)
             .addController("Front center, 2nd layer")
             .addCasing("25+", "Agitated Reaction Vessel Casing", false)

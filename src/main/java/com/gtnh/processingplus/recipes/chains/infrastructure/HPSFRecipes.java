@@ -32,18 +32,17 @@ public class HPSFRecipes {
         meltingPath();
     }
 
-    // SPC-style controller: IV assembler recipe.
     private static void controllerRecipe() {
         GTValues.RA.stdBuilder()
             .itemInputs(
                 new ItemStack(GTNHPPBlocks.CASINGS, 4, BlockGTNHPPCasings.HPSF_CASING),
-                GTOreDictUnificator.get(OrePrefixes.circuit, Materials.IV, 4),
+                GTOreDictUnificator.get(OrePrefixes.circuit, Materials.EV, 4),
                 ItemList.Electric_Pump_EV.get(2),
-                ItemList.Field_Generator_EV.get(1))
+                ItemList.Field_Generator_HV.get(2))
             .fluidInputs(molten(Materials.SolderingAlloy, 1152))
             .itemOutputs(GTNHPPBlocks.HPSF.getStackForm(1))
-            .duration(40 * SECONDS)
-            .eut(TierEU.RECIPE_IV)
+            .duration(30 * SECONDS)
+            .eut(TierEU.RECIPE_EV)
             .addTo(RecipeMaps.assemblerRecipes);
     }
 

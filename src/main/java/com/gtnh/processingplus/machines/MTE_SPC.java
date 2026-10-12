@@ -1,13 +1,7 @@
 package com.gtnh.processingplus.machines;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlock;
-import static gregtech.api.enums.HatchElement.Energy;
-import static gregtech.api.enums.HatchElement.InputBus;
-import static gregtech.api.enums.HatchElement.InputHatch;
-import static gregtech.api.enums.HatchElement.Maintenance;
-import static gregtech.api.enums.HatchElement.Muffler;
-import static gregtech.api.enums.HatchElement.OutputBus;
-import static gregtech.api.enums.HatchElement.OutputHatch;
+import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_BOARD_PROCESSOR;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_BOARD_PROCESSOR_ACTIVE;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_BOARD_PROCESSOR_ACTIVE_GLOW;
@@ -200,7 +194,7 @@ public class MTE_SPC extends MTEExtendedPowerMultiBlockBase<MTE_SPC> implements 
                 .addElement(
                     'G',
                     buildHatchAdder(MTE_SPC.class)
-                        .atLeast(Energy, InputBus, InputHatch, OutputBus, OutputHatch, Maintenance, Muffler)
+                        .atLeast(Energy.or(ExoticEnergy), InputBus, InputHatch, OutputBus, OutputHatch, Maintenance, Muffler)
                         .casingIndex(CASING_INDEX)
                         .hint(1)
                         .buildAndChain(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.SPC_CASING))
@@ -602,6 +596,7 @@ public class MTE_SPC extends MTEExtendedPowerMultiBlockBase<MTE_SPC> implements 
             .addGlassEnergyLimitInfo()
             .addInfo("The parallel bonus is also capped by the glass tier")
             .addInfo(EnumChatFormatting.DARK_RED + "Machines above the glass tier produce Scorched Circuit Boards")
+            .addSupportAny()
             .beginStructureBlock(5, 5, 8, true)
             .addController("Front center, 3rd layer")
             .addCasing("26+", "Spectral Isolation Casing", false)

@@ -29,45 +29,21 @@ public class GTNHPPBlocks {
 
     public static BlockGTNHPPCasings CASINGS;
 
-    /** SPC controller instance: kept so its craft recipe can reference the controller stack. */
+    /** Controller instances: kept so its crafting recipe can reference the item stack. */
     public static MTE_BOF BOF;
     public static MTE_CSC CSC;
     public static MTE_SPC SPC;
-
-    /** HPSF controller instance: kept so its craft recipe can reference the controller stack. */
     public static MTE_HPSF HPSF;
-
-    /** HTRF controller instance: kept so its craft recipe can reference the controller stack. */
     public static MTE_HTRF HTRF;
-
-    /** CRV controller instance: kept so its assembly-line recipe can reference the controller stack. */
     public static MTE_CRV CRV;
-
-    /** PCV controller instance: kept so its assembler controller recipe can reference the controller stack. */
     public static MTE_PCV PCV;
-
-    /** CAC controller instance: kept so its assembly-line recipe can reference the controller stack. */
     public static MTE_CAC CAC;
-
-    /** RTG controller instance: kept so its assembly-line recipe can reference the controller stack. */
     public static MTE_RTG RTG;
-
-    /** CIDC controller instance: kept so its assembly-line recipe can reference the controller stack. */
     public static MTE_CIDC CIDC;
-
-    /** HPR controller instance: kept so its assembly-line recipe can reference the controller stack. */
     public static MTE_HPR HPR;
-
-    /** SCD controller instance: kept so its craft recipe can reference the controller stack. */
     public static MTE_SCD SCD;
-
-    /** SPU controller instance: kept so its assembly-line recipe can reference the controller stack. */
     public static MTE_SPU SPU;
-
-    /** DAF controller instance: kept so its assembler recipe can reference the controller stack. */
     public static MTE_DAF DAF;
-
-    /** CSTR controller instance: kept so its assembler recipe can reference the controller stack. */
     public static MTE_CSTR CSTR;
 
     // Reserved MTE IDs for the four not-yet-built multiblocks. The design doc's values
@@ -139,9 +115,9 @@ public class GTNHPPBlocks {
         CSTR = new MTE_CSTR(CSTR_ID, "gtnhpp.cstr", "Continuous Stirred Tank Reactor");
         CSTR.getStackForm(1);
 
-        // Unobtanium superconductor: lossless placeable wires + cables (ZPM); recipes auto-generated.
+        // Unobtanium superconductor: lossless placeable wires + cables with auto generated recipes
         // Uses MTE IDs 31517-31528 (6 wires + 6 cables).
-        // Unobtanium: superconductor wires + cables insulated with Polyphenylene Sulfide (no rubber recipe).
+        // Unobtanium: superconductor wires + cables insulated with Polyphenylene Sulfide
         WerkstoffCableLoader
             .register(PrPMaterials.Unobtanium, id(), 0L, 0L, 4L, TierEU.ZPM, TierEU.RECIPE_LuV, 200, true);
         // RHEA: cables insulated with Polyphenylene Sulfide foil, like Tungsten.

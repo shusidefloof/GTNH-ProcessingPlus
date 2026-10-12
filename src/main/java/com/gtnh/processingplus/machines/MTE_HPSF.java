@@ -1,13 +1,7 @@
 package com.gtnh.processingplus.machines;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlock;
-import static gregtech.api.enums.HatchElement.Energy;
-import static gregtech.api.enums.HatchElement.InputBus;
-import static gregtech.api.enums.HatchElement.InputHatch;
-import static gregtech.api.enums.HatchElement.Maintenance;
-import static gregtech.api.enums.HatchElement.Muffler;
-import static gregtech.api.enums.HatchElement.OutputBus;
-import static gregtech.api.enums.HatchElement.OutputHatch;
+import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_ELECTRIC_BLAST_FURNACE;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_ELECTRIC_BLAST_FURNACE_ACTIVE;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_ELECTRIC_BLAST_FURNACE_ACTIVE_GLOW;
@@ -153,7 +147,7 @@ public class MTE_HPSF extends MTEExtendedPowerMultiBlockBase<MTE_HPSF> implement
                 .addElement(
                     'C',
                     buildHatchAdder(MTE_HPSF.class)
-                        .atLeast(Energy, InputBus, InputHatch, OutputBus, OutputHatch, Maintenance, Muffler)
+                        .atLeast(Energy.or(ExoticEnergy), InputBus, InputHatch, OutputBus, OutputHatch, Maintenance, Muffler)
                         .casingIndex(CASING_INDEX)
                         .hint(1)
                         .buildAndChain(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.HPSF_CASING))
@@ -353,6 +347,7 @@ public class MTE_HPSF extends MTEExtendedPowerMultiBlockBase<MTE_HPSF> implement
                 EnumChatFormatting.RED + "Some recipes consume Nitrogen every cycle"
                     + EnumChatFormatting.GRAY
                     + ", keep a continuous supply connected")
+            .addSupportAny()
             .beginStructureBlock(11, 8, 13, true)
             .addController("Center of the 3x3 face on the control chamber")
             .addCasing("1+", "Hardened Pressure Vessel Casing", false)

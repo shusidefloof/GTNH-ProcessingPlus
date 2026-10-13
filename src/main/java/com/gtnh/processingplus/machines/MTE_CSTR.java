@@ -87,7 +87,14 @@ public class MTE_CSTR extends MTEExtendedPowerMultiBlockBase<MTE_CSTR> implement
                 .addElement(
                     'C',
                     buildHatchAdder(MTE_CSTR.class)
-                        .atLeast(Energy.or(ExoticEnergy), InputBus, InputHatch, OutputBus, OutputHatch, Maintenance, Muffler)
+                        .atLeast(
+                            Energy.or(ExoticEnergy),
+                            InputBus,
+                            InputHatch,
+                            OutputBus,
+                            OutputHatch,
+                            Maintenance,
+                            Muffler)
                         .casingIndex(CASING_INDEX)
                         .hint(1)
                         .buildAndChain(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.CSTR_CASING))

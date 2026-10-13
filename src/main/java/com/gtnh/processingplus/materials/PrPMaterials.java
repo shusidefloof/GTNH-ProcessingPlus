@@ -216,13 +216,14 @@ public class PrPMaterials implements Runnable {
     public static Werkstoff AmmoniaBorane;
     public static Werkstoff CrudeDecaboraneMelt;
     public static Werkstoff CryoFractionatedDecaborane;
-    public static Werkstoff OrthoCarborane;
-    public static Werkstoff NidoCarboranideSalt;
+    public static Werkstoff ClosoCarboraneCage;
+    public static Werkstoff OpenCageCarbaborateSalt;
     public static Werkstoff FranciumCarboranideCrystal;
     public static Werkstoff CarboraneAcidSolution;
     public static Werkstoff CarboraneChlorideSlag;
     public static Werkstoff AnhydrousCarboraneSuperacid;
     public static Werkstoff MagicCage;
+    public static Werkstoff GammaAlumina;
 
     // IV
     public static Werkstoff Furfural;
@@ -2556,7 +2557,7 @@ public class PrPMaterials implements Runnable {
             new Werkstoff(
                 rgb(230, 222, 190),
                 "Crude Decaborane Melt",
-                subscriptNumbers("??B10H14??"),
+                subscriptNumbers("B10H14/B2H6"),
                 new Werkstoff.Stats(),
                 Werkstoff.Types.MIXTURE,
                 fluidFeatures(),
@@ -2574,22 +2575,23 @@ public class PrPMaterials implements Runnable {
                 id(),
                 TextureSet.SET_FLUID));
 
-        OrthoCarborane = register(
+        // Slot order is fixed by the quest book's item IDs: this slot (once ortho-Carborane) is the closed cage.
+        ClosoCarboraneCage = register(
             new Werkstoff(
                 rgb(250, 250, 252),
-                "ortho-Carborane Icosahedral Cage",
-                subscriptNumbers("C2B10H12"),
+                "closo-Monocarbadodecaborate Icosahedral Cage",
+                subscriptNumbers("NaCB11H12"),
                 new Werkstoff.Stats(),
                 Werkstoff.Types.MIXTURE,
                 new Werkstoff.GenerationFeatures().onlyDust(),
                 id(),
                 TextureSet.SET_CRYSTALLINE));
 
-        NidoCarboranideSalt = register(
+        OpenCageCarbaborateSalt = register(
             new Werkstoff(
                 rgb(196, 214, 240),
-                "nido-Carboranide Open-Cage Salt",
-                subscriptNumbers("NaC2B9H12"),
+                "arachno-Carbadecaborate Open-Cage Salt",
+                subscriptNumbers("NaCB9H14"),
                 new Werkstoff.Stats(),
                 Werkstoff.Types.MIXTURE,
                 new Werkstoff.GenerationFeatures().onlyDust(),
@@ -2600,7 +2602,7 @@ public class PrPMaterials implements Runnable {
             new Werkstoff(
                 rgb(255, 196, 110),
                 "Francium closo-Carboranide Crystal",
-                subscriptNumbers("FrCB11H12"),
+                subscriptNumbers("(Na,Fr)CB11H12"),
                 new Werkstoff.Stats(),
                 Werkstoff.Types.MIXTURE,
                 new Werkstoff.GenerationFeatures().onlyDust(),
@@ -2650,6 +2652,18 @@ public class PrPMaterials implements Runnable {
                 new Werkstoff.GenerationFeatures().onlyDust(),
                 id(),
                 TextureSet.SET_CRYSTALLINE));
+
+        // Appended last on purpose: IDs follow id() call order and the quest book stores them as item damage.
+        GammaAlumina = register(
+            new Werkstoff(
+                rgb(235, 235, 240),
+                "Gamma-Alumina",
+                subscriptNumbers("Al2O3"),
+                new Werkstoff.Stats(),
+                Werkstoff.Types.MIXTURE,
+                new Werkstoff.GenerationFeatures().onlyDust(),
+                id(),
+                TextureSet.SET_DULL));
     }
 
     // =========================

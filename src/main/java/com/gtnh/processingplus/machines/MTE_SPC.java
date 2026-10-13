@@ -194,7 +194,14 @@ public class MTE_SPC extends MTEExtendedPowerMultiBlockBase<MTE_SPC> implements 
                 .addElement(
                     'G',
                     buildHatchAdder(MTE_SPC.class)
-                        .atLeast(Energy.or(ExoticEnergy), InputBus, InputHatch, OutputBus, OutputHatch, Maintenance, Muffler)
+                        .atLeast(
+                            Energy.or(ExoticEnergy),
+                            InputBus,
+                            InputHatch,
+                            OutputBus,
+                            OutputHatch,
+                            Maintenance,
+                            Muffler)
                         .casingIndex(CASING_INDEX)
                         .hint(1)
                         .buildAndChain(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.SPC_CASING))

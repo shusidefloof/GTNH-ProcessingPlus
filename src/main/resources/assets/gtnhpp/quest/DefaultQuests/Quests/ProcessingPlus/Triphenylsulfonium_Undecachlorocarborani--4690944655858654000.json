@@ -15,6 +15,12 @@
           "Count:3": 1,
           "id:8": "bartworks:gt.bwMetaGenerateddust",
           "OreDict:8": ""
+        },
+        "2:10": {
+          "Damage:2": 30686,
+          "Count:3": 2,
+          "id:8": "gregtech:gt.metaitem.01",
+          "OreDict:8": ""
         }
       },
       "partialMatch:1": 1,

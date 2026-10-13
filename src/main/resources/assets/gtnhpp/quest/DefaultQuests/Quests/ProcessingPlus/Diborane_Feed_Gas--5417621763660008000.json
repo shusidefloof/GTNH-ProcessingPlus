@@ -5,6 +5,30 @@
       "groupDetect:1": 0,
       "requiredItems:9": {
         "0:10": {
+          "Damage:2": 2755,
+          "Count:3": 18,
+          "id:8": "gregtech:gt.metaitem.01",
+          "OreDict:8": ""
+        },
+        "1:10": {
+          "Damage:2": 30720,
+          "Count:3": 3,
+          "id:8": "gregtech:gt.metaitem.01",
+          "OreDict:8": ""
+        }
+      },
+      "partialMatch:1": 1,
+      "consume:1": 0,
+      "autoConsume:1": 0,
+      "requireOnlyOneItem:1": 0,
+      "taskID:8": "bq_standard:optional_retrieval",
+      "ignoreNBT:1": 1
+    },
+    "1:10": {
+      "index:3": 1,
+      "groupDetect:1": 0,
+      "requiredItems:9": {
+        "0:10": {
           "Damage:2": 26177,
           "Count:3": 1,
           "id:8": "bartworks:gt.bwMetaGeneratedcell",
@@ -38,7 +62,7 @@
       "countAsQuest:1": 1,
       "autoClaim:1": 0,
       "globalShare:1": 0,
-      "desc:8": "Borohydride plus Sulfuric Acid in the LCR, and Diborane comes out. It is pyrophoric, so keep it away from air. No borohydride? Theres an alternative in the HPSF that burns Boron Trioxide and Aluminium in high pressure hydrogen instead.",
+      "desc:8": "Borohydride plus Sulfuric Acid in the LCR, and Diborane comes out. It is pyrophoric, so keep it away from air. Youll want a lot of it, 6 buckets every run. No borohydride? Theres an alternative in the HPSF that burns Boron Trioxide and Aluminium in high pressure hydrogen instead.",
       "notification_icon_scale:5": -1,
       "notification_show_icon:8": "default",
       "notification_fade_in:5": -1,

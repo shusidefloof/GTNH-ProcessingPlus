@@ -171,7 +171,14 @@ public class MTE_DAF extends MTEExtendedPowerMultiBlockBase<MTE_DAF> implements 
                 .addElement(
                     'B',
                     buildHatchAdder(MTE_DAF.class)
-                        .atLeast(Energy.or(ExoticEnergy), InputBus, InputHatch, OutputBus, OutputHatch, Maintenance, Muffler)
+                        .atLeast(
+                            Energy.or(ExoticEnergy),
+                            InputBus,
+                            InputHatch,
+                            OutputBus,
+                            OutputHatch,
+                            Maintenance,
+                            Muffler)
                         .casingIndex(CASING_INDEX)
                         .hint(1)
                         .buildAndChain(GregTechAPI.sBlockCasings1, 11))
@@ -421,7 +428,9 @@ public class MTE_DAF extends MTEExtendedPowerMultiBlockBase<MTE_DAF> implements 
                     + " mode with the mode button in the GUI")
             .addInfo("Consumes 1 mB/t of atmosphere gas while running")
             .addInfo("Recipe fluid inputs are consumed continuously (mB/t) while running")
-            .addInfo("Machine tier is set by the atmosphere casing, the glass and the" + EnumChatFormatting.WHITE + "item pipe casing:")
+            .addInfo(
+                "Machine tier is set by the atmosphere casing, the glass and the" + EnumChatFormatting.WHITE
+                    + "item pipe casing:")
             .addInfo(
                 EnumChatFormatting.WHITE + "IV"
                     + EnumChatFormatting.GRAY

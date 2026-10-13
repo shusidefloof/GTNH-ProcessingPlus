@@ -164,7 +164,14 @@ public class MTE_PCV extends MTEExtendedPowerMultiBlockBase<MTE_PCV> implements 
                 .addElement(
                     'Q',
                     buildHatchAdder(MTE_PCV.class)
-                        .atLeast(Energy.or(ExoticEnergy), InputBus, InputHatch, OutputBus, OutputHatch, Maintenance, Muffler)
+                        .atLeast(
+                            Energy.or(ExoticEnergy),
+                            InputBus,
+                            InputHatch,
+                            OutputBus,
+                            OutputHatch,
+                            Maintenance,
+                            Muffler)
                         .casingIndex(CASING_INDEX)
                         .hint(1)
                         .buildAndChain(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.CF_COMPOSITE_CASING))

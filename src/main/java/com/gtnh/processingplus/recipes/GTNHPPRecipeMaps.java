@@ -56,7 +56,7 @@ public class GTNHPPRecipeMaps {
     /** Continuous Stirred Tank Reactor: continuous-flow liquid-phase chemistry (IV tier). */
     public static final RecipeMap<RecipeMapBackend> sCSTRRecipes = RecipeMapBuilder
         .of("gtnhpp.recipe.cstr")
-        .maxIO(4, 4, 3, 3)
+        .maxIO(4, 4, 4, 3)
         .progressBar(GTUITextures.PROGRESSBAR_MIXER, ProgressBar.Direction.CIRCULAR_CW)
         .progressBarMUI2(GTGuiTextures.PROGRESSBAR_MIXER, ProgressWidget.Direction.CIRCULAR_CW)
         .build();

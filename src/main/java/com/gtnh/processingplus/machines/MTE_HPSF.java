@@ -147,7 +147,14 @@ public class MTE_HPSF extends MTEExtendedPowerMultiBlockBase<MTE_HPSF> implement
                 .addElement(
                     'C',
                     buildHatchAdder(MTE_HPSF.class)
-                        .atLeast(Energy.or(ExoticEnergy), InputBus, InputHatch, OutputBus, OutputHatch, Maintenance, Muffler)
+                        .atLeast(
+                            Energy.or(ExoticEnergy),
+                            InputBus,
+                            InputHatch,
+                            OutputBus,
+                            OutputHatch,
+                            Maintenance,
+                            Muffler)
                         .casingIndex(CASING_INDEX)
                         .hint(1)
                         .buildAndChain(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.HPSF_CASING))

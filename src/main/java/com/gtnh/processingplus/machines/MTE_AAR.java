@@ -130,7 +130,14 @@ public class MTE_AAR extends MTEExtendedPowerMultiBlockBase<MTE_AAR> implements 
                 .addElement(
                     'C',
                     buildHatchAdder(MTE_AAR.class)
-                        .atLeast(Energy.or(ExoticEnergy), InputBus, InputHatch, OutputBus, OutputHatch, Maintenance, Muffler)
+                        .atLeast(
+                            Energy.or(ExoticEnergy),
+                            InputBus,
+                            InputHatch,
+                            OutputBus,
+                            OutputHatch,
+                            Maintenance,
+                            Muffler)
                         .casingIndex(CASING_INDEX)
                         .hint(1)
                         .buildAndChain(GregTechAPI.sBlockCasings8, 0))
@@ -246,14 +253,14 @@ public class MTE_AAR extends MTEExtendedPowerMultiBlockBase<MTE_AAR> implements 
         tt.addInfo("Regulates an Ammonia Atmosphere for more advanced chemical reactions")
             .addInfo("Removes the ammonia use for all LCR recipes that utilize it")
             .addInfo(
-            "Increases Heat by " + EnumChatFormatting.RED
-                + "100K"
-                + EnumChatFormatting.GRAY
-                + " for every "
-                + TooltipHelper.tierText("Voltage")
-                + " tier past "
-                + EnumChatFormatting.AQUA
-                + "MV")
+                "Increases Heat by " + EnumChatFormatting.RED
+                    + "100K"
+                    + EnumChatFormatting.GRAY
+                    + " for every "
+                    + TooltipHelper.tierText("Voltage")
+                    + " tier past "
+                    + EnumChatFormatting.AQUA
+                    + "MV")
             .addInfo(
                 "Reduces " + TooltipHelper.effText("EU Usage")
                     + " by "

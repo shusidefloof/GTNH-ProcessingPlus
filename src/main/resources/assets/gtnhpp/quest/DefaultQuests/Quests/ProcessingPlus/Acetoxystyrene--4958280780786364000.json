@@ -9,6 +9,18 @@
           "Count:3": 1,
           "id:8": "gregtech:gt.metaitem.01",
           "OreDict:8": ""
+        },
+        "1:10": {
+          "Damage:2": 0,
+          "Count:3": 1,
+          "id:8": "miscutils:itemCellAceticAnhydride",
+          "OreDict:8": ""
+        },
+        "2:10": {
+          "Damage:2": 30013,
+          "Count:3": 1,
+          "id:8": "gregtech:gt.metaitem.01",
+          "OreDict:8": ""
         }
       },
       "partialMatch:1": 1,

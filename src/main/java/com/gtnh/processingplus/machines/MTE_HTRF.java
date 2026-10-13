@@ -110,7 +110,14 @@ public class MTE_HTRF extends MTEExtendedPowerMultiBlockBase<MTE_HTRF> implement
                 .addElement(
                     'E',
                     buildHatchAdder(MTE_HTRF.class)
-                        .atLeast(Energy.or(ExoticEnergy), InputBus, InputHatch, OutputBus, OutputHatch, Maintenance, Muffler)
+                        .atLeast(
+                            Energy.or(ExoticEnergy),
+                            InputBus,
+                            InputHatch,
+                            OutputBus,
+                            OutputHatch,
+                            Maintenance,
+                            Muffler)
                         .casingIndex(CASING_INDEX)
                         .hint(1)
                         .buildAndChain(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.HTRF_CASING))

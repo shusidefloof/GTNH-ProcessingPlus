@@ -79,6 +79,7 @@ public class PhotoresistRecipes {
         evEVBlend();
         // IV
         ivFurfural();
+        ivGammaAlumina();
         ivDihydropyran();
         ivTHPProtection();
         ivIVBlendEV();
@@ -102,15 +103,15 @@ public class PhotoresistRecipes {
         luvAmmoniumBisulfateCracking();
     }
 
-    // MV stage: Formaldehyde: Ethanol + O₂
+    // MV stage: Formaldehyde: Methanol + O₂ (deliberately slow; partial oxidation over a catalyst bed)
     private static void mvFormaldehydeSynthesis() {
         GTValues.RA.stdBuilder()
             // O2 as a cell so it fits the single-block CR at MV; UniversalChemical makes the LCR copy.
             .itemInputs(Materials.Oxygen.getCells(1), circuit(1))
-            .fluidInputs(fluid(Materials.Ethanol, 1000))
+            .fluidInputs(fluid(Materials.Methanol, 1000))
             .itemOutputs(ItemList.Cell_Empty.get(1))
             .fluidOutputs(fluid("fluid.formaldehyde", 1000))
-            .duration(3 * SECONDS)
+            .duration(15 * SECONDS)
             .eut(TierEU.RECIPE_MV)
             .addTo(GTRecipeConstants.UniversalChemical);
     }
@@ -189,8 +190,8 @@ public class PhotoresistRecipes {
     private static void hvNaphthaleneSensitizer() {
         GTValues.RA.stdBuilder()
             .itemInputs(circuit(1))
-            .fluidInputs(fluid("fluid.naphthalene", 1000), fluid(Materials.SulfuricAcid, 500))
-            .fluidOutputs(fluid(PrPMaterials.HVPhotoresistSensitizer, 1000))
+            .fluidInputs(fluid("fluid.naphthalene", 1000), fluid(Materials.SulfuricAcid, 1000))
+            .fluidOutputs(fluid(PrPMaterials.HVPhotoresistSensitizer, 1000), fluid(Materials.Water, 1000))
             .duration(15 * SECONDS)
             .eut(TierEU.RECIPE_MV)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
@@ -200,8 +201,8 @@ public class PhotoresistRecipes {
     private static void hvAnthraceneSensitizer() {
         GTValues.RA.stdBuilder()
             .itemInputs(circuit(2))
-            .fluidInputs(fluid("fluid.anthracene", 1000), fluid(Materials.NitricAcid, 500))
-            .fluidOutputs(fluid(PrPMaterials.HVPhotoresistSensitizer, 1000))
+            .fluidInputs(fluid("fluid.anthracene", 1000), fluid(Materials.NitricAcid, 1000))
+            .fluidOutputs(fluid(PrPMaterials.HVPhotoresistSensitizer, 1000), fluid(Materials.Water, 1000))
             .duration(5 * SECONDS)
             .eut(TierEU.RECIPE_MV)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
@@ -218,7 +219,7 @@ public class PhotoresistRecipes {
             .fluidOutputs(
                 fluid(PrPMaterials.HVPhotoresistSensitizer, 2000),
                 fluid(Materials.Water, 500),
-                fluid(Materials.NitrousOxide, 250))
+                fluid(Materials.NitrogenDioxide, 250))
             .duration(8 * SECONDS)
             .eut(TierEU.RECIPE_HV)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
@@ -245,23 +246,28 @@ public class PhotoresistRecipes {
             .addTo(RecipeMaps.mixerRecipes);
     }
 
-    // EV stage: Acetoxystyrene: Styrene + Acetic Anhydride
+    // EV stage: Acetoxystyrene: Styrene + ½ O₂ + Acetic Anhydride → Acetoxystyrene + Acetic Acid
     private static void evAcetoxystyrene() {
         GTValues.RA.stdBuilder()
             .itemInputs(circuit(1))
-            .fluidInputs(fluid(Materials.Styrene, 1000), fluid("molten.aceticanhydride", 1000))
-            .fluidOutputs(fluid(PrPMaterials.Acetoxystyrene, 1000))
+            .fluidInputs(
+                fluid(Materials.Styrene, 1000),
+                fluid("molten.aceticanhydride", 1000),
+                fluid(Materials.Oxygen, 1000))
+            .fluidOutputs(fluid(PrPMaterials.Acetoxystyrene, 1000), fluid(Materials.AceticAcid, 1000))
             .duration(4 * SECONDS)
             .eut(TierEU.RECIPE_MV)
             .addTo(RecipeMaps.multiblockChemicalReactorRecipes);
     }
 
-    // EV stage: PHS Resin: Acetoxystyrene + H₂O₂ + HCl (cat)
+    // EV stage: PHS Resin: Acetoxystyrene + H₂O + H₂O₂ (radical initiator) + HCl (cat); polymerizes, then the acetate
+    // hydrolyzes off as acetic acid
     private static void evPHSResin() {
         GTValues.RA.stdBuilder()
             .itemInputs(circuit(2))
             .fluidInputs(
                 fluid(PrPMaterials.Acetoxystyrene, 2000),
+                fluid(Materials.Water, 2000),
                 fluid("fluid.hydrogenperoxide", 1000),
                 fluid(Materials.HydrochloricAcid, 100))
             .fluidOutputs(molten(PrPMaterials.PHSResin, 144 * 9), fluid(Materials.AceticAcid, 2000))
@@ -278,6 +284,7 @@ public class PhotoresistRecipes {
             .itemInputs(circuit(2))
             .fluidInputs(
                 fluid(PrPMaterials.Acetoxystyrene, 2000),
+                fluid(Materials.Water, 2000),
                 fluid(PrPMaterials.ImpureHydrogenPeroxide, 1000),
                 fluid(Materials.HydrochloricAcid, 100))
             .fluidOutputs(molten(PrPMaterials.PHSResin, 144 * 3), fluid(Materials.AceticAcid, 2000))
@@ -428,26 +435,43 @@ public class PhotoresistRecipes {
             .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
     }
 
-    // IV stage: Dihydropyran: Furfural pyrolysis
+    // IV stage: Gamma-Alumina catalyst: 2 Al(OH)₃ → γ-Al₂O₃ + 3 H₂O. Gibbsite calcined at a moderate temperature
+    // dehydrates through boehmite into the high-surface-area γ phase (existing alumina is already the dense phase and
+    // cannot be converted back).
+    private static void ivGammaAlumina() {
+        GTValues.RA.stdBuilder()
+            .itemInputs(dust(Materials.Aluminiumhydroxide, 14), circuit(1))
+            .itemOutputs(dust(PrPMaterials.GammaAlumina, 5))
+            .fluidOutputs(fluid(Materials.Water, 9000))
+            .duration(10 * SECONDS)
+            .eut(TierEU.RECIPE_EV)
+            .metadata(GTRecipeConstants.COIL_HEAT, 1800)
+            .addTo(GTNHPPRecipeMaps.sHTRFRecipes);
+    }
+
+    // IV stage: Dihydropyran: Furfural + 3 H₂ → Dihydropyran + H₂O (hydrogenation to tetrahydrofurfuryl alcohol, then
+    // dehydration, over a γ-alumina catalyst that is not consumed)
     private static void ivDihydropyran() {
         GTValues.RA.stdBuilder()
-            .itemInputs(circuit(2))
-            .fluidInputs(fluid(PrPMaterials.Furfural, 1000))
-            .fluidOutputs(fluid(PrPMaterials.Dihydropyran, 1000))
+            .itemInputs(dust(PrPMaterials.GammaAlumina, 0), circuit(2))
+            .fluidInputs(fluid(PrPMaterials.Furfural, 1000), fluid(Materials.Hydrogen, 3000))
+            .fluidOutputs(fluid(PrPMaterials.Dihydropyran, 1000), fluid(Materials.Water, 1000))
             .duration(4 * SECONDS)
             .eut(TierEU.RECIPE_EV)
             .metadata(GTRecipeConstants.COIL_HEAT, 1800)
             .addTo(GTNHPPRecipeMaps.sHTRFRecipes);
     }
 
-    // IV stage: THP-Protected PHS: PHS Resin + Dihydropyran + HCl (cat)
+    // IV stage: THP-Protected PHS: PHS Resin + Dihydropyran + HCl (cat), under nitrogen (THP ethers are moisture
+    // sensitive)
     private static void ivTHPProtection() {
         GTValues.RA.stdBuilder()
             .itemInputs(circuit(3))
             .fluidInputs(
                 molten(PrPMaterials.PHSResin, 288),
                 fluid(PrPMaterials.Dihydropyran, 1000),
-                fluid(Materials.HydrochloricAcid, 50))
+                fluid(Materials.HydrochloricAcid, 50),
+                fluid(Materials.Nitrogen, 1000))
             .fluidOutputs(fluid(PrPMaterials.THPProtectedPHS, 1000))
             .duration(6 * SECONDS)
             .eut(TierEU.RECIPE_EV)
@@ -476,12 +500,12 @@ public class PhotoresistRecipes {
             .addTo(RecipeMaps.mixerRecipes);
     }
 
-    // LuV stage: Trifluoromethane: CHCl₃ + 3 HF (gates Triflic Acid)
+    // LuV stage: Trifluoromethane: CHCl₃ + 3 HF → CHF₃ + 3 HCl (gates Triflic Acid)
     private static void luvTrifluoromethane() {
         GTValues.RA.stdBuilder()
             .itemInputs(circuit(1))
             .fluidInputs(fluid(Materials.Chloroform, 1000), fluid(Materials.HydrofluoricAcid, 3000))
-            .fluidOutputs(fluid(PrPMaterials.Trifluoromethane, 1000))
+            .fluidOutputs(fluid(PrPMaterials.Trifluoromethane, 1000), fluid(Materials.HydrochloricAcid, 3000))
             .duration(4 * SECONDS)
             .eut(TierEU.RECIPE_EV)
             .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
@@ -491,7 +515,7 @@ public class PhotoresistRecipes {
     private static void luvSulfurTrioxide() {
         GTValues.RA.stdBuilder()
             .itemInputs(circuit(2))
-            .fluidInputs(fluid(Materials.SulfurDioxide, 2000), fluid(Materials.Oxygen, 1000))
+            .fluidInputs(fluid(Materials.SulfurDioxide, 2000), fluid(Materials.Oxygen, 2000))
             .fluidOutputs(fluid(Materials.SulfurTrioxide, 2000))
             .duration(3 * SECONDS)
             .eut(TierEU.RECIPE_HV)
@@ -513,21 +537,22 @@ public class PhotoresistRecipes {
     private static void luvAdamantolSynthesis() {
         GTValues.RA.stdBuilder()
             .itemInputs(dust(Materials.Adamantium, 1))
-            .fluidInputs(fluid(Materials.HydrofluoricAcid, 2000), fluid(Materials.SulfuricAcid, 500))
+            .fluidInputs(fluid(Materials.HydrofluoricAcid, 2000), fluid(Materials.SulfuricAcid, 1000))
             .itemOutputs(dust(PrPMaterials.Adamantol, 2))
             .duration(150 * TICKS)
             .eut(TierEU.RECIPE_IV)
             .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
     }
 
-    // LuV stage: Methacrylic Acid: Acetone + HCN + H₂SO₄; byproduces Ammonium Bisulfate
+    // LuV stage: Methacrylic Acid (acetone cyanohydrin route): Acetone + HCN + H₂SO₄ + H₂O → MAA + NH₄HSO₄
     private static void luvMethacrylicAcid() {
         GTValues.RA.stdBuilder()
             .itemInputs(circuit(4))
             .fluidInputs(
                 fluid(Materials.Acetone, 1000),
                 fluid("hydrogencyanide", 1000),
-                fluid(Materials.SulfuricAcid, 1000))
+                fluid(Materials.SulfuricAcid, 1000),
+                fluid(Materials.Water, 1000))
             .itemOutputs(ammoniumBisulfateDust(2))
             .fluidOutputs(fluid(PrPMaterials.MethacrylicAcid, 1000))
             .duration(6 * SECONDS)
@@ -535,24 +560,24 @@ public class PhotoresistRecipes {
             .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
     }
 
-    // LuV stage: Adamantyl Methacrylate: Methacrylic Acid + Adamantol
+    // LuV stage: Adamantyl Methacrylate: Methacrylic Acid + Adamantol → AdMA + H₂O
     private static void luvAdamantylMethacrylate() {
         GTValues.RA.stdBuilder()
             .itemInputs(dust(PrPMaterials.Adamantol, 1), circuit(5))
             .fluidInputs(fluid(PrPMaterials.MethacrylicAcid, 1000))
-            .fluidOutputs(fluid(PrPMaterials.AdamantylMethacrylate, 1000))
+            .fluidOutputs(fluid(PrPMaterials.AdamantylMethacrylate, 1000), fluid(Materials.Water, 1000))
             .duration(5 * SECONDS)
             .eut(TierEU.RECIPE_IV)
             .metadata(GTRecipeConstants.COIL_HEAT, 4500 + 400)
             .addTo(GTNHPPRecipeMaps.sHTRFRecipes);
     }
 
-    // LuV stage: Acetone Azine (AIBN precursor): Acetone + Hydrazine
+    // LuV stage: Acetone Azine (AIBN precursor): 2 Acetone + N₂H₄ → Azine + 2 H₂O
     private static void luvAcetoneAzine() {
         GTValues.RA.stdBuilder()
             .itemInputs(circuit(6))
             .fluidInputs(fluid(Materials.Acetone, 2000), fluid("fluid.hydrazine", 1000))
-            .fluidOutputs(fluid(PrPMaterials.AcetoneAzine, 1000))
+            .fluidOutputs(fluid(PrPMaterials.AcetoneAzine, 1000), fluid(Materials.Water, 2000))
             .duration(4 * SECONDS)
             .eut(TierEU.RECIPE_HV)
             .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
@@ -627,12 +652,12 @@ public class PhotoresistRecipes {
             .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
     }
 
-    // LuV stage: PGMEA solvent: PGME + Acetic Acid
+    // LuV stage: PGMEA solvent: PGME + Acetic Acid → PGMEA + H₂O
     private static void luvPGMEA() {
         GTValues.RA.stdBuilder()
             .itemInputs(circuit(11))
             .fluidInputs(fluid(PrPMaterials.PGME, 1000), fluid(Materials.AceticAcid, 1000))
-            .fluidOutputs(fluid(PrPMaterials.PGMEA, 1000))
+            .fluidOutputs(fluid(PrPMaterials.PGMEA, 1000), fluid(Materials.Water, 1000))
             .duration(3 * SECONDS)
             .eut(TierEU.RECIPE_EV)
             .addTo(GTNHPPRecipeMaps.sCSTRRecipes);
@@ -641,7 +666,7 @@ public class PhotoresistRecipes {
     // LuV stage: LuV Photoresist blend: IV + Alicyclic Resin + PAG + PGMEA (Mixer)
     private static void luvLuVBlend() {
         GTValues.RA.stdBuilder()
-            .itemInputs(dust(PrPMaterials.TriphenylsulfoniumTriflate, 4), dust(PrPMaterials.MagicCage, 6), circuit(13))
+            .itemInputs(dust(PrPMaterials.TriphenylsulfoniumTriflate, 4), dust(PrPMaterials.MagicCage, 4), circuit(13))
             .fluidInputs(
                 molten(PrPMaterials.AlicyclicResin, 1728),
                 fluid(PrPMaterials.IVPhotoresist, 8000),

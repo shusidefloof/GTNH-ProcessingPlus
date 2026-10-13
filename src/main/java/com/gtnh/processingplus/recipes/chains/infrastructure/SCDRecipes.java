@@ -97,13 +97,13 @@ public class SCDRecipes {
     // recovered as diluted NMP. Moved to PCV (polycondensation/gelation step).
     //
     // Step B (SCD, 3-stage): WetPANGel → PANAerogel + CO₂ gas
-    // Stage 1 (empty hatch): PAN gel enters pre-dried, no solvent exchange needed.
+    // Stage 1 (Ethanol): flush displaces residual water from the gel pores before the CO₂.
     // Stage 2 (Liquid CO₂ / Freon R-12): supercritical CO₂ extraction.
     // ~24 mB/t with Liquid CO₂ → ~8 L total; Freon R-12 halves stage-2 time.
     // Stage 3 (empty hatch): depressurization: fluid contamination degrades the aerogel.
     //
-    // Step C (HTRF): PANAerogel → CarbonAerogel + CO₂ + NH₃
-    // Pyrolysis / carbonization at ~3600 K.
+    // Step C (HTRF): PANAerogel → CarbonAerogel + NH₃ + HCN
+    // Pyrolysis / carbonization at ~3600 K. PAN has no oxygen, so the nitrogen leaves as ammonia and HCN.
     // =========================================================
     private static void carbonAerogelChain() {
 
@@ -137,7 +137,7 @@ public class SCDRecipes {
         GTValues.RA.stdBuilder()
             .itemInputs(dust(PrPMaterials.PANAerogel, 2), circuit(1))
             .itemOutputs(plate(PrPMaterials.CarbonAerogel, 2))
-            .fluidOutputs(fluid(Materials.CarbonDioxide, 1000), fluid(Materials.Ammonia, 500))
+            .fluidOutputs(fluid(Materials.Ammonia, 1000), fluid("hydrogencyanide", 1000))
             .duration(30 * SECONDS)
             .eut(TierEU.RECIPE_ZPM)
             .metadata(GTRecipeConstants.COIL_HEAT, 3600)

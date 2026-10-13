@@ -8,14 +8,13 @@ import net.minecraft.item.ItemStack;
 import com.gtnh.processingplus.blocks.BlockGTNHPPCasings;
 import com.gtnh.processingplus.blocks.GTNHPPBlocks;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-import gregtech.api.GregTechAPI;
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.ItemList;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
 import gregtech.api.enums.TierEU;
 import gregtech.api.recipe.RecipeMaps;
+import gregtech.api.util.GTModHandler;
 import gregtech.api.util.GTOreDictUnificator;
 
 public class CSTRRecipes {
@@ -44,38 +43,14 @@ public class CSTRRecipes {
     }
 
     // =========================================================
-    // CSTR controller: assembler + shaped recipe (IV tier, accessible)
+    // CSTR controller: hand-crafted only (EV tier), like GT's own multiblock controllers
     // =========================================================
     private static void controllerRecipe() {
-        ItemStack controller = new ItemStack(GregTechAPI.sBlockMachines, 1, GTNHPPBlocks.CSTR_ID);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                ItemList.Hull_EV.get(1),
-                GTOreDictUnificator.get(OrePrefixes.plateDense, Materials.Titanium, 4),
-                ItemList.Electric_Motor_EV.get(2),
-                ItemList.Electric_Pump_EV.get(1),
-                GTOreDictUnificator.get(OrePrefixes.plateDouble, Materials.Silver, 1),
-                circuit(8))
-            .itemOutputs(controller)
-            .duration(30 * SECONDS)
-            .eut(TierEU.RECIPE_EV)
-            .addTo(RecipeMaps.assemblerRecipes);
-
-        GameRegistry.addShapedRecipe(
-            controller,
-            "SDS",
-            "MHM",
-            "SPS",
-            'S',
-            GTOreDictUnificator.get(OrePrefixes.plateDense, Materials.Titanium, 1),
-            'H',
-            ItemList.Hull_EV.get(1),
-            'M',
-            ItemList.Electric_Motor_EV.get(1),
-            'P',
-            ItemList.Electric_Pump_EV.get(1),
-            'D',
-            GTOreDictUnificator.get(OrePrefixes.plateDouble, Materials.Silver, 1));
+        GTModHandler.addCraftingRecipe(
+            GTNHPPBlocks.CSTR.getStackForm(1),
+            GTModHandler.RecipeBits.BITS | GTModHandler.RecipeBits.DO_NOT_CHECK_FOR_COLLISIONS,
+            new Object[] { "SDS", "MHM", "SPS", 'S', OrePrefixes.plateDense.get(Materials.Titanium), 'D',
+                OrePrefixes.plateDouble.get(Materials.Silver), 'M', ItemList.Electric_Motor_EV, 'H', ItemList.Hull_EV,
+                'P', ItemList.Electric_Pump_EV });
     }
 }

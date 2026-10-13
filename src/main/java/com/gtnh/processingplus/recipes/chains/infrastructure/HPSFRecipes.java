@@ -77,7 +77,7 @@ public class HPSFRecipes {
     // SINTERING PATH (EV)
     // Np dust + W dust + Ta dust + Ti dust
     // → Mixer → Compressor → HPSF → Vacuum Freezer → ingot
-    // 4 input units : 1 ingot output
+    // 4 input units : 2 ingot output
     // =========================================================
 
     // Step 1: GT++ Mixer: blend four equimolar powders into homogeneous RHEA blend
@@ -129,14 +129,14 @@ public class HPSFRecipes {
 
     // =========================================================
     // MELTING PATH (IV): Alloy Blast Smelter
-    // Same 4 input units → 2 ingots worth of molten RHEA (2× yield)
+    // Same 4 input units → 4 ingots worth of molten RHEA (2× the sintering yield, no mass lost)
     // Skips powder prep and cooling step; faster and more efficient.
     // =========================================================
     private static void meltingPath() {
         GTValues.RA.stdBuilder()
             .itemInputs(item("dustNeptunium", 1), dust(Materials.Tantalum, 1), dust(Materials.Titanium, 1))
             .fluidInputs(molten(Materials.Tungsten, 144))
-            .fluidOutputs(molten(PrPMaterials.RefractoryHighEntropyAlloy, 288))
+            .fluidOutputs(molten(PrPMaterials.RefractoryHighEntropyAlloy, 576))
             .duration(100 * SECONDS)
             .eut(TierEU.RECIPE_LuV)
             .addTo(RecipeMaps.alloyBlastSmelterRecipes);

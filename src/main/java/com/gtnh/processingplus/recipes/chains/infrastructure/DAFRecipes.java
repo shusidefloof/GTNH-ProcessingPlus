@@ -55,7 +55,7 @@ public class DAFRecipes {
             .addTo(RecipeMaps.assemblerRecipes);
     }
 
-    // Pristine Atmosphere Casing: UV chamber shell, neutronium-lined
+    // Pristine Atmosphere Casing: UV chamber shell, osmium-framed with iridium lining
     private static void casingRecipeUV() {
         GTValues.RA.stdBuilder()
             .itemInputs(
@@ -69,7 +69,7 @@ public class DAFRecipes {
             .addTo(RecipeMaps.assemblerRecipes);
     }
 
-    // Absolute Atmosphere Casing: UEV chamber shell, transcendent alloy
+    // Absolute Atmosphere Casing: UEV chamber shell, neutronium-framed with osmium lining
     private static void casingRecipeUEV() {
         GTValues.RA.stdBuilder()
             .itemInputs(

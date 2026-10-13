@@ -49,11 +49,10 @@ public class CRVRecipes {
     }
 
     // -------------------------------------------------------------------------
-    // CRV controller: assembly-line recipe (EV).
+    // CRV controller: assembly-line recipe (LuV), scanned from a LuV hull.
     //
-    // The vessel is an EV hull lined with sintered silicon-carbide ceramic plates
-    // (the crucible wall) and braced with a tungstensteel frame. Stainless pipes
-    // feed the Argon quench pulse. Scanned from a plain EV hull.
+    // Four LuV alloy smelters are the furnace core, lined with hBN blocks (the crucible wall) and braced with a
+    // tungstensteel frame. Stainless pipes feed the Argon quench pulse.
     // -------------------------------------------------------------------------
     private static void controllerRecipe() {
         GTValues.RA.stdBuilder()
@@ -116,7 +115,7 @@ public class CRVRecipes {
     private static void amorphousTritaniumAlloy() {
         GTValues.RA.stdBuilder()
             .itemInputs(ingot(Materials.Tritanium, 4), dust(Materials.Americium, 2), circuit(8))
-            .fluidInputs(fluid(PrPMaterials.HBNLubricant, 500), fluid(Materials.Argon, 2000))
+            .fluidInputs(fluid(PrPMaterials.HBNLubricant, 1000), fluid(Materials.Argon, 2000))
             .itemOutputs(ingot(PrPMaterials.AmorphousTritaniumAlloy, 4))
             .duration(40 * SECONDS)
             .eut(TierEU.RECIPE_LuV)

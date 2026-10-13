@@ -128,12 +128,13 @@ public class CSCRecipes {
             .addTo(GTNHPPRecipeMaps.sCSCRecipes);
     }
 
-    // circuits(3-5): Noble gas extraction: tiered air volumes, escalating Freon cost
+    // circuits 2-6: Noble gas extraction (Argon, Neon, Helium, Krypton, Xenon): tiered air volumes, escalating
+    // Freon cost. The Argon cut skips the N2/O2 split entirely, so it gives twice the argon of the circuit 1 mode.
     private static void nobleGasVaporization() {
         GTValues.RA.stdBuilder()
             .itemInputs(circuit(2))
-            .fluidInputs(fluid(Materials.Air, 125000), fluid(PrPMaterials.FreonR12, 5000))
-            .fluidOutputs(fluid(Materials.Argon, 8400), fluid(PrPMaterials.FreonR12, 4500))
+            .fluidInputs(fluid(Materials.Air, 50000), fluid(PrPMaterials.FreonR12, 5000))
+            .fluidOutputs(fluid(Materials.Argon, 20000), fluid(PrPMaterials.FreonR12, 4500))
             .duration(10 * SECONDS)
             .eut(TierEU.RECIPE_HV)
             .addTo(GTNHPPRecipeMaps.sCSCRecipes);

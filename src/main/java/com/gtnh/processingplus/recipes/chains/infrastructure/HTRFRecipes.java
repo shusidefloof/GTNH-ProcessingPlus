@@ -47,11 +47,7 @@ public class HTRFRecipes {
                 plate(Materials.BlackSteel, 3),
                 plate(Materials.Polytetrafluoroethylene, 3),
                 item("frameGtBlackSteel", 1))
-            .itemOutputs(
-                new net.minecraft.item.ItemStack(
-                    com.gtnh.processingplus.blocks.GTNHPPBlocks.CASINGS,
-                    1,
-                    BlockGTNHPPCasings.HTRF_REINFORCED_CASING))
+            .itemOutputs(new ItemStack(GTNHPPBlocks.CASINGS, 1, BlockGTNHPPCasings.HTRF_REINFORCED_CASING))
             .duration(50 * TICKS)
             .eut(TierEU.RECIPE_LV)
             .addTo(RecipeMaps.assemblerRecipes);
@@ -61,11 +57,7 @@ public class HTRFRecipes {
                 gear(PrPMaterials.SinteredSiliconCarbide, 1),
                 screw(PrPMaterials.SinteredSiliconCarbide, 2),
                 item("frameGtBlackSteel", 1))
-            .itemOutputs(
-                new net.minecraft.item.ItemStack(
-                    com.gtnh.processingplus.blocks.GTNHPPBlocks.CASINGS,
-                    1,
-                    com.gtnh.processingplus.blocks.BlockGTNHPPCasings.HTRF_CASING))
+            .itemOutputs(new ItemStack(GTNHPPBlocks.CASINGS, 1, BlockGTNHPPCasings.HTRF_CASING))
             .duration(50 * TICKS)
             .eut(TierEU.RECIPE_LV)
             .addTo(RecipeMaps.assemblerRecipes);

@@ -35,7 +35,8 @@ public class CACRecipes {
      * The superconductors the CAC takes over. NOTE the deliberate omission of SuperconductorUV: GT's
      * naming is offset by one, so SuperconductorUV is the UHV-tier conductor, but it's also what UV
      * energy hatches are built from, and you need those to REACH UHV (and thus aerogel and the CAC).
-     * Gating it here would soft-lock progression, so it stays on its stock assembler recipe. The CAC
+     * Gating it here would soft-lock progression, so it stays in the assembler (RecipeSwaps gates it
+     * behind Unobtanium cable instead, which is reachable well before UHV). The CAC
      * only takes the genuinely post-UHV conductors (SuperconductorUHV and up).
      */
     private static final Materials[] CAC_SUPERCONDUCTORS = { Materials.SuperconductorUHV, Materials.SuperconductorUEV,
@@ -80,7 +81,7 @@ public class CACRecipes {
     }
 
     // -------------------------------------------------------------------------
-    // Controller: assembly-line recipe (UHV), scanned from a UHV hull.
+    // Controller: assembly-line recipe (UHV), scanned from a UV hull.
     // -------------------------------------------------------------------------
     private static void controllerRecipe() {
         GTValues.RA.stdBuilder()

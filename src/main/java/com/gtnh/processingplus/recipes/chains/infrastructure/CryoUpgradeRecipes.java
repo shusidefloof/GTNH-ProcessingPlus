@@ -52,8 +52,8 @@ public class CryoUpgradeRecipes {
     private static void crvTitaniumCryo() {
         GTValues.RA.stdBuilder()
             .itemInputs(ingot(Materials.Tritanium, 4), dust(Materials.Americium, 2), circuit(12))
-            .fluidInputs(fluid(PrPMaterials.HBNLubricant, 500), fluid(PrPMaterials.LiquidArgon, 500))
-            .itemOutputs(ingot(PrPMaterials.AmorphousTritaniumAlloy, 4))
+            .fluidInputs(fluid(PrPMaterials.HBNLubricant, 1000), fluid(PrPMaterials.LiquidArgon, 1000))
+            .itemOutputs(ingot(PrPMaterials.AmorphousTritaniumAlloy, 5))
             .duration(32 * SECONDS)
             .eut(TierEU.RECIPE_LuV)
             .addTo(GTNHPPRecipeMaps.sCRVRecipes);
@@ -64,7 +64,7 @@ public class CryoUpgradeRecipes {
         GTValues.RA.stdBuilder()
             .itemInputs(dust(Materials.Naquadria, 4), ingot(Materials.NaquadahEnriched, 2), circuit(13))
             .fluidInputs(fluid(PrPMaterials.HBNLubricant, 1000), fluid(PrPMaterials.LiquidArgon, 1000))
-            .itemOutputs(ingot(PrPMaterials.AmorphousNaquadria, 2))
+            .itemOutputs(ingot(PrPMaterials.AmorphousNaquadria, 3))
             .duration(48 * SECONDS)
             .eut(TierEU.RECIPE_ZPM)
             .addTo(GTNHPPRecipeMaps.sCRVRecipes);

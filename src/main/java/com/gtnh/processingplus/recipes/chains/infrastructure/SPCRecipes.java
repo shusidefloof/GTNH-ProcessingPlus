@@ -52,7 +52,7 @@ public class SPCRecipes {
         premiumBoardRecipes();
     }
 
-    // SPC controller: IV assembler recipe.
+    // SPC controller: EV assembler recipe.
     private static void controllerRecipe() {
         GTValues.RA.stdBuilder()
             .itemInputs(
@@ -187,7 +187,7 @@ public class SPCRecipes {
     private static void epoxyBoard() {
         Collection<GTRecipe> recipes = GTValues.RA.stdBuilder()
             .itemInputs(plate(Materials.Epoxid, 1), foil(Materials.Gold, 8))
-            .fluidInputs(fluid(Materials.SulfuricAcid, 500))
+            .fluidInputs(fluid(Materials.SulfuricAcid, 1000))
             .itemOutputs(ItemList.Circuit_Board_Epoxy.get(1))
             .duration(4 * SECONDS)
             .eut(TierEU.RECIPE_HV)
@@ -202,7 +202,7 @@ public class SPCRecipes {
     private static void epoxyBoardEngrave() {
         Collection<GTRecipe> recipes = GTValues.RA.stdBuilder()
             .itemInputs(ItemList.Circuit_Board_Epoxy.get(1), foil(Materials.Electrum, 8))
-            .fluidInputs(fluid(PrPMaterials.EVPhotoresist, 500))
+            .fluidInputs(fluid(PrPMaterials.EVPhotoresist, 1000))
             .itemOutputs(ItemList.Circuit_Board_Epoxy_Advanced.get(1))
             .duration(4 * SECONDS)
             .eut(TierEU.RECIPE_HV)
@@ -218,7 +218,7 @@ public class SPCRecipes {
     private static void fiberglassBoard() {
         Collection<GTRecipe> recipes = GTValues.RA.stdBuilder()
             .itemInputs(plate(Materials.EpoxidFiberReinforced, 1), foil(Materials.Aluminium, 12))
-            .fluidInputs(fluid(Materials.SulfuricAcid, 500))
+            .fluidInputs(fluid(Materials.SulfuricAcid, 1000))
             .itemOutputs(ItemList.Circuit_Board_Fiberglass.get(1))
             .duration(4 * SECONDS)
             .eut(TierEU.RECIPE_HV)
@@ -248,11 +248,11 @@ public class SPCRecipes {
             new int[] { MV, HV, EV, HV });
     }
 
-    // Multifiberglass Board: [Chem Bath HV] → [Laser LuV] → [Chem Bath HV]
+    // Multifiberglass Board: [Chem Bath HV] → [Laser IV] → [Chem Bath HV]
     private static void multifiberglassBoard() {
         Collection<GTRecipe> recipes = GTValues.RA.stdBuilder()
             .itemInputs(ItemList.Circuit_Board_Fiberglass.get(2), foil(Materials.Iridium, 16))
-            .fluidInputs(fluid(Materials.SulfuricAcid, 1000), fluid(PrPMaterials.LuVPhotoresist, 500))
+            .fluidInputs(fluid(Materials.SulfuricAcid, 1000), fluid(PrPMaterials.LuVPhotoresist, 1000))
             .itemOutputs(ItemList.Circuit_Board_Multifiberglass.get(1))
             .duration(4 * SECONDS)
             .eut(TierEU.RECIPE_EV)
@@ -287,7 +287,7 @@ public class SPCRecipes {
                 foil(Materials.NiobiumTitanium, 16),
                 foil(Materials.NaquadahEnriched, 8),
                 ItemList.Circuit_Parts_PetriDish.get(1))
-            .fluidInputs(fluid(Materials.GrowthMediumSterilized, 500), fluid(PrPMaterials.ZPMPhotoresist, 1000))
+            .fluidInputs(fluid(Materials.GrowthMediumSterilized, 1000), fluid(PrPMaterials.ZPMPhotoresist, 1000))
             .itemOutputs(ItemList.Circuit_Board_Wetware.get(1))
             .duration(5 * SECONDS)
             .eut(TierEU.RECIPE_EV)
@@ -330,7 +330,7 @@ public class SPCRecipes {
                 foil(Materials.Neutronium, 16),
                 foil(Materials.SuperconductorUVBase, 8),
                 ItemList.Circuit_Parts_PetriDish.get(4))
-            .fluidInputs(fluid(Materials.BioMediumSterilized, 1000), fluid(PrPMaterials.UVPhotoresist, 500))
+            .fluidInputs(fluid(Materials.BioMediumSterilized, 1000), fluid(PrPMaterials.UVPhotoresist, 1000))
             .itemOutputs(ItemList.Circuit_Board_Bio.get(1))
             .duration(15 * SECONDS)
             .eut(TierEU.RECIPE_UV)
@@ -370,7 +370,7 @@ public class SPCRecipes {
     private static void opticalBoard() {
         Collection<GTRecipe> recipes = GTValues.RA.stdBuilder()
             .itemInputs(plate(Materials.Kevlar, 2), item("foilTairitsu", 16), foil(Materials.Osmium, 8))
-            .fluidInputs(fluid(Materials.Grade7PurifiedWater, 500))
+            .fluidInputs(fluid(Materials.Grade7PurifiedWater, 1000))
             .itemOutputs(GTNHPPItems.opticalBoardRaw(1))
             .duration(5 * SECONDS)
             .eut(TierEU.RECIPE_ZPM)
@@ -418,8 +418,8 @@ public class SPCRecipes {
         // Epoxy Advanced: IV photoresist (was EV)
         premium(
             new ItemStack[] { ItemList.Circuit_Board_Epoxy.get(1), foil(Materials.Electrum, 8) },
-            new FluidStack[] { fluid(PrPMaterials.IVPhotoresist, 500) },
-            ItemList.Circuit_Board_Epoxy_Advanced.get(4),
+            new FluidStack[] { fluid(PrPMaterials.IVPhotoresist, 1000) },
+            ItemList.Circuit_Board_Epoxy_Advanced.get(2),
             3 * 20,
             TierEU.RECIPE_HV,
             new MachineType[] { CB, MX, LE, CB },
@@ -431,7 +431,7 @@ public class SPCRecipes {
             new ItemStack[] { ItemList.Circuit_Board_Fiberglass.get(1), foil(Materials.EnergeticAlloy, 12),
                 foil(Materials.Palladium, 4) },
             new FluidStack[] { fluid(PrPMaterials.LuVPhotoresist, 1000) },
-            ItemList.Circuit_Board_Fiberglass_Advanced.get(4),
+            ItemList.Circuit_Board_Fiberglass_Advanced.get(2),
             3 * 20,
             TierEU.RECIPE_HV,
             new MachineType[] { CB, LE, AS, CB },
@@ -441,8 +441,8 @@ public class SPCRecipes {
         // Multifiberglass: ZPM photoresist (was LuV)
         premium(
             new ItemStack[] { ItemList.Circuit_Board_Fiberglass.get(2), foil(Materials.Iridium, 16) },
-            new FluidStack[] { fluid(Materials.SulfuricAcid, 1000), fluid(PrPMaterials.ZPMPhotoresist, 500) },
-            ItemList.Circuit_Board_Multifiberglass.get(4),
+            new FluidStack[] { fluid(Materials.SulfuricAcid, 1000), fluid(PrPMaterials.ZPMPhotoresist, 1000) },
+            ItemList.Circuit_Board_Multifiberglass.get(2),
             3 * 20,
             TierEU.RECIPE_EV,
             new MachineType[] { CB, LE, CB },
@@ -453,7 +453,7 @@ public class SPCRecipes {
         premium(
             new ItemStack[] { ItemList.Circuit_Board_Multifiberglass.get(1), foil(Materials.Platinum, 8) },
             new FluidStack[] { fluid(PrPMaterials.ZPMPhotoresist, 2000) },
-            ItemList.Circuit_Board_Multifiberglass_Elite.get(4),
+            ItemList.Circuit_Board_Multifiberglass_Elite.get(2),
             4 * 20,
             TierEU.RECIPE_EV,
             new MachineType[] { CB, LE, EL, CB },
@@ -464,8 +464,8 @@ public class SPCRecipes {
         premium(
             new ItemStack[] { ItemList.Circuit_Board_Multifiberglass.get(2), foil(Materials.NiobiumTitanium, 16),
                 foil(Materials.NaquadahEnriched, 8), ItemList.Circuit_Parts_PetriDish.get(1) },
-            new FluidStack[] { fluid(Materials.GrowthMediumSterilized, 500), fluid(PrPMaterials.UVPhotoresist, 1000) },
-            ItemList.Circuit_Board_Wetware.get(4),
+            new FluidStack[] { fluid(Materials.GrowthMediumSterilized, 1000), fluid(PrPMaterials.UVPhotoresist, 1000) },
+            ItemList.Circuit_Board_Wetware.get(2),
             4 * 20,
             TierEU.RECIPE_EV,
             new MachineType[] { CB, MX, LE, CB },
@@ -479,7 +479,7 @@ public class SPCRecipes {
             new ItemStack[] { ItemList.Circuit_Board_Wetware.get(1), foil(Materials.NiobiumTitanium, 64),
                 foil(Materials.Naquadah, 16) },
             new FluidStack[] { fluid(PrPMaterials.UHVPhotoresist, 5000) },
-            ItemList.Circuit_Board_Wetware_Extreme.get(4),
+            ItemList.Circuit_Board_Wetware_Extreme.get(2),
             7 * 20,
             TierEU.RECIPE_LuV,
             new MachineType[] { CB, EL, LE, CB },
@@ -492,8 +492,8 @@ public class SPCRecipes {
         premium(
             new ItemStack[] { ItemList.Circuit_Board_Wetware.get(2), foil(Materials.Neutronium, 16),
                 foil(Materials.SuperconductorUVBase, 8), ItemList.Circuit_Parts_PetriDish.get(4) },
-            new FluidStack[] { fluid(Materials.BioMediumSterilized, 1000), fluid(PrPMaterials.UHVPhotoresist, 500) },
-            ItemList.Circuit_Board_Bio.get(4),
+            new FluidStack[] { fluid(Materials.BioMediumSterilized, 1000), fluid(PrPMaterials.UHVPhotoresist, 1000) },
+            ItemList.Circuit_Board_Bio.get(2),
             7 * 20,
             TierEU.RECIPE_UV,
             new MachineType[] { CB, MX, LE, CB },
@@ -507,7 +507,7 @@ public class SPCRecipes {
             new ItemStack[] { ItemList.Circuit_Board_Bio.get(2), foil(Materials.Neutronium, 24),
                 foil(Materials.Osmium, 8), ItemList.Circuit_Parts_PetriDish.get(1) },
             new FluidStack[] { fluid(PrPMaterials.UEVPhotoresist, 1000) },
-            ItemList.Circuit_Board_Bio_Ultra.get(4),
+            ItemList.Circuit_Board_Bio_Ultra.get(2),
             7 * 20,
             TierEU.RECIPE_EV,
             new MachineType[] { CB, MX, LE, CB },

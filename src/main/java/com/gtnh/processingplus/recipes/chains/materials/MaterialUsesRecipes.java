@@ -32,7 +32,7 @@ public class MaterialUsesRecipes {
     private static void paaAdhesive() {
         GTValues.RA.stdBuilder()
             .itemInputs(dust(PrPMaterials.ConcentratedPAA, 1), circuit(3))
-            .fluidInputs(fluid(Materials.Water, 500))
+            .fluidInputs(fluid(Materials.Water, 1000))
             .fluidOutputs(fluid(PrPMaterials.PAAAdhesive, 1000))
             .duration(15 * SECONDS)
             .eut(TierEU.RECIPE_UV)
@@ -60,8 +60,8 @@ public class MaterialUsesRecipes {
     // Aerogel Insulation Panel: silica aerogel bonded to carbon fiber backing
     //
     // Aerogel provides extreme thermal resistance; CF backing prevents mechanical
-    // fragility. Epoxid matrix locks the composite. Used as high-tier multiblock
-    // insulation lining: primarily the HTRF outer wall.
+    // fragility. Epoxid matrix locks the composite. Used in the CAC casings, the SPU structure
+    // and Jiritsu Alloy.
     // -------------------------------------------------------------------------
     private static void aerogelInsulationPanel() {
         GTValues.RA.stdBuilder()
@@ -73,13 +73,6 @@ public class MaterialUsesRecipes {
             .addTo(RecipeMaps.assemblerRecipes);
     }
 
-    // -------------------------------------------------------------------------
-    // Loaded Aerogel Catalyst Support: Pt/Pd nanoparticles in aerogel matrix
-    //
-    // HCl wets the aerogel surface, anchoring PGM particles into the pore walls.
-    // The huge surface area of silica aerogel (>1000 m²/g) concentrates catalysis
-    // far beyond conventional support materials. Consumed in CRV exotic reactions.
-    // -------------------------------------------------------------------------
     // -------------------------------------------------------------------------
     // Thermoplastic solidification: molten polymer → plates via fluid solidifier
     // 144 mB = 1 plate (GT standard unit); mold is checked but not consumed.
@@ -111,6 +104,14 @@ public class MaterialUsesRecipes {
             .addTo(RecipeMaps.fluidSolidifierRecipes);
     }
 
+    // -------------------------------------------------------------------------
+    // Loaded Aerogel Catalyst Support: Pt/Pd nanoparticles in aerogel matrix
+    //
+    // HCl wets the aerogel surface, anchoring PGM particles into the pore walls; it comes back
+    // out diluted.
+    // The huge surface area of silica aerogel (>1000 m²/g) concentrates catalysis
+    // far beyond conventional support materials. Consumed in CRV exotic reactions.
+    // -------------------------------------------------------------------------
     private static void loadedAerogelCatalyst() {
         GTValues.RA.stdBuilder()
             .itemInputs(
@@ -118,8 +119,8 @@ public class MaterialUsesRecipes {
                 dustSmall(Materials.Platinum, 1),
                 dustSmall(Materials.Palladium, 1),
                 circuit(6))
-            .fluidInputs(fluid(Materials.HydrochloricAcid, 500))
-            .fluidOutputs(fluid(Materials.Water, 500))
+            .fluidInputs(fluid(Materials.HydrochloricAcid, 1000))
+            .fluidOutputs(fluid(Materials.DilutedHydrochloricAcid, 1000))
             .itemOutputs(dust(PrPMaterials.LoadedAerogelCatalystSupport, 2))
             .duration(30 * SECONDS)
             .eut(TierEU.RECIPE_ZPM)

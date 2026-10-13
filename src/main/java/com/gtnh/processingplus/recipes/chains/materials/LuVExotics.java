@@ -151,7 +151,7 @@ public class LuVExotics {
                     dust(Materials.Ultimet, 2),
                     dust(Materials.EnergeticSilver, 2),
                     dust(Materials.CrystallineAlloy, 2))
-                .fluidInputs(molten(Materials.Naquadah, 72))
+                .fluidInputs(molten(Materials.Naquadah, 144))
                 .itemOutputs(dust(PrPMaterials.JiritsuAlloy, 6))
                 .duration(15 * SECONDS)
                 .eut(TierEU.RECIPE_UHV)

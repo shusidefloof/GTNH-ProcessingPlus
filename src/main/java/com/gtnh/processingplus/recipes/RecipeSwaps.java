@@ -607,10 +607,10 @@ public final class RecipeSwaps {
     }
 
     // -------------------------------------------------------------------------
-    // Unobtanium ZPM-hull gate: every ZPM machine hull now needs an Unobtanium superconductor
-    // cable. The assembler recipe keeps its Naquadah cable and gains Unobtanium alongside; the
-    // hand-craftable recipe (a bypass that never touches the assembler) has its Naquadah cables
-    // replaced by Unobtanium so neither path skips the gate. No material composition touched.
+    // Unobtanium ZPM-hull gate: every ZPM machine hull now needs Unobtanium superconductor cable.
+    // Both the assembler recipe and the hand-craftable recipe (a bypass that never touches the
+    // assembler) have their Naquadah cables replaced by 2 Unobtanium 2x cables, so neither path skips
+    // the gate and neither is cheaper than the other. No material composition touched.
     // This is the sink for the painful Unobtanium chain: every ZPM machine routes through it.
     // -------------------------------------------------------------------------
     private static void gateZPMHullWithUnobtanium() {
@@ -619,7 +619,7 @@ public final class RecipeSwaps {
             GTNHProcessingPlus.LOG.warn("ZPM hull Unobtanium gate: no bridge material, skipped.");
             return;
         }
-        ItemStack unobtaniumCable = GTOreDictUnificator.get(OrePrefixes.cableGt04, unobtanium, 2);
+        ItemStack unobtaniumCable = GTOreDictUnificator.get(OrePrefixes.cableGt02, unobtanium, 2);
         ItemStack hullZPM = ItemList.Hull_ZPM.get(1);
         if (unobtaniumCable == null) {
             GTNHProcessingPlus.LOG.warn("ZPM hull Unobtanium gate: no Unobtanium cable (cable loader ran?), skipped.");
@@ -666,12 +666,13 @@ public final class RecipeSwaps {
     }
 
     // -------------------------------------------------------------------------
-    // Unobtanium ZPM-superconductor gate: the finishing (anneal) step that turns
-    // SuperconductorZPMBase wire into finished SuperconductorZPM wire now also needs an Unobtanium
-    // cable (like the Naquadah pipe). This is the anneal recipe, NOT the alloy composition, so the
-    // base material is untouched. Output is nudged 18 -> 20 to compensate for the new cost. All
-    // three stock coolant variants (Helium / Liquid Helium / SpaceTime) are preserved. Together with
-    // the hull gate this creates a double Unobtanium demand across the ZPM tier.
+    // Unobtanium ZPM/UV-superconductor gate: the finishing (anneal) step that turns
+    // SuperconductorZPMBase wire into finished SuperconductorZPM wire, and SuperconductorUVBase into
+    // SuperconductorUV (GT's naming is offset by one, so that is the UHV-tier conductor), now also needs
+    // an Unobtanium cable (like the Naquadah / Neutronium pipe). These are the anneal recipes, NOT the
+    // alloy compositions, so the base materials are untouched. Outputs are nudged 18 -> 20 and 21 -> 23 to
+    // compensate for the new cost. All three stock coolant variants (Helium / Liquid Helium / SpaceTime)
+    // are preserved. Together with the hull gate this creates a double Unobtanium demand across the ZPM tier.
     // -------------------------------------------------------------------------
     private static void gateZPMSuperconductorWithUnobtanium() {
         Materials unobtanium = PrPMaterials.Unobtanium.getBridgeMaterial();
@@ -687,21 +688,22 @@ public final class RecipeSwaps {
         }
 
         int removed = PPRecipeHelper.removeRecipesByOutput(RecipeMaps.assemblerRecipes, superconductor);
+        removed += PPRecipeHelper.removeRecipesByOutput(
+            RecipeMaps.assemblerRecipes,
+            GTOreDictUnificator.get(OrePrefixes.wireGt01, Materials.SuperconductorUV, 1));
 
         // Re-add the three stock coolant variants, each now requiring Unobtanium cable + boosted output.
         addUnobtaniumSuperconductor(Materials.Helium.getGas(16_000), 1600, unobtaniumCable);
         addUnobtaniumSuperconductor(WerkstoffLoader.LiquidHelium.getFluidOrGas(16_000), 1280, unobtaniumCable);
         addUnobtaniumSuperconductor(Materials.SpaceTime.getMolten(32), 800, unobtaniumCable);
 
-        addUnobtaniumSuperconductorToUHV(Materials.Helium.getGas(20_000), 80 * 20, unobtaniumCable);
-        addUnobtaniumSuperconductorToUHV(
-            (WerkstoffLoader.LiquidHelium.getFluidOrGas(20_000)),
-            64 * 20,
-            unobtaniumCable);
-        addUnobtaniumSuperconductorToUHV(Materials.SpaceTime.getMolten(40), 40 * 20, unobtaniumCable);
+        addUnobtaniumSuperconductorUV(Materials.Helium.getGas(20_000), 80 * 20, unobtaniumCable);
+        addUnobtaniumSuperconductorUV((WerkstoffLoader.LiquidHelium.getFluidOrGas(20_000)), 64 * 20, unobtaniumCable);
+        addUnobtaniumSuperconductorUV(Materials.SpaceTime.getMolten(40), 40 * 20, unobtaniumCable);
 
-        GTNHProcessingPlus.LOG
-            .info("ZPM superconductor: removed {} stock recipe(s), re-added gated behind Unobtanium cable.", removed);
+        GTNHProcessingPlus.LOG.info(
+            "ZPM/UV superconductor: removed {} stock recipe(s), re-added gated behind Unobtanium cable.",
+            removed);
     }
 
     private static void addUnobtaniumSuperconductor(FluidStack coolant, int duration, ItemStack unobtaniumCable) {
@@ -720,7 +722,7 @@ public final class RecipeSwaps {
             .addTo(RecipeMaps.assemblerRecipes);
     }
 
-    private static void addUnobtaniumSuperconductorToUHV(FluidStack coolant, int duration, ItemStack unobtaniumCable) {
+    private static void addUnobtaniumSuperconductorUV(FluidStack coolant, int duration, ItemStack unobtaniumCable) {
         if (coolant == null) return; // a coolant material may be absent depending on installed mods
         GTValues.RA.stdBuilder()
             .itemInputs(
@@ -729,7 +731,7 @@ public final class RecipeSwaps {
                 unobtaniumCable.copy(),
                 ItemList.Electric_Pump_UV.get(1))
             .circuit(9)
-            .itemOutputs(GTOreDictUnificator.get(OrePrefixes.wireGt01, Materials.SuperconductorZPM, 23))
+            .itemOutputs(GTOreDictUnificator.get(OrePrefixes.wireGt01, Materials.SuperconductorUV, 23))
             .fluidInputs(coolant)
             .duration(duration)
             .eut(TierEU.RECIPE_UV)

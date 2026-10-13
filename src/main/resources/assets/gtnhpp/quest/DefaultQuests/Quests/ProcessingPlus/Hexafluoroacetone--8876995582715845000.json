@@ -62,7 +62,7 @@
       "countAsQuest:1": 1,
       "autoClaim:1": 0,
       "globalShare:1": 0,
-      "desc:8": "Trifluoromethane plus Oxygen, HTRF at a 2700K coil. Heavily fluorinated on purpose, that fluorine content is what gives the later resist monomers their etch resistance.",
+      "desc:8": "Trifluoromethane plus Oxygen, HTRF at a 2700K coil. Heavily fluorinated, that fluorine content is what gives the later resist monomers their etch resistance.",
       "notification_icon_scale:5": -1,
       "notification_show_icon:8": "default",
       "notification_fade_in:5": -1,

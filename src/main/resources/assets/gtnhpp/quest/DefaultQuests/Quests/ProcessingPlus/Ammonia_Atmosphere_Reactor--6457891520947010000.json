@@ -27,7 +27,7 @@
       "notification_style:8": "default",
       "notification_duration:5": -1,
       "completion_particle:8": "default",
-      "isMain:1": 0,
+      "isMain:1": 1,
       "lockedProgress:1": 0,
       "repeat_relative:1": 1,
       "notification_fade_out:5": -1,

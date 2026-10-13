@@ -56,7 +56,7 @@
       "countAsQuest:1": 1,
       "autoClaim:1": 0,
       "globalShare:1": 0,
-      "desc:8": "Diborane cooked in the HTRF at 2700K. Five diboranes get fused into one decaborane and a ton of hydrogen comes off, so id catch that. Not all of it reacts though, which is why its still crude.",
+      "desc:8": "Diborane cooked in the HTRF at 2700K. Five diboranes get fused into one decaborane and a ton of hydrogen comes off. Not all of it gets flushed out though, which is why its still crude.",
       "notification_icon_scale:5": -1,
       "notification_show_icon:8": "default",
       "notification_fade_in:5": -1,

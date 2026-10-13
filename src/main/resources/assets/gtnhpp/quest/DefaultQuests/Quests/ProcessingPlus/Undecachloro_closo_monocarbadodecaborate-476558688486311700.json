@@ -62,7 +62,7 @@
       "countAsQuest:1": 1,
       "autoClaim:1": 0,
       "globalShare:1": 0,
-      "desc:8": "The Francium crystal plus 22 buckets of Chlorine, Basic Oxygen Furnace. The cage takes eleven chlorines, the HCl that comes off turns it into an acid, and everything else is thrown off as Carborane Chloride Slag. Yes 22 buckets, chlorine comes in pairs.",
+      "desc:8": "The cage takes eleven chlorines, the HCl that comes off turns it into an acid, and everything else is thrown off as Carborane Chloride Slag. ",
       "notification_icon_scale:5": -1,
       "notification_show_icon:8": "default",
       "notification_fade_in:5": -1,

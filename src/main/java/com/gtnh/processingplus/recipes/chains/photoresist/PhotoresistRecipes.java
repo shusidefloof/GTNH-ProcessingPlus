@@ -796,7 +796,7 @@ public class PhotoresistRecipes {
                 fluid(PrPMaterials.HFIMAMonomer, 1000),
                 fluid(PrPMaterials.GBLMAMonomer, 1000),
                 fluid(PrPMaterials.HAdMAMonomer, 1000))
-            .fluidOutputs(molten(PrPMaterials.ArFCopolymerResin, 1000))
+            .fluidOutputs(molten(PrPMaterials.ArFCopolymerResin, 1008))
             .duration(5 * SECONDS)
             .eut(TierEU.RECIPE_ZPM)
             .metadata(GTRecipeConstants.COIL_HEAT, 3600)

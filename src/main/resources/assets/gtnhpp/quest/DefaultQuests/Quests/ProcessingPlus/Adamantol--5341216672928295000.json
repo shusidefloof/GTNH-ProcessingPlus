@@ -68,7 +68,7 @@
       "countAsQuest:1": 1,
       "autoClaim:1": 0,
       "globalShare:1": 0,
-      "desc:8": "Adamantium dust dissolved in Hydrofluoric and Sulfuric Acid, CSTR. Solid dust form gets redissolved for the methacrylate step downstream.",
+      "desc:8": "Adamantium dust dissolved in Hydrofluoric and Sulfuric Acid. The solid dust form gets redissolved for the methacrylate step later.",
       "notification_icon_scale:5": -1,
       "notification_show_icon:8": "default",
       "notification_fade_in:5": -1,

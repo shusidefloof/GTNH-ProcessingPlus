@@ -46,7 +46,6 @@ public class HPSFRecipes {
             .addTo(RecipeMaps.assemblerRecipes);
     }
 
-    // Casings used by the HPSF structure, assembler recipes.
     private static void casingRecipes() {
         // Hardened Pressure Vessel Casing
         GTValues.RA.stdBuilder()
@@ -60,10 +59,9 @@ public class HPSFRecipes {
             .eut(TierEU.RECIPE_LV)
             .addTo(RecipeMaps.assemblerRecipes);
 
-        // Pressure Vessel Ring Casing: heavier, HSSS-framed variant for the main vessel ring
         GTValues.RA.stdBuilder()
             .itemInputs(
-                GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.HSSS, 1),
+                GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.TungstenSteel, 1),
                 plate(Materials.TungstenSteel, 4),
                 plate(Materials.Tungsten, 4),
                 circuit(6))
@@ -73,14 +71,6 @@ public class HPSFRecipes {
             .addTo(RecipeMaps.assemblerRecipes);
     }
 
-    // =========================================================
-    // SINTERING PATH (EV)
-    // Np dust + W dust + Ta dust + Ti dust
-    // → Mixer → Compressor → HPSF → Vacuum Freezer → ingot
-    // 4 input units : 2 ingot output
-    // =========================================================
-
-    // Step 1: GT++ Mixer: blend four equimolar powders into homogeneous RHEA blend
     private static void sinteringPath_Mix() {
         GTValues.RA.stdBuilder()
             .itemInputs(
@@ -94,7 +84,6 @@ public class HPSFRecipes {
             .addTo(RecipeMaps.mixerNonCellRecipes);
     }
 
-    // Step 2: Compressor: cold-press blend into a dense sintering compact
     private static void sinteringPath_Compact() {
         GTValues.RA.stdBuilder()
             .itemInputs(dust(PrPMaterials.RHEAPowderBlend, 4))
@@ -104,8 +93,6 @@ public class HPSFRecipes {
             .addTo(RecipeMaps.compressorRecipes);
     }
 
-    // Step 3: HPSF: hot-press compact under N₂ at 3000 K (requires Nichrome coils min.)
-    // N₂ is consumed per cycle: ensure continuous supply.
     private static void sinteringPath_Sinter() {
         GTValues.RA.stdBuilder()
             .itemInputs(dust(PrPMaterials.RHEASinteringCompact, 1), circuit(1))
@@ -116,8 +103,7 @@ public class HPSFRecipes {
             .metadata(GTRecipeConstants.COIL_HEAT, 3000)
             .addTo(GTNHPPRecipeMaps.sHPSFRecipes);
     }
-
-    // Step 4: Vacuum Freezer: quench hot ingot → dense RHEA ingot
+    
     private static void sinteringPath_Cool() {
         GTValues.RA.stdBuilder()
             .itemInputs(ingotHot(PrPMaterials.RefractoryHighEntropyAlloy, 1))
@@ -127,11 +113,6 @@ public class HPSFRecipes {
             .addTo(RecipeMaps.vacuumFreezerRecipes);
     }
 
-    // =========================================================
-    // MELTING PATH (IV): Alloy Blast Smelter
-    // Same 4 input units → 4 ingots worth of molten RHEA (2× the sintering yield, no mass lost)
-    // Skips powder prep and cooling step; faster and more efficient.
-    // =========================================================
     private static void meltingPath() {
         GTValues.RA.stdBuilder()
             .itemInputs(item("dustNeptunium", 1), dust(Materials.Tantalum, 1), dust(Materials.Titanium, 1))

@@ -145,8 +145,8 @@ public class MTE_CRV extends MTEExtendedPowerMultiBlockBase<MTE_CRV> implements 
         checkOneMaintenanceHatch(errors);
         checkHasEnergyHatch(errors);
         checkHasMufflerHatch(errors);
-        checkHasInputBus(errors);
-        checkHasOutputBus(errors);
+        checkHasAnyInput(errors);
+        checkHasAnyOutput(errors);
         if (PPRecipeHelper.recipeMapHasFluidInputs(getRecipeMap())) checkHasInputHatch(errors);
         if (PPRecipeHelper.recipeMapHasFluidOutputs(getRecipeMap())) checkHasOutputHatch(errors);
     }

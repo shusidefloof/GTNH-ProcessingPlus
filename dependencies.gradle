@@ -42,6 +42,9 @@ dependencies {
     // project's only other source of gtnhlib) pins an older version at runtime. Without this, NEI's
     // recipe/usage lookup throws NoClassDefFoundError and crashes for every item, not just ours.
     runtimeOnlyNonPublishable("com.github.GTNewHorizons:GTNHLib:0.11.51:dev")
+    // BlockRenderer6343: NEI's "Multiblock Info" page, the 3D structure preview for GT multiblocks (ours included).
+    // Runtime-only, pinned to the 2.9.0-RC-1 modlist.
+    runtimeOnlyNonPublishable("com.github.GTNewHorizons:BlockRenderer6343:1.4.23:dev")
 
     // devOnlyNonPublishable = compileOnly + runtimeOnly, but not published to Maven.
     // GT5 and NHCM are hard requirements, so they must be on the runtime classpath in dev.

@@ -103,7 +103,7 @@ public class HPSFRecipes {
             .metadata(GTRecipeConstants.COIL_HEAT, 3000)
             .addTo(GTNHPPRecipeMaps.sHPSFRecipes);
     }
-    
+
     private static void sinteringPath_Cool() {
         GTValues.RA.stdBuilder()
             .itemInputs(ingotHot(PrPMaterials.RefractoryHighEntropyAlloy, 1))

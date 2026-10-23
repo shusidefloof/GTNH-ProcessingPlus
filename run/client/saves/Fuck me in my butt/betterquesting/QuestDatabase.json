@@ -10683,7 +10683,7 @@
 					"countAsQuest:1": 1,
 					"autoClaim:1": 0,
 					"globalShare:1": 0,
-					"desc:8": "Heat capacity is coil tier heat plus §e100K§r per voltage tier above LV, with the same overclock/efficiency curve as the EBF. What the tooltip doesn't advertise: it has very very few hand authored recipes at all, on load it scans every Large Chemical Reactor recipe that consumes gaseous Ammonia and§6 clones it here with the ammonia requirement stripped out§r, since the AAR supplies its own atmosphere.",
+					"desc:8": "Heat capacity is coil tier heat plus §e100K§r per voltage tier above LV, with the same overclock/efficiency curve as the EBF. It scans every Large Chemical Reactor recipe that consumes gaseous Ammonia and§6 clones it here with the ammonia requirement stripped out§r, since the AAR supplies its own atmosphere.",
 					"notification_icon_scale:5": -1.0,
 					"notification_show_icon:8": "default",
 					"notification_fade_in:5": -1.0,

@@ -2410,7 +2410,10 @@ public class PrPMaterials implements Runnable {
                 new Werkstoff.GenerationFeatures().onlyDust()
                     .addMolten()
                     .addMetalItems()
-                    .addSimpleMetalWorkingItems(),
+                    .addSimpleMetalWorkingItems()
+                    // Screws, gears and double plates, so BartWorks generates the Bolted/Rebolted Casing recipes
+                    // (the PCV structure uses the Rebolted Casing).
+                    .addCasings(),
                 id(),
                 TextureSet.SET_SHINY));
 

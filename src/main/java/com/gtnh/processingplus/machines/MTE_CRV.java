@@ -243,8 +243,7 @@ public class MTE_CRV extends MTEExtendedPowerMultiBlockBase<MTE_CRV> implements 
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType("Reaction Vessel, Alloy Blast Smelter, CRV")
-            .addInfo(
-                "Allows for even more Complex alloys to be created!")
+            .addInfo("Allows for even more Complex alloys to be created!")
             .addInfo(
                 "Switch between " + EnumChatFormatting.GOLD
                     + "CRV"

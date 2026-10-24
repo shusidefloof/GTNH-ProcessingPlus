@@ -661,13 +661,13 @@ public class MTE_SCD extends MTEExtendedPowerMultiBlockBase<MTE_SCD> implements 
                     + EnumChatFormatting.GRAY
                     + " that are managed through the Input Hatch")
             .addInfo(
-                EnumChatFormatting.AQUA + "Stage 1, Solvent Purge"
+                EnumChatFormatting.AQUA + "Stage 1"
                     + EnumChatFormatting.GRAY
                     + ": fill the hatch with the recipe's solvent, or keep it empty")
             .addInfo(
-                EnumChatFormatting.AQUA + "Stage 2, Supercritical Infusion"
+                EnumChatFormatting.AQUA + "Stage 2"
                     + EnumChatFormatting.GRAY
-                    + ": supply a supercritical fluid (Liquid CO₂, Freon R-12...)")
+                    + ": supply a supercritical fluid (Liquid CO₂, Freon R-12)")
             .addInfo(
                 "Better fluids shorten stage 2: " + EnumChatFormatting.WHITE
                     + "Freon R-12"
@@ -676,7 +676,7 @@ public class MTE_SCD extends MTEExtendedPowerMultiBlockBase<MTE_SCD> implements 
                     + TooltipHelper.speedText(2f)
                     + " faster than Liquid CO₂")
             .addInfo(
-                EnumChatFormatting.AQUA + "Stage 3, Depressurization"
+                EnumChatFormatting.AQUA + "Stage 3"
                     + EnumChatFormatting.GRAY
                     + ": the hatch must be "
                     + EnumChatFormatting.WHITE

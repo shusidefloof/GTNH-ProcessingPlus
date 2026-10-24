@@ -29,6 +29,7 @@ public class BOFRecipes {
         dolomiteConversion();
         slagSeparation();
         slagResidueSift();
+        noFluxConversion();
     }
 
     private static void casingOrBlockRecipe() {
@@ -44,13 +45,33 @@ public class BOFRecipes {
             .eut(TierEU.RECIPE_LV / 2)
             .addTo(RecipeMaps.assemblerRecipes);
 
-        // Controller is hand-crafted only, like GT's own multiblock controllers.
+        // Controller is a regular crafting recipe like GTs multiblocks
         GTModHandler.addCraftingRecipe(
             GTNHPPBlocks.BOF.getStackForm(1),
             GTModHandler.RecipeBits.BITS | GTModHandler.RecipeBits.DO_NOT_CHECK_FOR_COLLISIONS,
             new Object[] { "SHS", "CAC", "SPS", 'S', OrePrefixes.plate.get(Materials.Aluminium), 'C',
                 OrePrefixes.circuit.get(Materials.MV), 'H', "pipeHugePotin", 'A', ItemList.Hull_MV, 'P',
                 ItemList.Electric_Pump_MV });
+    }
+
+    private static void noFluxConversion() {
+        GTValues.RA.stdBuilder()
+            .itemInputs(ingot(Materials.Iron, 16), dust(Materials.Carbon, 1))
+            .circuit(1)
+            .fluidInputs(fluid(Materials.Oxygen, 4000))
+            .itemOutputs(ingot(Materials.Steel, 16))
+            .duration(32 * SECONDS)
+            .eut(TierEU.RECIPE_MV)
+            .addTo(GTNHPPRecipeMaps.sBOFRecipes);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(ingot(Materials.Iron, 50), dust(Materials.Carbon, 1))
+            .circuit(1)
+            .fluidInputs(fluid(Materials.Oxygen, 5000))
+            .itemOutputs(ingot(Materials.Steel, 50))
+            .duration(32 * SECONDS)
+            .eut(TierEU.RECIPE_EV)
+            .addTo(GTNHPPRecipeMaps.sBOFRecipes);
     }
 
     // Fe + CaMg(CO₃)₂ + O₂ → steel + BOF slag + CO₂ + CO (dolomite flux, partial combustion)

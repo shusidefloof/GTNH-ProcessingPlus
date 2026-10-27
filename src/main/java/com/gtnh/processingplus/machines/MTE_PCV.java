@@ -50,7 +50,6 @@ public class MTE_PCV extends MTEExtendedPowerMultiBlockBase<MTE_PCV> implements 
 
     private static final int CASING_INDEX = 11;
     private static final String STRUCTURE_PIECE_MAIN = "main";
-    // Controller (~) at slice 0, row 9, col 4.
     private static final int OFFSET_X = 4;
     private static final int OFFSET_Y = 9;
     private static final int OFFSET_Z = 0;
@@ -58,7 +57,7 @@ public class MTE_PCV extends MTEExtendedPowerMultiBlockBase<MTE_PCV> implements 
     private static IStructureDefinition<MTE_PCV> STRUCTURE_DEFINITION = null;
 
     // Promethium Betavoltaic Alloy rebolted casing (OrePrefixes.blockCasingAdvanced), resolved from the
-    // actual ItemStack the Werkstoff produces rather than hardcoding a magic damage value.
+    // actual ItemStack the Werkstoff produces rather than hardcoding a damage value.
     private static final Block PROMETHIUM_BETAVOLTAIC_BLOCK;
     private static final int PROMETHIUM_BETAVOLTAIC_BLOCK_META;
 
@@ -87,57 +86,44 @@ public class MTE_PCV extends MTEExtendedPowerMultiBlockBase<MTE_PCV> implements 
             STRUCTURE_DEFINITION = StructureDefinition.<MTE_PCV>builder()
                 .addShape(
                     STRUCTURE_PIECE_MAIN,
-                    // shape[z][y][x]: 9 depth slices, each 13 rows (top→bottom) × 16 cols.
-                    // Controller (~) at slice 0, row 9, col 4.
                     new String[][] {
-                        // z=0: front face (controller column)
                         { "                ", "                ", "                ", "                ",
                             "                ", "                ", "                ", "  DJ JD         ",
                             "  DEEED         ", "  DE~ED         ", "  DEEED         ", "  DJ JD         ",
                             "  D   D         " },
-                        // z=1
                         { "                ", "                ", "   NNN          ", "   GNG          ",
                             "   G G          ", "   G G          ", "  DJ JD         ", " Q RQR Q        ",
                             " Q RRR Q        ", " Q RRR Q        ", " Q RRR Q        ", " Q RQR Q        ",
                             "  QJ JQ         " },
-                        // z=2
                         { "                ", "   NNN          ", "  DG GD         ", "  DG GD         ",
                             "  DKQKD         ", "  DIBID         ", " DDRQRDD        ", "D P   P D   QQQ ",
                             "D P   P D   IAI ", "D P   P D   IAI ", "D P   P D  DIAID", "D P   P D  DQQQD",
                             "DQQPQPQQD  DQQQD" },
-                        // z=3
                         { "   DND          ", "  NSOSN         ", " NGC CGN        ", " GGC CGG        ",
                             " GKS SKG        ", " GIBMBIG        ", " JRRLRRJ    QQQ ", "JR     RJ  QQJQQ",
                             "JR     RJ  IB BI", "JR     RJNNIH HI", "JR     RJ  IH HI", "JR     RJ  QB BQ",
                             " JPPPPPJ   QQJQQ" },
-                        // z=4: centre slice
                         { "   NNN          ", "  NOOON         ", " N  F  N        ", " N  F  N        ",
                             "  Q F Q         ", "  BMFMB         ", "  QLLLQ     QQQ ", " Q     Q   QJJJQ",
                             " R     RBNNQ   A", " R     RBOOO   A", " R     R NNQ   A", " Q     Q   Q   Q",
                             "  QPPPQ    QJJJQ" },
-                        // z=5 (mirror of z=3)
                         { "   DND          ", "  NSOSN         ", " NGC CGN        ", " GGC CGG        ",
                             " GKS SKG        ", " GIBMBIG        ", " JRRLRRJ    QQQ ", "JR     RJ  QQJQQ",
                             "JR     RJ  IB BI", "JR     RJNNIH HI", "JR     RJ  IH HI", "JR     RJ  QB BQ",
                             " JPPPPPJ   QQJQQ" },
-                        // z=6 (mirror of z=2)
                         { "                ", "   NNN          ", "  DG GD         ", "  DG GD         ",
                             "  DKQKD         ", "  DIBID         ", " DDRQRDD        ", "D P   P D   QQQ ",
                             "D P   P D   IAI ", "D P   P D   IAI ", "D P   P D  DIAID", "D P   P D  DQQQD",
                             "DQQPQPQQD  DQQQD" },
-                        // z=7 (mirror of z=1)
                         { "                ", "                ", "   NNN          ", "   GNG          ",
                             "   G G          ", "   G G          ", "  DJ JD         ", " Q RQR Q        ",
                             " Q RRR Q        ", " Q RRR Q        ", " Q RRR Q        ", " Q RQR Q        ",
                             "  QJ JQ         " },
-                        // z=8: back face
                         { "                ", "                ", "                ", "                ",
                             "                ", "                ", "                ", "  DJ JD         ",
                             "  DJ JD         ", "  DJ JD         ", "  DJ JD         ", "  DJ JD         ",
                             "  D   D         " }, })
-                // --- PCV casing (solid structural; hatches go on the Carbon Fiber Composite casing instead) ---
                 .addElement('P', ofBlock(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.PCV_CASING))
-                // --- GregTech blocks ---
                 .addElement('E', fb("gregtech", "gt.blockcasings", 11))
                 .addElement('G', fb("gregtech", "gt.blockcasings11", 5))
                 .addElement('H', fb("gregtech", "gt.blockframes", 71))
@@ -146,21 +132,15 @@ public class MTE_PCV extends MTEExtendedPowerMultiBlockBase<MTE_PCV> implements 
                 .addElement('K', fb("gregtech", "gt.blockmetal8", 10))
                 .addElement('L', fb("gregtech", "gt.sheetmetal", 71))
                 .addElement('M', fb("gregtech", "gt.sheetmetal", 73))
-                // gregtech also owns the bartworks-material sheetmetal and the solenoid/cyclotron coils
                 .addElement('D', fb("gregtech", "bw.sheetmetal", 26166))
                 .addElement('F', fb("gregtech", "gt.blockcasings.cyclotron_coils", 2))
-                // C = bartworks-material frame; same modid pattern as bw.sheetmetal
                 .addElement('C', fb("gregtech", "bw.frames", 26021))
-                // --- GT++ (miscutils) blocks ---
                 .addElement('N', fb("miscutils", "gtplusplus.blockcasings.5", 0))
                 .addElement('O', fb("miscutils", "gtplusplus.blockcasings.5", 1))
                 .addElement('B', ofFrame(MaterialsAlloy.INCONEL_792))
                 .addElement('S', ofFrame(MaterialsAlloy.INCONEL_792))
-                // --- Bartworks blocks ---
                 .addElement('A', fb("bartworks", "BW_GlasBlocks", 0))
-                // R = Promethium Betavoltaic Alloy rebolted casing (PrPMaterials), not a glass placeholder
                 .addElement('R', ofBlock(PROMETHIUM_BETAVOLTAIC_BLOCK, PROMETHIUM_BETAVOLTAIC_BLOCK_META))
-                // --- Carbon Fiber Composite casing = the ONLY hatch-bearing element ---
                 .addElement(
                     'Q',
                     buildHatchAdder(MTE_PCV.class)

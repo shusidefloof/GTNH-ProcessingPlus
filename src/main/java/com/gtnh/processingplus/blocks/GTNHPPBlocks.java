@@ -57,7 +57,7 @@ public class GTNHPPBlocks {
 
     // SCD sits in the gap between CAC (31516) and the first cable-loader ID (31529).
     // WerkstoffCableLoader.register() uses startId+0..startId+11, and id() returns 31529 on its
-    // first call: so 31517 is free. Verified by reading WerkstoffCableLoader.java.
+    // first call: so 31517 is free.
     public static final int SCD_ID = 31517;
 
     // DAF sits right after SCD, still within the 31518-31528 gap before cable loaders.
@@ -115,7 +115,7 @@ public class GTNHPPBlocks {
         CSTR = new MTE_CSTR(CSTR_ID, "gtnhpp.cstr", "Continuous Stirred Tank Reactor");
         CSTR.getStackForm(1);
 
-        // Unobtanium superconductor: lossless placeable wires + cables with auto generated recipes
+        // Unobtanium superconductor: placeable wires + cables with auto generated recipes
         // Uses MTE IDs 31517-31528 (6 wires + 6 cables).
         // Unobtanium: superconductor wires + cables insulated with Polyphenylene Sulfide
         WerkstoffCableLoader

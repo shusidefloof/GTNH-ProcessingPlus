@@ -46,8 +46,8 @@ import gtPlusPlus.core.block.ModBlocks;
 /**
  * Cryogenic Annealing Cryostat (CAC): a 15×13×7 vacuum cryostat tower, structure designed by
  * Lord of Turtle. The superconductor wire is cryo-annealed inside a hollow glass vacuum core, wrapped
- * in a Solenoid Superconductor Coil column (tier scales parallels and EU discount, MTELatex-style) and
- * a shell of GT/GT++ endgame casings. Takes over every UHV-tier-and-above superconductor anneal recipe.
+ * in a Solenoid Superconductor Coil column (tier scales parallels and EU discount, Latex-style) and
+ * a shell of GT/GT++ endgame casings. Replaces every UHV-tier-and-above superconductor anneal recipe.
  */
 public class MTE_CAC extends MTEExtendedPowerMultiBlockBase<MTE_CAC> implements ISurvivalConstructable {
 
@@ -90,16 +90,15 @@ public class MTE_CAC extends MTEExtendedPowerMultiBlockBase<MTE_CAC> implements 
                 .addShape(
                     STRUCTURE_PIECE_MAIN,
                     /*
-                     * Block legend (from the in-game structure export, credit: Lord of Turtle):
-                     * A -> BW_GlasBlocks: any tiered BartWorks glass (hollow vacuum core)
-                     * B -> gt.blockcasings.cyclotron_coils: any tier Solenoid Superconductor Coil (core
-                     * column; tier scales parallels and EU discount, see getMaxParallelRecipes)
-                     * C -> gt.blockcasings10:14: Solidifier Radiator
-                     * D -> gt.blockcasings11:5: Quantium Item Pipe Casing
-                     * E -> gt.blockcasings12:7: Ultimately Static Machine Casing
-                     * F -> gt.blockframes:966: Orichalcum Frame Box
-                     * G -> gtplusplus.blockcasings.3:3: Bedrock Miner Casing (GT++)
-                     * H -> gtplusplus.blockspecialcasings.2:3: Custom Machine Casing 4 (GT++, hatch-capable shell)
+                     * Block legend:
+                     * A -> any tiered BartWorks glass
+                     * B -> any tier Solenoid Superconductor Coil
+                     * C -> Solidifier Radiator
+                     * D -> Quantium Item Pipe Casing
+                     * E -> Ultimately Static Machine Casing
+                     * F -> Orichalcum Frame Box
+                     * G -> Bedrock Miner Casing Thing
+                     * H -> Custom Machine Casing 4 (TODO: UPDATE WITH ACTUAL COIL NAME)
                      */
                     new String[][] {
                         { "    HHHHHHH    ", "    F HHH F    ", "    F HHH F    ", "    F     F    ", "    F     F    ",

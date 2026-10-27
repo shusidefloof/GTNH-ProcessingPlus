@@ -19,7 +19,7 @@ public class SPCRecipeData {
     public final int[] stationMinTiers;
     public final MachineType supportType;
     public final int supportMinTier;
-    /** External upgrade module this recipe requires (linked + adapter routed in), or null for none. */
+    /** External upgrade module this recipe requires, or null for none. */
     public final SPCModuleType requiredModule;
 
     private SPCRecipeData(MachineType[] types, int[] minTiers, MachineType supportType, int supportMinTier,

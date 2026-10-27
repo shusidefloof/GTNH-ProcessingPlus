@@ -41,14 +41,13 @@ import gregtech.api.util.GTUtility;
 import gregtech.api.util.MultiblockTooltipBuilder;
 
 /**
- * Basic Oxygen Furnace (BOF): a 5×4×5 steelmaking converter that refines iron into steel
+ * Basic Oxygen Furnace (BOF): steelmaker that refines iron into steel
  * using a high-purity oxygen blast. Accepts flux additives (calcium, calcite, dolomite)
  * to increase yield and produce recoverable BOF slag (lime flux can be fully recycled).
  */
 public class MTE_BOF extends MTEExtendedPowerMultiBlockBase<MTE_BOF> implements ISurvivalConstructable {
 
-    // casingTexturePages[0][16]: GT5U's own Solid Steel Machine Casing (BlockCasings2 meta 0), so the hatches and
-    // controller face match the BOF_CASING structure block without any custom texture registration.
+    // GT5U's Solid Steel Machine Casing
     public static final int SOLID_STEEL_MACHINE_CASING_INDEX = 16;
     private static final int CASING_INDEX = SOLID_STEEL_MACHINE_CASING_INDEX;
     private static final String STRUCTURE_PIECE_MAIN = "main";
@@ -79,13 +78,15 @@ public class MTE_BOF extends MTEExtendedPowerMultiBlockBase<MTE_BOF> implements 
                     STRUCTURE_PIECE_MAIN,
                     /*
                      * Block legend:
-                     * A -> sBlockCasings3:10: Solid Steel Machine Casing (structural shell)
-                     * B -> sBlockCasings3:14: Steel Turbine Casing (inner liner / tuyere zone)
-                     * C -> BOF Casing (hatch-capable outer shell)
+                     * A -> Solid Steel Machine Casing
+                     * B -> Steel Turbine Casing
+                     * C -> BOF Casing
                      */
-                    new String[][] { { "     ", "  C  ", " A~A ", " ACA " }, { "  C  ", " C C ", "C   C", "CCBCC" },
-                        { " C C ", "C   C", "A   A", "ABBBA" }, { "  C  ", " C C ", "C   C", "CCBCC" },
-                        { "     ", "  C  ", " CAC ", " CAC " }, })
+                    new String[][] { { "     ", "  C  ", " A~A ", " ACA " },
+                                     { "  C  ", " C C ", "C   C", "CCBCC" },
+                                     { " C C ", "C   C", "A   A", "ABBBA" },
+                                     { "  C  ", " C C ", "C   C", "CCBCC" },
+                                     { "     ", "  C  ", " CAC ", " CAC " }, })
                 .addElement('A', ofBlock(GregTechAPI.sBlockCasings3, 10))
                 .addElement('B', ofBlock(GregTechAPI.sBlockCasings3, 14))
                 .addElement(

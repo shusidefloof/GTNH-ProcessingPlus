@@ -50,10 +50,8 @@ import tectech.thing.casing.TTCasingsContainer;
  */
 public class MTE_SPU extends MTEExtendedPowerMultiBlockBase<MTE_SPU> implements ISurvivalConstructable {
 
-    // CleanStainlessSteelMachineCasing (sBlockCasings4 meta1): matches SPU's actual wall (sBlockCasings4, meta1).
     private static final int CASING_INDEX = 49;
     private static final String STRUCTURE_PIECE_MAIN = "main";
-    // Controller marker '~' sits at slice z=2, row y=14, char x=7 in the exported shape.
     private static final int OFFSET_X = 7;
     private static final int OFFSET_Y = 14;
     private static final int OFFSET_Z = 2;
@@ -80,16 +78,16 @@ public class MTE_SPU extends MTEExtendedPowerMultiBlockBase<MTE_SPU> implements 
                 .addShape(
                     STRUCTURE_PIECE_MAIN,
                     /*
-                     * Block legend (from the in-game structure export):
-                     * A -> bw.sheetmetal: Jiritsu sheet metal (PrPMaterials, pale blue-white UIV alloy)
-                     * B -> gt.blockcasings4:1: Clean Stainless Steel Machine Casing (hatch-capable shell)
-                     * C -> gt.blockcasingsSE:1: Space Elevator Support Structure
-                     * D -> gt.blockcasingsTT:12: Ultimate Molecular Casing (TecTech)
-                     * E -> gt.blockcasingsTT:13: Ultimate Advanced Molecular Casing (TecTech)
-                     * F -> gt.blockframes:405: Stellar Alloy Frame Box
-                     * G -> tile.quantumGlass:0: Quantum Glass (TecTech)
-                     * H -> BWBlockCasingsAdvanced (bolted): Aerogel Insulation Panel (PrPMaterials)
-                     * I -> BWBlockCasings (plain): Aerogel Insulation Panel (PrPMaterials)
+                     * Block legend:
+                     * A -> Jiritsu sheet metal
+                     * B -> Clean Stainless Steel Machine Casing
+                     * C -> Space Elevator Support Structure
+                     * D -> Ultimate Molecular Casing
+                     * E -> Ultimate Advanced Molecular Casing
+                     * F -> Stellar Alloy Frame Box
+                     * G -> Quantum Glass
+                     * H -> Aerogel Insulation Panel
+                     * I -> Aerogel Insulation Panel
                      * K -> single legacy Subatomic Patterning Casing block, kept at local (0,0,0)
                      */
                     new String[][] {

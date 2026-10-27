@@ -111,17 +111,17 @@ public class MTE_AAR extends MTEExtendedPowerMultiBlockBase<MTE_AAR> implements 
                     STRUCTURE_PIECE_MAIN,
                     /*
                      * Block legend (from the in-game structure export):
-                     * A -> Iodine Frame Box (GT++), structural shell
-                     * B -> gt.blockcasings5: any tier Heating Coil (drives mCoilLevel via activeCoils)
-                     * C -> gt.blockcasings8:0: Chemically Inert Machine Casing (hatch-capable shell)
-                     * D -> gt.blockcasings9:0: PBI Pipe Casing (internal piping)
-                     * E -> miscutils.blockcasings:14: Coil (Blast Smelter) Casing, reused as outer shell
+                     * A -> Iodine Frame Box
+                     * B -> any tier Heating Coil
+                     * C -> Chemically Inert Machine Casing
+                     * D -> PBI Pipe Casing
+                     * E -> Blast Smelter Coil Casing
                      */
                     new String[][] { { "CEEEC", "ACCCA", "CC~CC", "ACCCA", "CEEEC" },
-                        { "ECCCE", "CD DC", "CD DC", "CD DC", "ECCCE" },
-                        { "ECCCE", "C D C", "B D B", "C D C", "ECCCE" },
-                        { "ECCCE", "CD DC", "CD DC", "CD DC", "ECCCE" },
-                        { "CEEEC", "ACCCA", "CCBCC", "ACCCA", "CEEEC" } })
+                                     { "ECCCE", "CD DC", "CD DC", "CD DC", "ECCCE" },
+                                     { "ECCCE", "C D C", "B D B", "C D C", "ECCCE" },
+                                     { "ECCCE", "CD DC", "CD DC", "CD DC", "ECCCE" },
+                                     { "CEEEC", "ACCCA", "CCBCC", "ACCCA", "CEEEC" } })
                 .addElement('A', ofBlock(IODINE_FRAME_BLOCK, IODINE_FRAME_META))
                 .addElement(
                     'B',

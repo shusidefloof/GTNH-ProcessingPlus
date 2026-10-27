@@ -28,11 +28,9 @@ public class BlockGTNHPPCasings extends Block {
     public static final int BOF_CASING = 10;
     public static final int SPC_BEAM_CASING = 11;
     public static final int SPC_FRAME_CASING = 12;
-    // SPC support-bay adapters (route an external upgrade module into the SPC)
     public static final int BIO_ADAPTER = 13;
     public static final int CRYO_ADAPTER = 14;
     public static final int QUANTUM_ADAPTER = 15;
-    // External SPC upgrade-module casings
     public static final int BIO_MODULE_CASING = 16;
     public static final int CRYO_MODULE_CASING = 17;
     public static final int QUANTUM_MODULE_CASING = 18;
@@ -109,8 +107,8 @@ public class BlockGTNHPPCasings extends Block {
         "gregtech:iconsets/MACHINE_CASING_CLEAN_STAINLESSSTEEL", // Bio module casing
         "gregtech:iconsets/MACHINE_CASING_FROST_PROOF",          // Cryo module casing
         "gregtech:iconsets/MACHINE_CASING_RADIATIONPROOF",       // Quantum module casing
-        "gregtech:iconsets/MACHINE_CASING_CHEMICALLY_INERT", // SiC color, same as HTRF casing
-        "gregtech:iconsets/MACHINE_HEATPROOFCASING", // CF composite: dark woven look (placeholder)
+        "gregtech:iconsets/MACHINE_CASING_CHEMICALLY_INERT", //HTRF casing
+        "gregtech:iconsets/MACHINE_HEATPROOFCASING", // CF composite (placeholder)
         "gregtech:iconsets/MACHINE_CASING_FROST_PROOF",          // CAC vacuum shell
         "gregtech:iconsets/MACHINE_CASING_CLEAN_STAINLESSSTEEL", // CAC aerogel lining
         "gregtech:iconsets/MACHINE_CASING_RADIATIONPROOF",       // RTG shell

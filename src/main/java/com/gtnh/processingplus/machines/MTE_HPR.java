@@ -53,12 +53,9 @@ import gregtech.api.util.shutdown.ShutDownReasonRegistry;
 
 public class MTE_HPR extends MTEExtendedPowerMultiBlockBase<MTE_HPR> implements ISurvivalConstructable {
 
-    // GoodGenerator's pressureResistantWalls isn't in GT5U's shared casing texture registry, we register it
-    // ourselves (CommonProxy.registerExternalCasingTextures()) into page 100, slot 0 = 100*128 = 12800.
     public static final int PRESSURE_RESISTANT_WALLS_CASING_INDEX = 12800;
     private static final int CASING_INDEX = PRESSURE_RESISTANT_WALLS_CASING_INDEX;
     private static final String STRUCTURE_PIECE_MAIN = "main";
-    // Controller (~) is at slice z=1, row y=14, col x=14
     private static final int OFFSET_X = 14;
     private static final int OFFSET_Y = 14;
     private static final int OFFSET_Z = 1;
@@ -116,7 +113,6 @@ public class MTE_HPR extends MTEExtendedPowerMultiBlockBase<MTE_HPR> implements 
     @Override
     public IStructureDefinition<MTE_HPR> getStructureDefinition() {
         if (STRUCTURE_DEFINITION == null) {
-            // Build coil block list once (safe here, called after mod init)
             Block[] coilBlocks = new Block[COIL_NAMES.length];
             for (int i = 0; i < COIL_NAMES.length; i++) {
                 coilBlocks[i] = ggBlock(COIL_NAMES[i]);
@@ -129,23 +125,23 @@ public class MTE_HPR extends MTEExtendedPowerMultiBlockBase<MTE_HPR> implements 
             STRUCTURE_DEFINITION = StructureDefinition.<MTE_HPR>builder()
                 .addShape(
                     STRUCTURE_PIECE_MAIN,
-                    new String[][] { { // z=0: outer frame ring (pressure walls only)
-                        "                             ", "              D              ",
-                        "             D D             ", "            D   D            ",
-                        "             D D             ", "              D              ",
-                        "                             ", "                             ",
-                        "                             ", "                             ",
-                        "                             ", "                             ",
-                        "   D          D          D   ", "  D D        DCD        D D  ",
-                        " D   D      DC CD      D   D ", "  D D        DCD        D D  ",
-                        "   D          D          D   ", "                             ",
-                        "                             ", "                             ",
-                        "                             ", "                             ",
-                        "                             ", "              D              ",
-                        "             D D             ", "            D   D            ",
-                        "             D D             ", "              D              ",
-                        "                             " },
-                        { // z=1: front vessel faces; controller (~) at row 14 col 14
+                    new String[][] { {
+                            "                             ", "              D              ",
+                            "             D D             ", "            D   D            ",
+                            "             D D             ", "              D              ",
+                            "                             ", "                             ",
+                            "                             ", "                             ",
+                            "                             ", "                             ",
+                            "   D          D          D   ", "  D D        DCD        D D  ",
+                            " D   D      DC CD      D   D ", "  D D        DCD        D D  ",
+                            "   D          D          D   ", "                             ",
+                            "                             ", "                             ",
+                            "                             ", "                             ",
+                            "                             ", "              D              ",
+                            "             D D             ", "            D   D            ",
+                            "             D D             ", "              D              ",
+                            "                             " },
+                        {
                             "              D              ", "             BFB             ",
                             "            BFFFB            ", "           DFFFFFD           ",
                             "            BFFFB            ", "             BFB             ",
@@ -161,7 +157,7 @@ public class MTE_HPR extends MTEExtendedPowerMultiBlockBase<MTE_HPR> implements 
                             "            BFFFB            ", "           DFFFFFD           ",
                             "            BFFFB            ", "             BFB             ",
                             "              D              " },
-                        { // z=2: glass conduit connections
+                        {
                             "             D D             ", "            BFFFB            ",
                             "           DF   FD           ", "        DCCCF   FCCCD        ",
                             "           DF   FD           ", "            BFFFB            ",
@@ -177,7 +173,7 @@ public class MTE_HPR extends MTEExtendedPowerMultiBlockBase<MTE_HPR> implements 
                             "           DF   FD           ", "        DCCCF   FCCCD        ",
                             "           DF   FD           ", "            BFFFB            ",
                             "             D D             " },
-                        { // z=3: central reaction core with FRF coils and radiation frames
+                        {
                             "            D   D            ", "           DFFFFFD           ",
                             "        DCCCF   FCCCD        ", "      BBBAAAF   FAAABBB      ",
                             "     BB DCCCF   FCCCD BB     ", "    BB     DFFFFFD     BB    ",
@@ -193,7 +189,7 @@ public class MTE_HPR extends MTEExtendedPowerMultiBlockBase<MTE_HPR> implements 
                             "     BB DCCCF   FCCCD BB     ", "      BBBAAAF   FAAABBB      ",
                             "        DCCCF   FCCCD        ", "           DFFFFFD           ",
                             "            D   D            " },
-                        { // z=4: mirror of z=2
+                        {
                             "             D D             ", "            BFFFB            ",
                             "           DF   FD           ", "        DCCCF   FCCCD        ",
                             "           DF   FD           ", "            BFFFB            ",
@@ -209,7 +205,7 @@ public class MTE_HPR extends MTEExtendedPowerMultiBlockBase<MTE_HPR> implements 
                             "           DF   FD           ", "        DCCCF   FCCCD        ",
                             "           DF   FD           ", "            BFFFB            ",
                             "             D D             " },
-                        { // z=5: mirror of z=1 (back vessel faces, no controller)
+                        {
                             "              D              ", "             BFB             ",
                             "            BFFFB            ", "           DFFFFFD           ",
                             "            BFFFB            ", "             BFB             ",
@@ -225,7 +221,7 @@ public class MTE_HPR extends MTEExtendedPowerMultiBlockBase<MTE_HPR> implements 
                             "            BFFFB            ", "           DFFFFFD           ",
                             "            BFFFB            ", "             BFB             ",
                             "              D              " },
-                        { // z=6: back outer frame ring
+                        {
                             "                             ", "              D              ",
                             "             D D             ", "            D   D            ",
                             "             D D             ", "              D              ",
@@ -306,7 +302,7 @@ public class MTE_HPR extends MTEExtendedPowerMultiBlockBase<MTE_HPR> implements 
         void scaleOutputs(int delta, int fatigue) {
             int num, den;
             if (delta > 0) {
-                // Frequency switch: jump penalty, fatigue irrelevant (already reset)
+                // Frequency switch
                 if (delta == 1) {
                     num = 10;
                     den = 10;
@@ -344,7 +340,7 @@ public class MTE_HPR extends MTEExtendedPowerMultiBlockBase<MTE_HPR> implements 
                 else {
                     num = 1;
                     den = 1000;
-                } // coil saturated: near-zero output
+                } // near-zero output
             }
             if (num == den) return;
 
@@ -456,8 +452,6 @@ public class MTE_HPR extends MTEExtendedPowerMultiBlockBase<MTE_HPR> implements 
     public ITexture[] getTexture(IGregTechTileEntity aBaseMetaTileEntity, ForgeDirection side, ForgeDirection aFacing,
         int colorIndex, boolean aActive, boolean redstoneLevel) {
         if (side == aFacing) {
-            // OVERLAY_FUSION1 has no separate _ACTIVE variant (matches the real Fusion Reactor's own
-            // getTexture pattern): same base icon either way, the glow layer is what shows it's running.
             if (aActive) return new ITexture[] { getCasingTextureForId(CASING_INDEX), TextureFactory.builder()
                 .addIcon(OVERLAY_FUSION1)
                 .extFacing()

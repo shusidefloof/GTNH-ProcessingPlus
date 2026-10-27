@@ -49,19 +49,15 @@ import gregtech.common.gui.modularui.multiblock.base.MTEMultiBlockBaseGui;
 
 /**
  * Ceramic Reaction Vessel: 5×5×5 structure with hBN ceramic inner lining.
- * The 24 hBN blocks are structurally load-bearing: checkMachine fails without them.
- * Only multiblock that can safely contain exotic molten alloy mixtures at LuV/ZPM.
+ * Only multiblock that can safely contain exotic molten alloy mixtures at LuV/ZPM+.
  */
 public class MTE_CRV extends MTEExtendedPowerMultiBlockBase<MTE_CRV> implements ISurvivalConstructable {
 
-    // RobustTungstenSteelMachineCasing (sBlockCasings4 meta0): matches CRV_CASING's borrowed texture.
     private static final int CASING_INDEX = 48;
     private static final String STRUCTURE_PIECE_MAIN = "main";
     private static final int OFFSET_X = 2;
     private static final int OFFSET_Y = 2;
     private static final int OFFSET_Z = 0;
-
-    // Machine modes: native CRV recipes, or the shared GT++ Alloy Blast Smelter recipe pool.
     private static final int MACHINEMODE_CRV = 0;
     private static final int MACHINEMODE_ABS = 1;
 
@@ -86,18 +82,12 @@ public class MTE_CRV extends MTEExtendedPowerMultiBlockBase<MTE_CRV> implements 
             STRUCTURE_DEFINITION = StructureDefinition.<MTE_CRV>builder()
                 .addShape(
                     STRUCTURE_PIECE_MAIN,
-                    // shape[z][y][x]: 5 z-layers, 5 y-rows each, 5 x-chars
-                    // 'C' = CRV casing or hatch, 'B' = hBN ceramic block (no hatches allowed), ' ' = air
+                    // TODO: UPDATE STRUCTURE
                     new String[][] {
-                        // z=0: front face: all casing, controller center
                         { "CCCCC", "CCCCC", "CC~CC", "CCCCC", "CCCCC" },
-                        // z=1: outer casing ring + hBN inner lining
                         { "CCCCC", "CBBBC", "CB BC", "CBBBC", "CCCCC" },
-                        // z=2: middle layer (identical to z=1)
                         { "CCCCC", "CBBBC", "CB BC", "CBBBC", "CCCCC" },
-                        // z=3: inner layer (identical to z=1)
                         { "CCCCC", "CBBBC", "CB BC", "CBBBC", "CCCCC" },
-                        // z=4: back face: all casing
                         { "CCCCC", "CCCCC", "CCCCC", "CCCCC", "CCCCC" }, })
                 .addElement(
                     'C',
@@ -154,7 +144,7 @@ public class MTE_CRV extends MTEExtendedPowerMultiBlockBase<MTE_CRV> implements 
     @Override
     protected ProcessingLogic createProcessingLogic() {
         if (machineMode == MACHINEMODE_ABS) {
-            // 400% speed (1/4 duration) and up to 8 parallels, ABS-mode only.
+            // 400% speed (1/4 duration) and up to 8 parallels, ABS Only.
             return new ProcessingLogic().setSpeedBonus(1F / 4F)
                 .setMaxParallelSupplier(this::getTrueParallel);
         }
@@ -169,9 +159,6 @@ public class MTE_CRV extends MTEExtendedPowerMultiBlockBase<MTE_CRV> implements 
         return GTNHPPRecipeMaps.sCRVRecipes;
     }
 
-    // getRecipeMap() only reflects whichever mode is currently selected, so NEI's default catalyst
-    // lookup (which reads getRecipeMap() once, on a fresh MACHINEMODE_CRV-by-default instance) never
-    // discovers the ABS-mode recipes. Overriding this exposes both maps to NEI regardless of mode.
     @Override
     public Collection<RecipeMap<?>> getAvailableRecipeMaps() {
         return Arrays.asList(GTNHPPRecipeMaps.sCRVRecipes, RecipeMaps.alloyBlastSmelterRecipes);
@@ -187,8 +174,6 @@ public class MTE_CRV extends MTEExtendedPowerMultiBlockBase<MTE_CRV> implements 
         return true;
     }
 
-    // Default getMachineModeKey() just returns "GT5U.MULTI_MACHINE_MODE.unknown" ("Unknown Mode")
-    // same MTEOreWashingPlant pattern as the GUI button fix above.
     @Override
     public String getMachineModeKey() {
         return "GT5U.GTNHPP_CRV.mode." + machineMode;
@@ -200,12 +185,6 @@ public class MTE_CRV extends MTEExtendedPowerMultiBlockBase<MTE_CRV> implements 
         machineModeIcons.add(GTUITextures.OVERLAY_BUTTON_MACHINEMODE_COMPRESSING);
     }
 
-    // setMachineModeIcons() alone no longer surfaces a GUI button, MTEMultiBlockBaseGui (the actual
-    // rendered GUI since the ModularUI2 migration) only adds the mode-switch widget when its OWN,
-    // separate machineModeIcons list (populated here) is non-empty. See MTEOreWashingPlant for the
-    // upstream reference implementation of this exact pattern. Note this needs the ModularUI2
-    // GTGuiTextures icons specifically (withMachineModeIcons takes com.cleanroommc's UITexture, not
-    // GTUITextures' ModularUI1 one used by setMachineModeIcons() above).
     @Override
     protected @NotNull MTEMultiBlockBaseGui<?> getGui() {
         return new MTEMultiBlockBaseGui<>(this).withMachineModeIcons(

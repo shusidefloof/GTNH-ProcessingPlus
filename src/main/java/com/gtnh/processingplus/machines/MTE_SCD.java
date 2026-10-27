@@ -61,37 +61,20 @@ import gregtech.api.util.tooltip.TooltipHelper;
  * <li><b>Stage 2: Supercritical Infusion</b>: inject a registered supercritical fluid.
  * Higher-tier fluids (Freon R-12) advance the stage faster. Stalls if no valid fluid.</li>
  * <li><b>Stage 3: Depressurization</b>: hatch must be empty. Any fluid present at
- * any point during stage 3 marks the batch as contaminated → degraded output.</li>
+ * any point during stage 3 marks the batch as contaminated -> degraded output.</li>
  * </ul>
  * Energy is consumed every tick regardless of stall state.
  */
 public class MTE_SCD extends MTEExtendedPowerMultiBlockBase<MTE_SCD> implements ISurvivalConstructable {
 
-    // -------------------------------------------------------------------------
-    // Stage mechanic: static registries
-    // -------------------------------------------------------------------------
-
-    /**
-     * Stage 1 fluid IDs for mSpecialValue encoding.
-     * {@code STAGE1_EMPTY} (0) means stage 1 requires an empty hatch rather than a specific fluid.
-     */
     public static final int STAGE1_EMPTY = 0;
     public static final int STAGE1_ACETONE = 1;
     public static final int STAGE1_ETHANOL = 2;
     public static final int STAGE1_IPA = 3;
 
-    /** Stage 1 fluid ID → Fluid. Populated from SCDRecipes.init(). */
+    /** Stage 1 fluid ID -> Fluid. Populated from SCDRecipes.init(). */
     private static final Map<Integer, Fluid> STAGE1_FLUIDS = new HashMap<>();
 
-    /**
-     * Valid stage 2 fluids → extra effective ticks per real tick.
-     * <ul>
-     * <li>0 = baseline 1× speed (Liquid CO₂)</li>
-     * <li>1 = 2× faster (Freon R-12)</li>
-     * </ul>
-     * A LinkedHashMap so iteration order is deterministic when scanning hatches.
-     * Populated from SCDRecipes.init().
-     */
     private static final Map<Fluid, Integer> STAGE2_TIERS = new LinkedHashMap<>();
 
     public static void registerStage1Fluid(int id, Fluid fluid) {
@@ -127,10 +110,6 @@ public class MTE_SCD extends MTEExtendedPowerMultiBlockBase<MTE_SCD> implements 
         return (r.mSpecialValue >> 12) & 0xFF;
     }
 
-    // -------------------------------------------------------------------------
-    // Stage state fields
-    // -------------------------------------------------------------------------
-
     /** 0 = idle, 1/2/3 = active drying stage. */
     private int mDryingStage = 0;
     /** Effective tick counter within the current stage (advances faster with better stage-2 fluids). */
@@ -151,11 +130,6 @@ public class MTE_SCD extends MTEExtendedPowerMultiBlockBase<MTE_SCD> implements 
     private ItemStack mDegradedOutput = null;
     private FluidStack[] mSavedFluidOutputs = new FluidStack[0];
 
-    // -------------------------------------------------------------------------
-    // Structure constants
-    // -------------------------------------------------------------------------
-
-    // StableTitaniumMachineCasing (sBlockCasings4 meta2): matches SCD_CASING's borrowed texture.
     private static final int CASING_INDEX = 50;
     private static final String STRUCTURE_PIECE_MAIN = "main";
     private static final int OFFSET_X = 7;
@@ -189,41 +163,37 @@ public class MTE_SCD extends MTEExtendedPowerMultiBlockBase<MTE_SCD> implements 
         return new MTE_SCD(this);
     }
 
-    // -------------------------------------------------------------------------
-    // Structure
-    // -------------------------------------------------------------------------
-
     @Override
     public IStructureDefinition<MTE_SCD> getStructureDefinition() {
         if (STRUCTURE_DEFINITION == null) {
             STRUCTURE_DEFINITION = StructureDefinition.<MTE_SCD>builder()
                 .addShape(
                     STRUCTURE_PIECE_MAIN,
-                    new String[][] { { // z=0: front face; controller (~) at row 5 col 7
+                    new String[][] { {
                         "            ", "            ", "       C    ", "      ECE   ", "HFHFFEBDBE  ", "HGH CCD~DCC ",
                         "HAH  EBDBE  ", "HAH   ECE   ", "HGH    C    ", "H H         " },
-                        { // z=1
+                        {
                             "            ", "            ", "      ICI   ", " FFFFIB BI  ", "FBBBBB   BI ",
                             "GBGFBB    C ", "A A IB   BI ", "A A HIB BIH ", "GGG H ICIHH ", "    H     H " },
-                        { // z=2
+                        {
                             "            ", "      EEE   ", "     I C I  ", "    I     I ", "HFHE       E",
                             "HGHEC     CE", "HAHE       E", "HAH I     I ", "HGH HI C IH ", "H H   EEE   " },
-                        { // z=3
+                        {
                             "            ", "      EAE   ", "    II   II ", "    I     I ", "   E       E",
                             "   A       A", "   E       E", "    I     I ", "    II   II ", "      EAE   " },
-                        { // z=4
+                        {
                             "            ", "      EAE   ", "    II   II ", "    I     I ", "   E       E",
                             "   A       A", "   E       E", "    I     I ", "    II   II ", "      EAE   " },
-                        { // z=5
+                        {
                             "            ", "      EAE   ", "    II   II ", "    I     I ", "   E       E",
                             "   A       A", "   E       E", "    I     I ", "    II   II ", "      EAE   " },
-                        { // z=6
+                        {
                             "            ", "      EEE   ", "     I C I  ", "    I     I ", "HFHE       E",
                             "HGHEC     CE", "HAHE       E", "HAH I     I ", "HGH HI C IH ", "H H   EEE   " },
-                        { // z=7
+                        {
                             "            ", "            ", "      ICI   ", " FFFFIB BI  ", "FBBBBB   BI ",
                             "GBGFB     C ", "A A IB   BI ", "A A HIB BIH ", "GGG HHICIHH ", "    H     H " },
-                        { // z=8: back face
+                        {
                             "            ", "            ", "       C    ", "      ECE   ", "HFHFFEBDBE  ",
                             "HGH CCDCDCC ", "HAH  EBDBE  ", "HAH   ECE   ", "HGH    C    ", "H H         " } })
                 .addElement('A', ofBlock(bwBlock("BW_GlasBlocks"), 0))
@@ -283,16 +253,10 @@ public class MTE_SCD extends MTEExtendedPowerMultiBlockBase<MTE_SCD> implements 
         checkHasOutputBus(errors);
         if (PPRecipeHelper.recipeMapHasFluidInputs(getRecipeMap())) checkHasInputHatch(errors);
         if (PPRecipeHelper.recipeMapHasFluidOutputs(getRecipeMap())) checkHasOutputHatch(errors);
-        // Stage fluids are not declared as recipe inputs (they're consumed per-tick).
-        // Disable the hatch filter so the player can insert any fluid during a recipe run.
         for (MTEHatchInput hatch : mInputHatches) {
             hatch.disableFilter = true;
         }
     }
-
-    // -------------------------------------------------------------------------
-    // Processing: stage machine
-    // -------------------------------------------------------------------------
 
     private class SCDProcessingLogic extends ProcessingLogic {
 
@@ -312,9 +276,7 @@ public class MTE_SCD extends MTEExtendedPowerMultiBlockBase<MTE_SCD> implements 
     }
 
     /**
-     * Finds the recipe via the standard GT path (consumes item inputs), then hijacks the timing:
-     * the GT auto-completion sentinel is set to Integer.MAX_VALUE/2 so the machine never completes
-     * by itself: stage logic drives termination instead.
+     * Finds the recipe via the standard GT
      */
     @Override
     public CheckRecipeResult checkProcessing() {
@@ -352,7 +314,7 @@ public class MTE_SCD extends MTEExtendedPowerMultiBlockBase<MTE_SCD> implements 
         mStage2MaxTicks = Math.max(1, total / 3);
         mStage3MaxTicks = Math.max(1, total - 2 * (total / 3));
 
-        // Sentinel prevents GT from auto-completing. Stage 3 sets mMaxProgresstime=1 when done.
+        // prevents GT from auto-completing. Stage 3 sets mMaxProgresstime=1 when done.
         mMaxProgresstime = Integer.MAX_VALUE / 2;
         mProgresstime = 0;
         mDryingStage = 1;
@@ -378,7 +340,6 @@ public class MTE_SCD extends MTEExtendedPowerMultiBlockBase<MTE_SCD> implements 
                 break;
         }
 
-        // Energy drains every tick: maintaining pressure costs power even while stalled.
         if (!super.onRunningTick(aStack)) return false;
         return true;
     }
@@ -387,7 +348,6 @@ public class MTE_SCD extends MTEExtendedPowerMultiBlockBase<MTE_SCD> implements 
         Fluid needed = STAGE1_FLUIDS.get(mStage1FluidId);
 
         if (needed == null) {
-            // Stage 1 is an empty-hatch check (STAGE1_EMPTY)
             if (hasAnyFluidInHatch()) {
                 mStalling = true;
                 return;
@@ -418,7 +378,6 @@ public class MTE_SCD extends MTEExtendedPowerMultiBlockBase<MTE_SCD> implements 
             return;
         }
 
-        // Better fluids advance stage 2 by multiple effective ticks per real tick.
         mStageTicks += (1 + extra);
         if (mStageTicks >= mStage2MaxTicks) {
             mDryingStage = 3;
@@ -426,12 +385,9 @@ public class MTE_SCD extends MTEExtendedPowerMultiBlockBase<MTE_SCD> implements 
         }
     }
 
-    // 1-second grace window at the start of stage 3, gives the player time to drain any remaining
-    // stage-2 fluid before contamination tracking begins.
     private static final int STAGE3_GRACE_TICKS = 20;
 
     private void tickStage3() {
-        // Skip contamination check during the grace window so the player can empty the hatch.
         if (mStageTicks >= STAGE3_GRACE_TICKS && hasAnyFluidInHatch()) {
             mStage3HasFluid = true;
         }
@@ -442,7 +398,6 @@ public class MTE_SCD extends MTEExtendedPowerMultiBlockBase<MTE_SCD> implements 
     }
 
     private void completeRecipe() {
-        // Restore outputs so GT's doPostProcessing() pushes them to output hatches/buses.
         ItemStack chosenItem = mStage3HasFluid ? mDegradedOutput : mPerfectOutput;
         mOutputItems = (chosenItem != null) ? new ItemStack[] { chosenItem } : new ItemStack[0];
         mOutputFluids = (mSavedFluidOutputs != null) ? mSavedFluidOutputs : new FluidStack[0];
@@ -454,9 +409,6 @@ public class MTE_SCD extends MTEExtendedPowerMultiBlockBase<MTE_SCD> implements 
         mStageTicks = 0;
         mStalling = false;
         mStage3HasFluid = false;
-
-        // Set mMaxProgresstime=1, mProgresstime=0 so GT's tick loop increments to 1==1
-        // and fires doPostProcessing() this same tick, outputting mOutputItems/mOutputFluids.
         mMaxProgresstime = 1;
         mProgresstime = 0;
     }
@@ -464,16 +416,10 @@ public class MTE_SCD extends MTEExtendedPowerMultiBlockBase<MTE_SCD> implements 
     @Override
     public void onPostTick(IGregTechTileEntity aBase, long aTick) {
         super.onPostTick(aBase, aTick);
-        // Undo the mProgresstime++ that super just did to keep the sentinel frozen while stalling.
-        // Guard against mMaxProgresstime==1 (completion signal) so we don't interfere with that path.
         if (aBase.isServerSide() && mStalling && mMaxProgresstime > 1 && mProgresstime > 0) {
             mProgresstime--;
         }
     }
-
-    // -------------------------------------------------------------------------
-    // Fluid hatch helpers
-    // -------------------------------------------------------------------------
 
     /** True if any input hatch contains fluid. Uses the public {@code mFluid} field on MTEBasicTank. */
     private boolean hasAnyFluidInHatch() {
@@ -492,10 +438,6 @@ public class MTE_SCD extends MTEExtendedPowerMultiBlockBase<MTE_SCD> implements 
         }
         return null;
     }
-
-    // -------------------------------------------------------------------------
-    // Info data
-    // -------------------------------------------------------------------------
 
     @Override
     public String[] getInfoData() {
@@ -545,10 +487,6 @@ public class MTE_SCD extends MTEExtendedPowerMultiBlockBase<MTE_SCD> implements 
 
         return info.toArray(new String[0]);
     }
-
-    // -------------------------------------------------------------------------
-    // NBT
-    // -------------------------------------------------------------------------
 
     @Override
     public void saveNBTData(NBTTagCompound aNBT) {
@@ -609,15 +547,11 @@ public class MTE_SCD extends MTEExtendedPowerMultiBlockBase<MTE_SCD> implements 
                 mSavedFluidOutputs[i] = FluidStack.loadFluidStackFromNBT(aNBT.getCompoundTag("mFluidOut" + i));
             }
         }
-        // Restore the sentinel so the stage machine resumes correctly after a server restart.
+        // Restore so it resumes correctly after a server restart.
         if (mDryingStage > 0) {
             mMaxProgresstime = Integer.MAX_VALUE / 2;
         }
     }
-
-    // -------------------------------------------------------------------------
-    // Rendering, sound, tooltip
-    // -------------------------------------------------------------------------
 
     @Override
     public ITexture[] getTexture(IGregTechTileEntity aBaseMetaTileEntity, ForgeDirection side, ForgeDirection aFacing,
@@ -704,10 +638,6 @@ public class MTE_SCD extends MTEExtendedPowerMultiBlockBase<MTE_SCD> implements 
             .toolTipFinisher("_Shusi_");
         return tt;
     }
-
-    // -------------------------------------------------------------------------
-    // Capabilities
-    // -------------------------------------------------------------------------
 
     @Override
     public boolean supportsInputSeparation() {

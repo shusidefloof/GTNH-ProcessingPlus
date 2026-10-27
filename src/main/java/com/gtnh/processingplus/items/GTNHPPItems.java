@@ -14,7 +14,6 @@ public class GTNHPPItems {
     /** Raw UEV-tier optical circuit board substrate, precursor to Circuit_Board_Optical. */
     public static Item OPTICAL_CIRCUIT_BOARD_RAW;
 
-    // LuV exotics (Vibranium + Unobtanium intermediates) now live on the shared
     // INTERMEDIATES MetaItem: see the Intermediate enum.
 
     /** Promethium Betavoltaic Cell: fuel for the RTG generator multiblock. */

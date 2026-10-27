@@ -53,7 +53,6 @@ import gregtech.common.misc.GTStructureChannels;
 
 public class MTE_HTRF extends MTEExtendedPowerMultiBlockBase<MTE_HTRF> implements ISurvivalConstructable {
 
-    // HeatProofMachineCasing (sBlockCasings1 meta11): matches HTRF_CASING's borrowed texture.
     private static final int CASING_INDEX = 11;
     private static final String STRUCTURE_PIECE_MAIN = "main";
     private static final int OFFSET_X = 3;
@@ -194,9 +193,6 @@ public class MTE_HTRF extends MTEExtendedPowerMultiBlockBase<MTE_HTRF> implement
             @Nonnull
             @Override
             protected OverclockCalculator createOverclockCalculator(@Nonnull GTRecipe recipe) {
-                // Configure overclock with heat bonus
-                // Every 1800K extra heat = 1 perfect OC (duration /4, power /4)
-                // Every 900K extra heat = -5% EU/t (if discount enabled)
                 return super.createOverclockCalculator(recipe).setRecipeHeat(recipe.mSpecialValue)
                     .setMachineHeat(mHeatingCapacity)
                     .setHeatOC(true)

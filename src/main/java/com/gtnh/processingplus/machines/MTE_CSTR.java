@@ -75,14 +75,10 @@ public class MTE_CSTR extends MTEExtendedPowerMultiBlockBase<MTE_CSTR> implement
             STRUCTURE_DEFINITION = StructureDefinition.<MTE_CSTR>builder()
                 .addShape(
                     STRUCTURE_PIECE_MAIN,
-                    // shape[z][y][x]: 3 depth slices, 3 rows each, 3 chars wide.
-                    // 'C' = CSTR casing or any hatch; ' ' = hollow interior (agitation chamber).
+                    //TODO: UPDATE BLOCK LEGEND
                     new String[][] {
-                        // z=0: front face, controller at center
                         { "CCC", "C~C", "CCC" },
-                        // z=1: reactor interior (hollow agitation chamber)
                         { "CCC", "CEC", "CDC" },
-                        // z=2: back face
                         { "CCC", "CCC", "CCC" }, })
                 .addElement(
                     'C',

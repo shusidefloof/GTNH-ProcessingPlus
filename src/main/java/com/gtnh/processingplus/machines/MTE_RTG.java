@@ -44,11 +44,7 @@ import gregtech.api.util.GTUtility;
 import gregtech.api.util.MultiblockTooltipBuilder;
 
 /**
- * Radioisotope Thermoelectric Generator (RTG): a UV-tier multiblock power source.
- * Burns Promethium Betavoltaic Cells: each cell's beta decay drives a steady EU output through the
- * dynamo hatches, and the more cells loaded into the input bus, the higher the sustained output
- * (up to {@link #MAX_CELLS} burned per cycle). The cells deplete over time, so it's a real Promethium
- * sink rather than free power.
+ * Radioisotope Thermoelectric Generator (RTG)
  */
 public class MTE_RTG extends MTEExtendedPowerMultiBlockBase<MTE_RTG> implements ISurvivalConstructable {
 
@@ -85,7 +81,6 @@ public class MTE_RTG extends MTEExtendedPowerMultiBlockBase<MTE_RTG> implements 
             STRUCTURE_DEFINITION = StructureDefinition.<MTE_RTG>builder()
                 .addShape(
                     STRUCTURE_PIECE_MAIN,
-                    // shape[z][y][x]: 5×5×5, 'C' = Radioisotope casing or hatch, ' ' = shielded core void
                     new String[][] { { "CCCCC", "CCCCC", "CC~CC", "CCCCC", "CCCCC" },
                         { "CCCCC", "C   C", "C   C", "C   C", "CCCCC" },
                         { "CCCCC", "C   C", "C   C", "C   C", "CCCCC" },
@@ -133,7 +128,7 @@ public class MTE_RTG extends MTEExtendedPowerMultiBlockBase<MTE_RTG> implements 
     }
 
     /**
-     * Generator loop. Each cell is worth EU_PER_CELL, but the output is clamped to what the installed
+     * Each cell is worth EU_PER_CELL, but the output is clamped to what the installed
      * dynamo hatches can actually emit: generating more than that makes GT explode the multiblock. So
      * it only burns as many cells as the dynamos can carry (the rest wait in the bus); you scale the
      * machine up by adding more / higher-tier dynamo hatches.
@@ -173,11 +168,10 @@ public class MTE_RTG extends MTEExtendedPowerMultiBlockBase<MTE_RTG> implements 
             return CheckRecipeResultRegistry.NO_FUEL_FOUND;
         }
 
-        // Only burn as many cells as the dynamos can output (at least one), so we never over-produce.
+        // Only burn as many cells as the dynamos can output
         int toBurn = (int) Math.max(1L, Math.min((long) available, dynamoCap / EU_PER_CELL));
 
-        // depleteInput() only pulls from a single slot at a time, so draw from each stack (largest first)
-        // until we've taken toBurn cells.
+        // depleteInput() only pulls from a single slot at a time
         cellStacks.sort((a, b) -> Integer.compare(b.stackSize, a.stackSize));
         int burned = 0;
         for (ItemStack s : cellStacks) {

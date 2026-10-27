@@ -47,7 +47,7 @@ public class QuestLoader {
     private static final File CONFIG_QUESTS_DIR = new File("config/" + Mods.BetterQuesting.ID + "/DefaultQuests");
     private static final String RESOURCE_QUESTS_PREFIX = "assets/" + MOD_RESOURCE_ID + "/quest/DefaultQuests/";
     // Bundled alongside the quest files themselves (tools/export-quests.js writes it in the same
-    // run as QuestLine.json, from the exact same questLineIDHigh/Low values), never hardcode
+    // run as QuestLine.json, from the exact same questLineIDHigh/Low values)
     // this key separately, it must always match what's actually in QuestLine.json or
     // BetterQuesting stores a null IQuestLine entry, which crashes the quest-book GUI.
     private static final String RESOURCE_ORDER_FILE = "QuestLinesOrder.txt";
@@ -72,10 +72,10 @@ public class QuestLoader {
      * the encoded UUID key on the left isn't (see encodeQuestLineKey in tools/export-quests.js
      * a rebuilt jar can legitimately produce a different key for the same questline).
      *
-     * @param injectKeys true → ensure our key(s) are present, removing outdated ones (files are
+     * @param injectKeys true -> ensure our key(s) are present, removing outdated ones (files are
      *                   confirmed present)
-     *                   false → remove our key(s) entirely (files unavailable; prevents null
-     *                   IQuestLine entry in BetterQuesting which causes NPE in the quest-book GUI)
+     *                   false -> remove our key(s) entirely (files unavailable; prevents null
+     *                   IQuestLine entry in BetterQuesting which causes a Null Pointer Exception in the quest-book GUI)
      */
     public static void syncQuestLinesOrder(boolean injectKeys) throws IOException {
         List<String> ourKeys = injectKeys ? readOurOrderKeys() : new ArrayList<>();
@@ -162,7 +162,7 @@ public class QuestLoader {
 
                 String relativePath = name.substring(RESOURCE_QUESTS_PREFIX.length());
                 // Handled separately by syncQuestLinesOrder(): this file is shared with other
-                // mods' own default quest lines, so it must be merged, never blindly overwritten.
+                // mods' own default quest lines, so it must be merged.
                 if (relativePath.equals(RESOURCE_ORDER_FILE)) continue;
                 File targetFile = new File(CONFIG_QUESTS_DIR, relativePath);
 

@@ -77,28 +77,18 @@ import gregtech.api.util.tooltip.TooltipHelper;
  */
 public class MTE_SPC extends MTEExtendedPowerMultiBlockBase<MTE_SPC> implements ISurvivalConstructable {
 
-    // -------------------------------------------------------------------------
-    // Constants
-    // -------------------------------------------------------------------------
-
-    // StableTitaniumMachineCasing (sBlockCasings4 meta2): matches SPC_CASING's borrowed texture.
     private static final int CASING_INDEX = 50;
     public static final int MIN_STATIONS = 2;
     public static final int MAX_STATIONS = 6;
 
     private static final String PIECE_MAIN = "main";
 
-    // Controller is at x=2, y=2, z=0 in piece space (center of front face).
     private static final int OFFSET_X = 2;
     private static final int OFFSET_Y = 2;
 
     private static ItemStack getScorchedBoard() {
         return GTNHPPItems.scorchedBoard(1);
     }
-
-    // -------------------------------------------------------------------------
-    // Custom ProcessingLogic: exposes lastRecipe so checkProcessing can read it
-    // -------------------------------------------------------------------------
 
     private static class SPCProcessingLogic extends ProcessingLogic {
 
@@ -107,38 +97,17 @@ public class MTE_SPC extends MTEExtendedPowerMultiBlockBase<MTE_SPC> implements 
         }
     }
 
-    // -------------------------------------------------------------------------
-    // Structure definition (shape only: change freely)
-    // -------------------------------------------------------------------------
-
     private static IStructureDefinition<MTE_SPC> STRUCTURE_DEFINITION = null;
-
-    // -------------------------------------------------------------------------
-    // Per-instance state
-    // -------------------------------------------------------------------------
 
     private int mStationCount = MIN_STATIONS;
 
-    // Minimum BW glass tier found across all A-element positions during structure check.
-    // BW glass meta == voltage tier index (0=ULV … 14=MAX).
-    // Caps max energy hatch tier and caps the tier-excess parallel bonus.
-    // TODO: extend glassElement() to detect a special glass variant that enables
-    // perfect overclocking or another large bonus (e.g. Neodymium glass → +OC).
     private int mGlassTier = 0;
 
-    // Rebuilt on every checkMachine: ordered list of what's in each main station bay.
     final List<StationEntry> mDetectedStations = new ArrayList<>();
 
-    // Rebuilt on every checkMachine: which upgrade adapters are routed into the support bays.
     final EnumSet<SPCModuleType> mInstalledAdapters = EnumSet.noneOf(SPCModuleType.class);
 
-    // Transient: external upgrade modules currently data-stick linked to this SPC, by type.
-    // Modules re-register themselves periodically; entries are validated in hasModule().
     private final Map<SPCModuleType, MTE_SPCModuleBase<?>> mLinkedModules = new EnumMap<>(SPCModuleType.class);
-
-    // -------------------------------------------------------------------------
-    // Constructors
-    // -------------------------------------------------------------------------
 
     public MTE_SPC(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
@@ -152,29 +121,6 @@ public class MTE_SPC extends MTEExtendedPowerMultiBlockBase<MTE_SPC> implements 
     public IMetaTileEntity newMetaEntity(IGregTechTileEntity aTileEntity) {
         return new MTE_SPC(this);
     }
-
-    // -------------------------------------------------------------------------
-    // Structure definition: fixed 5×5×8 sealed process line
-    //
-    // Station-layer cross-section (z=1..6):
-    // I G D G I outer pillars (frame casing) + SPC casing (hatches) + D
-    // B A A A B upper band: gt casing sides, BW glass middle
-    // M F H F x process level: main bay (M, left) | frames (F) | beam (H) | right wall (x)
-    // E A A A E lower band: frame box sides, BW glass middle
-    // I G D G I
-    //
-    // Left wall (x=0) = 6 main station bays (M), z=1..6.
-    // Right wall (x=4) = 2 support bays (N) at z=1 and z=6; SPC casing (G) at z=2..5.
-    // Caps (z=0 front / z=7 back): front center = controller (~), back center = I.
-    //
-    // Block legend:
-    // A = BW Glass (any tier, viewport + tier mechanic)
-    // B = gt.blockcasings:3 C = gt.blockcasings2:13 D = gt.blockcasings3:10
-    // E = gt.blockframes:306 F = gt.blockframes:334
-    // G = Spectral Isolation Casing (hatch-capable)
-    // H = Photonic Alignment Casing I = Spectral Frame Casing
-    // M = main station bay N = support machine bay
-    // -------------------------------------------------------------------------
 
     @Override
     public IStructureDefinition<MTE_SPC> getStructureDefinition() {
@@ -190,7 +136,6 @@ public class MTE_SPC extends MTEExtendedPowerMultiBlockBase<MTE_SPC> implements 
                         { "IGDGI", "BAAAB", "MFHFG", "EAAAE", "IGDGI" },
                         { "IGDGI", "BAAAB", "MFHFN", "EAAAE", "IGDGI" },
                         { "IGDGI", "CAAAC", "CFIFC", "CAAAC", "IGDGI" }, })
-                // G = Spectral Isolation Casing: hatch positions (energy / maintenance / I-O)
                 .addElement(
                     'G',
                     buildHatchAdder(MTE_SPC.class)
@@ -205,34 +150,20 @@ public class MTE_SPC extends MTEExtendedPowerMultiBlockBase<MTE_SPC> implements 
                         .casingIndex(CASING_INDEX)
                         .hint(1)
                         .buildAndChain(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.SPC_CASING))
-                // A = any tiered glass: tier tracked for the energy cap + bonus cap
                 .addElement('A', chainAllGlasses(-1, (t, tier) -> t.mGlassTier = tier, t -> t.mGlassTier))
-                // B = Reinforced Glass Machine Casing (gt.blockcasings:3)
                 .addElement('B', ofBlock(GameRegistry.findBlock("gregtech", "gt.blockcasings"), 3))
-                // C = Tungstensteel Machine Casing (gt.blockcasings2:13)
                 .addElement('C', ofBlock(GameRegistry.findBlock("gregtech", "gt.blockcasings2"), 13))
-                // D = Europium-Reinforced Radiation Proof Casing (gt.blockcasings3:10)
                 .addElement('D', ofBlock(GameRegistry.findBlock("gregtech", "gt.blockcasings3"), 10))
-                // E = Americium Frame Box (gt.blockframes:306)
                 .addElement('E', ofBlock(GameRegistry.findBlock("gregtech", "gt.blockframes"), 306))
-                // F = TungstenSteel Frame Box (gt.blockframes:334)
                 .addElement('F', ofBlock(GameRegistry.findBlock("gregtech", "gt.blockframes"), 334))
-                // H = Photonic Alignment Casing: central beam column
                 .addElement('H', ofBlock(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.SPC_BEAM_CASING))
-                // I = Spectral Frame Casing: outer corner pillars + back-cap core
                 .addElement('I', ofBlock(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.SPC_FRAME_CASING))
-                // M = main station bay: left wall, z=1-6, populates mDetectedStations
                 .addElement('M', stationBayElement())
-                // N = support adapter bay: right wall ends, routes upgrade modules into the SPC
                 .addElement('N', adapterBayElement())
                 .build();
         }
         return STRUCTURE_DEFINITION;
     }
-
-    // -------------------------------------------------------------------------
-    // Structure check
-    // -------------------------------------------------------------------------
 
     @Override
     public void checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack, List<StructureError> errors) {
@@ -259,10 +190,6 @@ public class MTE_SPC extends MTEExtendedPowerMultiBlockBase<MTE_SPC> implements 
         return fromHatches;
     }
 
-    // -------------------------------------------------------------------------
-    // Construction (hint / survival build)
-    // -------------------------------------------------------------------------
-
     @Override
     public void construct(ItemStack stackSize, boolean hintsOnly) {
         buildPiece(PIECE_MAIN, stackSize, hintsOnly, OFFSET_X, OFFSET_Y, 0);
@@ -274,14 +201,6 @@ public class MTE_SPC extends MTEExtendedPowerMultiBlockBase<MTE_SPC> implements 
         return survivalBuildPiece(PIECE_MAIN, stackSize, OFFSET_X, OFFSET_Y, 0, elementBudget, env, false, true);
     }
 
-    // -------------------------------------------------------------------------
-    // Machine bay structure elements
-    // -------------------------------------------------------------------------
-
-    /**
-     * Accepts any GT single-block machine or an empty/casing slot.
-     * Appends a StationEntry to mDetectedStations when called during checkPiece.
-     */
     private static IStructureElement<MTE_SPC> stationBayElement() {
         return new IStructureElement<MTE_SPC>() {
 
@@ -305,10 +224,6 @@ public class MTE_SPC extends MTEExtendedPowerMultiBlockBase<MTE_SPC> implements 
         };
     }
 
-    /**
-     * Support-bay slot: accepts an upgrade adapter block (recorded into mInstalledAdapters), or an
-     * empty/casing slot (no adapter). Any other block fails the structure check.
-     */
     private static IStructureElement<MTE_SPC> adapterBayElement() {
         return new IStructureElement<MTE_SPC>() {
 
@@ -336,17 +251,11 @@ public class MTE_SPC extends MTEExtendedPowerMultiBlockBase<MTE_SPC> implements 
 
             @Override
             public boolean placeBlock(MTE_SPC t, World world, int x, int y, int z, ItemStack trigger) {
-                return false; // player installs their own adapter (or leaves it empty)
+                return false;
             }
         };
     }
 
-    /**
-     * Reads what is at (x, y, z) and returns a StationEntry, or null if the block is invalid.
-     * GT single-block machines → type + tier detected.
-     * Air or SPC casing → EMPTY entry (slot unfilled).
-     * Any other block → null (structure check fails).
-     */
     private static StationEntry detectMachine(World world, int x, int y, int z) {
         TileEntity te = world.getTileEntity(x, y, z);
         if (te instanceof IGregTechTileEntity) {
@@ -365,16 +274,6 @@ public class MTE_SPC extends MTEExtendedPowerMultiBlockBase<MTE_SPC> implements 
         return null;
     }
 
-    // -------------------------------------------------------------------------
-    // Recipe sequence matching (called by recipe registration / checkRecipe)
-    // -------------------------------------------------------------------------
-
-    /**
-     * Returns true if the current station configuration satisfies the given ordered sequence.
-     * requiredTypes and requiredMinTiers must be the same length.
-     * The SPC must have at least as many stations as the sequence length.
-     * Each station is checked in order; the first mismatch returns false.
-     */
     public boolean matchesSequence(MachineType[] requiredTypes, int[] requiredMinTiers) {
         if (requiredTypes.length != requiredMinTiers.length) return false;
         if (mDetectedStations.size() < requiredTypes.length) return false;
@@ -385,36 +284,24 @@ public class MTE_SPC extends MTEExtendedPowerMultiBlockBase<MTE_SPC> implements 
         return true;
     }
 
-    /**
-     * Returns true if the given upgrade module is satisfied: its adapter is routed into a support
-     * bay AND a module of that type is data-stick linked and currently running.
-     */
     public boolean isModuleSatisfied(SPCModuleType type) {
         if (type == null) return true;
         return mInstalledAdapters.contains(type) && hasModule(type);
     }
 
-    // -------------------------------------------------------------------------
-    // Upgrade-module linking (data-stick): see MTE_SPCModuleBase
-    // -------------------------------------------------------------------------
-
-    /** Called by a module when it (re)links to this SPC. */
     public void registerLinkedModule(MTE_SPCModuleBase<?> module) {
         mLinkedModules.put(module.getModuleType(), module);
     }
 
-    /** Called by a module when its block is destroyed. */
     public void unregisterLinkedModule(MTE_SPCModuleBase<?> module) {
         mLinkedModules.remove(module.getModuleType(), module);
     }
 
-    /** True if a module of the given type is linked and currently formed + running. */
     public boolean hasModule(SPCModuleType type) {
         MTE_SPCModuleBase<?> module = mLinkedModules.get(type);
         return module != null && module.isModuleActive();
     }
 
-    /** Left-click with a data stick copies this controller's coordinates onto the stick for module linking. */
     @Override
     public void onLeftclick(IGregTechTileEntity aBaseMetaTileEntity, EntityPlayer aPlayer) {
         if (aPlayer instanceof EntityPlayerMP) {
@@ -433,10 +320,6 @@ public class MTE_SPC extends MTEExtendedPowerMultiBlockBase<MTE_SPC> implements 
         super.onLeftclick(aBaseMetaTileEntity, aPlayer);
     }
 
-    // -------------------------------------------------------------------------
-    // NBT: persist station count across chunk load / world restart
-    // -------------------------------------------------------------------------
-
     @Override
     public void saveNBTData(NBTTagCompound aNBT) {
         super.saveNBTData(aNBT);
@@ -452,10 +335,6 @@ public class MTE_SPC extends MTEExtendedPowerMultiBlockBase<MTE_SPC> implements 
             : MIN_STATIONS;
         mGlassTier = aNBT.hasKey("spcGlassTier") ? aNBT.getInteger("spcGlassTier") : 0;
     }
-
-    // -------------------------------------------------------------------------
-    // Recipe map
-    // -------------------------------------------------------------------------
 
     @Override
     public RecipeMap<?> getRecipeMap() {
@@ -475,6 +354,7 @@ public class MTE_SPC extends MTEExtendedPowerMultiBlockBase<MTE_SPC> implements 
      * parallels = 2 ^ minExcessTier, capped at 64
      * flat +1 added to every output stack when minExcess >= 1
      */
+
     @Override
     public CheckRecipeResult checkProcessing() {
         CheckRecipeResult result = super.checkProcessing();
@@ -486,7 +366,7 @@ public class MTE_SPC extends MTEExtendedPowerMultiBlockBase<MTE_SPC> implements 
         SPCRecipeData data = SPCRecipeData.get(recipe);
         if (data == null) return result;
 
-        // Upgrade-module gate: scorched board if the required module isn't routed in + linked + running.
+        // scorched board if the required module isn't routed in + linked + running.
         if (!isModuleSatisfied(data.requiredModule)) {
             mOutputItems = new ItemStack[] { getScorchedBoard() };
             mOutputFluids = new net.minecraftforge.fluids.FluidStack[0];
@@ -496,13 +376,12 @@ public class MTE_SPC extends MTEExtendedPowerMultiBlockBase<MTE_SPC> implements 
         int minExcess = data.validateAndGetMinExcess(mDetectedStations);
 
         if (minExcess < 0) {
-            // Wrong machine type or tier too low → scorched board
+            // Wrong machine type or tier too low -> scorched board
             mOutputItems = new ItemStack[] { getScorchedBoard() };
             mOutputFluids = new net.minecraftforge.fluids.FluidStack[0];
             return result;
         }
 
-        // Glass tier cap: re-compute excess treating each machine tier as min(actual, mGlassTier).
         // If any glass-capped tier falls below the recipe minimum, produce a scorched board
         // the glass is too low-tier for this recipe regardless of the machines installed.
         if (mGlassTier > 0) {
@@ -543,10 +422,6 @@ public class MTE_SPC extends MTEExtendedPowerMultiBlockBase<MTE_SPC> implements 
         return result;
     }
 
-    // -------------------------------------------------------------------------
-    // Rendering
-    // -------------------------------------------------------------------------
-
     @Override
     public ITexture[] getTexture(IGregTechTileEntity aBaseMetaTileEntity, ForgeDirection side, ForgeDirection aFacing,
         int colorIndex, boolean aActive, boolean redstoneLevel) {
@@ -572,10 +447,6 @@ public class MTE_SPC extends MTEExtendedPowerMultiBlockBase<MTE_SPC> implements 
         }
         return new ITexture[] { casingTexturePages[0][CASING_INDEX] };
     }
-
-    // -------------------------------------------------------------------------
-    // Tooltip
-    // -------------------------------------------------------------------------
 
     @Override
     protected MultiblockTooltipBuilder createTooltip() {
@@ -622,10 +493,6 @@ public class MTE_SPC extends MTEExtendedPowerMultiBlockBase<MTE_SPC> implements 
             .toolTipFinisher("_Shusi_");
         return tt;
     }
-
-    // -------------------------------------------------------------------------
-    // Info panel (shows detected station configuration)
-    // -------------------------------------------------------------------------
 
     @Override
     public String[] getInfoData() {
@@ -675,10 +542,6 @@ public class MTE_SPC extends MTEExtendedPowerMultiBlockBase<MTE_SPC> implements 
         lines[3 + mDetectedStations.size()] = adapters.toString();
         return lines;
     }
-
-    // -------------------------------------------------------------------------
-    // Audio / quality-of-life flags
-    // -------------------------------------------------------------------------
 
     @Override
     @SideOnly(Side.CLIENT)

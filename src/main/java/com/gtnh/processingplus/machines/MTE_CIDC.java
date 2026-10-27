@@ -47,16 +47,12 @@ import gtnhlanth.common.register.LanthItemList;
 
 /**
  * Controlled Isotopic Doping Chamber (CIDC): UV-tier multiblock that assembles the RE-Doped
- * Photoresist Matrix (four rare-earth dopants + tin-oxo cluster, doped under a light-isolated beam
- * column). That matrix is required for UV Photoresist → UV/Elite circuit boards, so the CIDC is the
- * gate that makes the entire UV+ tier reachable.
+ * Photoresist Matrix. Required for UV Photoresist -> UV/Elite circuit boards
  */
 public class MTE_CIDC extends MTEExtendedPowerMultiBlockBase<MTE_CIDC> implements ISurvivalConstructable {
 
-    // StableTitaniumMachineCasing (sBlockCasings4 meta2): matches SPC_CASING's borrowed texture.
     private static final int CASING_INDEX = 50;
     private static final String STRUCTURE_PIECE_MAIN = "main";
-    // Controller marker '~' sits at slice z=2, row y=14, char x=7 in the exported shape.
     private static final int OFFSET_X = 7;
     private static final int OFFSET_Y = 14;
     private static final int OFFSET_Z = 2;
@@ -82,35 +78,6 @@ public class MTE_CIDC extends MTEExtendedPowerMultiBlockBase<MTE_CIDC> implement
             STRUCTURE_DEFINITION = StructureDefinition.<MTE_CIDC>builder()
                 .addShape(
                     STRUCTURE_PIECE_MAIN,
-                    /*
-                     * Structure:
-                     * Blocks:
-                     * A -> ofBlock...(BW_GlasBlocks, 0, ...);
-                     * B -> ofBlock...(bw.frames, 26021, ...);
-                     * C -> ofBlock...(casing.electrode, 0, ...);
-                     * D -> ofBlock...(gt.blockcasings, 15, ...);
-                     * E -> ofBlock...(gt.blockcasings11, 3, ...);
-                     * F -> ofBlock...(gt.blockcasings13, 1, ...);
-                     * G -> ofBlock...(gt.blockcasings4, 1, ...);
-                     * H -> ofBlock...(gt.blockcasings9, 0, ...);
-                     * I -> ofBlock...(gt.blockcasings9, 1, ...);
-                     * J -> ofBlock...(gt.blockframes, 129, ...);
-                     * K -> ofBlock...(gtplusplus.blockcasings.2, 11, ...);
-                     * L -> ofBlock...(tile.gtnhpp.casings, 0, ...);
-                     * M -> ofBlock...(tile.gtnhpp.casings, 9, ...);
-                     * N -> ofBlock...(tile.gtnhpp.casings, 25, ...);
-                     * Tiles:
-                     * Special Tiles:
-                     * O -> ofSpecialTileAdder(bartworks.system.material.BWTileEntityMetaGeneratedBlocksCasingAdvanced,
-                     * ...); // You will probably want to change it to something else
-                     * P -> ofSpecialTileAdder(gregtech.api.metatileentity.BaseMetaTileEntity, ...); // You will
-                     * probably want to change it to something else
-                     * Offsets:
-                     * -1 -1 -1
-                     */
-
-                    // shape[z][y][x]: 15 slices (z) × 16 rows (y) × 15 chars (x).
-                    // See the block legend below for what each letter maps to; ' ' = empty.
                     new String[][] {
                         { "               ", "LLL         LLL", "L K         K L", "L K         K L", "L K         K L",
                             "L K         K L", "L K         K L", "L K         K L", "L K         K L",
@@ -174,23 +141,7 @@ public class MTE_CIDC extends MTEExtendedPowerMultiBlockBase<MTE_CIDC> implement
                             "L K         K L", "L K         K L", "LLLL       LLLL" } })
 
                 /*
-                 * Block legend (from the in-game structure export):
-                 * A -> any tiered glass (BW glass etc.), chainAllGlasses()
-                 * B -> Sintered Silicon Carbide bolted casing, BWBlockCasingsAdvanced (meta = Werkstoff id)
-                 * C -> gtnhlanth electrode casing: LanthItemList.ELECTRODE_CASING
-                 * D -> gt.blockcasings:15: sBlockCasings1
-                 * E -> gt.blockcasings11:3: sBlockCasings11
-                 * F -> gt.blockcasings13:1: sBlockCasings13
-                 * G -> gt.blockcasings4:1: sBlockCasings4
-                 * H -> gt.blockcasings9:0: sBlockCasings9
-                 * I -> gt.blockcasings9:1: sBlockCasings9
-                 * J -> gt.blockframes:129: sBlockFrames
-                 * K -> gtplusplus.blockcasings.2:11 (miscutils)
-                 * L -> tile.gtnhpp.casings:0 (Silicon Carbide Ceramic Casing)
-                 * M -> tile.gtnhpp.casings:9 (Spectral Isolation Casing, plain, lower dome cells)
-                 * N -> tile.gtnhpp.casings:25 (Isotopic Doping Casing, chamber shell, no hatches)
-                 * O -> Sintered Silicon Carbide plain casing, BWBlockCasings (meta = Werkstoff id)
-                 * P -> top-dome M cells (Spectral Isolation Casing), ONLY hatch-capable cells
+                 * TODO: UPDATE BLOCK LEGEND
                  */
                 .addElement('A', chainAllGlasses())
                 .addElement(
@@ -206,12 +157,9 @@ public class MTE_CIDC extends MTEExtendedPowerMultiBlockBase<MTE_CIDC> implement
                 .addElement('J', StructureUtility.ofBlock(GregTechAPI.sBlockFrames, 129))
                 .addElement('K', ofBlock(GameRegistry.findBlock("miscutils", "gtplusplus.blockcasings.2"), 11))
                 .addElement('L', ofBlock(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.HTRF_CASING))
-                // M = Spectral Isolation Casing: plain casing (the lower/deeper dome cells).
                 .addElement('M', ofBlock(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.SPC_CASING))
                 .addElement('O', ofBlock(WerkstoffLoader.BWBlockCasings, PrPMaterials.SinteredSiliconCarbide.getId()))
-                // N = Isotopic Doping Casing: the chamber shell (no hatches).
                 .addElement('N', ofBlock(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.ISOTOPIC_DOPING_CASING))
-                // P = the top dome M cells (Spectral Isolation Casing), the ONLY hatch-capable spots.
                 .addElement(
                     'P',
                     buildHatchAdder(MTE_CIDC.class)

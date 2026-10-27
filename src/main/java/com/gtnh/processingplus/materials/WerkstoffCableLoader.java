@@ -58,7 +58,7 @@ public final class WerkstoffCableLoader {
         String nw = "wire." + m.mName.toLowerCase();
         String nc = "cable." + m.mName.toLowerCase();
 
-        // ── Placeable items (MTECable entities) ──
+        //Placeable items (MTECable entities)
         for (int i = 0; i < 6; i++) {
             GTOreDictUnificator.registerOre(
                 WIRE[i],
@@ -93,8 +93,7 @@ public final class WerkstoffCableLoader {
                     false).getStackForm(1L));
         }
 
-        // ── Recipes ──
-        // Wiremill: 1 ingot -> 2x 1x-wire
+        //  Recipes
         GTValues.RA.stdBuilder()
             .itemInputs(w.get(OrePrefixes.ingot, 1))
             .itemOutputs(GTOreDictUnificator.get(WIRE[0], m, 2))
@@ -102,7 +101,7 @@ public final class WerkstoffCableLoader {
             .eut(recipeEU)
             .addTo(RecipeMaps.wiremillRecipes);
 
-        // Assembler: combine 1x-wires into thicker wires (circuit selects thickness)
+        // Assembler: combine 1x-wires into thicker wires
         for (int i = 1; i < 6; i++) {
             GTValues.RA.stdBuilder()
                 .itemInputs(GTOreDictUnificator.get(WIRE[0], m, SIZE[i]), GTUtility.getIntegratedCircuit(SIZE[i]))

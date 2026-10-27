@@ -3,6 +3,8 @@ package com.gtnh.processingplus.machines.spc;
 /**
  * The categories of external upgrade module that can be data-stick linked to the SPC.
  * Each links through a matching support-bay adapter and gates a band of board recipes.
+ *
+ * TODO: REMOVE LATER
  */
 public enum SPCModuleType {
 

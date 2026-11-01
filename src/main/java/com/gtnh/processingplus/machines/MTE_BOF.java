@@ -82,11 +82,9 @@ public class MTE_BOF extends MTEExtendedPowerMultiBlockBase<MTE_BOF> implements 
                      * B -> Steel Turbine Casing
                      * C -> BOF Casing
                      */
-                    new String[][] { { "     ", "  C  ", " A~A ", " ACA " },
-                                     { "  C  ", " C C ", "C   C", "CCBCC" },
-                                     { " C C ", "C   C", "A   A", "ABBBA" },
-                                     { "  C  ", " C C ", "C   C", "CCBCC" },
-                                     { "     ", "  C  ", " CAC ", " CAC " }, })
+                    new String[][] { { "     ", "  C  ", " A~A ", " ACA " }, { "  C  ", " C C ", "C   C", "CCBCC" },
+                        { " C C ", "C   C", "A   A", "ABBBA" }, { "  C  ", " C C ", "C   C", "CCBCC" },
+                        { "     ", "  C  ", " CAC ", " CAC " }, })
                 .addElement('A', ofBlock(GregTechAPI.sBlockCasings3, 10))
                 .addElement('B', ofBlock(GregTechAPI.sBlockCasings3, 14))
                 .addElement(

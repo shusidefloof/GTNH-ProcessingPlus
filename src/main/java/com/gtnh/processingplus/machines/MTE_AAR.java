@@ -118,10 +118,10 @@ public class MTE_AAR extends MTEExtendedPowerMultiBlockBase<MTE_AAR> implements 
                      * E -> Blast Smelter Coil Casing
                      */
                     new String[][] { { "CEEEC", "ACCCA", "CC~CC", "ACCCA", "CEEEC" },
-                                     { "ECCCE", "CD DC", "CD DC", "CD DC", "ECCCE" },
-                                     { "ECCCE", "C D C", "B D B", "C D C", "ECCCE" },
-                                     { "ECCCE", "CD DC", "CD DC", "CD DC", "ECCCE" },
-                                     { "CEEEC", "ACCCA", "CCBCC", "ACCCA", "CEEEC" } })
+                        { "ECCCE", "CD DC", "CD DC", "CD DC", "ECCCE" },
+                        { "ECCCE", "C D C", "B D B", "C D C", "ECCCE" },
+                        { "ECCCE", "CD DC", "CD DC", "CD DC", "ECCCE" },
+                        { "CEEEC", "ACCCA", "CCBCC", "ACCCA", "CEEEC" } })
                 .addElement('A', ofBlock(IODINE_FRAME_BLOCK, IODINE_FRAME_META))
                 .addElement(
                     'B',

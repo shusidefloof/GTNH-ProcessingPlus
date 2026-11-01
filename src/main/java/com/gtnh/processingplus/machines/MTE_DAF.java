@@ -203,6 +203,7 @@ public class MTE_DAF extends MTEExtendedPowerMultiBlockBase<MTE_DAF> implements 
             false,
             true);
     }
+
     @Override
     public void checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack, List<StructureError> errors) {
         mGlassTier = -1;
@@ -296,7 +297,6 @@ public class MTE_DAF extends MTEExtendedPowerMultiBlockBase<MTE_DAF> implements 
 
         return true;
     }
-
 
     @Override
     public boolean supportsMachineModeSwitch() {

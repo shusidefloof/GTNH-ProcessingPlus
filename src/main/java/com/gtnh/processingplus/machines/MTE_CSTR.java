@@ -75,11 +75,8 @@ public class MTE_CSTR extends MTEExtendedPowerMultiBlockBase<MTE_CSTR> implement
             STRUCTURE_DEFINITION = StructureDefinition.<MTE_CSTR>builder()
                 .addShape(
                     STRUCTURE_PIECE_MAIN,
-                    //TODO: UPDATE BLOCK LEGEND
-                    new String[][] {
-                        { "CCC", "C~C", "CCC" },
-                        { "CCC", "CEC", "CDC" },
-                        { "CCC", "CCC", "CCC" }, })
+                    // TODO: UPDATE BLOCK LEGEND
+                    new String[][] { { "CCC", "C~C", "CCC" }, { "CCC", "CEC", "CDC" }, { "CCC", "CCC", "CCC" }, })
                 .addElement(
                     'C',
                     buildHatchAdder(MTE_CSTR.class)

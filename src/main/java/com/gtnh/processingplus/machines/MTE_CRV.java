@@ -83,8 +83,7 @@ public class MTE_CRV extends MTEExtendedPowerMultiBlockBase<MTE_CRV> implements 
                 .addShape(
                     STRUCTURE_PIECE_MAIN,
                     // TODO: UPDATE STRUCTURE
-                    new String[][] {
-                        { "CCCCC", "CCCCC", "CC~CC", "CCCCC", "CCCCC" },
+                    new String[][] { { "CCCCC", "CCCCC", "CC~CC", "CCCCC", "CCCCC" },
                         { "CCCCC", "CBBBC", "CB BC", "CBBBC", "CCCCC" },
                         { "CCCCC", "CBBBC", "CB BC", "CBBBC", "CCCCC" },
                         { "CCCCC", "CBBBC", "CB BC", "CBBBC", "CCCCC" },

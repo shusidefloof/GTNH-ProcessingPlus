@@ -169,32 +169,24 @@ public class MTE_SCD extends MTEExtendedPowerMultiBlockBase<MTE_SCD> implements 
             STRUCTURE_DEFINITION = StructureDefinition.<MTE_SCD>builder()
                 .addShape(
                     STRUCTURE_PIECE_MAIN,
-                    new String[][] { {
-                        "            ", "            ", "       C    ", "      ECE   ", "HFHFFEBDBE  ", "HGH CCD~DCC ",
-                        "HAH  EBDBE  ", "HAH   ECE   ", "HGH    C    ", "H H         " },
-                        {
-                            "            ", "            ", "      ICI   ", " FFFFIB BI  ", "FBBBBB   BI ",
+                    new String[][] {
+                        { "            ", "            ", "       C    ", "      ECE   ", "HFHFFEBDBE  ",
+                            "HGH CCD~DCC ", "HAH  EBDBE  ", "HAH   ECE   ", "HGH    C    ", "H H         " },
+                        { "            ", "            ", "      ICI   ", " FFFFIB BI  ", "FBBBBB   BI ",
                             "GBGFBB    C ", "A A IB   BI ", "A A HIB BIH ", "GGG H ICIHH ", "    H     H " },
-                        {
-                            "            ", "      EEE   ", "     I C I  ", "    I     I ", "HFHE       E",
+                        { "            ", "      EEE   ", "     I C I  ", "    I     I ", "HFHE       E",
                             "HGHEC     CE", "HAHE       E", "HAH I     I ", "HGH HI C IH ", "H H   EEE   " },
-                        {
-                            "            ", "      EAE   ", "    II   II ", "    I     I ", "   E       E",
+                        { "            ", "      EAE   ", "    II   II ", "    I     I ", "   E       E",
                             "   A       A", "   E       E", "    I     I ", "    II   II ", "      EAE   " },
-                        {
-                            "            ", "      EAE   ", "    II   II ", "    I     I ", "   E       E",
+                        { "            ", "      EAE   ", "    II   II ", "    I     I ", "   E       E",
                             "   A       A", "   E       E", "    I     I ", "    II   II ", "      EAE   " },
-                        {
-                            "            ", "      EAE   ", "    II   II ", "    I     I ", "   E       E",
+                        { "            ", "      EAE   ", "    II   II ", "    I     I ", "   E       E",
                             "   A       A", "   E       E", "    I     I ", "    II   II ", "      EAE   " },
-                        {
-                            "            ", "      EEE   ", "     I C I  ", "    I     I ", "HFHE       E",
+                        { "            ", "      EEE   ", "     I C I  ", "    I     I ", "HFHE       E",
                             "HGHEC     CE", "HAHE       E", "HAH I     I ", "HGH HI C IH ", "H H   EEE   " },
-                        {
-                            "            ", "            ", "      ICI   ", " FFFFIB BI  ", "FBBBBB   BI ",
+                        { "            ", "            ", "      ICI   ", " FFFFIB BI  ", "FBBBBB   BI ",
                             "GBGFB     C ", "A A IB   BI ", "A A HIB BIH ", "GGG HHICIHH ", "    H     H " },
-                        {
-                            "            ", "            ", "       C    ", "      ECE   ", "HFHFFEBDBE  ",
+                        { "            ", "            ", "       C    ", "      ECE   ", "HFHFFEBDBE  ",
                             "HGH CCDCDCC ", "HAH  EBDBE  ", "HAH   ECE   ", "HGH    C    ", "H H         " } })
                 .addElement('A', ofBlock(bwBlock("BW_GlasBlocks"), 0))
                 .addElement('B', ofBlock(gtBlock("gt.blockcasings10"), 9))

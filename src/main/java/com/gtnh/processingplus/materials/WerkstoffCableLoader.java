@@ -58,7 +58,7 @@ public final class WerkstoffCableLoader {
         String nw = "wire." + m.mName.toLowerCase();
         String nc = "cable." + m.mName.toLowerCase();
 
-        //Placeable items (MTECable entities)
+        // Placeable items (MTECable entities)
         for (int i = 0; i < 6; i++) {
             GTOreDictUnificator.registerOre(
                 WIRE[i],
@@ -93,7 +93,7 @@ public final class WerkstoffCableLoader {
                     false).getStackForm(1L));
         }
 
-        //  Recipes
+        // Recipes
         GTValues.RA.stdBuilder()
             .itemInputs(w.get(OrePrefixes.ingot, 1))
             .itemOutputs(GTOreDictUnificator.get(WIRE[0], m, 2))

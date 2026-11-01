@@ -125,8 +125,8 @@ public class MTE_HPR extends MTEExtendedPowerMultiBlockBase<MTE_HPR> implements 
             STRUCTURE_DEFINITION = StructureDefinition.<MTE_HPR>builder()
                 .addShape(
                     STRUCTURE_PIECE_MAIN,
-                    new String[][] { {
-                            "                             ", "              D              ",
+                    new String[][] {
+                        { "                             ", "              D              ",
                             "             D D             ", "            D   D            ",
                             "             D D             ", "              D              ",
                             "                             ", "                             ",
@@ -141,8 +141,7 @@ public class MTE_HPR extends MTEExtendedPowerMultiBlockBase<MTE_HPR> implements 
                             "             D D             ", "            D   D            ",
                             "             D D             ", "              D              ",
                             "                             " },
-                        {
-                            "              D              ", "             BFB             ",
+                        { "              D              ", "             BFB             ",
                             "            BFFFB            ", "           DFFFFFD           ",
                             "            BFFFB            ", "             BFB             ",
                             "              D              ", "                             ",
@@ -157,8 +156,7 @@ public class MTE_HPR extends MTEExtendedPowerMultiBlockBase<MTE_HPR> implements 
                             "            BFFFB            ", "           DFFFFFD           ",
                             "            BFFFB            ", "             BFB             ",
                             "              D              " },
-                        {
-                            "             D D             ", "            BFFFB            ",
+                        { "             D D             ", "            BFFFB            ",
                             "           DF   FD           ", "        DCCCF   FCCCD        ",
                             "           DF   FD           ", "            BFFFB            ",
                             "             D D             ", "              C              ",
@@ -173,8 +171,7 @@ public class MTE_HPR extends MTEExtendedPowerMultiBlockBase<MTE_HPR> implements 
                             "           DF   FD           ", "        DCCCF   FCCCD        ",
                             "           DF   FD           ", "            BFFFB            ",
                             "             D D             " },
-                        {
-                            "            D   D            ", "           DFFFFFD           ",
+                        { "            D   D            ", "           DFFFFFD           ",
                             "        DCCCF   FCCCD        ", "      BBBAAAF   FAAABBB      ",
                             "     BB DCCCF   FCCCD BB     ", "    BB     DFFFFFD     BB    ",
                             "   BB       D   D       BB   ", "   B         CEC         B   ",
@@ -189,8 +186,7 @@ public class MTE_HPR extends MTEExtendedPowerMultiBlockBase<MTE_HPR> implements 
                             "     BB DCCCF   FCCCD BB     ", "      BBBAAAF   FAAABBB      ",
                             "        DCCCF   FCCCD        ", "           DFFFFFD           ",
                             "            D   D            " },
-                        {
-                            "             D D             ", "            BFFFB            ",
+                        { "             D D             ", "            BFFFB            ",
                             "           DF   FD           ", "        DCCCF   FCCCD        ",
                             "           DF   FD           ", "            BFFFB            ",
                             "             D D             ", "              C              ",
@@ -205,8 +201,7 @@ public class MTE_HPR extends MTEExtendedPowerMultiBlockBase<MTE_HPR> implements 
                             "           DF   FD           ", "        DCCCF   FCCCD        ",
                             "           DF   FD           ", "            BFFFB            ",
                             "             D D             " },
-                        {
-                            "              D              ", "             BFB             ",
+                        { "              D              ", "             BFB             ",
                             "            BFFFB            ", "           DFFFFFD           ",
                             "            BFFFB            ", "             BFB             ",
                             "              D              ", "                             ",
@@ -221,8 +216,7 @@ public class MTE_HPR extends MTEExtendedPowerMultiBlockBase<MTE_HPR> implements 
                             "            BFFFB            ", "           DFFFFFD           ",
                             "            BFFFB            ", "             BFB             ",
                             "              D              " },
-                        {
-                            "                             ", "              D              ",
+                        { "                             ", "              D              ",
                             "             D D             ", "            D   D            ",
                             "             D D             ", "              D              ",
                             "                             ", "                             ",

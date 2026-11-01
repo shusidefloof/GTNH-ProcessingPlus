@@ -16,6 +16,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
+import gregtech.api.GregTechAPI;
 import gregtech.api.enums.Mods;
 import gregtech.api.enums.Textures;
 import gregtech.api.render.TextureFactory;
@@ -74,6 +75,16 @@ public class CommonProxy {
 
     // Recipe swap init
     public void loadComplete(FMLLoadCompleteEvent event) {
+        // Run in GT's completion queue when it is still open, like other GT addons, so mods that patch GT's
+        // recipes there (GTNH Extra Nerf checks exact stock recipes) go first and our changes apply on top.
+        if (GregTechAPI.sGTCompleteLoad != null) {
+            GregTechAPI.sGTCompleteLoad.add(CommonProxy::finishRecipeLoading);
+        } else {
+            finishRecipeLoading();
+        }
+    }
+
+    private static void finishRecipeLoading() {
         try {
             PrPMaterials.resolveDeferredExternalMaterials();
             PrPlusRecipes.init();

@@ -457,7 +457,8 @@ public class PrPMaterials implements Runnable {
                 subscriptNumbers("(C)n"),
                 new Werkstoff.Stats(),
                 Werkstoff.Types.MIXTURE,
-                fiberFeatures(),
+                // Double plates for the UV Machine Casing when GTNH Extra Nerf is installed (see RecipeSwaps).
+                fiberFeatures().addDoubleAndDensePlates(),
                 id(),
                 TextureSet.SET_DULL));
 

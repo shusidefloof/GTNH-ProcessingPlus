@@ -20,7 +20,8 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
         + "after:GoodGenerator;"
         + "after:miscutils;"
         + "after:tectech;"
-        + "after:sciencenotleisure;")
+        + "after:sciencenotleisure;"
+        + "after:gtnhextranerf;")
 public class GTNHProcessingPlus {
 
     public static final String MODID = "gtnhprp";

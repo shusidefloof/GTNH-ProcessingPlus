@@ -27,6 +27,7 @@ import com.gtnh.processingplus.GTNHProcessingPlus;
 import com.gtnh.processingplus.materials.PrPMaterials;
 
 import bartworks.system.material.WerkstoffLoader;
+import cpw.mods.fml.common.Loader;
 import goodgenerator.api.recipe.GoodGeneratorRecipeMaps;
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.ItemList;
@@ -73,12 +74,15 @@ public final class RecipeSwaps {
     // machine casing (8 Osmium plates) now takes 4 Osmium + 4 Carbon Fiber Composite plates, so the
     // whole PAN → graphitization → composite line becomes the structural cost of building UV machines.
     // Both the assembler recipe and the hand-craft bypass (PPP/PwP/PPP) are gated so neither path skips
-    // the carbon fiber.
+    // the carbon fiber. With GTNH Extra Nerf installed (it makes the casing take 8 Osmium double plates), both
+    // materials are double plates instead, so the nerf carries over.
     // -------------------------------------------------------------------------
     private static void gateUVCasingWithCarbonFiber() {
-        ItemStack carbonPlate1 = plate(PrPMaterials.CarbonFiberComposite, 1);
-        ItemStack osmium4 = GTOreDictUnificator.get(OrePrefixes.plate, Materials.Osmium, 4);
-        ItemStack carbon4 = plate(PrPMaterials.CarbonFiberComposite, 4);
+        boolean extraNerf = Loader.isModLoaded("gtnhextranerf");
+        OrePrefixes platePrefix = extraNerf ? OrePrefixes.plateDouble : OrePrefixes.plate;
+        ItemStack carbonPlate1 = PrPMaterials.CarbonFiberComposite.get(platePrefix, 1);
+        ItemStack osmium4 = GTOreDictUnificator.get(platePrefix, Materials.Osmium, 4);
+        ItemStack carbon4 = PrPMaterials.CarbonFiberComposite.get(platePrefix, 4);
         ItemStack casingUV = ItemList.Casing_UV.get(1);
         if (carbonPlate1 == null || osmium4 == null || carbon4 == null) {
             GTNHProcessingPlus.LOG.warn("UV casing carbon-fiber gate: Carbon Fiber Composite plate missing, skipped.");
@@ -111,12 +115,13 @@ public final class RecipeSwaps {
         GTModHandler.addCraftingRecipe(
             casingUV,
             GTModHandler.RecipeBits.BUFFERED | GTModHandler.RecipeBits.NOT_REMOVABLE,
-            new Object[] { "PCP", "CwC", "PCP", 'P', OrePrefixes.plate.get(Materials.Osmium), 'C', carbonPlate1 });
+            new Object[] { "PCP", "CwC", "PCP", 'P', platePrefix.get(Materials.Osmium), 'C', carbonPlate1 });
 
         GTNHProcessingPlus.LOG.info(
-            "UV casing carbon-fiber gate: removed {} assembler + {} crafting recipe(s), re-added with 4 Carbon Fiber Composite plates.",
+            "UV casing carbon-fiber gate: removed {} assembler + {} crafting recipe(s), re-added with 4 Carbon Fiber Composite {}.",
             removed,
-            craftRemoved);
+            craftRemoved,
+            extraNerf ? "double plates (Extra Nerf)" : "plates");
     }
 
     // -------------------------------------------------------------------------

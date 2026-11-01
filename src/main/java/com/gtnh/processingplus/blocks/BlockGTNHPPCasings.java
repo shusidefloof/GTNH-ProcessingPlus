@@ -96,11 +96,11 @@ public class BlockGTNHPPCasings extends Block {
         "gregtech:iconsets/MACHINE_CASING_STABLE_TITANIUM",     // SCD
         "gregtech:iconsets/MACHINE_CASING_ROBUST_TUNGSTENSTEEL",// CRV
         "gregtech:iconsets/MACHINE_CASING_CLEAN_STAINLESSSTEEL",// hBN
-        "gregtech:iconsets/MACHINE_CASING_STABLE_TITANIUM",     // SPC
+        "gtnhprp:casings/spc_isolation_casing",     // SPC
         "gregtech:iconsets/MACHINE_CASING_CLEAN_STAINLESSSTEEL", // CSC
         "gtnhprp:casings/bof_casing",                            // BOF
-        "gregtech:iconsets/MACHINE_CASING_CLEAN_STAINLESSSTEEL", // SPC beam
-        "gregtech:iconsets/MACHINE_CASING_SOLID_STEEL",          // SPC frame
+        "gtnhprp:casings/spc_photonic_alignment_casing", // SPC beam
+        "gtnhprp:casings/spc_casing",          // SPC frame
         "gregtech:iconsets/MACHINE_CASING_CLEAN_STAINLESSSTEEL", // Bio adapter
         "gregtech:iconsets/MACHINE_CASING_FROST_PROOF",          // Cryo adapter
         "gregtech:iconsets/MACHINE_CASING_FUSION_GLASS",         // Quantum adapter

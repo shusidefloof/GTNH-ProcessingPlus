@@ -16,6 +16,11 @@ public final class PPTextures {
     public static final IIconContainer BOF_FRONT_GLOW = overlay("bof/front_glow");
     public static final IIconContainer BOF_FRONT_ACTIVE_GLOW = overlay("bof/front_active_glow");
 
+    public static final IIconContainer SPC_FRONT = overlay("spc/front");
+    public static final IIconContainer SPC_FRONT_ACTIVE = overlay("spc/front_active");
+    public static final IIconContainer SPC_FRONT_GLOW = overlay("spc/front_glow");
+    public static final IIconContainer SPC_FRONT_ACTIVE_GLOW = overlay("spc/front_active_glow");
+
     private PPTextures() {}
 
     private static IIconContainer overlay(String path) {

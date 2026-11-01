@@ -2,11 +2,7 @@ package com.gtnh.processingplus.machines;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlock;
 import static gregtech.api.enums.HatchElement.*;
-import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_BOARD_PROCESSOR;
-import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_BOARD_PROCESSOR_ACTIVE;
-import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_BOARD_PROCESSOR_ACTIVE_GLOW;
-import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_BOARD_PROCESSOR_GLOW;
-import static gregtech.api.enums.Textures.BlockIcons.casingTexturePages;
+import static gregtech.api.enums.Textures.BlockIcons.getCasingTextureForId;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
 import static gregtech.api.util.GTStructureUtility.chainAllGlasses;
 
@@ -45,6 +41,7 @@ import com.gtnh.processingplus.recipes.PPRecipeHelper;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import gregtech.api.GregTechAPI;
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.ItemList;
 import gregtech.api.enums.SoundResource;
@@ -77,7 +74,8 @@ import gregtech.api.util.tooltip.TooltipHelper;
  */
 public class MTE_SPC extends MTEExtendedPowerMultiBlockBase<MTE_SPC> implements ISurvivalConstructable {
 
-    private static final int CASING_INDEX = 50;
+    // The Spectral Frame Casing's own texture (GT texture page 100), so hatches and the controller match it.
+    private static final int CASING_INDEX = BlockGTNHPPCasings.textureIndex(BlockGTNHPPCasings.SPC_FRAME_CASING);
     public static final int MIN_STATIONS = 2;
     public static final int MAX_STATIONS = 6;
 
@@ -128,16 +126,19 @@ public class MTE_SPC extends MTEExtendedPowerMultiBlockBase<MTE_SPC> implements 
             STRUCTURE_DEFINITION = StructureDefinition.<MTE_SPC>builder()
                 .addShape(
                     PIECE_MAIN,
-                    new String[][] { { "IGDGI", "CAAAC", "CF~FC", "CAAAC", "IGDGI" },
-                        { "IGDGI", "BAAAB", "MFHFN", "EAAAE", "IGDGI" },
-                        { "IGDGI", "BAAAB", "MFHFG", "EAAAE", "IGDGI" },
-                        { "IGDGI", "BAAAB", "MFHFG", "EAAAE", "IGDGI" },
-                        { "IGDGI", "BAAAB", "MFHFG", "EAAAE", "IGDGI" },
-                        { "IGDGI", "BAAAB", "MFHFG", "EAAAE", "IGDGI" },
-                        { "IGDGI", "BAAAB", "MFHFN", "EAAAE", "IGDGI" },
-                        { "IGDGI", "CAAAC", "CFIFC", "CAAAC", "IGDGI" }, })
+                    // spotless:off
+                    new String[][] {
+                        { "KGDHK", "CAAAC", "CF~FC", "CAAAC", "KHDGK" },
+                        { "KGDHK", "BAAAB", "MIJIN", "EAAAE", "KHDGK" },
+                        { "KGDHK", "BAAAB", "MIJII", "EAAAE", "KHDGK" },
+                        { "KGDHK", "BAAAB", "MIJII", "EAAAE", "KHDGK" },
+                        { "KGDHK", "BAAAB", "MIJII", "EAAAE", "KHDGK" },
+                        { "KGDHK", "BAAAB", "MIJII", "EAAAE", "KHDGK" },
+                        { "KGDHK", "BAAAB", "MIJIN", "EAAAE", "KHDGK" },
+                        { "KGDHK", "CAAAC", "CFKFC", "CAAAC", "KHDGK" }, })
+                    // spotless:on
                 .addElement(
-                    'G',
+                    'K',
                     buildHatchAdder(MTE_SPC.class)
                         .atLeast(
                             Energy.or(ExoticEnergy),
@@ -149,15 +150,17 @@ public class MTE_SPC extends MTEExtendedPowerMultiBlockBase<MTE_SPC> implements 
                             Muffler)
                         .casingIndex(CASING_INDEX)
                         .hint(1)
-                        .buildAndChain(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.SPC_CASING))
+                        .buildAndChain(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.SPC_FRAME_CASING))
                 .addElement('A', chainAllGlasses(-1, (t, tier) -> t.mGlassTier = tier, t -> t.mGlassTier))
                 .addElement('B', ofBlock(GameRegistry.findBlock("gregtech", "gt.blockcasings"), 3))
                 .addElement('C', ofBlock(GameRegistry.findBlock("gregtech", "gt.blockcasings2"), 13))
                 .addElement('D', ofBlock(GameRegistry.findBlock("gregtech", "gt.blockcasings3"), 10))
                 .addElement('E', ofBlock(GameRegistry.findBlock("gregtech", "gt.blockframes"), 306))
                 .addElement('F', ofBlock(GameRegistry.findBlock("gregtech", "gt.blockframes"), 334))
-                .addElement('H', ofBlock(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.SPC_BEAM_CASING))
-                .addElement('I', ofBlock(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.SPC_FRAME_CASING))
+                .addElement('G', ofBlock(GregTechAPI.sBlockMetal1, 14)) // Block of Blue Steel
+                .addElement('H', ofBlock(GregTechAPI.sBlockMetal6, 2)) // Block of Red Steel
+                .addElement('I', ofBlock(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.SPC_CASING))
+                .addElement('J', ofBlock(GTNHPPBlocks.CASINGS, BlockGTNHPPCasings.SPC_BEAM_CASING))
                 .addElement('M', stationBayElement())
                 .addElement('N', adapterBayElement())
                 .build();
@@ -426,26 +429,26 @@ public class MTE_SPC extends MTEExtendedPowerMultiBlockBase<MTE_SPC> implements 
     public ITexture[] getTexture(IGregTechTileEntity aBaseMetaTileEntity, ForgeDirection side, ForgeDirection aFacing,
         int colorIndex, boolean aActive, boolean redstoneLevel) {
         if (side == aFacing) {
-            if (aActive) return new ITexture[] { casingTexturePages[0][CASING_INDEX], TextureFactory.builder()
-                .addIcon(OVERLAY_FRONT_BOARD_PROCESSOR_ACTIVE)
+            if (aActive) return new ITexture[] { getCasingTextureForId(CASING_INDEX), TextureFactory.builder()
+                .addIcon(PPTextures.SPC_FRONT_ACTIVE)
                 .extFacing()
                 .build(),
                 TextureFactory.builder()
-                    .addIcon(OVERLAY_FRONT_BOARD_PROCESSOR_ACTIVE_GLOW)
+                    .addIcon(PPTextures.SPC_FRONT_ACTIVE_GLOW)
                     .extFacing()
                     .glow()
                     .build() };
-            return new ITexture[] { casingTexturePages[0][CASING_INDEX], TextureFactory.builder()
-                .addIcon(OVERLAY_FRONT_BOARD_PROCESSOR)
+            return new ITexture[] { getCasingTextureForId(CASING_INDEX), TextureFactory.builder()
+                .addIcon(PPTextures.SPC_FRONT)
                 .extFacing()
                 .build(),
                 TextureFactory.builder()
-                    .addIcon(OVERLAY_FRONT_BOARD_PROCESSOR_GLOW)
+                    .addIcon(PPTextures.SPC_FRONT_GLOW)
                     .extFacing()
                     .glow()
                     .build() };
         }
-        return new ITexture[] { casingTexturePages[0][CASING_INDEX] };
+        return new ITexture[] { getCasingTextureForId(CASING_INDEX) };
     }
 
     @Override
@@ -477,19 +480,21 @@ public class MTE_SPC extends MTEExtendedPowerMultiBlockBase<MTE_SPC> implements 
             .addSupportAny()
             .beginStructureBlock(5, 5, 8, true)
             .addController("Front center, 3rd layer")
-            .addCasing("26+", "Spectral Isolation Casing", false)
-            .addCasing("33+", "Spectral Frame Casing", false)
+            .addCasing("33", "Spectral Frame Casing (corner edges and back center, hatches go here)", false)
+            .addCasing("16", "Spectral Isolation Casing", false)
             .addCasing("6", "Photonic Alignment Casing", false)
             .addOtherStructurePart("BartWorks Glass (any tier)", "Viewport bands, both levels")
-            .addOtherStructurePart("Reinforced / Tungstensteel Casing", "Upper and lower bands and pillars")
-            .addOtherStructurePart("Americium / Tungstensteel Frame Box", "Process-level uprights")
+            .addOtherStructurePart("Block of Blue Steel / Block of Red Steel", "Top and bottom faces, 16 each")
+            .addOtherStructurePart("Grate Machine Casing", "Top and bottom center lines")
+            .addOtherStructurePart("HV Machine Casing / Stainless Steel Frame Box", "Station section side bands")
+            .addOtherStructurePart("Steel Pipe Casing / Black Steel Frame Box", "Front and back caps")
             .addOtherStructurePart("GT Singleblock Machines", "Left-wall bays x 6 (process sequence)")
             .addOtherStructurePart("Upgrade Adapters", "Right-wall bays x 2 (route in linked modules)")
-            .addEnergyHatch("1+", "Any spectral isolation casing", 1)
-            .addMaintenanceHatch("1", "Any spectral isolation casing", 1)
-            .addMufflerHatch("1", "Any spectral isolation casing", 1)
-            .addInputAny("1+", "Any spectral isolation casing", 1)
-            .addOutputAny("1+", "Any spectral isolation casing", 1)
+            .addEnergyHatch("1+", "Any Spectral Frame Casing", 1)
+            .addMaintenanceHatch("1", "Any Spectral Frame Casing", 1)
+            .addMufflerHatch("1", "Any Spectral Frame Casing", 1)
+            .addInputAny("1+", "Any Spectral Frame Casing", 1)
+            .addOutputAny("1+", "Any Spectral Frame Casing", 1)
             .toolTipFinisher("_Shusi_");
         return tt;
     }

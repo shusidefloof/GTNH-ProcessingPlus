@@ -62,7 +62,7 @@ public class BlockGTNHPPCasings extends Block {
         "Spectral Isolation Casing",             // SPC
         "Cryogenic Column Casing",               // CSC
         "Basic Oxygen Furnace Casing",           // BOF
-        "Photonic Alignment Casing",             // SPC beam column
+        "Photonic Alignment Coil",             // SPC beam column
         "Spectral Frame Casing",                 // SPC structural frame
         "Bio-Lithography Adapter",               // SPC support-bay port -> Bio Module
         "Cryo-Stabilization Adapter",            // SPC support-bay port -> Cryo Module
@@ -82,14 +82,14 @@ public class BlockGTNHPPCasings extends Block {
         "Pristine Atmosphere Casing",         // DAF UV chamber
         "Absolute Atmosphere Casing",         // DAF UEV chamber
         "Agitated Reaction Vessel Casing",    // CSTR shell
-        "Pressure Vessel Ring Casing",        // HPSF main pressure vessel ring
+        "Pressure Vessel Casing",        // HPSF main pressure vessel ring
     };
 
     // Borrow GT5U's existing block textures as placeholders until custom art is made.
     // Each path references an existing texture in assets/gregtech/textures/blocks/iconsets/
     private static final String[] TEXTURE_NAMES = {
         "gregtech:iconsets/MACHINE_HEATPROOFCASING",            // HTRF
-        "gregtech:iconsets/MACHINE_CASING_ROBUST_TUNGSTENSTEEL",// HPSF
+        "gtnhprp:casings/hpsf_hardened_pressure_vessel_casing",// HPSF
         "gregtech:iconsets/MACHINE_CASING_SOLID_STEEL",         // DAF
         "gregtech:iconsets/MACHINE_CASING_CLEAN_STAINLESSSTEEL",// PCV
         "gregtech:iconsets/MACHINE_CASING_STABLE_TITANIUM",     // PFC
@@ -119,7 +119,7 @@ public class BlockGTNHPPCasings extends Block {
         "gregtech:iconsets/MACHINE_CASING_RADIATIONPROOF",       // DAF UV
         "gregtech:iconsets/MACHINE_CASING_FUSION_GLASS",         // DAF UEV
         "gregtech:iconsets/MACHINE_CASING_CLEAN_STAINLESSSTEEL", // CSTR
-        "gregtech:iconsets/MACHINE_CASING_ROBUST_TUNGSTENSTEEL", // HPSF ring
+        "gtnhprp:casings/hpsf_pressure_vessel_casing", // HPSF ring
     };
     // @formatter:on
 

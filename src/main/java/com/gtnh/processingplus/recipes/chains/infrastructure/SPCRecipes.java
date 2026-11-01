@@ -9,6 +9,7 @@ import java.util.Collection;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
+import com.dreammaster.item.NHItemList;
 import com.gtnh.processingplus.blocks.BlockGTNHPPCasings;
 import com.gtnh.processingplus.blocks.GTNHPPBlocks;
 import com.gtnh.processingplus.items.GTNHPPItems;
@@ -18,6 +19,7 @@ import com.gtnh.processingplus.machines.spc.SPCRecipeData;
 import com.gtnh.processingplus.materials.PrPMaterials;
 import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
 
+import bartworks.system.material.WerkstoffLoader;
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.ItemList;
 import gregtech.api.enums.Materials;
@@ -26,6 +28,8 @@ import gregtech.api.enums.TierEU;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.util.GTOreDictUnificator;
 import gregtech.api.util.GTRecipe;
+import gregtech.api.util.GTRecipeConstants;
+import gtnhlanth.common.register.WerkstoffMaterialPool;
 
 public class SPCRecipes {
 
@@ -82,9 +86,8 @@ public class SPCRecipes {
     private static void casingRecipe() {
         GTValues.RA.stdBuilder()
             .itemInputs(
-                GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.StainlessSteel, 1),
-                plate(Materials.StainlessSteel, 4),
-                plate(Materials.Aluminium, 4),
+                GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.Manyullyn, 1),
+                plate(Materials.Obsidian, 4),
                 plate(Materials.Polytetrafluoroethylene, 2),
                 circuit(10))
             .itemOutputs(new ItemStack(GTNHPPBlocks.CASINGS, 1, BlockGTNHPPCasings.SPC_CASING))
@@ -92,17 +95,50 @@ public class SPCRecipes {
             .eut(TierEU.RECIPE_LV)
             .addTo(RecipeMaps.assemblerRecipes);
 
-        // Photonic Alignment Casing: central beam column
+        // Photonic Alignment Casing: central beam column, built like GT's heating coils (wire + Mica Insulator Foil +
+        // molten metal, circuit 3) around Nd:YAG laser rods.
         GTValues.RA.stdBuilder()
             .itemInputs(
                 new ItemStack(GTNHPPBlocks.CASINGS, 1, BlockGTNHPPCasings.SPC_CASING),
-                plate(Materials.Aluminium, 2),
-                foil(Materials.Silver, 4),
-                circuit(10))
+                PrPMaterials.NdYAG.get(OrePrefixes.stick, 2),
+                PrPMaterials.AnodizedNiobium.get(OrePrefixes.wireFine, 16),
+                NHItemList.MicaInsulatorFoil.get(8),
+                circuit(3))
+            .fluidInputs(molten(Materials.Niobium, 144))
             .itemOutputs(new ItemStack(GTNHPPBlocks.CASINGS, 1, BlockGTNHPPCasings.SPC_BEAM_CASING))
-            .duration(50 * TICKS)
-            .eut(TierEU.RECIPE_LV)
+            .duration(25 * SECONDS)
+            .eut(TierEU.RECIPE_EV)
             .addTo(RecipeMaps.assemblerRecipes);
+
+        // Neodymium Oxide, straight synthesis: 4Nd + 3O2 = 2Nd2O3 (same form as BartWorks' Yttrium Oxide recipe).
+        GTValues.RA.stdBuilder()
+            .itemInputs(dust(Materials.Neodymium, 2), circuit(5))
+            .fluidInputs(Materials.Oxygen.getGas(3_000))
+            .itemOutputs(WerkstoffMaterialPool.NeodymiumOxide.get(OrePrefixes.dust, 5))
+            .duration(10 * SECONDS)
+            .eut(TierEU.RECIPE_MV)
+            .addTo(GTRecipeConstants.UniversalChemical);
+
+        // Nd:YAG dust: 3 Y2O3 + 5 Al2O3 by dust gives the garnet's 3:5 Y:Al ratio, doped with a pinch of Nd2O3.
+        // The gem comes from BartWorks' standard implosion recipe (4 dust -> 3 gem), and the rod from the lathe.
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                WerkstoffLoader.YttriumOxide.get(OrePrefixes.dust, 3),
+                dust(Materials.Aluminiumoxide, 5),
+                WerkstoffMaterialPool.NeodymiumOxide.get(OrePrefixes.dustTiny, 1))
+            .itemOutputs(dust(PrPMaterials.NdYAG, 8))
+            .duration(20 * SECONDS)
+            .eut(TierEU.RECIPE_HV)
+            .addTo(RecipeMaps.mixerRecipes);
+
+        // Anodized Niobium Fine Wire: niobium wire dipped in phosphoric acid grows its purple Nb2O5 film.
+        GTValues.RA.stdBuilder()
+            .itemInputs(wireFine(Materials.Niobium, 16))
+            .fluidInputs(fluid(Materials.PhosphoricAcid, 1000))
+            .itemOutputs(PrPMaterials.AnodizedNiobium.get(OrePrefixes.wireFine, 16))
+            .duration(20 * SECONDS)
+            .eut(TierEU.RECIPE_HV)
+            .addTo(RecipeMaps.chemicalBathRecipes);
 
         // Spectral Frame Casing: structural frame
         GTValues.RA.stdBuilder()

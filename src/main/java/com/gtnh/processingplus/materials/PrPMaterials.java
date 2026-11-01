@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.function.Supplier;
 
 import bartworks.system.material.Werkstoff;
+import gregtech.api.enums.OrePrefixes;
 import gregtech.api.enums.TextureSet;
 
 public class PrPMaterials implements Runnable {
@@ -224,6 +225,8 @@ public class PrPMaterials implements Runnable {
     public static Werkstoff AnhydrousCarboraneSuperacid;
     public static Werkstoff MagicCage;
     public static Werkstoff GammaAlumina;
+    public static Werkstoff NdYAG;
+    public static Werkstoff AnodizedNiobium;
 
     // IV
     public static Werkstoff Furfural;
@@ -2668,6 +2671,35 @@ public class PrPMaterials implements Runnable {
                 new Werkstoff.GenerationFeatures().onlyDust(),
                 id(),
                 TextureSet.SET_DULL));
+
+        // Nd:YAG, neodymium-doped yttrium aluminium garnet: the lilac laser crystal. A gem material, so it has the
+        // normal rod (lathed from the gem) for the SPC's Photonic Alignment Casing.
+        NdYAG = register(
+            new Werkstoff(
+                rgb(200, 170, 225),
+                "Neodymium-doped Yttrium Aluminum Garnet",
+                subscriptNumbers("(Y,Nd)3Al5O12"),
+                new Werkstoff.Stats().setMeltingPoint(2243),
+                Werkstoff.Types.COMPOUND,
+                new Werkstoff.GenerationFeatures().onlyDust()
+                    .addGems(),
+                id(),
+                TextureSet.SET_GEM_VERTICAL));
+
+        // Anodized Niobium: niobium with an Nb2O5 film whose thickness makes it purple by thin-film interference.
+        // Fine wire only: the film is grown on finished Niobium Fine Wire (drawing it afterwards would crack it), so
+        // there is no ingot and BartWorks adds no recipes for it.
+        AnodizedNiobium = register(
+            new Werkstoff(
+                rgb(93, 66, 125),
+                "Anodized Niobium",
+                subscriptNumbers("Nb(Nb2O5)"),
+                new Werkstoff.Stats().setMeltingPoint(2750),
+                Werkstoff.Types.MIXTURE,
+                new Werkstoff.GenerationFeatures().disable()
+                    .addPrefix(OrePrefixes.wireFine),
+                id(),
+                TextureSet.SET_METALLIC));
     }
 
     // =========================

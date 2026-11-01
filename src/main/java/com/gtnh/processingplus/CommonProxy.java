@@ -2,6 +2,7 @@ package com.gtnh.processingplus;
 
 import net.minecraft.block.Block;
 
+import com.gtnh.processingplus.blocks.BlockGTNHPPCasings;
 import com.gtnh.processingplus.blocks.GTNHPPBlocks;
 import com.gtnh.processingplus.items.GTNHPPItems;
 import com.gtnh.processingplus.loader.MaterialLoader;
@@ -25,6 +26,7 @@ public class CommonProxy {
     public void preInit(FMLPreInitializationEvent event) {
         GTNHPPBlocks.registerBlocks();
         GTNHPPItems.register();
+        com.gtnh.processingplus.machines.PPTextures.init();
         GTNHProcessingPlus.LOG.info("GT:NH Processing+ v{} loading", Tags.VERSION);
 
         MaterialLoader.load();
@@ -60,6 +62,13 @@ public class CommonProxy {
             Textures.BlockIcons.setCasingTextureForId(
                 com.gtnh.processingplus.machines.MTE_HPR.PRESSURE_RESISTANT_WALLS_CASING_INDEX,
                 TextureFactory.of(wall, 0));
+        }
+
+        // Our own casings, so a machine's hatches and controller can show its casing's texture.
+        for (int meta = 0; meta < BlockGTNHPPCasings.NUM_CASINGS; meta++) {
+            Textures.BlockIcons.setCasingTextureForId(
+                BlockGTNHPPCasings.textureIndex(meta),
+                TextureFactory.of(GTNHPPBlocks.CASINGS, meta));
         }
     }
 

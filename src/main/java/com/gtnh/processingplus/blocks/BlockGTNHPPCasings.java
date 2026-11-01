@@ -98,7 +98,7 @@ public class BlockGTNHPPCasings extends Block {
         "gregtech:iconsets/MACHINE_CASING_CLEAN_STAINLESSSTEEL",// hBN
         "gregtech:iconsets/MACHINE_CASING_STABLE_TITANIUM",     // SPC
         "gregtech:iconsets/MACHINE_CASING_CLEAN_STAINLESSSTEEL", // CSC
-        "gregtech:iconsets/MACHINE_CASING_SOLID_STEEL",          // BOF
+        "gtnhprp:casings/bof_casing",                            // BOF
         "gregtech:iconsets/MACHINE_CASING_CLEAN_STAINLESSSTEEL", // SPC beam
         "gregtech:iconsets/MACHINE_CASING_SOLID_STEEL",          // SPC frame
         "gregtech:iconsets/MACHINE_CASING_CLEAN_STAINLESSSTEEL", // Bio adapter
@@ -161,6 +161,15 @@ public class BlockGTNHPPCasings extends Block {
         for (int i = 0; i < NUM_CASINGS; i++) {
             list.add(new ItemStack(item, 1, i));
         }
+    }
+
+    /**
+     * GT casing texture index for one of these casings, so hatches and controllers can show it. Every casing is
+     * registered on texture page 100 (slot = meta + 1; slot 0 is the HPR wall) in
+     * {@code CommonProxy.registerExternalCasingTextures()}.
+     */
+    public static int textureIndex(int meta) {
+        return 100 * 128 + 1 + meta;
     }
 
     public String getLocalizedName(int meta) {

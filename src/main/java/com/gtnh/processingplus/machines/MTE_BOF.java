@@ -2,11 +2,7 @@ package com.gtnh.processingplus.machines;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlock;
 import static gregtech.api.enums.HatchElement.*;
-import static gregtech.api.enums.Textures.BlockIcons.MACHINE_CASING_SOLID_STEEL;
-import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_HEARTH;
-import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_HEARTH_ACTIVE;
-import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_HEARTH_ACTIVE_GLOW;
-import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_HEARTH_GLOW;
+import static gregtech.api.enums.Textures.BlockIcons.getCasingTextureForId;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
 
 import java.util.ArrayList;
@@ -47,9 +43,8 @@ import gregtech.api.util.MultiblockTooltipBuilder;
  */
 public class MTE_BOF extends MTEExtendedPowerMultiBlockBase<MTE_BOF> implements ISurvivalConstructable {
 
-    // GT5U's Solid Steel Machine Casing
-    public static final int SOLID_STEEL_MACHINE_CASING_INDEX = 16;
-    private static final int CASING_INDEX = SOLID_STEEL_MACHINE_CASING_INDEX;
+    // The BOF Casing's own texture, registered on GT texture page 100 so hatches and the controller match it.
+    private static final int CASING_INDEX = BlockGTNHPPCasings.textureIndex(BlockGTNHPPCasings.BOF_CASING);
     private static final String STRUCTURE_PIECE_MAIN = "main";
     private static final int OFFSET_X = 2, OFFSET_Y = 2, OFFSET_Z = 0;
 
@@ -160,26 +155,26 @@ public class MTE_BOF extends MTEExtendedPowerMultiBlockBase<MTE_BOF> implements 
     public ITexture[] getTexture(IGregTechTileEntity aBaseMetaTileEntity, ForgeDirection side, ForgeDirection aFacing,
         int colorIndex, boolean aActive, boolean redstoneLevel) {
         if (side == aFacing) {
-            if (aActive) return new ITexture[] { TextureFactory.of(MACHINE_CASING_SOLID_STEEL), TextureFactory.builder()
-                .addIcon(OVERLAY_FRONT_HEARTH_ACTIVE)
+            if (aActive) return new ITexture[] { getCasingTextureForId(CASING_INDEX), TextureFactory.builder()
+                .addIcon(PPTextures.BOF_FRONT_ACTIVE)
                 .extFacing()
                 .build(),
                 TextureFactory.builder()
-                    .addIcon(OVERLAY_FRONT_HEARTH_ACTIVE_GLOW)
+                    .addIcon(PPTextures.BOF_FRONT_ACTIVE_GLOW)
                     .extFacing()
                     .glow()
                     .build() };
-            return new ITexture[] { TextureFactory.of(MACHINE_CASING_SOLID_STEEL), TextureFactory.builder()
-                .addIcon(OVERLAY_FRONT_HEARTH)
+            return new ITexture[] { getCasingTextureForId(CASING_INDEX), TextureFactory.builder()
+                .addIcon(PPTextures.BOF_FRONT)
                 .extFacing()
                 .build(),
                 TextureFactory.builder()
-                    .addIcon(OVERLAY_FRONT_HEARTH_GLOW)
+                    .addIcon(PPTextures.BOF_FRONT_GLOW)
                     .extFacing()
                     .glow()
                     .build() };
         }
-        return new ITexture[] { TextureFactory.of(MACHINE_CASING_SOLID_STEEL) };
+        return new ITexture[] { getCasingTextureForId(CASING_INDEX) };
     }
 
     @Override

@@ -34,11 +34,7 @@ public class BOFRecipes {
 
     private static void casingOrBlockRecipe() {
         GTValues.RA.stdBuilder()
-            .itemInputs(
-                GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.Steel, 1),
-                plate(Materials.StainlessSteel, 4),
-                plate(Materials.BorosilicateGlass, 2),
-                plate(Materials.Copper, 1))
+            .itemInputs(GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.Steel, 1), plate(Materials.DarkSteel, 6))
             .circuit(11)
             .itemOutputs(new ItemStack(GTNHPPBlocks.CASINGS, 1, BlockGTNHPPCasings.BOF_CASING))
             .duration(2 * SECONDS + 10 * TICKS)
@@ -49,7 +45,7 @@ public class BOFRecipes {
         GTModHandler.addCraftingRecipe(
             GTNHPPBlocks.BOF.getStackForm(1),
             GTModHandler.RecipeBits.BITS | GTModHandler.RecipeBits.DO_NOT_CHECK_FOR_COLLISIONS,
-            new Object[] { "SHS", "CAC", "SPS", 'S', OrePrefixes.plate.get(Materials.Aluminium), 'C',
+            new Object[] { "SHS", "CAC", "SPS", 'S', OrePrefixes.plate.get(Materials.DarkSteel), 'C',
                 OrePrefixes.circuit.get(Materials.MV), 'H', "pipeHugePotin", 'A', ItemList.Hull_MV, 'P',
                 ItemList.Electric_Pump_MV });
     }

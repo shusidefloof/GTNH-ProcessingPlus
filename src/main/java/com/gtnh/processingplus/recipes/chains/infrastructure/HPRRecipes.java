@@ -27,7 +27,6 @@ public class HPRRecipes {
         casingRecipe();
         controllerRecipe();
         phaseSynchronizerRecipe();
-        phaseDesynchronizerRecipe();
     }
 
     // -------------------------------------------------------------------------
@@ -63,24 +62,6 @@ public class HPRRecipes {
             .itemOutputs(GTNHPPItems.phaseSynchronizer(4))
             .eut(TierEU.RECIPE_ZPM)
             .duration(30 * SECONDS)
-            .addTo(RecipeMaps.assemblerRecipes);
-    }
-
-    // -------------------------------------------------------------------------
-    // Phase Desynchronizer: deliberately collapses the resonance field by 1 step.
-    // Cheaper than a Synchronizer; useful for downshifting without burning fatigue.
-    // -------------------------------------------------------------------------
-    private static void phaseDesynchronizerRecipe() {
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                ItemList.Field_Generator_LuV.get(1),
-                GTOreDictUnificator.get(OrePrefixes.circuit, Materials.LuV, 2),
-                plate(Materials.NaquadahAlloy, 2),
-                foil(Materials.Naquadah, 4))
-            .fluidInputs(fluid("molten.solderingalloy", 288))
-            .itemOutputs(GTNHPPItems.phaseDesynchronizer(4))
-            .eut(TierEU.RECIPE_LuV)
-            .duration(20 * SECONDS)
             .addTo(RecipeMaps.assemblerRecipes);
     }
 

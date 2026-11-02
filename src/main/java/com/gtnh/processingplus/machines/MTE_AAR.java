@@ -322,7 +322,12 @@ public class MTE_AAR extends MTEExtendedPowerMultiBlockBase<MTE_AAR> implements 
     @Override
     @SideOnly(Side.CLIENT)
     protected SoundResource getActivitySoundLoop() {
-        return SoundResource.GT_MACHINES_EBF_LOOP;
+        return SoundResource.GTCEU_LOOP_CHEMICAL;
+    }
+
+    @Override
+    public boolean supportsBatchMode() {
+        return true;
     }
 
     @Override

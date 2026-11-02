@@ -289,7 +289,7 @@ public class MTE_CAC extends MTEExtendedPowerMultiBlockBase<MTE_CAC> implements 
     @Override
     @SideOnly(Side.CLIENT)
     protected SoundResource getActivitySoundLoop() {
-        return SoundResource.GT_MACHINES_EBF_LOOP;
+        return SoundResource.GT_MACHINES_MULTI_VACUUM_FREEZER_LOOP;
     }
 
     @Override

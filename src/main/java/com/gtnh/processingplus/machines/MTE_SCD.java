@@ -574,7 +574,7 @@ public class MTE_SCD extends MTEExtendedPowerMultiBlockBase<MTE_SCD> implements 
     @Override
     @SideOnly(Side.CLIENT)
     protected SoundResource getActivitySoundLoop() {
-        return SoundResource.GT_MACHINES_EBF_LOOP;
+        return SoundResource.GTCEU_LOOP_COMPRESSOR;
     }
 
     @Override
@@ -621,7 +621,15 @@ public class MTE_SCD extends MTEExtendedPowerMultiBlockBase<MTE_SCD> implements 
             .addSupportAny()
             .beginStructureBlock(12, 10, 9, true)
             .addController("Front, 8th from the left, 5th layer")
-            .addCasing("1+", "High-Pressure Containment Casing", false)
+            .addCasing("74", "High-Pressure Containment Casing", false)
+            .addCasing("64", "Europium Reinforced Radiation Proof Machine Casing", false)
+            .addCasing("37", "Coolant Duct", false)
+            .addCasing("31", "Frost Proof Machine Casing", false)
+            .addCasing("8", "Tungstensteel Pipe Casing", false)
+            .addOtherStructurePart("Melodic Alloy Sheet Metal", "Outer panels, 67")
+            .addOtherStructurePart("Borosilicate Glass Block", "Viewports, 28")
+            .addOtherStructurePart("Melodic Alloy Frame Box", "Supports, 20")
+            .addOtherStructurePart("Block of Europium", "18")
             .addEnergyHatch("1+", "Any high-pressure containment casing", 1)
             .addMaintenanceHatch("1", "Any high-pressure containment casing", 1)
             .addMufflerHatch("1", "Any high-pressure containment casing", 1)

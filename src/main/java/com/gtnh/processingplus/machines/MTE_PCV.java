@@ -284,7 +284,7 @@ public class MTE_PCV extends MTEExtendedPowerMultiBlockBase<MTE_PCV> implements 
     @Override
     @SideOnly(Side.CLIENT)
     protected SoundResource getActivitySoundLoop() {
-        return SoundResource.GT_MACHINES_EBF_LOOP;
+        return SoundResource.GTCEU_LOOP_CHEMICAL;
     }
 
     @Override

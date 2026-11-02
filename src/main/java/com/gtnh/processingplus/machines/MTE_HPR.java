@@ -387,7 +387,7 @@ public class MTE_HPR extends MTEExtendedPowerMultiBlockBase<MTE_HPR> implements 
                         if (freqTag > mFieldFrequency) mResonanceFatigue = 0;
                         ItemStack cost = new ItemStack(GTNHPPItems.PHASE_SYNCHRONIZER, delta);
                         if (!depleteInput(cost)) {
-                            stopMachine(ShutDownReasonRegistry.POWER_LOSS);
+                            stopMachine(ShutDownReasonRegistry.outOfItem(cost));
                             return false;
                         }
                     }
@@ -509,8 +509,12 @@ public class MTE_HPR extends MTEExtendedPowerMultiBlockBase<MTE_HPR> implements 
             .addSupportAny()
             .beginStructureBlock(29, 29, 7, true)
             .addController("Center, 15th layer, 2nd slice from the front")
-            .addCasing("1+", "Pressure Resistant Wall", false)
-            .addOtherStructurePart("FRF Coil (any tier)", "Core reaction rings", 1)
+            .addCasing("272", "Pressure Resistant Wall", false)
+            .addCasing("329", "Hybrid Phase Casing", false)
+            .addCasing("164", "Field Restriction Casing", false)
+            .addOtherStructurePart("FRF Coil (any tier)", "Core reaction rings, 24", 1)
+            .addOtherStructurePart("Field Restriction Glass", "185")
+            .addOtherStructurePart("Radiation Proof Steel Frame Box", "20")
             .addEnergyHatch("1+", "Any pressure resistant wall", 1)
             .addMaintenanceHatch("1", "Any pressure resistant wall", 1)
             .addInputAny("1+", "Any pressure resistant wall", 1)
@@ -556,7 +560,7 @@ public class MTE_HPR extends MTEExtendedPowerMultiBlockBase<MTE_HPR> implements 
     @Override
     @SideOnly(Side.CLIENT)
     protected SoundResource getActivitySoundLoop() {
-        return SoundResource.GT_MACHINES_EBF_LOOP;
+        return SoundResource.GT_MACHINES_FUSION_LOOP;
     }
 
     @Override

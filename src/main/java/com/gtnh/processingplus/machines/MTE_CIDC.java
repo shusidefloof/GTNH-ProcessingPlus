@@ -277,7 +277,7 @@ public class MTE_CIDC extends MTEExtendedPowerMultiBlockBase<MTE_CIDC> implement
     @Override
     @SideOnly(Side.CLIENT)
     protected SoundResource getActivitySoundLoop() {
-        return SoundResource.GT_MACHINES_EBF_LOOP;
+        return SoundResource.GTCEU_LOOP_HUM;
     }
 
     @Override

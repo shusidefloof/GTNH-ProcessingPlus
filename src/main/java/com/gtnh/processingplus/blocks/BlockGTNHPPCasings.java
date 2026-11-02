@@ -6,12 +6,16 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import gregtech.api.GregTechAPI;
 
 public class BlockGTNHPPCasings extends Block {
 
@@ -130,8 +134,44 @@ public class BlockGTNHPPCasings extends Block {
         super(Material.iron);
         setHardness(5.0f);
         setResistance(10.0f);
+        setStepSound(soundTypeMetal);
         setBlockName("gtnhpp.casings");
-        setCreativeTab(CreativeTabs.tabBlock);
+        setCreativeTab(GregTechAPI.TAG_GREGTECH_CASINGS);
+        // Like GT's casings: lets placing or breaking one notify nearby multiblock controllers (all metas).
+        GregTechAPI.registerMachineBlock(this, -1);
+    }
+
+    // The overrides below match GT's BlockCasingsAbstract, so these behave like any other GT casing.
+
+    @Override
+    public String getHarvestTool(int meta) {
+        return "wrench";
+    }
+
+    @Override
+    public int getHarvestLevel(int meta) {
+        return 2;
+    }
+
+    @Override
+    public boolean canCreatureSpawn(EnumCreatureType type, IBlockAccess world, int x, int y, int z) {
+        return false;
+    }
+
+    @Override
+    public boolean canBeReplacedByLeaves(IBlockAccess world, int x, int y, int z) {
+        return false;
+    }
+
+    @Override
+    public void onBlockAdded(World world, int x, int y, int z) {
+        GregTechAPI.causeMachineUpdate(world, x, y, z);
+    }
+
+    @Override
+    public void breakBlock(World world, int x, int y, int z, Block block, int meta) {
+        GregTechAPI.causeMachineUpdate(world, x, y, z);
+        super.breakBlock(world, x, y, z, block, meta);
     }
 
     @Override

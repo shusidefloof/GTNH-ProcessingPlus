@@ -185,7 +185,9 @@ public class MTE_CSTR extends MTEExtendedPowerMultiBlockBase<MTE_CSTR> implement
             .addSupportAny()
             .beginStructureBlock(3, 3, 3, true)
             .addController("Front center, 2nd layer")
-            .addCasing("25+", "Agitated Reaction Vessel Casing", false)
+            .addCasing("24", "Agitated Reaction Vessel Casing", false)
+            .addOtherStructurePart("Cupronickel Coil Block", "Center, 1")
+            .addOtherStructurePart("PTFE Pipe Casing", "Back center, 1")
             .addEnergyHatch("1+", "Any agitated reaction vessel casing", 1)
             .addMaintenanceHatch("1", "Any agitated reaction vessel casing", 1)
             .addMufflerHatch("1", "Any agitated reaction vessel casing", 1)
@@ -211,7 +213,7 @@ public class MTE_CSTR extends MTEExtendedPowerMultiBlockBase<MTE_CSTR> implement
     @Override
     @SideOnly(Side.CLIENT)
     protected SoundResource getActivitySoundLoop() {
-        return SoundResource.GT_MACHINES_EBF_LOOP;
+        return SoundResource.GTCEU_LOOP_MIXER;
     }
 
     @Override

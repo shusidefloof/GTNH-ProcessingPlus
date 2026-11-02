@@ -85,6 +85,11 @@ GT5U.gui.text.structure_error.spu_bad_maintenance_hatch=Requires exactly one Mai
 
 # Machine mode names (same GT5U.* shared namespace, same convention as MTEOreWashingPlant's
 # GT5U.GTPP_MULTI_WASH_PLANT.mode.<n> keys)
+# Recipe check failures shown in the machine GUI (SimpleCheckRecipeResult.ofFailure keys)
+GT5U.gui.text.recipe_result.coil_tier_too_low=§7Coil tier too low for this recipe
+GT5U.gui.text.recipe_result.field_frequency_too_low=§7Field frequency too low for this recipe
+GT5U.gui.text.recipe_result.freon_debt_explosion=§cFreon debt was not repaid exactly: the column exploded
+
 GT5U.GTNHPP_CRV.mode.0=Ceramic Reaction Vessel
 GT5U.GTNHPP_CRV.mode.1=Alloy Blast Smelter
 GT5U.GTNHPP_DAF.mode.0=Oxidizing (O2)

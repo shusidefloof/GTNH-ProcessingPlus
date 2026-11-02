@@ -32,15 +32,12 @@ public class GTNHProcessingPlus {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        System.out.println(">>> MAIN MOD PREINIT FIRED");
-        System.out.println("PROXY IS: " + proxy);
         proxy.preInit(event);
     }
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
         proxy.init(event);
-        System.out.println("GT MATERIAL COUNT: " + gregtech.api.GregTechAPI.sGeneratedMaterials.length);
     }
 
     @Mod.EventHandler

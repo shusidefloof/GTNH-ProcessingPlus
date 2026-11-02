@@ -568,7 +568,12 @@ public class MTE_CSC extends MTEExtendedPowerMultiBlockBase<MTE_CSC> implements 
     @Override
     @SideOnly(Side.CLIENT)
     protected SoundResource getActivitySoundLoop() {
-        return SoundResource.GT_MACHINES_EBF_LOOP;
+        return SoundResource.GT_MACHINES_DISTILLERY_LOOP;
+    }
+
+    @Override
+    public boolean supportsBatchMode() {
+        return true;
     }
 
     @Override

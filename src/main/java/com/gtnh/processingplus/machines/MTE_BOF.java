@@ -185,12 +185,14 @@ public class MTE_BOF extends MTEExtendedPowerMultiBlockBase<MTE_BOF> implements 
             .addSupportAny()
             .beginStructureBlock(5, 4, 5, true)
             .addController("Front center, 2nd layer")
-            .addCasing("44+", "Basic Oxygen Furnace Casing", false)
-            .addEnergyHatch("1+", "Any casing", 1)
-            .addMaintenanceHatch("1", "Any casing", 1)
-            .addMufflerHatch("1", "Any casing", 1)
-            .addInputAny("1+", "Any casing", 1)
-            .addOutputAny("1+", "Any casing", 1)
+            .addCasing("29", "Basic Oxygen Furnace Casing", false)
+            .addCasing("10", "Grate Machine Casing", false)
+            .addCasing("5", "Steel Firebox Casing", false)
+            .addEnergyHatch("1+", "Any Basic Oxygen Furnace Casing", 1)
+            .addMaintenanceHatch("1", "Any Basic Oxygen Furnace Casing", 1)
+            .addMufflerHatch("1", "Any Basic Oxygen Furnace Casing", 1)
+            .addInputAny("1+", "Any Basic Oxygen Furnace Casing", 1)
+            .addOutputAny("1+", "Any Basic Oxygen Furnace Casing", 1)
             .toolTipFinisher("_Shusi_");
         return tt;
     }

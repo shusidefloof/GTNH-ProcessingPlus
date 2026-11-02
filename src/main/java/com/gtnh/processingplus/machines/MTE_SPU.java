@@ -282,7 +282,12 @@ public class MTE_SPU extends MTEExtendedPowerMultiBlockBase<MTE_SPU> implements 
     @Override
     @SideOnly(Side.CLIENT)
     protected SoundResource getActivitySoundLoop() {
-        return SoundResource.GT_MACHINES_EBF_LOOP;
+        return SoundResource.GT_MACHINES_QUANTUM_FORCE_TRANSFORMER_LOOP;
+    }
+
+    @Override
+    public boolean supportsBatchMode() {
+        return true;
     }
 
     @Override

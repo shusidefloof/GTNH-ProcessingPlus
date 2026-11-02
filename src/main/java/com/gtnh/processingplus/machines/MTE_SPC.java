@@ -551,7 +551,7 @@ public class MTE_SPC extends MTEExtendedPowerMultiBlockBase<MTE_SPC> implements 
     @Override
     @SideOnly(Side.CLIENT)
     protected SoundResource getActivitySoundLoop() {
-        return SoundResource.GT_MACHINES_EBF_LOOP;
+        return SoundResource.GT_MACHINES_MULTI_PRECISE_LOOP;
     }
 
     @Override

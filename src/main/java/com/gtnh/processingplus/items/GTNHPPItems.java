@@ -25,9 +25,6 @@ public class GTNHPPItems {
     /** Consumed by the HPR to retune its resonance field when jumping between frequencies (1 per step). */
     public static Item PHASE_SYNCHRONIZER;
 
-    /** Consumed by the HPR to manually decrease the resonance field frequency by 1 step. */
-    public static Item PHASE_DESYNCHRONIZER;
-
     /**
      * Register a plain single-meta item. The display name is hard-coded via getItemStackDisplayName
      * (matching how the casings name themselves) so it shows correctly regardless of lang/domain.
@@ -48,15 +45,12 @@ public class GTNHPPItems {
     }
 
     public static void register() {
-        SCORCHED_CIRCUIT_BOARD = new Item().setUnlocalizedName("gtnhpp.scorched_circuit_board")
-            .setTextureName("minecraft:paper")
-            .setCreativeTab(CreativeTabs.tabMaterials);
-        GameRegistry.registerItem(SCORCHED_CIRCUIT_BOARD, "scorched_circuit_board");
+        SCORCHED_CIRCUIT_BOARD = simpleItem("scorched_circuit_board", "Scorched Circuit Board", "minecraft:paper");
 
-        OPTICAL_CIRCUIT_BOARD_RAW = new Item().setUnlocalizedName("gtnhpp.optical_circuit_board_raw")
-            .setTextureName("minecraft:paper")
-            .setCreativeTab(CreativeTabs.tabMaterials);
-        GameRegistry.registerItem(OPTICAL_CIRCUIT_BOARD_RAW, "optical_circuit_board_raw");
+        OPTICAL_CIRCUIT_BOARD_RAW = simpleItem(
+            "optical_circuit_board_raw",
+            "Raw Optical Circuit Board",
+            "minecraft:paper");
 
         PROMETHIUM_BETAVOLTAIC_CELL = simpleItem(
             "promethium_betavoltaic_cell",
@@ -64,7 +58,6 @@ public class GTNHPPItems {
             "minecraft:glowstone_dust");
 
         PHASE_SYNCHRONIZER = simpleItem("phase_synchronizer", "Phase Synchronizer", "minecraft:blaze_powder");
-        PHASE_DESYNCHRONIZER = simpleItem("phase_desynchronizer", "Phase Desynchronizer", "minecraft:ender_pearl");
 
         // Single shared MetaItem for all demoted dust-only chain intermediates (see Intermediate enum).
         INTERMEDIATES = new ItemGTNHPPIntermediates();
@@ -85,9 +78,5 @@ public class GTNHPPItems {
 
     public static ItemStack phaseSynchronizer(int amount) {
         return new ItemStack(PHASE_SYNCHRONIZER, amount);
-    }
-
-    public static ItemStack phaseDesynchronizer(int amount) {
-        return new ItemStack(PHASE_DESYNCHRONIZER, amount);
     }
 }

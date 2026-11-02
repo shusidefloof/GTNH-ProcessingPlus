@@ -279,7 +279,7 @@ public class MTE_DAF extends MTEExtendedPowerMultiBlockBase<MTE_DAF> implements 
         FluidStack atmo = machineMode == MACHINEMODE_INERT ? Materials.Nitrogen.getFluid(1)
             : Materials.Oxygen.getFluid(1);
         if (!depleteInput(atmo)) {
-            stopMachine(ShutDownReasonRegistry.POWER_LOSS);
+            stopMachine(ShutDownReasonRegistry.outOfFluid(atmo));
             return false;
         }
 
@@ -288,8 +288,9 @@ public class MTE_DAF extends MTEExtendedPowerMultiBlockBase<MTE_DAF> implements 
         if (recipe != null && recipe.mFluidInputs != null) {
             for (FluidStack fs : recipe.mFluidInputs) {
                 if (fs == null || fs.amount <= 0) continue;
-                if (!depleteInput(new FluidStack(fs.getFluid(), fs.amount))) {
-                    stopMachine(ShutDownReasonRegistry.POWER_LOSS);
+                FluidStack perTick = new FluidStack(fs.getFluid(), fs.amount);
+                if (!depleteInput(perTick)) {
+                    stopMachine(ShutDownReasonRegistry.outOfFluid(perTick));
                     return false;
                 }
             }
@@ -380,40 +381,21 @@ public class MTE_DAF extends MTEExtendedPowerMultiBlockBase<MTE_DAF> implements 
                     + " mode with the mode button in the GUI")
             .addInfo("Consumes 1 mB/t of atmosphere gas while running")
             .addInfo("Recipe fluid inputs are consumed continuously (mB/t) while running")
-            .addInfo(
-                "Machine tier is set by the atmosphere casing, the glass and the" + EnumChatFormatting.WHITE
-                    + "item pipe casing:")
-            .addInfo(
-                EnumChatFormatting.WHITE + "IV"
-                    + EnumChatFormatting.GRAY
-                    + ": Dual-Sealed Atmosphere Casing, IV glass, Tin pipe")
-            .addInfo(
-                EnumChatFormatting.GREEN + "LuV"
-                    + EnumChatFormatting.GRAY
-                    + ": Advanced Atmosphere Casing, LuV glass, Electrum pipe")
-            .addInfo(
-                EnumChatFormatting.AQUA + "UV"
-                    + EnumChatFormatting.GRAY
-                    + ": Pristine Atmosphere Casing, UV glass, Osmium pipe")
-            .addInfo(
-                EnumChatFormatting.LIGHT_PURPLE + "UEV"
-                    + EnumChatFormatting.GRAY
-                    + ": Absolute Atmosphere Casing, UEV glass, Quantium pipe")
             .addSupportAny()
-            .beginStructureBlock(18, 7, 7, false)
+            .beginStructureBlock(19, 7, 7, false)
             .addController("Center, 4th layer, 2nd slice from the front")
-            .addCasing("1+", "GT Clean Machine Casing", false)
-            .addCasing("1+", "Atmosphere Casing", true)
-            .addOtherStructurePart("BartWorks Glass", "Inner chamber face")
-            .addOtherStructurePart("Item Pipe Casing", "Inner column connectors")
-            .addOtherStructurePart("NHCM Casing", "Column filler")
-            .addOtherStructurePart("Frame Box", "Corner pillars")
-            .addOtherStructurePart("Sheet Metal Casing", "Side panels")
-            .addEnergyHatch("1+", "Any GT clean machine casing", 1)
-            .addMaintenanceHatch("1", "Any GT clean machine casing", 1)
-            .addMufflerHatch("1", "Any GT clean machine casing", 1)
-            .addInputAny("1+", "Any GT clean machine casing", 1)
-            .addOutputAny("1+", "Any GT clean machine casing", 1)
+            .addCasing("134", "Heat Proof Machine Casing", false)
+            .addCasing("96", "Air Filter Turbine Casing", false)
+            .addCasing("80", "Atmosphere Casing (any tier)", false)
+            .addOtherStructurePart("Stainless Steel Sheet Metal", "Side panels, 80")
+            .addOtherStructurePart("BartWorks Glass (any tier)", "Inner chamber face, 35")
+            .addOtherStructurePart("Item Pipe Casing (any tier)", "Inner column connectors, 24")
+            .addOtherStructurePart("Kanthal Frame Box", "Corner pillars, 16")
+            .addEnergyHatch("1+", "Any Heat Proof Machine Casing", 1)
+            .addMaintenanceHatch("1", "Any Heat Proof Machine Casing", 1)
+            .addMufflerHatch("1", "Any Heat Proof Machine Casing", 1)
+            .addInputAny("1+", "Any Heat Proof Machine Casing", 1)
+            .addOutputAny("1+", "Any Heat Proof Machine Casing", 1)
             .toolTipFinisher("_Shusi_");
         return tt;
     }
@@ -451,6 +433,11 @@ public class MTE_DAF extends MTEExtendedPowerMultiBlockBase<MTE_DAF> implements 
     @SideOnly(Side.CLIENT)
     protected SoundResource getActivitySoundLoop() {
         return SoundResource.GT_MACHINES_EBF_LOOP;
+    }
+
+    @Override
+    public boolean supportsBatchMode() {
+        return true;
     }
 
     @Override

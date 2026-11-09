@@ -74,7 +74,6 @@ public class PhotoresistRecipes {
         evBariumPeroxideElectrolysis();
         evBariumChlorideElectrolysis();
         evPHSResinPrimitive();
-        evSulfurDichloride();
         evDiphenylsulfoniumSalt();
         evEVBlend();
         // IV
@@ -377,22 +376,11 @@ public class PhotoresistRecipes {
             .addTo(RecipeMaps.electrolyzerRecipes);
     }
 
-    // EV stage: Sulfur Dichloride (PAG precursor): S + Cl₂
-    private static void evSulfurDichloride() {
-        GTValues.RA.stdBuilder()
-            .itemInputs(dust(Materials.Sulfur, 1))
-            .fluidInputs(fluid(Materials.Chlorine, 2000))
-            .fluidOutputs(fluid(PrPMaterials.SulfurDichloride, 1000))
-            .duration(5 * SECONDS)
-            .eut(TierEU.RECIPE_LV)
-            .addTo(GTRecipeConstants.UniversalChemical);
-    }
-
     // EV stage: Diphenylsulfonium Salt (PAG): SCl₂ + 2 Benzene
     private static void evDiphenylsulfoniumSalt() {
         GTValues.RA.stdBuilder()
             .itemInputs(circuit(3))
-            .fluidInputs(fluid(PrPMaterials.SulfurDichloride, 1000), fluid(Materials.Benzene, 2000))
+            .fluidInputs(fluid(Materials.SulfurDichloride, 1000), fluid(Materials.Benzene, 2000))
             .itemOutputs(dust(PrPMaterials.DiphenylsulfoniumSalt, 2))
             .fluidOutputs(fluid(Materials.HydrochloricAcid, 2000))
             .duration(4 * SECONDS)

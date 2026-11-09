@@ -204,7 +204,6 @@ public class PrPMaterials implements Runnable {
     // EV
     public static Werkstoff Acetoxystyrene;
     public static Werkstoff PHSResin;
-    public static Werkstoff SulfurDichloride;
     public static Werkstoff DiphenylsulfoniumSalt;
     public static Werkstoff EVPhotoresist;
     public static Werkstoff BariumPeroxide;
@@ -368,7 +367,6 @@ public class PrPMaterials implements Runnable {
     // =========================
     public static Werkstoff CoalFlyash;
     public static Werkstoff MetalLeachate;
-    public static Werkstoff GalliumHydroxide;
     public static Werkstoff GermaniumHydroxide;
     public static Werkstoff GalliumTrichlorideSolution;
     public static Werkstoff GermaniumTetrachlorideSolution;
@@ -1094,16 +1092,8 @@ public class PrPMaterials implements Runnable {
                 id(),
                 TextureSet.SET_DULL));
 
-        SulfurDichloride = register(
-            new Werkstoff(
-                rgb(200, 170, 50),
-                "Sulfur Dichloride",
-                subscriptNumbers("SCl2"),
-                new Werkstoff.Stats(),
-                Werkstoff.Types.MIXTURE,
-                fluidFeatures(),
-                id(),
-                TextureSet.SET_FLUID));
+        // Reserved ID (was Sulfur Dichloride): GT's Materials.SulfurDichloride is used instead.
+        id();
 
         DiphenylsulfoniumSalt = register(
             new Werkstoff(
@@ -1988,16 +1978,8 @@ public class PrPMaterials implements Runnable {
                 id(),
                 TextureSet.SET_FLUID));
 
-        GalliumHydroxide = register(
-            new Werkstoff(
-                rgb(230, 240, 245),
-                "Gallium Hydroxide",
-                subscriptNumbers("Ga(OH)3"),
-                new Werkstoff.Stats(),
-                Werkstoff.Types.MIXTURE,
-                new Werkstoff.GenerationFeatures().onlyDust(),
-                id(),
-                TextureSet.SET_DULL));
+        // Reserved ID (was Gallium Hydroxide): GoodGenerator's GGMaterial.galliumHydroxide is used instead.
+        id();
 
         GermaniumHydroxide = register(
             new Werkstoff(

@@ -7,6 +7,7 @@ import static gregtech.api.util.GTRecipeBuilder.TICKS;
 import com.gtnh.processingplus.materials.PrPMaterials;
 import com.gtnh.processingplus.recipes.GTNHPPRecipeMaps;
 
+import goodgenerator.items.GGMaterial;
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
@@ -93,7 +94,7 @@ public class PassiveableMaterials {
         GTValues.RA.stdBuilder()
             .itemInputs(circuit(3))
             .fluidInputs(fluid(PrPMaterials.MetalLeachate, 4000), fluid(Materials.Ammonia, 500))
-            .itemOutputs(dust(PrPMaterials.GalliumHydroxide, 2), dust(PrPMaterials.GermaniumHydroxide, 2))
+            .itemOutputs(dust(GGMaterial.galliumHydroxide, 2), dust(PrPMaterials.GermaniumHydroxide, 2))
             .fluidOutputs(fluid(Materials.Water, 1000), fluid(Materials.Ammonia, 200))
             .duration(10 * SECONDS)
             .eut(TierEU.RECIPE_HV)
@@ -104,7 +105,7 @@ public class PassiveableMaterials {
         // =========================================================
 
         GTValues.RA.stdBuilder()
-            .itemInputs(dust(PrPMaterials.GalliumHydroxide, 2), circuit(4))
+            .itemInputs(dust(GGMaterial.galliumHydroxide, 2), circuit(4))
             .fluidInputs(fluid(Materials.HydrochloricAcid, 3000))
             .fluidOutputs(fluid(PrPMaterials.GalliumTrichlorideSolution, 2000), fluid(Materials.Water, 1000))
             .duration(8 * SECONDS)

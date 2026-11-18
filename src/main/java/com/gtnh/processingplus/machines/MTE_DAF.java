@@ -19,8 +19,6 @@ import java.util.List;
 
 import javax.annotation.Nonnull;
 
-import gregtech.api.util.GTUtility;
-import gregtech.api.util.tooltip.TooltipTier;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
@@ -61,8 +59,10 @@ import gregtech.api.render.TextureFactory;
 import gregtech.api.structure.error.StructureError;
 import gregtech.api.structure.error.StructureErrors;
 import gregtech.api.util.GTRecipe;
+import gregtech.api.util.GTUtility;
 import gregtech.api.util.MultiblockTooltipBuilder;
 import gregtech.api.util.shutdown.ShutDownReasonRegistry;
+import gregtech.api.util.tooltip.TooltipTier;
 import gregtech.common.gui.modularui.multiblock.base.MTEMultiBlockBaseGui;
 
 /**
@@ -290,8 +290,7 @@ public class MTE_DAF extends MTEExtendedPowerMultiBlockBase<MTE_DAF> implements 
         }
 
         // Drain recipe-specified fluids per tick (amounts in recipe = mB/t)
-        GTRecipe recipe = ((DAFProcessingLogic) processingLogic)
-            .getLastRecipe();
+        GTRecipe recipe = ((DAFProcessingLogic) processingLogic).getLastRecipe();
         if (recipe != null && recipe.mFluidInputs != null) {
             for (FluidStack fs : recipe.mFluidInputs) {
                 if (fs == null || fs.amount <= 0) continue;

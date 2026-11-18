@@ -2656,9 +2656,12 @@ public class PrPMaterials implements Runnable {
 
         // Nd:YAG, neodymium-doped yttrium aluminium garnet: the lilac laser crystal. A gem material, so it has the
         // normal rod (lathed from the gem) for the SPC's Photonic Alignment Casing.
+        // The colour also picks its lens colour (BartWorks BWColorUtil.getDyeFromColor). Keep blue well above red
+        // and red under 160 so it stays a Purple lens: the old lilac (200, 170, 225) became a 10th Red lens, which
+        // overflows NEI Custom Diagram's 9-slot same-colour row and kicks players on join.
         NdYAG = register(
             new Werkstoff(
-                rgb(200, 170, 225),
+                rgb(150, 110, 200),
                 "Neodymium-doped Yttrium Aluminum Garnet",
                 subscriptNumbers("(Y,Nd)3Al5O12"),
                 new Werkstoff.Stats().setMeltingPoint(2243),

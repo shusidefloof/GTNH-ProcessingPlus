@@ -19,6 +19,8 @@ import java.util.List;
 
 import javax.annotation.Nonnull;
 
+import gregtech.api.util.GTUtility;
+import gregtech.api.util.tooltip.TooltipTier;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
@@ -76,6 +78,9 @@ public class MTE_DAF extends MTEExtendedPowerMultiBlockBase<MTE_DAF> implements 
     private static final int OFFSET_X = 9;
     private static final int OFFSET_Y = 3;
     private static final int OFFSET_Z = 1;
+
+    private final static int PARALLELS = 4;
+    private final static double SPEED_INCREASE_TIER = 0.25D;
 
     private static final String[] TIER_NAMES = { "Invalid", "IV", "LuV", "UV", "UEV" };
 
@@ -268,23 +273,25 @@ public class MTE_DAF extends MTEExtendedPowerMultiBlockBase<MTE_DAF> implements 
 
     @Override
     protected ProcessingLogic createProcessingLogic() {
-        return new DAFProcessingLogic();
+        return new DAFProcessingLogic().setMaxParallelSupplier(this::getTrueParallel)
+            .setSpeedBonusSupplier(this::getSpeedBonus);
     }
 
     @Override
     public boolean onRunningTick(ItemStack aStack) {
         if (!super.onRunningTick(aStack)) return false;
 
-        // Drain 1 mB/t of the active atmosphere gas
-        FluidStack atmo = machineMode == MACHINEMODE_INERT ? Materials.Nitrogen.getFluid(1)
-            : Materials.Oxygen.getFluid(1);
+        // Drain 1 mB/t of the active atmosphere gas. Nitrogen and Oxygen only exist as gases in GT, so getFluid()
+        // returns null for them.
+        FluidStack atmo = machineMode == MACHINEMODE_INERT ? Materials.Nitrogen.getGas(1) : Materials.Oxygen.getGas(1);
         if (!depleteInput(atmo)) {
             stopMachine(ShutDownReasonRegistry.outOfFluid(atmo));
             return false;
         }
 
         // Drain recipe-specified fluids per tick (amounts in recipe = mB/t)
-        GTRecipe recipe = ((DAFProcessingLogic) processingLogic).getLastRecipe();
+        GTRecipe recipe = ((DAFProcessingLogic) processingLogic)
+            .getLastRecipe();
         if (recipe != null && recipe.mFluidInputs != null) {
             for (FluidStack fs : recipe.mFluidInputs) {
                 if (fs == null || fs.amount <= 0) continue;
@@ -381,6 +388,8 @@ public class MTE_DAF extends MTEExtendedPowerMultiBlockBase<MTE_DAF> implements 
                     + " mode with the mode button in the GUI")
             .addInfo("Consumes 1 mB/t of atmosphere gas while running")
             .addInfo("Recipe fluid inputs are consumed continuously (mB/t) while running")
+            .addVoltageParallelInfo(PARALLELS)
+            .addDynamicSpeedBonusInfo((float) SPEED_INCREASE_TIER, TooltipTier.ITEM_PIPE_CASING)
             .addSupportAny()
             .beginStructureBlock(19, 7, 7, false)
             .addController("Center, 4th layer, 2nd slice from the front")
@@ -453,5 +462,14 @@ public class MTE_DAF extends MTEExtendedPowerMultiBlockBase<MTE_DAF> implements 
     @Override
     public boolean supportsVoidProtection() {
         return true;
+    }
+
+    @Override
+    public int getMaxParallelRecipes() {
+        return (PARALLELS * GTUtility.getTier(this.getMaxInputVoltage()));
+    }
+
+    public double getSpeedBonus() {
+        return 1.0D / (1.0D + SPEED_INCREASE_TIER * mPipeCasingTier);
     }
 }

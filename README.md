@@ -6,12 +6,12 @@ Built for GTNH 2.9.0. Grab the jar from [Releases](https://github.com/shusideflo
 
 ## What it adds
 
+- **An 198 quest long, questbook guiding you through each tech tier and every addition! **
 - **16 new multiblocks**, including a photolithography chamber you fill with singleblock machines, a cryogenic separation column and a supercritical dryer
 - **Photoresist from MV to UMV**, and circuit boards are now made with it. Its one long processing chain spanning each tier starting from MV.
 - **New material chains** like carbon fiber, nylon, ceramics, aerogels, Vibranium, Unobtanium, Neptunium and Promethium
 - **Minor changes in recipes for GTNH Components** from IV and up, using the materials above
 - **New cables**, including an Unobtanium superconductor
-- **A quest line** that walks you through each tier and processing chain
 
 ## Some of the machines
 
